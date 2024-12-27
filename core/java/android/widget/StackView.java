@@ -31,7 +31,6 @@ import com.android.internal.R;
 import java.lang.ref.WeakReference;
 
 @RemoteViews.RemoteView
-/* loaded from: classes4.dex */
 public class StackView extends AdapterViewAnimator {
     private static final int DEFAULT_ANIMATION_DURATION = 400;
     private static final int FRAME_PADDING = 4;

@@ -6,7 +6,6 @@ import com.android.internal.org.bouncycastle.math.raw.Interleave;
 import com.android.internal.org.bouncycastle.util.Longs;
 import com.android.internal.org.bouncycastle.util.Pack;
 
-/* loaded from: classes5.dex */
 public abstract class GCMUtil {
     private static final int E1 = -520093696;
     private static final long E1L = -2233785415175766016L;

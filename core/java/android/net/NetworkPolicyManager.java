@@ -26,7 +26,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executor;
 
 @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
-/* loaded from: classes3.dex */
 public class NetworkPolicyManager {
     public static final int ALLOWED_METERED_REASON_FOREGROUND = 262144;
     public static final int ALLOWED_METERED_REASON_MASK = -65536;

@@ -1,6 +1,5 @@
 package com.android.internal.org.bouncycastle.operator;
 
-/* loaded from: classes5.dex */
 public class RuntimeOperatorException extends RuntimeException {
     private Throwable cause;
 

@@ -18,7 +18,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes.dex */
 public final class SensorPrivacyManager {
     public static final int TOGGLE_TYPE_HARDWARE = 2;
     public static final int TOGGLE_TYPE_SOFTWARE = 1;

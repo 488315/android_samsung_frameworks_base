@@ -2,7 +2,6 @@ package com.samsung.android.media.mir;
 
 import java.io.FileDescriptor;
 
-/* loaded from: classes6.dex */
 public class SemAudioThumbnail {
     public static final int ERROR_INVALID_ARG = -4;
     public static final int ERROR_INVALID_PATH = -7;

@@ -10,7 +10,6 @@ import com.android.internal.util.Preconditions;
 
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public final class Geofence implements Parcelable {
     public static final Parcelable.Creator<Geofence> CREATOR =
             new Parcelable.Creator<Geofence>() { // from class: android.location.Geofence.1

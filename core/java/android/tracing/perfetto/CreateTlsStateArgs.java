@@ -1,7 +1,6 @@
 package android.tracing.perfetto;
 
 
-/* loaded from: classes4.dex */
 public class CreateTlsStateArgs<DataSourceInstanceType extends DataSourceInstance> {
     private final DataSource<DataSourceInstanceType, Object, Object> mDataSource;
     private final int mInstanceIndex;

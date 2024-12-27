@@ -1,6 +1,5 @@
 package android.speech.tts;
 
-/* loaded from: classes3.dex */
 abstract class AbstractSynthesisCallback implements SynthesisCallback {
     protected final boolean mClientIsUsingV2;
 

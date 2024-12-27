@@ -8,7 +8,6 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/* loaded from: classes6.dex */
 class SecCarrier {
     private static final String FEATURE_GROUP_KEY = "CarrierFeature_Common_CarrierGroup";
     private static final String TAG_CARRIER_ID = "canonical_id";

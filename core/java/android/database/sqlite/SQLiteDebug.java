@@ -8,7 +8,6 @@ import android.util.Printer;
 
 import java.util.ArrayList;
 
-/* loaded from: classes.dex */
 public final class SQLiteDebug {
 
     public static class PagerStats {

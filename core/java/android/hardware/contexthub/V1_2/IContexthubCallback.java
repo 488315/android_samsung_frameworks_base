@@ -20,7 +20,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public interface IContexthubCallback extends android.hardware.contexthub.V1_0.IContexthubCallback {
     public static final String kInterfaceName =
             "android.hardware.contexthub@1.2::IContexthubCallback";

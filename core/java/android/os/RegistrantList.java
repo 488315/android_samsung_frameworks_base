@@ -2,7 +2,6 @@ package android.os;
 
 import java.util.ArrayList;
 
-/* loaded from: classes3.dex */
 public class RegistrantList {
     ArrayList registrants = new ArrayList();
 

@@ -4,7 +4,6 @@ import android.content.ComponentName;
 import android.os.Bundle;
 import android.util.AndroidRuntimeException;
 
-/* loaded from: classes.dex */
 public class RemoteServiceException extends AndroidRuntimeException {
     public RemoteServiceException(String msg) {
         super(msg);

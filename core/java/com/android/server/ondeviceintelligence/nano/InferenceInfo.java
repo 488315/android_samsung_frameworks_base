@@ -9,7 +9,6 @@ import com.android.framework.protobuf.nano.WireFormatNano;
 
 import java.io.IOException;
 
-/* loaded from: classes5.dex */
 public final class InferenceInfo extends MessageNano {
     private static volatile InferenceInfo[] _emptyArray;
     public long endTimeMs;

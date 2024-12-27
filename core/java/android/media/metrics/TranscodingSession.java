@@ -6,7 +6,6 @@ import com.android.internal.util.AnnotationValidations;
 
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public final class TranscodingSession implements AutoCloseable {
     private final String mId;
     private final LogSessionId mLogSessionId;

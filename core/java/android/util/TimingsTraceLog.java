@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/* loaded from: classes4.dex */
 public class TimingsTraceLog {
     public static final boolean DEBUG_BOOT_TIME = true;
     public static final long DEBUG_BOOT_TIME_THRESHOLD = 200;

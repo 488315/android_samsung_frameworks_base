@@ -13,7 +13,6 @@ import com.android.internal.util.Preconditions;
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 
-/* loaded from: classes4.dex */
 public final class CrossWindowBlurListeners {
     private static final String TAG = "CrossWindowBlurListeners";
     private static volatile CrossWindowBlurListeners sInstance;

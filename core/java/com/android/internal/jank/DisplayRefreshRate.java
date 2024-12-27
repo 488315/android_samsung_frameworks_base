@@ -3,7 +3,6 @@ package com.android.internal.jank;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes5.dex */
 public class DisplayRefreshRate {
     public static final int REFRESH_RATE_120_HZ = 5;
     public static final int REFRESH_RATE_240_HZ = 6;

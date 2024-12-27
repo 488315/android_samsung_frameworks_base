@@ -1,6 +1,5 @@
 package android.stats.hdmi;
 
-/* loaded from: classes3.dex */
 public final class HdmiStatsEnums {
     public static final int ANCESTOR = 2;
     public static final int AUDIO_SYSTEM = 5;

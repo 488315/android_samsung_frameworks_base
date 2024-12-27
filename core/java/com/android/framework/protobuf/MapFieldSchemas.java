@@ -1,7 +1,6 @@
 package com.android.framework.protobuf;
 
 @CheckReturnValue
-/* loaded from: classes3.dex */
 final class MapFieldSchemas {
     private static final MapFieldSchema FULL_SCHEMA = loadSchemaForFullRuntime();
     private static final MapFieldSchema LITE_SCHEMA = new MapFieldSchemaLite();

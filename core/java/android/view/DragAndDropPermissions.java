@@ -8,7 +8,6 @@ import android.util.Log;
 
 import com.android.internal.view.IDragAndDropPermissions;
 
-/* loaded from: classes4.dex */
 public final class DragAndDropPermissions implements Parcelable {
     public static final Parcelable.Creator<DragAndDropPermissions> CREATOR =
             new Parcelable.Creator<

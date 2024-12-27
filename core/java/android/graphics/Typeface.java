@@ -54,7 +54,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public class Typeface {
     public static final int BOLD = 1;
     public static final int BOLD_ITALIC = 3;

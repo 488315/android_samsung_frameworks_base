@@ -2,7 +2,6 @@ package com.android.server;
 
 import android.util.Log;
 
-/* loaded from: classes5.dex */
 public class ExtRDSData {
     private static final String TAG = "ExtRDSData";
     int blera;

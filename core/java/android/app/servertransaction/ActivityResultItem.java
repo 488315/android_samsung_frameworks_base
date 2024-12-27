@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public class ActivityResultItem extends ActivityTransactionItem {
     public static final long CALL_ACTIVITY_RESULT_BEFORE_RESUME = 78294732;
     public static final Parcelable.Creator<ActivityResultItem> CREATOR =

@@ -4,7 +4,6 @@ import com.android.internal.org.bouncycastle.asn1.ASN1Choice;
 import com.android.internal.org.bouncycastle.asn1.ASN1Object;
 import com.android.internal.org.bouncycastle.asn1.ASN1Primitive;
 
-/* loaded from: classes5.dex */
 public class VerificationKeyIndicator extends ASN1Object implements ASN1Choice {
     @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
               // com.android.internal.org.bouncycastle.asn1.ASN1Encodable

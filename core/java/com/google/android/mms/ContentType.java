@@ -6,7 +6,6 @@ import com.samsung.android.wallpaperbackup.BnRConstants;
 
 import java.util.ArrayList;
 
-/* loaded from: classes5.dex */
 public class ContentType {
     public static final String APP_DRM_CONTENT = "application/vnd.oma.drm.content";
     public static final String APP_DRM_MESSAGE = "application/vnd.oma.drm.message";

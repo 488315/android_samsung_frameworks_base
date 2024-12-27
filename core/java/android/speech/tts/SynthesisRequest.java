@@ -2,7 +2,6 @@ package android.speech.tts;
 
 import android.os.Bundle;
 
-/* loaded from: classes3.dex */
 public final class SynthesisRequest {
     private int mCallerUid;
     private String mCountry;

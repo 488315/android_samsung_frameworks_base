@@ -17,7 +17,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.net.UnknownHostException;
 
-/* loaded from: classes4.dex */
 public final class Log {
     public static final int ASSERT = 7;
     public static final int DEBUG = 3;

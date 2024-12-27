@@ -13,7 +13,6 @@ import com.samsung.android.desktopsystemui.sharedlib.system.QuickStepContract;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public final /* synthetic */ class MediaOutputAdapter$MediaDeviceViewHolder$$ExternalSyntheticLambda3 implements View.OnClickListener {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ Object f$0;

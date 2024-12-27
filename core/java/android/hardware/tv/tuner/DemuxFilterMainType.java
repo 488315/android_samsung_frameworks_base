@@ -1,6 +1,5 @@
 package android.hardware.tv.tuner;
 
-/* loaded from: classes2.dex */
 public @interface DemuxFilterMainType {
     public static final int ALP = 16;
     public static final int IP = 4;

@@ -12,7 +12,6 @@ import java.security.Provider;
 import java.security.cert.CertificateException;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public class AndroidKeyStoreProvider extends Provider {
     private static final String PROVIDER_NAME = "AndroidKeyStore";
 

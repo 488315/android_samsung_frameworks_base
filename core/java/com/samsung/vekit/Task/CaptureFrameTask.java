@@ -3,7 +3,6 @@ package com.samsung.vekit.Task;
 import com.samsung.vekit.Item.Item;
 import com.samsung.vekit.Listener.CaptureFrameTaskListener;
 
-/* loaded from: classes6.dex */
 public class CaptureFrameTask {
     private CaptureType captureType;
     private Item item;

@@ -1,6 +1,5 @@
 package android.media;
 
-/* loaded from: classes2.dex */
 public final class MediaTimestamp {
     public static final MediaTimestamp TIMESTAMP_UNKNOWN = new MediaTimestamp(-1, -1, 0.0f);
     public final float clockRate;

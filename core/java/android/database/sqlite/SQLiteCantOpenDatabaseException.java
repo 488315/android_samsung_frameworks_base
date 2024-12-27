@@ -1,6 +1,5 @@
 package android.database.sqlite;
 
-/* loaded from: classes.dex */
 public class SQLiteCantOpenDatabaseException extends SQLiteException {
     public static final int errCode = 14;
     private int mErrorCode;

@@ -1,6 +1,5 @@
 package android.service.usb;
 
-/* loaded from: classes3.dex */
 public final class UsbAccessoryProto {
     public static final long DESCRIPTION = 1138166333443L;
     public static final long MANUFACTURER = 1138166333441L;

@@ -15,7 +15,6 @@ import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 
 @Deprecated
-/* loaded from: classes.dex */
 public class FontFamily {
     private static String TAG = "FontFamily";
     private long mBuilderPtr;

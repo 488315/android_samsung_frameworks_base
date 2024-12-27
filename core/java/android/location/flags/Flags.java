@@ -1,6 +1,5 @@
 package android.location.flags;
 
-/* loaded from: classes2.dex */
 public final class Flags {
     private static FeatureFlags FEATURE_FLAGS = new FeatureFlagsImpl();
     public static final String FLAG_ENABLE_LOCATION_BYPASS =

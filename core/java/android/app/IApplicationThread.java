@@ -36,7 +36,6 @@ import com.android.internal.app.IVoiceInteractor;
 import java.util.List;
 import java.util.Map;
 
-/* loaded from: classes.dex */
 public interface IApplicationThread extends IInterface {
     void attachAgent(String str) throws RemoteException;
 

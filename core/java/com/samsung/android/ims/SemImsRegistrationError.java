@@ -3,7 +3,6 @@ package com.samsung.android.ims;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes6.dex */
 public class SemImsRegistrationError implements Parcelable {
     public static final Parcelable.Creator<SemImsRegistrationError> CREATOR =
             new Parcelable.Creator<

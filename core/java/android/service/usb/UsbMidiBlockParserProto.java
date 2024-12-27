@@ -1,6 +1,5 @@
 package android.service.usb;
 
-/* loaded from: classes3.dex */
 public final class UsbMidiBlockParserProto {
     public static final long BLOCK = 2246267895813L;
     public static final long DESCRIPTOR_SUBTYPE = 1120986464259L;

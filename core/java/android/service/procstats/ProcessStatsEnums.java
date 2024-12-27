@@ -1,6 +1,5 @@
 package android.service.procstats;
 
-/* loaded from: classes3.dex */
 public final class ProcessStatsEnums {
     public static final int AGGREGATED_PROCESS_STATE_BACKGROUND = 6;
     public static final int AGGREGATED_PROCESS_STATE_BOUND_TOP_OR_FGS = 3;

@@ -2,7 +2,6 @@ package vendor.samsung.hardware.sysinput.V1_3;
 
 import java.util.ArrayList;
 
-/* loaded from: classes.dex */
 public final class Result {
     public static final int BAD_STATUS = -4;
     public static final int BAD_VALUE = -8;

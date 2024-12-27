@@ -1,6 +1,5 @@
 package android.service.adb;
 
-/* loaded from: classes3.dex */
 public final class AdbDebuggingManagerProto {
     public static final long CONNECTED_TO_ADB = 1133871366145L;
     public static final long KEYSTORE = 1138166333445L;

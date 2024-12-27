@@ -1,6 +1,5 @@
 package com.android.net.module.util;
 
-/* loaded from: classes5.dex */
 public class ByteUtils {
     public static int indexOf(byte[] array, byte target) {
         return indexOf(array, target, 0, array.length);

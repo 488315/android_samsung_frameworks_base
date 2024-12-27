@@ -7,7 +7,6 @@ import android.os.RemoteCallbackList;
 import android.os.RemoteException;
 import android.util.MathUtils;
 
-/* loaded from: classes5.dex */
 public class ProgressReporter {
     private static final int STATE_FINISHED = 2;
     private static final int STATE_INIT = 0;

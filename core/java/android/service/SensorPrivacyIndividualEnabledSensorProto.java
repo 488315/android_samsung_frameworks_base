@@ -1,6 +1,5 @@
 package android.service;
 
-/* loaded from: classes3.dex */
 public final class SensorPrivacyIndividualEnabledSensorProto {
     public static final int CAMERA = 2;
     public static final int DISABLED = 2;

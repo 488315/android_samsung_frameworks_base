@@ -33,7 +33,6 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class VirtualDeviceParams implements Parcelable {
 
     @Deprecated public static final int ACTIVITY_POLICY_DEFAULT_ALLOWED = 0;

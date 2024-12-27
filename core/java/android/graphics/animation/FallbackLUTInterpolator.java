@@ -4,7 +4,6 @@ import android.animation.TimeInterpolator;
 import android.view.Choreographer;
 
 @HasNativeInterpolator
-/* loaded from: classes.dex */
 public class FallbackLUTInterpolator implements NativeInterpolator, TimeInterpolator {
     private static final int MAX_SAMPLE_POINTS = 300;
     private final float[] mLut;

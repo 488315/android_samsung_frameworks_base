@@ -8,7 +8,6 @@ import javax.net.ssl.ManagerFactoryParameters;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.TrustManagerFactorySpi;
 
-/* loaded from: classes3.dex */
 public class RootTrustManagerFactorySpi extends TrustManagerFactorySpi {
     private ApplicationConfig mApplicationConfig;
     private NetworkSecurityConfig mConfig;

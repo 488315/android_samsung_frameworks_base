@@ -6,7 +6,6 @@ import android.os.Parcelable;
 
 @SystemApi
 @Deprecated
-/* loaded from: classes.dex */
 public final class RuntimePermissionPresentationInfo implements Parcelable {
     public static final Parcelable.Creator<RuntimePermissionPresentationInfo> CREATOR =
             new Parcelable.Creator<RuntimePermissionPresentationInfo>() { // from class:

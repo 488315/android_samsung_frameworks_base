@@ -4,7 +4,6 @@ import android.database.Cursor;
 import android.database.CursorWrapper;
 import android.net.Uri;
 
-/* loaded from: classes2.dex */
 public class ExternalRingtonesCursorWrapper extends CursorWrapper {
     private Uri mUri;
 

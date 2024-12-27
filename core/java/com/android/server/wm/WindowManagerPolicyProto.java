@@ -1,6 +1,5 @@
 package com.android.server.wm;
 
-/* loaded from: classes5.dex */
 public final class WindowManagerPolicyProto {
     public static final long FOCUSED_APP_TOKEN = 1138166333448L;
     public static final long FOCUSED_WINDOW = 1146756268041L;

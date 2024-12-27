@@ -22,7 +22,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiConsumer;
 
-/* loaded from: classes.dex */
 public abstract class SemInputMotion {
     protected static final int FINGER_MOVE = 2;
     protected static final int FINGER_PRESS = 1;

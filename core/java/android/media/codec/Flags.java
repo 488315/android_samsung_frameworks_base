@@ -1,6 +1,5 @@
 package android.media.codec;
 
-/* loaded from: classes2.dex */
 public final class Flags {
     private static FeatureFlags FEATURE_FLAGS = new FeatureFlagsImpl();
     public static final String FLAG_AIDL_HAL_INPUT_SURFACE =

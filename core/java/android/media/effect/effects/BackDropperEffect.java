@@ -10,7 +10,6 @@ import android.media.effect.FilterGraphEffect;
 
 import com.samsung.android.content.smartclip.SemSmartClipMetaTagType;
 
-/* loaded from: classes2.dex */
 public class BackDropperEffect extends FilterGraphEffect {
     private static final String mGraphDefinition =
             "@import android.filterpacks.base;\n"

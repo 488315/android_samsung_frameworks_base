@@ -3,7 +3,6 @@ package android.util;
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.GrowingArrayUtils;
 
-/* loaded from: classes4.dex */
 public class SparseBooleanArray implements Cloneable {
     private int[] mKeys;
     private int mSize;

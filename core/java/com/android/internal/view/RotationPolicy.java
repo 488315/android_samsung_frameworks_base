@@ -18,7 +18,6 @@ import com.android.internal.R;
 
 import com.samsung.android.rune.CoreRune;
 
-/* loaded from: classes5.dex */
 public final class RotationPolicy {
     private static final int CURRENT_ROTATION = -1;
     public static final int NATURAL_ROTATION = 0;

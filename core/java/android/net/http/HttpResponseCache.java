@@ -14,7 +14,6 @@ import java.net.URLConnection;
 import java.util.List;
 import java.util.Map;
 
-/* loaded from: classes3.dex */
 public final class HttpResponseCache extends ResponseCache implements HasCacheHolder, Closeable {
     private final AndroidResponseCacheAdapter mDelegate;
 

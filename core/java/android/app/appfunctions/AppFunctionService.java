@@ -11,7 +11,6 @@ import android.os.ICancellationSignal;
 import android.os.OutcomeReceiver;
 import android.os.RemoteException;
 
-/* loaded from: classes.dex */
 public abstract class AppFunctionService extends Service {
     public static final String SERVICE_INTERFACE = "android.app.appfunctions.AppFunctionService";
     private final Binder mBinder =

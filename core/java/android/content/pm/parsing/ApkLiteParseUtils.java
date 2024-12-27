@@ -32,7 +32,6 @@ import java.util.Comparator;
 import java.util.Objects;
 import java.util.Set;
 
-/* loaded from: classes.dex */
 public class ApkLiteParseUtils {
     public static final String ANDROID_MANIFEST_FILENAME = "AndroidManifest.xml";
     private static final String ANDROID_RES_NAMESPACE =

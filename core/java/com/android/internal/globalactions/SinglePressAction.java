@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.android.internal.R;
 
-/* loaded from: classes5.dex */
 public abstract class SinglePressAction implements Action {
     private final Drawable mIcon;
     private final int mIconResId;

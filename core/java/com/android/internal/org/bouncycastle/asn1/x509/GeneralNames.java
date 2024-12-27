@@ -8,7 +8,6 @@ import com.android.internal.org.bouncycastle.asn1.ASN1TaggedObject;
 import com.android.internal.org.bouncycastle.asn1.DERSequence;
 import com.android.internal.org.bouncycastle.util.Strings;
 
-/* loaded from: classes5.dex */
 public class GeneralNames extends ASN1Object {
     private final GeneralName[] names;
 

@@ -12,7 +12,6 @@ import com.android.internal.util.AnnotationValidations;
 import java.lang.annotation.Annotation;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class RotationResolutionRequest implements Parcelable {
     public static final Parcelable.Creator<RotationResolutionRequest> CREATOR =
             new Parcelable.Creator<

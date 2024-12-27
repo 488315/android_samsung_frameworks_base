@@ -12,7 +12,6 @@ import java.util.Objects;
 import java.util.concurrent.Executor;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public class Lnb implements AutoCloseable {
     public static final int EVENT_TYPE_DISEQC_RX_OVERFLOW = 0;
     public static final int EVENT_TYPE_DISEQC_RX_PARITY_ERROR = 2;

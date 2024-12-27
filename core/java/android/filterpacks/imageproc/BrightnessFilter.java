@@ -7,7 +7,6 @@ import android.filterfw.core.ShaderProgram;
 
 import com.samsung.android.biometrics.SemBiometricConstants;
 
-/* loaded from: classes.dex */
 public class BrightnessFilter extends SimpleImageFilter {
     private static final String mBrightnessShader =
             "precision mediump float;\n"

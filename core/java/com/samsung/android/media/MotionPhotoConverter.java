@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-/* loaded from: classes6.dex */
 public class MotionPhotoConverter {
     private static final String TAG = "MotionPhotoConverter";
     private static MotionPhotoConverter sInstance;

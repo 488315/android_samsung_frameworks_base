@@ -8,7 +8,6 @@ import com.android.internal.org.bouncycastle.crypto.InvalidCipherTextException;
 import com.android.internal.org.bouncycastle.crypto.OutputLengthException;
 import com.android.internal.org.bouncycastle.crypto.params.ParametersWithRandom;
 
-/* loaded from: classes5.dex */
 public class PaddedBufferedBlockCipher extends BufferedBlockCipher {
     BlockCipherPadding padding;
 

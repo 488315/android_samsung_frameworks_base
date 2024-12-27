@@ -7,7 +7,6 @@ import com.android.modules.expresslog.Counter;
 import java.io.IOException;
 import java.util.Arrays;
 
-/* loaded from: classes5.dex */
 public class KernelSingleProcessCpuThreadReader {
     private static final boolean DEBUG = false;
     private static final String TAG = "KernelSingleProcCpuThreadRdr";

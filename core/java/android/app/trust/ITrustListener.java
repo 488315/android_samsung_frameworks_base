@@ -9,7 +9,6 @@ import android.text.TextUtils;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
 public interface ITrustListener extends IInterface {
     void onEnabledTrustAgentsChanged(int i) throws RemoteException;
 

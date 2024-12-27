@@ -9,7 +9,6 @@ import android.filterfw.format.ImageFormat;
 
 import java.lang.reflect.Field;
 
-/* loaded from: classes.dex */
 public abstract class ImageCombineFilter extends Filter {
     protected int mCurrentTarget;
     protected String[] mInputNames;

@@ -14,7 +14,6 @@ import com.android.internal.logging.MetricsLogger;
 
 import com.sec.android.allshare.iface.message.EventMsg;
 
-/* loaded from: classes5.dex */
 public final class ColorTemperatureController {
     private static final boolean DEBUG = true;
     private static final String TAG = "ColorTemperatureController";

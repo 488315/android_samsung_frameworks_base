@@ -6,7 +6,6 @@ import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 
-/* loaded from: classes4.dex */
 public abstract class Filter {
     private static final int FILTER_TOKEN = -791613427;
     private static final int FINISH_TOKEN = -559038737;

@@ -2,7 +2,6 @@ package android.hardware.camera2.params;
 
 import com.android.internal.util.Preconditions;
 
-/* loaded from: classes2.dex */
 public final class RggbChannelVector {
     public static final int BLUE = 3;
     public static final int COUNT = 4;

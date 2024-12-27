@@ -1,6 +1,5 @@
 package android.flags;
 
-/* loaded from: classes.dex */
 public final class FusedOffFlag extends BooleanFlagBase {
     @Override // android.flags.BooleanFlagBase, android.flags.Flag
     public /* bridge */ /* synthetic */ String getCategoryName() {

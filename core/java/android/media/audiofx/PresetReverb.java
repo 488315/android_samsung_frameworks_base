@@ -2,7 +2,6 @@ package android.media.audiofx;
 
 import java.util.StringTokenizer;
 
-/* loaded from: classes2.dex */
 public class PresetReverb extends AudioEffect {
     public static final int PARAM_PRESET = 0;
     public static final short PRESET_LARGEHALL = 5;

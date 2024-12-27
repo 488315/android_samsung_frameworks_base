@@ -9,7 +9,6 @@ import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 
-/* loaded from: classes4.dex */
 public final class ArrayMap<K, V> implements Map<K, V> {
     private static final int BASE_SIZE = 4;
     private static final int CACHE_SIZE = 10;

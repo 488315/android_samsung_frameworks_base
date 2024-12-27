@@ -24,7 +24,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.concurrent.TimeUnit;
 
-/* loaded from: classes5.dex */
 public class FrameTracker extends SurfaceControl.OnJankDataListener
         implements HardwareRendererObserver.OnFrameMetricsAvailableListener {
     private static final int FLUSH_DELAY_MILLISECOND = 60;

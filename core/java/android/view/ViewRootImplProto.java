@@ -1,6 +1,5 @@
 package android.view;
 
-/* loaded from: classes4.dex */
 public final class ViewRootImplProto {
     public static final long ADDED = 1133871366153L;
     public static final long APP_VISIBLE = 1133871366147L;

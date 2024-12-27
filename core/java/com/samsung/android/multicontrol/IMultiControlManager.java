@@ -7,7 +7,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.view.IInputFilter;
 
-/* loaded from: classes6.dex */
 public interface IMultiControlManager extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.multicontrol.IMultiControlManager";
 

@@ -7,7 +7,6 @@ import android.view.inputmethod.InputContentInfo;
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 
-/* loaded from: classes2.dex */
 interface InputMethodServiceInternal {
     Context getContext();
 

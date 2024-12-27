@@ -2,7 +2,6 @@ package com.android.internal.org.bouncycastle.asn1;
 
 import java.io.IOException;
 
-/* loaded from: classes5.dex */
 public class ASN1Boolean extends ASN1Primitive {
     private static final byte FALSE_VALUE = 0;
     private static final byte TRUE_VALUE = -1;

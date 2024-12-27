@@ -7,7 +7,6 @@ import android.os.HwParcel;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public final class TrafficDescriptor {
     public OptionalDnn dnn = new OptionalDnn();
     public OptionalOsAppId osAppId = new OptionalOsAppId();

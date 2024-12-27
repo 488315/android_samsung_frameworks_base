@@ -9,7 +9,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-/* loaded from: classes5.dex */
 public class SignerInformationStore implements Iterable<SignerInformation> {
     private List all;
     private Map table = new HashMap();

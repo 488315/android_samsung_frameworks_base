@@ -5,7 +5,6 @@ import com.samsung.vekit.Common.Type.VideoCodecType;
 
 import java.io.FileDescriptor;
 
-/* loaded from: classes6.dex */
 public class ExportInfo {
     private FileDescriptor fd;
     private int height;

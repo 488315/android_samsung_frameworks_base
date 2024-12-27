@@ -14,7 +14,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public final class SharedLibraryInfo implements Parcelable {
     public static final Parcelable.Creator<SharedLibraryInfo> CREATOR =
             new Parcelable.Creator<

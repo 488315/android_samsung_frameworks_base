@@ -4,7 +4,6 @@ import android.hardware.SyncFence;
 import android.os.ParcelFileDescriptor;
 import android.util.Log;
 
-/* loaded from: classes3.dex */
 public class EGLExt {
     public static final int EGL_CONTEXT_FLAGS_KHR = 12540;
     public static final int EGL_CONTEXT_MAJOR_VERSION_KHR = 12440;

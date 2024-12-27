@@ -7,7 +7,6 @@ import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
 
-/* loaded from: classes5.dex */
 public interface IShellCallback extends IInterface {
     ParcelFileDescriptor openFile(String str, String str2, String str3) throws RemoteException;
 

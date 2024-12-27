@@ -11,7 +11,6 @@ import android.util.Log;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public final class VolumeInfo implements Parcelable {
     public static final Parcelable.Creator<VolumeInfo> CREATOR =
             new Parcelable.Creator<VolumeInfo>() { // from class: android.media.VolumeInfo.1

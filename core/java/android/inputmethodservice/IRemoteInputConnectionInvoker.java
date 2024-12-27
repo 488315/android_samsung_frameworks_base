@@ -30,7 +30,6 @@ import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 import java.util.function.IntConsumer;
 
-/* loaded from: classes2.dex */
 final class IRemoteInputConnectionInvoker {
     private CancellationSignalBeamer.Sender mBeamer;
     private final IRemoteInputConnection mConnection;

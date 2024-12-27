@@ -1,6 +1,5 @@
 package android.adservices;
 
-/* loaded from: classes.dex */
 public final class AdservicesProtoEnums {
     public static final int ADEXT_DATA_SERVICE = 9;
     public static final int AD_ID = 4;

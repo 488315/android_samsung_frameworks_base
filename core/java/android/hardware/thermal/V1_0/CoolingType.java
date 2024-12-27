@@ -2,7 +2,6 @@ package android.hardware.thermal.V1_0;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class CoolingType {
     public static final int FAN_RPM = 0;
 

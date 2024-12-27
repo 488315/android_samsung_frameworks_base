@@ -2,7 +2,6 @@ package android.credentials;
 
 import android.os.Bundle;
 
-/* loaded from: classes.dex */
 public final class SecCredentialUtils {
     public static final boolean DEBUG_LOG = false;
     public static final String TAG = "CRED_LOG";

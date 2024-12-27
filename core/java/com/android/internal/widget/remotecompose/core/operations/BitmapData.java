@@ -7,7 +7,6 @@ import com.android.internal.widget.remotecompose.core.WireBuffer;
 
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public class BitmapData implements Operation {
     public static final Companion COMPANION = new Companion();
     public static final int MAX_IMAGE_DIMENSION = 8000;

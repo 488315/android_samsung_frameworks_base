@@ -15,7 +15,6 @@ import com.samsung.android.knox.analytics.database.Contract;
 import java.io.CharArrayWriter;
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public class DiskInfo implements Parcelable {
     public static final String ACTION_DISK_SCANNED = "android.os.storage.action.DISK_SCANNED";
     public static final Parcelable.Creator<DiskInfo> CREATOR =

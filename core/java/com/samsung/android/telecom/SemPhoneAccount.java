@@ -5,7 +5,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.telecom.PhoneAccount;
 
-/* loaded from: classes6.dex */
 public final class SemPhoneAccount implements Parcelable {
     public static final Parcelable.Creator<SemPhoneAccount> CREATOR =
             new Parcelable.Creator<

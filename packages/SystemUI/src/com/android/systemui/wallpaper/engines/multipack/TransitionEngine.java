@@ -17,7 +17,6 @@ import com.samsung.android.wallpaper.live.sdk.utils.DisplayUtils;
 import com.samsung.android.wallpaper.live.sdk.utils.GraphicsUtils;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes3.dex */
 public final class TransitionEngine extends WallpaperEngine {
     public final String TAG;
     public final long TRANSITION_ANIMATION_DURATION;

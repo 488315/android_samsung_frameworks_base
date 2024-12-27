@@ -3,7 +3,6 @@ package android.app;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes.dex */
 public final class ForegroundServiceStartNotAllowedException extends ServiceStartNotAllowedException
         implements Parcelable {
     public static final Parcelable.Creator<ForegroundServiceStartNotAllowedException> CREATOR =

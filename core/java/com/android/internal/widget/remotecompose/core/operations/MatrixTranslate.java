@@ -3,7 +3,6 @@ package com.android.internal.widget.remotecompose.core.operations;
 import com.android.internal.widget.remotecompose.core.Operation;
 import com.android.internal.widget.remotecompose.core.PaintContext;
 
-/* loaded from: classes5.dex */
 public class MatrixTranslate extends DrawBase2 {
     public static final DrawBase2.Companion COMPANION =
             new DrawBase2.Companion(

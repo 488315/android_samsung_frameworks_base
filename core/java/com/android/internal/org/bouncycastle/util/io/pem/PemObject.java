@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public class PemObject implements PemObjectGenerator {
     private static final List EMPTY_LIST = Collections.unmodifiableList(new ArrayList());
     private byte[] content;

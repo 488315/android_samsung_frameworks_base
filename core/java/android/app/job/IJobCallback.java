@@ -7,7 +7,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes.dex */
 public interface IJobCallback extends IInterface {
     void acknowledgeGetTransferredDownloadBytesMessage(int i, int i2, long j)
             throws RemoteException;

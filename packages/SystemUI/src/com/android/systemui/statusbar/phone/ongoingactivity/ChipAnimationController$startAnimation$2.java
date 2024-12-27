@@ -24,7 +24,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.CoroutineScopeKt;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes3.dex */
 final class ChipAnimationController$startAnimation$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ boolean $show;
     final /* synthetic */ int $state;

@@ -4,7 +4,6 @@ import android.graphics.Bitmap;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes6.dex */
 public class ScreenshotResult implements Parcelable {
     public static final Parcelable.Creator<ScreenshotResult> CREATOR =
             new Parcelable.Creator<

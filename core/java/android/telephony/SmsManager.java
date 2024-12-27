@@ -38,7 +38,6 @@ import java.util.Map;
 import java.util.concurrent.Executor;
 import java.util.function.Predicate;
 
-/* loaded from: classes4.dex */
 public final class SmsManager {
     public static final int CDMA_SMS_RECORD_LENGTH = 255;
     public static final String EXTRA_MMS_DATA = "android.telephony.extra.MMS_DATA";

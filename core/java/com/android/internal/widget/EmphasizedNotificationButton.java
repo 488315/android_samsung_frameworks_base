@@ -26,7 +26,6 @@ import android.widget.RemoteViews;
 import com.android.internal.R;
 
 @RemoteViews.RemoteView
-/* loaded from: classes5.dex */
 public class EmphasizedNotificationButton extends Button {
     private static final String FIRST_STRONG_ISOLATE = "\u2068";
     private static final String IMAGE_SPAN_TEXT = "�";

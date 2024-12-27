@@ -13,7 +13,6 @@ import android.widget.OverScroller;
 
 import com.android.internal.util.FrameworkStatsLog;
 
-/* loaded from: classes4.dex */
 public class GestureDetector {
     private static final int LONG_PRESS = 2;
     private static final int SHOW_PRESS = 1;

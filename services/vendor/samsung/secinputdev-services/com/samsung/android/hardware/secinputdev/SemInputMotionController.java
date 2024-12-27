@@ -22,7 +22,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-/* loaded from: classes.dex */
 public class SemInputMotionController {
     private static final String PACKAGE_NAME = "com.samsung.android.hardware.secinputdev.motion.";
     private SemInputCommandInterface commandOperator;

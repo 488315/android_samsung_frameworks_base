@@ -3,7 +3,6 @@ package com.samsung.android.displaysolution;
 import android.os.RemoteException;
 import android.util.Slog;
 
-/* loaded from: classes6.dex */
 public final class SemDisplaySolutionManager {
     private static long RETURN_ERROR = -1;
     private static float RETURN_ERROR_F = -1.0f;

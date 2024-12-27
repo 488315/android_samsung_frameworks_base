@@ -5,7 +5,6 @@ import android.provider.Telephony;
 
 import com.android.internal.content.NativeLibraryHelper;
 
-/* loaded from: classes5.dex */
 public class AnimatedFloatExpression {
     private static final float FP_PI = 3.1415927f;
     private static final float FP_TO_DEG = 0.017453292f;

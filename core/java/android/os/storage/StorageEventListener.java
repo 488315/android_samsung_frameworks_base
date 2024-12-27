@@ -1,6 +1,5 @@
 package android.os.storage;
 
-/* loaded from: classes3.dex */
 public class StorageEventListener {
     public void onUsbMassStorageConnectionChanged(boolean connected) {}
 

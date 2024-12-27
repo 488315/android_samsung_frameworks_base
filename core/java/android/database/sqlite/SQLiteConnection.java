@@ -37,7 +37,6 @@ import java.util.Map;
 import java.util.function.BinaryOperator;
 import java.util.function.UnaryOperator;
 
-/* loaded from: classes.dex */
 public final class SQLiteConnection implements CancellationSignal.OnCancelListener {
     static final /* synthetic */ boolean $assertionsDisabled = false;
     private static final boolean DEBUG = false;

@@ -17,7 +17,6 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
-/* loaded from: classes6.dex */
 public class Filter extends Element {
     private static final String GRAIN_TEMPLATE_IMAGE =
             "/system/cameradata/myfilter/GrainTemplateImage";

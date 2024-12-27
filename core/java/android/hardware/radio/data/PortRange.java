@@ -6,7 +6,6 @@ import android.os.Parcelable;
 
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public class PortRange implements Parcelable {
     public static final Parcelable.Creator<PortRange> CREATOR =
             new Parcelable.Creator<

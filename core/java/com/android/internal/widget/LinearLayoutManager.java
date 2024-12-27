@@ -13,7 +13,6 @@ import com.android.internal.widget.helper.ItemTouchHelper;
 
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public class LinearLayoutManager extends RecyclerView.LayoutManager
         implements ItemTouchHelper.ViewDropHandler,
                 RecyclerView.SmoothScroller.ScrollVectorProvider {

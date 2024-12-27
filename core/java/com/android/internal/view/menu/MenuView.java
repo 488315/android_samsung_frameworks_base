@@ -2,7 +2,6 @@ package com.android.internal.view.menu;
 
 import android.graphics.drawable.Drawable;
 
-/* loaded from: classes5.dex */
 public interface MenuView {
 
     public interface ItemView {

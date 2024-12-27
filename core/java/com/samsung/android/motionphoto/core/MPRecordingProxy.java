@@ -7,7 +7,6 @@ import android.util.Log;
 import java.nio.ByteBuffer;
 import java.util.concurrent.locks.ReentrantLock;
 
-/* loaded from: classes6.dex */
 public class MPRecordingProxy {
     private static final String TAG;
     private MPRecorderListener mListener;

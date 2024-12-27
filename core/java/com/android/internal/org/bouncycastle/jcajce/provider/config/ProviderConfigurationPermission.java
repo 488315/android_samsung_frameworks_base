@@ -6,7 +6,6 @@ import java.security.BasicPermission;
 import java.security.Permission;
 import java.util.StringTokenizer;
 
-/* loaded from: classes5.dex */
 public class ProviderConfigurationPermission extends BasicPermission {
     private static final int ACCEPTABLE_EC_CURVES = 16;
     private static final String ACCEPTABLE_EC_CURVES_STR = "acceptableeccurves";

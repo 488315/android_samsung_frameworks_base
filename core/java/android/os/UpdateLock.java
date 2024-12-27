@@ -3,7 +3,6 @@ package android.os;
 import android.content.Context;
 import android.util.Log;
 
-/* loaded from: classes3.dex */
 public class UpdateLock {
     private static final boolean DEBUG = false;
     public static final String NOW_IS_CONVENIENT = "nowisconvenient";

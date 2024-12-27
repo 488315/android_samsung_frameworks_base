@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public final class GetWalletCardsResponse implements Parcelable {
     public static final Parcelable.Creator<GetWalletCardsResponse> CREATOR =
             new Parcelable.Creator<

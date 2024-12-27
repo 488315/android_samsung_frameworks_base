@@ -1,6 +1,5 @@
 package com.android.server.blob;
 
-/* loaded from: classes5.dex */
 public final class BlobStatsEventProto {
 
     public final class BlobCommitterProto {

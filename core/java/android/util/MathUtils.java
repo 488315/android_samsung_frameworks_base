@@ -2,7 +2,6 @@ package android.util;
 
 import android.graphics.Rect;
 
-/* loaded from: classes4.dex */
 public final class MathUtils {
     private static final float DEG_TO_RAD = 0.017453292f;
     private static final float RAD_TO_DEG = 57.295784f;

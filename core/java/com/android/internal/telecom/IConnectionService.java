@@ -21,7 +21,6 @@ import com.android.internal.telephony.SemRILConstants;
 
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public interface IConnectionService extends IInterface {
     void abort(String str, Session.Info info) throws RemoteException;
 

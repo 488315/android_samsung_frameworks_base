@@ -6,7 +6,6 @@ import kotlin.jvm.internal.Ref$ObjectRef;
 import kotlinx.coroutines.DisposableHandle;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public final class RepeatWhenAttachedKt$repeatWhenAttached$1 implements DisposableHandle {
     public final /* synthetic */ Ref$ObjectRef $lifecycleOwner;
     public final /* synthetic */ RepeatWhenAttachedKt$repeatWhenAttached$onAttachListener$1 $onAttachListener;

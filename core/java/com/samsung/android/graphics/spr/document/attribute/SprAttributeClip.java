@@ -5,7 +5,6 @@ import com.samsung.android.graphics.spr.document.SprInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-/* loaded from: classes6.dex */
 public class SprAttributeClip extends SprAttributeBase {
     public float bottom;
     public float left;

@@ -18,7 +18,6 @@ import android.window.SizeConfigurationBuckets;
 
 import com.android.internal.policy.IKeyguardDismissCallback;
 
-/* loaded from: classes.dex */
 public class ActivityClient {
     private static final Singleton<ActivityClient> sInstance =
             new Singleton<ActivityClient>() { // from class: android.app.ActivityClient.1

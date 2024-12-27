@@ -28,7 +28,6 @@ import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
-/* loaded from: classes6.dex */
 public class EncodeVideo extends EncodeBase {
     private static final byte[] NAL_START_CODE = {0, 0, 0, 1};
     private static final String UNKNOWN_AUDIO = "audio/unknown";

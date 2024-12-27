@@ -2,7 +2,6 @@ package android.media;
 
 import android.content.Context;
 
-/* loaded from: classes2.dex */
 public class Cea708CaptionRenderer extends SubtitleController.Renderer {
     private Cea708CCWidget mCCWidget;
     private final Context mContext;

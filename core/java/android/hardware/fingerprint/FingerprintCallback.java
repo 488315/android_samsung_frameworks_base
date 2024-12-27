@@ -3,7 +3,6 @@ package android.hardware.fingerprint;
 import android.content.Context;
 import android.util.Slog;
 
-/* loaded from: classes2.dex */
 public class FingerprintCallback {
     public static final int REMOVE_ALL = 2;
     public static final int REMOVE_SINGLE = 1;

@@ -6,7 +6,6 @@ import android.os.PersistableBundle;
 
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public final class CellSignalStrengthGsm extends CellSignalStrength implements Parcelable {
     private static final boolean DBG = false;
     private static final int GSM_RSSI_GOOD = -97;

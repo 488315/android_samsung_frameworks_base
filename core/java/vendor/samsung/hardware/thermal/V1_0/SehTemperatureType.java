@@ -2,7 +2,6 @@ package vendor.samsung.hardware.thermal.V1_0;
 
 import java.util.ArrayList;
 
-/* loaded from: classes6.dex */
 public final class SehTemperatureType {
     public static final int BATTERY = 2;
     public static final int BCL_CURRENT = 7;

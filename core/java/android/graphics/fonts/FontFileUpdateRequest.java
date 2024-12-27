@@ -6,7 +6,6 @@ import android.os.ParcelFileDescriptor;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class FontFileUpdateRequest {
     private final ParcelFileDescriptor mParcelFileDescriptor;
     private final byte[] mSignature;

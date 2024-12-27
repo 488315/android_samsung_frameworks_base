@@ -1,6 +1,5 @@
 package android.media.soundtrigger;
 
-/* loaded from: classes2.dex */
 public @interface Status {
     public static final int DEAD_OBJECT = 4;
     public static final int INTERNAL_ERROR = 5;

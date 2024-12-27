@@ -2,7 +2,6 @@ package android.os;
 
 import java.io.FileDescriptor;
 
-/* loaded from: classes3.dex */
 public interface IVoldMountCallback extends IInterface {
     public static final String DESCRIPTOR = "android.os.IVoldMountCallback";
 

@@ -3,7 +3,6 @@ package android.os;
 import java.io.FileDescriptor;
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public interface IIncidentManager extends IInterface {
     void deleteAllIncidentReports(String str) throws RemoteException;
 

@@ -2,7 +2,6 @@ package com.android.server;
 
 import android.util.ArrayMap;
 
-/* loaded from: classes5.dex */
 public final class LocalServices {
     private static final ArrayMap<Class<?>, Object> sLocalServiceObjects = new ArrayMap<>();
 

@@ -4,7 +4,6 @@ import android.media.MediaMetrics;
 
 import java.math.BigInteger;
 
-/* loaded from: classes5.dex */
 class SimpleBigDecimal {
     private static final long serialVersionUID = 1;
     private final BigInteger bigInt;

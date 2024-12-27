@@ -17,7 +17,6 @@ import com.samsung.android.graphics.spr.document.shape.SprObjectBase;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* loaded from: classes6.dex */
 public class SprDrawableAnimationValue extends SprDrawableAnimation {
     private final ArrayList<AnimatorData> mAnimatingList;
 

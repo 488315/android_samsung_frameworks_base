@@ -1,6 +1,5 @@
 package com.samsung.android.rune;
 
-/* loaded from: classes6.dex */
 public class CDMRune {
     public static final boolean CDM_RSSI_THRESHOLD = true;
     public static final boolean CDM_SKIP_POPUP_SELF_MANAGED_APPSTREAM = true;

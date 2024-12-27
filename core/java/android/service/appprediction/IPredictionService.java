@@ -12,7 +12,6 @@ import android.os.IRemoteCallback;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes3.dex */
 public interface IPredictionService extends IInterface {
     public static final String DESCRIPTOR = "android.service.appprediction.IPredictionService";
 

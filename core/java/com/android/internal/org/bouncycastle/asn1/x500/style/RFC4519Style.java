@@ -15,7 +15,6 @@ import com.android.internal.org.bouncycastle.asn1.x500.X500NameStyle;
 
 import java.util.Hashtable;
 
-/* loaded from: classes5.dex */
 public class RFC4519Style extends AbstractX500NameStyle {
     public static final X500NameStyle INSTANCE;
     public static final ASN1ObjectIdentifier businessCategory =

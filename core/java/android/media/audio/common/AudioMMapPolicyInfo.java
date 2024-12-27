@@ -8,7 +8,6 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public class AudioMMapPolicyInfo implements Parcelable {
     public static final Parcelable.Creator<AudioMMapPolicyInfo> CREATOR =
             new Parcelable.Creator<AudioMMapPolicyInfo>() { // from class:

@@ -9,7 +9,6 @@ import android.util.Log;
 
 import com.samsung.android.media.AudioParameter;
 
-/* loaded from: classes5.dex */
 public class SemMultiMicManager {
     private static final String AUDIO_PARAMETER_SEC_LOCAL_MULTI_MIC_KEY = "l_multi_mic_key";
     private static final String AUDIO_PARAMETER_STREAM_CAM_BACK = "cam_back";

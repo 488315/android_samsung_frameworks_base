@@ -9,7 +9,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
-/* loaded from: classes5.dex */
 public class StoragedUidIoStatsReader {
     private static final String TAG = StoragedUidIoStatsReader.class.getSimpleName();
     private static String sUidIoFile = "/proc/uid_io/stats";

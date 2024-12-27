@@ -40,7 +40,6 @@ import java.util.Objects;
 import java.util.concurrent.Executor;
 import java.util.function.IntConsumer;
 
-/* loaded from: classes.dex */
 public class VirtualDeviceInternal {
     private final Context mContext;
     private final IVirtualDeviceManager mService;

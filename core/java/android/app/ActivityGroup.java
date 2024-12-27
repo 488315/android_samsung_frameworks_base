@@ -6,7 +6,6 @@ import android.os.Bundle;
 import java.util.HashMap;
 
 @Deprecated
-/* loaded from: classes.dex */
 public class ActivityGroup extends Activity {
     static final String PARENT_NON_CONFIG_INSTANCE_KEY = "android:parent_non_config_instance";
     private static final String STATES_KEY = "android:states";

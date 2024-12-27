@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-/* loaded from: classes.dex */
 public final class RegisterCredentialDescriptionRequest implements Parcelable {
     public static final Parcelable.Creator<RegisterCredentialDescriptionRequest> CREATOR =
             new Parcelable.Creator<RegisterCredentialDescriptionRequest>() { // from class:

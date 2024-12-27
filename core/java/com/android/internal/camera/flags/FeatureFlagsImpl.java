@@ -1,6 +1,5 @@
 package com.android.internal.camera.flags;
 
-/* loaded from: classes5.dex */
 public final class FeatureFlagsImpl implements FeatureFlags {
     @Override // com.android.internal.camera.flags.FeatureFlags
     public boolean analytics24q3() {

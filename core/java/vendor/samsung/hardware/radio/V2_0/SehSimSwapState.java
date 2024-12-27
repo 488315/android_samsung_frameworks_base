@@ -2,7 +2,6 @@ package vendor.samsung.hardware.radio.V2_0;
 
 import java.util.ArrayList;
 
-/* loaded from: classes6.dex */
 public final class SehSimSwapState {
     public static final int SIM_SWAP_ADDED = 1;
     public static final int SIM_SWAP_REMOVED = 0;

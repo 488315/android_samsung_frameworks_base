@@ -5,7 +5,6 @@ import android.annotation.SystemApi;
 import java.util.concurrent.Executor;
 
 @SystemApi
-/* loaded from: classes.dex */
 public class CloudSearchManager {
 
     public interface CallBack {

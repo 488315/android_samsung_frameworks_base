@@ -11,7 +11,6 @@ import android.telephony.ims.feature.ImsFeature;
 
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public final class ImsFeatureContainer implements Parcelable {
     public static final Parcelable.Creator<ImsFeatureContainer> CREATOR =
             new Parcelable.Creator<

@@ -9,7 +9,6 @@ import android.telephony.BarringInfo;
 import android.telephony.DomainSelectionService;
 import android.telephony.ServiceState;
 
-/* loaded from: classes5.dex */
 public interface IDomainSelectionServiceController extends IInterface {
     public static final String DESCRIPTOR =
             "com.android.internal.telephony.IDomainSelectionServiceController";

@@ -8,7 +8,6 @@ import android.os.RemoteException;
 
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public interface ITvInputManagerCallback extends IInterface {
     void onCurrentTunedInfosUpdated(List<TunedInfo> list) throws RemoteException;
 

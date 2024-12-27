@@ -7,7 +7,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes.dex */
 public interface IServiceConnection extends IInterface {
     void connected(ComponentName componentName, IBinder iBinder, boolean z) throws RemoteException;
 

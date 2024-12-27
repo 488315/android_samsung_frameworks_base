@@ -4,7 +4,6 @@ import android.content.Intent;
 import com.android.systemui.statusbar.pipeline.mobile.data.model.NetworkNameModel;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes3.dex */
 public abstract class NetworkNameModelKt {
     public static final NetworkNameModel.IntentDerived toNetworkNameModel(Intent intent, String str) {
         boolean booleanExtra = intent.getBooleanExtra("android.telephony.extra.SHOW_SPN", false);

@@ -23,7 +23,6 @@ import java.util.Objects;
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 
-/* loaded from: classes4.dex */
 public class ImsRcsManager {
     public static final String ACTION_SHOW_CAPABILITY_DISCOVERY_OPT_IN =
             "android.telephony.ims.action.SHOW_CAPABILITY_DISCOVERY_OPT_IN";

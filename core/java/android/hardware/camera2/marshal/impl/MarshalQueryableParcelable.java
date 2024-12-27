@@ -8,7 +8,6 @@ import android.os.Parcelable;
 
 import java.nio.ByteBuffer;
 
-/* loaded from: classes2.dex */
 public class MarshalQueryableParcelable<T extends Parcelable> implements MarshalQueryable<T> {
     private static final boolean DEBUG = false;
     private static final String FIELD_CREATOR = "CREATOR";

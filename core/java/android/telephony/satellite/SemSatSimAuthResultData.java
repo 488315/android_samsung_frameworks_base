@@ -7,7 +7,6 @@ import com.android.internal.telephony.util.TelephonyUtils;
 
 import vendor.samsung.hardware.radio.satellite.SehSatSimAuthRespData;
 
-/* loaded from: classes4.dex */
 public final class SemSatSimAuthResultData implements Parcelable {
     private static final String LOG_TAG = "SemSatSimAuthResultData";
     private String mAuts;

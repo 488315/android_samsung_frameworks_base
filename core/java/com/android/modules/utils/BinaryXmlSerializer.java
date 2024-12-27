@@ -10,7 +10,6 @@ import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
-/* loaded from: classes5.dex */
 public class BinaryXmlSerializer implements TypedXmlSerializer {
     static final int ATTRIBUTE = 15;
     public static final byte[] PROTOCOL_MAGIC_VERSION_0 = {65, 66, 88, 0};

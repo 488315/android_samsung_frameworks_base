@@ -12,7 +12,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public class UserBatteryConsumer extends BatteryConsumer {
     static final int COLUMN_COUNT = 2;
     private static final int COLUMN_INDEX_USER_ID = 1;

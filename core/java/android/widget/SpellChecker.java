@@ -20,7 +20,6 @@ import com.android.internal.util.GrowingArrayUtils;
 import java.text.BreakIterator;
 import java.util.Locale;
 
-/* loaded from: classes4.dex */
 public class SpellChecker implements SpellCheckerSession.SpellCheckerSessionListener {
     public static final int AVERAGE_WORD_LENGTH = 7;
     private static final boolean DBG = false;

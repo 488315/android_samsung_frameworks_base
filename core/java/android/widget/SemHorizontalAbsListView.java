@@ -75,7 +75,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-/* loaded from: classes4.dex */
 public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter>
         implements TextWatcher,
                 ViewTreeObserver.OnGlobalLayoutListener,

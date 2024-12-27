@@ -14,7 +14,6 @@ import android.util.Log;
 import java.util.Calendar;
 import java.util.Collection;
 
-/* loaded from: classes3.dex */
 public class KeyStoreSecurityLevel {
     private static final String TAG = "KeyStoreSecurityLevel";
     private final IKeystoreSecurityLevel mSecurityLevel;

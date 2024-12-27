@@ -2,7 +2,6 @@ package android.content.res;
 
 import android.graphics.drawable.Drawable;
 
-/* loaded from: classes.dex */
 class DrawableCache extends ThemedResourceCache<Drawable.ConstantState> {
     DrawableCache() {}
 

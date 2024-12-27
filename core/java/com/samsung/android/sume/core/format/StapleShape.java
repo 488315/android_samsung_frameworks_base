@@ -3,7 +3,6 @@ package com.samsung.android.sume.core.format;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes6.dex */
 class StapleShape implements Shape {
     public static final Parcelable.Creator<StapleShape> CREATOR =
             new Parcelable.Creator<

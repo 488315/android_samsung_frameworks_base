@@ -12,7 +12,6 @@ import java.util.Arrays;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public final class AmbientBrightnessDayStats implements Parcelable {
     public static final Parcelable.Creator<AmbientBrightnessDayStats> CREATOR =
             new Parcelable.Creator<AmbientBrightnessDayStats>() { // from class:

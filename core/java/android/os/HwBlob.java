@@ -5,7 +5,6 @@ import android.annotation.SystemApi;
 import libcore.util.NativeAllocationRegistry;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public class HwBlob {
     private static final String TAG = "HwBlob";
     private static final NativeAllocationRegistry sNativeRegistry;

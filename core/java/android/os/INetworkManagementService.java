@@ -8,7 +8,6 @@ import android.net.INetworkManagementEventObserver;
 import android.net.InterfaceConfiguration;
 import android.net.Network;
 
-/* loaded from: classes3.dex */
 public interface INetworkManagementService extends IInterface {
     void activateClo(String str) throws RemoteException;
 

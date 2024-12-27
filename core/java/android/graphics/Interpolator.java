@@ -2,7 +2,6 @@ package android.graphics;
 
 import android.os.SystemClock;
 
-/* loaded from: classes.dex */
 public class Interpolator {
     private int mFrameCount;
     private int mValueCount;

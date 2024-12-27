@@ -5,7 +5,6 @@ import android.content.Context;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes3.dex */
 public abstract class IdentityCredentialStore {
     public static final int CIPHERSUITE_ECDHE_HKDF_ECDSA_WITH_AES_256_GCM_SHA256 = 1;
 

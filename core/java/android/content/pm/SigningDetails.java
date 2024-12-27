@@ -15,7 +15,6 @@ import java.security.cert.CertificateException;
 import java.util.Arrays;
 import java.util.Set;
 
-/* loaded from: classes.dex */
 public final class SigningDetails implements Parcelable {
     private static final int PAST_CERT_EXISTS = 0;
     private static final String TAG = "SigningDetails";

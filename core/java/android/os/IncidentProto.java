@@ -1,6 +1,5 @@
 package android.os;
 
-/* loaded from: classes3.dex */
 public final class IncidentProto {
     public static final long ACTIVITIES = 1146756271044L;
     public static final long ALARM = 1146756271048L;

@@ -18,7 +18,6 @@ import java.util.LinkedHashSet;
 import java.util.Timer;
 import java.util.TimerTask;
 
-/* loaded from: classes6.dex */
 public class Device {
     private static final int AT_COMMAND_ALLOW_TOKEN_MODE = 28;
     private static final String CACHE_TAG = "MODE";

@@ -9,7 +9,6 @@ import com.android.internal.org.bouncycastle.asn1.ASN1Sequence;
 import com.android.internal.org.bouncycastle.asn1.DERIA5String;
 import com.android.internal.org.bouncycastle.asn1.DERSequence;
 
-/* loaded from: classes5.dex */
 public class PolicyQualifierInfo extends ASN1Object {
     private ASN1ObjectIdentifier policyQualifierId;
     private ASN1Encodable qualifier;

@@ -23,7 +23,6 @@ import com.android.internal.widget.remotecompose.core.operations.Utils;
 import com.android.internal.widget.remotecompose.core.operations.paint.PaintBundle;
 import com.android.internal.widget.remotecompose.core.operations.paint.PaintChanges;
 
-/* loaded from: classes5.dex */
 public class AndroidPaintContext extends PaintContext {
     Canvas mCanvas;
     Paint mPaint;

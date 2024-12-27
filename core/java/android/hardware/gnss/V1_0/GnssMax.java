@@ -2,7 +2,6 @@ package android.hardware.gnss.V1_0;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class GnssMax {
     public static final int SVS_COUNT = 64;
 

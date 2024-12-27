@@ -7,7 +7,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.Trace;
 
-/* loaded from: classes.dex */
 public class DestroyActivityItem extends ActivityLifecycleItem {
     public static final Parcelable.Creator<DestroyActivityItem> CREATOR =
             new Parcelable.Creator<DestroyActivityItem>() { // from class:

@@ -8,7 +8,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-/* loaded from: classes2.dex */
 public final class ColorSpaceProfiles {
     public static final int UNSPECIFIED = -1;
     private final Map<ColorSpace.Named, Map<Integer, Set<Long>>> mProfileMap = new ArrayMap();

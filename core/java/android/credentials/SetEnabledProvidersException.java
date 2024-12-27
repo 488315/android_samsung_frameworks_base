@@ -2,7 +2,6 @@ package android.credentials;
 
 import com.android.internal.util.Preconditions;
 
-/* loaded from: classes.dex */
 public class SetEnabledProvidersException extends Exception {
     private final String mType;
 

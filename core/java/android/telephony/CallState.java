@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public final class CallState implements Parcelable {
     public static final int CALL_CLASSIFICATION_BACKGROUND = 2;
     public static final int CALL_CLASSIFICATION_FOREGROUND = 1;

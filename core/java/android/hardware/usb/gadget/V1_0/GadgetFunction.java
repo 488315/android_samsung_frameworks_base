@@ -4,7 +4,6 @@ import android.security.keystore.KeyProperties;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class GadgetFunction {
     public static final long ACCESSORY = 2;
     public static final long ADB = 1;

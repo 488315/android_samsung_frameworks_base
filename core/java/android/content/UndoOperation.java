@@ -3,7 +3,6 @@ package android.content;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes.dex */
 public abstract class UndoOperation<DATA> implements Parcelable {
     UndoOwner mOwner;
 

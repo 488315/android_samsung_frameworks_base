@@ -20,7 +20,6 @@ import android.view.ViewParent;
 import com.android.internal.R;
 import com.android.internal.view.menu.ShowableListMenu;
 
-/* loaded from: classes4.dex */
 public class ListPopupWindow implements ShowableListMenu {
     private static final boolean DEBUG = false;
     private static final int EXPAND_LIST_TIMEOUT = 250;

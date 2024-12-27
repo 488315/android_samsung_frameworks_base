@@ -2,7 +2,6 @@ package com.sec.android.iaft;
 
 import android.net.Uri;
 
-/* loaded from: classes6.dex */
 public class SmLib_IafdConstant {
     public static final int CAN_NOT_FOUND = 0;
     public static final String DC_API_AUTHORITY = "com.samsung.android.sm.dcapi";

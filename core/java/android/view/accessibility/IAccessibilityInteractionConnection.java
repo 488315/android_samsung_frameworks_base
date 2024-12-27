@@ -11,7 +11,6 @@ import android.view.MagnificationSpec;
 import android.view.SurfaceControl;
 import android.window.ScreenCapture;
 
-/* loaded from: classes4.dex */
 public interface IAccessibilityInteractionConnection extends IInterface {
     void attachAccessibilityOverlayToWindow(
             SurfaceControl surfaceControl,

@@ -9,7 +9,6 @@ import com.android.internal.org.bouncycastle.crypto.params.ParametersWithIV;
 import com.android.internal.org.bouncycastle.util.Arrays;
 import com.android.internal.org.bouncycastle.util.Pack;
 
-/* loaded from: classes5.dex */
 public class SICBlockCipher extends StreamBlockCipher implements SkippingStreamCipher {
     private byte[] IV;
     private final int blockSize;

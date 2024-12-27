@@ -4,7 +4,6 @@ import android.graphics.drawable.Drawable;
 
 import com.samsung.android.graphics.spr.document.SprDocument;
 
-/* loaded from: classes6.dex */
 public abstract class SprDrawableAnimation implements Runnable {
     private static final int DEFAULT_FRAME_DURATION = 16;
     public static final byte TYPE_FRAMEANIMATION = 2;

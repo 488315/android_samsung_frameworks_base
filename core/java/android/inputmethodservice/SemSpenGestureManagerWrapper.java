@@ -5,7 +5,6 @@ import android.util.Log;
 
 import com.samsung.android.content.smartclip.SpenGestureManager;
 
-/* loaded from: classes2.dex */
 final class SemSpenGestureManagerWrapper {
     static SpenGestureManager mSpenGestureManager = null;
 

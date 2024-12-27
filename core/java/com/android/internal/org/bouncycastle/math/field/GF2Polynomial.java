@@ -2,7 +2,6 @@ package com.android.internal.org.bouncycastle.math.field;
 
 import com.android.internal.org.bouncycastle.util.Arrays;
 
-/* loaded from: classes5.dex */
 class GF2Polynomial implements Polynomial {
     protected final int[] exponents;
 

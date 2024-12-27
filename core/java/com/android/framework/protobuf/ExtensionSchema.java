@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.Map;
 
 @CheckReturnValue
-/* loaded from: classes3.dex */
 abstract class ExtensionSchema<T extends FieldSet.FieldDescriptorLite<T>> {
     abstract int extensionNumber(Map.Entry<?, ?> entry);
 

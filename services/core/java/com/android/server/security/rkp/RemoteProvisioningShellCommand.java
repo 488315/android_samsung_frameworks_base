@@ -45,7 +45,6 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes2.dex */
 public final class RemoteProvisioningShellCommand extends ShellCommand {
     public static final Duration BIND_TIMEOUT = Duration.ofSeconds(10);
     public final int mCallerUid;

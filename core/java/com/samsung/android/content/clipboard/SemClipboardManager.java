@@ -28,7 +28,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes5.dex */
 public class SemClipboardManager {
     public static final String ACTION_ADD_CLIP =
             "com.samsung.android.content.clipboard.action.ADD_CLIP";

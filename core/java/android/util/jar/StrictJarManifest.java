@@ -15,7 +15,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.jar.Attributes;
 
-/* loaded from: classes4.dex */
 public class StrictJarManifest implements Cloneable {
     static final int LINE_LENGTH_LIMIT = 72;
     private HashMap<String, Chunk> chunks;

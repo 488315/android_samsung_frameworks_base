@@ -2,7 +2,6 @@ package android.telecom.Logging;
 
 import android.telecom.Log;
 
-/* loaded from: classes3.dex */
 public abstract class Runnable {
     private final Object mLock;
     private final java.lang.Runnable mRunnable =

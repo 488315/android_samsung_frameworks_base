@@ -51,7 +51,6 @@ import java.util.function.Consumer;
 import java.util.function.ToDoubleFunction;
 import java.util.function.ToLongFunction;
 
-/* loaded from: classes5.dex */
 public class BinderCallsStats implements BinderInternal.Observer {
     private static final long BINDER_STATS_FILE_SIZE_THRESHOLD = 2097152;
     private static final int CALL_SESSIONS_POOL_SIZE = 100;

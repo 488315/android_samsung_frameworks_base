@@ -1,6 +1,5 @@
 package com.android.server;
 
-/* loaded from: classes5.dex */
 public final class IntentResolverProto {
     public static final long BASE_MIME_TYPES = 2246267895810L;
     public static final long FULL_MIME_TYPES = 2246267895809L;

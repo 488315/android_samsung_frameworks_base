@@ -13,7 +13,6 @@ import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.util.Log;
 
-/* loaded from: classes6.dex */
 public class SemMobileWipsProvider extends ContentProvider {
     public static final String ATTACK_TYPE = "attack_type";
     private static final String AUTHORITY = "com.samsung.server.wifi.mwips";

@@ -5,7 +5,6 @@ import android.view.animation.Interpolator;
 
 import java.util.ArrayList;
 
-/* loaded from: classes4.dex */
 public class PendingInsetsController implements WindowInsetsController {
     private static final int KEEP_BEHAVIOR = -1;
     private boolean mAnimationsDisabled;

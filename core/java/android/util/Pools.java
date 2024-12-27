@@ -1,6 +1,5 @@
 package android.util;
 
-/* loaded from: classes4.dex */
 public final class Pools {
 
     public interface Pool<T> {

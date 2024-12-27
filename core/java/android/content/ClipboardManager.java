@@ -8,7 +8,6 @@ import android.os.ServiceManager;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public class ClipboardManager extends android.text.ClipboardManager {
     public static final String DEVICE_CONFIG_ALLOW_VIRTUALDEVICE_SILOS =
             "allow_virtualdevice_silos";

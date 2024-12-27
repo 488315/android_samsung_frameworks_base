@@ -8,7 +8,6 @@ import android.os.ParcelFileDescriptor;
 import android.os.RemoteCallback;
 import android.os.RemoteException;
 
-/* loaded from: classes.dex */
 public interface IResourcesManager extends IInterface {
     public static final String DESCRIPTOR = "android.content.res.IResourcesManager";
 

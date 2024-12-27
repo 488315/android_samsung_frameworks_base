@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-/* loaded from: classes6.dex */
 public final class RefreshRateConfig {
     private static final String PROPERTY_AMBIENT_BRIGHTNESS =
             "persist.dm.passive.ambient_brightness";

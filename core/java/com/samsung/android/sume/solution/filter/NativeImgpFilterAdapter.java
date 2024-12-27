@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes6.dex */
 public class NativeImgpFilterAdapter implements Operator {
     private static final String TAG = Def.tagOf((Class<?>) NativeImgpFilterAdapter.class);
     private final NativeUniImgpPlugin plugin;

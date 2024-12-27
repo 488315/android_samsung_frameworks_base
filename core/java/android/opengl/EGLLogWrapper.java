@@ -12,7 +12,6 @@ import javax.microedition.khronos.egl.EGL;
 import javax.microedition.khronos.egl.EGL10;
 import javax.microedition.khronos.egl.EGL11;
 
-/* loaded from: classes3.dex */
 class EGLLogWrapper implements EGL11 {
     private int mArgCount;
     boolean mCheckError;

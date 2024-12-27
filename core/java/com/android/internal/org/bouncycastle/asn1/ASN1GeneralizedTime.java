@@ -15,7 +15,6 @@ import java.util.Locale;
 import java.util.SimpleTimeZone;
 import java.util.TimeZone;
 
-/* loaded from: classes5.dex */
 public class ASN1GeneralizedTime extends ASN1Primitive {
     protected byte[] time;
 

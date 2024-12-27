@@ -12,7 +12,6 @@ import android.filterfw.format.ImageFormat;
 import java.util.Date;
 import java.util.Random;
 
-/* loaded from: classes.dex */
 public class GrainFilter extends Filter {
     private static final int RAND_THRESHOLD = 128;
     private Program mGrainProgram;

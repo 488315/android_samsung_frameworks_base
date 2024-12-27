@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 
-/* loaded from: classes3.dex */
 public class PersonalizationData {
     private LinkedHashMap<String, NamespaceData> mNamespaces;
     private ArrayList<AccessControlProfile> mProfiles;

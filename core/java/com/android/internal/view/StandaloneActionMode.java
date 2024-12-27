@@ -14,7 +14,6 @@ import com.android.internal.widget.ActionBarContextView;
 
 import java.lang.ref.WeakReference;
 
-/* loaded from: classes5.dex */
 public class StandaloneActionMode extends ActionMode implements MenuBuilder.Callback {
     private ActionMode.Callback mCallback;
     private Context mContext;

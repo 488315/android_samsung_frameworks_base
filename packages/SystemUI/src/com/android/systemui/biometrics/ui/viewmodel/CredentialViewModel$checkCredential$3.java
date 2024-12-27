@@ -4,7 +4,6 @@ import kotlin.coroutines.Continuation;
 import kotlin.coroutines.jvm.internal.ContinuationImpl;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes.dex */
 final class CredentialViewModel$checkCredential$3 extends ContinuationImpl {
     Object L$0;
     Object L$1;

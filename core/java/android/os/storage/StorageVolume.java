@@ -21,7 +21,6 @@ import java.io.File;
 import java.util.Locale;
 import java.util.UUID;
 
-/* loaded from: classes3.dex */
 public final class StorageVolume implements Parcelable {
     private static final String ACTION_OPEN_EXTERNAL_DIRECTORY =
             "android.os.storage.action.OPEN_EXTERNAL_DIRECTORY";

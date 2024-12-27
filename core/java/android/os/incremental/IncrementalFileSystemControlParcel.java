@@ -5,7 +5,6 @@ import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
 import android.os.Parcelable;
 
-/* loaded from: classes3.dex */
 public class IncrementalFileSystemControlParcel implements Parcelable {
     public static final Parcelable.Creator<IncrementalFileSystemControlParcel> CREATOR =
             new Parcelable.Creator<

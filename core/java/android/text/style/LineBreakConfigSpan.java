@@ -7,7 +7,6 @@ import android.text.ParcelableSpan;
 
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public final class LineBreakConfigSpan implements ParcelableSpan {
     private final LineBreakConfig mLineBreakConfig;
     private static final LineBreakConfig sNoHyphenationConfig =

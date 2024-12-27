@@ -24,7 +24,6 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
-/* loaded from: classes4.dex */
 final class IInputMethodManagerGlobalInvoker {
     private static final long TIMEOUT_MS = 10000;
     private static volatile IInputMethodManager sServiceCache = null;

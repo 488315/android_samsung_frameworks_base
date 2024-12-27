@@ -10,7 +10,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public abstract class CodedInputStream {
     private static final int DEFAULT_BUFFER_SIZE = 4096;
     private static final int DEFAULT_SIZE_LIMIT = Integer.MAX_VALUE;

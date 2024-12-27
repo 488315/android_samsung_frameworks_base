@@ -2,7 +2,6 @@ package android.view.inputmethod;
 
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public final class TextSnapshot {
     private final int mCompositionEnd;
     private final int mCompositionStart;

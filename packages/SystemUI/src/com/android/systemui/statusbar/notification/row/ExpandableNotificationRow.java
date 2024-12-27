@@ -157,7 +157,6 @@ import kotlin.text.StringsKt__StringsJVMKt;
 import noticolorpicker.NotificationColorPicker;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public class ExpandableNotificationRow extends ActivatableNotificationView implements PluginListener<NotificationMenuRowPlugin>, SwipeableView, NotificationFadeAware.FadeOptimizedNotification, PanelScreenShotLogger.LogProvider {
     public static final AnonymousClass2 TRANSLATE_CONTENT;
     public boolean mAboveShelf;

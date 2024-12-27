@@ -7,7 +7,6 @@ import android.os.Parcelable;
 
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public class VcnTransportInfo implements TransportInfo, Parcelable {
     public static final Parcelable.Creator<VcnTransportInfo> CREATOR =
             new Parcelable.Creator<

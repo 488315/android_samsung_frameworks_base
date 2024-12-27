@@ -1,6 +1,5 @@
 package android.hardware.graphics.common;
 
-/* loaded from: classes2.dex */
 public @interface BufferUsage {
     public static final long CAMERA_INPUT = 262144;
     public static final long CAMERA_OUTPUT = 131072;

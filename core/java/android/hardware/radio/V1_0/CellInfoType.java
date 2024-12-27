@@ -6,7 +6,6 @@ import com.android.internal.telephony.DctConstants;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class CellInfoType {
     public static final int CDMA = 2;
     public static final int GSM = 1;

@@ -30,7 +30,6 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public class ImsConfigImplBase {
     public static final int CONFIG_RESULT_FAILED = 1;
     public static final int CONFIG_RESULT_SUCCESS = 0;

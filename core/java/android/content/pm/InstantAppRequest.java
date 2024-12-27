@@ -3,7 +3,6 @@ package android.content.pm;
 import android.content.Intent;
 import android.os.Bundle;
 
-/* loaded from: classes.dex */
 public final class InstantAppRequest {
     public final String callingFeatureId;
     public final String callingPackage;

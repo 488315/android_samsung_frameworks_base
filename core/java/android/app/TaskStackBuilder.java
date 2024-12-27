@@ -11,7 +11,6 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
-/* loaded from: classes.dex */
 public class TaskStackBuilder {
     private static final String TAG = "TaskStackBuilder";
     private final ArrayList<Intent> mIntents = new ArrayList<>();

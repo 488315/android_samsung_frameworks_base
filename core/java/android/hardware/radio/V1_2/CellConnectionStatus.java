@@ -4,7 +4,6 @@ import android.security.keystore.KeyProperties;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class CellConnectionStatus {
     public static final int NONE = 0;
     public static final int PRIMARY_SERVING = 1;

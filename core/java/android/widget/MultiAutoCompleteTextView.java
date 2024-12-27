@@ -8,7 +8,6 @@ import android.text.TextUtils;
 import android.text.method.QwertyKeyListener;
 import android.util.AttributeSet;
 
-/* loaded from: classes4.dex */
 public class MultiAutoCompleteTextView extends AutoCompleteTextView {
     private Tokenizer mTokenizer;
 

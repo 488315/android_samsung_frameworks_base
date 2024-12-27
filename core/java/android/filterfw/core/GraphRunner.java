@@ -1,6 +1,5 @@
 package android.filterfw.core;
 
-/* loaded from: classes.dex */
 public abstract class GraphRunner {
     public static final int RESULT_BLOCKED = 4;
     public static final int RESULT_ERROR = 6;

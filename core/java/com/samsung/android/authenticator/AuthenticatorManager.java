@@ -11,7 +11,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/* loaded from: classes5.dex */
 final class AuthenticatorManager {
     private static final int ASSET_TRUSTED_APP_HANDLE_BASE = 1000000;
     private static final int ASSET_TRUSTED_APP_HANDLE_LIMIT = 1999999;

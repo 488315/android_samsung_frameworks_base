@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Predicate;
 
-/* loaded from: classes5.dex */
 public class KernelCpuThreadReader {
     private static final String CPU_STATISTICS_FILENAME = "time_in_state";
     private static final boolean DEBUG = false;

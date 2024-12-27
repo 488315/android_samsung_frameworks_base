@@ -6,7 +6,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 
-/* loaded from: classes.dex */
 final class FragmentState implements Parcelable {
     public static final Parcelable.Creator<FragmentState> CREATOR =
             new Parcelable.Creator<FragmentState>() { // from class: android.app.FragmentState.1

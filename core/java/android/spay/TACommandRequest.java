@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public class TACommandRequest implements Parcelable {
     public static final int HEADER_SIZE = 100;
     public static final int MAX_BUFFER_SIZE = 5242880;

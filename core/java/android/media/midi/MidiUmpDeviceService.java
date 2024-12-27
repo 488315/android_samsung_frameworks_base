@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/* loaded from: classes2.dex */
 public abstract class MidiUmpDeviceService extends Service {
     public static final String SERVICE_INTERFACE = "android.media.midi.MidiUmpDeviceService";
     private static final String TAG = "MidiUmpDeviceService";

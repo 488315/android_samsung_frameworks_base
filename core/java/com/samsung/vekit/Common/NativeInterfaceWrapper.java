@@ -26,7 +26,6 @@ import com.samsung.vekit.External.NativeInterface;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
-/* loaded from: classes6.dex */
 public class NativeInterfaceWrapper {
     private final String TAG = getClass().getSimpleName();
     NativeInterface nativeInterface;

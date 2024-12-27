@@ -3,7 +3,6 @@ package com.samsung.android.globalactions.util;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 
-/* loaded from: classes6.dex */
 public class DevicePolicyManagerWrapper {
     private final DevicePolicyManager mDevicePolicyManager;
 

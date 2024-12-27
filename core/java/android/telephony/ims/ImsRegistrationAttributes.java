@@ -12,7 +12,6 @@ import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
 
-/* loaded from: classes4.dex */
 public final class ImsRegistrationAttributes implements Parcelable {
     public static final int ATTR_EPDG_OVER_CELL_INTERNET = 1;
     public static final int ATTR_REGISTRATION_TYPE_EMERGENCY = 2;

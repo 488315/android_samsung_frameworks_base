@@ -8,7 +8,6 @@ import android.os.Message;
 import android.os.Messenger;
 import android.util.Log;
 
-/* loaded from: classes5.dex */
 public abstract class AsyncService extends Service {
     public static final int CMD_ASYNC_SERVICE_DESTROY = 16777216;
     public static final int CMD_ASYNC_SERVICE_ON_START_INTENT = 16777215;

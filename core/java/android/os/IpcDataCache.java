@@ -9,7 +9,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Iterator;
 
 @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
-/* loaded from: classes3.dex */
 public class IpcDataCache<Query, Result> extends PropertyInvalidatedCache<Query, Result> {
 
     @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)

@@ -5,7 +5,6 @@ import android.media.tv.tuner.TunerUtils;
 import android.media.tv.tuner.TunerVersionChecker;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public class DownloadSettings extends Settings {
     private final int mDownloadId;
     private final boolean mUseDownloadId;

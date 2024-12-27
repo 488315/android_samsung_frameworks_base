@@ -20,7 +20,6 @@ import android.view.WindowManager;
 import com.android.internal.R;
 
 @Deprecated
-/* loaded from: classes4.dex */
 public class ZoomButtonsController implements View.OnTouchListener {
     private static final int MSG_DISMISS_ZOOM_CONTROLS = 3;
     private static final int MSG_POST_CONFIGURATION_CHANGED = 2;

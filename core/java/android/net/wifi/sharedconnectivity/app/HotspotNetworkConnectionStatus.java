@@ -11,7 +11,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class HotspotNetworkConnectionStatus implements Parcelable {
     public static final int CONNECTION_STATUS_CONNECT_TO_HOTSPOT_FAILED = 9;
     public static final int CONNECTION_STATUS_ENABLING_HOTSPOT = 1;

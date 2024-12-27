@@ -9,7 +9,6 @@ import android.os.RemoteCallback;
 import android.os.RemoteException;
 import android.os.storage.StorageVolume;
 
-/* loaded from: classes3.dex */
 public interface IExternalStorageService extends IInterface {
     public static final String DESCRIPTOR = "android.service.storage.IExternalStorageService";
 

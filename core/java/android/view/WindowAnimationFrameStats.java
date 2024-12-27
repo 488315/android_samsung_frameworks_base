@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @Deprecated
-/* loaded from: classes4.dex */
 public final class WindowAnimationFrameStats extends FrameStats implements Parcelable {
     public static final Parcelable.Creator<WindowAnimationFrameStats> CREATOR =
             new Parcelable.Creator<

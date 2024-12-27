@@ -4,7 +4,6 @@ import java.time.Clock;
 import java.time.Instant;
 import java.time.ZoneId;
 
-/* loaded from: classes3.dex */
 public abstract class SimpleClock extends Clock {
     private final ZoneId zone;
 

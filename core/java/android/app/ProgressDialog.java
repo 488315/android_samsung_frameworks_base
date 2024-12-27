@@ -22,7 +22,6 @@ import com.android.internal.R;
 import java.text.NumberFormat;
 
 @Deprecated
-/* loaded from: classes.dex */
 public class ProgressDialog extends AlertDialog {
     public static final int SEM_STYLE_CIRCLE = 1000;
     public static final int STYLE_HORIZONTAL = 1;

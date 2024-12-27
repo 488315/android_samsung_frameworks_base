@@ -6,7 +6,6 @@ import android.os.Parcelable;
 
 import java.util.StringJoiner;
 
-/* loaded from: classes6.dex */
 public class SehExtendedRegStateResult implements Parcelable {
     public static final Parcelable.Creator<SehExtendedRegStateResult> CREATOR =
             new Parcelable.Creator<

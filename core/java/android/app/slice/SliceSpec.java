@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @Deprecated
-/* loaded from: classes.dex */
 public final class SliceSpec implements Parcelable {
     public static final Parcelable.Creator<SliceSpec> CREATOR =
             new Parcelable.Creator<SliceSpec>() { // from class: android.app.slice.SliceSpec.1

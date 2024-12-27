@@ -2,7 +2,6 @@ package android.graphics;
 
 import java.util.Arrays;
 
-/* loaded from: classes.dex */
 public class Matrix44 {
     final float[] mBackingArray;
 

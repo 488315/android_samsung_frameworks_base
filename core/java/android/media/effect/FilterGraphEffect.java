@@ -8,7 +8,6 @@ import android.filterfw.io.GraphIOException;
 import android.filterfw.io.GraphReader;
 import android.filterfw.io.TextGraphReader;
 
-/* loaded from: classes2.dex */
 public class FilterGraphEffect extends FilterEffect {
     private static final String TAG = "FilterGraphEffect";
     protected FilterGraph mGraph;

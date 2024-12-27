@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.os.Message;
 
-/* loaded from: classes6.dex */
 public class IAFDService extends Service {
     static final int CMD_ADDB_HOTFIXDB_UPDATE = 11;
     static final int CMD_HIGHBDB_HOTFIXDB_UPDATE = 12;

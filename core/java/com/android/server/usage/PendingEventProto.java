@@ -1,6 +1,5 @@
 package com.android.server.usage;
 
-/* loaded from: classes5.dex */
 public final class PendingEventProto {
     public static final long CLASS_NAME = 1138166333442L;
     public static final long CONFIG = 1146756268038L;

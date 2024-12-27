@@ -21,7 +21,6 @@ import java.util.function.BiConsumer;
 import java.util.function.IntConsumer;
 import java.util.stream.IntStream;
 
-/* loaded from: classes3.dex */
 public interface IPermissionManager extends IInterface {
     public static final String DESCRIPTOR = "android.permission.IPermissionManager";
 

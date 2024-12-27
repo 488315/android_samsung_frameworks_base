@@ -22,7 +22,6 @@ import com.samsung.android.wallpaperbackup.BnRConstants;
 import java.util.Locale;
 import java.util.Objects;
 
-/* loaded from: classes5.dex */
 public class MimeIconUtils {
     private static final ArrayMap<String, ContentResolver.MimeTypeInfo> sCache = new ArrayMap<>();
 

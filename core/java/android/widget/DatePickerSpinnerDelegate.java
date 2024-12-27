@@ -22,7 +22,6 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Locale;
 
-/* loaded from: classes4.dex */
 class DatePickerSpinnerDelegate extends DatePicker.AbstractDatePickerDelegate {
     private static final String DATE_FORMAT = "MM/dd/yyyy";
     private static final boolean DEFAULT_CALENDAR_VIEW_SHOWN = true;

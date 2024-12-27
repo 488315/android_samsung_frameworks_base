@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Consumer;
 
-/* loaded from: classes4.dex */
 public final class ViewTreeObserver {
     private static boolean sIllegalOnDrawModificationIsFatal;
     private boolean mAlive = true;

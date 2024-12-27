@@ -7,7 +7,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
-/* loaded from: classes.dex */
 public interface DownloadCallback {
     public static final int DOWNLOAD_FAILURE_STATUS_DOWNLOADING = 3;
     public static final int DOWNLOAD_FAILURE_STATUS_NETWORK_FAILURE = 2;

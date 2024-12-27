@@ -27,7 +27,6 @@ import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 
 @SystemApi
-/* loaded from: classes.dex */
 public class WearableSensingManager {
     static final long ALLOW_WEARABLE_SENSING_SERVICE_FILE_READ = 330701114;
     public static final String EXTRA_WEARABLE_SENSING_DATA_REQUEST =

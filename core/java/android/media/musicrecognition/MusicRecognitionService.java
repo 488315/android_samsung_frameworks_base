@@ -17,7 +17,6 @@ import com.android.internal.util.function.TriConsumer;
 import com.android.internal.util.function.pooled.PooledLambda;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public abstract class MusicRecognitionService extends Service {
     public static final String ACTION_MUSIC_SEARCH_LOOKUP =
             "android.service.musicrecognition.MUSIC_RECOGNITION";

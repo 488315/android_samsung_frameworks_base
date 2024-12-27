@@ -28,7 +28,6 @@ import java.io.FileNotFoundException;
 import java.util.LinkedList;
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public abstract class DocumentsProvider extends ContentProvider {
     private static final int MATCH_CHILDREN = 6;
     private static final int MATCH_CHILDREN_TREE = 8;

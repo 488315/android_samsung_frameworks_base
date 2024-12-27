@@ -4,7 +4,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public final class FlagsFactory {
     public static final FlagsFactory INSTANCE = new FlagsFactory();
     public static final Map flagMap = new LinkedHashMap();

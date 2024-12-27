@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 
-/* loaded from: classes5.dex */
 public final class CancellationGroup {
     private final Object mLock = new Object();
     private ArrayList<CompletableFuture<?>> mFutureList = null;

@@ -5,7 +5,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @Deprecated
-/* loaded from: classes6.dex */
 public class SemContextMovementAlert extends SemContextEventContext {
     public static final Parcelable.Creator<SemContextMovementAlert> CREATOR =
             new Parcelable.Creator<

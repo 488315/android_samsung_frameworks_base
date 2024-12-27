@@ -21,7 +21,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/* loaded from: classes.dex */
 public class ApplicationLoaders {
     private static final String TAG = "ApplicationLoaders";
     private static final ApplicationLoaders gApplicationLoaders = new ApplicationLoaders();

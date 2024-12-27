@@ -8,7 +8,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.widget.RemoteViews;
 
-/* loaded from: classes5.dex */
 public interface IRemoteViewsFactory extends IInterface {
     int getCount() throws RemoteException;
 

@@ -6,7 +6,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
-/* loaded from: classes5.dex */
 public class Base64 {
     private static final Encoder encoder = new Base64Encoder();
 

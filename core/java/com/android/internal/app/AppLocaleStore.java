@@ -16,7 +16,6 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-/* loaded from: classes5.dex */
 public class AppLocaleStore {
     private static final String TAG = AppLocaleStore.class.getSimpleName();
 

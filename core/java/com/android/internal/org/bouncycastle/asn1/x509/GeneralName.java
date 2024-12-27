@@ -19,7 +19,6 @@ import com.android.internal.org.bouncycastle.util.IPAddress;
 import java.io.IOException;
 import java.util.StringTokenizer;
 
-/* loaded from: classes5.dex */
 public class GeneralName extends ASN1Object implements ASN1Choice {
     public static final int dNSName = 2;
     public static final int directoryName = 4;

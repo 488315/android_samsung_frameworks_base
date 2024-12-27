@@ -10,7 +10,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public abstract class VerificationCodeParserBase implements VerificationCodeParser {
     public static final String[] OTP_PATTERN = {"^([\\d]{4,10})$", "^(?=.*[\\d])(?=.*[a-zA-Z])([\\da-zA-Z]{6,10})$", "^([A-Z]{1,3}-[\\d]{4,6})$", "^([\\d]{3,5}-[\\d]{3,5})$"};
     public static final String PATTERN_EMAIL = PatternsCompat.EMAIL_ADDRESS.toString();

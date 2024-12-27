@@ -14,7 +14,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public final class WalletCard implements Parcelable {
     public static final int CARD_TYPE_NON_PAYMENT = 2;
     public static final int CARD_TYPE_PAYMENT = 1;

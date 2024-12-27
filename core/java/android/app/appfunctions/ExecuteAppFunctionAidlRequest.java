@@ -6,7 +6,6 @@ import android.os.UserHandle;
 
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public final class ExecuteAppFunctionAidlRequest implements Parcelable {
     public static final Parcelable.Creator<ExecuteAppFunctionAidlRequest> CREATOR =
             new Parcelable.Creator<ExecuteAppFunctionAidlRequest>() { // from class:

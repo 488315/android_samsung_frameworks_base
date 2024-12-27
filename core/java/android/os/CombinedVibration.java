@@ -11,7 +11,6 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-/* loaded from: classes3.dex */
 public abstract class CombinedVibration implements Parcelable {
     public static final Parcelable.Creator<CombinedVibration> CREATOR =
             new Parcelable.Creator<

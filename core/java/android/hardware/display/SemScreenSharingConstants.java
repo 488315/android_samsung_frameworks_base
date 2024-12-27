@@ -2,7 +2,6 @@ package android.hardware.display;
 
 import android.os.Build;
 
-/* loaded from: classes2.dex */
 public final class SemScreenSharingConstants {
     public static final String CONNECTION_TYPE_CHROMECAST = "gcast";
     public static final String CONNECTION_TYPE_DLNA = "dlna";

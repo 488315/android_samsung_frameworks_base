@@ -14,7 +14,6 @@ import com.android.systemui.plugins.subscreen.SubRoom;
 import com.android.systemui.util.SystemUIAnalytics;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public class SubscreenParentDetailItemViewHolder extends RecyclerView.ViewHolder {
     public SubscreenNotificationDetailAdapter mAdapter;
     public final TextView mAppName;

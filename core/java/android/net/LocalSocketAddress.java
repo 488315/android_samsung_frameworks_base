@@ -1,6 +1,5 @@
 package android.net;
 
-/* loaded from: classes3.dex */
 public class LocalSocketAddress {
     private final String name;
     private final Namespace namespace;

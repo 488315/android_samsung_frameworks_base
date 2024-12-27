@@ -6,7 +6,6 @@ import android.system.keystore2.KeyDescriptor;
 
 import java.security.PrivateKey;
 
-/* loaded from: classes3.dex */
 public class AndroidKeyStorePrivateKey extends AndroidKeyStoreKey implements PrivateKey {
     public AndroidKeyStorePrivateKey(
             KeyDescriptor descriptor,

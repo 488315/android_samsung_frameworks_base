@@ -14,7 +14,6 @@ import java.util.Objects;
 import java.util.UUID;
 import java.util.regex.Pattern;
 
-/* loaded from: classes.dex */
 public class BluetoothDeviceFilterUtils {
     private static final boolean DEBUG = false;
     private static final String LOG_TAG = "CDM_BluetoothDeviceFilterUtils";

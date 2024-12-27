@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.provider.Telephony;
 
-/* loaded from: classes5.dex */
 public class OperatorInfo implements Parcelable {
     public static final Parcelable.Creator<OperatorInfo> CREATOR =
             new Parcelable.Creator<

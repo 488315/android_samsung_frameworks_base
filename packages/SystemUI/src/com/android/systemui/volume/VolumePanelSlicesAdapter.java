@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.Map;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes3.dex */
 public final class VolumePanelSlicesAdapter extends RecyclerView.Adapter {
     public final LifecycleOwner mLifecycleOwner;
     public VolumePanelDialog$$ExternalSyntheticLambda5 mOnSliceActionListener;

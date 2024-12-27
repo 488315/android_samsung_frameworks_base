@@ -25,7 +25,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 
-/* loaded from: classes6.dex */
 public class SprObjectShapePath extends SprObjectBase {
     public static final byte TYPE_BEZIER_CURVETO = 4;
     public static final byte TYPE_CLOSE = 6;

@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public class KeyCharacteristics implements Parcelable {
     public static final Parcelable.Creator<KeyCharacteristics> CREATOR =
             new Parcelable.Creator<

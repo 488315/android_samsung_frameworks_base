@@ -16,7 +16,6 @@ import com.samsung.android.globalactions.util.SystemController;
 
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public class DataModeActionViewModel implements ActionViewModel {
     private final AlertDialogFactory mAlertDialogFactory;
     private ConditionChecker mConditionChecker;

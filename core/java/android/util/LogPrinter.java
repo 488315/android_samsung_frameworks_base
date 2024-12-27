@@ -1,6 +1,5 @@
 package android.util;
 
-/* loaded from: classes4.dex */
 public class LogPrinter implements Printer {
     private final int mBuffer;
     private final int mPriority;

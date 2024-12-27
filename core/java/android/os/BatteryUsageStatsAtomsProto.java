@@ -1,6 +1,5 @@
 package android.os;
 
-/* loaded from: classes3.dex */
 public final class BatteryUsageStatsAtomsProto {
     public static final long COMPONENT_MODELS = 2246267895816L;
     public static final long DEVICE_BATTERY_CONSUMER = 1146756268036L;

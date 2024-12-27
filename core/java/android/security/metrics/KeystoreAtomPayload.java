@@ -3,7 +3,6 @@ package android.security.metrics;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes3.dex */
 public final class KeystoreAtomPayload implements Parcelable {
     public static final Parcelable.Creator<KeystoreAtomPayload> CREATOR =
             new Parcelable.Creator<

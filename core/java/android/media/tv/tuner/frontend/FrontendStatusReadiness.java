@@ -6,7 +6,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class FrontendStatusReadiness {
     public static final int FRONTEND_STATUS_READINESS_STABLE = 3;
     public static final int FRONTEND_STATUS_READINESS_UNAVAILABLE = 1;

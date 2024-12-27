@@ -16,7 +16,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.List;
 
-/* loaded from: classes4.dex */
 public interface InputMethod {
     public static final String SERVICE_INTERFACE = "android.view.InputMethod";
     public static final String SERVICE_META_DATA = "android.view.im";

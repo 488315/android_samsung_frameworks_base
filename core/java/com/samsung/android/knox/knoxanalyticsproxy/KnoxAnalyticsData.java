@@ -11,7 +11,6 @@ import java.io.Serializable;
 import java.util.Calendar;
 import java.util.TimeZone;
 
-/* loaded from: classes6.dex */
 public class KnoxAnalyticsData implements Parcelable {
     public static final Parcelable.Creator<KnoxAnalyticsData> CREATOR =
             new Parcelable.Creator<

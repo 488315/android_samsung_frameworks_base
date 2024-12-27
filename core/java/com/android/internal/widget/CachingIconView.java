@@ -20,7 +20,6 @@ import java.util.Objects;
 import java.util.function.Consumer;
 
 @RemoteViews.RemoteView
-/* loaded from: classes5.dex */
 public class CachingIconView extends ImageView {
     private int mBackgroundColor;
     private int mDesiredVisibility;

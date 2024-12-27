@@ -13,7 +13,6 @@ import android.os.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public interface IProcessStats extends IInterface {
     public static final String DESCRIPTOR = "com.android.internal.app.procstats.IProcessStats";
 

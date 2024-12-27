@@ -6,7 +6,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class IptvFrontendSettings extends FrontendSettings {
     public static final int IGMP_UNDEFINED = 0;
     public static final int IGMP_V1 = 1;

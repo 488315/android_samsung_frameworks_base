@@ -5,7 +5,6 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import java.lang.reflect.Array;
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public interface RadioTechnologyFamily$$ {
     static String toString(int _aidl_v) {
         return _aidl_v == 0 ? "THREE_GPP" : _aidl_v == 1 ? "THREE_GPP2" : Integer.toString(_aidl_v);

@@ -11,7 +11,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-/* loaded from: classes5.dex */
 public class ExtendedPKIXBuilderParameters extends ExtendedPKIXParameters {
     private Set excludedCerts;
     private int maxPathLength;

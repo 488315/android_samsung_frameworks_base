@@ -52,7 +52,6 @@ import java.util.Objects;
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 
-/* loaded from: classes4.dex */
 public final class SurfaceControl implements Parcelable {
     public static final int BUFFER_TRANSFORM_IDENTITY = 0;
     public static final int BUFFER_TRANSFORM_MIRROR_HORIZONTAL = 1;

@@ -2,7 +2,6 @@ package android.app.usage;
 
 import java.util.ArrayList;
 
-/* loaded from: classes.dex */
 public class EventList {
     private final ArrayList<UsageEvents.Event> mEvents = new ArrayList<>();
 

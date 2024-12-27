@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class AppPredictionSessionId implements Parcelable {
     public static final Parcelable.Creator<AppPredictionSessionId> CREATOR =
             new Parcelable.Creator<AppPredictionSessionId>() { // from class:

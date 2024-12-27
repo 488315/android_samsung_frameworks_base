@@ -3,7 +3,6 @@ package android.hardware.vibrator;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public final class PrimitivePwle implements Parcelable {
     public static final Parcelable.Creator<PrimitivePwle> CREATOR =
             new Parcelable.Creator<

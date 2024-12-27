@@ -7,7 +7,6 @@ import android.text.TextUtils;
 
 @SystemApi
 @Deprecated
-/* loaded from: classes3.dex */
 public final class DhcpClientEvent implements IpConnectivityLog.Event {
     public static final Parcelable.Creator<DhcpClientEvent> CREATOR =
             new Parcelable.Creator<

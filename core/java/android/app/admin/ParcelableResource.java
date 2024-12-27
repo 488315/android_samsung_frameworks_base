@@ -21,7 +21,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 import java.util.function.Supplier;
 
-/* loaded from: classes.dex */
 public final class ParcelableResource implements Parcelable {
     private static final String ATTR_PACKAGE_NAME = "package-name";
     private static final String ATTR_RESOURCE_ID = "resource-id";

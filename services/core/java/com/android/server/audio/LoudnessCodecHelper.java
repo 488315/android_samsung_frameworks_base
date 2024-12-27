@@ -23,7 +23,6 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes.dex */
 public final class LoudnessCodecHelper {
     static final int SPL_RANGE_LARGE = 3;
     static final int SPL_RANGE_MEDIUM = 2;

@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.function.ToIntFunction;
 
-/* loaded from: classes3.dex */
 public final class PowerMonitorReadings {
     public static final int ENERGY_UNAVAILABLE = -1;
     private static final Comparator<PowerMonitor> POWER_MONITOR_COMPARATOR =

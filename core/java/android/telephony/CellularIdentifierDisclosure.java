@@ -7,7 +7,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public final class CellularIdentifierDisclosure implements Parcelable {
     public static final int CELLULAR_IDENTIFIER_IMEI = 2;
     public static final int CELLULAR_IDENTIFIER_IMSI = 1;

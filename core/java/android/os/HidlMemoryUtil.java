@@ -13,7 +13,6 @@ import java.nio.DirectByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public final class HidlMemoryUtil {
     private static final String TAG = "HidlMemoryUtil";
 

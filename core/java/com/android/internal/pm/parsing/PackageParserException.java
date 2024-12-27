@@ -1,6 +1,5 @@
 package com.android.internal.pm.parsing;
 
-/* loaded from: classes5.dex */
 public class PackageParserException extends Exception {
     public final int error;
 

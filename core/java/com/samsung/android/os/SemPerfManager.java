@@ -14,7 +14,6 @@ import android.util.Log;
 
 import com.sec.android.sdhms.ISamsungDeviceHealthManager;
 
-/* loaded from: classes6.dex */
 public class SemPerfManager {
     public static final String COMMAND_ACTIVITY_EXECUTION = "EXEC_ACTIVITY";
     public static final String COMMAND_BROWSER_DASH_MODE = "SBROWSER_DASH_MODE";

@@ -18,7 +18,6 @@ import java.util.Set;
 import java.util.function.Predicate;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes.dex */
 public class InitialConfiguration {
     public static final InetAddress INET6_ANY = InetAddresses.parseNumericAddress("::");
     private static final int RFC6177_MIN_PREFIX_LENGTH = 48;

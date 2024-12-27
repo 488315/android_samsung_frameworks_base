@@ -3,7 +3,6 @@ package android.app.timezonedetector;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 
-/* loaded from: classes.dex */
 public final class TimeZoneDetectorImpl implements TimeZoneDetector {
     private static final boolean DEBUG = false;
     private static final String TAG = "timezonedetector.TimeZoneDetector";

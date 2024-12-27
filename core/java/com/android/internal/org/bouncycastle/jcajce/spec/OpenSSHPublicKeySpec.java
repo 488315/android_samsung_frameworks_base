@@ -5,7 +5,6 @@ import com.android.internal.org.bouncycastle.util.Strings;
 
 import java.security.spec.EncodedKeySpec;
 
-/* loaded from: classes5.dex */
 public class OpenSSHPublicKeySpec extends EncodedKeySpec {
     private static final String[] allowedTypes = {"ssh-rsa", "ssh-ed25519", "ssh-dss"};
     private final String type;

@@ -1,6 +1,5 @@
 package android.graphics;
 
-/* loaded from: classes.dex */
 public class ComposePathEffect extends PathEffect {
     private static native long nativeCreate(long j, long j2);
 

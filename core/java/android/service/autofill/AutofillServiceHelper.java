@@ -4,7 +4,6 @@ import android.view.autofill.AutofillId;
 
 import com.android.internal.util.Preconditions;
 
-/* loaded from: classes3.dex */
 final class AutofillServiceHelper {
     static AutofillId[] assertValid(AutofillId[] ids) {
         Preconditions.checkArgument(ids != null && ids.length > 0, "must have at least one id");

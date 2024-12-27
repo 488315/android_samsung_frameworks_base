@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes6.dex */
 public class SemContextLocationCore extends SemContextEventContext {
     public static final int ACTION_CURRENT_LOCATION_ACTIVITY_RECOGNITION_START = 11;
     public static final int ACTION_CURRENT_LOCATION_ACTIVITY_RECOGNITION_STOP = 12;

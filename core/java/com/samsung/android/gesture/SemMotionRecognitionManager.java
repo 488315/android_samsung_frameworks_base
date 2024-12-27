@@ -19,7 +19,6 @@ import com.samsung.android.hardware.context.SemContextMovement;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* loaded from: classes6.dex */
 public class SemMotionRecognitionManager {
     public static final int EVENT_DOUBLE_TAP = 8;
     public static final int EVENT_ELEVATOR_DETECTOR = 16777216;

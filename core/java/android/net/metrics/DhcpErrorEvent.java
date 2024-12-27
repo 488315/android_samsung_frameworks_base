@@ -9,7 +9,6 @@ import com.android.internal.util.MessageUtils;
 
 @SystemApi
 @Deprecated
-/* loaded from: classes3.dex */
 public final class DhcpErrorEvent implements IpConnectivityLog.Event {
     public static final int BOOTP_TOO_SHORT = 67174400;
     public static final int BUFFER_UNDERFLOW = 83951616;

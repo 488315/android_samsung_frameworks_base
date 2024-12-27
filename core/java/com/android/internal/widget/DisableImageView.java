@@ -8,7 +8,6 @@ import android.widget.ImageView;
 import android.widget.RemoteViews;
 
 @RemoteViews.RemoteView
-/* loaded from: classes5.dex */
 public class DisableImageView extends ImageView {
     public DisableImageView(Context context) {
         this(context, null, 0, 0);

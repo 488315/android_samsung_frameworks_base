@@ -3,7 +3,6 @@ package com.android.systemui.dreams;
 import com.android.systemui.dreams.DreamOverlayService;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public final /* synthetic */ class DreamOverlayService$2$$ExternalSyntheticLambda0 implements Runnable {
     public final /* synthetic */ int $r8$classId = 0;
     public final /* synthetic */ Object f$0;

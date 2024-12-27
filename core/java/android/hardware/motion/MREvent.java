@@ -3,7 +3,6 @@ package android.hardware.motion;
 import com.samsung.android.gesture.SemMotionRecognitionEvent;
 
 @Deprecated
-/* loaded from: classes2.dex */
 public class MREvent extends SemMotionRecognitionEvent {
     public static final int DIRECT_CALL = 68;
     public static final int DIRECT_CALL_LEFT = 101;

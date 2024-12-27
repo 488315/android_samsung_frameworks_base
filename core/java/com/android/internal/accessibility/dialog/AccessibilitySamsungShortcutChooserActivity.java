@@ -30,7 +30,6 @@ import com.samsung.android.emergencymode.SemEmergencyManager;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public class AccessibilitySamsungShortcutChooserActivity extends Activity {
     private AccessibilityManager mAccessibilityManager;
     private AlertDialog mMenuDialog;

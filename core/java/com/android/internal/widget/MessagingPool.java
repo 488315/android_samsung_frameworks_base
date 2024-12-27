@@ -4,7 +4,6 @@ import android.util.Log;
 import android.util.Pools;
 import android.view.View;
 
-/* loaded from: classes5.dex */
 public class MessagingPool<T extends View> implements Pools.Pool<T> {
     private static final boolean ENABLED = false;
     private static final String TAG = "MessagingPool";

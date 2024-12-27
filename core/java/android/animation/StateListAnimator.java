@@ -7,7 +7,6 @@ import android.view.View;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
-/* loaded from: classes.dex */
 public class StateListAnimator implements Cloneable {
     private AnimatorListenerAdapter mAnimatorListener;
     private int mChangingConfigurations;

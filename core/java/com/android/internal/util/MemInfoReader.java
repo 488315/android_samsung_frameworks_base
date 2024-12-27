@@ -3,7 +3,6 @@ package com.android.internal.util;
 import android.os.Debug;
 import android.os.StrictMode;
 
-/* loaded from: classes5.dex */
 public final class MemInfoReader {
     private static final int LIGHT_MEMINFO_COUNT = 14;
     final long[] mInfos = new long[36];

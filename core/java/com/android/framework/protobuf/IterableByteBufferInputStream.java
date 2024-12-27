@@ -5,7 +5,6 @@ import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.util.Iterator;
 
-/* loaded from: classes3.dex */
 class IterableByteBufferInputStream extends InputStream {
     private long currentAddress;
     private byte[] currentArray;

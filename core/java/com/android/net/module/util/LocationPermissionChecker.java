@@ -14,7 +14,6 @@ import android.util.Log;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes5.dex */
 public class LocationPermissionChecker {
     public static final int ERROR_LOCATION_MODE_OFF = 1;
     public static final int ERROR_LOCATION_PERMISSION_MISSING = 2;

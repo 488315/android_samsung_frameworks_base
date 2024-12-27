@@ -19,7 +19,6 @@ import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
 @Deprecated
-/* loaded from: classes2.dex */
 public final class SoundTriggerDetector {
     private static final boolean DBG = false;
     private static final int MSG_AVAILABILITY_CHANGED = 1;

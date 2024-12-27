@@ -16,7 +16,6 @@ import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
-/* loaded from: classes6.dex */
 public class RestrictedReceiverFilter {
     private static final boolean DEBUG = true;
     private static final String TAG = "RestrictedReceiverFilter";

@@ -4,7 +4,6 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.text.TextPaint;
 
-/* loaded from: classes4.dex */
 public abstract class ReplacementSpan extends MetricAffectingSpan {
     private CharSequence mContentDescription = null;
 

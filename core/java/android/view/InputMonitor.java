@@ -7,7 +7,6 @@ import android.os.RemoteException;
 
 import com.android.internal.util.AnnotationValidations;
 
-/* loaded from: classes4.dex */
 public final class InputMonitor implements Parcelable {
     public static final Parcelable.Creator<InputMonitor> CREATOR =
             new Parcelable.Creator<InputMonitor>() { // from class: android.view.InputMonitor.1

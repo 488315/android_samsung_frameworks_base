@@ -8,7 +8,6 @@ import android.util.Log;
 import java.util.ArrayList;
 
 /* compiled from: BackStackRecord.java */
-/* loaded from: classes.dex */
 final class BackStackState implements Parcelable {
     public static final Parcelable.Creator<BackStackState> CREATOR =
             new Parcelable.Creator<BackStackState>() { // from class: android.app.BackStackState.1

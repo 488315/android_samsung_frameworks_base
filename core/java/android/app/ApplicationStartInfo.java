@@ -30,7 +30,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Map;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public final class ApplicationStartInfo implements Parcelable {
     public static final Parcelable.Creator<ApplicationStartInfo> CREATOR =
             new Parcelable.Creator<

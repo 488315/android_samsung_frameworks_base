@@ -14,7 +14,6 @@ import javax.microedition.khronos.egl.EGL10;
 import javax.microedition.khronos.opengles.GL;
 import javax.microedition.khronos.opengles.GL10;
 
-/* loaded from: classes3.dex */
 public class GLSurfaceView extends SurfaceView implements SurfaceHolder.Callback2 {
     public static final int DEBUG_CHECK_GL_ERROR = 1;
     public static final int DEBUG_LOG_GL_CALLS = 2;

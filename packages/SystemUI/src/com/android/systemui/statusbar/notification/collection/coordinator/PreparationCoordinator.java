@@ -63,7 +63,6 @@ import kotlin.sequences.SequencesKt___SequencesKt;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 @CoordinatorScope
-/* loaded from: classes2.dex */
 public class PreparationCoordinator implements Coordinator {
     private static final int CHILD_BIND_CUTOFF = 9;
     private static final int EXTRA_VIEW_BUFFER_COUNT = 1;

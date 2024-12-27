@@ -1,6 +1,5 @@
 package com.android.server.accessibility;
 
-/* loaded from: classes5.dex */
 public final class AccessibilityTraceFileProto {
     public static final long ENTRY = 2246267895810L;
     public static final int INVALID = 0;

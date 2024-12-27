@@ -8,7 +8,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public final class KeyboardLayoutSelectionResult implements Parcelable {
     public static final int LAYOUT_SELECTION_CRITERIA_DEFAULT = 4;
     public static final int LAYOUT_SELECTION_CRITERIA_DEVICE = 2;

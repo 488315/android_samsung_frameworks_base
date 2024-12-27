@@ -21,7 +21,6 @@ import android.window.ScreenCapture;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
 public interface IAccessibilityServiceConnection extends IInterface {
     void attachAccessibilityOverlayToDisplay(
             int i,

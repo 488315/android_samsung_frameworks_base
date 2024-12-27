@@ -11,7 +11,6 @@ import com.android.internal.util.AnnotationValidations;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public final class InlinePresentation implements Parcelable {
     public static final Parcelable.Creator<InlinePresentation> CREATOR =
             new Parcelable.Creator<

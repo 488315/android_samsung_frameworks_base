@@ -4,7 +4,6 @@ import android.app.PendingIntent;
 import android.os.Parcel;
 import android.text.ParcelableSpan;
 
-/* loaded from: classes4.dex */
 public class EasyEditSpan implements ParcelableSpan {
     public static final String EXTRA_TEXT_CHANGED_TYPE =
             "android.text.style.EXTRA_TEXT_CHANGED_TYPE";

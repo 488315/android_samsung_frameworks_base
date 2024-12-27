@@ -29,7 +29,6 @@ import com.samsung.android.edge.EdgeManagerInternal;
 import java.util.List;
 import java.util.Map;
 
-/* loaded from: classes2.dex */
 public interface IInputManager extends IInterface {
     boolean addDeviceWirelessKeyboardShare(int i) throws RemoteException;
 

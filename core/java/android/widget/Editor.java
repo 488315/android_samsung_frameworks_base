@@ -142,7 +142,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public class Editor {
     private static final int ACTION_MODE_MENU_ITEM_ORDER_ASSIST = 1;
     private static final int ACTION_MODE_MENU_ITEM_ORDER_AUTOFILL = 15;

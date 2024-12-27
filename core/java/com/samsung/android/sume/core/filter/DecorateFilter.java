@@ -8,7 +8,6 @@ import com.samsung.android.sume.core.functional.PlaceHolder;
 
 import java.util.stream.Stream;
 
-/* loaded from: classes6.dex */
 public abstract class DecorateFilter implements MediaFilter {
     private static final String TAG = Def.tagOf((Class<?>) DecorateFilter.class);
     protected MediaFilter successor;

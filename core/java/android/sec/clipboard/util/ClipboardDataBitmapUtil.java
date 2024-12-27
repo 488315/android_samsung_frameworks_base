@@ -14,7 +14,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
-/* loaded from: classes3.dex */
 public class ClipboardDataBitmapUtil {
     private static final int CLIPBOARD_LANDSCAPE_COLUMN = 5;
     private static final int CLIPBOARD_PORTRAIT_COLUMN = 3;

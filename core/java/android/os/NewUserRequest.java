@@ -6,7 +6,6 @@ import android.text.TextUtils;
 import android.text.format.DateFormat;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class NewUserRequest {
     private final String mAccountName;
     private final PersistableBundle mAccountOptions;

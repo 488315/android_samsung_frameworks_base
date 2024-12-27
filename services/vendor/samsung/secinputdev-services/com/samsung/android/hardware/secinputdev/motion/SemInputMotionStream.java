@@ -5,7 +5,6 @@ import android.content.Context;
 import java.io.PrintWriter;
 import java.nio.MappedByteBuffer;
 
-/* loaded from: classes.dex */
 public class SemInputMotionStream extends SemInputMotion {
     private static final String TAG = "SemInputMotionStream";
 

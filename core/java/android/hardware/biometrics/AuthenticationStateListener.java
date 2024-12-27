@@ -13,7 +13,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes2.dex */
 public interface AuthenticationStateListener extends IInterface {
     public static final String DESCRIPTOR =
             "android.hardware.biometrics.AuthenticationStateListener";

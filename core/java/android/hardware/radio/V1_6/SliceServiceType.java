@@ -4,7 +4,6 @@ import android.security.keystore.KeyProperties;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class SliceServiceType {
     public static final byte EMBB = 1;
     public static final byte MIOT = 3;

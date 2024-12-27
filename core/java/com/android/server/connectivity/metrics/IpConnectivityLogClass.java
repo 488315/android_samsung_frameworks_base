@@ -1,6 +1,5 @@
 package com.android.server.connectivity.metrics;
 
-/* loaded from: classes5.dex */
 public final class IpConnectivityLogClass {
     public static final int BLUETOOTH = 1;
     public static final int CELLULAR = 2;

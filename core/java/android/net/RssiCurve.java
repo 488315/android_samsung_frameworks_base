@@ -10,7 +10,6 @@ import java.util.Objects;
 
 @SystemApi
 @Deprecated
-/* loaded from: classes3.dex */
 public class RssiCurve implements Parcelable {
     public static final Parcelable.Creator<RssiCurve> CREATOR =
             new Parcelable.Creator<RssiCurve>() { // from class: android.net.RssiCurve.1

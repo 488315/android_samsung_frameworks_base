@@ -1,6 +1,5 @@
 package android.content;
 
-/* loaded from: classes.dex */
 public final class ResourcesConfigurationProto {
     public static final long CONFIGURATION = 1146756268033L;
     public static final long SCREEN_HEIGHT_PX = 1155346202628L;

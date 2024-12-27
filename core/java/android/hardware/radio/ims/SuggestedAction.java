@@ -1,6 +1,5 @@
 package android.hardware.radio.ims;
 
-/* loaded from: classes2.dex */
 public @interface SuggestedAction {
     public static final int NONE = 0;
     public static final int TRIGGER_CLEAR_RAT_BLOCKS = 4;

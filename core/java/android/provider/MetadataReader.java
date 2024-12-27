@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/* loaded from: classes3.dex */
 public final class MetadataReader {
     private static final String JPEG_MIME_TYPE = "image/jpeg";
     private static final String JPG_MIME_TYPE = "image/jpg";

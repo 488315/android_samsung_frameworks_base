@@ -9,7 +9,6 @@ import com.android.systemui.bixby2.controller.MWBixbyController$$ExternalSynthet
 import com.android.systemui.broadcast.BroadcastDispatcher;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public final class SlimIndicatorPackageReceiver extends SlimIndicatorReceiver {
     public final String TAG;
 

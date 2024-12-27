@@ -2,7 +2,6 @@ package android.hardware.gnss.V2_0;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class ElapsedRealtimeFlags {
     public static final short HAS_TIMESTAMP_NS = 1;
     public static final short HAS_TIME_UNCERTAINTY_NS = 2;

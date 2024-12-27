@@ -3,7 +3,6 @@ package android.view;
 import android.graphics.Rect;
 import android.window.ClientWindowFrames;
 
-/* loaded from: classes4.dex */
 public class WindowlessWindowLayout extends WindowLayout {
     @Override // android.view.WindowLayout
     public void computeFrames(

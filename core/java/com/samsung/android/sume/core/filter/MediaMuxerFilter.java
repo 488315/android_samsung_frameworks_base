@@ -47,7 +47,6 @@ import java.util.function.IntConsumer;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-/* loaded from: classes6.dex */
 public class MediaMuxerFilter implements MediaFilter, MediaInputStreamFilter {
     private static final String TAG = Def.tagOf((Class<?>) MediaMuxerFilter.class);
     private String cacheId;

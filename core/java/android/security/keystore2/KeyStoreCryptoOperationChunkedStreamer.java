@@ -6,7 +6,6 @@ import android.security.keystore.ArrayUtils;
 
 import libcore.util.EmptyArray;
 
-/* loaded from: classes3.dex */
 class KeyStoreCryptoOperationChunkedStreamer implements KeyStoreCryptoOperationStreamer {
     private static final int DEFAULT_CHUNK_SIZE_MAX = 32768;
     private static final int DEFAULT_CHUNK_SIZE_THRESHOLD = 2048;

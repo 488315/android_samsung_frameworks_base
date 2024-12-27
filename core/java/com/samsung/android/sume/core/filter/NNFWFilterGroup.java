@@ -16,7 +16,6 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
-/* loaded from: classes6.dex */
 public class NNFWFilterGroup extends NNFWFilter implements MediaFilterGroup {
     private static final String TAG = Def.tagOf((Class<?>) NNFWFilterGroup.class);
     private List<MediaFilter> filters;

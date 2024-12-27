@@ -13,7 +13,6 @@ import com.sec.android.allshare.iface.message.AllShareKey;
 
 import java.util.ArrayList;
 
-/* loaded from: classes3.dex */
 final class ScreenSharingDeviceImpl extends ScreenSharingDevice
         implements IBundleHolder, IHandlerHolder {
     private static final String TAG_CLASS = "ScreenSharingDeviceImpl";

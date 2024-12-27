@@ -10,7 +10,6 @@ import android.filterfw.core.Program;
 import android.filterfw.core.ShaderProgram;
 import android.filterfw.format.ImageFormat;
 
-/* loaded from: classes.dex */
 public class ImageStitcher extends Filter {
     private int mImageHeight;
     private int mImageWidth;

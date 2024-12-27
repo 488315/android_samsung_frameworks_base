@@ -7,7 +7,6 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.function.IntPredicate;
 
-/* loaded from: classes4.dex */
 public final class ActivityStatsTechSpecificInfo implements Parcelable {
     public static final Parcelable.Creator<ActivityStatsTechSpecificInfo> CREATOR =
             new Parcelable.Creator<

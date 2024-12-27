@@ -14,7 +14,6 @@ import android.util.Log;
 
 import java.lang.reflect.Method;
 
-/* loaded from: classes6.dex */
 public class ExtControlDeviceService extends IExtControlDeviceService.Stub {
     private static final String ACTION_NFC_POLICY_CHANGED =
             "com.sec.android.intent.action.NFC_POLICY_CHANGED";

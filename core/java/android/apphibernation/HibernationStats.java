@@ -5,7 +5,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class HibernationStats implements Parcelable {
     public static final Parcelable.Creator<HibernationStats> CREATOR =
             new Parcelable.Creator<

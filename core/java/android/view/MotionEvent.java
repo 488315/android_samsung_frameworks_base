@@ -13,7 +13,6 @@ import dalvik.annotation.optimization.FastNative;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes4.dex */
 public final class MotionEvent extends InputEvent implements Parcelable {
     public static final int ACTION_BUTTON_PRESS = 11;
     public static final int ACTION_BUTTON_RELEASE = 12;

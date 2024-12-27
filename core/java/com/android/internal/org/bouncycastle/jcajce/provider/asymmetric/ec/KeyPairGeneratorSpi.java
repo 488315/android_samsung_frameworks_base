@@ -34,7 +34,6 @@ import java.security.spec.ECGenParameterSpec;
 import java.util.Hashtable;
 import java.util.Map;
 
-/* loaded from: classes5.dex */
 public abstract class KeyPairGeneratorSpi extends KeyPairGenerator {
     public KeyPairGeneratorSpi(String algorithmName) {
         super(algorithmName);

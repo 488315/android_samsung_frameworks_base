@@ -2,7 +2,6 @@ package com.android.internal.org.bouncycastle.crypto;
 
 import java.security.SecureRandom;
 
-/* loaded from: classes5.dex */
 public class KeyGenerationParameters {
     private SecureRandom random;
     private int strength;

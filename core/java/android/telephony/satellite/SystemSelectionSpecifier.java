@@ -7,7 +7,6 @@ import android.util.IntArray;
 
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public final class SystemSelectionSpecifier implements Parcelable {
     public static final Parcelable.Creator<SystemSelectionSpecifier> CREATOR =
             new Parcelable.Creator<

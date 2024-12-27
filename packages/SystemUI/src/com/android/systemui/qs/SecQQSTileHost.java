@@ -32,7 +32,6 @@ import java.util.List;
 import java.util.concurrent.Executor;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public final class SecQQSTileHost implements TunerService.Tunable, QSHost.Callback {
     public static final boolean DEBUG = Log.isLoggable("SecQQSTileHost", 3);
     public static final boolean LOGGING_DEBUG = Log.isLoggable(SystemUIAnalytics.TAG_QUICK_SETTINGS, 3);

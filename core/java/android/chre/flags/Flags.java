@@ -1,6 +1,5 @@
 package android.chre.flags;
 
-/* loaded from: classes.dex */
 public final class Flags {
     private static FeatureFlags FEATURE_FLAGS = new FeatureFlagsImpl();
     public static final String FLAG_ABORT_IF_NO_CONTEXT_HUB_FOUND =

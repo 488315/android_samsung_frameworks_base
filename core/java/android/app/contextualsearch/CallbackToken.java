@@ -17,7 +17,6 @@ import com.android.internal.util.FunctionalUtils;
 import java.util.concurrent.Executor;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class CallbackToken implements Parcelable {
     private static final boolean DEBUG = true;
     private final Object mLock;

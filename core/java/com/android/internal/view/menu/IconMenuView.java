@@ -19,7 +19,6 @@ import com.android.internal.R;
 
 import java.util.ArrayList;
 
-/* loaded from: classes5.dex */
 public final class IconMenuView extends ViewGroup
         implements MenuBuilder.ItemInvoker, MenuView, Runnable {
     private static final int ITEM_CAPTION_CYCLE_DELAY = 1000;

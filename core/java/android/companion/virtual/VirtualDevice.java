@@ -6,7 +6,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.RemoteException;
 
-/* loaded from: classes.dex */
 public final class VirtualDevice implements Parcelable {
     public static final Parcelable.Creator<VirtualDevice> CREATOR =
             new Parcelable.Creator<

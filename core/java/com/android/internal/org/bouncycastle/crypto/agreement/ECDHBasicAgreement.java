@@ -11,7 +11,6 @@ import com.android.internal.org.bouncycastle.math.ec.ECPoint;
 
 import java.math.BigInteger;
 
-/* loaded from: classes5.dex */
 public class ECDHBasicAgreement implements BasicAgreement {
     private ECPrivateKeyParameters key;
 

@@ -5,7 +5,6 @@ import com.android.internal.org.bouncycastle.crypto.Digest;
 import java.security.Security;
 import java.util.Locale;
 
-/* loaded from: classes5.dex */
 public final class AndroidDigestFactory {
     private static final AndroidDigestFactoryInterface BC = new AndroidDigestFactoryBouncyCastle();
     private static final AndroidDigestFactoryInterface CONSCRYPT;

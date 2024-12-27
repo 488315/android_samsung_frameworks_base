@@ -2,7 +2,6 @@ package android.view;
 
 import android.graphics.Rect;
 
-/* loaded from: classes4.dex */
 public abstract class ActionMode {
     public static final int DEFAULT_HIDE_DURATION = -1;
     public static final int SEM_TYPE_FLOATING = 99;

@@ -2,7 +2,6 @@ package com.samsung.android.globalactions.presentation.view;
 
 import com.samsung.android.globalactions.util.LogWrapper;
 
-/* loaded from: classes6.dex */
 public class SamsungGlobalActionsAnimatorFSM {
     private static final String TAG = "SamsungGlobalActionsAnimatorFSM";
     private final GlobalActionsAnimator mAnimator;

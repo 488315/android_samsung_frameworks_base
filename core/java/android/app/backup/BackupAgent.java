@@ -47,7 +47,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 
-/* loaded from: classes.dex */
 public abstract class BackupAgent extends ContextWrapper {
     private static final boolean DEBUG = false;
     private static final int DEFAULT_BACKUP_DESTINATION = 0;

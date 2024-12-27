@@ -4,7 +4,6 @@ import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes.dex */
 public final class UriPermission implements Parcelable {
     public static final Parcelable.Creator<UriPermission> CREATOR =
             new Parcelable.Creator<UriPermission>() { // from class: android.content.UriPermission.1

@@ -3,7 +3,6 @@ package com.android.internal.telephony;
 import android.telephony.SubscriptionManager;
 import android.util.Log;
 
-/* loaded from: classes5.dex */
 public class SmartcardInternal {
     public static final int SMARTCARD_IO_ERROR_ATR_BUFFER = -6;
     public static final int SMARTCARD_IO_ERROR_CARD_NOT_EXIST = -2;

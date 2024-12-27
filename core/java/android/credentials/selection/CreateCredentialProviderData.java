@@ -9,7 +9,6 @@ import com.android.internal.util.AnnotationValidations;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes.dex */
 public final class CreateCredentialProviderData extends ProviderData implements Parcelable {
     public static final Parcelable.Creator<CreateCredentialProviderData> CREATOR =
             new Parcelable.Creator<CreateCredentialProviderData>() { // from class:

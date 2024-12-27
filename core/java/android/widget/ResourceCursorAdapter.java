@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-/* loaded from: classes4.dex */
 public abstract class ResourceCursorAdapter extends CursorAdapter {
     private LayoutInflater mDropDownInflater;
     private int mDropDownLayout;

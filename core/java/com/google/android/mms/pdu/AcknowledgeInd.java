@@ -2,7 +2,6 @@ package com.google.android.mms.pdu;
 
 import com.google.android.mms.InvalidHeaderValueException;
 
-/* loaded from: classes5.dex */
 public class AcknowledgeInd extends GenericPdu {
     public AcknowledgeInd(int mmsVersion, byte[] transactionId) throws InvalidHeaderValueException {
         setMessageType(133);

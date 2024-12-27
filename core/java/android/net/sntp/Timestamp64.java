@@ -6,7 +6,6 @@ import java.time.Instant;
 import java.util.Objects;
 import java.util.Random;
 
-/* loaded from: classes3.dex */
 public final class Timestamp64 {
     static final long MAX_SECONDS_IN_ERA = 4294967295L;
     static final int NANOS_PER_SECOND = 1000000000;

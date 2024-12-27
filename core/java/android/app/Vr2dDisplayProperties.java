@@ -9,7 +9,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class Vr2dDisplayProperties implements Parcelable {
     public static final Parcelable.Creator<Vr2dDisplayProperties> CREATOR =
             new Parcelable.Creator<

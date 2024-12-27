@@ -4,7 +4,6 @@ import android.annotation.SystemApi;
 import android.view.Surface;
 
 @SystemApi
-/* loaded from: classes.dex */
 public interface VirtualCameraCallback {
     void onStreamClosed(int i);
 

@@ -1,6 +1,5 @@
 package android.service.usb;
 
-/* loaded from: classes3.dex */
 public final class UsbDebuggingManagerProto {
     public static final long CONNECTED_TO_ADB = 1133871366145L;
     public static final long LAST_KEY_RECEIVED = 1138166333442L;

@@ -3,7 +3,6 @@ package android.service.controls;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes3.dex */
 public class DeviceTypes {
     private static final int NUM_CONCRETE_TYPES = 52;
     private static final int NUM_GENERIC_TYPES = 7;

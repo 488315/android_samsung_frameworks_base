@@ -3,7 +3,6 @@ package com.google.android.mms.pdu;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 
-/* loaded from: classes5.dex */
 public class CharacterSets {
     static final /* synthetic */ boolean $assertionsDisabled = false;
     public static final int ANY_CHARSET = 0;

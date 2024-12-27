@@ -1,6 +1,5 @@
 package android.hardware.usb.V1_1;
 
-/* loaded from: classes2.dex */
 public class Constants {
 
     public final class PortMode_1_1 {

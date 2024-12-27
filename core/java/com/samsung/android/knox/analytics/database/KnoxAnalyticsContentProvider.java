@@ -14,7 +14,6 @@ import android.os.Bundle;
 import com.samsung.android.knox.analytics.util.Log;
 import com.samsung.android.knox.analytics.util.SecurityUtils;
 
-/* loaded from: classes6.dex */
 public class KnoxAnalyticsContentProvider extends ContentProvider {
     private static final int B2C_FEATURE_PATH_ID = 7;
     private static final int CLEANED_EVENTS_PATH_ID = 5;

@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public class Temperature implements Parcelable {
     public static final Parcelable.Creator<Temperature> CREATOR =
             new Parcelable.Creator<

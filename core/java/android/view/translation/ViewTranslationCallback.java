@@ -2,7 +2,6 @@ package android.view.translation;
 
 import android.view.View;
 
-/* loaded from: classes4.dex */
 public interface ViewTranslationCallback {
     boolean onClearTranslation(View view);
 

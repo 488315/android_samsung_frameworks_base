@@ -26,7 +26,6 @@ import java.util.function.Function;
 import java.util.function.IntFunction;
 import java.util.stream.Collectors;
 
-/* loaded from: classes6.dex */
 public class MFDescriptorGraph implements Parcelable {
     private final DescriptorNode[] nodes;
     private final Graph.Option option;

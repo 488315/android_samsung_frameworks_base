@@ -8,7 +8,6 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public class CellIdentityNr implements Parcelable {
     public static final Parcelable.Creator<CellIdentityNr> CREATOR =
             new Parcelable.Creator<CellIdentityNr>() { // from class:

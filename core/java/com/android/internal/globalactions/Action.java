@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-/* loaded from: classes5.dex */
 public interface Action {
     View create(Context context, View view, ViewGroup viewGroup, LayoutInflater layoutInflater);
 

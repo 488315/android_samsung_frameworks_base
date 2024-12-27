@@ -50,7 +50,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 
-/* loaded from: classes5.dex */
 public class RemoteComposeBuffer {
     private static final boolean DEBUG = false;
     public static final int EASING_CUBIC_ACCELERATE = 2;

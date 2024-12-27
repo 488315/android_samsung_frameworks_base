@@ -2,7 +2,6 @@ package android.media;
 
 import android.content.Context;
 
-/* loaded from: classes2.dex */
 public class TtmlRenderer extends SubtitleController.Renderer {
     private static final String MEDIA_MIMETYPE_TEXT_TTML = "application/ttml+xml";
     private final Context mContext;

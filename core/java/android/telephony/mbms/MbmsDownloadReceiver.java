@@ -28,7 +28,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
-/* loaded from: classes4.dex */
 public class MbmsDownloadReceiver extends BroadcastReceiver {
     public static final String DOWNLOAD_TOKEN_SUFFIX = ".download_token";
     private static final String EMBMS_INTENT_PERMISSION = "android.permission.SEND_EMBMS_INTENTS";

@@ -6,7 +6,6 @@ import android.os.SystemProperties;
 import com.android.internal.util.FrameworkStatsLog;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes2.dex */
 public abstract class KeyCustomizationConstants {
     public static final String VOLD_DECRYPT = SystemProperties.get("vold.decrypt");
     public static final int[] SUPPORT_PRESS_TYPE_ALL = {3, 4, 8, 16, 32, 64};

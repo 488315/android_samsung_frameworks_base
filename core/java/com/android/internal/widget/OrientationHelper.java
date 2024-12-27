@@ -3,7 +3,6 @@ package com.android.internal.widget;
 import android.graphics.Rect;
 import android.view.View;
 
-/* loaded from: classes5.dex */
 public abstract class OrientationHelper {
     public static final int HORIZONTAL = 0;
     private static final int INVALID_SIZE = Integer.MIN_VALUE;

@@ -3,7 +3,6 @@ package android.speech.tts;
 import java.util.Iterator;
 import java.util.concurrent.LinkedBlockingQueue;
 
-/* loaded from: classes3.dex */
 class AudioPlaybackHandler {
     private static final boolean DBG = false;
     private static final String TAG = "TTS.AudioPlaybackHandler";

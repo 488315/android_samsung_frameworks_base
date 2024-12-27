@@ -8,7 +8,6 @@ import android.os.RemoteException;
 
 import com.android.internal.telephony.IVoidConsumer;
 
-/* loaded from: classes4.dex */
 public interface ISatelliteDatagramCallback extends IInterface {
     public static final String DESCRIPTOR =
             "android.telephony.satellite.ISatelliteDatagramCallback";

@@ -13,7 +13,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.concurrent.TimeUnit;
 
-/* loaded from: classes5.dex */
 class ImeTracingServerImpl extends ImeTracing {
     private static final int BUFFER_CAPACITY = 4194304;
     private static final long MAGIC_NUMBER_CLIENTS_VALUE = 4990904633913462089L;

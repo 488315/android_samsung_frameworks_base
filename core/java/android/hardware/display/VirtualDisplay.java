@@ -3,7 +3,6 @@ package android.hardware.display;
 import android.view.Display;
 import android.view.Surface;
 
-/* loaded from: classes2.dex */
 public final class VirtualDisplay {
     private final Display mDisplay;
     private final DisplayManagerGlobal mGlobal;

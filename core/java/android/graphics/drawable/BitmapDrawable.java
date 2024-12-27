@@ -33,7 +33,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-/* loaded from: classes.dex */
 public class BitmapDrawable extends Drawable {
     private static final int DEFAULT_PAINT_FLAGS = 6;
     private static final String TAG = "BitmapDrawable";

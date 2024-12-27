@@ -5,7 +5,6 @@ import com.android.internal.util.Preconditions;
 import java.util.Arrays;
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public abstract class SegmentFinder {
     public static final int DONE = -1;
 

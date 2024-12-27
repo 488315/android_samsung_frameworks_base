@@ -5,7 +5,6 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.LinkedBlockingQueue;
 
-/* loaded from: classes6.dex */
 public class BlockingMessageChannel implements MessageChannel {
     private String id;
     protected BlockingQueue<Message> queue;

@@ -15,7 +15,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.IntPredicate;
 
-/* loaded from: classes4.dex */
 public final class DataFailCause {
     public static final int ACCESS_ATTEMPT_ALREADY_IN_PROGRESS = 2219;
     public static final int ACCESS_BLOCK = 2087;

@@ -1,6 +1,5 @@
 package android.service.notification;
 
-/* loaded from: classes3.dex */
 public final class RankingHelperProto {
     public static final long NOTIFICATION_SIGNAL_EXTRACTORS = 2237677961217L;
     public static final long RECORDS = 2246267895810L;

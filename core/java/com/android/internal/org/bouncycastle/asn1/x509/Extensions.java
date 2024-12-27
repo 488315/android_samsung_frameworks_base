@@ -13,7 +13,6 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Vector;
 
-/* loaded from: classes5.dex */
 public class Extensions extends ASN1Object {
     private Hashtable extensions = new Hashtable();
     private Vector ordering = new Vector();

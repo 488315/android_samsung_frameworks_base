@@ -1,6 +1,5 @@
 package android.hardware.biometrics.face;
 
-/* loaded from: classes2.dex */
 public @interface AcquiredInfo {
     public static final byte DARK_GLASSES_DETECTED = 25;
     public static final byte FACE_OBSCURED = 20;

@@ -7,7 +7,6 @@ import com.android.internal.graphics.cam.Cam;
 import java.util.List;
 
 /* compiled from: ColorScheme.java */
-/* loaded from: classes6.dex */
 interface Hue {
     double get(Cam cam);
 

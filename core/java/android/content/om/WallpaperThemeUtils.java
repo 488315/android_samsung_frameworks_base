@@ -8,7 +8,6 @@ import android.os.Build;
 import android.util.DisplayMetrics;
 import android.util.Log;
 
-/* loaded from: classes.dex */
 public class WallpaperThemeUtils {
     private static final String TAG = "SWT_WallpaperThemeUtils";
 

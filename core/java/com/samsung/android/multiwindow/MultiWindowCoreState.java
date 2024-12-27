@@ -2,7 +2,6 @@ package com.samsung.android.multiwindow;
 
 import android.os.Bundle;
 
-/* loaded from: classes6.dex */
 public class MultiWindowCoreState {
     public static final String MW_SHARED_PREF_NAME = "multiwindow.property";
     private final Object mLock = new Object();

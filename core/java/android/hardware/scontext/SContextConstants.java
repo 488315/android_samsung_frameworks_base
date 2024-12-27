@@ -1,7 +1,6 @@
 package android.hardware.scontext;
 
 @Deprecated
-/* loaded from: classes2.dex */
 public class SContextConstants {
     static final int ABNORMAL_PRESSURE = 41;
     static final int ACTIVE_TIME_MONITOR = 34;

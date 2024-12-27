@@ -9,7 +9,6 @@ import com.android.internal.org.bouncycastle.util.Integers;
 import java.util.HashMap;
 import java.util.Map;
 
-/* loaded from: classes5.dex */
 public class SecretKeyUtil {
     private static Map keySizes = new HashMap();
 

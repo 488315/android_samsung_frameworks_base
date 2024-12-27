@@ -11,7 +11,6 @@ import com.android.internal.org.bouncycastle.asn1.DERSequence;
 
 import java.math.BigInteger;
 
-/* loaded from: classes5.dex */
 public class ValidationParams extends ASN1Object {
     private ASN1Integer pgenCounter;
     private DERBitString seed;

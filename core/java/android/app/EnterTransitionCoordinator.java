@@ -24,7 +24,6 @@ import com.android.internal.view.OneShotPreDrawListener;
 
 import java.util.ArrayList;
 
-/* loaded from: classes.dex */
 class EnterTransitionCoordinator extends ActivityTransitionCoordinator {
     private static final int MIN_ANIMATION_FRAMES = 2;
     private static final String TAG = "EnterTransitionCoordinator";

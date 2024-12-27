@@ -2,7 +2,6 @@ package android.provider;
 
 import java.util.concurrent.Executor;
 
-/* loaded from: classes3.dex */
 public interface DeviceConfigInterface {
     public static final DeviceConfigInterface REAL =
             new DeviceConfigInterface() { // from class: android.provider.DeviceConfigInterface.1

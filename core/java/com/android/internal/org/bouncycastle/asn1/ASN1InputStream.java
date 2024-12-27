@@ -8,7 +8,6 @@ import java.io.FilterInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-/* loaded from: classes5.dex */
 public class ASN1InputStream extends FilterInputStream implements BERTags {
     private final boolean lazyEvaluate;
     private final int limit;

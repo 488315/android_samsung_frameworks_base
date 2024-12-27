@@ -3,7 +3,6 @@ package com.samsung.android.service.EngineeringMode.token;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* loaded from: classes6.dex */
 public class ModeItemCollection extends InfoCollection {
     private ArrayList<ModeItem> mModeItems;
 

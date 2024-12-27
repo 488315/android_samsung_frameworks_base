@@ -1,6 +1,5 @@
 package android.audio.policy.configuration.V7_0;
 
-/* loaded from: classes.dex */
 public enum AudioChannelMask {
     AUDIO_CHANNEL_NONE("AUDIO_CHANNEL_NONE"),
     AUDIO_CHANNEL_OUT_MONO("AUDIO_CHANNEL_OUT_MONO"),

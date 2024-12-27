@@ -16,7 +16,6 @@ import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-/* loaded from: classes5.dex */
 public class CollectionUtils {
     private CollectionUtils() {}
 

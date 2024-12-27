@@ -15,7 +15,6 @@ import com.samsung.vekit.Listener.AnalyzeStatusListener;
 
 import java.util.HashMap;
 
-/* loaded from: classes6.dex */
 public class VEAnalyzer extends Element {
     private long analyzedTime;
     private final AnalyzeEventHandler eventHandler;

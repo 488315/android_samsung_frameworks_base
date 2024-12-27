@@ -5,7 +5,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @Deprecated
-/* loaded from: classes2.dex */
 public class SContextWristUpMotion extends SContextEventContext {
     public static final Parcelable.Creator<SContextWristUpMotion> CREATOR =
             new Parcelable.Creator<SContextWristUpMotion>() { // from class:

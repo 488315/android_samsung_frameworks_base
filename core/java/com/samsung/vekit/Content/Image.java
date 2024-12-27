@@ -7,7 +7,6 @@ import com.samsung.vekit.Common.Type.ContentType;
 import com.samsung.vekit.Common.Util.ImageUtil;
 import com.samsung.vekit.Common.VEContext;
 
-/* loaded from: classes6.dex */
 public class Image extends Content {
     private static final int IMAGE_BUFFER_SIZE = 3840;
     private Bitmap bitmap;

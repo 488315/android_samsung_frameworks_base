@@ -25,7 +25,6 @@ import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.function.Consumer;
 
-/* loaded from: classes5.dex */
 class AppPredictionServiceResolverComparator extends AbstractResolverComparator {
     private static final String TAG = "APSResolverComparator";
     private final AppPredictor mAppPredictor;

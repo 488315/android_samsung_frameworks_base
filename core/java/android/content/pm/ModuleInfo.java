@@ -8,7 +8,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public final class ModuleInfo implements Parcelable {
     public static final Parcelable.Creator<ModuleInfo> CREATOR =
             new Parcelable.Creator<ModuleInfo>() { // from class: android.content.pm.ModuleInfo.1

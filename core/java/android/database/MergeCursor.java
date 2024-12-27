@@ -1,6 +1,5 @@
 package android.database;
 
-/* loaded from: classes.dex */
 public class MergeCursor extends AbstractCursor {
     private Cursor mCursor;
     private Cursor[] mCursors;

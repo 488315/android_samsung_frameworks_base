@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
 
-/* loaded from: classes2.dex */
 public final class MediaCodecList {
     public static final int ALL_CODECS = 1;
     public static final int REGULAR_CODECS = 0;

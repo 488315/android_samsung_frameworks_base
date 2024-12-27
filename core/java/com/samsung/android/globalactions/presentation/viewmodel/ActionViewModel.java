@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.view.View;
 
-/* loaded from: classes6.dex */
 public interface ActionViewModel {
 
     public enum ToggleState {

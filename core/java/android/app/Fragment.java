@@ -37,7 +37,6 @@ import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
 
 @Deprecated
-/* loaded from: classes.dex */
 public class Fragment implements ComponentCallbacks2, View.OnCreateContextMenuListener {
     static final int ACTIVITY_CREATED = 2;
     static final int CREATED = 1;

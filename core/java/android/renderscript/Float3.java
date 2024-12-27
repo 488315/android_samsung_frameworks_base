@@ -1,7 +1,6 @@
 package android.renderscript;
 
 @Deprecated
-/* loaded from: classes3.dex */
 public class Float3 {
     public float x;
     public float y;

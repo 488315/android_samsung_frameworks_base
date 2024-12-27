@@ -6,7 +6,6 @@ import kotlin.jvm.internal.Lambda;
 
 /* JADX INFO: Access modifiers changed from: package-private */
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes.dex */
 public final class BroadcastDispatcher$broadcastFlow$2 extends Lambda implements Function2 {
     public static final BroadcastDispatcher$broadcastFlow$2 INSTANCE = new BroadcastDispatcher$broadcastFlow$2();
 

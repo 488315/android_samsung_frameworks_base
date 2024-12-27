@@ -4,7 +4,6 @@ import android.graphics.Rect;
 import android.view.animation.ClipRectAnimation;
 import android.view.animation.Transformation;
 
-/* loaded from: classes5.dex */
 public class ClipRectLRAnimation extends ClipRectAnimation {
     public ClipRectLRAnimation(int fromL, int fromR, int toL, int toR) {
         super(fromL, 0, fromR, 0, toL, 0, toR, 0);

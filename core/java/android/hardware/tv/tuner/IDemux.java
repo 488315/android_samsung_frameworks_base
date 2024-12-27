@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes2.dex */
 public interface IDemux extends IInterface {
     public static final String DESCRIPTOR = "android$hardware$tv$tuner$IDemux".replace('$', '.');
     public static final String HASH = "f8d74c149f04e76b6d622db2bd8e465dae24b08c";

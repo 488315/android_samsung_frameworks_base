@@ -5,7 +5,6 @@ import com.android.systemui.common.shared.model.ContentDescription;
 import com.android.systemui.common.shared.model.Icon;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes.dex */
 public final class IconViewBinder {
     public static final IconViewBinder INSTANCE = new IconViewBinder();
 

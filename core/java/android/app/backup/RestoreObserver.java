@@ -2,7 +2,6 @@ package android.app.backup;
 
 import android.annotation.SystemApi;
 
-/* loaded from: classes.dex */
 public abstract class RestoreObserver {
     @SystemApi
     public void restoreSetsAvailable(RestoreSet[] result) {}

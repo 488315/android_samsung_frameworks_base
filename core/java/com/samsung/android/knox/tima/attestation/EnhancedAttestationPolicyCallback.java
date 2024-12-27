@@ -3,7 +3,6 @@ package com.samsung.android.knox.tima.attestation;
 import android.os.RemoteException;
 import android.util.Log;
 
-/* loaded from: classes6.dex */
 public abstract class EnhancedAttestationPolicyCallback {
     private static final String TAG = "SEMEAPolicyCb";
     private EnhancedAttestationPolicyCallback acb = this;

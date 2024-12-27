@@ -11,7 +11,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 import java.util.UUID;
 
-/* loaded from: classes3.dex */
 public final class CallEndpoint implements Parcelable {
     private static final String CALLENDPOINT_NAME_ID_NULL_ERROR =
             "CallEndpoint name cannot be null.";

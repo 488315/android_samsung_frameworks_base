@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes3.dex */
 public interface IDetectorSessionVisualQueryDetectionCallback extends IInterface {
     public static final String DESCRIPTOR =
             "android.service.voice.IDetectorSessionVisualQueryDetectionCallback";

@@ -22,7 +22,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public final class DisplayInfo implements Parcelable {
     public static final Parcelable.Creator<DisplayInfo> CREATOR =
             new Parcelable.Creator<DisplayInfo>() { // from class: android.view.DisplayInfo.1

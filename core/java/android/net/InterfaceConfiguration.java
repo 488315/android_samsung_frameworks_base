@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import java.util.HashSet;
 import java.util.Iterator;
 
-/* loaded from: classes3.dex */
 public class InterfaceConfiguration implements Parcelable {
     private static final String FLAG_DOWN = "down";
     private static final String FLAG_UP = "up";

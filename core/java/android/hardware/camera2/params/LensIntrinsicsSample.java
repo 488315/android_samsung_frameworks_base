@@ -7,7 +7,6 @@ import com.android.internal.util.Preconditions;
 
 import java.util.Arrays;
 
-/* loaded from: classes2.dex */
 public final class LensIntrinsicsSample {
     private final float[] mLensIntrinsics;
     private final long mTimestampNs;

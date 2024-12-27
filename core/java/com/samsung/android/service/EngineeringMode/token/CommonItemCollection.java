@@ -2,7 +2,6 @@ package com.samsung.android.service.EngineeringMode.token;
 
 import java.util.ArrayList;
 
-/* loaded from: classes6.dex */
 public class CommonItemCollection extends InfoCollection {
     private ArrayList<CommonItem> mCommonItem;
 

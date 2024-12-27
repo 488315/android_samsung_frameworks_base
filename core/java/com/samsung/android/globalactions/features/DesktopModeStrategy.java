@@ -10,7 +10,6 @@ import com.samsung.android.globalactions.util.ConditionChecker;
 import com.samsung.android.globalactions.util.DesktopModeManagerWrapper;
 import com.samsung.android.globalactions.util.SystemConditions;
 
-/* loaded from: classes6.dex */
 public class DesktopModeStrategy
         implements InitializationStrategy, DisposingStrategy, DefaultActionsCreationStrategy {
     private final ConditionChecker mConditionChecker;

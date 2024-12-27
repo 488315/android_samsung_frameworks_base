@@ -10,7 +10,6 @@ import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.view.ViewGroup;
 
-/* loaded from: classes4.dex */
 public abstract class CursorAdapter extends BaseAdapter
         implements Filterable, CursorFilter.CursorFilterClient, ThemedSpinnerAdapter {
 

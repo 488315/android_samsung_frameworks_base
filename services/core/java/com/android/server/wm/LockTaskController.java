@@ -39,7 +39,6 @@ import java.util.Arrays;
 import java.util.function.Predicate;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes2.dex */
 public final class LockTaskController {
     public static final SparseArray STATUS_BAR_FLAG_MAP_LOCKED;
     static final int STATUS_BAR_MASK_LOCKED = 128319488;

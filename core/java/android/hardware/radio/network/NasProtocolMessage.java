@@ -1,6 +1,5 @@
 package android.hardware.radio.network;
 
-/* loaded from: classes2.dex */
 public @interface NasProtocolMessage {
     public static final int ATTACH_REQUEST = 1;
     public static final int AUTHENTICATION_AND_CIPHERING_RESPONSE = 6;

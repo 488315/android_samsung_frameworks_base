@@ -19,7 +19,6 @@ import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
 import android.widget.ListView;
 
-/* loaded from: classes5.dex */
 public class SemSweepTranslationFilter extends SemAbsSweepAnimationFilter {
     private static final int BG_ALPHA = 225;
     private static final int COEFFICIENT_FOR_VELOCITY_ADJUSTMENT = 23;

@@ -9,7 +9,6 @@ import java.io.PrintWriter;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes.dex */
 public class WaitResult implements Parcelable {
     public static final Parcelable.Creator<WaitResult> CREATOR =
             new Parcelable.Creator<WaitResult>() { // from class: android.app.WaitResult.1

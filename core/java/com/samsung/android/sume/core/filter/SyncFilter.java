@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-/* loaded from: classes6.dex */
 public class SyncFilter extends DecorateFilter {
     private static final String TAG = Def.tagOf((Class<?>) SyncFilter.class);
 

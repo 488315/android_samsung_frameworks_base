@@ -8,7 +8,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.view.Surface;
 
-/* loaded from: classes2.dex */
 public class FaceEnrollOptions implements Parcelable {
     public static final Parcelable.Creator<FaceEnrollOptions> CREATOR =
             new Parcelable.Creator<FaceEnrollOptions>() { // from class:

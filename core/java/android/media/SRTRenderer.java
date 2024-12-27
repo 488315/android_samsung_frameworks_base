@@ -3,7 +3,6 @@ package android.media;
 import android.content.Context;
 import android.os.Handler;
 
-/* loaded from: classes2.dex */
 public class SRTRenderer extends SubtitleController.Renderer {
     private final Context mContext;
     private final Handler mEventHandler;

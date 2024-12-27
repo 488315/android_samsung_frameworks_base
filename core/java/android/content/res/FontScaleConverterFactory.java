@@ -3,7 +3,6 @@ package android.content.res;
 import android.util.MathUtils;
 import android.util.SparseArray;
 
-/* loaded from: classes.dex */
 public class FontScaleConverterFactory {
     private static final float SCALE_KEY_MULTIPLIER = 100.0f;
     private static float sMinScaleBeforeCurvesApplied;

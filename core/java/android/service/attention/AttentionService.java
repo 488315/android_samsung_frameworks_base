@@ -15,7 +15,6 @@ import java.lang.ref.WeakReference;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public abstract class AttentionService extends Service {
     public static final int ATTENTION_FAILURE_CAMERA_PERMISSION_ABSENT = 6;
     public static final int ATTENTION_FAILURE_CANCELLED = 3;

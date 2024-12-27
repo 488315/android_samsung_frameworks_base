@@ -9,7 +9,6 @@ import com.samsung.android.sume.core.functional.DescriptorStreamLoader;
 
 import java.util.function.Consumer;
 
-/* loaded from: classes6.dex */
 public abstract class PluginFixture<T extends PluginFixture<?>> {
     protected ContentFilterRegister contentFilterRegister;
     private Runnable deInitializer;

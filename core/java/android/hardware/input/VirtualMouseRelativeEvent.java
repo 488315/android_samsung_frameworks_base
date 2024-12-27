@@ -5,7 +5,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public final class VirtualMouseRelativeEvent implements Parcelable {
     public static final Parcelable.Creator<VirtualMouseRelativeEvent> CREATOR =
             new Parcelable.Creator<VirtualMouseRelativeEvent>() { // from class:

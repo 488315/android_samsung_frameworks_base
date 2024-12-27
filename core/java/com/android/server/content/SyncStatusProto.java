@@ -1,6 +1,5 @@
 package com.android.server.content;
 
-/* loaded from: classes5.dex */
 public final class SyncStatusProto {
     public static final long IS_JOB_ATTRIBUTION_FIXED = 1133871366147L;
     public static final long IS_JOB_NAMESPACE_MIGRATED = 1133871366146L;

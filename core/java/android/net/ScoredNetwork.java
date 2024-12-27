@@ -10,7 +10,6 @@ import java.util.Set;
 
 @SystemApi
 @Deprecated
-/* loaded from: classes3.dex */
 public class ScoredNetwork implements Parcelable {
     public static final String ATTRIBUTES_KEY_BADGING_CURVE =
             "android.net.attributes.key.BADGING_CURVE";

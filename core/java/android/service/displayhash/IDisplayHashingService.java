@@ -10,7 +10,6 @@ import android.os.RemoteCallback;
 import android.os.RemoteException;
 import android.view.displayhash.DisplayHash;
 
-/* loaded from: classes3.dex */
 public interface IDisplayHashingService extends IInterface {
     public static final String DESCRIPTOR = "android.service.displayhash.IDisplayHashingService";
 

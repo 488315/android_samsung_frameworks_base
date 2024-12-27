@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public class PortraitVideoItem extends VideoItem implements PortraitVideoStatusListener {
     int blurStrength;
     PVFrameInfo frameInfo;

@@ -19,7 +19,6 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-/* loaded from: classes.dex */
 public abstract class SemInputDevice {
     private static final String STATIC_TAG = "SemInputDevice";
     protected final String TAG;

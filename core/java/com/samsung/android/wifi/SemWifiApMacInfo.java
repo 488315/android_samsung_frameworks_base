@@ -13,7 +13,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/* loaded from: classes6.dex */
 public class SemWifiApMacInfo {
     private static final int BUFFER_SIZE = 64;
     private static final String WIFI_MAC_INFO = "/data/misc/wifi_hostapd/wifimac.info";

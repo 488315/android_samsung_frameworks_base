@@ -5,7 +5,6 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import java.util.ArrayList;
 import java.util.Collection;
 
-/* loaded from: classes5.dex */
 public class X509CollectionStoreParameters implements X509StoreParameters {
     private Collection collection;
 

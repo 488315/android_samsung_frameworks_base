@@ -3,7 +3,6 @@ package android.media.tv.tuner.filter;
 import android.annotation.SystemApi;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class MmtpFilterConfiguration extends FilterConfiguration {
     private final int mMmtpPid;
 

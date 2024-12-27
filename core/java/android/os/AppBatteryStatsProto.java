@@ -1,6 +1,5 @@
 package android.os;
 
-/* loaded from: classes3.dex */
 public final class AppBatteryStatsProto {
     public static final long UID_STATS = 2246267895809L;
 

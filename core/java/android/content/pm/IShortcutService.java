@@ -16,7 +16,6 @@ import com.android.internal.os.IParcelFileDescriptorFactory;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
 public interface IShortcutService extends IInterface {
     boolean addDynamicShortcuts(String str, ParceledListSlice parceledListSlice, int i)
             throws RemoteException;

@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
-/* loaded from: classes5.dex */
 public class SemExecutableWhitelist {
     private static final int SIGNATURE_MAX = 3;
     private static final int SIGNATURE_SAMSUNG_APPLICATION = 2;

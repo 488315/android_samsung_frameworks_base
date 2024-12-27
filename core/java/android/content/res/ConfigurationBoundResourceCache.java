@@ -1,6 +1,5 @@
 package android.content.res;
 
-/* loaded from: classes.dex */
 public class ConfigurationBoundResourceCache<T> extends ThemedResourceCache<ConstantState<T>> {
     @Override // android.content.res.ThemedResourceCache
     public /* bridge */ /* synthetic */ void clear() {

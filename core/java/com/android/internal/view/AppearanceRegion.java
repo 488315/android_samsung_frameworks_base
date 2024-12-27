@@ -9,7 +9,6 @@ import android.view.ViewDebug;
 
 import com.android.internal.util.AnnotationValidations;
 
-/* loaded from: classes5.dex */
 public class AppearanceRegion implements Parcelable {
     public static final Parcelable.Creator<AppearanceRegion> CREATOR =
             new Parcelable.Creator<

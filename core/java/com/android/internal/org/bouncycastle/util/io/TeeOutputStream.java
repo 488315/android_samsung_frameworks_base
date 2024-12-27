@@ -3,7 +3,6 @@ package com.android.internal.org.bouncycastle.util.io;
 import java.io.IOException;
 import java.io.OutputStream;
 
-/* loaded from: classes5.dex */
 public class TeeOutputStream extends OutputStream {
     private OutputStream output1;
     private OutputStream output2;

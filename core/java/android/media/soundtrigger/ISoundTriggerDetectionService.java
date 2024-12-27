@@ -9,7 +9,6 @@ import android.os.Parcel;
 import android.os.ParcelUuid;
 import android.os.RemoteException;
 
-/* loaded from: classes2.dex */
 public interface ISoundTriggerDetectionService extends IInterface {
     void onError(ParcelUuid parcelUuid, int i, int i2) throws RemoteException;
 

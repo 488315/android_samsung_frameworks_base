@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.ViewConfiguration;
 import android.widget.FrameLayout;
 
-/* loaded from: classes3.dex */
 public class InlineSuggestionRoot extends FrameLayout {
     private static final String TAG = "InlineSuggestionRoot";
     private final IInlineSuggestionUiCallback mCallback;

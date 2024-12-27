@@ -29,7 +29,6 @@ import java.util.Iterator;
 import java.util.List;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes3.dex */
 public final class HotspotControllerImpl implements HotspotController, WifiManager.SoftApCallback {
     public static final boolean DEBUG = Log.isLoggable("HotspotController", 3);
     public static final IntentFilter mHotspotControllerIntentFilter = new IntentFilter("com.samsung.android.net.wifi.WIFI_AP_STA_STATE_CHANGED");

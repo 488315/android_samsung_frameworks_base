@@ -7,7 +7,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.telephony.euicc.EuiccNotification;
 
-/* loaded from: classes5.dex */
 public interface IRetrieveNotificationCallback extends IInterface {
     public static final String DESCRIPTOR =
             "com.android.internal.telephony.euicc.IRetrieveNotificationCallback";

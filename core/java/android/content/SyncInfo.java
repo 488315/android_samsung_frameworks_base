@@ -4,7 +4,6 @@ import android.accounts.Account;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes.dex */
 public class SyncInfo implements Parcelable {
     public final Account account;
     public final String authority;

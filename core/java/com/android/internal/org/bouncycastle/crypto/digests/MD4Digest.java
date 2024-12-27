@@ -2,7 +2,6 @@ package com.android.internal.org.bouncycastle.crypto.digests;
 
 import com.android.internal.org.bouncycastle.util.Memoable;
 
-/* loaded from: classes5.dex */
 public class MD4Digest extends GeneralDigest {
     private static final int DIGEST_LENGTH = 16;
     private static final int S11 = 3;

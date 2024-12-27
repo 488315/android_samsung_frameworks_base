@@ -1,6 +1,5 @@
 package android.webkit;
 
-/* loaded from: classes4.dex */
 public final class FeatureFlagsImpl implements FeatureFlags {
     @Override // android.webkit.FeatureFlags
     public boolean updateServiceIpcWrapper() {

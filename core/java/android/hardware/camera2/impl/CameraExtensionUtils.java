@@ -17,7 +17,6 @@ import java.util.Map;
 import java.util.concurrent.Executor;
 import java.util.concurrent.RejectedExecutionException;
 
-/* loaded from: classes2.dex */
 public final class CameraExtensionUtils {
     public static final int JPEG_DEFAULT_QUALITY = 100;
     public static final int JPEG_DEFAULT_ROTATION = 0;

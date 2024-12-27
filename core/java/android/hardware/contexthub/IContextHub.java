@@ -8,7 +8,6 @@ import android.os.RemoteException;
 
 import java.util.List;
 
-/* loaded from: classes2.dex */
 public interface IContextHub extends IInterface {
     public static final String DESCRIPTOR =
             "android$hardware$contexthub$IContextHub".replace('$', '.');

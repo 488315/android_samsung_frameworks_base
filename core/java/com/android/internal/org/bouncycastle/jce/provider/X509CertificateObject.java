@@ -63,7 +63,6 @@ import java.util.Set;
 
 import javax.security.auth.x500.X500Principal;
 
-/* loaded from: classes5.dex */
 public class X509CertificateObject extends X509Certificate implements PKCS12BagAttributeCarrier {
     private PKCS12BagAttributeCarrier attrCarrier = new PKCS12BagAttributeCarrierImpl();
     private BasicConstraints basicConstraints;

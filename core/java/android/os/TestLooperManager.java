@@ -4,7 +4,6 @@ import android.util.ArraySet;
 
 import java.util.concurrent.LinkedBlockingQueue;
 
-/* loaded from: classes3.dex */
 public class TestLooperManager {
     private static final ArraySet<Looper> sHeldLoopers = new ArraySet<>();
     private final LinkedBlockingQueue<MessageExecution> mExecuteQueue = new LinkedBlockingQueue<>();

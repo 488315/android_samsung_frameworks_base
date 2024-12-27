@@ -28,7 +28,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 
-/* loaded from: classes5.dex */
 public interface ServiceConnector<I extends IInterface> {
 
     @FunctionalInterface

@@ -2,7 +2,6 @@ package android.hardware.radio.V1_0;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class DeviceStateType {
     public static final int CHARGING_STATE = 1;
     public static final int LOW_DATA_EXPECTED = 2;

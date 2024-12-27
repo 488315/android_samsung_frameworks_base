@@ -1,6 +1,5 @@
 package android.telephony;
 
-/* loaded from: classes4.dex */
 public interface PersistentLoggerBackend {
     void debug(String str, String str2);
 

@@ -1,6 +1,5 @@
 package android.bluetooth.hci;
 
-/* loaded from: classes.dex */
 public final class BluetoothHciProtoEnums {
     public static final int BLE_EVT_ADVERTISING_SET_TERMINATED_EVT = 18;
     public static final int BLE_EVT_ADV_PKT_RPT_EVT = 2;

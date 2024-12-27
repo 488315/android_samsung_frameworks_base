@@ -7,5 +7,4 @@ import java.lang.annotation.Target;
 
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.CLASS)
-/* loaded from: classes.dex */
 public @interface PermissionManuallyEnforced {}

@@ -3,7 +3,6 @@ package com.android.internal.statusbar;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes5.dex */
 public class NotificationVisibility implements Parcelable {
     private static final int MAX_POOL_SIZE = 25;
     private static final String TAG = "NoViz";

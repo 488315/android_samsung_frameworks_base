@@ -5,7 +5,6 @@ import android.sec.enterprise.EnterpriseDeviceManager;
 import android.sec.enterprise.IEDMProxy;
 import android.sec.enterprise.content.SecContentProviderURI;
 
-/* loaded from: classes3.dex */
 public class CertificatePolicy {
     public static final String BROWSER_MODULE = "browser_module";
     public static final int CERTIFICATE_VALIDATED_SUCCESSFULLY = -1;

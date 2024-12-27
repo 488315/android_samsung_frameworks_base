@@ -8,7 +8,6 @@ import android.os.PersistableBundle;
 import android.os.RemoteException;
 import android.telephony.ims.RcsClientConfiguration;
 
-/* loaded from: classes4.dex */
 public interface IImsConfig extends IInterface {
     public static final String DESCRIPTOR = "android.telephony.ims.aidl.IImsConfig";
 

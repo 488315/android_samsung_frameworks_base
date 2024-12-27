@@ -13,7 +13,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public class PrecomputedText implements Spannable {
     private static final char LINE_FEED = '\n';
     private final int mEnd;

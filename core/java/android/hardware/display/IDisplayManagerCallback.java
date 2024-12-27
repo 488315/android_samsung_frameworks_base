@@ -9,7 +9,6 @@ import android.os.RemoteException;
 
 import java.util.List;
 
-/* loaded from: classes2.dex */
 public interface IDisplayManagerCallback extends IInterface {
     void onDeviceEvent(Bundle bundle, int i) throws RemoteException;
 

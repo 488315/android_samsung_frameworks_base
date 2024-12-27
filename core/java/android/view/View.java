@@ -175,7 +175,6 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
-/* loaded from: classes4.dex */
 public class View implements Drawable.Callback, KeyEvent.Callback, AccessibilityEventSource {
     public static final int ACCESSIBILITY_CURSOR_POSITION_UNDEFINED = -1;
     public static final int ACCESSIBILITY_DATA_SENSITIVE_AUTO = 0;

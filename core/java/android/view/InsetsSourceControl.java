@@ -11,7 +11,6 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.function.Consumer;
 
-/* loaded from: classes4.dex */
 public class InsetsSourceControl implements Parcelable {
     public static final Parcelable.Creator<InsetsSourceControl> CREATOR =
             new Parcelable.Creator<

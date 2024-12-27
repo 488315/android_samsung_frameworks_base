@@ -2,7 +2,6 @@ package android.audio.policy.configuration.V7_0;
 
 import com.samsung.android.media.AudioTag;
 
-/* loaded from: classes.dex */
 public enum AudioStreamType {
     AUDIO_STREAM_VOICE_CALL("AUDIO_STREAM_VOICE_CALL"),
     AUDIO_STREAM_SYSTEM("AUDIO_STREAM_SYSTEM"),

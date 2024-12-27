@@ -41,7 +41,6 @@ import java.io.StringWriter;
 import java.util.Arrays;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public final class NotificationChannel implements Parcelable {
     public static final int ALLOW_BUBBLE_OFF = 0;
     public static final int ALLOW_BUBBLE_ON = 1;

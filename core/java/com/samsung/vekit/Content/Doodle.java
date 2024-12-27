@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public class Doodle extends Content {
     private Panel capturedImagePanel;
     private String capturedImagePath;

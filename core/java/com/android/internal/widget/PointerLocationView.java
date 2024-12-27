@@ -32,7 +32,6 @@ import com.android.internal.content.NativeLibraryHelper;
 import com.android.internal.widget.PointerLocationView;
 import com.samsung.android.ims.settings.SemImsProfile;
 
-/* loaded from: classes5.dex */
 public class PointerLocationView extends View implements InputManager.InputDeviceListener, WindowManagerPolicyConstants.PointerEventListener {
     private static final String ALT_STRATEGY_PROPERY_KEY = "debug.velocitytracker.alt";
     private static final PointerState EMPTY_POINTER_STATE = new PointerState();

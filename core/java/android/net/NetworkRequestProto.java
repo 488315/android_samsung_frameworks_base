@@ -1,6 +1,5 @@
 package android.net;
 
-/* loaded from: classes3.dex */
 public final class NetworkRequestProto {
     public static final long LEGACY_TYPE = 1120986464259L;
     public static final long NETWORK_CAPABILITIES = 1146756268036L;

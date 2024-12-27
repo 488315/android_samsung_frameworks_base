@@ -4,7 +4,6 @@ import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public class AudioGainSys implements Parcelable {
     public static final Parcelable.Creator<AudioGainSys> CREATOR =
             new Parcelable.Creator<AudioGainSys>() { // from class: android.media.AudioGainSys.1

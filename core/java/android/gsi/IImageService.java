@@ -8,7 +8,6 @@ import android.os.RemoteException;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
 public interface IImageService extends IInterface {
     public static final int CREATE_IMAGE_DEFAULT = 0;
     public static final int CREATE_IMAGE_READONLY = 1;

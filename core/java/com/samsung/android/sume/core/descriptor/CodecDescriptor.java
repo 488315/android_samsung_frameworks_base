@@ -11,7 +11,6 @@ import com.samsung.android.sume.core.types.MediaType;
 import java.util.HashMap;
 import java.util.Map;
 
-/* loaded from: classes6.dex */
 public class CodecDescriptor extends MFDescriptorBase {
     private int bitrate;
     private final Map<String, Object> data;

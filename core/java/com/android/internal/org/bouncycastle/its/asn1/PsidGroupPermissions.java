@@ -7,7 +7,6 @@ import com.android.internal.org.bouncycastle.asn1.ASN1Sequence;
 
 import java.math.BigInteger;
 
-/* loaded from: classes5.dex */
 public class PsidGroupPermissions extends ASN1Object {
     private final BigInteger chainLengthRange;
     private final Object eeType;

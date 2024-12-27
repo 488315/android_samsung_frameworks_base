@@ -1,6 +1,5 @@
 package android.animation;
 
-/* loaded from: classes.dex */
 public class ArgbEvaluator implements TypeEvaluator {
     private static final ArgbEvaluator sInstance = new ArgbEvaluator();
 

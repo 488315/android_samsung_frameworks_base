@@ -8,7 +8,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.sec.enterprise.proxy.IProxyCredentialsCallback;
 
-/* loaded from: classes5.dex */
 public interface IProxyCallback extends IInterface {
     public static final String DESCRIPTOR = "com.android.net.IProxyCallback";
 

@@ -9,7 +9,6 @@ import android.os.UserManager;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes4.dex */
 public class UserPackage {
     public static final int MINIMUM_SUPPORTED_SDK = 33;
     private final PackageInfo mPackageInfo;

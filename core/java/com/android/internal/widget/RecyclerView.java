@@ -48,7 +48,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public class RecyclerView extends ViewGroup implements ScrollingView, NestedScrollingChild {
     static final boolean DEBUG = false;
     static final boolean DISPATCH_TEMP_DETACH = false;

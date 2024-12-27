@@ -13,7 +13,6 @@ import com.android.internal.infra.AndroidFuture;
 
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public interface IPermissionController extends IInterface {
     public static final String DESCRIPTOR = "android.permission.IPermissionController";
 

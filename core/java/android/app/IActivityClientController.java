@@ -19,7 +19,6 @@ import android.window.SizeConfigurationBuckets;
 
 import com.android.internal.policy.IKeyguardDismissCallback;
 
-/* loaded from: classes.dex */
 public interface IActivityClientController extends IInterface {
     public static final String DESCRIPTOR = "android.app.IActivityClientController";
 

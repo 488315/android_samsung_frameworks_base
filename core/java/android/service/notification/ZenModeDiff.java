@@ -11,7 +11,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 import java.util.Set;
 
-/* loaded from: classes3.dex */
 public class ZenModeDiff {
     public static final int ADDED = 1;
     public static final int NONE = 0;

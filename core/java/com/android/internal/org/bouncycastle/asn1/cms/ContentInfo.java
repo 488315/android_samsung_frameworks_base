@@ -10,7 +10,6 @@ import com.android.internal.org.bouncycastle.asn1.ASN1TaggedObject;
 import com.android.internal.org.bouncycastle.asn1.BERSequence;
 import com.android.internal.org.bouncycastle.asn1.BERTaggedObject;
 
-/* loaded from: classes5.dex */
 public class ContentInfo extends ASN1Object implements CMSObjectIdentifiers {
     private ASN1Encodable content;
     private ASN1ObjectIdentifier contentType;

@@ -8,7 +8,6 @@ import com.android.internal.util.Preconditions;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes3.dex */
 public final class TemperatureControlTemplate extends ControlTemplate {
     private static final int ALL_FLAGS = 62;
     public static final int FLAG_MODE_COOL = 8;

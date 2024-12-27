@@ -6,7 +6,6 @@ import android.speech.RecognizerResultsIntent;
 import java.util.HashMap;
 import java.util.Map;
 
-/* loaded from: classes5.dex */
 public class PduPart {
     public static final String CONTENT_TRANSFER_ENCODING = "Content-Transfer-Encoding";
     public static final String P_7BIT = "7bit";

@@ -7,7 +7,6 @@ import javax.microedition.khronos.opengles.GL11;
 import javax.microedition.khronos.opengles.GL11Ext;
 import javax.microedition.khronos.opengles.GL11ExtensionPack;
 
-/* loaded from: classes3.dex */
 abstract class GLWrapperBase implements GL, GL10, GL10Ext, GL11, GL11Ext, GL11ExtensionPack {
     protected GL10 mgl;
     protected GL10Ext mgl10Ext;

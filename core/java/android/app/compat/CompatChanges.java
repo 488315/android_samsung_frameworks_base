@@ -15,7 +15,6 @@ import java.util.Map;
 import java.util.Set;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class CompatChanges {
     private static final ChangeIdStateCache QUERY_CACHE = new ChangeIdStateCache();
 

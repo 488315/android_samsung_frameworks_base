@@ -20,7 +20,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public interface IGnssVisibilityControlCallback extends IBase {
     public static final String kInterfaceName =
             "android.hardware.gnss.visibility_control@1.0::IGnssVisibilityControlCallback";

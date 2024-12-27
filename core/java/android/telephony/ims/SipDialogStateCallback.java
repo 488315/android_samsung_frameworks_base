@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.concurrent.Executor;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public abstract class SipDialogStateCallback {
     private CallbackBinder mCallback;
 

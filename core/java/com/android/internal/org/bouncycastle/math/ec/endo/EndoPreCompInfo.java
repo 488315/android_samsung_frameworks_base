@@ -3,7 +3,6 @@ package com.android.internal.org.bouncycastle.math.ec.endo;
 import com.android.internal.org.bouncycastle.math.ec.ECPoint;
 import com.android.internal.org.bouncycastle.math.ec.PreCompInfo;
 
-/* loaded from: classes5.dex */
 public class EndoPreCompInfo implements PreCompInfo {
     protected ECEndomorphism endomorphism;
     protected ECPoint mappedPoint;

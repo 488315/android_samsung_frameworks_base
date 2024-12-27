@@ -14,7 +14,6 @@ import android.window.ClientWindowFrames;
 
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public class WindowStateResizeItem extends WindowStateTransactionItem {
     public static final Parcelable.Creator<WindowStateResizeItem> CREATOR =
             new Parcelable.Creator<WindowStateResizeItem>() { // from class:

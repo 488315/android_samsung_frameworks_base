@@ -4,7 +4,6 @@ import android.annotation.SystemApi;
 
 import java.util.Set;
 
-/* loaded from: classes4.dex */
 public class GeolocationPermissions {
 
     public interface Callback {

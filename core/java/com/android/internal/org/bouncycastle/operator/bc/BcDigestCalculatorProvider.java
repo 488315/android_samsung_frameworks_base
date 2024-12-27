@@ -9,7 +9,6 @@ import com.android.internal.org.bouncycastle.operator.OperatorCreationException;
 import java.io.IOException;
 import java.io.OutputStream;
 
-/* loaded from: classes5.dex */
 public class BcDigestCalculatorProvider implements DigestCalculatorProvider {
     private BcDigestProvider digestProvider = BcDefaultDigestProvider.INSTANCE;
 

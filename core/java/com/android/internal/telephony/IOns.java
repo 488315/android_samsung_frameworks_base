@@ -9,7 +9,6 @@ import android.telephony.AvailableNetworkInfo;
 
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public interface IOns extends IInterface {
     public static final String DESCRIPTOR = "com.android.internal.telephony.IOns";
 

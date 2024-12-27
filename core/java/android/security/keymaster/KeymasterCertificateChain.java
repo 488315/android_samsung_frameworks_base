@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public class KeymasterCertificateChain implements Parcelable {
     public static final Parcelable.Creator<KeymasterCertificateChain> CREATOR =
             new Parcelable.Creator<

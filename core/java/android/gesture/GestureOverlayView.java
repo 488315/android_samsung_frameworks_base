@@ -18,7 +18,6 @@ import com.android.internal.R;
 
 import java.util.ArrayList;
 
-/* loaded from: classes.dex */
 public class GestureOverlayView extends FrameLayout {
     private static final boolean DITHER_FLAG = true;
     private static final int FADE_ANIMATION_RATE = 16;

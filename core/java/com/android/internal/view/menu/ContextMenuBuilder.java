@@ -7,7 +7,6 @@ import android.util.EventLog;
 import android.view.ContextMenu;
 import android.view.View;
 
-/* loaded from: classes5.dex */
 public class ContextMenuBuilder extends MenuBuilder implements ContextMenu {
     public ContextMenuBuilder(Context context) {
         super(context);

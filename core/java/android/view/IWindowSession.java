@@ -20,7 +20,6 @@ import android.window.WindowContainerToken;
 
 import java.util.List;
 
-/* loaded from: classes4.dex */
 public interface IWindowSession extends IInterface {
     public static final String KEY_RELAYOUT_BUNDLE_ACTIVITY_WINDOW_INFO = "activity_window_info";
     public static final String KEY_RELAYOUT_BUNDLE_CUTOUTPOLICY = "cutoutpolicy";

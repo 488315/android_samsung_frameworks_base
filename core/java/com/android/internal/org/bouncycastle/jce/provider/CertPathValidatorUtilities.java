@@ -78,7 +78,6 @@ import java.util.Set;
 
 import javax.security.auth.x500.X500Principal;
 
-/* loaded from: classes5.dex */
 class CertPathValidatorUtilities {
     protected static final String ANY_POLICY = "2.5.29.32.0";
     protected static final int CRL_SIGN = 6;

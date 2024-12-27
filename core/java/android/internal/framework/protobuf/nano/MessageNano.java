@@ -3,7 +3,6 @@ package android.internal.framework.protobuf.nano;
 import java.io.IOException;
 import java.util.Arrays;
 
-/* loaded from: classes2.dex */
 public abstract class MessageNano {
     protected volatile int cachedSize = -1;
 

@@ -29,7 +29,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/* loaded from: classes5.dex */
 public interface ParsingPackage {
     ParsingPackage addActivity(ParsedActivity parsedActivity);
 

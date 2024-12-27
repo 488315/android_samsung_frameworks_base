@@ -5,7 +5,6 @@ import com.samsung.android.graphics.spr.document.SprInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-/* loaded from: classes6.dex */
 public class SprAttributeStrokeLinejoin extends SprAttributeBase {
     public byte linejoin;
     public static byte STROKE_LINEJOIN_TYPE_NONE = 0;

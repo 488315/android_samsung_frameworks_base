@@ -3,7 +3,6 @@ package android.service.contentcapture;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes3.dex */
 public final class FlushMetrics implements Parcelable {
     public static final Parcelable.Creator<FlushMetrics> CREATOR =
             new Parcelable.Creator<

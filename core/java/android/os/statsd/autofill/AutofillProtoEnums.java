@@ -1,6 +1,5 @@
 package android.os.statsd.autofill;
 
-/* loaded from: classes3.dex */
 public final class AutofillProtoEnums {
     public static final int ACTION_SETTINGS_UPDATE_DEFAULT_APP = 2;
     public static final int AUTHENTICATION_FAILURE = 2;

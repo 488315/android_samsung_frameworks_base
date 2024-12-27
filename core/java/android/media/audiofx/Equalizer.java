@@ -5,7 +5,6 @@ import android.util.Log;
 import java.io.UnsupportedEncodingException;
 import java.util.StringTokenizer;
 
-/* loaded from: classes2.dex */
 public class Equalizer extends AudioEffect {
     public static final int PARAM_BAND_FREQ_RANGE = 4;
     public static final int PARAM_BAND_LEVEL = 2;

@@ -23,7 +23,6 @@ import java.util.Set;
 
 import javax.security.auth.x500.X500Principal;
 
-/* loaded from: classes3.dex */
 abstract class DirectoryCertificateSource implements CertificateSource {
     private static final char[] DIGITS = {
         '0',

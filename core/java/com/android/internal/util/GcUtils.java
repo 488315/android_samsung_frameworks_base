@@ -5,7 +5,6 @@ import android.util.Slog;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-/* loaded from: classes5.dex */
 public final class GcUtils {
     private static final String TAG = GcUtils.class.getSimpleName();
 

@@ -3,7 +3,6 @@ package android.hardware.face;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public final class FaceAuthenticationFrame implements Parcelable {
     public static final Parcelable.Creator<FaceAuthenticationFrame> CREATOR =
             new Parcelable.Creator<FaceAuthenticationFrame>() { // from class:

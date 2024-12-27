@@ -10,7 +10,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.ref.Reference;
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public final class PerformanceHintManager {
     private final long mNativeManagerPtr;
 

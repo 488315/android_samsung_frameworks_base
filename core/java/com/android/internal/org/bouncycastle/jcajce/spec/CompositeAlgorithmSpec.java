@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public class CompositeAlgorithmSpec implements AlgorithmParameterSpec {
     private final List<String> algorithmNames;
     private final List<AlgorithmParameterSpec> parameterSpecs;

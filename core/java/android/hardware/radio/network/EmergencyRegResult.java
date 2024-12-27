@@ -8,7 +8,6 @@ import android.os.Parcelable;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public class EmergencyRegResult implements Parcelable {
     public static final Parcelable.Creator<EmergencyRegResult> CREATOR =
             new Parcelable.Creator<EmergencyRegResult>() { // from class:

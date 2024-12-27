@@ -50,7 +50,6 @@ import java.util.Objects;
 import java.util.StringJoiner;
 import java.util.concurrent.TimeoutException;
 
-/* loaded from: classes.dex */
 public class Instrumentation {
     private static final long CONNECT_TIMEOUT_MILLIS = 60000;
     static final boolean DEBUG_START_ACTIVITY;

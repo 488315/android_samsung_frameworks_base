@@ -16,7 +16,6 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 
-/* loaded from: classes.dex */
 public class InsetDrawable extends DrawableWrapper {
     private InsetState mState;
     private final Rect mTmpInsetRect;

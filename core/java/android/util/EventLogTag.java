@@ -1,6 +1,5 @@
 package android.util;
 
-/* loaded from: classes4.dex */
 public final class EventLogTag {
     public static final long TAG_NAME = 1138166333442L;
     public static final long TAG_NUMBER = 1155346202625L;

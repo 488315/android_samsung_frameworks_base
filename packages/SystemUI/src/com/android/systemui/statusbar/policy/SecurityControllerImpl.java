@@ -39,7 +39,6 @@ import java.util.concurrent.Executor;
 import org.xmlpull.v1.XmlPullParserException;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes3.dex */
 public final class SecurityControllerImpl implements SecurityController {
     public static final boolean DEBUG = Log.isLoggable("SecurityController", 3);
     public static final NetworkRequest REQUEST = new NetworkRequest.Builder().clearCapabilities().addTransportType(4).build();

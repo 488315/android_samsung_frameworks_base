@@ -8,7 +8,6 @@ import com.samsung.android.feature.SemFloatingFeature;
 
 import java.util.Arrays;
 
-/* loaded from: classes5.dex */
 public abstract class PlayerExternalChipsetBes extends PlayerExternalChipsetBase {
     public static final boolean FEATURE_SUPPORT_RDS =
             SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_FMRADIO_SUPPORT_RDS");

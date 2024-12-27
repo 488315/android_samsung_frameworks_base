@@ -37,7 +37,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public final class MediaCas implements AutoCloseable {
     private static final long MEDIA_CAS_HIDL_COOKIE = 394;
     public static final int PLUGIN_STATUS_PHYSICAL_MODULE_CHANGED = 0;

@@ -25,7 +25,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
-/* loaded from: classes3.dex */
 public class XmlConfigSource implements ConfigSource {
     private static final int CONFIG_BASE = 0;
     private static final int CONFIG_DEBUG = 2;

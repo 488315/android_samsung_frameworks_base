@@ -24,7 +24,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/* loaded from: classes5.dex */
 public abstract class AbstractResolverComparator
         implements Comparator<ResolverActivity.ResolvedComponentInfo> {
     private static final boolean DEBUG = true;

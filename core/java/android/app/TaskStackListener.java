@@ -4,7 +4,6 @@ import android.content.ComponentName;
 import android.os.RemoteException;
 import android.window.TaskSnapshot;
 
-/* loaded from: classes.dex */
 public abstract class TaskStackListener extends ITaskStackListener.Stub {
     private boolean mIsRemote = true;
 

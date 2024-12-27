@@ -12,7 +12,6 @@ import java.lang.annotation.RetentionPolicy;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 @SystemApi(client = SystemApi.Client.SYSTEM_SERVER)
-/* loaded from: classes2.dex */
 public interface ActivityInterceptorCallback {
     public static final int DREAM_MANAGER_ORDERED_ID = 4;
     public static final int FROZEN_PACKAGE_ORDERED_ID = 6;

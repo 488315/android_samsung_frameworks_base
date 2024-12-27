@@ -17,7 +17,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-/* loaded from: classes5.dex */
 public class DefaultSignatureAlgorithmIdentifierFinder
         implements SignatureAlgorithmIdentifierFinder {
     private static Map algorithms = new HashMap();

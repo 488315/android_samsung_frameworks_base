@@ -4,7 +4,6 @@ import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes6.dex */
 public class SehAdnRecord implements Parcelable {
     public static final Parcelable.Creator<SehAdnRecord> CREATOR =
             new Parcelable.Creator<

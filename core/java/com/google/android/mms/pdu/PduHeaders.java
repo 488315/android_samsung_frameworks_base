@@ -5,7 +5,6 @@ import com.google.android.mms.InvalidHeaderValueException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/* loaded from: classes5.dex */
 public class PduHeaders {
     public static final int ADAPTATION_ALLOWED = 188;
     public static final int ADDITIONAL_HEADERS = 176;

@@ -6,7 +6,6 @@ import android.os.Parcelable;
 
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public class Cdma2000RegistrationInfo implements Parcelable {
     public static final Parcelable.Creator<Cdma2000RegistrationInfo> CREATOR =
             new Parcelable.Creator<Cdma2000RegistrationInfo>() { // from class:

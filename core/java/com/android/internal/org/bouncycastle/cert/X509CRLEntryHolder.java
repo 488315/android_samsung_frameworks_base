@@ -11,7 +11,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
-/* loaded from: classes5.dex */
 public class X509CRLEntryHolder {
     private GeneralNames ca;
     private TBSCertList.CRLEntry entry;

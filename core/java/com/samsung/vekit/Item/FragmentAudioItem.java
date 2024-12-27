@@ -11,7 +11,6 @@ import com.samsung.vekit.Layer.Layer;
 
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public class FragmentAudioItem extends Item {
     public static final int TARGET_DURATION_GAP = 2000;
     private int bodyFragmentCount;

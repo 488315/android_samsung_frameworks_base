@@ -3,7 +3,6 @@ package com.samsung.android.content.smartclip;
 import android.util.Log;
 import android.view.View;
 
-/* loaded from: classes5.dex */
 public class SemSmartClipViewHelper {
     private static final String TAG = "SemSmartClipViewHelper";
 

@@ -20,7 +20,6 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-/* loaded from: classes6.dex */
 public class CustomizedTextParser {
     private static final String CSC_XML_FILE_NAME = "unique_text.xml";
     private static final String CSC_XML_FILE_PATH = "/system/csc/";

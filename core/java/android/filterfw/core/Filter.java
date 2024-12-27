@@ -16,7 +16,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-/* loaded from: classes.dex */
 public abstract class Filter {
     static final int STATUS_ERROR = 6;
     static final int STATUS_FINISHED = 5;

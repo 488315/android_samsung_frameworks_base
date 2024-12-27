@@ -6,7 +6,6 @@ import android.graphics.Rect;
 import android.view.MotionEvent;
 
 @Deprecated
-/* loaded from: classes6.dex */
 public class CompatTranslator {
     private final CompatTranslator mParent;
     private Point mBoundsPosition = new Point();

@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 
-/* loaded from: classes6.dex */
 public class VirtualLockUtils {
     private static final String BASE_DIR = "/data/system/users";
     public static final int DEFAULT_TRY_RANGE = 10;

@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.util.Collections;
 import java.util.List;
 
-/* loaded from: classes4.dex */
 public final class VisualVoicemailSmsFilterSettings implements Parcelable {
     public static final String DEFAULT_CLIENT_PREFIX = "//VVM";
     public static final int DEFAULT_DESTINATION_PORT = -1;

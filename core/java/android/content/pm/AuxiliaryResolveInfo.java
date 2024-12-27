@@ -9,7 +9,6 @@ import android.text.format.DateFormat;
 import java.util.Collections;
 import java.util.List;
 
-/* loaded from: classes.dex */
 public final class AuxiliaryResolveInfo {
     public final Intent failureIntent;
     public final List<AuxiliaryFilter> filters;

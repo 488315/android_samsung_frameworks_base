@@ -4,7 +4,6 @@ import android.graphics.Rect;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes5.dex */
 public class SmartClipDataExtractionEvent implements Parcelable {
     public static final Parcelable.Creator<SmartClipDataExtractionEvent> CREATOR =
             new Parcelable.Creator<

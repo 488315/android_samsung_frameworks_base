@@ -2,7 +2,6 @@ package com.samsung.android.knox;
 
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public abstract class SemRcpCallback {
     private SemIRCPCallback s = new SubSemRcpCallback(this);
 

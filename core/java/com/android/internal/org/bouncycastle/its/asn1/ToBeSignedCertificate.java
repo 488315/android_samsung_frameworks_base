@@ -4,7 +4,6 @@ import com.android.internal.org.bouncycastle.asn1.ASN1Object;
 import com.android.internal.org.bouncycastle.asn1.ASN1Primitive;
 import com.android.internal.org.bouncycastle.asn1.ASN1Sequence;
 
-/* loaded from: classes5.dex */
 public class ToBeSignedCertificate extends ASN1Object {
     private ToBeSignedCertificate(ASN1Sequence seq) {}
 

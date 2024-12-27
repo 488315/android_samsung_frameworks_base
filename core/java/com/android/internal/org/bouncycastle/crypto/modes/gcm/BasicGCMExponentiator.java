@@ -2,7 +2,6 @@ package com.android.internal.org.bouncycastle.crypto.modes.gcm;
 
 import com.android.internal.org.bouncycastle.util.Arrays;
 
-/* loaded from: classes5.dex */
 public class BasicGCMExponentiator implements GCMExponentiator {
     private long[] x;
 

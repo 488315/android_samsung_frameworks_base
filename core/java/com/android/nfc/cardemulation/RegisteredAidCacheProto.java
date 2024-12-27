@@ -1,6 +1,5 @@
 package com.android.nfc.cardemulation;
 
-/* loaded from: classes5.dex */
 public final class RegisteredAidCacheProto {
     public static final long AID_CACHE_ENTRIES = 2246267895809L;
     public static final long PREFERRED_FOREGROUND_SERVICE = 1146756268034L;

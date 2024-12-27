@@ -2,7 +2,6 @@ package com.android.internal.widget.remotecompose.core;
 
 import java.time.LocalDateTime;
 
-/* loaded from: classes5.dex */
 public class TimeVariables {
     public void updateTime(RemoteContext context) {
         LocalDateTime dateTime = LocalDateTime.now();

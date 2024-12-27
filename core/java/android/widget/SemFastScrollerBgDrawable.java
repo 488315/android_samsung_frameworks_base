@@ -5,7 +5,6 @@ import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 
-/* loaded from: classes4.dex */
 public class SemFastScrollerBgDrawable extends Drawable {
     private float mValue = 0.0f;
     private Paint mPaint = new Paint(1);

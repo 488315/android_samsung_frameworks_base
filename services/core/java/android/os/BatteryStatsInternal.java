@@ -10,7 +10,6 @@ import java.util.Collection;
 import java.util.List;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes.dex */
 public abstract class BatteryStatsInternal {
     public static final int CPU_WAKEUP_SUBSYSTEM_ALARM = 1;
     public static final int CPU_WAKEUP_SUBSYSTEM_CELLULAR_DATA = 5;

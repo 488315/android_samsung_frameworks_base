@@ -18,7 +18,6 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
 
-/* loaded from: classes.dex */
 public class ApplicationErrorReport implements Parcelable {
     public static final Parcelable.Creator<ApplicationErrorReport> CREATOR =
             new Parcelable.Creator<

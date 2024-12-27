@@ -7,7 +7,6 @@ import android.os.Parcelable;
 
 import java.util.Objects;
 
-/* loaded from: classes5.dex */
 public class ReferrerIntent extends Intent {
     public static final Parcelable.Creator<ReferrerIntent> CREATOR =
             new Parcelable.Creator<

@@ -15,7 +15,6 @@ import java.io.OutputStream;
 import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
 
-/* loaded from: classes5.dex */
 public abstract class RemoteStream<RES, IOSTREAM extends Closeable> extends AndroidFuture<RES>
         implements Runnable {
     private final FunctionalUtils.ThrowingFunction<IOSTREAM, RES> mHandleStream;

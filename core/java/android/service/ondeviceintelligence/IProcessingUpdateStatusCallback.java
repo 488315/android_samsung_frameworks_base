@@ -7,7 +7,6 @@ import android.os.Parcel;
 import android.os.PersistableBundle;
 import android.os.RemoteException;
 
-/* loaded from: classes3.dex */
 public interface IProcessingUpdateStatusCallback extends IInterface {
     public static final String DESCRIPTOR =
             "android.service.ondeviceintelligence.IProcessingUpdateStatusCallback";

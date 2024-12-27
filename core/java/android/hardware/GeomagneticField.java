@@ -5,7 +5,6 @@ import android.text.format.Time;
 import java.util.Calendar;
 import java.util.TimeZone;
 
-/* loaded from: classes.dex */
 public class GeomagneticField {
     static final /* synthetic */ boolean $assertionsDisabled = false;
     private static final float EARTH_REFERENCE_RADIUS_KM = 6371.2f;

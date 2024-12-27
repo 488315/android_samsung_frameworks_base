@@ -21,7 +21,6 @@ import dalvik.system.BaseDexClassLoader;
 
 import java.io.File;
 
-/* loaded from: classes.dex */
 public class NativeActivity extends Activity
         implements SurfaceHolder.Callback2,
                 InputQueue.Callback,

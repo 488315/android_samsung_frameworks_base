@@ -1,6 +1,5 @@
 package android.animation;
 
-/* loaded from: classes.dex */
 public class IntArrayEvaluator implements TypeEvaluator<int[]> {
     private int[] mArray;
 

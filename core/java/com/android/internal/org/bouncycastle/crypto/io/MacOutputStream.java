@@ -5,7 +5,6 @@ import com.android.internal.org.bouncycastle.crypto.Mac;
 import java.io.IOException;
 import java.io.OutputStream;
 
-/* loaded from: classes5.dex */
 public class MacOutputStream extends OutputStream {
     protected Mac mac;
 

@@ -10,7 +10,6 @@ import com.android.internal.util.HeavyHitterSketch;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public final class BinderCallHeavyHitterWatcher {
     private static final float EPSILON = 1.0E-5f;
     private static final String TAG = "BinderCallHeavyHitterWatcher";

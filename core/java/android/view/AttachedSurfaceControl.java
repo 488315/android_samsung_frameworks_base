@@ -5,7 +5,6 @@ import android.graphics.Region;
 import android.window.InputTransferToken;
 import android.window.SurfaceSyncGroup;
 
-/* loaded from: classes4.dex */
 public interface AttachedSurfaceControl {
 
     public interface OnBufferTransformHintChangedListener {

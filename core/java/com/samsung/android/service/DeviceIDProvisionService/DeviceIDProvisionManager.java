@@ -24,7 +24,6 @@ import java.util.Locale;
 
 import javax.crypto.KeyGenerator;
 
-/* loaded from: classes6.dex */
 public class DeviceIDProvisionManager {
     private static final String TAG = "DeviceIDProvisionManager";
     private Context mContext;

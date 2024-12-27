@@ -6,7 +6,6 @@ import android.os.Handler;
 
 import com.android.server.LocalServices;
 
-/* loaded from: classes.dex */
 public class DisplayStateListenerWrapper extends ExternalService {
     private final DisplayManagerInternal.DisplayStateListener displayStateListener;
 

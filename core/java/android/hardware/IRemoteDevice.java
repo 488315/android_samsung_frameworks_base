@@ -9,7 +9,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.telephony.ims.RcsContactPresenceTuple;
 
-/* loaded from: classes.dex */
 public interface IRemoteDevice extends IInterface {
     public static final String DESCRIPTOR = "android.hardware.IRemoteDevice";
 

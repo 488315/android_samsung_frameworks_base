@@ -38,7 +38,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-/* loaded from: classes5.dex */
 public class SmsMessage extends SmsMessageBase {
     private static final byte BEARER_DATA = 8;
     private static final byte BEARER_REPLY_OPTION = 6;

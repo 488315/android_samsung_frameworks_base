@@ -6,7 +6,6 @@ import com.samsung.android.sume.core.filter.ImgpFilter;
 import com.samsung.android.sume.core.format.MediaFormat;
 import com.samsung.android.sume.core.functional.Operator;
 
-/* loaded from: classes6.dex */
 public class ImgpFilterAdapter implements Operator {
     private final ImgpFilter imgpFilter;
 

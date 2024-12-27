@@ -4,7 +4,6 @@ import android.security.keystore.KeyProperties;
 
 import java.util.ArrayList;
 
-/* loaded from: classes6.dex */
 public final class SehNrIconType {
     public static final int BASIC = 1;
     public static final int INVALID = -1;

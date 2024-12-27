@@ -1,6 +1,5 @@
 package android.util;
 
-/* loaded from: classes4.dex */
 public final class CloseGuard {
     private final dalvik.system.CloseGuard mImpl = getImpl();
 

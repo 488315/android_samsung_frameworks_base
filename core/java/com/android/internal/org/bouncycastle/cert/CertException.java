@@ -1,6 +1,5 @@
 package com.android.internal.org.bouncycastle.cert;
 
-/* loaded from: classes5.dex */
 public class CertException extends Exception {
     private Throwable cause;
 

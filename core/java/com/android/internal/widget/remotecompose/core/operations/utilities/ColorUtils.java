@@ -1,6 +1,5 @@
 package com.android.internal.widget.remotecompose.core.operations.utilities;
 
-/* loaded from: classes5.dex */
 public class ColorUtils {
     public static int RC_COLOR = 62;
 

@@ -27,7 +27,6 @@ import java.security.spec.X509EncodedKeySpec;
 import java.util.HashMap;
 import java.util.Map;
 
-/* loaded from: classes5.dex */
 public final class BouncyCastleProvider extends Provider implements ConfigurableProvider {
     private static final String ASYMMETRIC_PACKAGE =
             "com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.";

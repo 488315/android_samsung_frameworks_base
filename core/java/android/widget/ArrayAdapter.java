@@ -15,7 +15,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-/* loaded from: classes4.dex */
 public class ArrayAdapter<T> extends BaseAdapter implements Filterable, ThemedSpinnerAdapter {
     private final Context mContext;
     private LayoutInflater mDropDownInflater;

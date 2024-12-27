@@ -21,7 +21,6 @@ import java.security.spec.RSAPrivateCrtKeySpec;
 import java.security.spec.RSAPrivateKeySpec;
 import java.security.spec.RSAPublicKeySpec;
 
-/* loaded from: classes5.dex */
 public class KeyFactorySpi extends BaseKeyFactorySpi {
     @Override // com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.util.BaseKeyFactorySpi, java.security.KeyFactorySpi
     protected KeySpec engineGetKeySpec(Key key, Class spec) throws InvalidKeySpecException {

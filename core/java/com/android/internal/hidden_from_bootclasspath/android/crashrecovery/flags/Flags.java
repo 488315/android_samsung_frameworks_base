@@ -1,6 +1,5 @@
 package com.android.internal.hidden_from_bootclasspath.android.crashrecovery.flags;
 
-/* loaded from: classes5.dex */
 public final class Flags {
     private static FeatureFlags FEATURE_FLAGS = new FeatureFlagsImpl();
     public static final String FLAG_ALLOW_RESCUE_PARTY_FLAG_RESETS =

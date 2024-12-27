@@ -13,7 +13,6 @@ import com.samsung.vekit.Item.Item;
 import java.util.Arrays;
 import java.util.function.Predicate;
 
-/* loaded from: classes6.dex */
 public class TransitionAnimation extends Animation<Float> {
     protected Item secondTarget;
     protected TransitionType transitionType;

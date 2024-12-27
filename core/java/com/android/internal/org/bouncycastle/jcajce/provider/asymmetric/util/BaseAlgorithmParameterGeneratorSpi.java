@@ -8,7 +8,6 @@ import java.security.AlgorithmParameters;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 
-/* loaded from: classes5.dex */
 public abstract class BaseAlgorithmParameterGeneratorSpi extends AlgorithmParameterGeneratorSpi {
     private final JcaJceHelper helper = new BCJcaJceHelper();
 

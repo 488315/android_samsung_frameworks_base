@@ -8,7 +8,6 @@ import android.graphics.Rect;
 import android.util.FloatProperty;
 import android.view.animation.LinearInterpolator;
 
-/* loaded from: classes.dex */
 class RippleBackground extends RippleComponent {
     private static final TimeInterpolator LINEAR_INTERPOLATOR = new LinearInterpolator();
     private static final BackgroundProperty OPACITY =

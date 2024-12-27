@@ -46,7 +46,6 @@ import javax.crypto.spec.OAEPParameterSpec;
 import javax.crypto.spec.PSource;
 import javax.crypto.spec.SecretKeySpec;
 
-/* loaded from: classes3.dex */
 abstract class AndroidKeyStoreCipherSpiBase extends CipherSpi implements KeyStoreCryptoOperation {
     public static final String DEFAULT_MGF1_DIGEST = "SHA-1";
     private static final String TAG = "AndroidKeyStoreCipherSpiBase";

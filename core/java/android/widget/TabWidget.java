@@ -20,7 +20,6 @@ import com.android.internal.R;
 import com.samsung.android.widget.SemTabDotLineView;
 
 @Deprecated
-/* loaded from: classes4.dex */
 public class TabWidget extends LinearLayout implements View.OnFocusChangeListener {
     private static final int FONT_WEIGHT_REGULAR = 400;
     private static final int FONT_WEIGHT_SEMIBOLD = 600;

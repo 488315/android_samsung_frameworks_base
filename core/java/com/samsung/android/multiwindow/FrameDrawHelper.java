@@ -13,7 +13,6 @@ import com.android.internal.policy.DecorView;
 import com.samsung.android.rune.CoreRune;
 import com.samsung.android.util.SemViewUtils;
 
-/* loaded from: classes6.dex */
 public class FrameDrawHelper {
     public static final boolean DEBUG = false;
     private static final int STROKE_RADIUS_DEFAULT_IN_DIP = 14;

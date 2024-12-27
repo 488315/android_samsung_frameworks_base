@@ -36,7 +36,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-/* loaded from: classes2.dex */
 public class MediaRouter {
     static final /* synthetic */ boolean $assertionsDisabled = false;
     public static final int AVAILABILITY_FLAG_IGNORE_DEFAULT_ROUTE = 1;

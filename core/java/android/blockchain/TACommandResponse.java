@@ -8,7 +8,6 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
-/* loaded from: classes.dex */
 public class TACommandResponse implements Parcelable {
     public static final Parcelable.Creator<TACommandResponse> CREATOR =
             new Parcelable.Creator<

@@ -1,6 +1,5 @@
 package android.service.notification;
 
-/* loaded from: classes3.dex */
 public final class NotificationServiceDumpProto {
     public static final long CONDITION_PROVIDERS = 1146756268039L;
     public static final long LISTENERS_DISABLING_EFFECTS = 2246267895813L;

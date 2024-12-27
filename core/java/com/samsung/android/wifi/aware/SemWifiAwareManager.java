@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.RemoteException;
 import android.util.Log;
 
-/* loaded from: classes6.dex */
 public class SemWifiAwareManager {
     public static final String EXTRA_VENDOR_NAN_COMMAND_ID = "wifi_vendor_nan_command_id";
     public static final String EXTRA_VENDOR_NAN_RESPONSE = "wifi_vendor_nan_response";

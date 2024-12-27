@@ -1,7 +1,6 @@
 package com.samsung.android.wallpaper.colortheme.monet;
 
 /* compiled from: ColorScheme.java */
-/* loaded from: classes6.dex */
 final class CoreSpec {
     private final TonalSpec a1;
     private final TonalSpec a2;

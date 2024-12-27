@@ -1,6 +1,5 @@
 package android.util;
 
-/* loaded from: classes4.dex */
 public final class PersistedLogProto {
     public static final long CRASH_LOGS = 2246267895813L;
     public static final long EVENTS_LOGS = 2246267895811L;

@@ -1,6 +1,5 @@
 package android.service.procstats;
 
-/* loaded from: classes3.dex */
 public final class PackageAssociationProcessStatsProto {
     public static final long ACTIVE_COUNT = 1120986464261L;
     public static final long ACTIVE_DURATION_MS = 1112396529670L;

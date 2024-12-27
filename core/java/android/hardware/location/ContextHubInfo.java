@@ -11,7 +11,6 @@ import android.util.proto.ProtoOutputStream;
 import java.util.Arrays;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public class ContextHubInfo implements Parcelable {
     public static final Parcelable.Creator<ContextHubInfo> CREATOR =
             new Parcelable.Creator<

@@ -7,7 +7,6 @@ import java.lang.annotation.Target;
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 
-/* loaded from: classes3.dex */
 public interface WearModeManagerInternal {
     public static final String OFFBODY_STATE_ID = "off_body";
     public static final String QUICK_DOZE_REQUEST_IDENTIFIER = "quick_doze_request";

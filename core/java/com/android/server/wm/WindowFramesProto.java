@@ -1,6 +1,5 @@
 package com.android.server.wm;
 
-/* loaded from: classes5.dex */
 public final class WindowFramesProto {
     public static final long COMPAT_FRAME = 1146756268048L;
     public static final long CONTAINING_FRAME = 1146756268033L;

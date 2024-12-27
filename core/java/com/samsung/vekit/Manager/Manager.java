@@ -12,7 +12,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-/* loaded from: classes6.dex */
 public class Manager<T> extends Element {
     protected int index;
     protected ManagerType managerType;

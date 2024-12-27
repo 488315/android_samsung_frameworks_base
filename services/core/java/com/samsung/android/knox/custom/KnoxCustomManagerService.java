@@ -184,7 +184,6 @@ import java.util.concurrent.Future;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes2.dex */
 public final class KnoxCustomManagerService extends IKnoxCustomManager.Stub implements EnterpriseServiceCallback {
     public static final String ACTION_AIR_COMMAND_STATUS_CHANGED = "com.samsung.android.knox.intent.action.AIR_COMMAND_STATUS_CHANGED";
     public static final String ACTION_CUSTOM_DEVICE_SPEAKER_ENABLED = "com.samsung.android.knox.intent.action.SET_DEVICE_SPEAKER_ENABLED";

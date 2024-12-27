@@ -8,7 +8,6 @@ import android.os.RemoteException;
 
 import com.android.internal.telephony.SemRILConstants;
 
-/* loaded from: classes3.dex */
 public interface IDataShareCallback extends IInterface {
     public static final String DESCRIPTOR = "android.service.contentcapture.IDataShareCallback";
 

@@ -12,7 +12,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-/* loaded from: classes3.dex */
 public final class VcnWifiUnderlyingNetworkTemplate extends VcnUnderlyingNetworkTemplate {
     private static final String SSIDS_KEY = "mSsids";
     private final Set<String> mSsids;

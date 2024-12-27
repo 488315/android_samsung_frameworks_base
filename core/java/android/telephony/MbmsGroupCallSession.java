@@ -22,7 +22,6 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
-/* loaded from: classes4.dex */
 public class MbmsGroupCallSession implements AutoCloseable {
     private static final String LOG_TAG = "MbmsGroupCallSession";
 

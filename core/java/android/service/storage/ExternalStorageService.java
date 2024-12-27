@@ -22,7 +22,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.UUID;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public abstract class ExternalStorageService extends Service {
     public static final String EXTRA_ERROR = "android.service.storage.extra.error";
     public static final String EXTRA_PACKAGE_NAME = "android.service.storage.extra.package_name";

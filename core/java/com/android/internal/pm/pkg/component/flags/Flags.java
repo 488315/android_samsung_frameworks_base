@@ -1,6 +1,5 @@
 package com.android.internal.pm.pkg.component.flags;
 
-/* loaded from: classes5.dex */
 public final class Flags {
     private static FeatureFlags FEATURE_FLAGS = new FeatureFlagsImpl();
     public static final String FLAG_ENABLE_PER_PROCESS_USE_EMBEDDED_DEX_ATTR =

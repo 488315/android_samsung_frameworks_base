@@ -49,7 +49,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
 
-/* loaded from: classes5.dex */
 public class AccessibilityShortcutController {
     public static final String LIVE_TRANSCRIBE_CUSTOM_TILE_NAME =
             "custom(com.google.audio.hearing.visualization.accessibility.scribe/.service.ScribeTileService)";

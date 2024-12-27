@@ -2,7 +2,6 @@ package android.graphics;
 
 import com.android.internal.util.ArrayUtils;
 
-/* loaded from: classes.dex */
 public class TemporaryBuffer {
     private static char[] sTemp = null;
 

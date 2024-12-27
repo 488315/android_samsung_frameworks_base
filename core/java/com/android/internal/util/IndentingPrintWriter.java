@@ -3,7 +3,6 @@ package com.android.internal.util;
 import java.io.Writer;
 
 @Deprecated
-/* loaded from: classes5.dex */
 public class IndentingPrintWriter extends android.util.IndentingPrintWriter {
     public IndentingPrintWriter(Writer writer, String singleIndent) {
         super(writer, singleIndent, -1);

@@ -9,7 +9,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes4.dex */
 public class TaskFragmentOrganizer extends WindowOrganizer {
     public static final String KEY_ERROR_CALLBACK_OP_TYPE = "operation_type";
     public static final String KEY_ERROR_CALLBACK_TASK_FRAGMENT_INFO = "task_fragment_info";

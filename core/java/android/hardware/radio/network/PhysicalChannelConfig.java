@@ -9,7 +9,6 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public class PhysicalChannelConfig implements Parcelable {
     public static final Parcelable.Creator<PhysicalChannelConfig> CREATOR =
             new Parcelable.Creator<PhysicalChannelConfig>() { // from class:

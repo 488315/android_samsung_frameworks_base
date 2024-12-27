@@ -5,7 +5,6 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 
 import java.util.concurrent.Executor;
 
-/* loaded from: classes2.dex */
 public abstract class CameraExtensionSession implements AutoCloseable {
 
     public abstract static class ExtensionCaptureCallback {

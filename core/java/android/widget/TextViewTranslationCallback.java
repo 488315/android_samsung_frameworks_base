@@ -17,7 +17,6 @@ import android.view.translation.ViewTranslationResponse;
 
 import java.lang.ref.WeakReference;
 
-/* loaded from: classes4.dex */
 public class TextViewTranslationCallback implements ViewTranslationCallback {
     private static final char COMPAT_PAD_CHARACTER = 8194;
     private static final boolean DEBUG = Log.isLoggable(UiTranslationManager.LOG_TAG, 3);

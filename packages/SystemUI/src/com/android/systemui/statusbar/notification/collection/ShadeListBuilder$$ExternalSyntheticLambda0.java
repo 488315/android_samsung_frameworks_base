@@ -12,7 +12,6 @@ import com.android.systemui.statusbar.notification.collection.listbuilder.plugga
 import com.android.systemui.util.Assert;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public final /* synthetic */ class ShadeListBuilder$$ExternalSyntheticLambda0 implements Pluggable.PluggableListener, SemiStableSort.StableOrder {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ ShadeListBuilder f$0;

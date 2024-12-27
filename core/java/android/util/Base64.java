@@ -5,7 +5,6 @@ import com.samsung.android.graphics.spr.document.attribute.SprAttributeBase;
 
 import java.io.UnsupportedEncodingException;
 
-/* loaded from: classes4.dex */
 public class Base64 {
     static final /* synthetic */ boolean $assertionsDisabled = false;
     public static final int CRLF = 4;

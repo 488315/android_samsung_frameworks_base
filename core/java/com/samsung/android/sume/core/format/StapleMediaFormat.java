@@ -12,7 +12,6 @@ import com.samsung.android.sume.core.types.SplitType;
 
 import java.util.List;
 
-/* loaded from: classes6.dex */
 class StapleMediaFormat implements MediaFormat {
     MutableMediaFormat impl;
 

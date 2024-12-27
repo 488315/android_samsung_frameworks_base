@@ -16,7 +16,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes3.dex */
 public abstract class Vibrator {
     public static final int SEM_SUPPORTED_VIBRATION_NONE = 0;
     public static final int SEM_SUPPORTED_VIBRATION_TYPE_A = 1;

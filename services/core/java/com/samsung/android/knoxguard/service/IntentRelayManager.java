@@ -11,7 +11,6 @@ import com.android.server.ExplicitHealthCheckController$$ExternalSyntheticOutlin
 import com.samsung.android.knoxguard.service.utils.Constants;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes2.dex */
 public final class IntentRelayManager {
     public static final boolean LOG = false;
     public static final String TAG = "KG.IntentRelayManager";

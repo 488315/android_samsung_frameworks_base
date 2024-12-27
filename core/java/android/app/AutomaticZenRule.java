@@ -14,7 +14,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public final class AutomaticZenRule implements Parcelable {
     public static final Parcelable.Creator<AutomaticZenRule> CREATOR =
             new Parcelable.Creator<

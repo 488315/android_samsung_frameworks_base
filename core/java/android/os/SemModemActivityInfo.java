@@ -2,7 +2,6 @@ package android.os;
 
 import java.util.Arrays;
 
-/* loaded from: classes3.dex */
 public class SemModemActivityInfo implements Parcelable {
     public static final Parcelable.Creator<SemModemActivityInfo> CREATOR =
             new Parcelable.Creator<

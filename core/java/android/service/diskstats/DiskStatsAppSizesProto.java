@@ -1,6 +1,5 @@
 package android.service.diskstats;
 
-/* loaded from: classes3.dex */
 public final class DiskStatsAppSizesProto {
     public static final long APP_DATA_SIZE_KB = 1112396529668L;
     public static final long APP_SIZE_KB = 1112396529666L;

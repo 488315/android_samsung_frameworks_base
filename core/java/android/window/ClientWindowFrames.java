@@ -6,7 +6,6 @@ import android.os.Parcelable;
 
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public class ClientWindowFrames implements Parcelable {
     public static final Parcelable.Creator<ClientWindowFrames> CREATOR =
             new Parcelable.Creator<

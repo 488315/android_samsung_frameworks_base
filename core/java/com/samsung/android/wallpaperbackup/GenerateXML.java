@@ -5,7 +5,6 @@ import android.util.Log;
 import java.io.File;
 import java.io.IOException;
 
-/* loaded from: classes6.dex */
 public class GenerateXML {
     public static final String BOTTOM = "bottom";
     public static final String COMPONENT = "component";

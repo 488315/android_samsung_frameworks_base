@@ -7,7 +7,6 @@ import android.provider.OneTimeUseBuilder;
 
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public final class ObservingDevicePresenceRequest implements Parcelable {
     public static final Parcelable.Creator<ObservingDevicePresenceRequest> CREATOR =
             new Parcelable.Creator<ObservingDevicePresenceRequest>() { // from class:

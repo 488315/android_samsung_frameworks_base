@@ -34,7 +34,6 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes.dex */
 public final class MediaMetricsManagerService extends SystemService {
     public static final MediaItemInfo EMPTY_MEDIA_ITEM_INFO = new MediaItemInfo.Builder().build();
     public static final Pattern PATTERN_KNOWN_EDITING_LIBRARY_NAMES =

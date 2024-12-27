@@ -9,7 +9,6 @@ import com.android.internal.util.AnnotationValidations;
 import java.util.Objects;
 import java.util.Set;
 
-/* loaded from: classes.dex */
 public class DomainSet implements Parcelable {
     public static final Parcelable.Creator<DomainSet> CREATOR =
             new Parcelable.Creator<

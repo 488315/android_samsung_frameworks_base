@@ -8,7 +8,6 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public class AudioFormatDescription implements Parcelable {
     public static final Parcelable.Creator<AudioFormatDescription> CREATOR =
             new Parcelable.Creator<AudioFormatDescription>() { // from class:

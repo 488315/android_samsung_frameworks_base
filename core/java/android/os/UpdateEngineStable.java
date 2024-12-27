@@ -1,7 +1,6 @@
 package android.os;
 
 
-/* loaded from: classes3.dex */
 public class UpdateEngineStable {
     private static final String TAG = "UpdateEngineStable";
     private static final String UPDATE_ENGINE_STABLE_SERVICE =

@@ -7,7 +7,6 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import java.io.PrintWriter;
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public final class ScrollCaptureTarget {
     private final ScrollCaptureCallback mCallback;
     private final View mContainingView;

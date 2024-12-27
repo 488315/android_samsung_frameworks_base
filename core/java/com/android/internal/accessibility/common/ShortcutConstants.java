@@ -8,7 +8,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Map;
 
-/* loaded from: classes5.dex */
 public final class ShortcutConstants {
     public static final String CHOOSER_PACKAGE_NAME = "android";
     public static final char SERVICES_SEPARATOR = ':';

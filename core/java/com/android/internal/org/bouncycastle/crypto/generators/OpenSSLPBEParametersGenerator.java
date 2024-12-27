@@ -7,7 +7,6 @@ import com.android.internal.org.bouncycastle.crypto.digests.AndroidDigestFactory
 import com.android.internal.org.bouncycastle.crypto.params.KeyParameter;
 import com.android.internal.org.bouncycastle.crypto.params.ParametersWithIV;
 
-/* loaded from: classes5.dex */
 public class OpenSSLPBEParametersGenerator extends PBEParametersGenerator {
     private Digest digest = AndroidDigestFactory.getMD5();
 

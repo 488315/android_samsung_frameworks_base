@@ -18,7 +18,6 @@ import java.util.Locale;
 import java.util.regex.Pattern;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class AidGroup implements Parcelable {
     private static final int MAX_NUM_AIDS = 256;
     private static final String TAG = "AidGroup";

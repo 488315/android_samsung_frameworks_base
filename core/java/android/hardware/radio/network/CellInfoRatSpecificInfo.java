@@ -6,7 +6,6 @@ import android.os.Parcelable;
 
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public final class CellInfoRatSpecificInfo implements Parcelable {
     public static final Parcelable.Creator<CellInfoRatSpecificInfo> CREATOR =
             new Parcelable.Creator<CellInfoRatSpecificInfo>() { // from class:

@@ -8,7 +8,6 @@ import android.security.maintenance.IKeystoreMaintenance;
 import android.system.keystore2.KeyDescriptor;
 import android.util.Log;
 
-/* loaded from: classes3.dex */
 public class AndroidKeyStoreMaintenance {
     public static final int INVALID_ARGUMENT = 20;
     public static final int KEY_NOT_FOUND = 7;

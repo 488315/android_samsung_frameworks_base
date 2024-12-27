@@ -3,7 +3,6 @@ package com.android.internal.org.bouncycastle.crypto.digests;
 import com.android.internal.org.bouncycastle.util.Memoable;
 import com.android.internal.org.bouncycastle.util.Pack;
 
-/* loaded from: classes5.dex */
 public class SHA256Digest extends GeneralDigest implements EncodableDigest {
     private static final int DIGEST_LENGTH = 32;
     static final int[] K = {

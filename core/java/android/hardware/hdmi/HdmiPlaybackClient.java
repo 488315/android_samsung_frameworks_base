@@ -5,7 +5,6 @@ import android.os.RemoteException;
 import android.util.Log;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public final class HdmiPlaybackClient extends HdmiClient {
     private static final int ADDR_TV = 0;
     private static final String TAG = "HdmiPlaybackClient";

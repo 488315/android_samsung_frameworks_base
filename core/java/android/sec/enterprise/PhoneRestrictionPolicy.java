@@ -2,7 +2,6 @@ package android.sec.enterprise;
 
 import android.util.Log;
 
-/* loaded from: classes3.dex */
 public class PhoneRestrictionPolicy {
     public static final String ACTION_ICCID_AVAILABLE_INTERNAL =
             "com.samsung.android.knox.intent.action.ICCID_AVAILABLE_INTERNAL";

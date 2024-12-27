@@ -2,7 +2,6 @@ package android.util.apk;
 
 import java.nio.ByteBuffer;
 
-/* loaded from: classes4.dex */
 public class SignatureInfo {
     public final long apkSigningBlockOffset;
     public final long centralDirOffset;

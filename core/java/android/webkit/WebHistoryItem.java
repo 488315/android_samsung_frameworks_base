@@ -3,7 +3,6 @@ package android.webkit;
 import android.annotation.SystemApi;
 import android.graphics.Bitmap;
 
-/* loaded from: classes4.dex */
 public abstract class WebHistoryItem implements Cloneable {
     /* JADX INFO: Access modifiers changed from: protected */
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */

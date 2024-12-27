@@ -4,7 +4,6 @@ import android.content.res.AssetFileDescriptor;
 
 import java.io.FileDescriptor;
 
-/* loaded from: classes6.dex */
 public class SemSingleBackgroundMusic extends SemBackgroundMusic {
     public void set(FileDescriptor fd, int startTime, int endTime) {
         SemBackgroundMusic.BGMInfo bgmSingle = new SemBackgroundMusic.BGMInfo();

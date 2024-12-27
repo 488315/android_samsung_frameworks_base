@@ -6,7 +6,6 @@ import android.util.Log;
 
 import com.samsung.android.continuity.sem.SemWrapper;
 
-/* loaded from: classes5.dex */
 public class SemContinuityManager {
     public static final int BUDS_AUTO_SWITCHING = 2;
     public static final int COPY_AND_PASTE = 8;

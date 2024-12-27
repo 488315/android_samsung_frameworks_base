@@ -16,7 +16,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-/* loaded from: classes2.dex */
 public final class AudioMetadata {
     private static final int AUDIO_METADATA_OBJ_TYPE_BASEMAP = 6;
     private static final int AUDIO_METADATA_OBJ_TYPE_DOUBLE = 4;

@@ -57,7 +57,6 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Vector;
 
-/* loaded from: classes6.dex */
 public class SemMediaPlayer implements SubtitleController.Listener {
     public static final int AUDIO_VOLUME_FADE_IN = 1;
     public static final int AUDIO_VOLUME_FADE_INOUT = 3;

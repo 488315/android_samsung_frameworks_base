@@ -1,6 +1,5 @@
 package com.samsung.android.knox.sdp.core;
 
-/* loaded from: classes6.dex */
 public class SdpEngineConstants {
 
     public interface Flags {

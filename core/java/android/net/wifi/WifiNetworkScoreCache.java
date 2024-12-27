@@ -15,7 +15,6 @@ import java.io.PrintWriter;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public class WifiNetworkScoreCache extends INetworkScoreCache.Stub {
     private static final int DEFAULT_MAX_CACHE_SIZE = 100;
     public static final int INVALID_NETWORK_SCORE = -128;

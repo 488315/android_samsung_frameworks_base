@@ -1,6 +1,5 @@
 package android.os.strictmode;
 
-/* loaded from: classes3.dex */
 public abstract class Violation extends Throwable {
     private int mHashCode;
     private boolean mHashCodeValid;

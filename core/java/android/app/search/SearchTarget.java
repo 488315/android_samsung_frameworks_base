@@ -14,7 +14,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class SearchTarget implements Parcelable {
     public static final Parcelable.Creator<SearchTarget> CREATOR =
             new Parcelable.Creator<

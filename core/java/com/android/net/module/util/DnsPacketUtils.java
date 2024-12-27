@@ -14,7 +14,6 @@ import java.nio.charset.StandardCharsets;
 import java.text.DecimalFormat;
 import java.text.FieldPosition;
 
-/* loaded from: classes5.dex */
 public final class DnsPacketUtils {
 
     public static class DnsRecordParser {

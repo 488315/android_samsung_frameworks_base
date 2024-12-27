@@ -4,7 +4,6 @@ import android.view.autofill.AutofillValue;
 
 import java.util.regex.Pattern;
 
-/* loaded from: classes3.dex */
 public final class Field {
     private Dataset.DatasetFieldFilter mFilter;
     private Presentations mPresentations;

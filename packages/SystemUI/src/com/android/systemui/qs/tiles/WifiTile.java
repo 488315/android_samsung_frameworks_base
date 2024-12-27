@@ -64,7 +64,6 @@ import com.samsung.android.wifi.SemWifiManager;
 import com.sec.ims.settings.ImsProfile;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public final class WifiTile extends SQSTileImpl {
     public static final Intent WIFI_SETTINGS = new Intent("android.settings.WIFI_SETTINGS");
     public final AccessPointController mAccessPointController;

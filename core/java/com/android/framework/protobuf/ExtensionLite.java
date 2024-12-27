@@ -1,7 +1,6 @@
 package com.android.framework.protobuf;
 
 
-/* loaded from: classes3.dex */
 public abstract class ExtensionLite<ContainingType extends MessageLite, Type> {
     public abstract Type getDefaultValue();
 

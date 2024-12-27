@@ -8,7 +8,6 @@ import com.android.internal.app.ResolverActivity;
 
 import java.util.ArrayList;
 
-/* loaded from: classes5.dex */
 public class MultiDisplayResolveInfo extends DisplayResolveInfo {
     final DisplayResolveInfo mBaseInfo;
     private int mSelected;

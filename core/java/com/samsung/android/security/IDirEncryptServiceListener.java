@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes6.dex */
 public interface IDirEncryptServiceListener extends IInterface {
     void onEncryptionStatusChanged(String str, int i, String str2, int i2, int i3)
             throws RemoteException;

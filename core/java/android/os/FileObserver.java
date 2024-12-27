@@ -11,7 +11,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public abstract class FileObserver {
     public static final int ACCESS = 1;
     public static final int ALL_EVENTS = 4095;

@@ -10,7 +10,6 @@ import com.android.internal.util.CollectionUtils;
 import java.util.List;
 import java.util.Set;
 
-/* loaded from: classes.dex */
 public class ApkLite {
     private final ArchivedPackageParcel mArchivedPackage;
     private final String mConfigForSplit;

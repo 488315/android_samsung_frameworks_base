@@ -1,6 +1,5 @@
 package com.android.server.wm;
 
-/* loaded from: classes5.dex */
 public final class ActivityRecordProto {
     public static final long ALL_DRAWN = 1133871366160L;
     public static final long APP_STOPPED = 1133871366152L;

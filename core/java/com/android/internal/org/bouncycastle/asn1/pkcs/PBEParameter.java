@@ -11,7 +11,6 @@ import com.android.internal.org.bouncycastle.asn1.DERSequence;
 
 import java.math.BigInteger;
 
-/* loaded from: classes5.dex */
 public class PBEParameter extends ASN1Object {
     ASN1Integer iterations;
     ASN1OctetString salt;

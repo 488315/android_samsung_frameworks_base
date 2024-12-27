@@ -27,7 +27,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.function.BiConsumer;
 
-/* loaded from: classes5.dex */
 public class PowerProfile {
     private static final String ATTR_NAME = "name";
     private static final String CPU_CLUSTER_POWER_COUNT = "cpu.cluster_power.cluster";

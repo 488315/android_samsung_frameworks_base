@@ -1,6 +1,5 @@
 package com.android.server.wm.shell;
 
-/* loaded from: classes5.dex */
 public final class Transition {
     public static final long ABORT_TIME_NS = 1112396529674L;
     public static final long CREATE_TIME_NS = 1112396529668L;

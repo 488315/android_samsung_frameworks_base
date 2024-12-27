@@ -16,7 +16,6 @@ import com.android.internal.R;
 import java.util.ArrayList;
 import java.util.Set;
 
-/* loaded from: classes5.dex */
 public class AssistUtils {
     public static final int INVOCATION_TYPE_ASSIST_BUTTON = 7;
     public static final int INVOCATION_TYPE_GESTURE = 1;

@@ -9,7 +9,6 @@ import android.os.Parcel;
 import android.os.PermissionEnforcer;
 import android.os.RemoteException;
 
-/* loaded from: classes6.dex */
 public interface IContainerService extends IInterface {
     public static final String DESCRIPTOR =
             "com.samsung.android.core.pm.containerservice.IContainerService";

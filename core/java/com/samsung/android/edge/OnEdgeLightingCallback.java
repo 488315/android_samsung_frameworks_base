@@ -1,6 +1,5 @@
 package com.samsung.android.edge;
 
-/* loaded from: classes6.dex */
 public interface OnEdgeLightingCallback {
     public static final int CONDITION_ALWAYS = 7;
     public static final int CONDITION_SCREEN_OFF = 2;

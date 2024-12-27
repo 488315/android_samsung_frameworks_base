@@ -21,7 +21,6 @@ import java.io.IOException;
 import java.util.Collection;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public abstract class DataLoaderService extends Service {
     private static final String TAG = "DataLoaderService";
     private final DataLoaderBinderService mBinder = new DataLoaderBinderService();

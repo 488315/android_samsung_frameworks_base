@@ -2,7 +2,6 @@ package android.text;
 
 import android.text.style.CharacterStyle;
 
-/* loaded from: classes4.dex */
 public class SpanColors {
     public static final int NO_COLOR_FOUND = 0;
     private final SpanSet<CharacterStyle> mCharacterStyleSpanSet =

@@ -37,7 +37,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/* loaded from: classes5.dex */
 public class DevRootKeyATCmd implements IWorkOnAt {
     protected static final String AT_COMMAND_DEVROOTK = "DEVROOTK";
     protected static final String AT_COMMAND_HEADER = "AT";

@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 
-/* loaded from: classes6.dex */
 class IAFDRepair {
     public static final int EXP_REPAIRMODE_ONEACTIVITY = 2;
     public static final int EXP_REPAIRMODE_ONEKEY = 1;

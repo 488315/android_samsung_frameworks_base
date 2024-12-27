@@ -6,7 +6,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public class DemuxCapabilities {
     private final int mAudioFilterCount;
     private final int mDemuxCount;

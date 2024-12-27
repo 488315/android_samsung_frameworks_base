@@ -6,7 +6,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public final class UriPathPair implements Parcelable {
     public static final Parcelable.Creator<UriPathPair> CREATOR =
             new Parcelable.Creator<

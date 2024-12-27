@@ -7,7 +7,6 @@ import android.text.TextUtils;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes4.dex */
 public final class ImsException extends Exception {
     public static final int CODE_ERROR_INVALID_SUBSCRIPTION = 3;
     public static final int CODE_ERROR_SERVICE_UNAVAILABLE = 1;

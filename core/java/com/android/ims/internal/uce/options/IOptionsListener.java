@@ -8,7 +8,6 @@ import android.os.RemoteException;
 
 import com.android.ims.internal.uce.common.StatusCode;
 
-/* loaded from: classes5.dex */
 public interface IOptionsListener extends IInterface {
     void cmdStatus(OptionsCmdStatus optionsCmdStatus) throws RemoteException;
 

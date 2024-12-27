@@ -2,7 +2,6 @@ package android;
 
 import android.annotation.SystemApi;
 
-/* loaded from: classes.dex */
 public final class Manifest {
 
     public static final class permission {

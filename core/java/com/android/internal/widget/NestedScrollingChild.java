@@ -1,6 +1,5 @@
 package com.android.internal.widget;
 
-/* loaded from: classes5.dex */
 public interface NestedScrollingChild {
     boolean dispatchNestedFling(float f, float f2, boolean z);
 

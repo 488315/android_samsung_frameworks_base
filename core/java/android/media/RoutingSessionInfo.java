@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.UnaryOperator;
 
-/* loaded from: classes2.dex */
 public final class RoutingSessionInfo implements Parcelable {
     public static final Parcelable.Creator<RoutingSessionInfo> CREATOR =
             new Parcelable.Creator<

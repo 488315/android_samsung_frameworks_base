@@ -1,6 +1,5 @@
 package android.sax;
 
-/* loaded from: classes3.dex */
 class Children {
     Child[] children = new Child[16];
 

@@ -27,7 +27,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Vector;
 
-/* loaded from: classes3.dex */
 public class SslCertificate {
     private static String ISO_8601_DATE_FORMAT = "yyyy-MM-dd HH:mm:ssZ";
     private static final String ISSUED_BY = "issued-by";

@@ -18,7 +18,6 @@ import android.widget.ImageView;
 
 import com.android.internal.R;
 
-/* loaded from: classes2.dex */
 public class KeyButtonView extends ImageView implements ButtonInterface {
     public static final float QUICKSTEP_TOUCH_SLOP_RATIO = 3.0f;
     private static final String TAG = KeyButtonView.class.getSimpleName();

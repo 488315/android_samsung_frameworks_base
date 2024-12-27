@@ -8,7 +8,6 @@ import android.util.Slog;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes.dex */
 public class PinnerServiceClient {
     private static String TAG = "PinnerServiceClient";
 

@@ -5,7 +5,6 @@ import android.content.pm.PackageManager;
 
 import java.io.File;
 
-/* loaded from: classes5.dex */
 public class CocktailBarFeatures {
     public static final String CATEGORY_NORMAL = "normal";
     public static final boolean COCKTAIL_ENABLED = true;

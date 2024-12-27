@@ -8,7 +8,6 @@ import com.android.internal.util.Preconditions;
 import java.util.Arrays;
 import java.util.List;
 
-/* loaded from: classes.dex */
 public final class UnsafeStateException extends IllegalStateException implements Parcelable {
     public static final Parcelable.Creator<UnsafeStateException> CREATOR =
             new Parcelable.Creator<UnsafeStateException>() { // from class:

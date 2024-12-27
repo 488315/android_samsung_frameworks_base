@@ -13,7 +13,6 @@ import com.android.server.LocalServices;
 import com.android.server.pm.UserManagerInternal;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes.dex */
 public abstract class SecureSettingsWrapper {
     public static final ArraySet CLONE_TO_MANAGED_PROFILE;
     public static final AnonymousClass1 NOOP;

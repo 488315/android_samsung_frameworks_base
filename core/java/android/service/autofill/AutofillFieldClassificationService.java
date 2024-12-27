@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.Map;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public abstract class AutofillFieldClassificationService extends Service {
     public static final String EXTRA_SCORES = "scores";
     public static final String REQUIRED_ALGORITHM_CREDIT_CARD = "CREDIT_CARD";

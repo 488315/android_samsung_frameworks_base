@@ -6,7 +6,6 @@ import android.os.Parcelable;
 
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public class TdscdmaSignalStrength implements Parcelable {
     public static final Parcelable.Creator<TdscdmaSignalStrength> CREATOR =
             new Parcelable.Creator<TdscdmaSignalStrength>() { // from class:

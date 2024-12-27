@@ -3,7 +3,6 @@ package com.android.framework.protobuf;
 import java.io.IOException;
 
 @CheckReturnValue
-/* loaded from: classes3.dex */
 interface Schema<T> {
     boolean equals(T t, T t2);
 

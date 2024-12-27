@@ -12,7 +12,6 @@ import com.android.internal.org.bouncycastle.asn1.DERTaggedObject;
 import com.android.internal.org.bouncycastle.asn1.oiw.OIWObjectIdentifiers;
 import com.android.internal.org.bouncycastle.asn1.x509.AlgorithmIdentifier;
 
-/* loaded from: classes5.dex */
 public class RSAESOAEPparams extends ASN1Object {
     public static final AlgorithmIdentifier DEFAULT_HASH_ALGORITHM =
             new AlgorithmIdentifier(OIWObjectIdentifiers.idSHA1, DERNull.INSTANCE);

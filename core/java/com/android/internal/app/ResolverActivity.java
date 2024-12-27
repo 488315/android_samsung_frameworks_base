@@ -96,7 +96,6 @@ import java.util.Set;
 import java.util.concurrent.Executor;
 import java.util.function.Supplier;
 
-/* loaded from: classes5.dex */
 public class ResolverActivity extends Activity
         implements ResolverListAdapter.ResolverListCommunicator {
     private static final boolean DEBUG = false;

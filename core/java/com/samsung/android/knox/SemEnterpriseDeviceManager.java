@@ -6,7 +6,6 @@ import android.os.RemoteException;
 import android.sec.enterprise.EnterpriseDeviceManager;
 import android.sec.enterprise.IEDMProxy;
 
-/* loaded from: classes6.dex */
 public class SemEnterpriseDeviceManager {
     private static String TAG = "SemEnterpriseDeviceManager";
     private static SemEnterpriseDeviceManager mSemEnterpriseDeviceManager = null;

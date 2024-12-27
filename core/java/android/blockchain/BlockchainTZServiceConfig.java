@@ -8,7 +8,6 @@ import android.os.Parcelable;
 import java.util.HashMap;
 import java.util.Map;
 
-/* loaded from: classes.dex */
 public class BlockchainTZServiceConfig implements Parcelable {
     private static final String QSEE_UNKNOWN_PROCESS = "unknown";
     private static final String QSEE_UNKNOWN_ROOT = "unknown";

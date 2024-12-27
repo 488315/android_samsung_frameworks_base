@@ -12,7 +12,6 @@ import java.nio.charset.Charset;
 import java.util.Collections;
 import java.util.List;
 
-/* loaded from: classes3.dex */
 final class NioByteString extends ByteString.LeafByteString {
     private final ByteBuffer buffer;
 

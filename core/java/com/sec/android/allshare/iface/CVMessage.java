@@ -5,7 +5,6 @@ import android.os.Messenger;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes6.dex */
 public class CVMessage implements Parcelable {
     public static final Parcelable.Creator<CVMessage> CREATOR =
             new Parcelable.Creator<

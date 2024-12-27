@@ -37,7 +37,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-/* loaded from: classes6.dex */
 public class RemoteServiceProxy implements ServiceProxy {
     private static final String TAG = Def.tagOf((Class<?>) RemoteServiceProxy.class);
     private ServiceConnection connection;

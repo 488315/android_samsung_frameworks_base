@@ -18,7 +18,6 @@ import java.io.FileDescriptor;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-/* loaded from: classes5.dex */
 public class WrapperInit {
     private static final String TAG = "AndroidRuntime";
 

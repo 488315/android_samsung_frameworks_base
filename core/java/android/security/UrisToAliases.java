@@ -14,7 +14,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public final class UrisToAliases implements Parcelable {
     public static final Parcelable.Creator<UrisToAliases> CREATOR =
             new Parcelable.Creator<

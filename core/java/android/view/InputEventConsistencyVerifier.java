@@ -4,7 +4,6 @@ import android.media.MediaMetrics;
 import android.os.Build;
 import android.util.Log;
 
-/* loaded from: classes4.dex */
 public final class InputEventConsistencyVerifier {
     private static final String EVENT_TYPE_GENERIC_MOTION = "GenericMotionEvent";
     private static final String EVENT_TYPE_KEY = "KeyEvent";

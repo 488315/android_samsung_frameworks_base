@@ -2,7 +2,6 @@ package android.service.autofill;
 
 import android.widget.RemoteViews;
 
-/* loaded from: classes3.dex */
 public final class Presentations {
     private RemoteViews mDialogPresentation;
     private InlinePresentation mInlinePresentation;

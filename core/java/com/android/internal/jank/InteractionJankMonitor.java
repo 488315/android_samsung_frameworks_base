@@ -25,7 +25,6 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
 
-/* loaded from: classes5.dex */
 public class InteractionJankMonitor {
 
     @Deprecated public static final int CUJ_BIOMETRIC_PROMPT_TRANSITION = 56;

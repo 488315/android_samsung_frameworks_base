@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Handler;
 
 @Deprecated
-/* loaded from: classes4.dex */
 abstract class WebSyncManager implements Runnable {
     protected static final String LOGTAG = "websync";
     protected WebViewDatabase mDataBase;

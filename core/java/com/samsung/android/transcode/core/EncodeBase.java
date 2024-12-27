@@ -38,7 +38,6 @@ import java.util.Vector;
 import java.util.concurrent.ExecutionException;
 import java.util.function.Consumer;
 
-/* loaded from: classes6.dex */
 public abstract class EncodeBase extends Encode {
     protected static final int ENCODER_LOOP_COUNT = 3;
     protected static final int HAL_PIXEL_FORMAT_EXYNOS_YCbCr_420_SP_M = 261;

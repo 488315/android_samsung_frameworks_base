@@ -3,7 +3,6 @@ package android.animation;
 import android.view.RenderNodeAnimator;
 import android.view.View;
 
-/* loaded from: classes.dex */
 public class RevealAnimator extends RenderNodeAnimator {
     private View mClipView;
 

@@ -9,7 +9,6 @@ import android.view.InputEvent;
 
 import java.util.ArrayList;
 
-/* loaded from: classes5.dex */
 public class SemRemoteAppDataExtractionManager {
     private static final String TAG = "SemRemoteAppDataExtractionManager";
     private SpenGestureManager mManager;

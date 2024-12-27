@@ -5,7 +5,6 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-/* loaded from: classes5.dex */
 abstract class TargetAdapter extends BaseAdapter {
 
     static class ViewHolder {

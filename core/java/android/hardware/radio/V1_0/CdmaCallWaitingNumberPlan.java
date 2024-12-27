@@ -2,7 +2,6 @@ package android.hardware.radio.V1_0;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class CdmaCallWaitingNumberPlan {
     public static final int DATA = 3;
     public static final int ISDN = 1;

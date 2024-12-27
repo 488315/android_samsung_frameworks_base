@@ -4,7 +4,6 @@ import android.media.tv.interactive.TvInteractiveAppView;
 
 import java.security.cert.X509Certificate;
 
-/* loaded from: classes3.dex */
 public final class TrustAnchor {
     public final X509Certificate certificate;
     public final boolean overridesPins;

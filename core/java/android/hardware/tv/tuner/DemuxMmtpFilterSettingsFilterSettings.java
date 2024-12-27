@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public final class DemuxMmtpFilterSettingsFilterSettings implements Parcelable {
     public static final Parcelable.Creator<DemuxMmtpFilterSettingsFilterSettings> CREATOR =
             new Parcelable.Creator<DemuxMmtpFilterSettingsFilterSettings>() { // from class:

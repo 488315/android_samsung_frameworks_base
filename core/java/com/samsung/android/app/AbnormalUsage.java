@@ -8,7 +8,6 @@ import android.view.View;
 
 import dalvik.system.VMDebug;
 
-/* loaded from: classes5.dex */
 public class AbnormalUsage {
     private static final long RUNTIME_USED_LIMIT = 450000;
     private static final long RUNTIME_USED_WARM_LIMIT = 380000;

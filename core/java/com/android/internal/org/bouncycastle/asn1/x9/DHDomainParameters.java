@@ -12,7 +12,6 @@ import com.android.internal.org.bouncycastle.asn1.DERSequence;
 import java.math.BigInteger;
 import java.util.Enumeration;
 
-/* loaded from: classes5.dex */
 public class DHDomainParameters extends ASN1Object {
     private ASN1Integer g;
     private ASN1Integer j;

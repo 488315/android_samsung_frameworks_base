@@ -2,7 +2,6 @@ package android.os;
 
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public interface ICustomFrequencyManager extends IInterface {
     public static final String DESCRIPTOR = "android.os.ICustomFrequencyManager";
     public static final int GROUP_ANIMATION = 4;

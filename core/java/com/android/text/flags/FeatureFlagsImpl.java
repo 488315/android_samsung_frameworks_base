@@ -1,6 +1,5 @@
 package com.android.text.flags;
 
-/* loaded from: classes5.dex */
 public final class FeatureFlagsImpl implements FeatureFlags {
     @Override // com.android.text.flags.FeatureFlags
     public boolean completeFontLoadInSystemServicesReady() {

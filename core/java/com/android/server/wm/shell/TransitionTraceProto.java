@@ -1,6 +1,5 @@
 package com.android.server.wm.shell;
 
-/* loaded from: classes5.dex */
 public final class TransitionTraceProto {
     public static final int INVALID = 0;
     public static final long MAGIC_NUMBER = 1125281431553L;

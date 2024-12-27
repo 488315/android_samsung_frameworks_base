@@ -10,7 +10,6 @@ import android.view.WindowManager;
 
 import com.samsung.android.view.SemWindowManager;
 
-/* loaded from: classes6.dex */
 public class ScreenCaptureUtil {
     private static final String TAG = "ScreenCaptureUtil";
     private Bitmap mCapture;

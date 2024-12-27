@@ -1,6 +1,5 @@
 package android.os.vibrator;
 
-/* loaded from: classes3.dex */
 public final class FeatureFlagsImpl implements FeatureFlags {
     @Override // android.os.vibrator.FeatureFlags
     public boolean adaptiveHapticsEnabled() {

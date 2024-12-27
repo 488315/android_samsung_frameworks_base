@@ -14,7 +14,6 @@ import com.android.internal.telecom.IVideoProvider;
 
 import java.util.NoSuchElementException;
 
-/* loaded from: classes3.dex */
 public class VideoCallImpl extends InCallService.VideoCall {
     private final VideoCallListenerBinder mBinder;
     private InCallService.VideoCall.Callback mCallback;

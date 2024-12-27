@@ -34,7 +34,6 @@ import java.util.function.IntConsumer;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-/* loaded from: classes6.dex */
 public class MediaParserFilter implements MediaFilter, MediaOutputStreamFilter {
     private static final String TAG = Def.tagOf((Class<?>) MediaParserFilter.class);
     private int bitrate;

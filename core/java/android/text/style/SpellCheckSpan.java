@@ -3,7 +3,6 @@ package android.text.style;
 import android.os.Parcel;
 import android.text.ParcelableSpan;
 
-/* loaded from: classes4.dex */
 public class SpellCheckSpan implements ParcelableSpan {
     private boolean mSpellCheckInProgress;
 

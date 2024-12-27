@@ -6,7 +6,6 @@ import android.hardware.camera2.utils.TypeReference;
 
 import java.nio.ByteBuffer;
 
-/* loaded from: classes2.dex */
 public class MarshalQueryableBoolean implements MarshalQueryable<Boolean> {
 
     private class MarshalerBoolean extends Marshaler<Boolean> {

@@ -12,7 +12,6 @@ import javax.inject.Provider;
 import kotlin.jvm.internal.Intrinsics;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes3.dex */
 public final class UnfoldSharedInternalModule {
     public static Optional createOptionalUnfoldTransitionProgressProvider(UnfoldTransitionConfig unfoldTransitionConfig, DaggerReferenceGlobalRootComponent.ReferenceGlobalRootComponentImpl.SwitchingProvider.AnonymousClass1 anonymousClass1, ATraceLoggerTransitionProgressListener aTraceLoggerTransitionProgressListener, DaggerReferenceGlobalRootComponent.ReferenceGlobalRootComponentImpl.SwitchingProvider.AnonymousClass3 anonymousClass3, Provider provider, FoldStateProvider foldStateProvider, Handler handler) {
         ResourceUnfoldTransitionConfig resourceUnfoldTransitionConfig = (ResourceUnfoldTransitionConfig) unfoldTransitionConfig;

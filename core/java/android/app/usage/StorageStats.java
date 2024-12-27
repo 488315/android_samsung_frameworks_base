@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes.dex */
 public final class StorageStats implements Parcelable {
     public static final int APP_DATA_TYPE_FILE_TYPE_APK = 3;
     public static final int APP_DATA_TYPE_FILE_TYPE_CURRENT_PROFILE = 2;

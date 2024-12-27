@@ -14,7 +14,6 @@ import android.window.OnBackAnimationCallback;
 
 import java.io.PrintWriter;
 
-/* loaded from: classes4.dex */
 public class ImeBackAnimationController implements OnBackAnimationCallback {
     private static final float PEEK_FRACTION = 0.1f;
     private static final int POST_COMMIT_CANCEL_DURATION_MS = 50;

@@ -22,7 +22,6 @@ import java.security.SignatureSpi;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes3.dex */
 abstract class AndroidKeyStoreSignatureSpiBase extends SignatureSpi
         implements KeyStoreCryptoOperation {
     private static final String TAG = "AndroidKeyStoreSignatureSpiBase";

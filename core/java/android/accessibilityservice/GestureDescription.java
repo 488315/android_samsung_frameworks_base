@@ -11,7 +11,6 @@ import com.android.internal.util.Preconditions;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes.dex */
 public final class GestureDescription {
     private static final long MAX_GESTURE_DURATION_MS = 60000;
     private static final int MAX_STROKE_COUNT = 20;

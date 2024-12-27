@@ -11,7 +11,6 @@ import android.media.audiopolicy.AudioMixingRule;
 import android.media.audiopolicy.AudioPolicy;
 import android.util.Log;
 
-/* loaded from: classes6.dex */
 public class SemVirtualAudioDevice {
     private static final String TAG = "SemVirtualAudioDeviceManager";
     private AudioManager mAudioManager;

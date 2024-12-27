@@ -2,7 +2,6 @@ package com.samsung.android.transcode.unit.decoder;
 
 import java.util.ArrayList;
 
-/* loaded from: classes6.dex */
 public class DecoderFrameManager implements DecoderReleaseListener {
     private final ArrayList<DecodedFrame> decodedFrameQueue = new ArrayList<>();
 

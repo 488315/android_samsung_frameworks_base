@@ -17,7 +17,6 @@ import com.samsung.android.globalactions.presentation.strategies.WindowManagerFu
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public interface FeatureFactory {
     List<ActionInteractionStrategy> createActionInteractionStrategies(String str);
 

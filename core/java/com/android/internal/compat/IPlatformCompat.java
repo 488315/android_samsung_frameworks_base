@@ -10,7 +10,6 @@ import android.os.Parcel;
 import android.os.PermissionEnforcer;
 import android.os.RemoteException;
 
-/* loaded from: classes5.dex */
 public interface IPlatformCompat extends IInterface {
     public static final String DESCRIPTOR = "com.android.internal.compat.IPlatformCompat";
 

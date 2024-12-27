@@ -1,6 +1,5 @@
 package android.view;
 
-/* loaded from: classes4.dex */
 public final class DisplayProto {
     public static final int COLOR_MODE_ADOBE_RGB = 8;
     public static final int COLOR_MODE_BT601_525 = 3;

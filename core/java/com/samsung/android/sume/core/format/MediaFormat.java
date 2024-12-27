@@ -22,7 +22,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-/* loaded from: classes6.dex */
 public interface MediaFormat extends Serializable, Cloneable {
     public static final int EXIF = 1;
     public static final int GAINMAP = 3;

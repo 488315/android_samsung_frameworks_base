@@ -1,7 +1,6 @@
 package android.os;
 
 
-/* loaded from: classes3.dex */
 public interface IThermalService extends IInterface {
     CoolingDevice[] getCurrentCoolingDevices() throws RemoteException;
 

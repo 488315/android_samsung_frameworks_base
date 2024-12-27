@@ -4,7 +4,6 @@ import android.annotation.SystemApi;
 import android.media.tv.tuner.TunerUtils;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public abstract class SectionSettings extends Settings {
     final int mBitWidthOfLengthField;
     final boolean mCrcEnabled;

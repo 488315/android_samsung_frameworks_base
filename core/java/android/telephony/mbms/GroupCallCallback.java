@@ -3,7 +3,6 @@ package android.telephony.mbms;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes4.dex */
 public interface GroupCallCallback {
     public static final int SIGNAL_STRENGTH_UNAVAILABLE = -1;
 

@@ -10,7 +10,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public final class AvailableNetworkInfo implements Parcelable {
     public static final Parcelable.Creator<AvailableNetworkInfo> CREATOR =
             new Parcelable.Creator<

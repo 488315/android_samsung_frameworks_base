@@ -1,7 +1,6 @@
 package android.os.health;
 
 
-/* loaded from: classes3.dex */
 public final class PackageHealthStats {
     public static final HealthKeys.Constants CONSTANTS =
             new HealthKeys.Constants(PackageHealthStats.class);

@@ -5,7 +5,6 @@ import android.graphics.drawable.Drawable;
 
 import com.android.internal.accessibility.util.AccessibilityUtils;
 
-/* loaded from: classes5.dex */
 class InvisibleToggleAllowListingFeatureTarget extends AccessibilityTarget {
     InvisibleToggleAllowListingFeatureTarget(
             Context context,

@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-/* loaded from: classes3.dex */
 public final class RemoteConnection {
     private Uri mAddress;
     private int mAddressPresentation;

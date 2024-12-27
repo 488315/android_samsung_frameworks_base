@@ -3,7 +3,6 @@ package android.content.pm;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes.dex */
 public final class LauncherUserInfo implements Parcelable {
     public static final Parcelable.Creator<LauncherUserInfo> CREATOR =
             new Parcelable.Creator<

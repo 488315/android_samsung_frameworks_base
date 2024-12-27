@@ -20,7 +20,6 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.TimeZone;
 
-/* loaded from: classes4.dex */
 public class DateFormat {
 
     @Deprecated public static final char AM_PM = 'a';

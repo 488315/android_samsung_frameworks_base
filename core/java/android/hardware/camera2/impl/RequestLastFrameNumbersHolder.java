@@ -5,7 +5,6 @@ import android.hardware.camera2.utils.SubmitInfo;
 
 import java.util.List;
 
-/* loaded from: classes2.dex */
 public class RequestLastFrameNumbersHolder {
     private boolean mInflightCompleted;
     private final long mLastRegularFrameNumber;

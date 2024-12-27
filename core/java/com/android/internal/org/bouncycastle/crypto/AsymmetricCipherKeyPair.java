@@ -2,7 +2,6 @@ package com.android.internal.org.bouncycastle.crypto;
 
 import com.android.internal.org.bouncycastle.crypto.params.AsymmetricKeyParameter;
 
-/* loaded from: classes5.dex */
 public class AsymmetricCipherKeyPair {
     private AsymmetricKeyParameter privateParam;
     private AsymmetricKeyParameter publicParam;

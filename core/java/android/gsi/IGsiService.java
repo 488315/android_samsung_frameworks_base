@@ -9,7 +9,6 @@ import android.os.RemoteException;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
 public interface IGsiService extends IInterface {
     public static final String DESCRIPTOR = "android.gsi.IGsiService";
     public static final int INSTALL_ERROR_FILE_SYSTEM_CLUTTERED = 3;

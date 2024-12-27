@@ -13,7 +13,6 @@ import android.util.Log;
 import android.util.Size;
 import android.view.Surface;
 
-/* loaded from: classes2.dex */
 public class CameraExtensionForwardProcessor {
     private static final int FORWARD_QUEUE_SIZE = 3;
     public static final String TAG = "CameraExtensionForward";

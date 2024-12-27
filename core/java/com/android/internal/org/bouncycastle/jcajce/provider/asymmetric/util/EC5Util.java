@@ -30,7 +30,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-/* loaded from: classes5.dex */
 public class EC5Util {
     private static Map customCurves = new HashMap();
 

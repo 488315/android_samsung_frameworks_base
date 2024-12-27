@@ -2,7 +2,6 @@ package com.samsung.android.sume.core.channel;
 
 import android.view.Surface;
 
-/* loaded from: classes6.dex */
 public interface SurfaceChannel extends BufferChannel {
     void configure(int i, int i2, int i3);
 

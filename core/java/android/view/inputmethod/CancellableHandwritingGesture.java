@@ -4,7 +4,6 @@ import android.os.CancellationSignal;
 import android.os.CancellationSignalBeamer;
 import android.os.IBinder;
 
-/* loaded from: classes4.dex */
 public abstract class CancellableHandwritingGesture extends HandwritingGesture {
     CancellationSignal mCancellationSignal;
     IBinder mCancellationSignalToken;

@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public final class AudioVolumeGroup implements Parcelable {
     public static final int DEFAULT_VOLUME_GROUP = -1;
     private static final String TAG = "AudioVolumeGroup";

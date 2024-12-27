@@ -1,6 +1,5 @@
 package android.os;
 
-/* loaded from: classes3.dex */
 public interface IInputConstants extends IInterface {
     public static final int DEFAULT_POINTER_ACCELERATION = 3;
     public static final String DESCRIPTOR = "android.os.IInputConstants";

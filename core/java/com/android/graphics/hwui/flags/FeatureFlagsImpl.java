@@ -1,6 +1,5 @@
 package com.android.graphics.hwui.flags;
 
-/* loaded from: classes3.dex */
 public final class FeatureFlagsImpl implements FeatureFlags {
     @Override // com.android.graphics.hwui.flags.FeatureFlags
     public boolean animateHdrTransitions() {

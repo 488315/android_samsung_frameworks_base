@@ -2,7 +2,6 @@ package android.os;
 
 import android.util.EventLog;
 
-/* loaded from: classes3.dex */
 public class EventLogTags {
     public static final int SERVICE_MANAGER_SLOW = 230001;
     public static final int SERVICE_MANAGER_STATS = 230000;

@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 
-/* loaded from: classes3.dex */
 public class DeviceChecker {
     public static final String AVPLAYER_AUDIO = "AVPLAYER_AUDIO";
     public static final String AVPLAYER_VIDEO = "AVPLAYER_VIDEO";

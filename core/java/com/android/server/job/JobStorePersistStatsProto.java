@@ -1,6 +1,5 @@
 package com.android.server.job;
 
-/* loaded from: classes5.dex */
 public final class JobStorePersistStatsProto {
     public static final long FIRST_LOAD = 1146756268033L;
     public static final long LAST_SAVE = 1146756268034L;

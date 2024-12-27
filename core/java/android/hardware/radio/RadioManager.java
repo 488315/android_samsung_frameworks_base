@@ -29,7 +29,6 @@ import java.util.concurrent.Executor;
 import java.util.stream.Collectors;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public class RadioManager {
     public static final int BAND_AM = 0;
     public static final int BAND_AM_HD = 3;

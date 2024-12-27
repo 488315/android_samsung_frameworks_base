@@ -5,7 +5,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class SnoozeCriterion implements Parcelable {
     public static final Parcelable.Creator<SnoozeCriterion> CREATOR =
             new Parcelable.Creator<

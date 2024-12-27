@@ -5,7 +5,6 @@ import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public class GnssMeasurement implements Parcelable {
     public static final int ADR_STATE_CYCLE_SLIP = 4;
     public static final int ADR_STATE_HALF_CYCLE_RESOLVED = 8;

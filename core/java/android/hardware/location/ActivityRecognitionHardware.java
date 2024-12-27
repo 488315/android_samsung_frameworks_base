@@ -8,7 +8,6 @@ import android.util.Log;
 
 import java.lang.reflect.Array;
 
-/* loaded from: classes2.dex */
 public class ActivityRecognitionHardware extends IActivityRecognitionHardware.Stub {
     private static final String ENFORCE_HW_PERMISSION_MESSAGE =
             "Permission 'android.permission.LOCATION_HARDWARE' not granted to access"

@@ -8,7 +8,6 @@ import java.util.Arrays;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public final class BrightnessChangeEvent implements Parcelable {
     public static final Parcelable.Creator<BrightnessChangeEvent> CREATOR =
             new Parcelable.Creator<BrightnessChangeEvent>() { // from class:

@@ -8,7 +8,6 @@ import android.util.Slog;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes6.dex */
 public final class SemDisplayAdaptiveSyncManager {
     public static final int RESULT_ERROR = 1;
     public static final int RESULT_NO_SUPPORT = 2;

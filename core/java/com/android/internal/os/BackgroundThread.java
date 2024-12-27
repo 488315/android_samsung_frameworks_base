@@ -7,7 +7,6 @@ import android.os.Looper;
 
 import java.util.concurrent.Executor;
 
-/* loaded from: classes5.dex */
 public final class BackgroundThread extends HandlerThread {
     private static final long SLOW_DELIVERY_THRESHOLD_MS = 30000;
     private static final long SLOW_DISPATCH_THRESHOLD_MS = 10000;

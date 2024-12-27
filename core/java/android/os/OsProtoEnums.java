@@ -1,6 +1,5 @@
 package android.os;
 
-/* loaded from: classes3.dex */
 public final class OsProtoEnums {
     public static final int BATTERY = 1;
     public static final int BATTERY_HEALTH_COLD = 7;

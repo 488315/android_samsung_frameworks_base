@@ -10,7 +10,6 @@ import java.lang.annotation.Annotation;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes2.dex */
 public final class MediaProjectionConfig implements Parcelable {
     public static final int CAPTURE_REGION_FIXED_DISPLAY = 1;
     public static final int CAPTURE_REGION_USER_CHOICE = 0;

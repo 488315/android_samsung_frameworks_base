@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class FontFamilyUpdateRequest {
     private final List<FontFamily> mFontFamilies;
     private final List<FontFileUpdateRequest> mFontFiles;

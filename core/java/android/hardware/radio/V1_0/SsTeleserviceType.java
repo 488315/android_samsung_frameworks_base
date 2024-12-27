@@ -2,7 +2,6 @@ package android.hardware.radio.V1_0;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class SsTeleserviceType {
     public static final int ALL_DATA_TELESERVICES = 3;
     public static final int ALL_TELESERVICES_EXCEPT_SMS = 5;

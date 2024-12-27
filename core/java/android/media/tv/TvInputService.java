@@ -43,7 +43,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public abstract class TvInputService extends Service {
     private static final boolean DEBUG = false;
     private static final int DETACH_OVERLAY_VIEW_TIMEOUT_MS = 5000;

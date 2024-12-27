@@ -7,7 +7,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes2.dex */
 public interface IFusedGeofenceHardware extends IInterface {
     void addGeofences(GeofenceHardwareRequestParcelable[] geofenceHardwareRequestParcelableArr)
             throws RemoteException;

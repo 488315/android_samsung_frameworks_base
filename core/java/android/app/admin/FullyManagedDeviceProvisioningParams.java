@@ -10,7 +10,6 @@ import java.util.Locale;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class FullyManagedDeviceProvisioningParams implements Parcelable {
     private static final String CAN_DEVICE_OWNER_GRANT_SENSOR_PERMISSIONS_PARAM =
             "CAN_DEVICE_OWNER_GRANT_SENSOR_PERMISSIONS";

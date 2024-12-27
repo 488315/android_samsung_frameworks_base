@@ -1,6 +1,5 @@
 package android.database.sqlite;
 
-/* loaded from: classes.dex */
 public class SQLiteDatabaseCorruptException extends SQLiteException {
     public static final int SQLITE_CORRUPT = 11;
     public static final int SQLITE_CORRUPT_EXTRA = 1035;

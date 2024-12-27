@@ -22,7 +22,6 @@ import java.security.spec.PSSParameterSpec;
 import javax.crypto.spec.OAEPParameterSpec;
 import javax.crypto.spec.PSource;
 
-/* loaded from: classes5.dex */
 public abstract class AlgorithmParametersSpi extends java.security.AlgorithmParametersSpi {
     protected abstract AlgorithmParameterSpec localEngineGetParameterSpec(Class cls)
             throws InvalidParameterSpecException;

@@ -5,7 +5,6 @@ import android.os.Parcelable;
 import android.text.ParcelableSpan;
 import android.text.TextPaint;
 
-/* loaded from: classes4.dex */
 public final class SuggestionRangeSpan extends CharacterStyle implements ParcelableSpan {
     public static final Parcelable.Creator<SuggestionRangeSpan> CREATOR =
             new Parcelable.Creator<

@@ -6,7 +6,6 @@ import android.os.Binder;
 
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public class PermissionUtil {
     public static SafeCloseable establishIdentityIndirect(
             Context context,

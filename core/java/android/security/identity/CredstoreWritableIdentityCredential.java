@@ -13,7 +13,6 @@ import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.Collection;
 
-/* loaded from: classes3.dex */
 class CredstoreWritableIdentityCredential extends WritableIdentityCredential {
     private static final String TAG = "CredstoreWritableIdentityCredential";
     private IWritableCredential mBinder;

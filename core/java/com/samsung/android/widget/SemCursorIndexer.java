@@ -4,7 +4,6 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 
-/* loaded from: classes6.dex */
 public class SemCursorIndexer extends SemAbstractIndexer {
 
     @Deprecated public static final String EXTRA_INDEX_COUNTS = "indexscroll_index_counts";

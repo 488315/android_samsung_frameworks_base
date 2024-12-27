@@ -1,6 +1,5 @@
 package android.content.res;
 
-/* loaded from: classes.dex */
 public class TagCounter {
     private static final int DEFAULT_MAX_COUNT = 512;
     private int mMaxValue = 512;

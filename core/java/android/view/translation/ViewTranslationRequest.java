@@ -16,7 +16,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-/* loaded from: classes4.dex */
 public final class ViewTranslationRequest implements Parcelable {
     public static final Parcelable.Creator<ViewTranslationRequest> CREATOR =
             new Parcelable.Creator<

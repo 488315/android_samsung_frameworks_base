@@ -7,7 +7,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.view.KeyEvent;
 
-/* loaded from: classes2.dex */
 public interface IOnVolumeKeyLongPressListener extends IInterface {
     void onVolumeKeyLongPress(KeyEvent keyEvent) throws RemoteException;
 

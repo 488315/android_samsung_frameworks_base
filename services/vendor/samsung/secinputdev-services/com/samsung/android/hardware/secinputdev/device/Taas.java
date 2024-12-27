@@ -5,7 +5,6 @@ import android.util.Log;
 import com.samsung.android.hardware.secinputdev.SemInputCommandService;
 import com.samsung.android.hardware.secinputdev.SemInputDumpsysData;
 
-/* loaded from: classes.dex */
 public class Taas extends SemInputDevice {
     public Taas(String name, int devid) {
         super(name, devid, 0, "NG");

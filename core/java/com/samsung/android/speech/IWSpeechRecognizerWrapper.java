@@ -2,7 +2,6 @@ package com.samsung.android.speech;
 
 import android.util.Log;
 
-/* loaded from: classes6.dex */
 public class IWSpeechRecognizerWrapper {
     private static final String TAG = IWSpeechRecognizerWrapper.class.getSimpleName();
     private static MMUIRecognizer uniqueInstance;

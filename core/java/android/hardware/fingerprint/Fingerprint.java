@@ -4,7 +4,6 @@ import android.hardware.biometrics.BiometricAuthenticator;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public final class Fingerprint extends BiometricAuthenticator.Identifier {
     public static final Parcelable.Creator<Fingerprint> CREATOR =
             new Parcelable.Creator<

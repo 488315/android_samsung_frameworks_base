@@ -5,7 +5,6 @@ import com.android.internal.org.bouncycastle.util.Arrays;
 import java.io.IOException;
 import java.math.BigInteger;
 
-/* loaded from: classes5.dex */
 public class ASN1Enumerated extends ASN1Primitive {
     private static ASN1Enumerated[] cache = new ASN1Enumerated[12];
     private final byte[] bytes;

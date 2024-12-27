@@ -5,7 +5,6 @@ import kotlin.jvm.functions.Function3;
 import kotlin.jvm.internal.AdaptedFunctionReference;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes3.dex */
 final /* synthetic */ class FlowKt$pairwise$4 extends AdaptedFunctionReference implements Function3 {
     public static final FlowKt$pairwise$4 INSTANCE = new FlowKt$pairwise$4();
 

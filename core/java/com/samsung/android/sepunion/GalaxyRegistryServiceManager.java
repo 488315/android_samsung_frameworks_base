@@ -3,7 +3,6 @@ package com.samsung.android.sepunion;
 import android.content.Context;
 import android.os.IBinder;
 
-/* loaded from: classes6.dex */
 public class GalaxyRegistryServiceManager {
     private static final String TAG = GalaxyRegistryServiceManager.class.getSimpleName();
     private Context mContext;

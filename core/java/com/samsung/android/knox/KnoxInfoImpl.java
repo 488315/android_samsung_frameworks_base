@@ -15,7 +15,6 @@ import com.sec.android.iaft.SmLib_IafdConstant;
 import java.util.HashMap;
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public class KnoxInfoImpl {
     static final long INTERVAL_NANO_SEC = 3000000000L;
     static final String TAG = "KnoxInfoImpl";

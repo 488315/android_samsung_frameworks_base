@@ -5,7 +5,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes2.dex */
 public class SensorProperties {
     public static final int STRENGTH_CONVENIENCE = 0;
     public static final int STRENGTH_STRONG = 2;

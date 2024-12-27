@@ -22,7 +22,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public interface ICas extends android.hardware.cas.V1_1.ICas {
     public static final String kInterfaceName = "android.hardware.cas@1.2::ICas";
 

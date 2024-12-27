@@ -8,7 +8,6 @@ import kotlin.collections.MapsKt__MapsKt;
 import kotlin.jvm.functions.Function1;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes.dex */
 public abstract class SecRenderInfoKt {
     public static final Map secDeviceColorMap = MapsKt__MapWithDefaultKt.withDefault(MapsKt__MapsKt.mapOf(new Pair(49001, new Pair(Integer.valueOf(R.color.sec_control_default_foreground), Integer.valueOf(R.color.sec_control_default_background))), new Pair(49002, new Pair(Integer.valueOf(R.color.sec_thermo_heat_foreground), Integer.valueOf(R.color.sec_control_enabled_thermo_heat_background))), new Pair(49003, new Pair(Integer.valueOf(R.color.sec_thermo_cool_foreground), Integer.valueOf(R.color.sec_control_enabled_thermo_cool_background))), new Pair(13, new Pair(Integer.valueOf(R.color.sec_light_foreground), Integer.valueOf(R.color.sec_control_enabled_light_background))), new Pair(50, new Pair(Integer.valueOf(R.color.camera_foreground), Integer.valueOf(R.color.control_enabled_default_background)))), new Function1() { // from class: com.android.systemui.controls.ui.SecRenderInfoKt$secDeviceColorMap$1
         @Override // kotlin.jvm.functions.Function1

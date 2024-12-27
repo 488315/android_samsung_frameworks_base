@@ -9,7 +9,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public final class ConversationStatus implements Parcelable {
     public static final int ACTIVITY_ANNIVERSARY = 2;
     public static final int ACTIVITY_AUDIO = 4;

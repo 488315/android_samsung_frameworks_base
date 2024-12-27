@@ -21,7 +21,6 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
-/* loaded from: classes6.dex */
 public abstract class NNFWFilter implements MediaFilter {
     private static final String TAG = Def.tagOf((Class<?>) NNFWFilter.class);
     protected NNFWDescriptor descriptor;

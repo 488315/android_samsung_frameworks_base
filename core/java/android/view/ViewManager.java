@@ -1,7 +1,6 @@
 package android.view;
 
 
-/* loaded from: classes4.dex */
 public interface ViewManager {
     void addView(View view, ViewGroup.LayoutParams layoutParams);
 

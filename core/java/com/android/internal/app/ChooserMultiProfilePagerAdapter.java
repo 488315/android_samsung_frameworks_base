@@ -10,7 +10,6 @@ import com.android.internal.R;
 import com.android.internal.widget.GridLayoutManager;
 import com.android.internal.widget.RecyclerView;
 
-/* loaded from: classes5.dex */
 public class ChooserMultiProfilePagerAdapter extends AbstractMultiProfilePagerAdapter {
     private static final int SINGLE_CELL_SPAN_SIZE = 1;
     private int mBottomOffset;

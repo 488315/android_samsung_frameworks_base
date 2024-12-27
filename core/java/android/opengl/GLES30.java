@@ -6,7 +6,6 @@ import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.nio.LongBuffer;
 
-/* loaded from: classes3.dex */
 public class GLES30 extends GLES20 {
     public static final int GL_ACTIVE_UNIFORM_BLOCKS = 35382;
     public static final int GL_ACTIVE_UNIFORM_BLOCK_MAX_NAME_LENGTH = 35381;

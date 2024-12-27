@@ -2,7 +2,6 @@ package com.samsung.android.sume.core.format;
 
 import android.util.Pair;
 
-/* loaded from: classes6.dex */
 public interface MutableShape extends Shape {
     MutableShape scale(Pair<Float, Float> pair);
 

@@ -9,7 +9,6 @@ import com.android.internal.org.bouncycastle.asn1.DERSequence;
 
 import java.util.Enumeration;
 
-/* loaded from: classes5.dex */
 public class PBES2Parameters extends ASN1Object implements PKCSObjectIdentifiers {
     private KeyDerivationFunc func;
     private EncryptionScheme scheme;

@@ -34,7 +34,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public class SemExecutableManager {
     public static final String EXTRA_EXECUTABLE_ICON = "com.samsung.android.execute.extra.ICON";
     public static final String EXTRA_EXECUTABLE_INTENT = "com.samsung.android.execute.extra.INTENT";

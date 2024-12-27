@@ -14,7 +14,6 @@ import com.android.internal.org.bouncycastle.asn1.x509.AlgorithmIdentifier;
 
 import java.math.BigInteger;
 
-/* loaded from: classes5.dex */
 public class RSASSAPSSparams extends ASN1Object {
     public static final AlgorithmIdentifier DEFAULT_HASH_ALGORITHM =
             new AlgorithmIdentifier(OIWObjectIdentifiers.idSHA1, DERNull.INSTANCE);

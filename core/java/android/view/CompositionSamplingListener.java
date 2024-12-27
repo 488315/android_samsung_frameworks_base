@@ -6,7 +6,6 @@ import com.android.internal.util.Preconditions;
 
 import java.util.concurrent.Executor;
 
-/* loaded from: classes4.dex */
 public abstract class CompositionSamplingListener {
     private final Executor mExecutor;
     private long mNativeListener = nativeCreate(this);

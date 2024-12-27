@@ -3,7 +3,6 @@ package android.telephony;
 import android.database.sqlite.SQLiteDatabase;
 import android.provider.CalendarContract;
 
-/* loaded from: classes4.dex */
 public final class DisconnectCause {
     public static final int ALREADY_DIALING = 72;
     public static final int ANSWERED_ELSEWHERE = 52;

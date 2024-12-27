@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-/* loaded from: classes.dex */
 public final class AccessibilityGestureEvent implements Parcelable {
     public static final Parcelable.Creator<AccessibilityGestureEvent> CREATOR =
             new Parcelable.Creator<AccessibilityGestureEvent>() { // from class:

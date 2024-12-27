@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public final class TaskFragmentInfo implements Parcelable {
     public static final Parcelable.Creator<TaskFragmentInfo> CREATOR =
             new Parcelable.Creator<

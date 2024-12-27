@@ -26,7 +26,6 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/* loaded from: classes5.dex */
 public final class PowerStats {
     private static final byte PARCEL_FORMAT_VERSION = 2;
     private static final int PARCEL_FORMAT_VERSION_MASK = 255;

@@ -8,7 +8,6 @@ import android.os.Parcelable;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public final class CellBroadcastIdRange implements Parcelable {
     public static final Parcelable.Creator<CellBroadcastIdRange> CREATOR =
             new Parcelable.Creator<

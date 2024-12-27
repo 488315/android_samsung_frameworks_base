@@ -13,7 +13,6 @@ import android.telephony.satellite.SemSatelliteState;
 
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public interface ISemTelephony extends IInterface {
     public static final String DESCRIPTOR = "com.android.internal.telephony.ISemTelephony";
 

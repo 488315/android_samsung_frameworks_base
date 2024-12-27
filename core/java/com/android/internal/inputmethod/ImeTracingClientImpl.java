@@ -6,7 +6,6 @@ import android.view.inputmethod.InputMethodManagerGlobal;
 
 import java.io.PrintWriter;
 
-/* loaded from: classes5.dex */
 class ImeTracingClientImpl extends ImeTracing {
     ImeTracingClientImpl() {
         sEnabled = InputMethodManagerGlobal.isImeTraceEnabled();

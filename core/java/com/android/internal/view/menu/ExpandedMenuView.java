@@ -9,7 +9,6 @@ import android.widget.ListView;
 
 import com.android.internal.R;
 
-/* loaded from: classes5.dex */
 public final class ExpandedMenuView extends ListView
         implements MenuBuilder.ItemInvoker, MenuView, AdapterView.OnItemClickListener {
     private int mAnimations;

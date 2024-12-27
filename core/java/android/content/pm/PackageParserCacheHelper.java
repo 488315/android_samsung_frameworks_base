@@ -5,7 +5,6 @@ import android.os.Parcel;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/* loaded from: classes.dex */
 public class PackageParserCacheHelper {
     private static final boolean DEBUG = false;
     private static final String TAG = "PackageParserCacheHelper";

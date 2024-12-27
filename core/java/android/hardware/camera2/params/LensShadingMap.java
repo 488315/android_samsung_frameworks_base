@@ -8,7 +8,6 @@ import com.android.internal.util.Preconditions;
 import java.util.Arrays;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public final class LensShadingMap {
     public static final float MINIMUM_GAIN_FACTOR = 1.0f;
     private final int mColumns;

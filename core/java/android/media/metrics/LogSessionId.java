@@ -2,7 +2,6 @@ package android.media.metrics;
 
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public final class LogSessionId {
     public static final LogSessionId LOG_SESSION_ID_NONE = new LogSessionId("");
     private final String mSessionId;

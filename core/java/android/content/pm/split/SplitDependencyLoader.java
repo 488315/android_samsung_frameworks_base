@@ -9,7 +9,6 @@ import libcore.util.EmptyArray;
 import java.util.Arrays;
 import java.util.BitSet;
 
-/* loaded from: classes.dex */
 public abstract class SplitDependencyLoader<E extends Exception> {
     private final SparseArray<int[]> mDependencies;
 

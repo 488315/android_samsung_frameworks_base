@@ -32,7 +32,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes2.dex */
 public final class InputManager {
     public static final String ACTION_QUERY_KEYBOARD_LAYOUTS =
             "android.hardware.input.action.QUERY_KEYBOARD_LAYOUTS";

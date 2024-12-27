@@ -45,7 +45,6 @@ import java.util.concurrent.Executor;
 import java.util.function.Predicate;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public class AlwaysOnHotwordDetector extends AbstractDetector {
     public static final int AUDIO_CAPABILITY_ECHO_CANCELLATION = 1;
     public static final int AUDIO_CAPABILITY_NOISE_SUPPRESSION = 2;

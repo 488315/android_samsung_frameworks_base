@@ -9,7 +9,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public final class SemSatelliteRegistrationStateResult implements Parcelable {
     public static final Parcelable.Creator<SemSatelliteRegistrationStateResult> CREATOR =
             new Parcelable.Creator<

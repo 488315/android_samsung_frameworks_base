@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes4.dex */
 public final class CarrierInfo implements Parcelable {
     public static final Parcelable.Creator<CarrierInfo> CREATOR =
             new Parcelable.Creator<CarrierInfo>() { // from class: android.telephony.CarrierInfo.1

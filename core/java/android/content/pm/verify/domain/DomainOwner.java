@@ -10,7 +10,6 @@ import com.android.internal.util.AnnotationValidations;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class DomainOwner implements Parcelable {
     public static final Parcelable.Creator<DomainOwner> CREATOR =
             new Parcelable.Creator<

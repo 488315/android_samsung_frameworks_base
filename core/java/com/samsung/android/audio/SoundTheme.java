@@ -9,7 +9,6 @@ import com.android.internal.R;
 
 import com.samsung.android.feature.SemFloatingFeature;
 
-/* loaded from: classes5.dex */
 public final class SoundTheme {
     private static final String BRAND_SOUND_VERSION_DEFAULT = "3.1.1";
     private static final String BrandSound = "BrandSound";

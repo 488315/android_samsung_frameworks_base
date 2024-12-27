@@ -13,7 +13,6 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.RunnableFuture;
 
-/* loaded from: classes4.dex */
 public abstract class InputEventSender {
     private static final String TAG = "InputEventSender";
     private final CloseGuard mCloseGuard = CloseGuard.get();

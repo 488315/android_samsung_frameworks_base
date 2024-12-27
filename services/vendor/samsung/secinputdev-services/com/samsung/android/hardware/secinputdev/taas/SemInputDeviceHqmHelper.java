@@ -14,7 +14,6 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-/* loaded from: classes.dex */
 public class SemInputDeviceHqmHelper {
     private static final String[] BIG_DATA = {"CASA", "CASB"};
     private static final int HQMCASEALISTITEMCOUNT = 5;

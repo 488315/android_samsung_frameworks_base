@@ -3,7 +3,6 @@ package android.net;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes3.dex */
 public class LinkQualityInfo implements Parcelable {
     public static final Parcelable.Creator<LinkQualityInfo> CREATOR =
             new Parcelable.Creator<LinkQualityInfo>() { // from class: android.net.LinkQualityInfo.1

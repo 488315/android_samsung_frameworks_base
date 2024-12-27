@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
-/* loaded from: classes5.dex */
 public class SmsNumberUtils {
     private static int[] ALL_COUNTRY_CODES = null;
     private static final int CDMA_HOME_NETWORK = 1;

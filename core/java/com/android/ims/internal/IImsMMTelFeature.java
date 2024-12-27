@@ -12,7 +12,6 @@ import android.telephony.ims.aidl.IImsSmsListener;
 
 import com.android.internal.telephony.PublishDialog;
 
-/* loaded from: classes5.dex */
 public interface IImsMMTelFeature extends IInterface {
     void acknowledgeSms(int i, int i2, int i3, int i4) throws RemoteException;
 

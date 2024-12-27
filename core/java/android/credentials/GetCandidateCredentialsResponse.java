@@ -13,7 +13,6 @@ import com.android.internal.util.Preconditions;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes.dex */
 public final class GetCandidateCredentialsResponse implements Parcelable {
     public static final Parcelable.Creator<GetCandidateCredentialsResponse> CREATOR =
             new Parcelable.Creator<GetCandidateCredentialsResponse>() { // from class:

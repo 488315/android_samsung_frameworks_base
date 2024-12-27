@@ -17,7 +17,6 @@ import android.speech.tts.TextToSpeech;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 
-/* loaded from: classes2.dex */
 public interface ISessionController extends IInterface {
     void adjustVolume(String str, String str2, int i, int i2) throws RemoteException;
 

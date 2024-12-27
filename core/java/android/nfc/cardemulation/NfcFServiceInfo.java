@@ -27,7 +27,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class NfcFServiceInfo implements Parcelable {
     public static final Parcelable.Creator<NfcFServiceInfo> CREATOR =
             new Parcelable.Creator<

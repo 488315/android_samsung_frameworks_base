@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 
-/* loaded from: classes5.dex */
 public class WearGestureInterceptionDetector {
     private static final boolean DEBUG = false;
     private static final String TAG = "WearGestureInterceptionDetector";

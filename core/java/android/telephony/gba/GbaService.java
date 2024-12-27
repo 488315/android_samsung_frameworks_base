@@ -16,7 +16,6 @@ import android.util.Log;
 import android.util.SparseArray;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public class GbaService extends Service {
     private static final boolean DBG = Build.IS_DEBUGGABLE;
     private static final int EVENT_GBA_AUTH_REQUEST = 1;

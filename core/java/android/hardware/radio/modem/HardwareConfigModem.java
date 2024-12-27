@@ -7,7 +7,6 @@ import android.os.Parcelable;
 
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public class HardwareConfigModem implements Parcelable {
     public static final Parcelable.Creator<HardwareConfigModem> CREATOR =
             new Parcelable.Creator<HardwareConfigModem>() { // from class:

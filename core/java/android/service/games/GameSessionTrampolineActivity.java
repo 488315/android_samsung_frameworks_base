@@ -8,7 +8,6 @@ import android.util.Slog;
 
 import com.android.internal.infra.AndroidFuture;
 
-/* loaded from: classes3.dex */
 public final class GameSessionTrampolineActivity extends Activity {
     static final String FUTURE_KEY = "GameSessionTrampolineActivity.future";
     private static final String HAS_LAUNCHED_INTENT_KEY =

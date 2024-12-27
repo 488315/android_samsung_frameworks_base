@@ -16,7 +16,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public interface ISehSysInputCallback extends IBase {
     public static final String kInterfaceName =
             "vendor.samsung.hardware.sysinput@1.3::ISehSysInputCallback";

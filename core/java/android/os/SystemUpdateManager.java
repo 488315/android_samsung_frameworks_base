@@ -5,7 +5,6 @@ import android.annotation.SystemApi;
 import com.android.internal.util.Preconditions;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public class SystemUpdateManager {
     public static final String KEY_IS_SECURITY_UPDATE = "is_security_update";
     public static final String KEY_STATUS = "status";

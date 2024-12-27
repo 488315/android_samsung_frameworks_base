@@ -1,6 +1,5 @@
 package com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.util;
 
-/* loaded from: classes5.dex */
 public class PrimeCertaintyCalculator {
     private PrimeCertaintyCalculator() {}
 

@@ -8,7 +8,6 @@ import java.nio.charset.CharacterCodingException;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
 
-/* loaded from: classes3.dex */
 public final class UriCodec {
     private static final char INVALID_INPUT_CHARACTER = 65533;
 

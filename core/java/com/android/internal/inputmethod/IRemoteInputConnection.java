@@ -19,7 +19,6 @@ import android.view.inputmethod.TextAttribute;
 
 import com.android.internal.infra.AndroidFuture;
 
-/* loaded from: classes5.dex */
 public interface IRemoteInputConnection extends IInterface {
     public static final String DESCRIPTOR =
             "com.android.internal.inputmethod.IRemoteInputConnection";

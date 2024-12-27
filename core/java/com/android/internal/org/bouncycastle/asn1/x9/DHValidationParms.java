@@ -9,7 +9,6 @@ import com.android.internal.org.bouncycastle.asn1.ASN1TaggedObject;
 import com.android.internal.org.bouncycastle.asn1.DERBitString;
 import com.android.internal.org.bouncycastle.asn1.DERSequence;
 
-/* loaded from: classes5.dex */
 public class DHValidationParms extends ASN1Object {
     private ASN1Integer pgenCounter;
     private DERBitString seed;

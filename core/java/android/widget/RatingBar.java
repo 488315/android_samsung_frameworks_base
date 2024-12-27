@@ -15,7 +15,6 @@ import com.android.internal.R;
 
 import java.util.HashMap;
 
-/* loaded from: classes4.dex */
 public class RatingBar extends AbsSeekBar {
     public static final String PLURALS_MAX = "max";
     public static final String PLURALS_RATING = "rating";

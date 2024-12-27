@@ -1,6 +1,5 @@
 package android.graphics;
 
-/* loaded from: classes.dex */
 public class MaskFilter {
     long native_instance;
 

@@ -9,7 +9,6 @@ import java.security.spec.KeySpec;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.PBEKeySpec;
 
-/* loaded from: classes5.dex */
 public class PBESecretKeyFactory extends BaseSecretKeyFactory implements PBE {
     private int digest;
     private boolean forCipher;

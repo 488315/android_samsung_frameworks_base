@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.function.Function;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class IntentHelper {
     public static CancelSelectionRequest extractCancelUiRequest(Intent intent) {
         return (CancelSelectionRequest)

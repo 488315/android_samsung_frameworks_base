@@ -5,7 +5,6 @@ import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.Slog;
 
-/* loaded from: classes.dex */
 public final class OverlayInfoExt implements Parcelable {
     private static final String DELIMITER = ":";
     public final int category;

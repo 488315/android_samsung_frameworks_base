@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.time.Duration;
 import java.time.Instant;
 
-/* loaded from: classes2.dex */
 public final class LocationTime implements Parcelable {
     public static final Parcelable.Creator<LocationTime> CREATOR =
             new Parcelable.Creator<LocationTime>() { // from class: android.location.LocationTime.1

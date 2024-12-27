@@ -27,7 +27,6 @@ import javax.crypto.Mac;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKeyFactory;
 
-/* loaded from: classes5.dex */
 public interface JcaJceHelper {
     AlgorithmParameterGenerator createAlgorithmParameterGenerator(String str)
             throws NoSuchAlgorithmException, NoSuchProviderException;

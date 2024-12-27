@@ -13,7 +13,6 @@ import android.view.Display;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 
-/* loaded from: classes2.dex */
 final class SemImsUtils {
     private static final String ACTION_INPUTMETHOD_STARTING_SSRM =
             "com.samsung.android.intent.action.INPUTMETHOD_STARTING";

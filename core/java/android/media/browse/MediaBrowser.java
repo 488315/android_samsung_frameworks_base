@@ -30,7 +30,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-/* loaded from: classes2.dex */
 public final class MediaBrowser {
     private static final int CONNECT_STATE_CONNECTED = 3;
     private static final int CONNECT_STATE_CONNECTING = 2;

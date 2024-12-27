@@ -8,7 +8,6 @@ import android.os.IRemoteCallback;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes.dex */
 public interface IPredictionManager extends IInterface {
     public static final String DESCRIPTOR = "android.app.prediction.IPredictionManager";
 

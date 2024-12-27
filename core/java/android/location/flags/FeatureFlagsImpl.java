@@ -1,6 +1,5 @@
 package android.location.flags;
 
-/* loaded from: classes2.dex */
 public final class FeatureFlagsImpl implements FeatureFlags {
     @Override // android.location.flags.FeatureFlags
     public boolean enableLocationBypass() {

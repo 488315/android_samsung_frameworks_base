@@ -8,7 +8,6 @@ import android.view.ViewParent;
 
 import com.android.internal.view.menu.ShowableListMenu;
 
-/* loaded from: classes4.dex */
 public abstract class ForwardingListener
         implements View.OnTouchListener, View.OnAttachStateChangeListener {
     private int mActivePointerId;

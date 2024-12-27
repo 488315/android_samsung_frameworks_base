@@ -1,6 +1,5 @@
 package android.os;
 
-/* loaded from: classes3.dex */
 public final class TimerProto {
     public static final long COUNT = 1112396529666L;
     public static final long CURRENT_DURATION_MS = 1112396529668L;

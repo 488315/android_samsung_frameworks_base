@@ -18,7 +18,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes6.dex */
 public class SemTelecomManager {
     public static final String CALLER = "caller";
     public static final int CALL_FILTER_ALL = 3;

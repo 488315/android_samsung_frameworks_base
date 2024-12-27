@@ -7,7 +7,6 @@ import android.os.HwParcel;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public final class CdmaSmsMessage {
     public int teleserviceId = 0;
     public boolean isServicePresent = false;

@@ -1,6 +1,5 @@
 package com.samsung.android.sume.core.types;
 
-/* loaded from: classes6.dex */
 public enum ShapeType implements NumericEnum {
     NONE(0),
     NWHC(1),

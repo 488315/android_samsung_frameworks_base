@@ -1,6 +1,5 @@
 package android.hardware.power;
 
-/* loaded from: classes2.dex */
 public @interface Mode {
     public static final int AUDIO_STREAMING_LOW_LATENCY = 10;
     public static final int AUTOMOTIVE_PROJECTION = 18;

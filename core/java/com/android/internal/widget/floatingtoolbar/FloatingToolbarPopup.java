@@ -9,7 +9,6 @@ import android.widget.PopupWindow;
 
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public interface FloatingToolbarPopup {
     void dismiss();
 

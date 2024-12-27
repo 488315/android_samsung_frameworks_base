@@ -3,7 +3,6 @@ package android.hardware.face;
 import android.os.Bundle;
 import android.os.RemoteException;
 
-/* loaded from: classes2.dex */
 public class FaceServiceReceiver extends IFaceServiceReceiver.Stub {
     @Override // android.hardware.face.IFaceServiceReceiver
     public void onEnrollResult(Face face, int remaining) throws RemoteException {}

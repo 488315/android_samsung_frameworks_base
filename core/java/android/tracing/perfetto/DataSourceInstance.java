@@ -1,6 +1,5 @@
 package android.tracing.perfetto;
 
-/* loaded from: classes4.dex */
 public abstract class DataSourceInstance implements AutoCloseable {
     private final DataSource mDataSource;
     private final int mInstanceIndex;

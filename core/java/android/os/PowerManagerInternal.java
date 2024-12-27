@@ -4,7 +4,6 @@ import android.view.KeyEvent;
 
 import java.util.function.Consumer;
 
-/* loaded from: classes3.dex */
 public abstract class PowerManagerInternal {
     public static final int BOOST_DISPLAY_UPDATE_IMMINENT = 1;
     public static final int BOOST_INTERACTION = 0;

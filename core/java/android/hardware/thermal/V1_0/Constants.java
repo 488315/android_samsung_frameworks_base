@@ -1,6 +1,5 @@
 package android.hardware.thermal.V1_0;
 
-/* loaded from: classes2.dex */
 public class Constants {
 
     public final class TemperatureType {

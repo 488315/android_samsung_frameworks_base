@@ -7,7 +7,6 @@ import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 
 @Deprecated
-/* loaded from: classes.dex */
 public class ExpandableListActivity extends Activity
         implements View.OnCreateContextMenuListener,
                 ExpandableListView.OnChildClickListener,

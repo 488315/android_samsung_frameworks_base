@@ -5,7 +5,6 @@ import android.content.res.Configuration;
 
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public class DisplayAdjustments {
     public static final DisplayAdjustments DEFAULT_DISPLAY_ADJUSTMENTS = new DisplayAdjustments();
     private volatile CompatibilityInfo mCompatInfo = CompatibilityInfo.DEFAULT_COMPATIBILITY_INFO;

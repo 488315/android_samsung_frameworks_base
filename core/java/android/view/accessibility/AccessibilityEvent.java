@@ -15,7 +15,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.function.IntFunction;
 
-/* loaded from: classes4.dex */
 public final class AccessibilityEvent extends AccessibilityRecord implements Parcelable {
     public static final int CONTENT_CHANGE_TYPE_CONTENT_DESCRIPTION = 4;
     public static final int CONTENT_CHANGE_TYPE_CONTENT_INVALID = 1024;

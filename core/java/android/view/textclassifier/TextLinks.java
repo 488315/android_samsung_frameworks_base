@@ -25,7 +25,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.function.Function;
 
-/* loaded from: classes4.dex */
 public final class TextLinks implements Parcelable {
     public static final int APPLY_STRATEGY_IGNORE = 0;
     public static final int APPLY_STRATEGY_REPLACE = 1;

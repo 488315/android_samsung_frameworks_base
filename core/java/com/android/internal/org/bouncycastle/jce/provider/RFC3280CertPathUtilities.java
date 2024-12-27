@@ -61,7 +61,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.TimeZone;
 
-/* loaded from: classes5.dex */
 class RFC3280CertPathUtilities {
     public static final String ANY_POLICY = "2.5.29.32.0";
     protected static final int CRL_SIGN = 6;

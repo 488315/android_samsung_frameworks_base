@@ -10,7 +10,6 @@ import java.util.Iterator;
 import java.util.Locale;
 import java.util.Vector;
 
-/* loaded from: classes2.dex */
 public class SubtitleController {
     static final /* synthetic */ boolean $assertionsDisabled = false;
     private static final int WHAT_HIDE = 2;

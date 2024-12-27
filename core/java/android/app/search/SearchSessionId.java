@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class SearchSessionId implements Parcelable {
     public static final Parcelable.Creator<SearchSessionId> CREATOR =
             new Parcelable.Creator<

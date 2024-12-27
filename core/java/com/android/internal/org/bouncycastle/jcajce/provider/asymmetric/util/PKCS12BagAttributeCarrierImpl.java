@@ -15,7 +15,6 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Vector;
 
-/* loaded from: classes5.dex */
 public class PKCS12BagAttributeCarrierImpl implements PKCS12BagAttributeCarrier {
     private Hashtable pkcs12Attributes;
     private Vector pkcs12Ordering;

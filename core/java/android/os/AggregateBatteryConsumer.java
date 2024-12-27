@@ -10,7 +10,6 @@ import org.xmlpull.v1.XmlPullParserException;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-/* loaded from: classes3.dex */
 public final class AggregateBatteryConsumer extends BatteryConsumer {
     static final int COLUMN_COUNT = 3;
     static final int COLUMN_INDEX_CONSUMED_POWER = 2;

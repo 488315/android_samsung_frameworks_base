@@ -28,7 +28,6 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 @Deprecated
-/* loaded from: classes3.dex */
 public class SeekBarVolumizer implements SeekBar.OnSeekBarChangeListener, Handler.Callback {
     private static final int CHECK_RINGTONE_PLAYBACK_DELAY_MS = 1000;
     private static final int CHECK_UPDATE_SLIDER_LATER_MS = 500;

@@ -1,6 +1,5 @@
 package android.util;
 
-/* loaded from: classes4.dex */
 public final class TextDumpProto {
     public static final long COMMAND = 1138166333441L;
     public static final long CONTENT = 1138166333442L;

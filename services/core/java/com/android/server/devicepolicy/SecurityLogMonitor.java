@@ -23,7 +23,6 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes.dex */
 public final class SecurityLogMonitor implements Runnable {
     public static final long BROADCAST_RETRY_INTERVAL_MS;
     static final int BUFFER_ENTRIES_NOTIFICATION_LEVEL = 1024;

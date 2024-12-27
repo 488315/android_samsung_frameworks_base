@@ -15,7 +15,6 @@ import java.lang.annotation.Target;
 })
 @Documented
 @Retention(RetentionPolicy.SOURCE)
-/* loaded from: classes.dex */
 public @interface Dimension {
     public static final int DP = 0;
     public static final int PX = 1;

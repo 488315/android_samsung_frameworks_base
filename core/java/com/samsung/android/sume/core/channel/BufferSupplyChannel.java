@@ -10,7 +10,6 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-/* loaded from: classes6.dex */
 public class BufferSupplyChannel implements BufferChannel, Supplier<MediaBuffer> {
     private static final String TAG = Def.tagOf((Class<?>) BufferSupplyChannel.class);
     private final BufferChannel channel;

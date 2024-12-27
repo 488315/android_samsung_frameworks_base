@@ -29,7 +29,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.BiFunction;
 
-/* loaded from: classes.dex */
 public abstract class ActivityManagerInternal {
     public static final int ALLOW_FULL_ONLY = 2;
     public static final int ALLOW_NON_FULL = 0;

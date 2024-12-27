@@ -6,7 +6,6 @@ import android.os.Parcelable;
 
 import com.android.internal.util.AnnotationValidations;
 
-/* loaded from: classes.dex */
 public abstract class ProviderData implements Parcelable {
     public static final String EXTRA_DISABLED_PROVIDER_DATA_LIST =
             "android.credentials.selection.extra.DISABLED_PROVIDER_DATA_LIST";

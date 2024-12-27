@@ -45,7 +45,6 @@ import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.function.IntConsumer;
 
-/* loaded from: classes.dex */
 public abstract class Context {
     public static final String ACCESSIBILITY_SERVICE = "accessibility";
     public static final String ACCOUNT_SERVICE = "account";

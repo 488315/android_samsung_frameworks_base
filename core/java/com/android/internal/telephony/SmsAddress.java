@@ -1,6 +1,5 @@
 package com.android.internal.telephony;
 
-/* loaded from: classes5.dex */
 public abstract class SmsAddress {
     public static final int TON_ABBREVIATED = 6;
     public static final int TON_ALPHANUMERIC = 5;

@@ -4,7 +4,6 @@ import android.hardware.biometrics.fingerprint.ISessionCallback;
 import android.os.RemoteException;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes.dex */
 public final /* synthetic */ class SemTpaTestHal$1$$ExternalSyntheticLambda2 implements Runnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ SemTpaTestHal.AnonymousClass1 f$0;

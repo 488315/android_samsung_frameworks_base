@@ -24,7 +24,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.nio.channels.FileChannel;
 
-/* loaded from: classes3.dex */
 public class FileHelper {
     private static final String BASE_64_ENCODING = ";base64";
     private static final String PREFIX_CONTENT_URI = "content://";

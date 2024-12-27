@@ -12,7 +12,6 @@ import com.samsung.android.media.AudioParameter;
 
 import java.io.File;
 
-/* loaded from: classes6.dex */
 public class SemSdCardEncryption {
     public static final String ADMIN_START = "adminStart";
     public static final String CHECK_OTHER_DEVICE = "OtherDevice";

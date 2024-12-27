@@ -4,7 +4,6 @@ import com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier;
 
 import com.samsung.android.media.AudioParameter;
 
-/* loaded from: classes5.dex */
 public interface X9ObjectIdentifiers {
     public static final ASN1ObjectIdentifier ansi_X9_62 = new ASN1ObjectIdentifier("1.2.840.10045");
     public static final ASN1ObjectIdentifier id_fieldType = ansi_X9_62.branch("1");

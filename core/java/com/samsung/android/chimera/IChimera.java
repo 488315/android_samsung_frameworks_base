@@ -10,7 +10,6 @@ import com.samsung.android.chimera.genie.MemRequest;
 
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public interface IChimera extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.chimera.IChimera";
 

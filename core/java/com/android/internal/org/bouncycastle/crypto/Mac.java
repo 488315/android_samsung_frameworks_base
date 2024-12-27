@@ -1,6 +1,5 @@
 package com.android.internal.org.bouncycastle.crypto;
 
-/* loaded from: classes5.dex */
 public interface Mac {
     int doFinal(byte[] bArr, int i) throws DataLengthException, IllegalStateException;
 

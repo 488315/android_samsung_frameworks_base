@@ -44,7 +44,6 @@ import java.util.function.Consumer;
 import kotlin.jvm.functions.Function1;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public final /* synthetic */ class NotificationRowBinderImpl$$ExternalSyntheticLambda0 implements RowInflaterTask.RowInflationFinishedListener {
     public final /* synthetic */ NotificationRowBinderImpl f$0;
     public final /* synthetic */ NotificationEntry f$1;

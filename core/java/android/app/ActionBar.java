@@ -24,7 +24,6 @@ import com.android.internal.R;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes.dex */
 public abstract class ActionBar {
     public static final int DISPLAY_HOME_AS_UP = 4;
     public static final int DISPLAY_SHOW_CUSTOM = 16;

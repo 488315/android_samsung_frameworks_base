@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.util.Slog;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes2.dex */
 public final /* synthetic */ class BroadcastHelper$$ExternalSyntheticLambda5 implements Runnable {
     public final /* synthetic */ BroadcastHelper f$0;
     public final /* synthetic */ boolean f$1;

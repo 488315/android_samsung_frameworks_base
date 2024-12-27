@@ -26,7 +26,6 @@ import com.android.internal.R;
 
 import com.samsung.android.wallpaperbackup.GenerateXML;
 
-/* loaded from: classes4.dex */
 class FastScroller {
     private static final int DURATION_CROSS_FADE = 50;
     private static final int DURATION_FADE_IN = 150;

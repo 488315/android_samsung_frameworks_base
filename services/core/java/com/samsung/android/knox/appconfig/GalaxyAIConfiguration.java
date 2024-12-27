@@ -9,7 +9,6 @@ import com.samsung.android.knox.EnterpriseDeviceManager;
 import com.samsung.android.knox.EnterpriseKnoxManager;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes2.dex */
 public final class GalaxyAIConfiguration {
     public static final String TAG = "GalaxyAIConfiguration";
     public final Context mContext;

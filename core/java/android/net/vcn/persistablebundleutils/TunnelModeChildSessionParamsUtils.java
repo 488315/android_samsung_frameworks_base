@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public final class TunnelModeChildSessionParamsUtils {
     private static final String CONFIG_REQUESTS_KEY = "CONFIG_REQUESTS_KEY";
     private static final String HARD_LIFETIME_SEC_KEY = "HARD_LIFETIME_SEC_KEY";

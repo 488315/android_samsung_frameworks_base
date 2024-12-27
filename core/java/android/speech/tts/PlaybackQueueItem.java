@@ -1,7 +1,6 @@
 package android.speech.tts;
 
 
-/* loaded from: classes3.dex */
 abstract class PlaybackQueueItem implements Runnable {
     private final Object mCallerIdentity;
     private final TextToSpeechService.UtteranceProgressDispatcher mDispatcher;

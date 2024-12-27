@@ -48,7 +48,6 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.PropertyReference0Impl;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public final class BrightnessDetailAdapter implements DetailAdapter {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final Lazy activityStarter$delegate;

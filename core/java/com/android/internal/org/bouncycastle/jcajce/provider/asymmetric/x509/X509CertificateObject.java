@@ -23,7 +23,6 @@ import java.util.Enumeration;
 
 import javax.security.auth.x500.X500Principal;
 
-/* loaded from: classes5.dex */
 class X509CertificateObject extends X509CertificateImpl implements PKCS12BagAttributeCarrier {
     private PKCS12BagAttributeCarrier attrCarrier;
     private final Object cacheLock;

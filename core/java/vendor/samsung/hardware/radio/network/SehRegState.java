@@ -1,6 +1,5 @@
 package vendor.samsung.hardware.radio.network;
 
-/* loaded from: classes6.dex */
 public @interface SehRegState {
     public static final int NOT_REG_MT_NOT_SEARCHING_OP = 0;
     public static final int NOT_REG_MT_NOT_SEARCHING_OP_EM = 10;

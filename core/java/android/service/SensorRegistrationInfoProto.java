@@ -1,6 +1,5 @@
 package android.service;
 
-/* loaded from: classes3.dex */
 public final class SensorRegistrationInfoProto {
     public static final long ACTIVATED = 1133871366152L;
     public static final long MAX_REPORT_LATENCY_US = 1112396529671L;

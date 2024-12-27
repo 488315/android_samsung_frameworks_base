@@ -2,7 +2,6 @@ package android.sec.enterprise;
 
 import android.util.Log;
 
-/* loaded from: classes3.dex */
 public class DeviceInventory {
     public static final String DEVICE_INFO_DROPPED_CALL = "dropped";
     public static final String DEVICE_INFO_MISSED_CALL = "missed";

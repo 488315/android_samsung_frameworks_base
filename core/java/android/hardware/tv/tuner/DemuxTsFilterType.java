@@ -1,6 +1,5 @@
 package android.hardware.tv.tuner;
 
-/* loaded from: classes2.dex */
 public @interface DemuxTsFilterType {
     public static final int AUDIO = 4;
     public static final int PCR = 6;

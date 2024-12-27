@@ -20,7 +20,6 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public class AttributeCertificateHolder implements Selector {
     private static DigestCalculatorProvider digestCalculatorProvider;
     final Holder holder;

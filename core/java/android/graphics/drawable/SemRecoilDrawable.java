@@ -23,7 +23,6 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 
-/* loaded from: classes.dex */
 public class SemRecoilDrawable extends LayerDrawable {
     private static final int DEFAULT_TINT_COLOR = 419430400;
     private static final int RADIUS_AUTO = -1;

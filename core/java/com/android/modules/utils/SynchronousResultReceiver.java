@@ -14,7 +14,6 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-/* loaded from: classes5.dex */
 public final class SynchronousResultReceiver<T> implements Parcelable {
     private static final int QUEUE_THRESHOLD = 4;
     private static final String TAG = "SynchronousResultReceiver";

@@ -11,7 +11,6 @@ import com.android.internal.util.AnnotationValidations;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class Feature implements Parcelable {
     public static final Parcelable.Creator<Feature> CREATOR =
             new Parcelable.Creator<

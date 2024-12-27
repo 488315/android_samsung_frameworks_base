@@ -8,7 +8,6 @@ import android.os.Parcelable;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class DevicePolicyDrawableResource implements Parcelable {
     public static final Parcelable.Creator<DevicePolicyDrawableResource> CREATOR =
             new Parcelable.Creator<DevicePolicyDrawableResource>() { // from class:

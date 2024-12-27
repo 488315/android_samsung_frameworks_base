@@ -10,7 +10,6 @@ import android.util.LruCache;
 import java.util.Locale;
 import java.util.TimeZone;
 
-/* loaded from: classes4.dex */
 public final class RelativeDateTimeFormatter {
     private static final FormatterCache CACHED_FORMATTERS = new FormatterCache();
     public static final long DAY_IN_MILLIS = 86400000;

@@ -22,7 +22,6 @@ import com.android.keyguard.KeyguardPasswordView;
 import com.android.systemui.DejankUtils;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes.dex */
 public class KeyguardPasswordView extends KeyguardSecAbsKeyInputView {
     public static final int[] DISABLE_STATE_SET = {-16842910};
     public static final int[] ENABLE_STATE_SET = {R.attr.state_enabled};

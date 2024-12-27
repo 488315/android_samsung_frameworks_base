@@ -5,7 +5,6 @@ import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public class GetInputForAttrResponse implements Parcelable {
     public static final Parcelable.Creator<GetInputForAttrResponse> CREATOR =
             new Parcelable.Creator<GetInputForAttrResponse>() { // from class:

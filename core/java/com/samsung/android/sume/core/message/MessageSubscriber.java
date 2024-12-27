@@ -1,6 +1,5 @@
 package com.samsung.android.sume.core.message;
 
-/* loaded from: classes6.dex */
 public interface MessageSubscriber {
     void bindToMessageChannelRouter(MessageChannelRouter messageChannelRouter);
 

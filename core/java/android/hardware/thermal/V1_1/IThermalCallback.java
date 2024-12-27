@@ -22,7 +22,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public interface IThermalCallback extends IBase {
     public static final String kInterfaceName = "android.hardware.thermal@1.1::IThermalCallback";
 

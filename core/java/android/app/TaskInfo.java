@@ -17,7 +17,6 @@ import com.samsung.android.rune.CoreRune;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public class TaskInfo {
     public static final int PROPERTY_VALUE_UNSET = -1;
     private static final String TAG = "TaskInfo";

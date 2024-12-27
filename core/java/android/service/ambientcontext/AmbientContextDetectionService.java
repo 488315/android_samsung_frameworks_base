@@ -13,7 +13,6 @@ import java.util.Objects;
 import java.util.function.Consumer;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public abstract class AmbientContextDetectionService extends Service {
     public static final String SERVICE_INTERFACE =
             "android.service.ambientcontext.AmbientContextDetectionService";

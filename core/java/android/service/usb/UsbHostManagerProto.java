@@ -1,6 +1,5 @@
 package android.service.usb;
 
-/* loaded from: classes3.dex */
 public final class UsbHostManagerProto {
     public static final long CONNECTIONS = 2246267895812L;
     public static final long DEFAULT_USB_HOST_CONNECTION_HANDLER = 1146756268033L;

@@ -11,7 +11,6 @@ import android.os.RemoteException;
 
 import java.util.List;
 
-/* loaded from: classes2.dex */
 public interface IBiometricService extends IInterface {
     public static final String DESCRIPTOR = "android.hardware.biometrics.IBiometricService";
 

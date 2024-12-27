@@ -21,7 +21,6 @@ import com.samsung.android.feature.SemFloatingFeature;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-/* loaded from: classes6.dex */
 class IAFDServiceImpl {
     private static final String TAG = "IAFDServiceImpl";
     private SmLib_IafdSmAPIManager apiSMManager;

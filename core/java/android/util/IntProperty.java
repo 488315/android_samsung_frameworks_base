@@ -1,6 +1,5 @@
 package android.util;
 
-/* loaded from: classes4.dex */
 public abstract class IntProperty<T> extends Property<T, Integer> {
     public abstract void setValue(T t, int i);
 

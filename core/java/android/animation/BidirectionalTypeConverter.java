@@ -1,6 +1,5 @@
 package android.animation;
 
-/* loaded from: classes.dex */
 public abstract class BidirectionalTypeConverter<T, V> extends TypeConverter<T, V> {
     private BidirectionalTypeConverter mInvertedConverter;
 

@@ -1,6 +1,5 @@
 package android.provider;
 
-/* loaded from: classes3.dex */
 public abstract class OneTimeUseBuilder<T> {
     private boolean used = false;
 

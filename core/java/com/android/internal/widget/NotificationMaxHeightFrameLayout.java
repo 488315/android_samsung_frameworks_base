@@ -9,7 +9,6 @@ import android.widget.RemoteViews;
 import com.android.internal.R;
 
 @RemoteViews.RemoteView
-/* loaded from: classes5.dex */
 public class NotificationMaxHeightFrameLayout extends FrameLayout {
     private final int mNotificationMaxHeight;
 

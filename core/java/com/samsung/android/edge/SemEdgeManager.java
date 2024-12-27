@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-/* loaded from: classes6.dex */
 public class SemEdgeManager {
     public static final int DISABLE_EDGE_LIGHTING = 1;
     public static final int DISABLE_NONE_EDGE_LIGHTING = 0;

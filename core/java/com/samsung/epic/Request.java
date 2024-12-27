@@ -6,7 +6,6 @@ import android.os.ServiceManager;
 import android.os.epic.IEpicManager;
 import android.os.epic.IEpicObject;
 
-/* loaded from: classes6.dex */
 public class Request {
     private static final String TAG = "EpicRequest";
     private static IEpicManager mEpicManager;

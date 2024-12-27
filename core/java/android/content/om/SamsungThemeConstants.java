@@ -16,7 +16,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 
-/* loaded from: classes.dex */
 public final class SamsungThemeConstants {
     public static final String ACTION_THEME_APPLY =
             "com.samsung.android.theme.themecenter.THEME_APPLY";

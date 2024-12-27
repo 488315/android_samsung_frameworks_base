@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class RequestInfo implements Parcelable {
     public static final Parcelable.Creator<RequestInfo> CREATOR =
             new Parcelable.Creator<

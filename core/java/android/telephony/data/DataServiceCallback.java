@@ -11,7 +11,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.List;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public class DataServiceCallback {
     private static final boolean DBG = true;
     public static final int RESULT_ERROR_BUSY = 3;

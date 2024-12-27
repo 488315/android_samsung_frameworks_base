@@ -3,7 +3,6 @@ package com.android.ims;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes4.dex */
 public class RcsTypeIdPair implements Parcelable {
     public static final Parcelable.Creator<RcsTypeIdPair> CREATOR =
             new Parcelable.Creator<RcsTypeIdPair>() { // from class: com.android.ims.RcsTypeIdPair.1

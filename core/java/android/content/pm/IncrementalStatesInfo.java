@@ -3,7 +3,6 @@ package android.content.pm;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes.dex */
 public class IncrementalStatesInfo implements Parcelable {
     public static final Parcelable.Creator<IncrementalStatesInfo> CREATOR =
             new Parcelable.Creator<IncrementalStatesInfo>() { // from class:

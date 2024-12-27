@@ -8,7 +8,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public final class CdmaSmsCbProgramData implements Parcelable {
     public static final int ALERT_OPTION_DEFAULT_ALERT = 1;
     public static final int ALERT_OPTION_HIGH_PRIORITY_ONCE = 10;

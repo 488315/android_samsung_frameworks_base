@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.PriorityQueue;
 import java.util.concurrent.CountDownLatch;
 
-/* loaded from: classes5.dex */
 public class ResolverListController {
     private static final boolean DEBUG = false;
     private static final String TAG = "ResolverListController";

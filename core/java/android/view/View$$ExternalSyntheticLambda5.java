@@ -1,7 +1,6 @@
 package android.view;
 
 /* compiled from: D8$$SyntheticClass */
-/* loaded from: classes4.dex */
 public final /* synthetic */ class View$$ExternalSyntheticLambda5 implements Runnable {
     public final /* synthetic */ View f$0;
 

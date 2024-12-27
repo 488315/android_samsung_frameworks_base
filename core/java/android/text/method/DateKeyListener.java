@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.Locale;
 
-/* loaded from: classes4.dex */
 public class DateKeyListener extends NumberKeyListener {
     private static final String SYMBOLS_TO_IGNORE = "yMLd";
     private final char[] mCharacters;

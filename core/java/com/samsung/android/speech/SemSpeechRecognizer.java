@@ -13,7 +13,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Locale;
 
-/* loaded from: classes6.dex */
 public class SemSpeechRecognizer {
     public static final int STATE_READY = 0;
     public static final int STATE_RUNNING = 1;

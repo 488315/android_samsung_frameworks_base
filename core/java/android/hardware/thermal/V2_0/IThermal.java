@@ -24,7 +24,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public interface IThermal extends android.hardware.thermal.V1_0.IThermal {
     public static final String kInterfaceName = "android.hardware.thermal@2.0::IThermal";
 

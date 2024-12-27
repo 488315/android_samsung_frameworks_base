@@ -22,7 +22,6 @@ import kotlinx.coroutines.flow.SafeFlow;
 import kotlinx.coroutines.flow.internal.AbstractSharedFlow;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes3.dex */
 public final class FlowKt {
     public static final <T1, T2, T3, T4, T5, T6, R> Flow combine(Flow flow, Flow flow2, Flow flow3, Flow flow4, Flow flow5, Flow flow6, Function7 function7) {
         return new FlowKt$combine$$inlined$combine$1(new Flow[]{flow, flow2, flow3, flow4, flow5, flow6}, function7);

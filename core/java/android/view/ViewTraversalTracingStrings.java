@@ -1,6 +1,5 @@
 package android.view;
 
-/* loaded from: classes4.dex */
 class ViewTraversalTracingStrings {
     public final String classSimpleName;
     public final String onLayout;

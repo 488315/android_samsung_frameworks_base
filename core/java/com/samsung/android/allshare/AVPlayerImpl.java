@@ -22,7 +22,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-/* loaded from: classes3.dex */
 final class AVPlayerImpl extends AVPlayer implements IBundleHolder, IHandlerHolder {
     private static final String TAG_CLASS = "AVPlayerImpl";
     private IAllShareConnector mAllShareConnector;

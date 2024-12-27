@@ -9,7 +9,6 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.WeakHashMap;
 
-/* loaded from: classes3.dex */
 public abstract class TokenWatcher {
     private Handler mHandler;
     private String mTag;

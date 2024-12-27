@@ -11,7 +11,6 @@ import com.android.internal.org.bouncycastle.asn1.DERSequence;
 import java.math.BigInteger;
 import java.util.Enumeration;
 
-/* loaded from: classes5.dex */
 public class RSAPublicKey extends ASN1Object {
     private BigInteger modulus;
     private BigInteger publicExponent;

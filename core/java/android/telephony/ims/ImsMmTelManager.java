@@ -22,7 +22,6 @@ import java.util.Objects;
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 
-/* loaded from: classes4.dex */
 public class ImsMmTelManager implements RegistrationManager {
     private static final String TAG = "ImsMmTelManager";
     public static final int WIFI_MODE_CELLULAR_PREFERRED = 1;

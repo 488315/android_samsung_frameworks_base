@@ -2,7 +2,6 @@ package com.android.internal.widget;
 
 import android.view.View;
 
-/* loaded from: classes5.dex */
 public abstract class SimpleItemAnimator extends RecyclerView.ItemAnimator {
     private static final boolean DEBUG = false;
     private static final String TAG = "SimpleItemAnimator";

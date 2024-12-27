@@ -11,7 +11,6 @@ import com.android.internal.R;
 
 import java.util.regex.Pattern;
 
-/* loaded from: classes4.dex */
 public class TableLayout extends LinearLayout {
     private SparseBooleanArray mCollapsedColumns;
     private boolean mInitialized;

@@ -3,7 +3,6 @@ package android.accounts;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes.dex */
 public class AuthenticatorDescription implements Parcelable {
     public static final Parcelable.Creator<AuthenticatorDescription> CREATOR =
             new Parcelable.Creator<AuthenticatorDescription>() { // from class:

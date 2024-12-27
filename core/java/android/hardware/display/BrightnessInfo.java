@@ -8,7 +8,6 @@ import android.os.PowerManager;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes2.dex */
 public final class BrightnessInfo implements Parcelable {
     public static final int BRIGHTNESS_MAX_REASON_NONE = 0;
     public static final int BRIGHTNESS_MAX_REASON_POWER_IC = 2;

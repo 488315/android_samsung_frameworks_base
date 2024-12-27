@@ -11,7 +11,6 @@ import java.io.OutputStreamWriter;
 import java.util.Iterator;
 import java.util.List;
 
-/* loaded from: classes.dex */
 public class ThemePalette {
     private String TAG = "SWT_ThemePalette";
     public boolean mIsGray = false;

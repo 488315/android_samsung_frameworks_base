@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public class SmsWriteArgs implements Parcelable {
     public static final Parcelable.Creator<SmsWriteArgs> CREATOR =
             new Parcelable.Creator<

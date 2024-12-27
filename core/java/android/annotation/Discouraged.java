@@ -13,7 +13,6 @@ import java.lang.annotation.Target;
     ElementType.TYPE
 })
 @Retention(RetentionPolicy.SOURCE)
-/* loaded from: classes.dex */
 public @interface Discouraged {
     String message();
 }

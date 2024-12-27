@@ -10,7 +10,6 @@ import com.android.internal.accessibility.util.ShortcutUtils;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes5.dex */
 class ToggleAccessibilityServiceTarget extends AccessibilityServiceTarget {
     private Context mContext;
 

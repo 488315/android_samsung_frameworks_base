@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes4.dex */
 public class ImsCallSession {
     private static final String TAG = "ImsCallSession";
     private String mCallId;

@@ -14,7 +14,6 @@ import android.os.ServiceManager;
 import android.util.Log;
 
 @Deprecated
-/* loaded from: classes3.dex */
 public abstract class ConditionProviderService extends Service {
 
     @Deprecated

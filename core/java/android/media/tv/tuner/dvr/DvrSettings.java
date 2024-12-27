@@ -6,7 +6,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public class DvrSettings {
     public static final int DATA_FORMAT_ES = 2;
     public static final int DATA_FORMAT_PES = 1;

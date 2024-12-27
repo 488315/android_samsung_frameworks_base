@@ -1,6 +1,5 @@
 package com.android.server.wm;
 
-/* loaded from: classes5.dex */
 public final class WindowManagerServiceDumpProto {
     public static final long BACK_NAVIGATION = 1146756268044L;
     public static final long DISPLAY_FROZEN = 1133871366150L;

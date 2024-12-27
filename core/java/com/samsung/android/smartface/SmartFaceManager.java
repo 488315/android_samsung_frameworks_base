@@ -17,7 +17,6 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-/* loaded from: classes6.dex */
 public class SmartFaceManager {
     public static final String FALSE = "false";
     public static final String FEATURE_SMART_STAY = "com.sec.android.smartface.smart_stay";

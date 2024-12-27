@@ -13,7 +13,6 @@ import java.io.PrintWriter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/* loaded from: classes.dex */
 public final class Rect implements Parcelable {
     public static final Parcelable.Creator<Rect> CREATOR =
             new Parcelable.Creator<Rect>() { // from class: android.graphics.Rect.1

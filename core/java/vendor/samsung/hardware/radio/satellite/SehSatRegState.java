@@ -1,6 +1,5 @@
 package vendor.samsung.hardware.radio.satellite;
 
-/* loaded from: classes6.dex */
 public @interface SehSatRegState {
     public static final int NOT_REG_MT_NOT_SEARCHING_OP = 0;
     public static final int NOT_REG_MT_SEARCHING_OP = 2;

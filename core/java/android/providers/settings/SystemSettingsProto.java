@@ -1,6 +1,5 @@
 package android.providers.settings;
 
-/* loaded from: classes3.dex */
 public final class SystemSettingsProto {
     public static final long ADVANCED_SETTINGS = 1146756268034L;
     public static final long ALARM = 1146756268035L;

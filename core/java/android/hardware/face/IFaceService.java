@@ -20,7 +20,6 @@ import android.view.Surface;
 
 import java.util.List;
 
-/* loaded from: classes2.dex */
 public interface IFaceService extends IInterface {
     public static final String DESCRIPTOR = "android.hardware.face.IFaceService";
 

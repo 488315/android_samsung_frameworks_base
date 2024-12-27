@@ -54,7 +54,6 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-/* loaded from: classes4.dex */
 public class MmTelFeature extends ImsFeature {
 
     @SystemApi public static final int AUDIO_HANDLER_ANDROID = 0;

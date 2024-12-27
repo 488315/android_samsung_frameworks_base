@@ -2,7 +2,6 @@ package com.android.framework.protobuf;
 
 
 @CheckReturnValue
-/* loaded from: classes3.dex */
 final class ProtobufLists {
     private ProtobufLists() {}
 

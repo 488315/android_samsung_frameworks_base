@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-/* loaded from: classes5.dex */
 public final class SyncResultReceiver extends IResultReceiver.Stub {
     private static final String EXTRA = "EXTRA";
     private Bundle mBundle;

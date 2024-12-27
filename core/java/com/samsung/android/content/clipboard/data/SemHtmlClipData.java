@@ -22,7 +22,6 @@ import com.samsung.android.content.clipboard.provider.SemImageClipDataProvider;
 import java.io.File;
 import java.io.FileNotFoundException;
 
-/* loaded from: classes5.dex */
 public class SemHtmlClipData extends SemClipData {
     private static final String REGEX =
             "(?i)<[^/bpd][^>]*>|<p[a-z][^>]*>|<br[a-z][^>]*>|<d[^i][^v][^>]*>|<div[a-z][^>]*>|</[^bpd]+?>|</p[a-z]+>|</br[a-z]+>|</d[^i][^v]+>|</div[a-z]+>";

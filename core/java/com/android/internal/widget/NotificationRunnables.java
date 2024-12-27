@@ -1,6 +1,5 @@
 package com.android.internal.widget;
 
-/* loaded from: classes5.dex */
 public final class NotificationRunnables {
     public static final Runnable NOOP =
             new Runnable() { // from class:

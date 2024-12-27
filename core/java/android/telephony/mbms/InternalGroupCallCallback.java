@@ -4,7 +4,6 @@ import android.os.Binder;
 
 import java.util.concurrent.Executor;
 
-/* loaded from: classes4.dex */
 public class InternalGroupCallCallback extends IGroupCallCallback.Stub {
     private final GroupCallCallback mAppCallback;
     private final Executor mExecutor;

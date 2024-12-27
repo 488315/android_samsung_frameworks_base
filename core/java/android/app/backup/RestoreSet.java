@@ -5,7 +5,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @SystemApi
-/* loaded from: classes.dex */
 public class RestoreSet implements Parcelable {
     public static final Parcelable.Creator<RestoreSet> CREATOR =
             new Parcelable.Creator<RestoreSet>() { // from class: android.app.backup.RestoreSet.1

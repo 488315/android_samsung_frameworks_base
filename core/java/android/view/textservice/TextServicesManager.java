@@ -19,7 +19,6 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes4.dex */
 public final class TextServicesManager {
     private static final boolean DBG = false;
     private static final String TAG = TextServicesManager.class.getSimpleName();

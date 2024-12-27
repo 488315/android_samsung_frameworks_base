@@ -11,7 +11,6 @@ import android.service.autofill.Dataset;
 
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public interface IFillCallback extends IInterface {
     public static final String DESCRIPTOR = "android.service.autofill.augmented.IFillCallback";
 

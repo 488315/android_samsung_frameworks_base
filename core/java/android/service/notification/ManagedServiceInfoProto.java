@@ -1,6 +1,5 @@
 package android.service.notification;
 
-/* loaded from: classes3.dex */
 public final class ManagedServiceInfoProto {
     public static final long COMPONENT = 1146756268033L;
     public static final long IS_GUEST = 1133871366149L;

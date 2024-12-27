@@ -1,6 +1,5 @@
 package android.service;
 
-/* loaded from: classes3.dex */
 public final class SensorEventsProto {
     public static final long RECENT_EVENTS_LOGS = 2246267895809L;
 

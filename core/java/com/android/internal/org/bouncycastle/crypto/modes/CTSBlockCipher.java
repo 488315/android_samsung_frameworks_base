@@ -7,7 +7,6 @@ import com.android.internal.org.bouncycastle.crypto.InvalidCipherTextException;
 import com.android.internal.org.bouncycastle.crypto.OutputLengthException;
 import com.android.internal.org.bouncycastle.crypto.StreamBlockCipher;
 
-/* loaded from: classes5.dex */
 public class CTSBlockCipher extends BufferedBlockCipher {
     private int blockSize;
 

@@ -8,7 +8,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public abstract class VirtualInputDeviceConfig {
     private static final int DEVICE_NAME_MAX_LENGTH = 80;
     private final int mAssociatedDisplayId;

@@ -1,6 +1,5 @@
 package android.telephony;
 
-/* loaded from: classes4.dex */
 public final class SecurityProtoEnums {
     public static final int CELLULAR_IDENTIFIER_IMEI = 2;
     public static final int CELLULAR_IDENTIFIER_IMSI = 1;

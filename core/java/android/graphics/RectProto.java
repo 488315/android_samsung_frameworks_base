@@ -1,6 +1,5 @@
 package android.graphics;
 
-/* loaded from: classes.dex */
 public final class RectProto {
     public static final long BOTTOM = 1120986464260L;
     public static final long LEFT = 1120986464257L;

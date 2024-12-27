@@ -11,7 +11,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public final class TvTrackInfo implements Parcelable {
     public static final Parcelable.Creator<TvTrackInfo> CREATOR =
             new Parcelable.Creator<TvTrackInfo>() { // from class: android.media.tv.TvTrackInfo.1

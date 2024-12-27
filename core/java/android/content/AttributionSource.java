@@ -18,7 +18,6 @@ import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
 
-/* loaded from: classes.dex */
 public final class AttributionSource implements Parcelable {
     private final AttributionSourceState mAttributionSourceState;
     private AttributionSource mNextCached;

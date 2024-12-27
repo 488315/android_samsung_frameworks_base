@@ -1,6 +1,5 @@
 package com.samsung.android.ims.settings;
 
-/* loaded from: classes6.dex */
 public class SemImsConstant {
 
     public enum ImsFeature {

@@ -6,7 +6,6 @@ import android.os.Parcelable;
 
 import java.util.Arrays;
 
-/* loaded from: classes4.dex */
 public final class RadioAccessSpecifier implements Parcelable {
     public static final Parcelable.Creator<RadioAccessSpecifier> CREATOR =
             new Parcelable.Creator<

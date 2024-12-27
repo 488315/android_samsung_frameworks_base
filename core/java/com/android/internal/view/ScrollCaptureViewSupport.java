@@ -19,7 +19,6 @@ import android.view.ViewGroup;
 import java.lang.ref.WeakReference;
 import java.util.function.Consumer;
 
-/* loaded from: classes5.dex */
 public class ScrollCaptureViewSupport<V extends View> implements ScrollCaptureCallback {
     private static final String SETTING_CAPTURE_DELAY = "screenshot.scroll_capture_delay";
     private static final long SETTING_CAPTURE_DELAY_DEFAULT = 60;

@@ -3,7 +3,6 @@ package com.samsung.android.view;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes6.dex */
 public class MultiResolutionChangeRequestInfo implements Parcelable {
     public static final Parcelable.Creator<MultiResolutionChangeRequestInfo> CREATOR =
             new Parcelable.Creator<

@@ -8,7 +8,6 @@ import android.graphics.ColorFilter;
 import android.graphics.Rect;
 import android.util.MathUtils;
 
-/* loaded from: classes.dex */
 public class ColorStateListDrawable extends Drawable implements Drawable.Callback {
     private ColorDrawable mColorDrawable;
     private boolean mMutated;

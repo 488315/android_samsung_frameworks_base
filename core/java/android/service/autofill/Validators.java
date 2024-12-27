@@ -2,7 +2,6 @@ package android.service.autofill;
 
 import com.android.internal.util.Preconditions;
 
-/* loaded from: classes3.dex */
 public final class Validators {
     private Validators() {
         throw new UnsupportedOperationException("contains static methods only");

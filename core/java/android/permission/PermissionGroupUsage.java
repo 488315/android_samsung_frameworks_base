@@ -10,7 +10,6 @@ import com.android.internal.util.AnnotationValidations;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class PermissionGroupUsage implements Parcelable {
     public static final Parcelable.Creator<PermissionGroupUsage> CREATOR =
             new Parcelable.Creator<

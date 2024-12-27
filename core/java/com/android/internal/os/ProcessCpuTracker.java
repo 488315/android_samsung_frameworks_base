@@ -27,7 +27,6 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public class ProcessCpuTracker {
     private static final boolean DEBUG = false;
     static final int PROCESS_FULL_STAT_MAJOR_FAULTS = 2;

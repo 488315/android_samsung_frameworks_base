@@ -3,7 +3,6 @@ package com.android.internal.org.bouncycastle.util.io;
 import java.io.IOException;
 import java.io.OutputStream;
 
-/* loaded from: classes5.dex */
 public abstract class SimpleOutputStream extends OutputStream {
     @Override // java.io.OutputStream, java.io.Closeable, java.lang.AutoCloseable
     public void close() {}

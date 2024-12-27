@@ -36,7 +36,6 @@ import com.android.systemui.settings.UserTrackerImpl;
 import java.util.UUID;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public class AppClipsActivity extends ComponentActivity {
     public static final PackageManager.ApplicationInfoFlags APPLICATION_INFO_FLAGS = PackageManager.ApplicationInfoFlags.of(0);
     public String mCallingPackageName;

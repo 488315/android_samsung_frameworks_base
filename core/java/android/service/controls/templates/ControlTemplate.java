@@ -9,7 +9,6 @@ import com.android.internal.util.Preconditions;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes3.dex */
 public abstract class ControlTemplate {
     private static final ControlTemplate ERROR_TEMPLATE;
     private static final String KEY_TEMPLATE_ID = "key_template_id";

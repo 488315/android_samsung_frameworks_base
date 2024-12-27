@@ -7,7 +7,6 @@ import com.android.internal.telephony.ITelephony;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes4.dex */
 public class NetworkScan {
     public static final int ERROR_INTERRUPTED = 10002;
     public static final int ERROR_INVALID_SCAN = 2;

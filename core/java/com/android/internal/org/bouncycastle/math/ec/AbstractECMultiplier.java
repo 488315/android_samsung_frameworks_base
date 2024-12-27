@@ -2,7 +2,6 @@ package com.android.internal.org.bouncycastle.math.ec;
 
 import java.math.BigInteger;
 
-/* loaded from: classes5.dex */
 public abstract class AbstractECMultiplier implements ECMultiplier {
     protected abstract ECPoint multiplyPositive(ECPoint eCPoint, BigInteger bigInteger);
 

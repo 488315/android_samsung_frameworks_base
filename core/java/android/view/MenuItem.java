@@ -6,7 +6,6 @@ import android.graphics.BlendMode;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 
-/* loaded from: classes4.dex */
 public interface MenuItem {
     public static final int SHOW_AS_ACTION_ALWAYS = 2;
     public static final int SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW = 8;

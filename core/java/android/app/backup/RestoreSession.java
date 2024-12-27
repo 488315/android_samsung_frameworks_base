@@ -12,7 +12,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 @SystemApi
-/* loaded from: classes.dex */
 public class RestoreSession {
     static final String TAG = "RestoreSession";
     IRestoreSession mBinder;

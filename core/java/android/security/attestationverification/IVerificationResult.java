@@ -4,7 +4,6 @@ import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes3.dex */
 public class IVerificationResult implements Parcelable {
     public static final Parcelable.Creator<IVerificationResult> CREATOR =
             new Parcelable.Creator<

@@ -1,6 +1,5 @@
 package vendor.samsung.hardware.radio.sim;
 
-/* loaded from: classes6.dex */
 public @interface SehPinState {
     public static final int DISABLED = 3;
     public static final int ENABLED_BLOCKED = 4;

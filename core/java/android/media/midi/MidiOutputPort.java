@@ -17,7 +17,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/* loaded from: classes2.dex */
 public final class MidiOutputPort extends MidiSender implements Closeable {
     private static final String TAG = "MidiOutputPort";
     private IMidiDeviceServer mDeviceServer;

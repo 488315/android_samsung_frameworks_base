@@ -3,7 +3,6 @@ package com.samsung.android.displayaiqe;
 import android.content.Context;
 import android.util.Slog;
 
-/* loaded from: classes.dex */
 public final class DisplayAiqeHalInstance {
     private static final String TAG = DisplayAiqeHalInstance.class.getSimpleName();
 

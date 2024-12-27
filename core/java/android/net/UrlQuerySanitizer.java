@@ -9,7 +9,6 @@ import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/* loaded from: classes3.dex */
 public class UrlQuerySanitizer {
     private boolean mAllowUnregisteredParamaters;
     private boolean mPreferFirstRepeatedParameter;

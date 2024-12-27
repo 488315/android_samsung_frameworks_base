@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes.dex */
 public final class GameState implements Parcelable {
     public static final Parcelable.Creator<GameState> CREATOR =
             new Parcelable.Creator<GameState>() { // from class: android.app.GameState.1

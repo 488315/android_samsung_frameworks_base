@@ -1,6 +1,5 @@
 package android.hardware.tv.tuner;
 
-/* loaded from: classes2.dex */
 public @interface FrontendIsdbtCoderate {
     public static final int AUTO = 1;
     public static final int CODERATE_1_2 = 2;

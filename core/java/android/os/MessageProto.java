@@ -1,6 +1,5 @@
 package android.os;
 
-/* loaded from: classes3.dex */
 public final class MessageProto {
     public static final long ARG1 = 1120986464260L;
     public static final long ARG2 = 1120986464261L;

@@ -7,7 +7,6 @@ import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
 
-/* loaded from: classes3.dex */
 public interface IDataShareReadAdapter extends IInterface {
     public static final String DESCRIPTOR = "android.service.contentcapture.IDataShareReadAdapter";
 

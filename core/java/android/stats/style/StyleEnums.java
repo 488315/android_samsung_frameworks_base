@@ -1,6 +1,5 @@
 package android.stats.style;
 
-/* loaded from: classes3.dex */
 public final class StyleEnums {
     public static final int APP_LAUNCHED = 22;
     public static final int CLOCK_APPLIED = 33;

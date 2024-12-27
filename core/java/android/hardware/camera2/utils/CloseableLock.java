@@ -6,7 +6,6 @@ import android.util.Log;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
-/* loaded from: classes2.dex */
 public class CloseableLock implements AutoCloseable {
     private static final boolean VERBOSE = false;
     private final String TAG;

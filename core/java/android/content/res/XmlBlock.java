@@ -14,7 +14,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
 
-/* loaded from: classes.dex */
 public final class XmlBlock implements AutoCloseable {
     private static final boolean DEBUG = false;
     private static final int ERROR_BAD_DOCUMENT = -OsConstants.EINVAL;

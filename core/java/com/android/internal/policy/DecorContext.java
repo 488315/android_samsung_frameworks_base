@@ -12,7 +12,6 @@ import android.view.contentcapture.ContentCaptureManager;
 
 import java.lang.ref.WeakReference;
 
-/* loaded from: classes5.dex */
 public class DecorContext extends ContextThemeWrapper {
     private ContentCaptureManager mContentCaptureManager;
     private WeakReference<Context> mContext;

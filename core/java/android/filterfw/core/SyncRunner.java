@@ -8,7 +8,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-/* loaded from: classes.dex */
 public class SyncRunner extends GraphRunner {
     private static final String TAG = "SyncRunner";
     private GraphRunner.OnRunnerDoneListener mDoneListener;

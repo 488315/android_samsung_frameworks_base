@@ -3,7 +3,6 @@ package com.android.internal.org.bouncycastle.asn1;
 import java.io.IOException;
 import java.io.InputStream;
 
-/* loaded from: classes5.dex */
 class ConstructedOctetStream extends InputStream {
     private InputStream _currentStream;
     private boolean _first = true;

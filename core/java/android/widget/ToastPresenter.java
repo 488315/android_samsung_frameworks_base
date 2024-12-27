@@ -34,7 +34,6 @@ import com.samsung.android.desktopmode.SemDesktopModeState;
 
 import java.lang.ref.WeakReference;
 
-/* loaded from: classes4.dex */
 public class ToastPresenter {
     public static final int DEVICE_DEFAULT_TEXT_TOAST_LAYOUT = 17367430;
     private static final long LONG_DURATION_TIMEOUT = 7000;

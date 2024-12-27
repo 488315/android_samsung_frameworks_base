@@ -13,7 +13,6 @@ import com.samsung.android.wallpaperbackup.BnRConstants;
 import java.util.HashMap;
 import java.util.Locale;
 
-/* loaded from: classes2.dex */
 public class MediaFile {
 
     @Deprecated private static final int FIRST_AUDIO_FILE_TYPE = 1;

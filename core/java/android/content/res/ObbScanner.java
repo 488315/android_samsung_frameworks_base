@@ -3,7 +3,6 @@ package android.content.res;
 import java.io.File;
 import java.io.IOException;
 
-/* loaded from: classes.dex */
 public class ObbScanner {
     private static native void getObbInfo_native(String str, ObbInfo obbInfo) throws IOException;
 

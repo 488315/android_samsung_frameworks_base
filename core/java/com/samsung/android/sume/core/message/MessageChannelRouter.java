@@ -21,7 +21,6 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-/* loaded from: classes6.dex */
 public class MessageChannelRouter {
     private static final String TAG = Def.tagOf((Class<?>) MessageChannelRouter.class);
     private final List<MessageChannel> errorListener = new LinkedList();

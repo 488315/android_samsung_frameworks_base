@@ -1,6 +1,5 @@
 package com.samsung.android.media;
 
-/* loaded from: classes6.dex */
 public @interface MediaInfoSubType {
     public static final int kAudioCodec = 1;
     public static final int kUnspecifiedSubType = 0;

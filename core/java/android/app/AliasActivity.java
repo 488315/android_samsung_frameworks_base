@@ -16,7 +16,6 @@ import org.xmlpull.v1.XmlPullParserException;
 import java.io.IOException;
 
 @Deprecated
-/* loaded from: classes.dex */
 public class AliasActivity extends Activity {
     public final String ALIAS_META_DATA = "android.app.alias";
 

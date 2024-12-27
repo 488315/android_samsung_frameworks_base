@@ -37,7 +37,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RemoteViews.RemoteView
-/* loaded from: classes4.dex */
 public class DateTimeView extends TextView {
     private static final int SHOW_MONTH_DAY_YEAR = 1;
     private static final int SHOW_TIME = 0;

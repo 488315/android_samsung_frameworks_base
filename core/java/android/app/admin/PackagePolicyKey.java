@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class PackagePolicyKey extends PolicyKey {
     private static final String ATTR_PACKAGE_NAME = "package-name";
     public static final Parcelable.Creator<PackagePolicyKey> CREATOR =

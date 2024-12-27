@@ -2,7 +2,6 @@ package com.android.internal.org.bouncycastle.crypto;
 
 import com.android.internal.org.bouncycastle.util.Strings;
 
-/* loaded from: classes5.dex */
 public abstract class PBEParametersGenerator {
     protected int iterationCount;
     protected byte[] password;

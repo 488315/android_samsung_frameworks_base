@@ -3,7 +3,6 @@ package android.media;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public class MediaMonitorDimension implements Parcelable {
     public static final Parcelable.Creator<MediaMonitorDimension> CREATOR =
             new Parcelable.Creator<

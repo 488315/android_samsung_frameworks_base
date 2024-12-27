@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes3.dex */
 public interface IStorageHealthListener extends IInterface {
     public static final String DESCRIPTOR = "android.os.incremental.IStorageHealthListener";
     public static final int HEALTH_STATUS_BLOCKED = 2;

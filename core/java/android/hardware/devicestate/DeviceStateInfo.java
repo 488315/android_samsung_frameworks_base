@@ -8,7 +8,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public final class DeviceStateInfo implements Parcelable {
     public static final int CHANGED_BASE_STATE = 2;
     public static final int CHANGED_CURRENT_STATE = 4;

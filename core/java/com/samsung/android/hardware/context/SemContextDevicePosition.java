@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes6.dex */
 public class SemContextDevicePosition extends SemContextEventContext {
     public static final Parcelable.Creator<SemContextDevicePosition> CREATOR =
             new Parcelable.Creator<

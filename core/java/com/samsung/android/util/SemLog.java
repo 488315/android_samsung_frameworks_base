@@ -4,7 +4,6 @@ import android.os.SemSystemProperties;
 import android.util.Log;
 import android.util.Slog;
 
-/* loaded from: classes6.dex */
 public final class SemLog {
     public static final int ASSERT = 7;
     public static final int DEBUG = 3;

@@ -10,7 +10,6 @@ import java.util.Collection;
 import java.util.Objects;
 import java.util.function.Consumer;
 
-/* loaded from: classes.dex */
 public final class CursorToBulkCursorAdaptor extends BulkCursorNative
         implements IBinder.DeathRecipient {
     private static final String TAG = "Cursor";

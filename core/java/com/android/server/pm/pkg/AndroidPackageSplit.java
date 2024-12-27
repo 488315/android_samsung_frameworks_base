@@ -5,7 +5,6 @@ import android.annotation.SystemApi;
 import java.util.List;
 
 @SystemApi(client = SystemApi.Client.SYSTEM_SERVER)
-/* loaded from: classes5.dex */
 public interface AndroidPackageSplit {
     String getClassLoaderName();
 

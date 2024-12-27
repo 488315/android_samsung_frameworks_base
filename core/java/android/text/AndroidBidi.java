@@ -2,7 +2,6 @@ package android.text;
 
 import android.icu.text.Bidi;
 
-/* loaded from: classes4.dex */
 public class AndroidBidi {
     public static int bidi(int dir, char[] chs, byte[] chInfo) {
         byte paraLevel;

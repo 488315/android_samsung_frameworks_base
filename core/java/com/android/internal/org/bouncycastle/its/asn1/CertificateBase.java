@@ -6,7 +6,6 @@ import com.android.internal.org.bouncycastle.asn1.ASN1Primitive;
 import com.android.internal.org.bouncycastle.asn1.ASN1Sequence;
 import com.android.internal.org.bouncycastle.asn1.DERSequence;
 
-/* loaded from: classes5.dex */
 public class CertificateBase extends ASN1Object {
     private CertificateType type;
     private byte[] version;

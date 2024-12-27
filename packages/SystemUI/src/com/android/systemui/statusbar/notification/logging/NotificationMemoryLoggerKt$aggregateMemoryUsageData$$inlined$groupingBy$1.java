@@ -5,7 +5,6 @@ import kotlin.Pair;
 import kotlin.collections.Grouping;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public final class NotificationMemoryLoggerKt$aggregateMemoryUsageData$$inlined$groupingBy$1 implements Grouping {
     public final /* synthetic */ Iterable $this_groupingBy;
 

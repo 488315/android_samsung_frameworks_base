@@ -9,7 +9,6 @@ import android.view.autofill.AutofillId;
 
 import java.util.ArrayList;
 
-/* loaded from: classes4.dex */
 final class ChildContentCaptureSession extends ContentCaptureSession {
     private final ContentCaptureSession mParent;
 

@@ -100,7 +100,6 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public class PhoneWindow extends Window implements MenuBuilder.Callback {
     private static final String ACTION_BAR_TAG = "android:ActionBar";
     private static final int CUSTOM_TITLE_COMPATIBLE_FEATURES = 13505;

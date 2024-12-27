@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-/* loaded from: classes3.dex */
 public final class KeyProtection implements KeyStore.ProtectionParameter, UserAuthArgs {
     private final String[] mBlockModes;
     private final long mBoundToSecureUserId;

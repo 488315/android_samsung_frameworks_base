@@ -9,7 +9,6 @@ import android.os.ParcelableException;
 
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public class ContentProviderResult implements Parcelable {
     public static final Parcelable.Creator<ContentProviderResult> CREATOR =
             new Parcelable.Creator<ContentProviderResult>() { // from class:

@@ -10,7 +10,6 @@ import com.android.internal.util.Preconditions;
 import java.util.ArrayDeque;
 import java.util.Queue;
 
-/* loaded from: classes.dex */
 public class PolicySizeVerifier {
     public static final int MAX_LONG_SUPPORT_MESSAGE_LENGTH = 20000;
     public static final int MAX_ORG_NAME_LENGTH = 200;

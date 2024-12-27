@@ -13,7 +13,6 @@ import android.widget.SeekBar;
 import com.android.internal.R;
 
 @Deprecated
-/* loaded from: classes3.dex */
 public class VolumePreference extends SeekBarDialogPreference
         implements PreferenceManager.OnActivityStopListener,
                 View.OnKeyListener,

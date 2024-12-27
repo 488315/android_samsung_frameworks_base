@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public final class DataRemovalRequest implements Parcelable {
     public static final Parcelable.Creator<DataRemovalRequest> CREATOR =
             new Parcelable.Creator<

@@ -18,7 +18,6 @@ import android.view.animation.Transformation;
 import com.android.internal.R;
 
 @Deprecated
-/* loaded from: classes4.dex */
 public class Gallery extends AbsSpinner implements GestureDetector.OnGestureListener {
     private static final int SCROLL_TO_FLING_UNCERTAINTY_TIMEOUT = 250;
     private static final String TAG = "Gallery";

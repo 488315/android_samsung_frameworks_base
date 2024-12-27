@@ -2,7 +2,6 @@ package com.android.internal.org.bouncycastle.asn1;
 
 import java.io.IOException;
 
-/* loaded from: classes5.dex */
 public class DLBitString extends ASN1BitString {
     public static ASN1BitString getInstance(Object obj) {
         if (obj == null || (obj instanceof DLBitString)) {

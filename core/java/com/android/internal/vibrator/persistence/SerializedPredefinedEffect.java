@@ -7,7 +7,6 @@ import com.android.modules.utils.TypedXmlSerializer;
 
 import java.io.IOException;
 
-/* loaded from: classes5.dex */
 final class SerializedPredefinedEffect implements SerializedVibrationEffect.SerializedSegment {
     private final XmlConstants.PredefinedEffectName mEffectName;
     private final boolean mShouldFallback;

@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class CombinedCardsTemplateData extends BaseTemplateData {
     public static final Parcelable.Creator<CombinedCardsTemplateData> CREATOR =
             new Parcelable.Creator<CombinedCardsTemplateData>() { // from class:

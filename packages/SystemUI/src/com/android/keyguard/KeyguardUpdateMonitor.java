@@ -118,7 +118,6 @@ import javax.inject.Provider;
 import kotlin.jvm.internal.Intrinsics;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes.dex */
 public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpable, CoreStartable, KeyguardSecUpdateMonitor {
     public static final int BIOMETRIC_HELP_FINGERPRINT_NOT_RECOGNIZED = -1;
     protected static final int BIOMETRIC_STATE_CANCELLING = 2;

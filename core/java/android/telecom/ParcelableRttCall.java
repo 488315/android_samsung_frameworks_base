@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
 import android.os.Parcelable;
 
-/* loaded from: classes3.dex */
 public class ParcelableRttCall implements Parcelable {
     public static final Parcelable.Creator<ParcelableRttCall> CREATOR =
             new Parcelable.Creator<

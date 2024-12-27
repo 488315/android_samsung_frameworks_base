@@ -4,7 +4,6 @@ import android.annotation.SystemApi;
 import android.os.Bundle;
 import android.os.Handler;
 
-/* loaded from: classes2.dex */
 public final class AudioFocusRequest {
     private static final AudioAttributes FOCUS_DEFAULT_ATTR =
             new AudioAttributes.Builder().setUsage(1).build();

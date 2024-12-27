@@ -13,7 +13,6 @@ import java.util.Arrays;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public final class SipMessage implements Parcelable {
     private static final String CRLF = "\r\n";
     private final String mCallIdParam;

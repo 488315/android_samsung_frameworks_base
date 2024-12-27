@@ -3,7 +3,6 @@ package android.tracing.perfetto;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes4.dex */
 public class DataSourceParams {
     public static DataSourceParams DEFAULTS = new Builder().build();
     public static final int PERFETTO_DS_BUFFER_EXHAUSTED_POLICY_DROP = 0;

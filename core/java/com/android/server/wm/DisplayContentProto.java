@@ -1,6 +1,5 @@
 package com.android.server.wm;
 
-/* loaded from: classes5.dex */
 public final class DisplayContentProto {
     public static final long ABOVE_APP_WINDOWS = 2246267895814L;
     public static final long APP_TRANSITION = 1146756268048L;

@@ -18,7 +18,6 @@ import java.util.Arrays;
 import java.util.List;
 
 @Deprecated
-/* loaded from: classes.dex */
 public final class SliceItem implements Parcelable {
     public static final Parcelable.Creator<SliceItem> CREATOR =
             new Parcelable.Creator<SliceItem>() { // from class: android.app.slice.SliceItem.1

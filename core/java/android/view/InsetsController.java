@@ -42,7 +42,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public class InsetsController implements WindowInsetsController, InsetsAnimationControlCallbacks {
     private static final int ANIMATION_DELAY_DIM_MS = 500;
     private static final int ANIMATION_DURATION_FADE_IN_MS = 500;

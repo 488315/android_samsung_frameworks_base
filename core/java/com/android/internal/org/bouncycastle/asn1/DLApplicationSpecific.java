@@ -3,7 +3,6 @@ package com.android.internal.org.bouncycastle.asn1;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
-/* loaded from: classes5.dex */
 public class DLApplicationSpecific extends ASN1ApplicationSpecific {
     DLApplicationSpecific(boolean isConstructed, int tag, byte[] octets) {
         super(isConstructed, tag, octets);

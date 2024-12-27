@@ -5,7 +5,6 @@ import android.os.SystemClock;
 
 import com.samsung.android.graphics.spr.document.SprDocument;
 
-/* loaded from: classes6.dex */
 public class SprDrawableAnimationFrame extends SprDrawableAnimation {
     private int mCurrentFrameIndex;
     private final int mFrameCount;

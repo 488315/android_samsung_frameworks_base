@@ -24,7 +24,6 @@ import java.util.concurrent.TimeoutException;
 import java.util.function.Consumer;
 import java.util.function.ToIntFunction;
 
-/* loaded from: classes3.dex */
 public class SystemHealthManager {
     private static final Comparator<PowerMonitor> POWER_MONITOR_COMPARATOR =
             Comparator.comparingInt(

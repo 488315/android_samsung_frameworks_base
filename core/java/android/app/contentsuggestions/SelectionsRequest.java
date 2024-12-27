@@ -7,7 +7,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class SelectionsRequest implements Parcelable {
     public static final Parcelable.Creator<SelectionsRequest> CREATOR =
             new Parcelable.Creator<SelectionsRequest>() { // from class:

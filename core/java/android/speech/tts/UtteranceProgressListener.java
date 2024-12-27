@@ -1,7 +1,6 @@
 package android.speech.tts;
 
 
-/* loaded from: classes3.dex */
 public abstract class UtteranceProgressListener {
     public abstract void onDone(String str);
 

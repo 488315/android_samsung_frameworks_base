@@ -3,7 +3,6 @@ package com.samsung.android.edge;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes6.dex */
 public final class EdgeLightingPolicyInfo implements Parcelable {
     public static final int CATEGORY_BLACK = 2;
     public static final int CATEGORY_WHITE = 1;

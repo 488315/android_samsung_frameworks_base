@@ -15,7 +15,6 @@ import com.android.internal.util.Preconditions;
 
 import java.util.concurrent.Executor;
 
-/* loaded from: classes2.dex */
 final class InputDeviceVibrator extends Vibrator {
     private static final String TAG = "InputDeviceVibrator";
     private final int mDeviceId;

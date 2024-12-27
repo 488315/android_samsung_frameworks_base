@@ -37,7 +37,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public interface IRadioIndication extends android.hardware.radio.V1_4.IRadioIndication {
     public static final String kInterfaceName = "android.hardware.radio@1.5::IRadioIndication";
 

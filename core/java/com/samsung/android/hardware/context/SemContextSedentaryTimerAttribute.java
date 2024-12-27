@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import android.util.Log;
 
 @Deprecated(forRemoval = true, since = "15.5")
-/* loaded from: classes6.dex */
 public class SemContextSedentaryTimerAttribute extends SemContextAttribute {
     public static final Parcelable.Creator<SemContextSedentaryTimerAttribute> CREATOR =
             new Parcelable.Creator<

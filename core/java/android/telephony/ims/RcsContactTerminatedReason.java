@@ -4,7 +4,6 @@ import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes4.dex */
 public final class RcsContactTerminatedReason implements Parcelable {
     public static final Parcelable.Creator<RcsContactTerminatedReason> CREATOR =
             new Parcelable.Creator<

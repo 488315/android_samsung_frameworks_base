@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import java.util.HashMap;
 import java.util.Map;
 
-/* loaded from: classes5.dex */
 public final class CompatibilityOverridesToRemoveByPackageConfig implements Parcelable {
     public static final Parcelable.Creator<CompatibilityOverridesToRemoveByPackageConfig> CREATOR =
             new Parcelable.Creator<

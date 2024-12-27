@@ -1,6 +1,5 @@
 package com.android.window.flags;
 
-/* loaded from: classes5.dex */
 public final class FeatureFlagsImpl implements FeatureFlags {
     @Override // com.android.window.flags.FeatureFlags
     public boolean activityEmbeddingAnimationCustomizationFlag() {

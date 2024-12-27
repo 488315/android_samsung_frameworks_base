@@ -6,7 +6,6 @@ import android.util.AttributeSet;
 
 import com.android.internal.R;
 
-/* loaded from: classes4.dex */
 public class AlphaAnimation extends Animation {
     private float mFromAlpha;
     private float mToAlpha;

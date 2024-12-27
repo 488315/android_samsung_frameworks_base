@@ -5,7 +5,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public class ArrayUtils {
     private static final boolean DEBUG = false;
     private static final String TAG = "ArrayUtils";

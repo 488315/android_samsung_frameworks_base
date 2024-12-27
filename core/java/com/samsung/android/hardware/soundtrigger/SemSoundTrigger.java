@@ -13,7 +13,6 @@ import java.util.Iterator;
 import java.util.Locale;
 import java.util.UUID;
 
-/* loaded from: classes6.dex */
 public class SemSoundTrigger {
     public static final int RECOGNITION_MODE_USER_AUTHENTICATION = 4;
     public static final int RECOGNITION_MODE_USER_IDENTIFICATION = 2;

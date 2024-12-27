@@ -7,7 +7,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes.dex */
 public interface IRemoteDeviceCallback extends IInterface {
     public static final String DESCRIPTOR = "android.hardware.IRemoteDeviceCallback";
     public static final int ERROR_REMOTE_BUFFER = 1;

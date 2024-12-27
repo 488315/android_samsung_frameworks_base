@@ -17,7 +17,6 @@ import com.android.internal.R;
 
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public class MultiWindowEdgeDetector {
     public static final int EDGE_LEFT_TOP = 5;
     public static final int EDGE_NONE = 0;

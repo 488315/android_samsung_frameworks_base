@@ -2,7 +2,6 @@ package android.graphics.animation;
 
 import android.animation.TimeInterpolator;
 
-/* loaded from: classes.dex */
 public final class NativeInterpolatorFactory {
     public static native long createAccelerateDecelerateInterpolator();
 

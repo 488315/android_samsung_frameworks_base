@@ -2,7 +2,6 @@ package com.android.internal.org.bouncycastle.asn1.eac;
 
 import com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier;
 
-/* loaded from: classes5.dex */
 public interface EACObjectIdentifiers {
     public static final ASN1ObjectIdentifier bsi_de = new ASN1ObjectIdentifier("0.4.0.127.0.7");
     public static final ASN1ObjectIdentifier id_PK = bsi_de.branch("2.2.1");

@@ -11,7 +11,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Set;
 
-/* loaded from: classes2.dex */
 public final class RecommendedStreamConfigurationMap {
     public static final int MAX_USECASE_COUNT = 32;
     private static final String TAG = "RecommendedStreamConfigurationMap";

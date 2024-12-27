@@ -12,7 +12,6 @@ import com.samsung.vekit.Item.Item;
 
 import java.util.ArrayList;
 
-/* loaded from: classes6.dex */
 public class FilterAnimation extends Animation<FilterInfo> {
     public FilterAnimation(VEContext context, int id, String name) {
         super(context, AnimationType.FILTER, id, name);

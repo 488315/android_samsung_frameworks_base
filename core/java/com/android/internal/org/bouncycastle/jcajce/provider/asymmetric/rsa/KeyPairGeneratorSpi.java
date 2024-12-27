@@ -19,7 +19,6 @@ import java.security.SecureRandom;
 import java.security.spec.AlgorithmParameterSpec;
 import java.security.spec.RSAKeyGenParameterSpec;
 
-/* loaded from: classes5.dex */
 public class KeyPairGeneratorSpi extends KeyPairGenerator {
     private static final AlgorithmIdentifier PKCS_ALGID =
             new AlgorithmIdentifier(PKCSObjectIdentifiers.rsaEncryption, DERNull.INSTANCE);

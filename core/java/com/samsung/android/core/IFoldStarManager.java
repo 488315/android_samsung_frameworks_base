@@ -8,7 +8,6 @@ import android.os.RemoteException;
 
 import java.util.Map;
 
-/* loaded from: classes6.dex */
 public interface IFoldStarManager extends IInterface {
     public static final int ASPECT_RATIO_POLICY_16_TO_9 = 2;
     public static final int ASPECT_RATIO_POLICY_4_TO_3 = 3;

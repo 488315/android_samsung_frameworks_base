@@ -8,7 +8,6 @@ import android.view.accessibility.AccessibilityEvent;
 import com.android.internal.widget.RecyclerView;
 import com.android.internal.widget.RecyclerViewAccessibilityDelegate;
 
-/* loaded from: classes5.dex */
 class ChooserRecyclerViewAccessibilityDelegate extends RecyclerViewAccessibilityDelegate {
     private final int[] mConsumed;
     private final Rect mTempRect;

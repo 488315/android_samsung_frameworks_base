@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-/* loaded from: classes5.dex */
 public class UidPackageState implements Parcelable {
     public static final Parcelable.Creator<UidPackageState> CREATOR =
             new Parcelable.Creator<

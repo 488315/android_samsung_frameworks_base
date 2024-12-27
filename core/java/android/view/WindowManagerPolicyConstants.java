@@ -3,7 +3,6 @@ package android.view;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes4.dex */
 public interface WindowManagerPolicyConstants {
     public static final String ACTION_HDMI_PLUGGED = "android.intent.action.HDMI_PLUGGED";
     public static final int APPLICATION_ABOVE_SUB_PANEL_SUBLAYER = 3;

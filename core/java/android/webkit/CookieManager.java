@@ -3,7 +3,6 @@ package android.webkit;
 import android.annotation.SystemApi;
 import android.net.WebAddress;
 
-/* loaded from: classes4.dex */
 public abstract class CookieManager {
     public abstract boolean acceptCookie();
 

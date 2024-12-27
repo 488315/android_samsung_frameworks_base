@@ -11,7 +11,6 @@ import java.security.PrivilegedExceptionAction;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/* loaded from: classes3.dex */
 final class UnsafeUtil {
     static final boolean IS_BIG_ENDIAN;
     private static final int STRIDE = 8;

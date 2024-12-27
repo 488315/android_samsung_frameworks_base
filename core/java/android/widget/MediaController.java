@@ -23,7 +23,6 @@ import com.samsung.android.transcode.constants.EncodeConstants;
 import java.util.Formatter;
 import java.util.Locale;
 
-/* loaded from: classes4.dex */
 public class MediaController extends FrameLayout {
     private static final int sDefaultTimeout = 3000;
     private final AccessibilityManager mAccessibilityManager;

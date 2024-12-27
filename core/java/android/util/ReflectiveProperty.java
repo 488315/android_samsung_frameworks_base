@@ -6,7 +6,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-/* loaded from: classes4.dex */
 class ReflectiveProperty<T, V> extends Property<T, V> {
     private static final String PREFIX_GET = "get";
     private static final String PREFIX_IS = "is";

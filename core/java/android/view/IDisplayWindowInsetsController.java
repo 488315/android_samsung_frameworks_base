@@ -8,7 +8,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.view.inputmethod.ImeTracker;
 
-/* loaded from: classes4.dex */
 public interface IDisplayWindowInsetsController extends IInterface {
     public static final String DESCRIPTOR = "android.view.IDisplayWindowInsetsController";
 

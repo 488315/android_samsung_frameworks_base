@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes3.dex */
 public interface ICarrierMessagingCallback extends IInterface {
     void onDownloadMmsComplete(int i) throws RemoteException;
 

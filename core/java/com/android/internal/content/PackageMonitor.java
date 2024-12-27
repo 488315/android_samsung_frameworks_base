@@ -24,7 +24,6 @@ import java.lang.ref.WeakReference;
 import java.util.Objects;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes5.dex */
 public abstract class PackageMonitor extends BroadcastReceiver {
     public static final int PACKAGE_PERMANENT_CHANGE = 3;
     public static final int PACKAGE_TEMPORARY_CHANGE = 2;

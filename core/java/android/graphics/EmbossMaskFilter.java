@@ -1,6 +1,5 @@
 package android.graphics;
 
-/* loaded from: classes.dex */
 public class EmbossMaskFilter extends MaskFilter {
     private static native long nativeConstructor(float[] fArr, float f, float f2, float f3);
 

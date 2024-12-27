@@ -16,7 +16,6 @@ import java.util.function.Consumer;
 import java.util.function.ToIntFunction;
 import java.util.regex.Pattern;
 
-/* loaded from: classes6.dex */
 public final class MetaDataUtil {
     static final /* synthetic */ boolean $assertionsDisabled = false;
     private static final int JPEG_LENGTH_SIZE = 2;

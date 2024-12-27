@@ -44,7 +44,6 @@ import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-/* loaded from: classes.dex */
 public class AccountManager {
     public static final String ACCOUNT_ACCESS_TOKEN_TYPE =
             "com.android.AccountManager.ACCOUNT_ACCESS_TOKEN_TYPE";

@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-/* loaded from: classes5.dex */
 public class KernelCpuThreadReaderDiff {
     private static final int OTHER_THREADS_ID = -1;
     private static final String OTHER_THREADS_NAME = "__OTHER_THREADS";

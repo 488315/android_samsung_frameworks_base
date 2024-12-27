@@ -9,7 +9,6 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.Arrays;
 
-/* loaded from: classes6.dex */
 public class Packet {
     public static final int MAX_PACKET_SIZE = 512;
     public static final int PAC_PACKET_CMD_AT_CMD_CHECK = 1;

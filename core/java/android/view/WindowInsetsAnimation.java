@@ -7,7 +7,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.List;
 
-/* loaded from: classes4.dex */
 public final class WindowInsetsAnimation {
     private float mAlpha;
     private final long mDurationMillis;

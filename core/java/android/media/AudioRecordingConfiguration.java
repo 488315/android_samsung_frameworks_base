@@ -14,7 +14,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public final class AudioRecordingConfiguration implements Parcelable {
     private final AudioEffect.Descriptor[] mClientEffects;
     private final AudioFormat mClientFormat;

@@ -9,7 +9,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public final class LinkCapacityEstimate implements Parcelable {
     public static final Parcelable.Creator<LinkCapacityEstimate> CREATOR =
             new Parcelable.Creator() { // from class: android.telephony.LinkCapacityEstimate.1

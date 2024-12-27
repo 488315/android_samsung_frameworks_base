@@ -1,6 +1,5 @@
 package android.hardware.power;
 
-/* loaded from: classes2.dex */
 public @interface SessionHint {
     public static final int CPU_LOAD_DOWN = 1;
     public static final int CPU_LOAD_RESET = 2;

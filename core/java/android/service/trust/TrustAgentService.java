@@ -27,7 +27,6 @@ import java.util.List;
 import java.util.function.Consumer;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public class TrustAgentService extends Service {
     private static final boolean DEBUG = false;
     private static final String EXTRA_TOKEN = "token";

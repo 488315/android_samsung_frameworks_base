@@ -9,7 +9,6 @@ import java.lang.reflect.Constructor;
 import java.util.HashSet;
 import java.util.Iterator;
 
-/* loaded from: classes.dex */
 public class FilterFactory {
     private static FilterFactory mSharedFactory;
     private HashSet<String> mPackages = new HashSet<>();

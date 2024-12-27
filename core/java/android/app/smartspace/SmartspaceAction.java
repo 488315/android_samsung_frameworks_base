@@ -14,7 +14,6 @@ import android.text.format.DateFormat;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class SmartspaceAction implements Parcelable {
     public static final Parcelable.Creator<SmartspaceAction> CREATOR =
             new Parcelable.Creator<

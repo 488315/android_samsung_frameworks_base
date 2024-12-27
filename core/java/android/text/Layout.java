@@ -28,7 +28,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Arrays;
 import java.util.List;
 
-/* loaded from: classes4.dex */
 public abstract class Layout {
     public static final int BREAK_STRATEGY_BALANCED = 2;
     public static final int BREAK_STRATEGY_HIGH_QUALITY = 1;

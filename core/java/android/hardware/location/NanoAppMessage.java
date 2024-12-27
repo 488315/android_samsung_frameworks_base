@@ -13,7 +13,6 @@ import libcore.util.HexEncoding;
 import java.util.Arrays;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public final class NanoAppMessage implements Parcelable {
     public static final Parcelable.Creator<NanoAppMessage> CREATOR =
             new Parcelable.Creator<

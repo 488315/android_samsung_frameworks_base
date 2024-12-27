@@ -5,7 +5,6 @@ import android.text.format.DateFormat;
 import com.android.internal.org.bouncycastle.crypto.Digest;
 import com.android.internal.org.bouncycastle.crypto.digests.AndroidDigestFactory;
 
-/* loaded from: classes5.dex */
 public class Fingerprint {
     private static char[] encodingTable = {
         '0',

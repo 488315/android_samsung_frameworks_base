@@ -7,7 +7,6 @@ import com.samsung.android.globalactions.presentation.SamsungGlobalActions;
 import com.samsung.android.globalactions.util.HandlerUtil;
 import com.samsung.android.globalactions.util.LogWrapper;
 
-/* loaded from: classes6.dex */
 public class LogoutActionViewModel implements ActionViewModel {
     private static final String TAG = "LogoutActionViewModel";
     private final SamsungGlobalActions mGlobalActions;

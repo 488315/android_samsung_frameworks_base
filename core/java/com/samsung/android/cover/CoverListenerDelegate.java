@@ -7,7 +7,6 @@ import android.os.Message;
 import android.os.RemoteException;
 import android.util.Log;
 
-/* loaded from: classes6.dex */
 class CoverListenerDelegate extends ICoverManagerCallback.Stub {
     private static final String TAG = "CoverManager";
     private ListenerDelegateHandler mHandler;

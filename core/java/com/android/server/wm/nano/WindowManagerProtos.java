@@ -9,7 +9,6 @@ import com.android.framework.protobuf.nano.WireFormatNano;
 
 import java.io.IOException;
 
-/* loaded from: classes5.dex */
 public interface WindowManagerProtos {
 
     public static final class TaskSnapshotProto extends MessageNano {

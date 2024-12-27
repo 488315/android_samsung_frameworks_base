@@ -41,7 +41,6 @@ import java.util.Iterator;
 
 import javax.security.auth.x500.X500Principal;
 
-/* loaded from: classes5.dex */
 public class X509V3CertificateGenerator {
     private AlgorithmIdentifier sigAlgId;
     private ASN1ObjectIdentifier sigOID;

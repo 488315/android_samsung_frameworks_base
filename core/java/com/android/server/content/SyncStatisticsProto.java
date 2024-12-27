@@ -1,6 +1,5 @@
 package com.android.server.content;
 
-/* loaded from: classes5.dex */
 public final class SyncStatisticsProto {
     public static final long STATS = 2246267895809L;
 

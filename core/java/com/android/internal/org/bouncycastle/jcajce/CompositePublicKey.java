@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public class CompositePublicKey implements PublicKey {
     private final List<PublicKey> keys;
 

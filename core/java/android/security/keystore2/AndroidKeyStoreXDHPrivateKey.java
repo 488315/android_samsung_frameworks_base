@@ -8,7 +8,6 @@ import java.security.interfaces.XECPrivateKey;
 import java.security.spec.NamedParameterSpec;
 import java.util.Optional;
 
-/* loaded from: classes3.dex */
 public class AndroidKeyStoreXDHPrivateKey extends AndroidKeyStorePrivateKey
         implements XECPrivateKey {
     public AndroidKeyStoreXDHPrivateKey(

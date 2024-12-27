@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes2.dex */
 public class SensorPropertiesInternal implements Parcelable {
     public static final Parcelable.Creator<SensorPropertiesInternal> CREATOR =
             new Parcelable.Creator<SensorPropertiesInternal>() { // from class:

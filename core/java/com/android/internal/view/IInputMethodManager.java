@@ -27,7 +27,6 @@ import com.android.internal.inputmethod.InputMethodInfoSafeList;
 
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public interface IInputMethodManager extends IInterface {
     boolean acceptStylusHandwritingDelegation(
             IInputMethodClient iInputMethodClient, int i, String str, String str2, int i2)

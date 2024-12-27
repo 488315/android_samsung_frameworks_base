@@ -2,7 +2,6 @@ package com.samsung.android.sume.core.evaluate;
 
 import java.util.stream.Stream;
 
-/* loaded from: classes6.dex */
 public class EvalNone implements Evaluator {
     @Override // com.samsung.android.sume.core.evaluate.Evaluator
     public <V> V getValue() {

@@ -13,7 +13,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public final class ApkAssets {
     private static final int FORMAT_APK = 0;
     private static final int FORMAT_ARSC = 2;

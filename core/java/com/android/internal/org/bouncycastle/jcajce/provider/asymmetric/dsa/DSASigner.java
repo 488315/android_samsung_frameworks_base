@@ -23,7 +23,6 @@ import java.security.SignatureException;
 import java.security.SignatureSpi;
 import java.security.spec.AlgorithmParameterSpec;
 
-/* loaded from: classes5.dex */
 public class DSASigner extends SignatureSpi
         implements PKCSObjectIdentifiers, X509ObjectIdentifiers {
     private Digest digest;

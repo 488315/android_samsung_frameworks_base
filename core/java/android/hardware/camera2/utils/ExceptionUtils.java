@@ -5,7 +5,6 @@ import android.os.DeadObjectException;
 import android.os.RemoteException;
 import android.os.ServiceSpecificException;
 
-/* loaded from: classes2.dex */
 public class ExceptionUtils {
     public static CameraAccessException throwAsPublicException(ServiceSpecificException e)
             throws CameraAccessException {

@@ -8,7 +8,6 @@ import android.os.ServiceManager;
 import com.android.net.module.util.PermissionUtils;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public class NetworkStack {
 
     @SystemApi

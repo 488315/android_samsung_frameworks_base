@@ -1,6 +1,5 @@
 package android.graphics;
 
-/* loaded from: classes.dex */
 public class BlurMaskFilter extends MaskFilter {
     private static native long nativeConstructor(float f, int i);
 

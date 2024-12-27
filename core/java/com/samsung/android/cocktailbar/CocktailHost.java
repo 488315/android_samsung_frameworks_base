@@ -15,7 +15,6 @@ import android.widget.RemoteViews;
 
 import java.lang.ref.WeakReference;
 
-/* loaded from: classes5.dex */
 public class CocktailHost {
     static final int HANDLE_COCKTAIL_CLOSE = 5;
     static final int HANDLE_COCKTAIL_PARTIALLY_UPDATE = 2;

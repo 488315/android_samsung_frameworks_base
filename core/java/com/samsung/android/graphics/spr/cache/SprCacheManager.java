@@ -9,7 +9,6 @@ import com.samsung.android.graphics.spr.document.debug.SprDebug;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* loaded from: classes6.dex */
 public class SprCacheManager {
     private ArrayList<SprCache> mCacheList = new ArrayList<>();
     private String mHashCode;

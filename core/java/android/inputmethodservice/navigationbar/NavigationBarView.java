@@ -20,7 +20,6 @@ import com.android.internal.R;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-/* loaded from: classes2.dex */
 public final class NavigationBarView extends FrameLayout {
     private static final boolean DEBUG = false;
     private static final Interpolator FAST_OUT_SLOW_IN =

@@ -50,7 +50,6 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.Set;
 
-/* loaded from: classes.dex */
 public class Intent implements Parcelable, Cloneable {
 
     @SystemApi

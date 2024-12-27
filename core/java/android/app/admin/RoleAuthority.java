@@ -10,7 +10,6 @@ import java.util.Objects;
 import java.util.Set;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class RoleAuthority extends Authority {
     public static final Parcelable.Creator<RoleAuthority> CREATOR =
             new Parcelable.Creator<

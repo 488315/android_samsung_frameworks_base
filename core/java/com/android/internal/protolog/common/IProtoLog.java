@@ -1,6 +1,5 @@
 package com.android.internal.protolog.common;
 
-/* loaded from: classes5.dex */
 public interface IProtoLog {
     boolean isEnabled(IProtoLogGroup iProtoLogGroup, LogLevel logLevel);
 

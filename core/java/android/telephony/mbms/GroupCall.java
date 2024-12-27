@@ -9,7 +9,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.List;
 
-/* loaded from: classes4.dex */
 public class GroupCall implements AutoCloseable {
     private static final String LOG_TAG = "MbmsGroupCall";
     public static final int REASON_BY_USER_REQUEST = 1;

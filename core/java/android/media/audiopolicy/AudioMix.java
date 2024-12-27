@@ -14,7 +14,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public class AudioMix implements Parcelable {
     private static final int CALLBACK_FLAGS_ALL = 1;
     public static final int CALLBACK_FLAG_NOTIFY_ACTIVITY = 1;

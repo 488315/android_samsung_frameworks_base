@@ -5,7 +5,6 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public class SensorLocationInternal implements Parcelable {
     public final String displayId;
     public final int sensorLocationX;

@@ -12,7 +12,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
 
-/* loaded from: classes.dex */
 public final class AccessibilityUtils {
     private static final String ANCHOR_TAG = "a";
     private static final String IMG_PREFIX = "R.drawable.";

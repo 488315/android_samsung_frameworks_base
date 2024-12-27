@@ -3,7 +3,6 @@ package com.samsung.android.wallpaper.legibilitycolors.utils.image;
 import android.graphics.Bitmap;
 import android.hardware.scontext.SContextConstants;
 
-/* loaded from: classes6.dex */
 public class ImageConvolution extends BitmapImageProcessing {
     public double mFactor;
     public double mOffset;

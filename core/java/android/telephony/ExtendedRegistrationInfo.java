@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public final class ExtendedRegistrationInfo implements Parcelable {
     private final boolean mIsPsOnlyReg;
     private final int mMobileOptionalRadioTech;

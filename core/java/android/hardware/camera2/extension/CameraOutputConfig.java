@@ -8,7 +8,6 @@ import android.view.Surface;
 import java.util.Collection;
 import java.util.List;
 
-/* loaded from: classes2.dex */
 public class CameraOutputConfig implements Parcelable {
     public static final Parcelable.Creator<CameraOutputConfig> CREATOR =
             new Parcelable.Creator<CameraOutputConfig>() { // from class:

@@ -11,7 +11,6 @@ import android.os.PermissionEnforcer;
 import android.os.RemoteCallback;
 import android.os.RemoteException;
 
-/* loaded from: classes.dex */
 public interface IAmbientContextManager extends IInterface {
     public static final String DESCRIPTOR = "android.app.ambientcontext.IAmbientContextManager";
 

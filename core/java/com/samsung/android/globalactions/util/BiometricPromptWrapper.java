@@ -9,7 +9,6 @@ import android.os.Looper;
 
 import java.util.concurrent.Executor;
 
-/* loaded from: classes6.dex */
 public class BiometricPromptWrapper {
     private static final String TAG = "BiometricPromptWrapper";
     private final BiometricManager mBiometricManager;

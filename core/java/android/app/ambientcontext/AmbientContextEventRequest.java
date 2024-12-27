@@ -16,7 +16,6 @@ import java.util.Iterator;
 import java.util.Set;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class AmbientContextEventRequest implements Parcelable {
     public static final Parcelable.Creator<AmbientContextEventRequest> CREATOR =
             new Parcelable.Creator<AmbientContextEventRequest>() { // from class:

@@ -4,7 +4,6 @@ import android.os.SystemProperties;
 import android.sysprop.CryptoProperties;
 import android.sysprop.HdmiProperties;
 
-/* loaded from: classes5.dex */
 public class RoSystemProperties {
     public static final boolean CEC_AUDIO_DEVICE_FORWARD_VOLUME_KEYS_SYSTEM_AUDIO_MODE_OFF;
     public static final boolean CONFIG_AVOID_GFX_ACCEL;

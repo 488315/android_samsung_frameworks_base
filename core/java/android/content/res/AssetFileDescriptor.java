@@ -21,7 +21,6 @@ import java.nio.channels.FileLock;
 import java.nio.channels.ReadableByteChannel;
 import java.nio.channels.WritableByteChannel;
 
-/* loaded from: classes.dex */
 public class AssetFileDescriptor implements Parcelable, Closeable {
     public static final Parcelable.Creator<AssetFileDescriptor> CREATOR =
             new Parcelable.Creator<AssetFileDescriptor>() { // from class:

@@ -6,7 +6,6 @@ import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.function.Predicate;
 
-/* loaded from: classes6.dex */
 public class NalUnitParser {
     private static final int CHECK_MAX_SIZE = 512;
     private static final int CLLI_SEI_MESSAGE_PAYLOAD_SIZE = 4;

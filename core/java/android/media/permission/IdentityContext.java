@@ -1,6 +1,5 @@
 package android.media.permission;
 
-/* loaded from: classes2.dex */
 public class IdentityContext implements SafeCloseable {
     private static ThreadLocal<Identity> sThreadLocalIdentity = new ThreadLocal<>();
     private Identity mPrior = get();

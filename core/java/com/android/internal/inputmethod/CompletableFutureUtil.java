@@ -9,7 +9,6 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-/* loaded from: classes5.dex */
 public final class CompletableFutureUtil {
     private CompletableFutureUtil() {}
 

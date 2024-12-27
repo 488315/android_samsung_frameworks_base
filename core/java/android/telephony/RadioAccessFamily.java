@@ -10,7 +10,6 @@ import com.samsung.android.vibrator.SemHapticFeedbackConstants;
 
 import java.util.Locale;
 
-/* loaded from: classes4.dex */
 public class RadioAccessFamily implements Parcelable {
     private static final int CDMA = 72;
     public static final Parcelable.Creator<RadioAccessFamily> CREATOR =

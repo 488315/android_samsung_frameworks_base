@@ -1,6 +1,5 @@
 package android.hardware.radio.voice;
 
-/* loaded from: classes2.dex */
 public @interface AudioQuality {
     public static final int AMR = 1;
     public static final int AMR_WB = 2;

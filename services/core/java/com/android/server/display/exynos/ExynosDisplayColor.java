@@ -11,7 +11,6 @@ import java.io.File;
 import java.util.TreeMap;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes.dex */
 public final class ExynosDisplayColor {
     public final String BYPASS_XML_FILE_PATH;
     public final String CGC17_CON_SYSFS_PATH;

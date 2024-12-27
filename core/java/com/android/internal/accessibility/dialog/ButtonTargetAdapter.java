@@ -11,7 +11,6 @@ import com.android.internal.R;
 
 import java.util.List;
 
-/* loaded from: classes5.dex */
 class ButtonTargetAdapter extends TargetAdapter {
     private List<AccessibilityTarget> mTargets;
 

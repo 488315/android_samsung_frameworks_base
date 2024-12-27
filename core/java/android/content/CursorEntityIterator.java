@@ -3,7 +3,6 @@ package android.content;
 import android.database.Cursor;
 import android.os.RemoteException;
 
-/* loaded from: classes.dex */
 public abstract class CursorEntityIterator implements EntityIterator {
     private final Cursor mCursor;
     private boolean mIsClosed = false;

@@ -26,7 +26,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
-/* loaded from: classes.dex */
 public final class SystemFonts {
     private static final String FONTS_ADDITIONAL_XML = "/system/etc/fonts_additional.xml";
     private static final String FONTS_XML = "/system/etc/font_fallback.xml";

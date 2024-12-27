@@ -1,6 +1,5 @@
 package android.filterfw.core;
 
-/* loaded from: classes.dex */
 public abstract class FrameManager {
     private FilterContext mContext;
 

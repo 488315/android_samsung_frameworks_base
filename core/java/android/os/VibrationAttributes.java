@@ -12,7 +12,6 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-/* loaded from: classes3.dex */
 public final class VibrationAttributes implements Parcelable {
     public static final int CATEGORY_KEYBOARD = 1;
     public static final int CATEGORY_UNKNOWN = 0;

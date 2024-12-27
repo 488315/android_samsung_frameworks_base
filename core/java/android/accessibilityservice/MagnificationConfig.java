@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes.dex */
 public final class MagnificationConfig implements Parcelable {
     public static final Parcelable.Creator<MagnificationConfig> CREATOR =
             new Parcelable.Creator<MagnificationConfig>() { // from class:

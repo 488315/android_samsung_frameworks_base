@@ -5,7 +5,6 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 
-/* loaded from: classes4.dex */
 public class ViewSwitcher extends ViewAnimator {
     ViewFactory mFactory;
 

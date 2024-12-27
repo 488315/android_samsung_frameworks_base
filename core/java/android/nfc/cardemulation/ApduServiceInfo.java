@@ -24,7 +24,6 @@ import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class ApduServiceInfo implements Parcelable {
     static final String SE_PREFIX_ESE = "eSE";
     static final String SE_PREFIX_SIM = "SIM";

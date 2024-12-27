@@ -7,7 +7,6 @@ import com.samsung.android.security.mdf.MdfUtils;
 
 import java.security.Provider;
 
-/* loaded from: classes3.dex */
 class AndroidKeyStoreBCWorkaroundProvider extends Provider {
     private static final String DESEDE_SYSTEM_PROPERTY = "ro.hardware.keystore_desede";
     private static final String KEYSTORE_PRIVATE_KEY_CLASS_NAME =

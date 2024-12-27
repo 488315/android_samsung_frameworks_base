@@ -59,7 +59,6 @@ import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-/* loaded from: classes.dex */
 public abstract class PackageManager {
 
     @SystemApi

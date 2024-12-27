@@ -1,6 +1,5 @@
 package com.android.internal.compat.flags;
 
-/* loaded from: classes5.dex */
 public final class Flags {
     private static FeatureFlags FEATURE_FLAGS = new FeatureFlagsImpl();
     public static final String FLAG_SKIP_OLD_AND_DISABLED_COMPAT_LOGGING =

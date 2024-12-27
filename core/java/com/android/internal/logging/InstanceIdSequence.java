@@ -3,7 +3,6 @@ package com.android.internal.logging;
 import java.security.SecureRandom;
 import java.util.Random;
 
-/* loaded from: classes5.dex */
 public class InstanceIdSequence {
     protected final int mInstanceIdMax;
     private final Random mRandom = new SecureRandom();

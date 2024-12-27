@@ -3,7 +3,6 @@ package com.android.server.net;
 import java.net.InetAddress;
 
 /* compiled from: NetlinkTracker.java */
-/* loaded from: classes5.dex */
 class DnsServerEntry implements Comparable<DnsServerEntry> {
     public final InetAddress address;
     public long expiry;

@@ -7,7 +7,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public class AvSettings extends Settings {
     public static final int AUDIO_STREAM_TYPE_AAC = 6;
     public static final int AUDIO_STREAM_TYPE_AAC_ADTS = 16;

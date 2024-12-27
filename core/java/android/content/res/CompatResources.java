@@ -5,7 +5,6 @@ import android.graphics.drawable.Drawable;
 
 import java.lang.ref.WeakReference;
 
-/* loaded from: classes.dex */
 public class CompatResources extends Resources {
     private WeakReference<Context> mContext;
 

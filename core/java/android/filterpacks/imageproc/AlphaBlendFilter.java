@@ -5,7 +5,6 @@ import android.filterfw.core.FilterContext;
 import android.filterfw.core.Program;
 import android.filterfw.core.ShaderProgram;
 
-/* loaded from: classes.dex */
 public class AlphaBlendFilter extends ImageCombineFilter {
     private final String mAlphaBlendShader;
 

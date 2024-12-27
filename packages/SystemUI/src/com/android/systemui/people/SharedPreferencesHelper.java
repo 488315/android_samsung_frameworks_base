@@ -5,7 +5,6 @@ import com.android.systemui.people.widget.PeopleTileKey;
 import com.samsung.android.knox.ucm.plugin.agent.UcmAgentProviderImpl;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public final class SharedPreferencesHelper {
     public static void setPeopleTileKey(SharedPreferences sharedPreferences, PeopleTileKey peopleTileKey) {
         String str = peopleTileKey.mShortcutId;

@@ -2,7 +2,6 @@ package android.media;
 
 import android.content.Context;
 
-/* loaded from: classes2.dex */
 public class ClosedCaptionRenderer extends SubtitleController.Renderer {
     private Cea608CCWidget mCCWidget;
     private final Context mContext;

@@ -5,7 +5,6 @@ import android.security.keystore.KeyProperties;
 import com.android.internal.org.bouncycastle.util.Memoable;
 import com.android.internal.org.bouncycastle.util.Pack;
 
-/* loaded from: classes5.dex */
 public class SHA512Digest extends LongDigest {
     private static final int DIGEST_LENGTH = 64;
 

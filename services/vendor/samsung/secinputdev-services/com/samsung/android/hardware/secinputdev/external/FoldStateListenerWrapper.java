@@ -10,7 +10,6 @@ import android.view.Display;
 
 import java.util.function.Consumer;
 
-/* loaded from: classes.dex */
 public class FoldStateListenerWrapper extends ExternalService {
     private static final String DISPLAY_CATEGORY_BUILTIN =
             "com.samsung.android.hardware.display.category.BUILTIN";

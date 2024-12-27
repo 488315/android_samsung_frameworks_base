@@ -3,7 +3,6 @@ package android.hardware.input;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public final class HostUsiVersion implements Parcelable {
     public static final Parcelable.Creator<HostUsiVersion> CREATOR =
             new Parcelable.Creator<

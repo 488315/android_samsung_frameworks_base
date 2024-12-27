@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public class Tonal implements ExtractionType {
     private static final boolean DEBUG = true;
     private static final float FIT_WEIGHT_H = 1.0f;

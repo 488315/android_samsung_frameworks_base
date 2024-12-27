@@ -9,7 +9,6 @@ import dalvik.system.PathClassLoader;
 
 import java.lang.reflect.Method;
 
-/* loaded from: classes6.dex */
 public class SemCodecSolutionService {
     private static final String TAG = "SemCodecSolutionService";
     private Class mClass;

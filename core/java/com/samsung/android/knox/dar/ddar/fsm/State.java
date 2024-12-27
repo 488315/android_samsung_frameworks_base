@@ -2,7 +2,6 @@ package com.samsung.android.knox.dar.ddar.fsm;
 
 import com.android.internal.content.NativeLibraryHelper;
 
-/* loaded from: classes6.dex */
 public enum State {
     IDLE,
     DEVICE_UNLOCK_DATA_UNLOCK,

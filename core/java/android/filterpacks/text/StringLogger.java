@@ -6,7 +6,6 @@ import android.filterfw.core.Frame;
 import android.filterfw.format.ObjectFormat;
 import android.util.Log;
 
-/* loaded from: classes.dex */
 public class StringLogger extends Filter {
     public StringLogger(String name) {
         super(name);

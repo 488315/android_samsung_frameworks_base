@@ -10,7 +10,6 @@ import com.android.internal.logging.nano.MetricsProto;
 
 import java.text.Normalizer;
 
-/* loaded from: classes4.dex */
 public class KeyCharacterMap implements Parcelable {
     private static final int ACCENT_ACUTE = 180;
     private static final int ACCENT_APOSTROPHE = 39;

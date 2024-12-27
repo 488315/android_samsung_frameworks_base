@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public final class ParcelableConference implements Parcelable {
     public static final Parcelable.Creator<ParcelableConference> CREATOR =
             new Parcelable.Creator<

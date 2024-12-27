@@ -20,7 +20,6 @@ import android.os.StrictMode;
 
 import com.android.internal.util.Preconditions;
 
-/* loaded from: classes3.dex */
 public final class CalendarContract {
     public static final String ACCOUNT_TYPE_LOCAL = "LOCAL";
     public static final String ACTION_EVENT_REMINDER = "android.intent.action.EVENT_REMINDER";

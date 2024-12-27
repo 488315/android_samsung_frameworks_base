@@ -2,7 +2,6 @@ package android.widget;
 
 import android.os.Handler;
 
-/* loaded from: classes4.dex */
 class DoubleDigitManager {
     private Integer intermediateDigit;
     private final CallBack mCallBack;

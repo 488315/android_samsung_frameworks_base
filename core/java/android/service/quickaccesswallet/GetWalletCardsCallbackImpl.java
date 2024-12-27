@@ -9,7 +9,6 @@ import android.os.RemoteException;
 import android.text.TextUtils;
 import android.util.Log;
 
-/* loaded from: classes3.dex */
 final class GetWalletCardsCallbackImpl implements GetWalletCardsCallback {
     private static final String TAG = "QAWalletCallback";
     private final IQuickAccessWalletServiceCallbacks mCallback;

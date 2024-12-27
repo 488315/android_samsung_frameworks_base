@@ -14,5 +14,4 @@ import java.lang.annotation.Target;
     ElementType.PACKAGE
 })
 @Retention(RetentionPolicy.CLASS)
-/* loaded from: classes.dex */
 public @interface Hide {}

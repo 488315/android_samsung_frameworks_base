@@ -6,7 +6,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @Deprecated
-/* loaded from: classes3.dex */
 public final class ScriptIntrinsicBLAS extends ScriptIntrinsic {
     public static final int CONJ_TRANSPOSE = 113;
     public static final int LEFT = 141;

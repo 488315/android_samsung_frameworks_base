@@ -2,7 +2,6 @@ package android.print;
 
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public final class PrintJob {
     private PrintJobInfo mCachedInfo;
     private final PrintManager mPrintManager;

@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.util.Arrays;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public final class AudioChannelLayout implements Parcelable {
     public static final int CHANNEL_BACK_CENTER = 256;
     public static final int CHANNEL_BACK_LEFT = 16;

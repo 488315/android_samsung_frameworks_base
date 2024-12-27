@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes2.dex */
 public interface IThermal extends IInterface {
     public static final String DESCRIPTOR = "android$hardware$thermal$IThermal".replace('$', '.');
     public static final String HASH = "2f49c78011338b42b43d5d0e250d9b520850cc1f";

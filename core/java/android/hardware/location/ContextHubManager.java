@@ -18,7 +18,6 @@ import java.util.Objects;
 import java.util.concurrent.Executor;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public final class ContextHubManager {
     public static final int AUTHORIZATION_DENIED = 0;
     public static final int AUTHORIZATION_DENIED_GRACE_PERIOD = 1;

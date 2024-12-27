@@ -17,7 +17,6 @@ import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/* loaded from: classes5.dex */
 final class ImeTracingPerfettoImpl extends ImeTracing {
     private final InputMethodDataSource mDataSource;
     private final AtomicInteger mTracingSessionsCount = new AtomicInteger(0);

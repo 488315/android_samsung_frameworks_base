@@ -10,7 +10,6 @@ import android.util.Slog;
 import com.android.internal.compat.IPlatformCompat;
 import com.android.internal.util.CollectionUtils;
 
-/* loaded from: classes.dex */
 public class ParseTypeImpl implements ParseInput, ParseResult<Object> {
     public static final boolean DEBUG_FILL_STACK_TRACE = false;
     public static final boolean DEBUG_LOG_ON_ERROR = false;

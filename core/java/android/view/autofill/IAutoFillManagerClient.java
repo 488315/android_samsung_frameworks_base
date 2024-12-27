@@ -18,7 +18,6 @@ import com.android.internal.os.IResultReceiver;
 
 import java.util.List;
 
-/* loaded from: classes4.dex */
 public interface IAutoFillManagerClient extends IInterface {
     void authenticate(int i, int i2, IntentSender intentSender, Intent intent, boolean z)
             throws RemoteException;

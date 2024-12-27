@@ -1,6 +1,5 @@
 package android.database;
 
-/* loaded from: classes.dex */
 public class DataSetObservable extends Observable<DataSetObserver> {
     public void notifyChanged() {
         synchronized (this.mObservers) {

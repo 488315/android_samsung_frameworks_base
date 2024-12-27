@@ -12,7 +12,6 @@ import libcore.io.IoUtils;
 
 import java.io.IOException;
 
-/* loaded from: classes5.dex */
 public class DefaultSplitAssetLoader implements SplitAssetLoader {
     private ApkAssets mBaseApkAssets;
     private final String mBaseApkPath;

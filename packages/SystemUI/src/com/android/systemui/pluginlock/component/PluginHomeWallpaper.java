@@ -23,7 +23,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public class PluginHomeWallpaper {
     private static final String PREFIX_FIRST_FILE = "wallpaper_0";
     private static final String TAG = "PluginHomeWallpaper";

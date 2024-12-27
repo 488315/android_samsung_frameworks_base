@@ -7,7 +7,6 @@ import android.os.Parcel;
 import android.os.PersistableBundle;
 import android.os.RemoteException;
 
-/* loaded from: classes2.dex */
 public interface IMediaMetricsManager extends IInterface {
     public static final String DESCRIPTOR = "android.media.metrics.IMediaMetricsManager";
 

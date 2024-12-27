@@ -14,7 +14,6 @@ import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.AdaptedFunctionReference;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes.dex */
 final /* synthetic */ class PackageUpdateMonitor$packageChanged$1 extends AdaptedFunctionReference implements Function2 {
     public PackageUpdateMonitor$packageChanged$1(Object obj) {
         super(2, obj, PackageUpdateLogger.class, "logChange", "logChange(Lcom/android/systemui/common/shared/model/PackageChangeModel;)V", 4);

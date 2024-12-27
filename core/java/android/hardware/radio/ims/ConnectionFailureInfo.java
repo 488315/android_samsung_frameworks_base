@@ -6,7 +6,6 @@ import android.os.Parcelable;
 
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public class ConnectionFailureInfo implements Parcelable {
     public static final Parcelable.Creator<ConnectionFailureInfo> CREATOR =
             new Parcelable.Creator<ConnectionFailureInfo>() { // from class:

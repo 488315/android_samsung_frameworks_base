@@ -7,7 +7,6 @@ import com.android.internal.util.TokenBucket;
 import java.util.BitSet;
 import java.util.StringJoiner;
 
-/* loaded from: classes3.dex */
 public class NetworkMetrics {
     private static final int CONNECT_LATENCY_MAXIMUM_RECORDS = 20000;
     private static final int INITIAL_DNS_BATCH_SIZE = 100;

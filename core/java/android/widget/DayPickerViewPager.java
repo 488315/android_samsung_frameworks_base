@@ -10,7 +10,6 @@ import com.android.internal.widget.ViewPager;
 import java.util.ArrayList;
 import java.util.function.Predicate;
 
-/* loaded from: classes4.dex */
 class DayPickerViewPager extends ViewPager {
     private final ArrayList<View> mMatchParentChildren;
 

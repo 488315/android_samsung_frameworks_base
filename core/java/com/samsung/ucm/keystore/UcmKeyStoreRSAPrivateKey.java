@@ -3,7 +3,6 @@ package com.samsung.ucm.keystore;
 import java.math.BigInteger;
 import java.security.interfaces.RSAKey;
 
-/* loaded from: classes6.dex */
 public class UcmKeyStoreRSAPrivateKey extends UcmKeyStorePrivateKey implements RSAKey {
     public UcmKeyStoreRSAPrivateKey(String alias) {
         super(alias, "RSA");

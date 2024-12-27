@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.TextView;
 
 @Deprecated
-/* loaded from: classes3.dex */
 public abstract class TwoStatePreference extends Preference {
     boolean mChecked;
     private boolean mCheckedSet;

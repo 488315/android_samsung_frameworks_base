@@ -9,7 +9,6 @@ import com.android.internal.util.TokenBucket;
 
 import java.util.BitSet;
 
-/* loaded from: classes3.dex */
 public class ConnectStats {
     private static final int EALREADY = OsConstants.EALREADY;
     private static final int EINPROGRESS = OsConstants.EINPROGRESS;

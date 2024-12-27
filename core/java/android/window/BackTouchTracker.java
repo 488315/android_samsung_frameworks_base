@@ -8,7 +8,6 @@ import com.samsung.android.rune.CoreRune;
 
 import java.io.PrintWriter;
 
-/* loaded from: classes4.dex */
 public class BackTouchTracker {
     private float mInitTouchX;
     private float mInitTouchY;

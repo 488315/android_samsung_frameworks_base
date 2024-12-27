@@ -1,6 +1,5 @@
 package com.android.internal.org.bouncycastle.util;
 
-/* loaded from: classes5.dex */
 public class StoreException extends RuntimeException {
     private Throwable _e;
 

@@ -1,6 +1,5 @@
 package android.hardware.display;
 
-/* loaded from: classes2.dex */
 public final class DisplayedContentSample {
     private long mNumFrames;
     private long[] mSamplesComponent0;

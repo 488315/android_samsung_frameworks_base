@@ -1,6 +1,5 @@
 package com.samsung.android.location;
 
-/* loaded from: classes6.dex */
 public class SemBleScanGeofence {
     private final String[] mAddress;
     private double mLatitude = 200.0d;

@@ -14,7 +14,6 @@ import com.android.internal.widget.RecyclerView;
 
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public class SemSelectTaskListAdapter extends RecyclerView.Adapter<ViewHolder> {
     private ActivityCallback mActivityCallback;
     protected AbstractMultiProfilePagerAdapter mMultiProfilePagerAdapter;

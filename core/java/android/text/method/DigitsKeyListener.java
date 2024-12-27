@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.Locale;
 
-/* loaded from: classes4.dex */
 public class DigitsKeyListener extends NumberKeyListener {
     private static final int DECIMAL = 2;
     private static final String DEFAULT_DECIMAL_POINT_CHARS = ".";

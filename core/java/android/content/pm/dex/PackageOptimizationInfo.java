@@ -1,6 +1,5 @@
 package android.content.pm.dex;
 
-/* loaded from: classes.dex */
 public class PackageOptimizationInfo {
     private final int mCompilationFilter;
     private final int mCompilationReason;

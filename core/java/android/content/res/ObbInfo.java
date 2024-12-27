@@ -3,7 +3,6 @@ package android.content.res;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes.dex */
 public class ObbInfo implements Parcelable {
     public static final Parcelable.Creator<ObbInfo> CREATOR =
             new Parcelable.Creator<ObbInfo>() { // from class: android.content.res.ObbInfo.1

@@ -19,7 +19,6 @@ import java.nio.charset.CodingErrorAction;
 import java.nio.charset.IllegalCharsetNameException;
 import java.nio.charset.UnsupportedCharsetException;
 
-/* loaded from: classes5.dex */
 public class FastXmlSerializer implements XmlSerializer {
     private static final int DEFAULT_BUFFER_LEN = 32768;
     private static final String[] ESCAPE_TABLE = {

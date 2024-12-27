@@ -9,7 +9,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Map;
 
-/* loaded from: classes3.dex */
 public final class MessageNanoPrinter {
     private static final String INDENT = "  ";
     private static final int MAX_STRING_LEN = 200;

@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.util.Collection;
 import java.util.List;
 
-/* loaded from: classes.dex */
 public class UriRelativeFilterGroupParcel implements Parcelable {
     public static final Parcelable.Creator<UriRelativeFilterGroupParcel> CREATOR =
             new Parcelable.Creator<UriRelativeFilterGroupParcel>() { // from class:

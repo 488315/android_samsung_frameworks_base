@@ -6,7 +6,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public class GeofenceHardwareMonitorEvent implements Parcelable {
     public static final Parcelable.Creator<GeofenceHardwareMonitorEvent> CREATOR =
             new Parcelable.Creator<GeofenceHardwareMonitorEvent>() { // from class:

@@ -4,7 +4,6 @@ import com.android.internal.util.ArrayUtils;
 
 import libcore.util.EmptyArray;
 
-/* loaded from: classes4.dex */
 public final class AutoGrowArray {
     private static final int MAX_CAPACITY_TO_BE_KEPT = 10000;
     private static final int MIN_CAPACITY_INCREMENT = 12;

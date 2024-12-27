@@ -3,7 +3,6 @@ package android.os;
 import android.annotation.SystemApi;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class NewUserResponse {
     private final int mOperationResult;
     private final UserHandle mUser;

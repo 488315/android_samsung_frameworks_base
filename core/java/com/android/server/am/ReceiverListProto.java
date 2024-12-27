@@ -1,6 +1,5 @@
 package com.android.server.am;
 
-/* loaded from: classes5.dex */
 public final class ReceiverListProto {
     public static final long APP = 1146756268033L;
     public static final long CURRENT = 1146756268037L;

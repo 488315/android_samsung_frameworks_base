@@ -2,7 +2,6 @@ package com.samsung.android.transcode.unit.decoder;
 
 import android.media.MediaCodec;
 
-/* loaded from: classes6.dex */
 public class DecodedFrame {
     public int bufferIndex;
     public int flags;

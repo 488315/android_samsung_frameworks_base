@@ -28,7 +28,6 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 @Deprecated
-/* loaded from: classes5.dex */
 public abstract class AbstractRemoteService<
                 S extends AbstractRemoteService<S, I>, I extends IInterface>
         implements IBinder.DeathRecipient {

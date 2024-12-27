@@ -7,7 +7,6 @@ import androidx.compose.ui.unit.IntRect;
 import androidx.compose.ui.unit.IntRectKt;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes.dex */
 public abstract class LazyGridStateExtKt {
     /* renamed from: isItemAtOffset-Uv8p0NA, reason: not valid java name */
     public static final boolean m944isItemAtOffsetUv8p0NA(LazyGridItemInfo lazyGridItemInfo, long j) {

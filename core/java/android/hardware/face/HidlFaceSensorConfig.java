@@ -6,7 +6,6 @@ import android.hardware.biometrics.face.SensorProps;
 
 import com.android.internal.R;
 
-/* loaded from: classes2.dex */
 public final class HidlFaceSensorConfig extends SensorProps {
     private int mModality;
     private int mSensorId;

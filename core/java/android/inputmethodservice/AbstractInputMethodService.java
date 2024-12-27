@@ -16,7 +16,6 @@ import android.window.WindowProviderService;
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 
-/* loaded from: classes2.dex */
 public abstract class AbstractInputMethodService extends WindowProviderService
         implements KeyEvent.Callback {
     final KeyEvent.DispatcherState mDispatcherState = new KeyEvent.DispatcherState();

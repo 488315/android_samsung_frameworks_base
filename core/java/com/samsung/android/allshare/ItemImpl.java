@@ -9,7 +9,6 @@ import com.sec.android.allshare.iface.message.AllShareKey;
 
 import java.util.ArrayList;
 
-/* loaded from: classes3.dex */
 final class ItemImpl extends Item {
     public static final Parcelable.Creator<ItemImpl> CREATOR =
             new Parcelable.Creator<

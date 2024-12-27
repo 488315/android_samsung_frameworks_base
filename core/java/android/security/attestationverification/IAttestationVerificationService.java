@@ -9,7 +9,6 @@ import android.os.RemoteException;
 
 import com.android.internal.infra.AndroidFuture;
 
-/* loaded from: classes3.dex */
 public interface IAttestationVerificationService extends IInterface {
     public static final String DESCRIPTOR =
             "android.security.attestationverification.IAttestationVerificationService";

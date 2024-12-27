@@ -2,7 +2,6 @@ package android.os;
 
 import java.util.ArrayList;
 
-/* loaded from: classes3.dex */
 public class CpuTrackerInfo implements Parcelable {
     public static final Parcelable.Creator<CpuTrackerInfo> CREATOR =
             new Parcelable.Creator<CpuTrackerInfo>() { // from class: android.os.CpuTrackerInfo.1

@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes.dex */
 public interface IFeatureFlagsCallback extends IInterface {
     public static final String DESCRIPTOR = "android.flags.IFeatureFlagsCallback";
 

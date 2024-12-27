@@ -7,7 +7,6 @@ import com.android.internal.org.bouncycastle.jcajce.provider.config.Configurable
 import com.android.internal.org.bouncycastle.jcajce.provider.symmetric.util.BaseKeyGenerator;
 import com.android.internal.org.bouncycastle.jcajce.provider.symmetric.util.BaseMac;
 
-/* loaded from: classes5.dex */
 public class MD5 {
     private MD5() {}
 

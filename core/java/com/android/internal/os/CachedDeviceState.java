@@ -4,7 +4,6 @@ import android.os.SystemClock;
 
 import java.util.ArrayList;
 
-/* loaded from: classes5.dex */
 public class CachedDeviceState {
     private volatile boolean mCharging;
     private final ArrayList<TimeInStateStopwatch> mOnBatteryStopwatches;

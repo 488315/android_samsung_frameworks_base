@@ -4,7 +4,6 @@ import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public class FrontendAtsc3Capabilities implements Parcelable {
     public static final Parcelable.Creator<FrontendAtsc3Capabilities> CREATOR =
             new Parcelable.Creator<FrontendAtsc3Capabilities>() { // from class:

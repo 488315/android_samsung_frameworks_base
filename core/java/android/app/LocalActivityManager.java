@@ -15,7 +15,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Deprecated
-/* loaded from: classes.dex */
 public class LocalActivityManager {
     static final int CREATED = 2;
     static final int DESTROYED = 5;

@@ -16,7 +16,6 @@ import com.android.internal.R;
 
 import java.util.ArrayList;
 
-/* loaded from: classes4.dex */
 public class ExpandableListView extends ListView {
     public static final int CHILD_INDICATOR_INHERIT = -1;
     private static final int INDICATOR_UNDEFINED = -2;

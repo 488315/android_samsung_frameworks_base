@@ -15,7 +15,6 @@ import java.nio.ByteBuffer;
 import java.nio.DirectByteBuffer;
 import java.nio.NioUtils;
 
-/* loaded from: classes3.dex */
 public final class SharedMemory implements Parcelable, Closeable {
     private Cleaner mCleaner;
     private final FileDescriptor mFileDescriptor;

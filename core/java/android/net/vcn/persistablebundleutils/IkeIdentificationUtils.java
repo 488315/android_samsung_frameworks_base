@@ -18,7 +18,6 @@ import java.util.Objects;
 
 import javax.security.auth.x500.X500Principal;
 
-/* loaded from: classes3.dex */
 public final class IkeIdentificationUtils {
     private static final String DER_ASN1_DN_KEY = "DER_ASN1_DN_KEY";
     private static final String FQDN_KEY = "FQDN_KEY";

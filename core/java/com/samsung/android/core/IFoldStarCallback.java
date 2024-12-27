@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes6.dex */
 public interface IFoldStarCallback extends IInterface {
     public static final int BOUNDS_COMPAT_NONE = 0;
     public static final String DESCRIPTOR = "com.samsung.android.core.IFoldStarCallback";

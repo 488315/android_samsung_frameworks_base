@@ -1,6 +1,5 @@
 package com.android.graphics.surfaceflinger.flags;
 
-/* loaded from: classes3.dex */
 public final class Flags {
     private static FeatureFlags FEATURE_FLAGS = new FeatureFlagsImpl();
     public static final String FLAG_ADD_SF_SKIPPED_FRAMES_TO_TRACE =

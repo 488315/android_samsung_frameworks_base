@@ -10,7 +10,6 @@ import com.samsung.android.util.InterpolatorUtils;
 
 import java.util.function.Consumer;
 
-/* loaded from: classes6.dex */
 public class DexSizeCompatResizeGuide extends SizeCompatResizeGuide {
     private static final int DELTA_ADJUSTMENT = 4;
     private static final int MAX_SIZE_THRESHOLD = 200;

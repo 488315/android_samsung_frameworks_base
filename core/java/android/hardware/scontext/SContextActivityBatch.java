@@ -5,7 +5,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @Deprecated
-/* loaded from: classes2.dex */
 public class SContextActivityBatch extends SContextEventContext {
     public static final Parcelable.Creator<SContextActivityBatch> CREATOR =
             new Parcelable.Creator<SContextActivityBatch>() { // from class:

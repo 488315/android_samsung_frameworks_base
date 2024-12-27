@@ -12,7 +12,6 @@ import java.util.Map;
 import java.util.concurrent.Executor;
 
 @SystemApi
-/* loaded from: classes.dex */
 public class VrManager {
     private Map<VrStateCallback, CallbackEntry> mCallbackMap = new ArrayMap();
     private final IVrManager mService;

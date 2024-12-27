@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Set;
 
-/* loaded from: classes4.dex */
 public final class Helper {
     public static boolean sDebug = false;
     public static boolean sVerbose = false;

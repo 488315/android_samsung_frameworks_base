@@ -1,6 +1,5 @@
 package android.os;
 
-/* loaded from: classes3.dex */
 public interface IUpdateEngineCallback extends IInterface {
     void onPayloadApplicationComplete(int i) throws RemoteException;
 

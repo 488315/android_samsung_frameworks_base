@@ -15,7 +15,6 @@ import org.xmlpull.v1.XmlPullParserException;
 import java.io.IOException;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public final class BrightnessCorrection implements Parcelable {
     public static final Parcelable.Creator<BrightnessCorrection> CREATOR =
             new Parcelable.Creator<BrightnessCorrection>() { // from class:

@@ -7,7 +7,6 @@ import java.io.OutputStream;
 import java.util.Map;
 
 @Deprecated
-/* loaded from: classes4.dex */
 public final class CacheManager {
     static final /* synthetic */ boolean $assertionsDisabled = false;
 

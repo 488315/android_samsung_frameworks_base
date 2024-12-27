@@ -9,7 +9,6 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-/* loaded from: classes.dex */
 public final class GestureUtils {
     private static final float NONUNIFORM_SCALE = (float) Math.sqrt(2.0d);
     private static final float SCALING_THRESHOLD = 0.26f;

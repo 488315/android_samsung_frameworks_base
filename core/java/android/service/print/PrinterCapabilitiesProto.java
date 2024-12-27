@@ -1,6 +1,5 @@
 package android.service.print;
 
-/* loaded from: classes3.dex */
 public final class PrinterCapabilitiesProto {
     public static final long COLOR_MODES = 2259152797700L;
     public static final long DUPLEX_MODES = 2259152797701L;

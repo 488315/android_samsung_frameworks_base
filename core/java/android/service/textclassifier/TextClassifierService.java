@@ -36,7 +36,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public abstract class TextClassifierService extends Service {
     public static final int CONNECTED = 0;
     public static final int DISCONNECTED = 1;

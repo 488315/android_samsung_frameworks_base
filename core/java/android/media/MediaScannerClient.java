@@ -1,6 +1,5 @@
 package android.media;
 
-/* loaded from: classes2.dex */
 public interface MediaScannerClient {
     void handleStringTag(String str, String str2);
 

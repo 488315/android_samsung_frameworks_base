@@ -1,6 +1,5 @@
 package com.android.server.am;
 
-/* loaded from: classes5.dex */
 public final class ProcessOomProto {
     public static final long ACTIVITIES = 1133871366149L;
     public static final long ADJ_SOURCE_OBJECT = 1138166333454L;

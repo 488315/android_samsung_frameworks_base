@@ -20,7 +20,6 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 
-/* loaded from: classes.dex */
 public class LayerDrawable extends Drawable implements Drawable.Callback {
     public static final int INSET_UNDEFINED = Integer.MIN_VALUE;
     private static final String LOG_TAG = "LayerDrawable";

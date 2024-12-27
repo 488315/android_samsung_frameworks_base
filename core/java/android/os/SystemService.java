@@ -5,7 +5,6 @@ import com.google.android.collect.Maps;
 import java.util.HashMap;
 import java.util.concurrent.TimeoutException;
 
-/* loaded from: classes3.dex */
 public class SystemService {
     private static HashMap<String, State> sStates = Maps.newHashMap();
     private static Object sPropertyLock = new Object();

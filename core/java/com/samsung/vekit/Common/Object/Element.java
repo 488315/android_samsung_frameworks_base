@@ -4,7 +4,6 @@ import com.samsung.vekit.Common.Type.ElementType;
 import com.samsung.vekit.Common.VEContext;
 import com.samsung.vekit.Panel.Panel;
 
-/* loaded from: classes6.dex */
 public class Element {
     protected String TAG = getClass().getSimpleName();
     protected VEContext context;

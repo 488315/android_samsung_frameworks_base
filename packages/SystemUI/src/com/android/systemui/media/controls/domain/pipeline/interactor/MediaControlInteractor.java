@@ -27,7 +27,6 @@ import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public final class MediaControlInteractor {
     public static final Intent SETTINGS_INTENT;
     public final ActivityIntentHelper activityIntentHelper;

@@ -24,7 +24,6 @@ import java.util.function.BiConsumer;
 import java.util.function.IntConsumer;
 import java.util.stream.IntStream;
 
-/* loaded from: classes.dex */
 public interface ILauncherApps extends IInterface {
     void addOnAppsChangedListener(String str, IOnAppsChangedListener iOnAppsChangedListener)
             throws RemoteException;

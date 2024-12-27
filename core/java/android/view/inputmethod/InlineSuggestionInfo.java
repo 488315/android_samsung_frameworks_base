@@ -13,7 +13,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Arrays;
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public final class InlineSuggestionInfo implements Parcelable {
     public static final Parcelable.Creator<InlineSuggestionInfo> CREATOR =
             new Parcelable.Creator<

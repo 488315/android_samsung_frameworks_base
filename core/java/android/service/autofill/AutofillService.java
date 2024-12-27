@@ -21,7 +21,6 @@ import com.android.internal.util.function.pooled.PooledLambda;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
-/* loaded from: classes3.dex */
 public abstract class AutofillService extends Service {
     public static final String EXTRA_ERROR = "error";
     public static final String EXTRA_FILL_RESPONSE = "android.service.autofill.extra.FILL_RESPONSE";

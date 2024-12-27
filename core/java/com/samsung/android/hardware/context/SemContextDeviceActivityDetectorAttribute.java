@@ -5,7 +5,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 
-/* loaded from: classes6.dex */
 public class SemContextDeviceActivityDetectorAttribute extends SemContextAttribute {
     public static final Parcelable.Creator<SemContextDeviceActivityDetectorAttribute> CREATOR =
             new Parcelable.Creator<

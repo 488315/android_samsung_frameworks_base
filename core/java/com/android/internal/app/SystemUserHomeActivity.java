@@ -6,7 +6,6 @@ import android.util.Log;
 
 import com.android.internal.R;
 
-/* loaded from: classes5.dex */
 public class SystemUserHomeActivity extends Activity {
     private static final String TAG = "SystemUserHome";
 

@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
-/* loaded from: classes6.dex */
 public class IAFTReceiver extends BroadcastReceiver {
     private static final String TAG = "IAFTManager";
     public static final String TRACE_RESULT = "com.android.internal.intent.action.TRACE_RESULT";

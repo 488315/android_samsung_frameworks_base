@@ -11,7 +11,6 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
-/* loaded from: classes6.dex */
 public enum NNFW implements NumericEnum {
     NONE(0, new Vendor[] {Vendor.NONE}),
     SNPE(1, new Vendor[] {Vendor.QCOM}),

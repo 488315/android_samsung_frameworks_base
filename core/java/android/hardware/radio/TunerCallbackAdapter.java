@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 final class TunerCallbackAdapter extends ITunerCallback.Stub {
     private static final String TAG = "BroadcastRadio.TunerCallbackAdapter";
     private final RadioTuner.Callback mCallback;

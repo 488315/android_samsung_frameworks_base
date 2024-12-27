@@ -2,7 +2,6 @@ package com.android.internal.org.bouncycastle.crypto.digests;
 
 import com.android.internal.org.bouncycastle.crypto.Digest;
 
-/* loaded from: classes5.dex */
 interface AndroidDigestFactoryInterface {
     Digest getMD5();
 

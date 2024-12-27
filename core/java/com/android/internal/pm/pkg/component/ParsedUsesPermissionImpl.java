@@ -9,7 +9,6 @@ import com.android.internal.util.Parcelling;
 
 import java.lang.annotation.Annotation;
 
-/* loaded from: classes5.dex */
 public class ParsedUsesPermissionImpl implements ParsedUsesPermission, Parcelable {
     public static final Parcelable.Creator<ParsedUsesPermissionImpl> CREATOR;
     static Parcelling<String> sParcellingForName;

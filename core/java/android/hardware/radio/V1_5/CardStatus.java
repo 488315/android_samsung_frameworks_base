@@ -7,7 +7,6 @@ import android.os.HwParcel;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public final class CardStatus {
     public android.hardware.radio.V1_4.CardStatus base =
             new android.hardware.radio.V1_4.CardStatus();

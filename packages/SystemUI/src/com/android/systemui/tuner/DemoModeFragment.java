@@ -23,7 +23,6 @@ import com.sec.ims.configuration.DATA;
 import com.sec.ims.settings.ImsProfile;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes3.dex */
 public final class DemoModeFragment extends PreferenceFragment implements Preference.OnPreferenceChangeListener {
     public static final String[] STATUS_ICONS = {"volume", "bluetooth", "location", "alarm", "zen", "sync", "tty", "eri", "mute", "speakerphone", "managed_profile"};
     public final DemoModeController mDemoModeController;

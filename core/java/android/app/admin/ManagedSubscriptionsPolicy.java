@@ -13,7 +13,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public final class ManagedSubscriptionsPolicy implements Parcelable {
     public static final Parcelable.Creator<ManagedSubscriptionsPolicy> CREATOR =
             new Parcelable.Creator<ManagedSubscriptionsPolicy>() { // from class:

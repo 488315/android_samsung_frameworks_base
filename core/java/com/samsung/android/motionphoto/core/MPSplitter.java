@@ -2,7 +2,6 @@ package com.samsung.android.motionphoto.core;
 
 import java.io.FileDescriptor;
 
-/* loaded from: classes6.dex */
 public class MPSplitter {
     private native long native_reserve_xmp_on_heic(FileDescriptor fileDescriptor, int i);
 

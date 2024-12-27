@@ -13,7 +13,6 @@ import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public final class DeviceStateManager {
     public static final String ACTION_SHOW_REAR_DISPLAY_OVERLAY =
             "com.android.intent.action.SHOW_REAR_DISPLAY_OVERLAY";

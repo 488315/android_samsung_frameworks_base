@@ -15,7 +15,6 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-/* loaded from: classes.dex */
 public class SemInputCommandService {
     private static final String TAG = "SemInputCommandService";
     private final HashMap<Integer, String> allDeviceList;

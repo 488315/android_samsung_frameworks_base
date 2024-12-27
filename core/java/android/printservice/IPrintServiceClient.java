@@ -15,7 +15,6 @@ import android.text.TextUtils;
 
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public interface IPrintServiceClient extends IInterface {
     PrintJobInfo getPrintJobInfo(PrintJobId printJobId) throws RemoteException;
 

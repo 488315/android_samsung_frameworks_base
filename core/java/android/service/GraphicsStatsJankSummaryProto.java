@@ -1,6 +1,5 @@
 package android.service;
 
-/* loaded from: classes3.dex */
 public final class GraphicsStatsJankSummaryProto {
     public static final long HIGH_INPUT_LATENCY_COUNT = 1120986464260L;
     public static final long JANKY_FRAMES = 1120986464258L;

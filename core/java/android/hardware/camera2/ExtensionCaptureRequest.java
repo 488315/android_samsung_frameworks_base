@@ -4,7 +4,6 @@ import android.hardware.camera2.impl.ExtensionKey;
 import android.hardware.camera2.impl.PublicKey;
 import android.util.Pair;
 
-/* loaded from: classes2.dex */
 public final class ExtensionCaptureRequest {
     public static final int EFV_STABILIZATION_MODE_GIMBAL = 1;
     public static final int EFV_STABILIZATION_MODE_LOCKED = 2;

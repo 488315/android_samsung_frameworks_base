@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 
-/* loaded from: classes6.dex */
 public class SemCustomDumpManager {
     private static final String TAG = SemCustomDumpManager.class.getSimpleName();
     private Context mContext;

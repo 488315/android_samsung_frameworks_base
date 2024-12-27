@@ -34,7 +34,6 @@ import android.os.ResultReceiver;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
 public interface IVirtualDevice extends IInterface {
     public static final String DESCRIPTOR = "android.companion.virtual.IVirtualDevice";
 

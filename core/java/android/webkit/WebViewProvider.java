@@ -45,7 +45,6 @@ import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public interface WebViewProvider {
 
     public interface ScrollDelegate {

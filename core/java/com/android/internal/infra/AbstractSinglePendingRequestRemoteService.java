@@ -9,7 +9,6 @@ import android.util.Slog;
 import java.io.PrintWriter;
 
 @Deprecated
-/* loaded from: classes5.dex */
 public abstract class AbstractSinglePendingRequestRemoteService<
                 S extends AbstractSinglePendingRequestRemoteService<S, I>, I extends IInterface>
         extends AbstractRemoteService<S, I> {

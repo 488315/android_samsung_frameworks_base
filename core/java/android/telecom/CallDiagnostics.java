@@ -8,7 +8,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public abstract class CallDiagnostics {
     public static final int BATTERY_STATE_CHARGING = 3;
     public static final int BATTERY_STATE_GOOD = 2;

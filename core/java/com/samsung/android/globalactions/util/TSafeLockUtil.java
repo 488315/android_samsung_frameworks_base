@@ -5,7 +5,6 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.provider.Settings;
 
-/* loaded from: classes6.dex */
 public class TSafeLockUtil {
     private static final String OFF_MENU_SETTING = "off_menu_setting";
     private static final String TLOCK_PKG_NAME = "com.skt.t_smart_charge";

@@ -7,7 +7,6 @@ import android.os.Message;
 
 import com.sec.android.allshare.iface.CVMessage;
 
-/* loaded from: classes3.dex */
 abstract class AllShareEventHandler extends Handler {
     private static final String TAG = "AllShareEventHandler";
 

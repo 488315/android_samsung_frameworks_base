@@ -11,7 +11,6 @@ import com.android.internal.util.FrameworkStatsLog;
 
 import java.util.Random;
 
-/* loaded from: classes5.dex */
 public class BinderLatencyObserver {
     public static final int BUCKET_COUNT_DEFAULT = 100;
     public static final float BUCKET_SCALE_FACTOR_DEFAULT = 1.125f;

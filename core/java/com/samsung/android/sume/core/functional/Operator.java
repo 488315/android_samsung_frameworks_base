@@ -3,7 +3,6 @@ package com.samsung.android.sume.core.functional;
 import com.samsung.android.sume.core.buffer.MediaBuffer;
 import com.samsung.android.sume.core.buffer.MutableMediaBuffer;
 
-/* loaded from: classes6.dex */
 public interface Operator {
     MutableMediaBuffer run(MediaBuffer mediaBuffer, MutableMediaBuffer mutableMediaBuffer)
             throws UnsupportedOperationException;

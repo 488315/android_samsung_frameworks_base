@@ -9,7 +9,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public final class MediaQualityStatus implements Parcelable {
     public static final Parcelable.Creator<MediaQualityStatus> CREATOR =
             new Parcelable.Creator<

@@ -21,7 +21,6 @@ import com.samsung.android.hardware.display.IRefreshRateToken;
 
 import java.util.List;
 
-/* loaded from: classes2.dex */
 public interface IDisplayManager extends IInterface {
     IRefreshRateToken acquireLowRefreshRateToken(IBinder iBinder, String str)
             throws RemoteException;

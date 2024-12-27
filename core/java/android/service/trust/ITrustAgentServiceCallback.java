@@ -9,7 +9,6 @@ import android.text.TextUtils;
 
 import com.android.internal.infra.AndroidFuture;
 
-/* loaded from: classes3.dex */
 public interface ITrustAgentServiceCallback extends IInterface {
     void addEscrowToken(byte[] bArr, int i) throws RemoteException;
 

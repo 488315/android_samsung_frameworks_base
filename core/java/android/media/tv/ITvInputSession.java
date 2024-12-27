@@ -12,7 +12,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.view.Surface;
 
-/* loaded from: classes3.dex */
 public interface ITvInputSession extends IInterface {
     void appPrivateCommand(String str, Bundle bundle) throws RemoteException;
 

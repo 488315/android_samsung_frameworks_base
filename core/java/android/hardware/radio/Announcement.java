@@ -11,7 +11,6 @@ import java.util.Map;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public final class Announcement implements Parcelable {
     public static final Parcelable.Creator<Announcement> CREATOR =
             new Parcelable.Creator<

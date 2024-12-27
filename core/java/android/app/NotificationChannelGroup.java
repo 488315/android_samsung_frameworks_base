@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public final class NotificationChannelGroup implements Parcelable {
     private static final String ATT_BLOCKED = "blocked";
     private static final String ATT_DESC = "desc";

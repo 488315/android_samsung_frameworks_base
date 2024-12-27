@@ -7,7 +7,6 @@ import com.android.internal.org.bouncycastle.asn1.ASN1Primitive;
 import com.android.internal.org.bouncycastle.asn1.ASN1Sequence;
 import com.android.internal.org.bouncycastle.asn1.BERSequence;
 
-/* loaded from: classes5.dex */
 public class Pfx extends ASN1Object implements PKCSObjectIdentifiers {
     private ContentInfo contentInfo;
     private MacData macData;

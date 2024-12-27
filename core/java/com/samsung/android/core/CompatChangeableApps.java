@@ -22,7 +22,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-/* loaded from: classes6.dex */
 public class CompatChangeableApps extends ICompatChangeableManager.Stub {
     public static final String TAG = "CompatChangeableApps";
     private final Map<String, CompatChangeablePackageInfo> mCache;

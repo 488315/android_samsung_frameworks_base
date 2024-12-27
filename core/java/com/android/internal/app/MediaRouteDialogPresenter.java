@@ -9,7 +9,6 @@ import android.media.MediaRouter;
 import android.util.Log;
 import android.view.View;
 
-/* loaded from: classes5.dex */
 public abstract class MediaRouteDialogPresenter {
     private static final String CHOOSER_FRAGMENT_TAG =
             "android.app.MediaRouteButton:MediaRouteChooserDialogFragment";

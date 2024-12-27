@@ -18,7 +18,6 @@ import java.security.PublicKey;
 import java.security.spec.ECGenParameterSpec;
 import java.security.spec.ECParameterSpec;
 
-/* loaded from: classes5.dex */
 class ECUtils {
     ECUtils() {}
 

@@ -8,7 +8,6 @@ import android.widget.RemoteViews;
 
 import java.util.ArrayList;
 
-/* loaded from: classes3.dex */
 public abstract class InternalTransformation implements Transformation, Parcelable {
     private static final String TAG = "InternalTransformation";
 

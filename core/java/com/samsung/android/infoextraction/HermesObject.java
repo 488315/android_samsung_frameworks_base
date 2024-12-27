@@ -3,7 +3,6 @@ package com.samsung.android.infoextraction;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes6.dex */
 public class HermesObject implements Parcelable {
     public static final Parcelable.Creator<HermesObject> CREATOR =
             new Parcelable.Creator<

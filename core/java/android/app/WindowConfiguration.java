@@ -22,7 +22,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public class WindowConfiguration implements Parcelable, Comparable<WindowConfiguration> {
     public static final int ACTIVITY_TYPE_ASSISTANT = 4;
     public static final int ACTIVITY_TYPE_DREAM = 5;

@@ -15,7 +15,6 @@ import com.android.internal.util.BitUtils;
 
 @SystemApi
 @Deprecated
-/* loaded from: classes3.dex */
 public class IpConnectivityLog {
     private static final boolean DBG = false;
     public static final String SERVICE_NAME = "connmetrics";

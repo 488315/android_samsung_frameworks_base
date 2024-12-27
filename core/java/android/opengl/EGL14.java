@@ -5,7 +5,6 @@ import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-/* loaded from: classes3.dex */
 public class EGL14 {
     public static final int EGL_ALPHA_MASK_SIZE = 12350;
     public static final int EGL_ALPHA_SIZE = 12321;

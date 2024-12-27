@@ -1,6 +1,5 @@
 package android.internal.perfetto.protos;
 
-/* loaded from: classes2.dex */
 public final class ProtologConfig {
 
     public final class ProtoLogConfig {

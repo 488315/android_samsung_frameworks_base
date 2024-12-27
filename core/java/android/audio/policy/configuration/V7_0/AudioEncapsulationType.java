@@ -1,6 +1,5 @@
 package android.audio.policy.configuration.V7_0;
 
-/* loaded from: classes.dex */
 public enum AudioEncapsulationType {
     AUDIO_ENCAPSULATION_TYPE_NONE("AUDIO_ENCAPSULATION_TYPE_NONE"),
     AUDIO_ENCAPSULATION_TYPE_IEC61937("AUDIO_ENCAPSULATION_TYPE_IEC61937");

@@ -79,7 +79,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public final class MobileDataTile extends SQSTileImpl implements SignalCallback {
     public static final Intent DATA_SETTINGS = new Intent().setAction("android.settings.DATA_USAGE_SETTINGS");
     public static final Intent DATA_SETTINGS_UPSM = new Intent().setAction("com.samsung.android.app.telephonyui.action.OPEN_NET_SETTINGS");

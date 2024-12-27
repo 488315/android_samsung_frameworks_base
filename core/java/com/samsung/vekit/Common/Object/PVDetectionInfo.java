@@ -2,7 +2,6 @@ package com.samsung.vekit.Common.Object;
 
 import com.samsung.vekit.Common.Type.PVObjectType;
 
-/* loaded from: classes6.dex */
 public class PVDetectionInfo {
     int angles;
     int bottom;

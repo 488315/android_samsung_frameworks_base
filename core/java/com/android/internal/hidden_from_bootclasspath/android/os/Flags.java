@@ -1,6 +1,5 @@
 package com.android.internal.hidden_from_bootclasspath.android.os;
 
-/* loaded from: classes5.dex */
 public final class Flags {
     private static FeatureFlags FEATURE_FLAGS = new FeatureFlagsImpl();
     public static final String FLAG_ADPF_FMQ_EAGER_SEND = "android.os.adpf_fmq_eager_send";

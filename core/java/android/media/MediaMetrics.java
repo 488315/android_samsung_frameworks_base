@@ -13,7 +13,6 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public class MediaMetrics {
     private static final Charset MEDIAMETRICS_CHARSET = StandardCharsets.UTF_8;
     public static final String SEPARATOR = ".";

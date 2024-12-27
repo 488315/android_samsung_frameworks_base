@@ -10,7 +10,6 @@ import android.view.animation.DecelerateInterpolator;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* loaded from: classes5.dex */
 public class DrawableHolder implements Animator.AnimatorListener {
     private static final boolean DBG = false;
     public static final DecelerateInterpolator EASE_OUT_INTERPOLATOR = new DecelerateInterpolator();

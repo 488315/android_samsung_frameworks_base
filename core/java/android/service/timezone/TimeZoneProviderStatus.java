@@ -16,7 +16,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class TimeZoneProviderStatus implements Parcelable {
     public static final Parcelable.Creator<TimeZoneProviderStatus> CREATOR =
             new Parcelable.Creator<

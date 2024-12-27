@@ -22,7 +22,6 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
-/* loaded from: classes6.dex */
 public class Message {
     public static final int BLOCK_DONE = 506;
     public static final int BLOCK_START = 505;

@@ -4,7 +4,6 @@ import android.util.Pair;
 
 import java.util.Map;
 
-/* loaded from: classes6.dex */
 public interface MessageProducer {
     Message newMessage(int i);
 

@@ -15,7 +15,6 @@ import android.telephony.satellite.SatelliteManager;
 import com.android.internal.telephony.flags.Flags;
 import com.android.internal.util.Preconditions;
 
-/* loaded from: classes4.dex */
 public class TelephonyFrameworkInitializer {
     static final long ENABLE_CHECKING_TELEPHONY_FEATURES = 330583731;
     private static volatile TelephonyServiceManager sTelephonyServiceManager;

@@ -17,7 +17,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes.dex */
 public final class PeopleManager {
     private static final String LOG_TAG = PeopleManager.class.getSimpleName();
     private Context mContext;

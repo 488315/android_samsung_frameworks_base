@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Stack;
 
-/* loaded from: classes.dex */
 public class DefaultDataHandler implements ContentInsertHandler {
     private static final String ARG = "arg";
     private static final String COL = "col";

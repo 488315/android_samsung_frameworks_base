@@ -11,7 +11,6 @@ import com.samsung.android.knox.dar.ddar.fsm.State;
 import com.samsung.android.knox.dar.ddar.proxy.KnoxProxyManager;
 import com.samsung.android.knox.dar.ddar.securesession.Wiper;
 
-/* loaded from: classes6.dex */
 public class DualDARController {
     private static final boolean DEBUG = false;
     public static final String DUALDAR_AGENT = "KNOXCORE_PROXY_AGENT";

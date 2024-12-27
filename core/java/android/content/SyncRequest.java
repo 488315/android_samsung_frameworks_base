@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes.dex */
 public class SyncRequest implements Parcelable {
     public static final Parcelable.Creator<SyncRequest> CREATOR =
             new Parcelable.Creator<SyncRequest>() { // from class: android.content.SyncRequest.1

@@ -4,7 +4,6 @@ import android.util.Log;
 
 import java.util.concurrent.locks.ReentrantLock;
 
-/* loaded from: classes6.dex */
 public class MPRecorder {
     private static final String TAG;
     private MPRecorderListener mListener;

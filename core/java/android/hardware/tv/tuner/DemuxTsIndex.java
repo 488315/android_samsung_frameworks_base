@@ -1,6 +1,5 @@
 package android.hardware.tv.tuner;
 
-/* loaded from: classes2.dex */
 public @interface DemuxTsIndex {
     public static final int ADAPTATION_EXTENSION_FLAG = 4096;
     public static final int CHANGE_TO_EVEN_SCRAMBLED = 8;

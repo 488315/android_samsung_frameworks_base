@@ -14,7 +14,6 @@ import java.io.IOException;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
-/* loaded from: classes5.dex */
 public abstract class AbstractX500NameStyle implements X500NameStyle {
     public static Hashtable copyHashTable(Hashtable paramsMap) {
         Hashtable newTable = new Hashtable();

@@ -3,7 +3,6 @@ package android.graphics;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes.dex */
 public class ImageFormat {
     public static final int DEPTH16 = 1144402265;
     public static final int DEPTH_JPEG = 1768253795;

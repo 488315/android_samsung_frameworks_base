@@ -28,7 +28,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
 @RemoteViews.RemoteView
-/* loaded from: classes4.dex */
 public class LinearLayout extends ViewGroup {
     public static final int HORIZONTAL = 0;
     private static final int INDEX_BOTTOM = 2;

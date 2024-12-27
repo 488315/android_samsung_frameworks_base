@@ -20,7 +20,6 @@ import java.util.Map;
 import java.util.concurrent.Executor;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes.dex */
 public final class CoreSettingsObserver extends ContentObserver {
     public static volatile boolean sDeviceConfigContextEntriesLoaded;
     public static final List sDeviceConfigEntries;

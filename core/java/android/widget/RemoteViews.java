@@ -126,7 +126,6 @@ import java.util.function.Function;
 import java.util.function.IntFunction;
 import java.util.function.Predicate;
 
-/* loaded from: classes4.dex */
 public class RemoteViews implements Parcelable, LayoutInflater.Filter {
     private static final int ATTRIBUTE_REFLECTION_ACTION_TAG = 32;
     private static final int BITMAP_REFLECTION_ACTION_TAG = 12;

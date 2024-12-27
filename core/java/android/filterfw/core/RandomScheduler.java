@@ -3,7 +3,6 @@ package android.filterfw.core;
 import java.util.Random;
 import java.util.Vector;
 
-/* loaded from: classes.dex */
 public class RandomScheduler extends Scheduler {
     private Random mRand;
 

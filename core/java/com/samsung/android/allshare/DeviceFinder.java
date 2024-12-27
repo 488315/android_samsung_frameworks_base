@@ -2,7 +2,6 @@ package com.samsung.android.allshare;
 
 import java.util.ArrayList;
 
-/* loaded from: classes3.dex */
 public abstract class DeviceFinder {
 
     public interface IDeviceFinderEventListener {

@@ -15,7 +15,6 @@ import java.io.PrintWriter;
 import java.util.List;
 
 @Deprecated
-/* loaded from: classes.dex */
 public class FragmentController {
     private final FragmentHostCallback<?> mHost;
 

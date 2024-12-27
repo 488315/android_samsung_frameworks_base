@@ -7,7 +7,6 @@ import android.os.IRemoteCallback;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes3.dex */
 public interface IDreamService extends IInterface {
     void attach(IBinder iBinder, boolean z, boolean z2, IRemoteCallback iRemoteCallback)
             throws RemoteException;

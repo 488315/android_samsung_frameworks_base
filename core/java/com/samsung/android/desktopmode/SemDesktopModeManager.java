@@ -10,7 +10,6 @@ import android.util.Log;
 
 import java.util.Map;
 
-/* loaded from: classes6.dex */
 public final class SemDesktopModeManager {
     public static final String LAUNCHER_PACKAGE = "com.sec.android.app.desktoplauncher";
     public static final String UI_SERVICE_PACKAGE = "com.sec.android.desktopmode.uiservice";

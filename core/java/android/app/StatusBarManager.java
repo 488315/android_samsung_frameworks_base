@@ -39,7 +39,6 @@ import java.util.Set;
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 
-/* loaded from: classes.dex */
 public class StatusBarManager {
     public static final String ACTION_KEYGUARD_PRIVATE_NOTIFICATIONS_CHANGED =
             "android.app.action.KEYGUARD_PRIVATE_NOTIFICATIONS_CHANGED";

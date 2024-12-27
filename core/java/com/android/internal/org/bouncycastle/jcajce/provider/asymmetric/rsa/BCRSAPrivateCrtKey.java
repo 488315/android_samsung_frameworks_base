@@ -17,7 +17,6 @@ import java.math.BigInteger;
 import java.security.interfaces.RSAPrivateCrtKey;
 import java.security.spec.RSAPrivateCrtKeySpec;
 
-/* loaded from: classes5.dex */
 public class BCRSAPrivateCrtKey extends BCRSAPrivateKey implements RSAPrivateCrtKey {
     static final long serialVersionUID = 7834723820638524718L;
     private BigInteger crtCoefficient;

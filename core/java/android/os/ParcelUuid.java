@@ -2,7 +2,6 @@ package android.os;
 
 import java.util.UUID;
 
-/* loaded from: classes3.dex */
 public final class ParcelUuid implements Parcelable {
     public static final Parcelable.Creator<ParcelUuid> CREATOR =
             new Parcelable.Creator<ParcelUuid>() { // from class: android.os.ParcelUuid.1

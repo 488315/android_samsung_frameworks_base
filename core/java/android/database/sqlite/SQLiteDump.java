@@ -22,7 +22,6 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-/* loaded from: classes.dex */
 public class SQLiteDump {
     public static final String DB_INFO_DUMP_DIR_NAME = "sqlite_dump";
     public static final SQLiteDump DUMMY_DB_DUMP = new SQLiteDump();

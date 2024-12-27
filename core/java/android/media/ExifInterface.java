@@ -62,7 +62,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.CRC32;
 
-/* loaded from: classes2.dex */
 public class ExifInterface {
     private static final short BYTE_ALIGN_II = 18761;
     private static final short BYTE_ALIGN_MM = 19789;

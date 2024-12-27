@@ -31,7 +31,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.OptionalInt;
 
-/* loaded from: classes4.dex */
 public class ApkSignatureSchemeV3Verifier {
     static final int APK_SIGNATURE_SCHEME_V31_BLOCK_ID = 462663009;
     static final int APK_SIGNATURE_SCHEME_V3_BLOCK_ID = -262969152;

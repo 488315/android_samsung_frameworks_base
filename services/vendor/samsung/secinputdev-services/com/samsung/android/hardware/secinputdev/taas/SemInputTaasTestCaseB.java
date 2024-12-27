@@ -12,7 +12,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.function.Consumer;
 
-/* loaded from: classes.dex */
 public class SemInputTaasTestCaseB implements SemInputTaasTestCase {
     private static final String TAG = "SemInputTaasTestCaseB";
     private ExternalApi mExternalApi = null;

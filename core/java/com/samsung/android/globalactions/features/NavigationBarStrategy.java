@@ -6,7 +6,6 @@ import com.samsung.android.globalactions.presentation.strategies.WindowDecoratio
 import com.samsung.android.globalactions.util.ConditionChecker;
 import com.samsung.android.globalactions.util.SystemConditions;
 
-/* loaded from: classes6.dex */
 public class NavigationBarStrategy implements WindowDecorationStrategy {
     ConditionChecker mConditionChecker;
 

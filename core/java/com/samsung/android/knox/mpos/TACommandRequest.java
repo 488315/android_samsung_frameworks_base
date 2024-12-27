@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public class TACommandRequest implements Parcelable {
     public static final Parcelable.Creator<TACommandRequest> CREATOR =
             new Parcelable.Creator<

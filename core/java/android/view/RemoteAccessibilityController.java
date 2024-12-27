@@ -10,7 +10,6 @@ import android.view.accessibility.IAccessibilityEmbeddedConnection;
 
 import java.lang.ref.WeakReference;
 
-/* loaded from: classes4.dex */
 class RemoteAccessibilityController {
     private static final String TAG = "RemoteAccessibilityController";
     private RemoteAccessibilityEmbeddedConnection mConnectionWrapper;

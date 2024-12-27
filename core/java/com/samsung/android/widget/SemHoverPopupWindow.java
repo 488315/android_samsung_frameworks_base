@@ -36,7 +36,6 @@ import com.samsung.android.cover.ICoverManager;
 import com.samsung.android.rune.ViewRune;
 import com.samsung.android.sepunion.UnionConstants;
 
-/* loaded from: classes6.dex */
 public class SemHoverPopupWindow {
     private static final int ANCHOR_VIEW_COORDINATES_TYPE_SCREEN = 2;
     private static final int ANCHOR_VIEW_COORDINATES_TYPE_WINDOW = 1;

@@ -2,7 +2,6 @@ package com.android.internal.os.logging;
 
 import com.android.internal.util.FrameworkStatsLog;
 
-/* loaded from: classes5.dex */
 public class MetricsLoggerWrapper {
     public static void logAppOverlayEnter(
             int uid, String packageName, boolean changed, int type, boolean usingAlertWindow) {

@@ -4,7 +4,6 @@ import android.service.timezone.TimeZoneProviderService;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class CardState {
     public static final int ABSENT = 0;
     public static final int ERROR = 2;

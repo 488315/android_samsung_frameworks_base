@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import com.samsung.android.sume.core.graph.Graph;
 import com.samsung.android.sume.core.types.OptionBase;
 
-/* loaded from: classes6.dex */
 public class Option extends Graph.Option {
     public static final Parcelable.Creator<Option> CREATOR =
             new Parcelable.Creator<

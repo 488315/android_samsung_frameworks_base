@@ -2,7 +2,6 @@ package com.samsung.android.wifi.util;
 
 import android.text.format.DateFormat;
 
-/* loaded from: classes6.dex */
 public class SemHexEncoding {
     private static final char[] LOWER_CASE_DIGITS = {
         '0',

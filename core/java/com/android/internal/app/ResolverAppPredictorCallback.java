@@ -8,7 +8,6 @@ import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-/* loaded from: classes5.dex */
 public class ResolverAppPredictorCallback {
     private volatile Consumer<List<AppTarget>> mCallback;
 

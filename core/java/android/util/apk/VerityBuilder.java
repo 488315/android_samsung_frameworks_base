@@ -9,7 +9,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
-/* loaded from: classes4.dex */
 public abstract class VerityBuilder {
     private static final int CHUNK_SIZE_BYTES = 4096;
     private static final byte[] DEFAULT_SALT = new byte[8];

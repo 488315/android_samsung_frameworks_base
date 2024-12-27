@@ -10,7 +10,6 @@ import android.util.Log;
 import java.io.FileDescriptor;
 import java.lang.ref.WeakReference;
 
-/* loaded from: classes2.dex */
 public class JetPlayer {
     private static final int JET_EVENT = 1;
     private static final int JET_EVENT_CHAN_MASK = 245760;

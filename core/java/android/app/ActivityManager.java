@@ -83,7 +83,6 @@ import java.util.concurrent.Executor;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
-/* loaded from: classes.dex */
 public class ActivityManager {
     public static final String ACTION_REPORT_HEAP_LIMIT = "android.app.action.REPORT_HEAP_LIMIT";
     public static final int ADD_RECENT_PAIRED_TASKS = 64;

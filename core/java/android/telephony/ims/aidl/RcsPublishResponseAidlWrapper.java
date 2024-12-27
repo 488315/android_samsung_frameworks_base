@@ -5,7 +5,6 @@ import android.telephony.ims.ImsException;
 import android.telephony.ims.SipDetails;
 import android.telephony.ims.stub.RcsCapabilityExchangeImplBase;
 
-/* loaded from: classes4.dex */
 public class RcsPublishResponseAidlWrapper
         implements RcsCapabilityExchangeImplBase.PublishResponseCallback {
     private final IPublishResponseCallback mResponseBinder;

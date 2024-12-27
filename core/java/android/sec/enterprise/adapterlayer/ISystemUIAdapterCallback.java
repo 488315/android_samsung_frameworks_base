@@ -7,7 +7,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.sec.enterprise.content.SecContentProviderURI;
 
-/* loaded from: classes3.dex */
 public interface ISystemUIAdapterCallback extends IInterface {
     public static final String DESCRIPTOR =
             "android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback";

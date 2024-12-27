@@ -1,6 +1,5 @@
 package android.server.inputmethod;
 
-/* loaded from: classes3.dex */
 public final class InputMethodManagerServiceProto {
     public static final long ACCESSIBILITY_REQUESTING_NO_SOFT_KEYBOARD = 1133871366168L;
     public static final long BACK_DISPOSITION = 1120986464277L;

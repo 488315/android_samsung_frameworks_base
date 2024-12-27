@@ -15,7 +15,6 @@ import com.android.internal.inputmethod.IAccessibilityInputMethodSession;
 import com.android.internal.inputmethod.IAccessibilityInputMethodSessionCallback;
 import com.android.internal.inputmethod.IRemoteAccessibilityInputConnection;
 
-/* loaded from: classes.dex */
 public interface IAccessibilityServiceClient extends IInterface {
     void bindInput() throws RemoteException;
 

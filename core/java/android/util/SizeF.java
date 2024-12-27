@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 import com.android.internal.util.Preconditions;
 
-/* loaded from: classes4.dex */
 public final class SizeF implements Parcelable {
     public static final Parcelable.Creator<SizeF> CREATOR =
             new Parcelable.Creator<SizeF>() { // from class: android.util.SizeF.1

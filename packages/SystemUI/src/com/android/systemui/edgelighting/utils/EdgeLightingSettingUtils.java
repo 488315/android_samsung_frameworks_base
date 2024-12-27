@@ -20,7 +20,6 @@ import java.util.HashMap;
 import java.util.List;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public final class EdgeLightingSettingUtils {
     public static final int[] mSimilarColorIndex = {3, 3, 3, 3, 3, 12, 13, 10, 5, 6, 7, 8, 12, 13};
     public static final int[] mSimilarColorIndexForONEUI_4 = {3, 3, 3, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};

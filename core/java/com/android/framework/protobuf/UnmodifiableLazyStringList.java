@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.RandomAccess;
 
-/* loaded from: classes3.dex */
 public class UnmodifiableLazyStringList extends AbstractList<String>
         implements LazyStringList, RandomAccess {
     private final LazyStringList list;

@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import android.util.Size;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class DisplayHashParams implements Parcelable {
     public static final Parcelable.Creator<DisplayHashParams> CREATOR =
             new Parcelable.Creator<

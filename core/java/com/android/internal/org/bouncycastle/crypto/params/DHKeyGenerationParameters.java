@@ -4,7 +4,6 @@ import com.android.internal.org.bouncycastle.crypto.KeyGenerationParameters;
 
 import java.security.SecureRandom;
 
-/* loaded from: classes5.dex */
 public class DHKeyGenerationParameters extends KeyGenerationParameters {
     private DHParameters params;
 

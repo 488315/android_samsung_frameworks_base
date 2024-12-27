@@ -25,7 +25,6 @@ import android.telephony.satellite.SemSatelliteSignalStrength;
 
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public interface ITelephonyRegistry extends IInterface {
     void addCarrierConfigChangeListener(
             ICarrierConfigChangeListener iCarrierConfigChangeListener, String str, String str2)

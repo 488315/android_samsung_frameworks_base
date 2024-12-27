@@ -12,7 +12,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-/* loaded from: classes.dex */
 public final class UsageEventsQuery implements Parcelable {
     public static final Parcelable.Creator<UsageEventsQuery> CREATOR =
             new Parcelable.Creator<

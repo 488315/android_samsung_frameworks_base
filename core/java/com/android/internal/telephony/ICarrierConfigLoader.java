@@ -10,7 +10,6 @@ import android.os.PermissionEnforcer;
 import android.os.PersistableBundle;
 import android.os.RemoteException;
 
-/* loaded from: classes5.dex */
 public interface ICarrierConfigLoader extends IInterface {
     @Deprecated
     PersistableBundle getConfigForSubId(int i, String str) throws RemoteException;

@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 import java.util.Arrays;
 
-/* loaded from: classes4.dex */
 public final class SentenceSuggestionsInfo implements Parcelable {
     public static final Parcelable.Creator<SentenceSuggestionsInfo> CREATOR =
             new Parcelable.Creator<

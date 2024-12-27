@@ -7,7 +7,6 @@ import com.android.telephony.Rlog;
 
 import java.util.ArrayList;
 
-/* loaded from: classes5.dex */
 public class PublishDialog implements Parcelable {
     public static final Parcelable.Creator<PublishDialog> CREATOR =
             new Parcelable.Creator<

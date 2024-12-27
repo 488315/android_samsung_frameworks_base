@@ -2,7 +2,6 @@ package android.opengl;
 
 import android.graphics.Bitmap;
 
-/* loaded from: classes3.dex */
 public final class GLUtils {
     private static native int native_getInternalFormat(Bitmap bitmap);
 

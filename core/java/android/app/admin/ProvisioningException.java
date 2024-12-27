@@ -7,7 +7,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
-/* loaded from: classes.dex */
 public class ProvisioningException extends AndroidException {
     public static final int ERROR_ADMIN_PACKAGE_INSTALLATION_FAILED = 3;
     public static final int ERROR_PRE_CONDITION_FAILED = 1;

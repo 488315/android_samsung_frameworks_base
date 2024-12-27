@@ -10,7 +10,6 @@ import android.text.format.DateFormat;
 import java.util.Date;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public final class AssociationInfo implements Parcelable {
     public static final Parcelable.Creator<AssociationInfo> CREATOR =
             new Parcelable.Creator<

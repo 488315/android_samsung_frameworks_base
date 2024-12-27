@@ -9,7 +9,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.window.TaskSnapshot;
 
-/* loaded from: classes4.dex */
 public interface IRecentsAnimationRunner extends IInterface {
     void onAnimationCanceled(int[] iArr, TaskSnapshot[] taskSnapshotArr) throws RemoteException;
 

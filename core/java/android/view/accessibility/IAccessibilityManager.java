@@ -24,7 +24,6 @@ import android.view.SurfaceControl;
 
 import java.util.List;
 
-/* loaded from: classes4.dex */
 public interface IAccessibilityManager extends IInterface {
     boolean OnStartGestureWakeup() throws RemoteException;
 

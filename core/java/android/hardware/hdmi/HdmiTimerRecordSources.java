@@ -4,7 +4,6 @@ import android.annotation.SystemApi;
 import android.util.Log;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public class HdmiTimerRecordSources {
     private static final int EXTERNAL_SOURCE_SPECIFIER_EXTERNAL_PHYSICAL_ADDRESS = 5;
     private static final int EXTERNAL_SOURCE_SPECIFIER_EXTERNAL_PLUG = 4;

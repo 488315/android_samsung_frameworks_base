@@ -10,7 +10,6 @@ import android.widget.ViewAnimator;
 
 import java.util.ArrayList;
 
-/* loaded from: classes5.dex */
 public class DialogViewAnimator extends ViewAnimator {
     private final ArrayList<View> mMatchParentChildren;
 

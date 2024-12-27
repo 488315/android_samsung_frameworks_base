@@ -10,7 +10,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public class ShaderData implements Operation, VariableSupport {
     public static final Companion COMPANION = new Companion();
     public static final int MAX_IMAGE_DIMENSION = 8000;

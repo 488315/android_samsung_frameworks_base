@@ -2,7 +2,6 @@ package android.renderscript;
 
 
 @Deprecated
-/* loaded from: classes3.dex */
 public final class ScriptIntrinsicColorMatrix extends ScriptIntrinsic {
     private final Float4 mAdd;
     private final Matrix4f mMatrix;

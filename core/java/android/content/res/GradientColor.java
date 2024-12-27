@@ -18,7 +18,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Arrays;
 
-/* loaded from: classes.dex */
 public class GradientColor extends ComplexColor {
     private static final boolean DBG_GRADIENT = false;
     private static final String TAG = "GradientColor";

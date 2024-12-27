@@ -4,7 +4,6 @@ import android.animation.TimeInterpolator;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.PathInterpolator;
 
-/* loaded from: classes6.dex */
 public class InterpolatorUtils {
     public static final PathInterpolator ONE_EASING =
             new PathInterpolator(0.22f, 0.25f, 0.0f, 1.0f);

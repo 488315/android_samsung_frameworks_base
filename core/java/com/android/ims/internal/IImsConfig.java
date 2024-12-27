@@ -8,7 +8,6 @@ import android.os.RemoteException;
 
 import com.android.ims.ImsConfigListener;
 
-/* loaded from: classes5.dex */
 public interface IImsConfig extends IInterface {
     void getFeatureValue(int i, int i2, ImsConfigListener imsConfigListener) throws RemoteException;
 

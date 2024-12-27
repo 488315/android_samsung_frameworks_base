@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes6.dex */
 public class SemContextSpecificPoseAlert extends SemContextEventContext {
     public static final int ACTION = 1;
     public static final Parcelable.Creator<SemContextSpecificPoseAlert> CREATOR =

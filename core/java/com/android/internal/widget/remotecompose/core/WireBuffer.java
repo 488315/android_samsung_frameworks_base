@@ -2,7 +2,6 @@ package com.android.internal.widget.remotecompose.core;
 
 import java.util.Arrays;
 
-/* loaded from: classes5.dex */
 public class WireBuffer {
     private static final int BUFFER_SIZE = 1048576;
     byte[] mBuffer;

@@ -2,7 +2,6 @@ package android.graphics;
 
 import android.util.proto.ProtoOutputStream;
 
-/* loaded from: classes.dex */
 public final class GraphicsProtos {
     private GraphicsProtos() {}
 

@@ -10,7 +10,6 @@ import java.lang.reflect.Method;
 import java.security.spec.AlgorithmParameterSpec;
 import java.security.spec.InvalidParameterSpecException;
 
-/* loaded from: classes5.dex */
 class GcmSpecUtil {
     static final Class gcmSpecClass =
             ClassUtil.loadClass(GcmSpecUtil.class, "javax.crypto.spec.GCMParameterSpec");

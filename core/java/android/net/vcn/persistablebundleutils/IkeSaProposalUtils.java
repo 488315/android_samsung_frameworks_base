@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.ToIntFunction;
 
-/* loaded from: classes3.dex */
 public final class IkeSaProposalUtils extends SaProposalUtilsBase {
     private static final String PRF_KEY = "PRF_KEY";
 

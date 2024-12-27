@@ -1,6 +1,5 @@
 package android.service.pm;
 
-/* loaded from: classes3.dex */
 public final class PackageProto {
     public static final long INSTALLER_NAME = 1138166333447L;
     public static final long INSTALL_SOURCE = 1146756268042L;

@@ -2,7 +2,6 @@ package android.hardware.radio.V1_0;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class ClipStatus {
     public static final int CLIP_PROVISIONED = 0;
     public static final int CLIP_UNPROVISIONED = 1;

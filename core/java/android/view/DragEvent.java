@@ -7,7 +7,6 @@ import android.os.Parcelable;
 
 import com.android.internal.view.IDragAndDropPermissions;
 
-/* loaded from: classes4.dex */
 public class DragEvent implements Parcelable {
     public static final int ACTION_DRAG_ENDED = 4;
     public static final int ACTION_DRAG_ENTERED = 5;

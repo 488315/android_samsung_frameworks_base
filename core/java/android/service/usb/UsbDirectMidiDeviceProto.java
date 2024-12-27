@@ -1,6 +1,5 @@
 package android.service.usb;
 
-/* loaded from: classes3.dex */
 public final class UsbDirectMidiDeviceProto {
     public static final long BLOCK_PARSER = 1146756268037L;
     public static final long IS_UNIVERSAL = 1133871366147L;

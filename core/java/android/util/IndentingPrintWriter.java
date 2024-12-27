@@ -4,7 +4,6 @@ import java.io.PrintWriter;
 import java.io.Writer;
 import java.util.Arrays;
 
-/* loaded from: classes4.dex */
 public class IndentingPrintWriter extends PrintWriter {
     private char[] mCurrentIndent;
     private int mCurrentLength;

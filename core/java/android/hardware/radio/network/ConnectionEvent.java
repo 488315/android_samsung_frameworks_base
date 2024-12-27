@@ -1,6 +1,5 @@
 package android.hardware.radio.network;
 
-/* loaded from: classes2.dex */
 public @interface ConnectionEvent {
     public static final int AS_SIGNALLING_5G = 11;
     public static final int AS_SIGNALLING_LTE = 5;

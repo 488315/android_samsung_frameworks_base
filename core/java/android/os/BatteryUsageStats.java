@@ -28,7 +28,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.function.ToDoubleFunction;
 
-/* loaded from: classes3.dex */
 public final class BatteryUsageStats implements Parcelable, Closeable {
     public static final int AGGREGATE_BATTERY_CONSUMER_SCOPE_ALL_APPS = 1;
     public static final int AGGREGATE_BATTERY_CONSUMER_SCOPE_COUNT = 2;

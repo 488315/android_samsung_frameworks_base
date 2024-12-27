@@ -39,7 +39,6 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes2.dex */
 public final class BackgroundActivityStartController {
     public static final ActivityOptions ACTIVITY_OPTIONS_SYSTEM_DEFINED = ActivityOptions.makeBasic().setPendingIntentBackgroundActivityStartMode(0).setPendingIntentCreatorBackgroundActivityStartMode(0);
     public final ActivityTaskManagerService mService;

@@ -20,7 +20,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public abstract class RotationResolverService extends Service {
     public static final int ROTATION_RESULT_FAILURE_CANCELLED = 0;
     public static final int ROTATION_RESULT_FAILURE_NOT_SUPPORTED = 4;

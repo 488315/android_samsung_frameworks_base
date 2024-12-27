@@ -16,7 +16,6 @@ import com.samsung.android.share.SemShareConstants;
 
 import java.util.HashMap;
 
-/* loaded from: classes4.dex */
 public class A11yLogger {
     private static final boolean DEBUG = true;
     public static final String PACKAGE_NAME_ACCESSIBILITY = "com.samsung.accessibility";

@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 import com.android.internal.util.Preconditions;
 
-/* loaded from: classes3.dex */
 public final class ControlButton implements Parcelable {
     public static final Parcelable.Creator<ControlButton> CREATOR =
             new Parcelable.Creator<

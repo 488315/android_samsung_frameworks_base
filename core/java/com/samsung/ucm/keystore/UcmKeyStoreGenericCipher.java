@@ -8,7 +8,6 @@ import java.util.Locale;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
-/* loaded from: classes6.dex */
 public abstract class UcmKeyStoreGenericCipher {
     private int mPadding;
     private UcmKeyStoreKey mUcmKey;

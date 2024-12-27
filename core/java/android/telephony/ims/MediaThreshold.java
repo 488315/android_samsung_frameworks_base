@@ -10,7 +10,6 @@ import java.util.Objects;
 import java.util.TreeSet;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public final class MediaThreshold implements Parcelable {
     public static final Parcelable.Creator<MediaThreshold> CREATOR =
             new Parcelable.Creator<

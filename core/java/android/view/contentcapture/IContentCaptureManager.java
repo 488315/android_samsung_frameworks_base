@@ -10,7 +10,6 @@ import android.os.RemoteException;
 
 import com.android.internal.os.IResultReceiver;
 
-/* loaded from: classes4.dex */
 public interface IContentCaptureManager extends IInterface {
     public static final String DESCRIPTOR = "android.view.contentcapture.IContentCaptureManager";
 

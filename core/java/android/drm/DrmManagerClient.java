@@ -36,7 +36,6 @@ import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 @Deprecated
-/* loaded from: classes.dex */
 public class DrmManagerClient implements AutoCloseable {
     private static final int ACTION_PROCESS_DRM_INFO = 1002;
     private static final int ACTION_REMOVE_ALL_RIGHTS = 1001;

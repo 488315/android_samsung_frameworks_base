@@ -2,7 +2,6 @@ package com.samsung.android.photoremaster.util;
 
 import android.util.Log;
 
-/* loaded from: classes6.dex */
 public class LogUtil {
     private static final String TAG_PREFIX = "Remaster-";
 

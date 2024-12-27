@@ -27,7 +27,6 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.PBEParameterSpec;
 
-/* loaded from: classes5.dex */
 public class PBEPBKDF2 {
     private static final Map prfCodes = new HashMap();
 

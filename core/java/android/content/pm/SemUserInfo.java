@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.UserHandle;
 
-/* loaded from: classes.dex */
 public class SemUserInfo implements Parcelable {
     public static final Parcelable.Creator<SemUserInfo> CREATOR =
             new Parcelable.Creator<SemUserInfo>() { // from class: android.content.pm.SemUserInfo.1

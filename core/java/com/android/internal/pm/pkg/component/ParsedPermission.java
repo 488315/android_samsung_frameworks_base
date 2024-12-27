@@ -2,7 +2,6 @@ package com.android.internal.pm.pkg.component;
 
 import java.util.Set;
 
-/* loaded from: classes5.dex */
 public interface ParsedPermission extends ParsedComponent {
     String getBackgroundPermission();
 

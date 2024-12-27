@@ -19,7 +19,6 @@ import java.io.PrintWriter;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes.dex */
 public abstract class Service extends ContextWrapper
         implements ComponentCallbacks2, ContentCaptureManager.ContentCaptureClient {
     public static final int START_CONTINUATION_MASK = 15;

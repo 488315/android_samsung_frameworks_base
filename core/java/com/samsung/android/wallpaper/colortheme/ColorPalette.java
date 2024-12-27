@@ -8,7 +8,6 @@ import com.samsung.android.wallpaper.colortheme.monet.ColorScheme;
 
 import java.lang.reflect.Array;
 
-/* loaded from: classes6.dex */
 public class ColorPalette {
     public static final int BOTTOM_DEFAULT = 4;
     public static final int BOTTOM_REVERSED = 8;

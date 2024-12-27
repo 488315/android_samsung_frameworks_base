@@ -3,7 +3,6 @@ package android.opengl;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
-/* loaded from: classes3.dex */
 public class GLES31 extends GLES30 {
     public static final int GL_ACTIVE_ATOMIC_COUNTER_BUFFERS = 37593;
     public static final int GL_ACTIVE_PROGRAM = 33369;

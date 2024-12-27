@@ -6,7 +6,6 @@ import com.android.internal.R;
 
 import libcore.util.NativeAllocationRegistry;
 
-/* loaded from: classes4.dex */
 public final class MotionPredictor {
     private final boolean mIsPredictionEnabled;
     private final long mPtr;

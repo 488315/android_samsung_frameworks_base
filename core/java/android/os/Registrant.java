@@ -2,7 +2,6 @@ package android.os;
 
 import java.lang.ref.WeakReference;
 
-/* loaded from: classes3.dex */
 public class Registrant {
     WeakReference refH;
     Object userObj;

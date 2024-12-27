@@ -14,7 +14,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Objects;
 
-/* loaded from: classes5.dex */
 public class BinaryXmlPullParser implements TypedXmlPullParser {
     private static final char[] HEX_DIGITS = {
         '0',

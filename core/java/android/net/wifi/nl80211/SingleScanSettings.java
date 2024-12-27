@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public class SingleScanSettings implements Parcelable {
     public static final Parcelable.Creator<SingleScanSettings> CREATOR =
             new Parcelable.Creator<

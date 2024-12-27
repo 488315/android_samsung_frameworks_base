@@ -7,7 +7,6 @@ import android.util.Pair;
 
 import java.util.Set;
 
-/* loaded from: classes2.dex */
 public class ConcurrentCameraIdCombination implements Parcelable {
     public static final Parcelable.Creator<ConcurrentCameraIdCombination> CREATOR =
             new Parcelable.Creator<ConcurrentCameraIdCombination>() { // from class:

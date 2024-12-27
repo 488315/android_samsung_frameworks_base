@@ -1,6 +1,5 @@
 package android.os;
 
-/* loaded from: classes3.dex */
 public interface IProcessInfoService extends IInterface {
     void getProcessStatesAndOomScoresFromPids(int[] iArr, int[] iArr2, int[] iArr3)
             throws RemoteException;

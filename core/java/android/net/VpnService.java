@@ -33,7 +33,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public class VpnService extends Service {
     private static final boolean DBG = Debug.semIsProductDev();
     private static final String FAST_PACKAGE_NAME = "com.samsung.android.fast";

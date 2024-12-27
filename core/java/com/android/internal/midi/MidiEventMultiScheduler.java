@@ -1,6 +1,5 @@
 package com.android.internal.midi;
 
-/* loaded from: classes5.dex */
 public class MidiEventMultiScheduler {
     private MultiLockMidiEventScheduler[] mMidiEventSchedulers;
     private int mNumEventSchedulers;

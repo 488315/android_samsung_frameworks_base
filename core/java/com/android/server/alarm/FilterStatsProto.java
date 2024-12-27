@@ -1,6 +1,5 @@
 package com.android.server.alarm;
 
-/* loaded from: classes5.dex */
 public final class FilterStatsProto {
     public static final long COUNT = 1120986464260L;
     public static final long LAST_FLIGHT_TIME_REALTIME = 1112396529666L;

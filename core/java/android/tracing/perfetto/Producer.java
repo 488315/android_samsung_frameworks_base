@@ -1,6 +1,5 @@
 package android.tracing.perfetto;
 
-/* loaded from: classes4.dex */
 public class Producer {
     private static native void nativePerfettoProducerInit(int i, int i2);
 

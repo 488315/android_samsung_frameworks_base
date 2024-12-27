@@ -85,7 +85,6 @@ import java.util.Set;
 import java.util.UUID;
 
 @Deprecated
-/* loaded from: classes.dex */
 public class PackageParser {
     public static final String ANDROID_MANIFEST_FILENAME = "AndroidManifest.xml";
     public static final String ANDROID_RESOURCES = "http://schemas.android.com/apk/res/android";

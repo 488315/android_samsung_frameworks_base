@@ -15,7 +15,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
 
-/* loaded from: classes6.dex */
 public class BufferedConveyorFilter extends SequentialFilter {
     private final AtomicBoolean done;
     private BufferChannel firstInChannel;

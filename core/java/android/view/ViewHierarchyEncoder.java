@@ -7,7 +7,6 @@ import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Map;
 
-/* loaded from: classes4.dex */
 public class ViewHierarchyEncoder {
     private static final byte SIG_BOOLEAN = 90;
     private static final byte SIG_BYTE = 66;

@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-/* loaded from: classes3.dex */
 class LocalSocketImpl {
     private FileDescriptor fd;
     private SocketInputStream fis;

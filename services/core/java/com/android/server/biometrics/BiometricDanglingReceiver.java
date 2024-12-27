@@ -13,7 +13,6 @@ import com.android.server.biometrics.sensors.BiometricNotificationUtils;
 import com.samsung.android.knox.custom.KnoxCustomManagerService;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes.dex */
 public final class BiometricDanglingReceiver extends BroadcastReceiver {
     public BiometricDanglingReceiver(Context context, int i) {
         IntentFilter intentFilter = new IntentFilter();

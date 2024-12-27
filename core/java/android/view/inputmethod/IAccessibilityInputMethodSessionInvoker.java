@@ -9,7 +9,6 @@ import android.util.Log;
 import com.android.internal.inputmethod.IAccessibilityInputMethodSession;
 import com.android.internal.inputmethod.IRemoteAccessibilityInputConnection;
 
-/* loaded from: classes4.dex */
 final class IAccessibilityInputMethodSessionInvoker {
     private static final String TAG = "IAccessibilityInputMethodSessionInvoker";
     private static Handler sAsyncBinderEmulationHandler;

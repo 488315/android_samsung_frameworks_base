@@ -13,5 +13,4 @@ import java.lang.annotation.Target;
     ElementType.LOCAL_VARIABLE
 })
 @Retention(RetentionPolicy.SOURCE)
-/* loaded from: classes5.dex */
 public @interface SamsungBiometricsSupport {}

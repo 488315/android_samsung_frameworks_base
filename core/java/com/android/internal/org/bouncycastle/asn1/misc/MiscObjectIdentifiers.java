@@ -4,7 +4,6 @@ import com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier;
 
 import com.samsung.android.media.AudioParameter;
 
-/* loaded from: classes5.dex */
 public interface MiscObjectIdentifiers {
     public static final ASN1ObjectIdentifier netscape =
             new ASN1ObjectIdentifier("2.16.840.1.113730.1");

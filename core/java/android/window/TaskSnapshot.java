@@ -15,7 +15,6 @@ import com.android.window.flags.Flags;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes4.dex */
 public class TaskSnapshot implements Parcelable {
     public static final Parcelable.Creator<TaskSnapshot> CREATOR =
             new Parcelable.Creator<TaskSnapshot>() { // from class: android.window.TaskSnapshot.1

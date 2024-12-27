@@ -9,7 +9,6 @@ import com.samsung.android.feature.SemFloatingFeature;
 import java.io.File;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes.dex */
 public final class PowerUiRune extends Rune {
     public static final boolean ADAPTIVE_PROTECTION_NOTIFICATION;
     public static final boolean AUDIO_DISABLE_HEADSET_CHARGING_SOUND;

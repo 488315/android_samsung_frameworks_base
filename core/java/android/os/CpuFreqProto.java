@@ -1,6 +1,5 @@
 package android.os;
 
-/* loaded from: classes3.dex */
 public final class CpuFreqProto {
     public static final long CPU_FREQS = 2246267895810L;
     public static final long JIFFY_HZ = 1120986464257L;

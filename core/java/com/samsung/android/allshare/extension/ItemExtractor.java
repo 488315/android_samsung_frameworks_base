@@ -10,7 +10,6 @@ import com.sec.android.allshare.iface.message.AllShareKey;
 
 import java.util.StringTokenizer;
 
-/* loaded from: classes3.dex */
 public class ItemExtractor {
     private static final String CLASS_TAG = "ItemExtractor";
 

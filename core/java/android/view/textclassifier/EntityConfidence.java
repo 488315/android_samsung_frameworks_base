@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 final class EntityConfidence implements Parcelable {
     public static final Parcelable.Creator<EntityConfidence> CREATOR =
             new Parcelable.Creator<

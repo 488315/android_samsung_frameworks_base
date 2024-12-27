@@ -1,6 +1,5 @@
 package com.samsung.android.knox.tima.attestation;
 
-/* loaded from: classes6.dex */
 public class SemEnhancedAttestationResult {
     private EnhancedAttestationResult result;
 

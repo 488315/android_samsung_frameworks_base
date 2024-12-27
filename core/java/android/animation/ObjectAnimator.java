@@ -4,7 +4,6 @@ import android.graphics.Path;
 import android.graphics.PointF;
 import android.util.Property;
 
-/* loaded from: classes.dex */
 public final class ObjectAnimator extends ValueAnimator {
     private static final boolean DBG = false;
     private static final String LOG_TAG = "ObjectAnimator";

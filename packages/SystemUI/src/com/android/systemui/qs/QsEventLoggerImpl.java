@@ -7,7 +7,6 @@ import com.samsung.android.desktopsystemui.sharedlib.system.QuickStepContract;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public final class QsEventLoggerImpl implements QsEventLogger, UiEventLogger {
     public final /* synthetic */ UiEventLogger $$delegate_0;
     public final InstanceIdSequence sequence = new InstanceIdSequence(QuickStepContract.SYSUI_STATE_IME_SWITCHER_SHOWING);

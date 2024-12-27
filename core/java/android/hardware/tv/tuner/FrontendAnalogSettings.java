@@ -4,7 +4,6 @@ import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public class FrontendAnalogSettings implements Parcelable {
     public static final Parcelable.Creator<FrontendAnalogSettings> CREATOR =
             new Parcelable.Creator<FrontendAnalogSettings>() { // from class:

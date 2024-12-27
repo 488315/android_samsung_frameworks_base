@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.util.HashMap;
 import java.util.Map;
 
-/* loaded from: classes3.dex */
 public class PaymentTZServiceCommnInfo implements Parcelable {
     public static final Parcelable.Creator<PaymentTZServiceCommnInfo> CREATOR =
             new Parcelable.Creator<

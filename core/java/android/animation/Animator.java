@@ -6,7 +6,6 @@ import android.util.LongArray;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicReference;
 
-/* loaded from: classes.dex */
 public abstract class Animator implements Cloneable {
     public static final long DURATION_INFINITE = -1;
     private static long sBackgroundPauseDelay = 1000;

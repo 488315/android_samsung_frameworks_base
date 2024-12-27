@@ -10,7 +10,6 @@ import java.nio.ByteOrder;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-/* loaded from: classes5.dex */
 public class KernelSingleUidTimeReader {
     private static final boolean DBG = false;
     private static final String PROC_FILE_DIR = "/proc/uid/";

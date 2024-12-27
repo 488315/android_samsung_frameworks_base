@@ -7,7 +7,6 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
-/* loaded from: classes6.dex */
 public class EvaluableMap<T> implements Evaluator {
     private final Map<Evaluator, T> data;
 

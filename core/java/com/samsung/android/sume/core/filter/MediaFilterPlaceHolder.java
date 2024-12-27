@@ -13,7 +13,6 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
-/* loaded from: classes6.dex */
 public class MediaFilterPlaceHolder implements MediaFilter, PlaceHolder<MediaFilter> {
     private static final String TAG = Def.tagOf((Class<?>) MediaFilterPlaceHolder.class);
     private final MFDescriptor descriptor;

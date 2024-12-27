@@ -1,6 +1,5 @@
 package com.samsung.android.core.pm;
 
-/* loaded from: classes6.dex */
 public class ExtConstants {
     public static final String ACTION_PACKAGE_SET_APPCATEGORY =
             "com.samsung.android.intent.action.SET_APPCATEGORY";

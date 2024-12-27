@@ -8,7 +8,6 @@ import com.samsung.android.transcode.util.LogS;
 import java.io.File;
 import java.io.IOException;
 
-/* loaded from: classes6.dex */
 public abstract class Encode {
     protected static final int INVALID_OUTPUT_BIT_RATE = -1;
     private static final long ONE_BILLION = 1000000000;

@@ -5,7 +5,6 @@ import com.android.app.animation.Interpolators;
 import com.android.systemui.navigationbar.gestural.NavigationHandle;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public final /* synthetic */ class NavigationHandle$$ExternalSyntheticLambda0 implements Interpolator {
     @Override // android.animation.TimeInterpolator
     public final float getInterpolation(float f) {

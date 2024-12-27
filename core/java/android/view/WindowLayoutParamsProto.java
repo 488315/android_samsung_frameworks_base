@@ -1,6 +1,5 @@
 package android.view;
 
-/* loaded from: classes4.dex */
 public final class WindowLayoutParamsProto {
     public static final long ALPHA = 1108101562380L;
     public static final long APPEARANCE = 1155346202653L;

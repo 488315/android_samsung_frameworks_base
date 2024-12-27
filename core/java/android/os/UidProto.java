@@ -1,6 +1,5 @@
 package android.os;
 
-/* loaded from: classes3.dex */
 public final class UidProto {
     public static final long AGGREGATED_WAKELOCK = 1146756268056L;
     public static final long AUDIO = 1146756268040L;

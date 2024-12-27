@@ -1,6 +1,5 @@
 package com.android.server.job;
 
-/* loaded from: classes5.dex */
 public final class JobServerProtoEnums {
     public static final int CONSTRAINT_BACKGROUND_NOT_RESTRICTED = 11;
     public static final int CONSTRAINT_BATTERY_NOT_LOW = 2;

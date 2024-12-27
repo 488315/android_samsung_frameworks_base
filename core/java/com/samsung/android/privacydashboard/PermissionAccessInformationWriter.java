@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public class PermissionAccessInformationWriter {
     private static final Uri PROVIDER_URI =
             Uri.parse(

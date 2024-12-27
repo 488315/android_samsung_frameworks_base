@@ -15,7 +15,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public final class SystemUpdateInfo implements Parcelable {
     private static final String ATTR_ORIGINAL_BUILD = "original-build";
     private static final String ATTR_RECEIVED_TIME = "received-time";

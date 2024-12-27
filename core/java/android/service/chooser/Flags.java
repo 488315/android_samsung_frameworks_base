@@ -1,6 +1,5 @@
 package android.service.chooser;
 
-/* loaded from: classes3.dex */
 public final class Flags {
     private static FeatureFlags FEATURE_FLAGS = new FeatureFlagsImpl();
     public static final String FLAG_CHOOSER_ALBUM_TEXT =

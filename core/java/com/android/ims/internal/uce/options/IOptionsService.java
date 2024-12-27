@@ -10,7 +10,6 @@ import com.android.ims.internal.uce.common.CapInfo;
 import com.android.ims.internal.uce.common.StatusCode;
 import com.android.ims.internal.uce.common.UceLong;
 
-/* loaded from: classes5.dex */
 public interface IOptionsService extends IInterface {
     StatusCode addListener(int i, IOptionsListener iOptionsListener, UceLong uceLong)
             throws RemoteException;

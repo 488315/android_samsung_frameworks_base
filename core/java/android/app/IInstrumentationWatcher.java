@@ -8,7 +8,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes.dex */
 public interface IInstrumentationWatcher extends IInterface {
     void instrumentationFinished(ComponentName componentName, int i, Bundle bundle)
             throws RemoteException;

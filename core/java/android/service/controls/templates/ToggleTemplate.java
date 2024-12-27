@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import com.android.internal.util.Preconditions;
 
-/* loaded from: classes3.dex */
 public final class ToggleTemplate extends ControlTemplate {
     private static final String KEY_BUTTON = "key_button";
     private static final int TYPE = 1;

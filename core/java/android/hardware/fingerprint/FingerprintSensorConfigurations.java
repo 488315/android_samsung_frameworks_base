@@ -16,7 +16,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.function.Predicate;
 
-/* loaded from: classes2.dex */
 public class FingerprintSensorConfigurations implements Parcelable {
     public static final Parcelable.Creator<FingerprintSensorConfigurations> CREATOR = new Parcelable.Creator<FingerprintSensorConfigurations>() { // from class: android.hardware.fingerprint.FingerprintSensorConfigurations.1
         /* JADX WARN: Can't rename method to resolve collision */

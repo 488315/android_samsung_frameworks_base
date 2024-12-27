@@ -37,7 +37,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Deprecated
-/* loaded from: classes3.dex */
 public abstract class PreferenceActivity extends ListActivity
         implements PreferenceManager.OnPreferenceTreeClickListener,
                 PreferenceFragment.OnPreferenceStartFragmentCallback {

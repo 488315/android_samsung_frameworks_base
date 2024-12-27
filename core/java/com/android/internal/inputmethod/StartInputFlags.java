@@ -4,7 +4,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @Retention(RetentionPolicy.SOURCE)
-/* loaded from: classes5.dex */
 public @interface StartInputFlags {
     public static final int INITIAL_CONNECTION = 4;
     public static final int IS_TEXT_EDITOR = 2;

@@ -1,6 +1,5 @@
 package com.android.graphics.hwui.flags;
 
-/* loaded from: classes3.dex */
 public final class Flags {
     private static FeatureFlags FEATURE_FLAGS = new FeatureFlagsImpl();
     public static final String FLAG_ANIMATE_HDR_TRANSITIONS =

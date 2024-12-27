@@ -30,7 +30,6 @@ import java.util.TreeMap;
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
-/* loaded from: classes4.dex */
 public class WindowOnBackInvokedDispatcher implements OnBackInvokedDispatcher {
     private static final boolean ALWAYS_ENFORCE_PREDICTIVE_BACK;
     private static final boolean ENABLE_PREDICTIVE_BACK;

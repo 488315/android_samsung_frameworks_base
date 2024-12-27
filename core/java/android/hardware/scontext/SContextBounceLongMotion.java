@@ -5,7 +5,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @Deprecated
-/* loaded from: classes2.dex */
 public class SContextBounceLongMotion extends SContextEventContext {
     public static final Parcelable.Creator<SContextBounceLongMotion> CREATOR =
             new Parcelable.Creator<SContextBounceLongMotion>() { // from class:

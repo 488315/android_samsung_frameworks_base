@@ -1,6 +1,5 @@
 package android.audio.policy.configuration.V7_0;
 
-/* loaded from: classes.dex */
 public enum AudioDevice {
     AUDIO_DEVICE_NONE("AUDIO_DEVICE_NONE"),
     AUDIO_DEVICE_OUT_EARPIECE("AUDIO_DEVICE_OUT_EARPIECE"),

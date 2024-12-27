@@ -15,7 +15,6 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 
-/* loaded from: classes.dex */
 public class AnimatedRotateDrawable extends DrawableWrapper implements Animatable {
     private float mCurrentDegrees;
     private float mIncrement;

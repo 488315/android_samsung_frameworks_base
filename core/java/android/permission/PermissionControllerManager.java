@@ -46,7 +46,6 @@ import java.util.function.Function;
 import java.util.function.IntConsumer;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class PermissionControllerManager {
     private static final int CHUNK_SIZE = 4096;
     public static final int COUNT_ONLY_WHEN_GRANTED = 1;

@@ -1,6 +1,5 @@
 package android.anr;
 
-/* loaded from: classes.dex */
 public final class AnrProtoEnums {
     public static final int BROADCAST_OF_INTENT = 1;
     public static final int CONTENT_PROVIDER_NOT_RESPONDING = 6;

@@ -37,7 +37,6 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 
-/* loaded from: classes5.dex */
 public class BatteryStatsHistory {
     static final int BATTERY_LEVEL_DETAILS_FLAG = 1;
     private static final boolean DEBUG = false;

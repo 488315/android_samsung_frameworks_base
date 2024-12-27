@@ -2,7 +2,6 @@ package android.hardware.radio.V1_0;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class UusType {
     public static final int TYPE1_IMPLICIT = 0;
     public static final int TYPE1_NOT_REQUIRED = 2;

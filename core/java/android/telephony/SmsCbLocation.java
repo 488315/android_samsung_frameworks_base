@@ -5,7 +5,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public final class SmsCbLocation implements Parcelable {
     public static final Parcelable.Creator<SmsCbLocation> CREATOR =
             new Parcelable.Creator<

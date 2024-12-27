@@ -16,7 +16,6 @@ import com.samsung.telephony.sysprop.SemTelephonyProps;
 
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public class TelephonyFeatures {
     public static final int DUALSIM_WITH_ONE_SLOT_NR = 1;
     public static final int DUALSIM_WITH_TWO_SLOT_NR = 2;

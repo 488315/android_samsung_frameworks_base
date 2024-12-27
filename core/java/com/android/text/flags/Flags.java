@@ -1,6 +1,5 @@
 package com.android.text.flags;
 
-/* loaded from: classes5.dex */
 public final class Flags {
     private static FeatureFlags FEATURE_FLAGS = new FeatureFlagsImpl();
     public static final String FLAG_COMPLETE_FONT_LOAD_IN_SYSTEM_SERVICES_READY =

@@ -8,7 +8,6 @@ import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
-/* loaded from: classes6.dex */
 public class LsLogVerify {
     private static final String REQUESTOR_NAME = "VRequestor.log";
     private static final String TAG = "LsLogVerify";

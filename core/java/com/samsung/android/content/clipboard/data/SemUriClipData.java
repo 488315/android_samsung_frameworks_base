@@ -19,7 +19,6 @@ import java.io.File;
 import java.io.FileFilter;
 import java.io.FileNotFoundException;
 
-/* loaded from: classes5.dex */
 public class SemUriClipData extends SemClipData {
     private static final String TAG = "SemUriClipData";
     private static final long serialVersionUID = 1;

@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
 public final class ChangedPackages implements Parcelable {
     public static final Parcelable.Creator<ChangedPackages> CREATOR =
             new Parcelable.Creator<

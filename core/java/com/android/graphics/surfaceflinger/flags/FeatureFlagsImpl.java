@@ -1,6 +1,5 @@
 package com.android.graphics.surfaceflinger.flags;
 
-/* loaded from: classes3.dex */
 public final class FeatureFlagsImpl implements FeatureFlags {
     @Override // com.android.graphics.surfaceflinger.flags.FeatureFlags
     public boolean addSfSkippedFramesToTrace() {

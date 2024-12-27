@@ -12,7 +12,6 @@ import java.io.PrintWriter;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-/* loaded from: classes4.dex */
 public class InsetsState implements Parcelable {
     public static final Parcelable.Creator<InsetsState> CREATOR =
             new Parcelable.Creator<InsetsState>() { // from class: android.view.InsetsState.1

@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.InvalidObjectException;
 import java.io.ObjectInputStream;
 
-/* loaded from: classes4.dex */
 public final class Rational extends Number implements Comparable<Rational> {
     private static final long serialVersionUID = 1;
     private final int mDenominator;

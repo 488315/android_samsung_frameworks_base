@@ -5,7 +5,6 @@ import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes.dex */
 public class ArchivedActivityParcel implements Parcelable {
     public static final Parcelable.Creator<ArchivedActivityParcel> CREATOR =
             new Parcelable.Creator<ArchivedActivityParcel>() { // from class:

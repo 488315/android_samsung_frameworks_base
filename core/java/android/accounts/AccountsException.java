@@ -1,6 +1,5 @@
 package android.accounts;
 
-/* loaded from: classes.dex */
 public class AccountsException extends Exception {
     public AccountsException() {}
 

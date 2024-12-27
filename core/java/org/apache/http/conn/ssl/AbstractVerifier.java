@@ -21,7 +21,6 @@ import javax.net.ssl.SSLSession;
 import javax.net.ssl.SSLSocket;
 
 @Deprecated
-/* loaded from: classes6.dex */
 public abstract class AbstractVerifier implements X509HostnameVerifier {
     private static final Pattern IPV4_PATTERN =
             Pattern.compile(

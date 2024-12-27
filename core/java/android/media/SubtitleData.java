@@ -2,7 +2,6 @@ package android.media;
 
 import android.os.Parcel;
 
-/* loaded from: classes2.dex */
 public final class SubtitleData {
     private static final String TAG = "SubtitleData";
     private byte[] mData;

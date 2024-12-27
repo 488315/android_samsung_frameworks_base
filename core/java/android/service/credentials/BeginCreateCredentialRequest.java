@@ -6,7 +6,6 @@ import android.os.Parcelable;
 
 import com.android.internal.util.Preconditions;
 
-/* loaded from: classes3.dex */
 public final class BeginCreateCredentialRequest implements Parcelable {
     public static final Parcelable.Creator<BeginCreateCredentialRequest> CREATOR =
             new Parcelable.Creator<

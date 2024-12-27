@@ -7,7 +7,6 @@ import kotlinx.coroutines.channels.ChannelCoroutine;
 import kotlinx.coroutines.channels.ProducerScope;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes.dex */
 final /* synthetic */ class AccessibilityRepositoryImpl$isTouchExplorationEnabled$1$listener$1 extends AdaptedFunctionReference implements Function1 {
     public AccessibilityRepositoryImpl$isTouchExplorationEnabled$1$listener$1(Object obj) {
         super(1, obj, ProducerScope.class, "trySend", "trySend-JP2dKIU(Ljava/lang/Object;)Ljava/lang/Object;", 8);

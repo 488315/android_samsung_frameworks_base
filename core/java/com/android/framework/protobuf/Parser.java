@@ -3,7 +3,6 @@ package com.android.framework.protobuf;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 
-/* loaded from: classes3.dex */
 public interface Parser<MessageType> {
     MessageType parseDelimitedFrom(InputStream inputStream) throws InvalidProtocolBufferException;
 

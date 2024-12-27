@@ -1,6 +1,5 @@
 package android.os;
 
-/* loaded from: classes3.dex */
 public interface IVoldTaskListener extends IInterface {
     void onFinished(int i, PersistableBundle persistableBundle) throws RemoteException;
 

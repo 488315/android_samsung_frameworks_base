@@ -18,7 +18,6 @@ import java.util.function.BiConsumer;
 import java.util.function.IntConsumer;
 import java.util.stream.IntStream;
 
-/* loaded from: classes.dex */
 public interface IJobScheduler extends IInterface {
     boolean canRunUserInitiatedJobs(String str) throws RemoteException;
 

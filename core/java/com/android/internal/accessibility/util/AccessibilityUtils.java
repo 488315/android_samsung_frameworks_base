@@ -44,7 +44,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
 
-/* loaded from: classes5.dex */
 public final class AccessibilityUtils {
     public static final String MENU_SERVICE_RELATIVE_CLASS_NAME = ".AccessibilityMenuService";
     public static final int NONE = 0;

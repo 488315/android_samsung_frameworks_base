@@ -1,6 +1,5 @@
 package com.android.server.am;
 
-/* loaded from: classes5.dex */
 public final class AppsStartInfoProto {
     public static final long LAST_UPDATE_TIMESTAMP = 1112396529665L;
     public static final long PACKAGES = 2246267895810L;

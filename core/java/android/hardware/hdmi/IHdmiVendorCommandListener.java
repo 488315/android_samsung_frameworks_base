@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes2.dex */
 public interface IHdmiVendorCommandListener extends IInterface {
     void onControlStateChanged(boolean z, int i) throws RemoteException;
 

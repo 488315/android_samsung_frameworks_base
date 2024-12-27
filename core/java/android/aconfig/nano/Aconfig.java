@@ -9,7 +9,6 @@ import android.internal.framework.protobuf.nano.WireFormatNano;
 
 import java.io.IOException;
 
-/* loaded from: classes.dex */
 public interface Aconfig {
     public static final int DISABLED = 2;
     public static final int ENABLED = 1;

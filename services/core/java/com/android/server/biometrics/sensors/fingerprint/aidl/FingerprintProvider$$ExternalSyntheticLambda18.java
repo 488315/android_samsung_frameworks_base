@@ -12,7 +12,6 @@ import com.android.server.biometrics.sensors.fingerprint.SemUdfpsSysUiImpl;
 import com.android.server.biometrics.sensors.fingerprint.aidl.FingerprintProvider.AnonymousClass6;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes.dex */
 public final /* synthetic */ class FingerprintProvider$$ExternalSyntheticLambda18
         implements Runnable {
     public final /* synthetic */ FingerprintProvider f$0;

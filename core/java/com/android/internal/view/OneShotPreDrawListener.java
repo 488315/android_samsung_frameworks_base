@@ -3,7 +3,6 @@ package com.android.internal.view;
 import android.view.View;
 import android.view.ViewTreeObserver;
 
-/* loaded from: classes5.dex */
 public class OneShotPreDrawListener
         implements ViewTreeObserver.OnPreDrawListener, View.OnAttachStateChangeListener {
     private final boolean mReturnValue;

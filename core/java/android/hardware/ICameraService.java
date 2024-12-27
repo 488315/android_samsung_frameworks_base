@@ -20,7 +20,6 @@ import android.os.RemoteException;
 
 import com.samsung.android.camera.IRequestInjectorCallback;
 
-/* loaded from: classes.dex */
 public interface ICameraService extends IInterface {
     public static final int API_VERSION_1 = 1;
     public static final int API_VERSION_2 = 2;

@@ -10,7 +10,6 @@ import android.util.Log;
 
 import java.util.Arrays;
 
-/* loaded from: classes.dex */
 public abstract class AbstractAccountAuthenticator {
     private static final String KEY_ACCOUNT =
             "android.accounts.AbstractAccountAuthenticator.KEY_ACCOUNT";

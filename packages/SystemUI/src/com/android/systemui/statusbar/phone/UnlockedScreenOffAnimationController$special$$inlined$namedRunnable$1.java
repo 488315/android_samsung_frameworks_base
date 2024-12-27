@@ -5,7 +5,6 @@ import com.android.systemui.LsRune;
 import com.android.systemui.Rune;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes3.dex */
 public final class UnlockedScreenOffAnimationController$special$$inlined$namedRunnable$1 implements Runnable, TraceNameSupplier {
     public final /* synthetic */ String $tag;
     public final /* synthetic */ UnlockedScreenOffAnimationController this$0;

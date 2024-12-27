@@ -1,6 +1,5 @@
 package android.graphics;
 
-/* loaded from: classes.dex */
 public class LightingColorFilter extends ColorFilter {
     private int mAdd;
     private int mMul;

@@ -4,7 +4,6 @@ import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public class GetSpatializerResponse implements Parcelable {
     public static final Parcelable.Creator<GetSpatializerResponse> CREATOR =
             new Parcelable.Creator<GetSpatializerResponse>() { // from class:

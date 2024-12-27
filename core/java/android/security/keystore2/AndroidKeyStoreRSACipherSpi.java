@@ -19,7 +19,6 @@ import java.util.List;
 import javax.crypto.spec.OAEPParameterSpec;
 import javax.crypto.spec.PSource;
 
-/* loaded from: classes3.dex */
 abstract class AndroidKeyStoreRSACipherSpi extends AndroidKeyStoreCipherSpiBase {
     private final int mKeymasterPadding;
     private int mKeymasterPaddingOverride;

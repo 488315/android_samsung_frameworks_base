@@ -6,7 +6,6 @@ import com.samsung.android.globalactions.presentation.strategies.WindowManagerFu
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class ThrottlingSeverity {
     public static final int CRITICAL = 4;
     public static final int EMERGENCY = 5;

@@ -1,6 +1,5 @@
 package android.flags;
 
-/* loaded from: classes.dex */
 public class BooleanFlag extends BooleanFlagBase {
     private final boolean mDefault;
 

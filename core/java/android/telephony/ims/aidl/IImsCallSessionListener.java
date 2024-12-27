@@ -18,7 +18,6 @@ import com.android.ims.internal.IImsCallSession;
 
 import java.util.List;
 
-/* loaded from: classes4.dex */
 public interface IImsCallSessionListener extends IInterface {
     public static final String DESCRIPTOR = "android.telephony.ims.aidl.IImsCallSessionListener";
 

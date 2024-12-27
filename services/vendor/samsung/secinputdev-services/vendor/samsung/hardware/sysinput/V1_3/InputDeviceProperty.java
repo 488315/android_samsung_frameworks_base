@@ -2,7 +2,6 @@ package vendor.samsung.hardware.sysinput.V1_3;
 
 import java.util.ArrayList;
 
-/* loaded from: classes.dex */
 public final class InputDeviceProperty {
     public static final int AOD_ACTIVE_AREA = 6;
     public static final int AOD_ENABLE = 7;

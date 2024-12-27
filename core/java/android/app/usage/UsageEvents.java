@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/* loaded from: classes.dex */
 public final class UsageEvents implements Parcelable {
     public static final Parcelable.Creator<UsageEvents> CREATOR =
             new Parcelable.Creator<UsageEvents>() { // from class: android.app.usage.UsageEvents.1

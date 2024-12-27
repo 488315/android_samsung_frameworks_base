@@ -18,7 +18,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.function.Predicate;
 
-/* loaded from: classes2.dex */
 public class FaceSensorConfigurations implements Parcelable {
     public static final Parcelable.Creator<FaceSensorConfigurations> CREATOR =
             new Parcelable.Creator<FaceSensorConfigurations>() { // from class:

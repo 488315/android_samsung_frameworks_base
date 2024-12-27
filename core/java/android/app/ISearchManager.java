@@ -11,7 +11,6 @@ import android.os.RemoteException;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
 public interface ISearchManager extends IInterface {
     List<ResolveInfo> getGlobalSearchActivities() throws RemoteException;
 

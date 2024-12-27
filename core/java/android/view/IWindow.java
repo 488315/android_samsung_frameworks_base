@@ -16,7 +16,6 @@ import com.android.internal.os.IResultReceiver;
 
 import com.samsung.android.content.smartclip.SmartClipRemoteRequestInfo;
 
-/* loaded from: classes4.dex */
 public interface IWindow extends IInterface {
     void closeSystemDialogs(String str) throws RemoteException;
 

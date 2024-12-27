@@ -6,7 +6,6 @@ import android.os.SystemProperties;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes4.dex */
 public class DisplayMetrics {
     public static final int DENSITY_140 = 140;
     public static final int DENSITY_180 = 180;

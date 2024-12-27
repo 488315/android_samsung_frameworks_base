@@ -2,7 +2,6 @@ package com.samsung.android.media;
 
 import android.util.Log;
 
-/* loaded from: classes6.dex */
 public class SemMediaCapabilities {
     public static final String FEATURE_HARDWARE_C2 = "sec.media.feature.c2";
     private static final String TAG = "SemMediaCapabilities";

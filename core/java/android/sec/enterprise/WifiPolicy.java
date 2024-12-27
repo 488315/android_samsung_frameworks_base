@@ -1,6 +1,5 @@
 package android.sec.enterprise;
 
-/* loaded from: classes3.dex */
 public class WifiPolicy {
     public static final int SECURITY_LEVEL_EAP_AKA = 25;
     public static final int SECURITY_LEVEL_EAP_AKA_CCKM = 27;

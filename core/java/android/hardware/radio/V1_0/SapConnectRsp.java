@@ -4,7 +4,6 @@ import android.service.timezone.TimeZoneProviderService;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class SapConnectRsp {
     public static final int CONNECT_FAILURE = 1;
     public static final int CONNECT_OK_CALL_ONGOING = 4;

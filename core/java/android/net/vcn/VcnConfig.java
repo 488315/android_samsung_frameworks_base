@@ -20,7 +20,6 @@ import java.util.Iterator;
 import java.util.Objects;
 import java.util.Set;
 
-/* loaded from: classes3.dex */
 public final class VcnConfig implements Parcelable {
     public static final Parcelable.Creator<VcnConfig> CREATOR;
     private static final String GATEWAY_CONNECTION_CONFIGS_KEY = "mGatewayConnectionConfigs";

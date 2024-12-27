@@ -5,7 +5,6 @@ import androidx.compose.ui.Modifier;
 import com.android.systemui.volume.panel.shared.model.VolumePanelUiComponent;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes3.dex */
 public interface ComposeVolumePanelUiComponent extends VolumePanelUiComponent {
     void Content(VolumePanelComposeScope volumePanelComposeScope, Modifier modifier, Composer composer, int i);
 }

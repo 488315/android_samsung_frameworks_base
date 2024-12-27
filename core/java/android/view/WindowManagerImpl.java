@@ -30,7 +30,6 @@ import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 import java.util.function.IntConsumer;
 
-/* loaded from: classes4.dex */
 public final class WindowManagerImpl implements WindowManager {
     private static final String TAG = "WindowManager";
     public final Context mContext;

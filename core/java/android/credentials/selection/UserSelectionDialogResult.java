@@ -8,7 +8,6 @@ import android.os.Parcelable;
 
 import com.android.internal.util.AnnotationValidations;
 
-/* loaded from: classes.dex */
 public final class UserSelectionDialogResult extends BaseDialogResult implements Parcelable {
     public static final Parcelable.Creator<UserSelectionDialogResult> CREATOR =
             new Parcelable.Creator<UserSelectionDialogResult>() { // from class:

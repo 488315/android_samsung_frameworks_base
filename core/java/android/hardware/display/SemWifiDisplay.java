@@ -3,7 +3,6 @@ package android.hardware.display;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public final class SemWifiDisplay implements Parcelable {
     public static final String FEATURE_HIGH_RESOLUTION_MODE = "high_resolution_mode";
     public static final int SCREEN_SHARING_AP_CONNECTED = 3;

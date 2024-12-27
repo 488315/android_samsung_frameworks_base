@@ -6,7 +6,6 @@ import com.samsung.android.security.mdf.MdfUtils;
 
 import java.security.Provider;
 
-/* loaded from: classes6.dex */
 public class KnoxUcmKeyStoreProvider extends Provider {
     private static final String KEYSTORE_PRIVATE_KEY_CLASS_NAME =
             "com.samsung.ucm.keystore.UcmKeyStorePrivateKey";

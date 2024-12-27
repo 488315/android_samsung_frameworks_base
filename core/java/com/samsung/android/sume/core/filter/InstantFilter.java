@@ -3,7 +3,6 @@ package com.samsung.android.sume.core.filter;
 import com.samsung.android.sume.core.buffer.MediaBuffer;
 import com.samsung.android.sume.core.buffer.MutableMediaBuffer;
 
-/* loaded from: classes6.dex */
 public class InstantFilter extends DecorateFilter {
     public InstantFilter(MediaFilter filter) {
         super(filter);

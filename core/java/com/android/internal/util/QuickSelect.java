@@ -3,7 +3,6 @@ package com.android.internal.util;
 import java.util.Comparator;
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public final class QuickSelect {
     private static <T> int selectImpl(
             List<T> list, int left, int right, int k, Comparator<? super T> comparator) {

@@ -11,7 +11,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Map;
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public abstract class VcnUnderlyingNetworkTemplate {
     static final int DEFAULT_METERED_MATCH_CRITERIA = 0;
     public static final int DEFAULT_MIN_BANDWIDTH_KBPS = 0;

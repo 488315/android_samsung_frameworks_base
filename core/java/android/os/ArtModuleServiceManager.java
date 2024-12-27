@@ -3,7 +3,6 @@ package android.os;
 import android.annotation.SystemApi;
 
 @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
-/* loaded from: classes3.dex */
 public class ArtModuleServiceManager {
 
     public static final class ServiceRegisterer {

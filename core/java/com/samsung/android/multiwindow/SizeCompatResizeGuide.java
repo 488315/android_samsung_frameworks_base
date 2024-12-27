@@ -8,7 +8,6 @@ import com.samsung.android.core.SizeCompatInfo;
 
 import java.util.function.Consumer;
 
-/* loaded from: classes6.dex */
 public abstract class SizeCompatResizeGuide extends FreeformResizeGuide {
     public static final int CTRL_TYPE_LEFT = 1;
     public static final int CTRL_TYPE_TOP = 4;

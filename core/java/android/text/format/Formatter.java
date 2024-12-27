@@ -17,7 +17,6 @@ import com.android.net.module.util.Inet4AddressUtils;
 
 import java.util.Locale;
 
-/* loaded from: classes4.dex */
 public final class Formatter {
     public static final int FLAG_CALCULATE_ROUNDED = 2;
     public static final int FLAG_IEC_UNITS = 8;

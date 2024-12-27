@@ -10,7 +10,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes2.dex */
 public interface ISoundTriggerModule extends IInterface {
     public static final String DESCRIPTOR =
             "android.media.soundtrigger_middleware.ISoundTriggerModule";

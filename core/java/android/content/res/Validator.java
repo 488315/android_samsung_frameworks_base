@@ -5,7 +5,6 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.util.ArrayDeque;
 
-/* loaded from: classes.dex */
 public class Validator {
     private final ArrayDeque<Element> mElements = new ArrayDeque<>();
 

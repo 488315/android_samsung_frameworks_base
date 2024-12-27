@@ -7,7 +7,6 @@ import com.android.internal.org.bouncycastle.util.BigIntegers;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 
-/* loaded from: classes5.dex */
 class DHKeyGeneratorHelper {
     static final DHKeyGeneratorHelper INSTANCE = new DHKeyGeneratorHelper();
     private static final BigInteger ONE = BigInteger.valueOf(1);

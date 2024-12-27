@@ -1,6 +1,5 @@
 package android.service.controls;
 
-/* loaded from: classes3.dex */
 public enum ControlsRuneType {
     CONTROLS_SAMSUNG_STYLE,
     CONTROLS_LOTTIE_ICON_ANIMATION,

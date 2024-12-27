@@ -9,7 +9,6 @@ import android.util.ArraySet;
 import java.util.Map;
 import java.util.Set;
 
-/* loaded from: classes3.dex */
 public class EngineWindowPage {
     private Bitmap mScreenShot;
     private volatile long mLastUpdateTime = 0;

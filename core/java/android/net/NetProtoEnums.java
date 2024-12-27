@@ -1,6 +1,5 @@
 package android.net;
 
-/* loaded from: classes3.dex */
 public final class NetProtoEnums {
     public static final int TRANSPORT_BLUETOOTH = 2;
     public static final int TRANSPORT_CELLULAR = 0;

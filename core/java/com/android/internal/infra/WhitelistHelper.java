@@ -11,7 +11,6 @@ import java.io.PrintWriter;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes5.dex */
 public final class WhitelistHelper {
     private static final String TAG = "WhitelistHelper";
     private ArrayMap<String, ArraySet<ComponentName>> mWhitelistedPackages;

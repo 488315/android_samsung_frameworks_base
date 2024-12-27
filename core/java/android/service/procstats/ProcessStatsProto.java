@@ -1,6 +1,5 @@
 package android.service.procstats;
 
-/* loaded from: classes3.dex */
 public final class ProcessStatsProto {
     public static final long ASSOCS = 2246267895815L;
     public static final long KILL = 1146756268035L;

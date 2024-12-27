@@ -9,7 +9,6 @@ import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
 
-/* loaded from: classes4.dex */
 public abstract class CursorTreeAdapter extends BaseExpandableListAdapter
         implements Filterable, CursorFilter.CursorFilterClient {
     private boolean mAutoRequery;

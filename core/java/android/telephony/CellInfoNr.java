@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public final class CellInfoNr extends CellInfo {
     public static final Parcelable.Creator<CellInfoNr> CREATOR =
             new Parcelable.Creator<CellInfoNr>() { // from class: android.telephony.CellInfoNr.1

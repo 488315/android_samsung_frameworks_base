@@ -7,7 +7,6 @@ import android.content.pm.PackageInfo;
 import android.os.RemoteException;
 
 @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
-/* loaded from: classes4.dex */
 public final class WebViewUpdateManager {
     private final IWebViewUpdateService mService;
 

@@ -12,7 +12,6 @@ import java.util.Arrays;
 
 @SystemApi
 @Deprecated
-/* loaded from: classes2.dex */
 public class ContextHubMessage implements Parcelable {
     public static final Parcelable.Creator<ContextHubMessage> CREATOR =
             new Parcelable.Creator<ContextHubMessage>() { // from class:

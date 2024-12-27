@@ -14,7 +14,6 @@ import android.widget.TextView;
 import com.android.internal.R;
 
 @Deprecated
-/* loaded from: classes.dex */
 public class ListFragment extends Fragment {
     ListAdapter mAdapter;
     CharSequence mEmptyText;

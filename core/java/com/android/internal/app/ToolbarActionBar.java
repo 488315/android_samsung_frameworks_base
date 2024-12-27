@@ -23,7 +23,6 @@ import com.android.internal.widget.ToolbarWidgetWrapper;
 
 import java.util.ArrayList;
 
-/* loaded from: classes5.dex */
 public class ToolbarActionBar extends ActionBar {
     private DecorToolbar mDecorToolbar;
     private boolean mLastMenuVisibility;

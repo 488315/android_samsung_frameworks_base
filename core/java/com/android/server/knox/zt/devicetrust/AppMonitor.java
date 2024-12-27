@@ -2,7 +2,6 @@ package com.android.server.knox.zt.devicetrust;
 
 import com.android.server.LocalServices;
 
-/* loaded from: classes5.dex */
 public final class AppMonitor {
     private volatile boolean isMonitoringOn;
     private volatile EndpointMonitorInternal mInternal;

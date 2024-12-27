@@ -21,7 +21,6 @@ import android.view.animation.PathInterpolator;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-/* loaded from: classes2.dex */
 final class KeyButtonRipple extends Drawable {
     private static final Interpolator ALPHA_OUT_INTERPOLATOR =
             new PathInterpolator(0.0f, 0.0f, 0.8f, 1.0f);

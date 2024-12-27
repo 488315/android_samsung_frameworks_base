@@ -4,7 +4,6 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 
 import java.io.IOException;
 
-/* loaded from: classes5.dex */
 public abstract class ASN1TaggedObject extends ASN1Primitive implements ASN1TaggedObjectParser {
     final boolean explicit;
     final ASN1Encodable obj;

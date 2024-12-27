@@ -13,7 +13,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.function.ToDoubleFunction;
 
-/* loaded from: classes5.dex */
 public class NoOpResolverComparator extends AbstractResolverComparator {
     private List<ResolveInfo> mOriginalTargetOrder;
 

@@ -4,7 +4,6 @@ import android.annotation.SystemApi;
 import android.os.RemoteException;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public class PlayerProxy {
     private static final boolean DEBUG = false;
     private static final String TAG = "PlayerProxy";

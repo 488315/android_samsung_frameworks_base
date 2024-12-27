@@ -5,7 +5,6 @@ import android.util.Log;
 
 import com.android.internal.util.Preconditions;
 
-/* loaded from: classes2.dex */
 public class MediaRouter2Utils {
     static final String SEPARATOR = ":";
     static final String TAG = "MR2Utils";

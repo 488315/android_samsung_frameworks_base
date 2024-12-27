@@ -3,7 +3,6 @@ package android.telephony;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes4.dex */
 public final class CellInfoCdma extends CellInfo implements Parcelable {
     public static final Parcelable.Creator<CellInfoCdma> CREATOR =
             new Parcelable.Creator<CellInfoCdma>() { // from class: android.telephony.CellInfoCdma.1

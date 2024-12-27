@@ -4,7 +4,6 @@ import android.content.res.Configuration;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes4.dex */
 public final class DisplayAreaInfo implements Parcelable {
     public static final Parcelable.Creator<DisplayAreaInfo> CREATOR =
             new Parcelable.Creator<

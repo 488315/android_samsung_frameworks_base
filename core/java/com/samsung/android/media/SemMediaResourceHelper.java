@@ -12,7 +12,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
-/* loaded from: classes6.dex */
 public final class SemMediaResourceHelper {
     public static final int CODEC_STATE_RUNNING = 1;
     public static final int CODEC_STATE_WAITING = 0;

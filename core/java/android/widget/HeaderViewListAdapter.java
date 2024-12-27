@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* loaded from: classes4.dex */
 public class HeaderViewListAdapter implements WrapperListAdapter, Filterable {
     static final ArrayList<ListView.FixedViewInfo> EMPTY_INFO_LIST = new ArrayList<>();
     private final ListAdapter mAdapter;

@@ -8,7 +8,6 @@ import com.android.internal.util.Preconditions;
 
 import java.util.Arrays;
 
-/* loaded from: classes2.dex */
 public final class ColorSpaceTransform {
     private static final int COLUMNS = 3;
     private static final int COUNT = 9;

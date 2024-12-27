@@ -9,7 +9,6 @@ import android.os.UserHandle;
 import com.android.internal.app.chooser.DisplayResolveInfo;
 import com.android.internal.app.chooser.MultiDisplayResolveInfo;
 
-/* loaded from: classes5.dex */
 public class ChooserStackedAppDialogFragment extends ChooserTargetActionsDialogFragment
         implements DialogInterface.OnClickListener {
     static final String MULTI_DRI_KEY = "multi_dri_key";

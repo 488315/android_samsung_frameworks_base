@@ -1,6 +1,5 @@
 package android.companion.virtual.flags;
 
-/* loaded from: classes.dex */
 public final class FeatureFlagsImpl implements FeatureFlags {
     @Override // android.companion.virtual.flags.FeatureFlags
     public boolean consistentDisplayFlags() {

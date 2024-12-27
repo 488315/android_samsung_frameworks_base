@@ -7,7 +7,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.view.ThreadedRenderer;
 
-/* loaded from: classes.dex */
 public interface ITransientNotification extends IInterface {
     void hide() throws RemoteException;
 

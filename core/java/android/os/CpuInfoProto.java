@@ -1,6 +1,5 @@
 package android.os;
 
-/* loaded from: classes3.dex */
 public final class CpuInfoProto {
     public static final long CPU_USAGE = 1146756268036L;
     public static final long MEM = 1146756268034L;

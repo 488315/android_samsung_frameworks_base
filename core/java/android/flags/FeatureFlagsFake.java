@@ -5,7 +5,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-/* loaded from: classes.dex */
 public class FeatureFlagsFake extends FeatureFlags {
     private final Map<BooleanFlagBase, Boolean> mFlagValues;
     private final Set<BooleanFlagBase> mReadFlags;

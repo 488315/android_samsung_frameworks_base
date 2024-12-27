@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public class NewIntentItem extends ActivityTransactionItem {
     public static final Parcelable.Creator<NewIntentItem> CREATOR =
             new Parcelable.Creator<

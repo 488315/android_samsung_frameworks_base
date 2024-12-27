@@ -28,7 +28,6 @@ import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public class SharedConnectivityManager {
     private static final boolean DEBUG = false;
     private static final String TAG = SharedConnectivityManager.class.getSimpleName();

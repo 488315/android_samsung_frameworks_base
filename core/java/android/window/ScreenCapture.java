@@ -21,7 +21,6 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.function.ObjIntConsumer;
 
-/* loaded from: classes4.dex */
 public class ScreenCapture {
     private static final int SCREENSHOT_WAIT_TIME_S = Build.HW_TIMEOUT_MULTIPLIER * 4;
     private static final String TAG = "ScreenCapture";

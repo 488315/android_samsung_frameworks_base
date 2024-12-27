@@ -5,7 +5,6 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.util.Log;
 
-/* loaded from: classes2.dex */
 public class MediaActionSound {
     public static final int FOCUS_COMPLETE = 1;
     private static final int NUM_MEDIA_SOUND_STREAMS = 1;

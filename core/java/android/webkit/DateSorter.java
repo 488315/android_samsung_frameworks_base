@@ -14,7 +14,6 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-/* loaded from: classes4.dex */
 public class DateSorter {
     public static final int DAY_COUNT = 5;
     private static final String LOGTAG = "webkit";

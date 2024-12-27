@@ -1,6 +1,5 @@
 package android.view;
 
-/* loaded from: classes4.dex */
 public class InflateException extends RuntimeException {
     public InflateException() {}
 

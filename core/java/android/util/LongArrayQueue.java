@@ -5,7 +5,6 @@ import com.android.internal.util.GrowingArrayUtils;
 
 import java.util.NoSuchElementException;
 
-/* loaded from: classes4.dex */
 public class LongArrayQueue {
     private int mHead;
     private int mSize;

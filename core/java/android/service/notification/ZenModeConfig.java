@@ -55,7 +55,6 @@ import java.util.UUID;
 import java.util.regex.Pattern;
 import org.xmlpull.v1.XmlPullParserException;
 
-/* loaded from: classes3.dex */
 public class ZenModeConfig implements Parcelable {
     private static final String ALLOW_ATT_ALARMS = "alarms";
     private static final String ALLOW_ATT_APP_BYPASS_DND_LIST = "appBypassDndList";

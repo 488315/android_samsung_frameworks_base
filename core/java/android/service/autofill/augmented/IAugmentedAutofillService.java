@@ -10,7 +10,6 @@ import android.view.autofill.AutofillId;
 import android.view.autofill.AutofillValue;
 import android.view.inputmethod.InlineSuggestionsRequest;
 
-/* loaded from: classes3.dex */
 public interface IAugmentedAutofillService extends IInterface {
     public static final String DESCRIPTOR =
             "android.service.autofill.augmented.IAugmentedAutofillService";

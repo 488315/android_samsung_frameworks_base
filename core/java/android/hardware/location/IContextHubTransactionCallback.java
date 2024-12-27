@@ -8,7 +8,6 @@ import android.os.RemoteException;
 
 import java.util.List;
 
-/* loaded from: classes2.dex */
 public interface IContextHubTransactionCallback extends IInterface {
     void onQueryResponse(int i, List<NanoAppState> list) throws RemoteException;
 

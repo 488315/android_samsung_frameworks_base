@@ -3,7 +3,6 @@ package android.view.contentprotection;
 import android.view.contentcapture.ContentCaptureEvent;
 import android.view.contentcapture.ViewNode;
 
-/* loaded from: classes4.dex */
 public final class ContentProtectionUtils {
     public static String getEventTextLower(ContentCaptureEvent event) {
         CharSequence text = event.getText();

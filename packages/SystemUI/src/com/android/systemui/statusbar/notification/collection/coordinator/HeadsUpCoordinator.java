@@ -63,7 +63,6 @@ import noticolorpicker.NotificationColorPicker;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 @CoordinatorScope
-/* loaded from: classes2.dex */
 public final class HeadsUpCoordinator implements Coordinator {
     private static final long BIND_TIMEOUT = 1000;
     private static final long MAX_RANKING_UPDATE_DELAY_MS = 2000;

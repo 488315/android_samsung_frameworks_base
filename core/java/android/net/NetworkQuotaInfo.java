@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @Deprecated
-/* loaded from: classes3.dex */
 public class NetworkQuotaInfo implements Parcelable {
     public static final Parcelable.Creator<NetworkQuotaInfo> CREATOR =
             new Parcelable.Creator<

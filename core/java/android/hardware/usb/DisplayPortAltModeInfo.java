@@ -9,7 +9,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public final class DisplayPortAltModeInfo implements Parcelable {
     public static final Parcelable.Creator<DisplayPortAltModeInfo> CREATOR =
             new Parcelable.Creator<DisplayPortAltModeInfo>() { // from class:

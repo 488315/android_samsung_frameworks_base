@@ -25,7 +25,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/* loaded from: classes6.dex */
 public class SemShareCommon {
     private static final boolean DEBUG = false;
     private static final String TAG = "SemShareCommon";

@@ -12,7 +12,6 @@ import android.widget.SeekBar;
 import com.android.internal.R;
 
 @Deprecated
-/* loaded from: classes3.dex */
 public class SeekBarPreference extends Preference implements SeekBar.OnSeekBarChangeListener {
     private int mMax;
     private int mProgress;

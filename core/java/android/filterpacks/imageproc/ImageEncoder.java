@@ -9,7 +9,6 @@ import android.graphics.Bitmap;
 
 import java.io.OutputStream;
 
-/* loaded from: classes.dex */
 public class ImageEncoder extends Filter {
 
     @GenerateFieldPort(name = "stream")

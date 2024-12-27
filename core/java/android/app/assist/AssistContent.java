@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes.dex */
 public class AssistContent implements Parcelable {
     public static final Parcelable.Creator<AssistContent> CREATOR =
             new Parcelable.Creator<

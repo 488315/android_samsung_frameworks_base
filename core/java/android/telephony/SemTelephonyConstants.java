@@ -1,6 +1,5 @@
 package android.telephony;
 
-/* loaded from: classes4.dex */
 public class SemTelephonyConstants {
     public static final int ASSISTED_DIAL_FROM_CONTACT_LIST = 1;
     public static final int ASSISTED_DIAL_FROM_DIAL_PAD = 2;

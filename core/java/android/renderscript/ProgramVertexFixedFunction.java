@@ -3,7 +3,6 @@ package android.renderscript;
 import android.hardware.gnss.GnssSignalType;
 
 @Deprecated
-/* loaded from: classes3.dex */
 public class ProgramVertexFixedFunction extends ProgramVertex {
     ProgramVertexFixedFunction(long id, RenderScript rs) {
         super(id, rs);

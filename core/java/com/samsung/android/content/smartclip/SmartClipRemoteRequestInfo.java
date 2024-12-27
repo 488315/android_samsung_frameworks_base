@@ -3,7 +3,6 @@ package com.samsung.android.content.smartclip;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes5.dex */
 public class SmartClipRemoteRequestInfo implements Parcelable {
     public static final Parcelable.Creator<SmartClipRemoteRequestInfo> CREATOR =
             new Parcelable.Creator<

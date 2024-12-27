@@ -15,7 +15,6 @@ import android.os.RemoteException;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
 public interface IContentService extends IInterface {
     void addPeriodicSync(Account account, String str, Bundle bundle, long j) throws RemoteException;
 

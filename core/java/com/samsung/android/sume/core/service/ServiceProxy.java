@@ -12,7 +12,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.concurrent.Future;
 
-/* loaded from: classes6.dex */
 public interface ServiceProxy {
     public static final String ACTION_START_FOREGROUND = "start-foreground";
     public static final String ACTION_STOP_FOREGROUND = "start-foreground";

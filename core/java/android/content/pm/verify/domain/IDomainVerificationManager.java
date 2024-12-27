@@ -9,7 +9,6 @@ import android.os.RemoteException;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
 public interface IDomainVerificationManager extends IInterface {
     public static final String DESCRIPTOR =
             "android.content.pm.verify.domain.IDomainVerificationManager";

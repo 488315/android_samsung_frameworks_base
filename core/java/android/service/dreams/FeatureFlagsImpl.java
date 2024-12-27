@@ -1,6 +1,5 @@
 package android.service.dreams;
 
-/* loaded from: classes3.dex */
 public final class FeatureFlagsImpl implements FeatureFlags {
     @Override // android.service.dreams.FeatureFlags
     public boolean dismissDreamOnKeyguardDismiss() {

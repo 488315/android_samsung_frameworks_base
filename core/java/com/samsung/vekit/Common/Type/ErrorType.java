@@ -1,6 +1,5 @@
 package com.samsung.vekit.Common.Type;
 
-/* loaded from: classes6.dex */
 public enum ErrorType {
     PLAYER_START_FAILED,
     PLAYER_PAUSE_FAILED,

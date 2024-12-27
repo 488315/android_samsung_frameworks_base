@@ -20,7 +20,6 @@ import java.util.Collection;
 import java.util.Random;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public abstract class AttestationUtils {
     public static final int ID_TYPE_IMEI = 2;
     public static final int ID_TYPE_MEID = 3;

@@ -10,7 +10,6 @@ import android.sec.enterprise.content.SecContentProviderURI;
 import android.text.TextUtils;
 import android.util.Log;
 
-/* loaded from: classes.dex */
 public class SearchRecentSuggestionsProvider extends ContentProvider {
     public static final int DATABASE_MODE_2LINES = 2;
     public static final int DATABASE_MODE_QUERIES = 1;

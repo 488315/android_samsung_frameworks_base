@@ -13,7 +13,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 import java.util.function.Supplier;
 
-/* loaded from: classes4.dex */
 public class InsetsSourceConsumer {
     protected static final int ANIMATION_STATE_HIDE = 2;
     protected static final int ANIMATION_STATE_NONE = 0;

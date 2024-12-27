@@ -8,7 +8,6 @@ import com.google.android.mms.ContentType;
 
 import java.util.regex.Pattern;
 
-/* loaded from: classes4.dex */
 public class MimeTypeMap {
     private static final MimeTypeMap sMimeTypeMap = new MimeTypeMap();
 

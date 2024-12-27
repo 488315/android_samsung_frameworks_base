@@ -6,7 +6,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class IptvFrontendSettingsFec {
     public static final int FEC_TYPE_COLUMN = 1;
     public static final int FEC_TYPE_COLUMN_ROW = 4;

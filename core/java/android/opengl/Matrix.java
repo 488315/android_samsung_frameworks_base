@@ -1,6 +1,5 @@
 package android.opengl;
 
-/* loaded from: classes3.dex */
 public class Matrix {
     private static final ThreadLocal<float[]> ThreadTmp =
             new ThreadLocal() { // from class: android.opengl.Matrix.1

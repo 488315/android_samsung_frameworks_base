@@ -5,7 +5,6 @@ import java.math.BigInteger;
 import javax.crypto.spec.DHParameterSpec;
 import javax.crypto.spec.DHPrivateKeySpec;
 
-/* loaded from: classes5.dex */
 public class DHExtendedPrivateKeySpec extends DHPrivateKeySpec {
     private final DHParameterSpec params;
 

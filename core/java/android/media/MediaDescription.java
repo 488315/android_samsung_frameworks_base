@@ -9,7 +9,6 @@ import android.text.TextUtils;
 
 import com.android.media.performance.flags.Flags;
 
-/* loaded from: classes2.dex */
 public class MediaDescription implements Parcelable {
     public static final long BT_FOLDER_TYPE_ALBUMS = 2;
     public static final long BT_FOLDER_TYPE_ARTISTS = 3;

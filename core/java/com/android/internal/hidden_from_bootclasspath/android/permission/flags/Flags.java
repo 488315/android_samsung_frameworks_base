@@ -1,6 +1,5 @@
 package com.android.internal.hidden_from_bootclasspath.android.permission.flags;
 
-/* loaded from: classes5.dex */
 public final class Flags {
     private static FeatureFlags FEATURE_FLAGS = new FeatureFlagsImpl();
     public static final String FLAG_APEX_SIGNATURE_PERMISSION_ALLOWLIST_ENABLED =

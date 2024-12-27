@@ -4,7 +4,6 @@ import android.os.IBinder;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes3.dex */
 public class OperationResult implements Parcelable {
     public static final Parcelable.Creator<OperationResult> CREATOR =
             new Parcelable.Creator<

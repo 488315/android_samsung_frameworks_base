@@ -1,6 +1,5 @@
 package android.filterfw.geometry;
 
-/* loaded from: classes.dex */
 public class Rectangle extends Quad {
     public Rectangle() {}
 

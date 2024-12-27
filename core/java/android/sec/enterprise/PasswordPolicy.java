@@ -2,7 +2,6 @@ package android.sec.enterprise;
 
 import android.util.Log;
 
-/* loaded from: classes3.dex */
 public class PasswordPolicy {
     public static final int PWD_CHANGE_NOT_ENFORCED = 0;
     private static String TAG = "PasswordPolicy";

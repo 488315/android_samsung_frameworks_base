@@ -8,7 +8,6 @@ import android.util.Log;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes2.dex */
 public final class MidiDeviceInfo implements Parcelable {
     public static final Parcelable.Creator<MidiDeviceInfo> CREATOR =
             new Parcelable.Creator<

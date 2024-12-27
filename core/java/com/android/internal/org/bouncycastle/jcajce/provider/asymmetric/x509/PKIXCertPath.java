@@ -34,7 +34,6 @@ import java.util.ListIterator;
 
 import javax.security.auth.x500.X500Principal;
 
-/* loaded from: classes5.dex */
 public class PKIXCertPath extends CertPath {
     static final List certPathEncodings;
     private List certificates;

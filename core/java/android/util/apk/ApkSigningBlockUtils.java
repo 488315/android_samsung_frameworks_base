@@ -32,7 +32,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-/* loaded from: classes4.dex */
 public final class ApkSigningBlockUtils {
     private static final long APK_SIG_BLOCK_MAGIC_HI = 3617552046287187010L;
     private static final long APK_SIG_BLOCK_MAGIC_LO = 2334950737559900225L;

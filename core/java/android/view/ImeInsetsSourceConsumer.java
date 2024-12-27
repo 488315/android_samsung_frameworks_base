@@ -11,7 +11,6 @@ import com.android.internal.inputmethod.ImeTracing;
 
 import java.util.function.Supplier;
 
-/* loaded from: classes4.dex */
 public final class ImeInsetsSourceConsumer extends InsetsSourceConsumer {
     private boolean mHasPendingRequest;
     private boolean mIsRequestedVisibleAwaitingLeash;

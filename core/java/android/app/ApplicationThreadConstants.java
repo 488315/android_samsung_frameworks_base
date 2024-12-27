@@ -1,6 +1,5 @@
 package android.app;
 
-/* loaded from: classes.dex */
 public final class ApplicationThreadConstants {
     public static final int BACKUP_MODE_FULL = 1;
     public static final int BACKUP_MODE_INCREMENTAL = 0;

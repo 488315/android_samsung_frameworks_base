@@ -16,7 +16,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes2.dex */
 public class AudioRecordingMonitorImpl implements AudioRecordingMonitor {
     private static final int MSG_RECORDING_CONFIG_CHANGE = 1;
     private static final String TAG = "android.media.AudioRecordingMonitor";

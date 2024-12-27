@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes5.dex */
 public final class NetworkScanResult implements Parcelable {
     public static final Parcelable.Creator<NetworkScanResult> CREATOR =
             new Parcelable.Creator<

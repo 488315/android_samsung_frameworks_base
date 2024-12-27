@@ -12,7 +12,6 @@ import android.util.Log;
 import java.util.List;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public abstract class ResolverRankerService extends Service {
     public static final String BIND_PERMISSION = "android.permission.BIND_RESOLVER_RANKER_SERVICE";
     private static final boolean DEBUG = false;

@@ -1,6 +1,5 @@
 package android.filterfw.core;
 
-/* loaded from: classes.dex */
 public class SimpleScheduler extends Scheduler {
     public SimpleScheduler(FilterGraph graph) {
         super(graph);

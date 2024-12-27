@@ -26,7 +26,6 @@ import java.util.Objects;
 import java.util.function.IntConsumer;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public abstract class HotwordDetectionService extends Service
         implements SandboxedDetectionInitializer {
     public static final int AUDIO_SOURCE_EXTERNAL = 2;

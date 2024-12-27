@@ -25,7 +25,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
-/* loaded from: classes5.dex */
 public class PackageParser2 implements AutoCloseable {
     private static final boolean LOG_PARSE_TIMINGS = Build.IS_DEBUGGABLE;
     private static final int LOG_PARSE_TIMINGS_THRESHOLD_MS = 100;

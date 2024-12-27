@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes4.dex */
 public final class RoundedCorner implements Parcelable {
     public static final Parcelable.Creator<RoundedCorner> CREATOR =
             new Parcelable.Creator<RoundedCorner>() { // from class: android.view.RoundedCorner.1

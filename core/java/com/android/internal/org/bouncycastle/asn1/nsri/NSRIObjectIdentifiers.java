@@ -4,7 +4,6 @@ import com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier;
 
 import com.samsung.android.media.AudioParameter;
 
-/* loaded from: classes5.dex */
 public interface NSRIObjectIdentifiers {
     public static final ASN1ObjectIdentifier nsri = new ASN1ObjectIdentifier("1.2.410.200046");
     public static final ASN1ObjectIdentifier id_algorithm = nsri.branch("1");

@@ -17,7 +17,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-/* loaded from: classes3.dex */
 public class LowLatencyModeManager {
     public static final int LOW = 2;
     private static final int MSG_GET_LATENCY_DONE = 2;

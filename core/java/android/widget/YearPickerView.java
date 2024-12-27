@@ -11,7 +11,6 @@ import android.view.accessibility.AccessibilityEvent;
 
 import com.android.internal.R;
 
-/* loaded from: classes4.dex */
 class YearPickerView extends ListView {
     private final YearAdapter mAdapter;
     private final int mChildSize;

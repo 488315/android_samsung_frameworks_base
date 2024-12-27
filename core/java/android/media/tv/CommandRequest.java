@@ -3,7 +3,6 @@ package android.media.tv;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes3.dex */
 public final class CommandRequest extends BroadcastInfoRequest implements Parcelable {
     public static final String ARGUMENT_TYPE_JSON = "json";
     public static final String ARGUMENT_TYPE_XML = "xml";

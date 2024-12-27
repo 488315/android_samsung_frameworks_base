@@ -2,7 +2,6 @@ package android.database.sqlite;
 
 import android.os.ParcelFileDescriptor;
 
-/* loaded from: classes.dex */
 public final class SQLiteStatement extends SQLiteProgram {
     SQLiteStatement(SQLiteDatabase db, String sql, Object[] bindArgs) {
         super(db, sql, bindArgs, null);

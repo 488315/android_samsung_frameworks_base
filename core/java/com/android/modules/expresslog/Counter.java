@@ -1,6 +1,5 @@
 package com.android.modules.expresslog;
 
-/* loaded from: classes5.dex */
 public final class Counter {
     private Counter() {}
 

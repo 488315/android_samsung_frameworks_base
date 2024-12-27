@@ -14,7 +14,6 @@ import android.util.Log;
 import java.util.List;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public abstract class RecommendationService extends Service {
     private static final String LOG_TAG = "PrintServiceRecS";
     public static final String SERVICE_INTERFACE =

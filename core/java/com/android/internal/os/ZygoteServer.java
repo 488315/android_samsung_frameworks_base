@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.function.ToIntFunction;
 
-/* loaded from: classes5.dex */
 class ZygoteServer {
     static final /* synthetic */ boolean $assertionsDisabled = false;
     private static final int INVALID_TIMESTAMP = -1;

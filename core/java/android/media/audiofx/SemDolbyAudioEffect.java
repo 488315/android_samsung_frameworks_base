@@ -8,7 +8,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.UUID;
 
-/* loaded from: classes2.dex */
 public class SemDolbyAudioEffect extends AudioEffect {
     public static final int DIALOG_ENHANCER_TYPE_IMPAIRED = 0;
     public static final int DIALOG_ENHANCER_TYPE_NORMAL = 1;

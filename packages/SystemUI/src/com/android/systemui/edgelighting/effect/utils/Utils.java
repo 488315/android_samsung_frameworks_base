@@ -8,7 +8,6 @@ import com.samsung.android.feature.SemFloatingFeature;
 import com.samsung.android.view.SemWindowManager;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public final class Utils {
     public static String MODEL_NAME = SemSystemProperties.get("ro.product.model");
     public static final String MODEL_NAME_FOR_JPN = SemSystemProperties.get("ro.factory.model");

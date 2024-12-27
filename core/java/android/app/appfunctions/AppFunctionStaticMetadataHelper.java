@@ -4,7 +4,6 @@ import android.app.appsearch.util.DocumentIdUtil;
 
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public class AppFunctionStaticMetadataHelper {
     public static final String APP_FUNCTION_INDEXER_PACKAGE = "android";
     public static final String APP_FUNCTION_STATIC_METADATA_DB = "apps-db";

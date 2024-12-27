@@ -6,7 +6,6 @@ import android.util.Log;
 
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public class ChannelSettings implements Parcelable {
     public static final Parcelable.Creator<ChannelSettings> CREATOR =
             new Parcelable.Creator<

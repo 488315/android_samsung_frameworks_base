@@ -52,7 +52,6 @@ import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.function.IntConsumer;
 
-/* loaded from: classes.dex */
 public abstract class AccessibilityService extends Service {
     public static final int ACCESSIBILITY_TAKE_SCREENSHOT_REQUEST_INTERVAL_TIMES_MS = 333;
     public static final int ERROR_TAKE_SCREENSHOT_INTERNAL_ERROR = 1;

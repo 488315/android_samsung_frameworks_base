@@ -9,7 +9,6 @@ import android.os.RemoteException;
 
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public interface IPrintSpoolerCallbacks extends IInterface {
     void customPrinterIconCacheCleared(int i) throws RemoteException;
 

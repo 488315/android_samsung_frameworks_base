@@ -16,7 +16,6 @@ import android.graphics.SurfaceTexture;
 import android.media.MediaMetrics;
 import android.util.Log;
 
-/* loaded from: classes.dex */
 public class SurfaceTextureTarget extends Filter {
     private static final String TAG = "SurfaceTextureTarget";
     private final int RENDERMODE_CUSTOMIZE;

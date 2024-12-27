@@ -6,7 +6,6 @@ import android.util.Log;
 
 import com.samsung.android.knox.dar.ddar.proxy.KnoxProxyManager;
 
-/* loaded from: classes6.dex */
 public class DualDarCache {
     private static final String DDAR_CACHE_SERVICE = "DDAR_CACHE_SERVICE";
     public static final String DELETE_DATA_CMD = "DELETE_DATA_CMD";

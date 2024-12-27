@@ -6,7 +6,6 @@ import com.android.internal.util.Preconditions;
 
 import java.nio.ByteBuffer;
 
-/* loaded from: classes2.dex */
 public abstract class Marshaler<T> {
     public static int NATIVE_SIZE_DYNAMIC = -1;
     protected final int mNativeType;

@@ -11,7 +11,6 @@ import android.text.TextUtils;
 
 import java.util.Locale;
 
-/* loaded from: classes4.dex */
 public class WordIterator implements Selection.PositionIterator {
     private static final int WINDOW_WIDTH = 50;
     private CharSequence mCharSeq;

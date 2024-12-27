@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.util.HashMap;
 import java.util.Map;
 
-/* loaded from: classes5.dex */
 public class CapInfo implements Parcelable {
     public static final String CALLCOMPOSER =
             "+g.3gpp.icsi-ref=\"urn%3Aurn-7%3A3gppservice.ims.icsi.gsma.callcomposer\"";

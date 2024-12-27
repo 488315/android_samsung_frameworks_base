@@ -4,7 +4,6 @@ import android.graphics.Bitmap;
 
 import com.samsung.vekit.Listener.CaptureFrameTaskListener;
 
-/* loaded from: classes6.dex */
 public class CaptureInfo {
     private Bitmap bitmap;
     private int height;

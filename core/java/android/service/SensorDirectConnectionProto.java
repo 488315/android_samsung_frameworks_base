@@ -1,6 +1,5 @@
 package android.service;
 
-/* loaded from: classes3.dex */
 public final class SensorDirectConnectionProto {
     public static final long HAL_CHANNEL_HANDLE = 1120986464258L;
     public static final long NUM_SENSOR_ACTIVATED = 1120986464259L;

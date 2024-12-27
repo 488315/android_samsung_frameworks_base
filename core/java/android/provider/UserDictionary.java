@@ -8,7 +8,6 @@ import android.text.TextUtils;
 
 import java.util.Locale;
 
-/* loaded from: classes3.dex */
 public class UserDictionary {
     public static final String AUTHORITY = "user_dictionary";
     public static final Uri CONTENT_URI = Uri.parse("content://user_dictionary");

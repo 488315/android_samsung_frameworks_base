@@ -8,7 +8,6 @@ import android.os.Parcelable;
 import java.util.List;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class ClassificationsRequest implements Parcelable {
     public static final Parcelable.Creator<ClassificationsRequest> CREATOR =
             new Parcelable.Creator<ClassificationsRequest>() { // from class:

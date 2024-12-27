@@ -3,7 +3,6 @@ package com.samsung.android.sdhms;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes6.dex */
 public class SemBatteryEventHistory implements Cloneable, Parcelable {
     public static final int BATTERY_STATUS_CHARGING = 2;
     public static final int BATTERY_STATUS_DISCHARGING = 4;

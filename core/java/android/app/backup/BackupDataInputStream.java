@@ -3,7 +3,6 @@ package android.app.backup;
 import java.io.IOException;
 import java.io.InputStream;
 
-/* loaded from: classes.dex */
 public class BackupDataInputStream extends InputStream {
     int dataSize;
     String key;

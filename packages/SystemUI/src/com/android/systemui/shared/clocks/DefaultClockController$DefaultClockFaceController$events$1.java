@@ -5,7 +5,6 @@ import com.android.systemui.plugins.clocks.ClockFaceEvents;
 import com.android.systemui.shared.clocks.DefaultClockController;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public final class DefaultClockController$DefaultClockFaceController$events$1 implements ClockFaceEvents {
     public final /* synthetic */ DefaultClockController.DefaultClockFaceController this$0;
     public final /* synthetic */ DefaultClockController this$1;

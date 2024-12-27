@@ -8,7 +8,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.Trace;
 
-/* loaded from: classes.dex */
 public class ResumeActivityItem extends ActivityLifecycleItem {
     public static final Parcelable.Creator<ResumeActivityItem> CREATOR =
             new Parcelable.Creator<ResumeActivityItem>() { // from class:

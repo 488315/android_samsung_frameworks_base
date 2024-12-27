@@ -1,6 +1,5 @@
 package android.media;
 
-/* loaded from: classes2.dex */
 class AudioHandle {
     private final int mId;
 

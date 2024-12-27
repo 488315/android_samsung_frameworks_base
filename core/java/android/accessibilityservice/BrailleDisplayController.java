@@ -13,7 +13,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.List;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes.dex */
 public interface BrailleDisplayController {
     public static final String TEST_BRAILLE_DISPLAY_BUS_BLUETOOTH = "BUS_BLUETOOTH";
     public static final String TEST_BRAILLE_DISPLAY_DESCRIPTOR = "DESCRIPTOR";

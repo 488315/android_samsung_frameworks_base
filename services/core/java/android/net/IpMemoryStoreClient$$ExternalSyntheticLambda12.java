@@ -5,7 +5,6 @@ import android.net.ipmemorystore.OnSameL3NetworkResponseListener;
 import android.net.ipmemorystore.OnStatusListener;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes.dex */
 public final /* synthetic */ class IpMemoryStoreClient$$ExternalSyntheticLambda12
         implements IpMemoryStoreClient.ThrowingRunnable {
     public final /* synthetic */ int $r8$classId;

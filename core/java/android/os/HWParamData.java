@@ -1,6 +1,5 @@
 package android.os;
 
-/* loaded from: classes3.dex */
 public class HWParamData {
     protected String compID = "";
     protected String compVer = "";

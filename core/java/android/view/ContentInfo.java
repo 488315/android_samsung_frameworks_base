@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.function.Predicate;
 
-/* loaded from: classes4.dex */
 public final class ContentInfo implements Parcelable {
     public static final Parcelable.Creator<ContentInfo> CREATOR =
             new Parcelable.Creator<ContentInfo>() { // from class: android.view.ContentInfo.1

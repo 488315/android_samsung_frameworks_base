@@ -1,6 +1,5 @@
 package android.stats.accessibility;
 
-/* loaded from: classes3.dex */
 public final class AccessibilityEnums {
     public static final int A11Y_BUTTON = 1;
     public static final int A11Y_BUTTON_LONG_PRESS = 4;

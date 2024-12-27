@@ -13,7 +13,6 @@ import java.io.PrintWriter;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes3.dex */
 public final class UidBatteryConsumer extends BatteryConsumer {
     static final int COLUMN_COUNT = 6;
     static final int COLUMN_INDEX_PACKAGE_WITH_HIGHEST_DRAIN = 2;

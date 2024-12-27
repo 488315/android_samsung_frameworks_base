@@ -8,7 +8,6 @@ import android.util.Log;
 
 import java.io.IOException;
 
-/* loaded from: classes3.dex */
 public final class PrintDocument {
     private static final String LOG_TAG = "PrintDocument";
     private final PrintDocumentInfo mInfo;

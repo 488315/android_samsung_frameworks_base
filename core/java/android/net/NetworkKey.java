@@ -14,7 +14,6 @@ import java.util.Objects;
 
 @SystemApi
 @Deprecated
-/* loaded from: classes3.dex */
 public class NetworkKey implements Parcelable {
     public static final Parcelable.Creator<NetworkKey> CREATOR =
             new Parcelable.Creator<NetworkKey>() { // from class: android.net.NetworkKey.1

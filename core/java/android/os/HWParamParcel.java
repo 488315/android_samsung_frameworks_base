@@ -1,7 +1,6 @@
 package android.os;
 
 
-/* loaded from: classes3.dex */
 public class HWParamParcel implements Parcelable {
     public static final Parcelable.Creator<HWParamParcel> CREATOR =
             new Parcelable.Creator<HWParamParcel>() { // from class: android.os.HWParamParcel.1

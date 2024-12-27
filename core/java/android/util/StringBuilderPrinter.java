@@ -1,6 +1,5 @@
 package android.util;
 
-/* loaded from: classes4.dex */
 public class StringBuilderPrinter implements Printer {
     private final StringBuilder mBuilder;
 

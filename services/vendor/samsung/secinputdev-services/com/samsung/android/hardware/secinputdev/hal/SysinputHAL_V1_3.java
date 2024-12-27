@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-/* loaded from: classes.dex */
 public class SysinputHAL_V1_3 extends SysinputHAL_V1_2 implements SysinputHALInterface {
     private final String TAG;
     private SysinputHALCallback callback;

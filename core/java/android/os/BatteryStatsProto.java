@@ -1,6 +1,5 @@
 package android.os;
 
-/* loaded from: classes3.dex */
 public final class BatteryStatsProto {
     public static final long END_PLATFORM_VERSION = 1138166333444L;
     public static final long PARCEL_VERSION = 1112396529666L;

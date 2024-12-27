@@ -1,6 +1,5 @@
 package android.hardware.tv.tuner;
 
-/* loaded from: classes2.dex */
 public @interface VideoStreamType {
     public static final int AV1 = 10;
     public static final int AVC = 5;

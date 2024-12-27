@@ -3,7 +3,6 @@ package com.samsung.android.sume.core.channel;
 import com.samsung.android.sume.core.buffer.MediaBuffer;
 import com.samsung.android.sume.core.format.MediaFormat;
 
-/* loaded from: classes6.dex */
 public class VoidBufferChannel implements BufferChannel {
     @Override // com.samsung.android.sume.core.channel.Channel
     public void send(MediaBuffer data) {}

@@ -1,6 +1,5 @@
 package android.hardware.radio;
 
-/* loaded from: classes2.dex */
 public @interface RadioError {
     public static final int ABORTED = 65;
     public static final int ACCESS_BARRED = 68;

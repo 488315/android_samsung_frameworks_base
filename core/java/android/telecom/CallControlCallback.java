@@ -2,7 +2,6 @@ package android.telecom;
 
 import java.util.function.Consumer;
 
-/* loaded from: classes3.dex */
 public interface CallControlCallback {
     void onAnswer(int i, Consumer<Boolean> consumer);
 

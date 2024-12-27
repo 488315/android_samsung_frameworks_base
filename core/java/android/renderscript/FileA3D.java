@@ -7,7 +7,6 @@ import java.io.File;
 import java.io.InputStream;
 
 @Deprecated
-/* loaded from: classes3.dex */
 public class FileA3D extends BaseObj {
     IndexEntry[] mFileEntries;
     InputStream mInputStream;

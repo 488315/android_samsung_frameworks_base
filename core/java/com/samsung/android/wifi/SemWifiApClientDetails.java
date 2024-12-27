@@ -13,7 +13,6 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/* loaded from: classes6.dex */
 public class SemWifiApClientDetails implements Parcelable, Comparable<SemWifiApClientDetails> {
     private static final int MAX_DEVICE_NAME_LOG = 32;
     public static final String REGEX_MAC = "^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$";

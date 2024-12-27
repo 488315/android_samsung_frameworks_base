@@ -10,7 +10,6 @@ import com.android.internal.net.INetworkWatchlistManager;
 import com.android.internal.util.Preconditions;
 
 @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
-/* loaded from: classes3.dex */
 public class NetworkWatchlistManager {
     private static final String SHARED_MEMORY_TAG = "NETWORK_WATCHLIST_SHARED_MEMORY";
     private static final String TAG = "NetworkWatchlistManager";

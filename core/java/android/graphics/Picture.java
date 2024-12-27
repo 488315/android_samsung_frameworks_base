@@ -3,7 +3,6 @@ package android.graphics;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-/* loaded from: classes.dex */
 public class Picture {
     private static final int WORKING_STREAM_STORAGE = 16384;
     private long mNativePicture;

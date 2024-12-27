@@ -9,7 +9,6 @@ import android.text.TextUtils;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class Icon implements Parcelable {
     public static final Parcelable.Creator<Icon> CREATOR =
             new Parcelable.Creator<

@@ -6,7 +6,6 @@ import java.math.BigInteger;
 import java.security.SecureRandom;
 import java.util.Hashtable;
 
-/* loaded from: classes5.dex */
 public abstract class ECPoint {
     protected static final ECFieldElement[] EMPTY_ZS = new ECFieldElement[0];
     protected ECCurve curve;

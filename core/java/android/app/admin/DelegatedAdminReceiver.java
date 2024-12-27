@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
 
-/* loaded from: classes.dex */
 public class DelegatedAdminReceiver extends BroadcastReceiver {
     private static final String TAG = "DelegatedAdminReceiver";
 

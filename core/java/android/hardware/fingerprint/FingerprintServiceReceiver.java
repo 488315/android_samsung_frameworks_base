@@ -2,7 +2,6 @@ package android.hardware.fingerprint;
 
 import android.os.RemoteException;
 
-/* loaded from: classes2.dex */
 public class FingerprintServiceReceiver extends IFingerprintServiceReceiver.Stub {
     @Override // android.hardware.fingerprint.IFingerprintServiceReceiver
     public void onEnrollResult(Fingerprint fp, int remaining) throws RemoteException {}

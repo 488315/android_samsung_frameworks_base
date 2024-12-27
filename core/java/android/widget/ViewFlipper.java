@@ -11,7 +11,6 @@ import android.view.inspector.PropertyReader;
 import com.android.internal.R;
 
 @RemoteViews.RemoteView
-/* loaded from: classes4.dex */
 public class ViewFlipper extends ViewAnimator {
     private static final int DEFAULT_INTERVAL = 3000;
     private static final boolean LOGD = false;

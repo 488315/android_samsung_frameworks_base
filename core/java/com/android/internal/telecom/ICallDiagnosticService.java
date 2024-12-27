@@ -11,7 +11,6 @@ import android.telecom.DisconnectCause;
 import android.telecom.ParcelableCall;
 import android.telephony.CallQuality;
 
-/* loaded from: classes5.dex */
 public interface ICallDiagnosticService extends IInterface {
     public static final String DESCRIPTOR = "com.android.internal.telecom.ICallDiagnosticService";
 

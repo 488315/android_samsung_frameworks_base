@@ -14,7 +14,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Deprecated
-/* loaded from: classes3.dex */
 public class MultiSelectListPreference extends DialogPreference {
     private CharSequence[] mEntries;
     private CharSequence[] mEntryValues;

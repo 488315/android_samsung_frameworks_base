@@ -23,7 +23,6 @@ import android.view.autofill.AutofillManager;
 
 import com.android.internal.widget.ScrollingTabContainerView;
 
-/* loaded from: classes4.dex */
 public abstract class AdapterView<T extends Adapter> extends ViewGroup {
     public static final int INVALID_POSITION = -1;
     public static final long INVALID_ROW_ID = Long.MIN_VALUE;

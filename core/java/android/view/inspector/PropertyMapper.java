@@ -3,7 +3,6 @@ package android.view.inspector;
 import java.util.Set;
 import java.util.function.IntFunction;
 
-/* loaded from: classes4.dex */
 public interface PropertyMapper {
     int mapBoolean(String str, int i);
 

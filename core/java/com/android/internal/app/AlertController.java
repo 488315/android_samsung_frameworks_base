@@ -40,7 +40,6 @@ import java.lang.ref.WeakReference;
 import java.util.Arrays;
 import java.util.function.Consumer;
 
-/* loaded from: classes5.dex */
 public class AlertController {
     public static final int MICRO = 1;
     private static boolean sHasPaddingBottomInCustom = false;

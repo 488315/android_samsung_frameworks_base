@@ -15,7 +15,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-/* loaded from: classes5.dex */
 public class DigestFactory {
     private static Set md5 = new HashSet();
     private static Set sha1 = new HashSet();

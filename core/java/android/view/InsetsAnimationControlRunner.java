@@ -4,7 +4,6 @@ import android.util.SparseArray;
 import android.util.proto.ProtoOutputStream;
 import android.view.inputmethod.ImeTracker;
 
-/* loaded from: classes4.dex */
 public interface InsetsAnimationControlRunner {
     void cancel();
 

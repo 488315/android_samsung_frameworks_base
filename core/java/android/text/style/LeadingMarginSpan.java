@@ -6,7 +6,6 @@ import android.os.Parcel;
 import android.text.Layout;
 import android.text.ParcelableSpan;
 
-/* loaded from: classes4.dex */
 public interface LeadingMarginSpan extends ParagraphStyle {
 
     public interface LeadingMarginSpan2 extends LeadingMarginSpan, WrapTogetherSpan {

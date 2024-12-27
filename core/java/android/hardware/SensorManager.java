@@ -13,7 +13,6 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-/* loaded from: classes.dex */
 public abstract class SensorManager {
     public static final int AXIS_MINUS_X = 129;
     public static final int AXIS_MINUS_Y = 130;

@@ -46,7 +46,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /* compiled from: Html.java */
-/* loaded from: classes4.dex */
 class HtmlToSpannedConverter implements ContentHandler {
     private static Pattern sBackgroundColorPattern;
     private static Pattern sForegroundColorPattern;

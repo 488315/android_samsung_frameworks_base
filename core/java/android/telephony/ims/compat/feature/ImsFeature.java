@@ -14,7 +14,6 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.WeakHashMap;
 
-/* loaded from: classes4.dex */
 public abstract class ImsFeature {
     public static final int EMERGENCY_MMTEL = 0;
     public static final int INVALID = -1;

@@ -8,7 +8,6 @@ import android.filterfw.core.GenerateFieldPort;
 import android.filterfw.format.ImageFormat;
 import android.graphics.Bitmap;
 
-/* loaded from: classes.dex */
 public class BitmapSource extends Filter {
 
     @GenerateFieldPort(name = "bitmap")

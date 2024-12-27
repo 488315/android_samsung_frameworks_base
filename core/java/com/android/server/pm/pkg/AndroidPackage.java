@@ -32,7 +32,6 @@ import java.util.Set;
 import java.util.UUID;
 
 @SystemApi(client = SystemApi.Client.SYSTEM_SERVER)
-/* loaded from: classes5.dex */
 public interface AndroidPackage {
     List<ParsedActivity> getActivities();
 

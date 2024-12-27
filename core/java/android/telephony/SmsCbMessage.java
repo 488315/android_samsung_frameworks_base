@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public final class SmsCbMessage implements Parcelable {
     public static final Parcelable.Creator<SmsCbMessage> CREATOR =
             new Parcelable.Creator<SmsCbMessage>() { // from class: android.telephony.SmsCbMessage.1

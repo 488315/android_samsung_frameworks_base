@@ -5,7 +5,6 @@ import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public class ElapsedRealtime implements Parcelable {
     public static final Parcelable.Creator<ElapsedRealtime> CREATOR =
             new Parcelable.Creator<

@@ -7,7 +7,6 @@ import com.android.internal.org.bouncycastle.crypto.PBEParametersGenerator;
 import com.android.internal.org.bouncycastle.crypto.params.KeyParameter;
 import com.android.internal.org.bouncycastle.crypto.params.ParametersWithIV;
 
-/* loaded from: classes5.dex */
 public class PKCS12ParametersGenerator extends PBEParametersGenerator {
     public static final int IV_MATERIAL = 2;
     public static final int KEY_MATERIAL = 1;

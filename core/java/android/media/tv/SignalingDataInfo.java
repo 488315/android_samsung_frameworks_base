@@ -9,7 +9,6 @@ import com.android.internal.util.AnnotationValidations;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes3.dex */
 public final class SignalingDataInfo implements Parcelable {
     public static final String CONTENT_ENCODING_BASE64 = "Base64";
     public static final String CONTENT_ENCODING_UTF_8 = "UTF-8";

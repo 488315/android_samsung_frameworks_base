@@ -6,7 +6,6 @@ import com.samsung.android.hardware.secinputdev.SemInputDeviceManager;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class IndicationFilter {
     public static final int ALL = 7;
     public static final int DATA_CALL_DORMANCY_CHANGED = 4;

@@ -39,7 +39,6 @@ import java.util.Formatter;
 import java.util.Locale;
 
 @RemoteViews.RemoteView
-/* loaded from: classes4.dex */
 public class Chronometer extends TextView {
     private static final int HOUR_IN_SEC = 3600;
     private static final int MAX_LEVEL = 10000;

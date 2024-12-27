@@ -6,7 +6,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class InstantAppInfo implements Parcelable {
     public static final Parcelable.Creator<InstantAppInfo> CREATOR =
             new Parcelable.Creator<

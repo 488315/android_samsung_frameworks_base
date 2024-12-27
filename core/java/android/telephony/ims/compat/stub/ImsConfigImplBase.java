@@ -12,7 +12,6 @@ import com.android.ims.internal.IImsConfig;
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
 
-/* loaded from: classes4.dex */
 public class ImsConfigImplBase {
     private static final String TAG = "ImsConfigImplBase";
     ImsConfigStub mImsConfigStub;

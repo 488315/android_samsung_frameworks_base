@@ -2,7 +2,6 @@ package com.samsung.android.hardware.secinputdev;
 
 import com.samsung.android.feature.SemFloatingFeature;
 
-/* loaded from: classes.dex */
 public class SemInputFeatures {
     public static final boolean IS_FACTORY_BUILD = false;
     public static final boolean IS_SHIP_BUILD = true;

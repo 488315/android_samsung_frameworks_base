@@ -9,7 +9,6 @@ import com.android.internal.inputmethod.IRemoteAccessibilityInputConnection;
 
 import java.util.concurrent.atomic.AtomicReference;
 
-/* loaded from: classes.dex */
 final class AccessibilityInputMethodSessionWrapper extends IAccessibilityInputMethodSession.Stub {
     private final Handler mHandler;
     private final AtomicReference<AccessibilityInputMethodSession> mSessionRef;

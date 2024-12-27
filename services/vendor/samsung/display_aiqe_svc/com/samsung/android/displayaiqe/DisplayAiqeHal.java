@@ -1,6 +1,5 @@
 package com.samsung.android.displayaiqe;
 
-/* loaded from: classes.dex */
 public interface DisplayAiqeHal {
     String getContentMode();
 

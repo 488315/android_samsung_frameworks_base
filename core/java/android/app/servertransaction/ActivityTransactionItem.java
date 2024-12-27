@@ -8,7 +8,6 @@ import android.os.Parcel;
 import java.io.PrintWriter;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public abstract class ActivityTransactionItem extends ClientTransactionItem {
     private IBinder mActivityToken;
 

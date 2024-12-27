@@ -1,6 +1,5 @@
 package android.bluetooth.leaudio;
 
-/* loaded from: classes.dex */
 public final class BluetoothLeAudioProtoEnums {
     public static final int CONNECTION_STATUS_FAILED = 2;
     public static final int CONNECTION_STATUS_SUCCESS = 1;

@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.jar.Attributes;
 
-/* loaded from: classes4.dex */
 class StrictJarManifestReader {
     private final byte[] buf;
     private final int endOfMainSection;

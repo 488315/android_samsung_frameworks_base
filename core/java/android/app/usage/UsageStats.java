@@ -8,7 +8,6 @@ import android.util.ArrayMap;
 import android.util.SparseArray;
 import android.util.SparseIntArray;
 
-/* loaded from: classes.dex */
 public final class UsageStats implements Parcelable {
     public static final Parcelable.Creator<UsageStats> CREATOR =
             new Parcelable.Creator<UsageStats>() { // from class: android.app.usage.UsageStats.1

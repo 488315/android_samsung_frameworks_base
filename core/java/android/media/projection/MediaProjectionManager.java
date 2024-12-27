@@ -17,7 +17,6 @@ import com.android.internal.R;
 
 import java.util.Map;
 
-/* loaded from: classes2.dex */
 public final class MediaProjectionManager {
     public static final String EXTRA_APP_TOKEN = "android.media.projection.extra.EXTRA_APP_TOKEN";
     public static final String EXTRA_LAUNCH_COOKIE =

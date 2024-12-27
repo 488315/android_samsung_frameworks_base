@@ -4,7 +4,6 @@ import android.util.ArrayMap;
 
 import java.util.HashMap;
 
-/* loaded from: classes5.dex */
 public class Maps {
     public static <K, V> HashMap<K, V> newHashMap() {
         return new HashMap<>();

@@ -12,7 +12,6 @@ import android.util.PathParser;
 
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public class CutoutSpecification {
     private static final String BIND_LEFT_CUTOUT_MARKER = "@bind_left_cutout";
     private static final String BIND_RIGHT_CUTOUT_MARKER = "@bind_right_cutout";

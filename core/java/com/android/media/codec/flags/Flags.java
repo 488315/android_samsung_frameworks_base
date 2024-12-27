@@ -1,6 +1,5 @@
 package com.android.media.codec.flags;
 
-/* loaded from: classes5.dex */
 public final class Flags {
     private static FeatureFlags FEATURE_FLAGS = new FeatureFlagsImpl();
     public static final String FLAG_AIDL_HAL = "com.android.media.codec.flags.aidl_hal";

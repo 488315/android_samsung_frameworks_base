@@ -1,6 +1,5 @@
 package android.os;
 
-/* loaded from: classes3.dex */
 public interface IDumpstateListener extends IInterface {
     public static final int BUGREPORT_ERROR_ANOTHER_REPORT_IN_PROGRESS = 5;
     public static final int BUGREPORT_ERROR_INVALID_INPUT = 1;

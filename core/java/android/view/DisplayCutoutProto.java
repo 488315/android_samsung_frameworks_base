@@ -1,6 +1,5 @@
 package android.view;
 
-/* loaded from: classes4.dex */
 public final class DisplayCutoutProto {
     public static final long BOUND_BOTTOM = 1146756268038L;
     public static final long BOUND_LEFT = 1146756268035L;

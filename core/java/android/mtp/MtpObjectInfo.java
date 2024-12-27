@@ -4,7 +4,6 @@ import com.android.internal.util.Preconditions;
 
 import dalvik.system.VMRuntime;
 
-/* loaded from: classes3.dex */
 public final class MtpObjectInfo {
     private int mAssociationDesc;
     private int mAssociationType;

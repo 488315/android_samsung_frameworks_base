@@ -1,6 +1,5 @@
 package com.samsung.android.globalactions.util;
 
-/* loaded from: classes6.dex */
 public enum SystemConditions {
     GET_MOBILE_DATA_ENABLED,
     IS_ENCRYPTION_STATUS_ACTIVE,

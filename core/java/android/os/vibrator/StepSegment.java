@@ -11,7 +11,6 @@ import com.android.internal.vibrator.persistence.XmlConstants;
 
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public final class StepSegment extends VibrationEffectSegment {
     public static final Parcelable.Creator<StepSegment> CREATOR =
             new Parcelable.Creator<StepSegment>() { // from class: android.os.vibrator.StepSegment.1

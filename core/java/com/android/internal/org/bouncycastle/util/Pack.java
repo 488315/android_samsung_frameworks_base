@@ -1,6 +1,5 @@
 package com.android.internal.org.bouncycastle.util;
 
-/* loaded from: classes5.dex */
 public abstract class Pack {
     public static short bigEndianToShort(byte[] bs, int off) {
         int n = (bs[off] & 255) << 8;

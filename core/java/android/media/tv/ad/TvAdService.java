@@ -31,7 +31,6 @@ import com.android.internal.os.SomeArgs;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public abstract class TvAdService extends Service {
     private static final boolean DEBUG = false;
     private static final int DETACH_MEDIA_VIEW_TIMEOUT_MS = 5000;

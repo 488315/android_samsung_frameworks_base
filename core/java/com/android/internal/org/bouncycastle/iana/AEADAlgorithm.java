@@ -1,6 +1,5 @@
 package com.android.internal.org.bouncycastle.iana;
 
-/* loaded from: classes5.dex */
 public class AEADAlgorithm {
     public static final int AEAD_AES_128_CCM = 3;
     public static final int AEAD_AES_128_CCM_8 = 18;

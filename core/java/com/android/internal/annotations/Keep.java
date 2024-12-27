@@ -13,5 +13,4 @@ import java.lang.annotation.Target;
     ElementType.TYPE
 })
 @Retention(RetentionPolicy.CLASS)
-/* loaded from: classes5.dex */
 public @interface Keep {}

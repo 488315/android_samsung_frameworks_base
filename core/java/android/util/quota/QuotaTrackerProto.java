@@ -1,6 +1,5 @@
 package android.util.quota;
 
-/* loaded from: classes4.dex */
 public final class QuotaTrackerProto {
     public static final long ELAPSED_REALTIME = 1112396529667L;
     public static final long IN_QUOTA_ALARM_LISTENER = 1146756268036L;

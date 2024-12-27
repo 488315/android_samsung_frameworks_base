@@ -10,7 +10,6 @@ import java.io.FileDescriptor;
 import java.io.IOException;
 import java.time.Duration;
 
-/* loaded from: classes.dex */
 public final class SyncFence implements AutoCloseable, Parcelable {
     public static final long SIGNAL_TIME_INVALID = -1;
     public static final long SIGNAL_TIME_PENDING = Long.MAX_VALUE;

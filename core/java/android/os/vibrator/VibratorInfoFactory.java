@@ -2,7 +2,6 @@ package android.os.vibrator;
 
 import android.os.VibratorInfo;
 
-/* loaded from: classes3.dex */
 public final class VibratorInfoFactory {
     public static VibratorInfo create(int id, VibratorInfo[] vibratorInfos) {
         if (vibratorInfos.length == 0) {

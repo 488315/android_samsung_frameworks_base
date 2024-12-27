@@ -1,6 +1,5 @@
 package com.android.internal.telephony;
 
-/* loaded from: classes5.dex */
 public interface TelephonyProperties {
     public static final String CURRENT_ACTIVE_PHONE = "gsm.current.phone-type";
     public static final String DISPLAY_OPPORTUNISTIC_SUBSCRIPTION_CARRIER_TEXT_PROPERTY_NAME =

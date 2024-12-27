@@ -40,7 +40,6 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-/* loaded from: classes6.dex */
 public abstract class GraphNodeBase<T> extends MessageSubscriberBase implements GraphNode<T> {
     private static final String TAG = Def.tagOf((Class<?>) GraphNodeBase.class);
     private Function<Exception, Boolean> exceptionHandler;

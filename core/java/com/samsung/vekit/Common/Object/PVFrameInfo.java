@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public class PVFrameInfo {
     int blurLevel;
     ArrayList<PVDetectionInfo> detectionInfoList;

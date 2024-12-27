@@ -15,7 +15,6 @@ import dalvik.annotation.optimization.FastNative;
 
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public class BaseRecordingCanvas extends Canvas {
     @FastNative
     private static native void nDrawArc(

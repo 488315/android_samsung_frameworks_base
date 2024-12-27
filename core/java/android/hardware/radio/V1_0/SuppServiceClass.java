@@ -4,7 +4,6 @@ import android.security.keystore.KeyProperties;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class SuppServiceClass {
     public static final int DATA = 2;
     public static final int DATA_ASYNC = 32;

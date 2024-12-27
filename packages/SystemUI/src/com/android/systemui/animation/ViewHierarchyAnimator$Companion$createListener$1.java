@@ -5,7 +5,6 @@ import android.view.animation.Interpolator;
 import com.android.systemui.animation.ViewHierarchyAnimator;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes.dex */
 public final class ViewHierarchyAnimator$Companion$createListener$1 implements View.OnLayoutChangeListener {
     public final /* synthetic */ long $duration;
     public final /* synthetic */ boolean $ephemeral;

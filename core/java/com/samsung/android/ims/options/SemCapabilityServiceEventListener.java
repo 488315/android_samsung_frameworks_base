@@ -10,7 +10,6 @@ import com.samsung.android.ims.util.SemImsUri;
 
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public interface SemCapabilityServiceEventListener extends IInterface {
     public static final String DESCRIPTOR =
             "com.samsung.android.ims.options.SemCapabilityServiceEventListener";

@@ -10,7 +10,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 import java.util.Set;
 
-/* loaded from: classes.dex */
 public final class WifiSsidPolicy implements Parcelable {
     public static final Parcelable.Creator<WifiSsidPolicy> CREATOR =
             new Parcelable.Creator<

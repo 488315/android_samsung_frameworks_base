@@ -17,7 +17,6 @@ import org.json.JSONObject;
 
 import java.util.Iterator;
 
-/* loaded from: classes5.dex */
 public class SemSmartClipDataRepository implements Parcelable {
     public static final String CONTENT_TYPE_AUDIO = "music";
     public static final String CONTENT_TYPE_DEFAULT = "image";

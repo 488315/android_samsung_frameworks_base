@@ -8,7 +8,6 @@ import java.util.Set;
 
 import javax.crypto.spec.DHParameterSpec;
 
-/* loaded from: classes5.dex */
 public interface ProviderConfiguration {
     Set getAcceptableNamedCurves();
 

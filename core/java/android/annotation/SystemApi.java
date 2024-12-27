@@ -14,7 +14,6 @@ import java.lang.annotation.Target;
     ElementType.PACKAGE
 })
 @Retention(RetentionPolicy.RUNTIME)
-/* loaded from: classes.dex */
 public @interface SystemApi {
 
     public enum Client {

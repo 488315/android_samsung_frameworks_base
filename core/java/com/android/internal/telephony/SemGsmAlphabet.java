@@ -6,7 +6,6 @@ import android.util.SparseIntArray;
 
 import com.android.internal.logging.nano.MetricsProto;
 
-/* loaded from: classes5.dex */
 public class SemGsmAlphabet {
     private static int sGsmSpaceChar;
     private static final SparseIntArray charToGsm = new SparseIntArray();

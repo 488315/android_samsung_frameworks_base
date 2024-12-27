@@ -16,7 +16,6 @@ import java.io.IOException;
 import java.net.SocketAddress;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class SocketUtils {
     public static void bindSocketToInterface(FileDescriptor socket, String iface)
             throws ErrnoException {

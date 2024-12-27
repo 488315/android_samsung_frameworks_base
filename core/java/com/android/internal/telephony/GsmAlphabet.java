@@ -14,7 +14,6 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public class GsmAlphabet {
     public static final byte GSM_EXTENDED_ESCAPE = 27;
     private static final String TAG = "GSM";

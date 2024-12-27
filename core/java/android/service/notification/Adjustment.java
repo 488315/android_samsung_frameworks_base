@@ -10,7 +10,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class Adjustment implements Parcelable {
     public static final Parcelable.Creator<Adjustment> CREATOR =
             new Parcelable.Creator<

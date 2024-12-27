@@ -37,7 +37,6 @@ import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public abstract class DomainSelectionService extends Service {
     private static final String LOG_TAG = "DomainSelectionService";
     public static final int SCAN_TYPE_FULL_SERVICE = 2;

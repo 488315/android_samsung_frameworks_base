@@ -16,7 +16,6 @@ import java.util.Objects;
 import java.util.Queue;
 import java.util.concurrent.TimeUnit;
 
-/* loaded from: classes6.dex */
 public class LsLogSummary {
     private static final long BODY_OFFSET = 17;
     public static final byte ENROLL_TYPE = 1;

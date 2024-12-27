@@ -28,7 +28,6 @@ import android.telephony.satellite.SemSatelliteSignalStrength;
 import java.util.List;
 import java.util.Map;
 
-/* loaded from: classes5.dex */
 public interface IPhoneStateListener extends IInterface {
     void onActiveDataSubIdChanged(int i) throws RemoteException;
 

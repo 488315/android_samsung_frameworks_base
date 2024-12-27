@@ -10,7 +10,6 @@ import android.widget.ListAdapter;
 
 import com.android.internal.R;
 
-/* loaded from: classes5.dex */
 public class ResolverMultiProfilePagerAdapter extends AbstractMultiProfilePagerAdapter {
     private final ResolverProfileDescriptor[] mItems;
     private boolean mUseLayoutWithDefault;

@@ -15,7 +15,6 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.samsung.android.core.pm.runtimemanifest.RuntimeManifestUtils;
 import com.sec.android.iaft.callback.IIAFTCallback;
 
-/* loaded from: classes6.dex */
 class IAFTManagerServiceImpl extends IIAFTManagerService.Stub {
     private static final int MSG_START_ATRACE = 2;
     private static final int MSG_START_ATRACE_ANALYZE = 3;

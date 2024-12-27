@@ -13,7 +13,6 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-/* loaded from: classes6.dex */
 public class PermissionAccessInformationController {
     private static final int OP_CAPTURE_SCREEN = 1000;
     private static final String TAG = "PermissionAccessInformationController";

@@ -3,7 +3,6 @@ package com.android.internal.org.bouncycastle.crypto.generators;
 import com.android.internal.org.bouncycastle.crypto.KeyGenerationParameters;
 import com.android.internal.org.bouncycastle.crypto.params.DESedeParameters;
 
-/* loaded from: classes5.dex */
 public class DESedeKeyGenerator extends DESKeyGenerator {
     private static final int MAX_IT = 20;
 

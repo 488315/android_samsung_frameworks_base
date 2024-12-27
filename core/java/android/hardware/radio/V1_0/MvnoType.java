@@ -4,7 +4,6 @@ import android.security.keystore.KeyProperties;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class MvnoType {
     public static final int GID = 2;
     public static final int IMSI = 1;

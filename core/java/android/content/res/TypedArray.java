@@ -13,7 +13,6 @@ import dalvik.system.VMRuntime;
 
 import java.util.Arrays;
 
-/* loaded from: classes.dex */
 public class TypedArray implements AutoCloseable {
     static final int STYLE_ASSET_COOKIE = 2;
     static final int STYLE_CHANGING_CONFIGURATIONS = 4;

@@ -6,7 +6,6 @@ import android.os.Parcelable;
 
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public final class Qos implements Parcelable {
     public static final Parcelable.Creator<Qos> CREATOR =
             new Parcelable.Creator<Qos>() { // from class: android.hardware.radio.data.Qos.1

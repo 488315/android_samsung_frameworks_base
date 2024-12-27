@@ -2,7 +2,6 @@ package android.media;
 
 import android.content.Context;
 
-/* loaded from: classes2.dex */
 public class WebVttRenderer extends SubtitleController.Renderer {
     private final Context mContext;
     private WebVttRenderingWidget mRenderingWidget;

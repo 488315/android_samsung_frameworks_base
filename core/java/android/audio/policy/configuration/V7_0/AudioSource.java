@@ -1,6 +1,5 @@
 package android.audio.policy.configuration.V7_0;
 
-/* loaded from: classes.dex */
 public enum AudioSource {
     AUDIO_SOURCE_DEFAULT("AUDIO_SOURCE_DEFAULT"),
     AUDIO_SOURCE_MIC("AUDIO_SOURCE_MIC"),

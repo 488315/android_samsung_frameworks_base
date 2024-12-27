@@ -25,7 +25,6 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-/* loaded from: classes6.dex */
 public class NNFilter extends PluginDecorateFilter<NNPlugin> {
     private static final String TAG = Def.tagOf((Class<?>) NNFilter.class);
     private NNDescriptor descriptor;

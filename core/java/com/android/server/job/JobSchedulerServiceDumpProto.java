@@ -1,6 +1,5 @@
 package com.android.server.job;
 
-/* loaded from: classes5.dex */
 public final class JobSchedulerServiceDumpProto {
     public static final long ACTIVE_JOBS = 2246267895818L;
     public static final long BACKING_UP_UIDS = 2220498092038L;

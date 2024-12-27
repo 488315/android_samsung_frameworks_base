@@ -2,7 +2,6 @@ package android.hardware.radio.V1_0;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class CdmaCallWaitingNumberType {
     public static final int INTERNATIONAL = 1;
     public static final int NATIONAL = 2;

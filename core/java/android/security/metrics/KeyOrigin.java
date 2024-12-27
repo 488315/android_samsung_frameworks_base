@@ -1,6 +1,5 @@
 package android.security.metrics;
 
-/* loaded from: classes3.dex */
 public @interface KeyOrigin {
     public static final int DERIVED = 2;
     public static final int GENERATED = 1;

@@ -28,7 +28,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-/* loaded from: classes4.dex */
 public class ApkSignatureSchemeV2Verifier {
     private static final int APK_SIGNATURE_SCHEME_V2_BLOCK_ID = 1896449818;
     private static final int MAX_V2_SIGNERS = 10;

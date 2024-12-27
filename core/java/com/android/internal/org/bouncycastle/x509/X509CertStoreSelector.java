@@ -7,7 +7,6 @@ import java.security.cert.Certificate;
 import java.security.cert.X509CertSelector;
 import java.security.cert.X509Certificate;
 
-/* loaded from: classes5.dex */
 public class X509CertStoreSelector extends X509CertSelector implements Selector {
     @Override // com.android.internal.org.bouncycastle.util.Selector
     public boolean match(Object obj) {

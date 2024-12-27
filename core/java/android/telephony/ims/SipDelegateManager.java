@@ -19,7 +19,6 @@ import java.util.Objects;
 import java.util.concurrent.Executor;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public class SipDelegateManager {
     public static final int DENIED_REASON_INVALID = 4;
     public static final int DENIED_REASON_IN_USE_BY_ANOTHER_DELEGATE = 1;

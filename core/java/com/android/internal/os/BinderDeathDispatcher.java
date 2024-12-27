@@ -7,7 +7,6 @@ import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.IndentingPrintWriter;
 
-/* loaded from: classes5.dex */
 public class BinderDeathDispatcher<T extends IInterface> {
     private static final String TAG = "BinderDeathDispatcher";
     private final Object mLock = new Object();

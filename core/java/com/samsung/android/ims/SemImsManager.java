@@ -18,7 +18,6 @@ import java.lang.ref.WeakReference;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-/* loaded from: classes6.dex */
 public class SemImsManager {
     public static final int HANDOVER_FAIL = 0;
     public static final int HANDOVER_L2W = 1;

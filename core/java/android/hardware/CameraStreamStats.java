@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 
-/* loaded from: classes.dex */
 public class CameraStreamStats implements Parcelable {
     public static final Parcelable.Creator<CameraStreamStats> CREATOR =
             new Parcelable.Creator<

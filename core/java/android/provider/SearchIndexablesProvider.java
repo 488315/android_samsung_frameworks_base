@@ -12,7 +12,6 @@ import android.net.Uri;
 import android.util.Log;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public abstract class SearchIndexablesProvider extends ContentProvider {
     private static final int MATCH_DYNAMIC_RAW_CODE = 6;
     private static final int MATCH_NON_INDEXABLE_KEYS_CODE = 3;

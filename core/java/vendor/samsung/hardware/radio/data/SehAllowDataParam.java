@@ -4,7 +4,6 @@ import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes6.dex */
 public class SehAllowDataParam implements Parcelable {
     public static final Parcelable.Creator<SehAllowDataParam> CREATOR =
             new Parcelable.Creator<

@@ -4,7 +4,6 @@ import com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier;
 
 import com.samsung.android.media.AudioParameter;
 
-/* loaded from: classes5.dex */
 public interface BCObjectIdentifiers {
     public static final ASN1ObjectIdentifier bc = new ASN1ObjectIdentifier("1.3.6.1.4.1.22554");
     public static final ASN1ObjectIdentifier bc_pbe = bc.branch("1");

@@ -23,7 +23,6 @@ import java.util.zip.Inflater;
 import java.util.zip.InflaterInputStream;
 import java.util.zip.ZipEntry;
 
-/* loaded from: classes4.dex */
 public final class StrictJarFile {
     private boolean closed;
     private final FileDescriptor fd;

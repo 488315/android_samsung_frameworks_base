@@ -18,7 +18,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
 
-/* loaded from: classes5.dex */
 public class ProtoLogDataSource extends DataSource<Instance, TlsState, IncrementalState> {
     private final Runnable mOnFlush;
     private final Consumer<ProtoLogConfig> mOnStart;

@@ -8,7 +8,6 @@ import android.os.RemoteException;
 
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public interface IChooserTargetResult extends IInterface {
     void sendResult(List<ChooserTarget> list) throws RemoteException;
 

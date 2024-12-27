@@ -10,7 +10,6 @@ import java.util.Collections;
 import java.util.List;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public final class NanoAppState implements Parcelable {
     public static final Parcelable.Creator<NanoAppState> CREATOR =
             new Parcelable.Creator<

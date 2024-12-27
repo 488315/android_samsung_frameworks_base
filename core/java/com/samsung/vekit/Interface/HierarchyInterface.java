@@ -5,7 +5,6 @@ import com.samsung.vekit.Animation.Animation;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public interface HierarchyInterface<T> {
     void attach(T t);
 

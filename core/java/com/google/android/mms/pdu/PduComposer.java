@@ -11,7 +11,6 @@ import java.io.InputStream;
 import java.util.Arrays;
 import java.util.HashMap;
 
-/* loaded from: classes5.dex */
 public class PduComposer {
     static final /* synthetic */ boolean $assertionsDisabled = false;
     private static final int END_STRING_FLAG = 0;

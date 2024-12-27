@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Objects;
 
-/* loaded from: classes5.dex */
 final class SerializedVibrationEffect implements XmlSerializedVibration<VibrationEffect> {
     private final SerializedSegment[] mSegments;
 

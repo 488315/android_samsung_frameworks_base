@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.locks.ReentrantLock;
 
-/* loaded from: classes6.dex */
 public class ClientRemasterDirector implements IDirector {
     static final String TAG = "ClientRemasterDirector";
     private final PhotoRemasterServiceClient mServiceClient = new PhotoRemasterServiceClient();

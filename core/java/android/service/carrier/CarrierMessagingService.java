@@ -10,7 +10,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public abstract class CarrierMessagingService extends Service {
     public static final int DOWNLOAD_STATUS_ERROR = 2;
     public static final int DOWNLOAD_STATUS_OK = 0;

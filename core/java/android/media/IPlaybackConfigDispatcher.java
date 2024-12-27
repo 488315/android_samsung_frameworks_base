@@ -8,7 +8,6 @@ import android.os.RemoteException;
 
 import java.util.List;
 
-/* loaded from: classes2.dex */
 public interface IPlaybackConfigDispatcher extends IInterface {
     void dispatchPlaybackConfigChange(List<AudioPlaybackConfiguration> list, boolean z)
             throws RemoteException;

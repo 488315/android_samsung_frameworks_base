@@ -1,6 +1,5 @@
 package com.samsung.android.audio;
 
-/* loaded from: classes5.dex */
 public final class AudioIntent {
     public static final String ACTION_AUDIOCORE_BIGDATA_APP =
             "com.sec.android.intent.action.DHR_HQM_REFRESH_REQ";

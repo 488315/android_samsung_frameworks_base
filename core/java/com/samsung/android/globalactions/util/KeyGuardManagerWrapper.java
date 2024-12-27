@@ -8,7 +8,6 @@ import android.content.Intent;
 
 import com.samsung.android.view.SemWindowManager;
 
-/* loaded from: classes6.dex */
 public class KeyGuardManagerWrapper {
     private static final String ACTION_SHOW_GLOBAL_ACTIONS =
             "android.intent.action.SHOW_GLOBAL_ACTIONS";

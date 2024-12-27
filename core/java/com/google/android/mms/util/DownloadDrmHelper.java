@@ -5,7 +5,6 @@ import android.drm.DrmManagerClient;
 import android.media.MediaMetrics;
 import android.util.Log;
 
-/* loaded from: classes5.dex */
 public class DownloadDrmHelper {
     public static final String EXTENSION_DRM_MESSAGE = ".dm";
     public static final String EXTENSION_INTERNAL_FWDL = ".fl";

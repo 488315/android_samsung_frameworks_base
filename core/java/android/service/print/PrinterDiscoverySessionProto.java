@@ -1,6 +1,5 @@
 package android.service.print;
 
-/* loaded from: classes3.dex */
 public final class PrinterDiscoverySessionProto {
     public static final long DISCOVERY_REQUESTS = 2237677961220L;
     public static final long IS_DESTROYED = 1133871366145L;

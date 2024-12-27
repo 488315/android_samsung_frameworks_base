@@ -15,7 +15,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
-/* loaded from: classes3.dex */
 abstract class AndroidKeyStoreECDSASignatureSpi extends AndroidKeyStoreSignatureSpiBase {
     private static final Set<String> ACCEPTED_SIGNING_SCHEMES =
             Set.of(

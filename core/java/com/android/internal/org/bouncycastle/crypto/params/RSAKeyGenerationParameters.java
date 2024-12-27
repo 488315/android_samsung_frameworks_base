@@ -5,7 +5,6 @@ import com.android.internal.org.bouncycastle.crypto.KeyGenerationParameters;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 
-/* loaded from: classes5.dex */
 public class RSAKeyGenerationParameters extends KeyGenerationParameters {
     private int certainty;
     private BigInteger publicExponent;

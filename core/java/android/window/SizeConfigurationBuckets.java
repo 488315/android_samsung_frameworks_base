@@ -7,7 +7,6 @@ import android.util.SparseIntArray;
 
 import java.util.Arrays;
 
-/* loaded from: classes4.dex */
 public final class SizeConfigurationBuckets implements Parcelable {
     public static final Parcelable.Creator<SizeConfigurationBuckets> CREATOR =
             new Parcelable.Creator<

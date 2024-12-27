@@ -7,7 +7,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.view.SurfaceControlViewHost;
 
-/* loaded from: classes5.dex */
 public interface IInlineContentCallback extends IInterface {
     public static final String DESCRIPTOR =
             "com.android.internal.view.inline.IInlineContentCallback";

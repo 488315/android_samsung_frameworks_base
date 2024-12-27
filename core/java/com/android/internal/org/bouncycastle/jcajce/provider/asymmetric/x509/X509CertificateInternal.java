@@ -6,7 +6,6 @@ import com.android.internal.org.bouncycastle.jcajce.util.JcaJceHelper;
 
 import java.security.cert.CertificateEncodingException;
 
-/* loaded from: classes5.dex */
 class X509CertificateInternal extends X509CertificateImpl {
     private final byte[] encoding;
 

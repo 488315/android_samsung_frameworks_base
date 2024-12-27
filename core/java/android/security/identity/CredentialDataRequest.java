@@ -4,7 +4,6 @@ import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/* loaded from: classes3.dex */
 public class CredentialDataRequest {
     Map<String, Collection<String>> mDeviceSignedEntriesToRequest = new LinkedHashMap();
     Map<String, Collection<String>> mIssuerSignedEntriesToRequest = new LinkedHashMap();

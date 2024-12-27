@@ -9,7 +9,6 @@ import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
 
-/* loaded from: classes5.dex */
 public abstract class ASN1BitString extends ASN1Primitive implements ASN1String {
     private static final char[] table = {
         '0',

@@ -10,7 +10,6 @@ import com.android.internal.org.bouncycastle.asn1.ASN1TaggedObject;
 import com.android.internal.org.bouncycastle.asn1.DERSequence;
 import com.android.internal.org.bouncycastle.asn1.DERTaggedObject;
 
-/* loaded from: classes5.dex */
 public class OtherName extends ASN1Object {
     private final ASN1ObjectIdentifier typeID;
     private final ASN1Encodable value;

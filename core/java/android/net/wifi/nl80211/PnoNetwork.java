@@ -8,7 +8,6 @@ import java.util.Arrays;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class PnoNetwork implements Parcelable {
     public static final Parcelable.Creator<PnoNetwork> CREATOR =
             new Parcelable.Creator<

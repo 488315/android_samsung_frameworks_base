@@ -10,7 +10,6 @@ import android.view.MotionEvent;
 
 import com.samsung.android.knox.zt.usertrust.IAuthTouchEventListener;
 
-/* loaded from: classes5.dex */
 public class AuthFactorTouchManager {
     private static final String TAG = "AuthFactorTouchManager";
     private static AuthFactorTouchManager mAuthFactorTouchManager;

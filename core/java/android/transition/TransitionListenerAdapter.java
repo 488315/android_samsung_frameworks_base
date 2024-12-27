@@ -1,7 +1,6 @@
 package android.transition;
 
 
-/* loaded from: classes4.dex */
 public abstract class TransitionListenerAdapter implements Transition.TransitionListener {
     @Override // android.transition.Transition.TransitionListener
     public void onTransitionStart(Transition transition) {}

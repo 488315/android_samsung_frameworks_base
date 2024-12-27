@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.function.Consumer;
 
-/* loaded from: classes4.dex */
 public class InsetsAnimationControlImpl
         implements InternalInsetsAnimationController, InsetsAnimationControlRunner {
     private static final String TAG = "InsetsAnimationCtrlImpl";

@@ -8,7 +8,6 @@ import android.util.Log;
 
 import java.lang.ref.WeakReference;
 
-/* loaded from: classes2.dex */
 public class Visualizer {
     public static final int ALREADY_EXISTS = -2;
     public static final int ERROR = -1;

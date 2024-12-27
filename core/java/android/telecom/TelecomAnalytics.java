@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class TelecomAnalytics implements Parcelable {
     public static final Parcelable.Creator<TelecomAnalytics> CREATOR =
             new Parcelable.Creator<

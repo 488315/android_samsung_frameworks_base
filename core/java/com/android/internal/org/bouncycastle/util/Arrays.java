@@ -3,7 +3,6 @@ package com.android.internal.org.bouncycastle.util;
 import java.math.BigInteger;
 import java.util.NoSuchElementException;
 
-/* loaded from: classes5.dex */
 public final class Arrays {
     private Arrays() {}
 

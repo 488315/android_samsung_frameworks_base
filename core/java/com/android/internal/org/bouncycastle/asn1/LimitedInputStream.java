@@ -2,7 +2,6 @@ package com.android.internal.org.bouncycastle.asn1;
 
 import java.io.InputStream;
 
-/* loaded from: classes5.dex */
 abstract class LimitedInputStream extends InputStream {
     protected final InputStream _in;
     private int _limit;

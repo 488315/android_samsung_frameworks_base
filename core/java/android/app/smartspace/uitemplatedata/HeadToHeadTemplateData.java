@@ -8,7 +8,6 @@ import android.os.Parcelable;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class HeadToHeadTemplateData extends BaseTemplateData {
     public static final Parcelable.Creator<HeadToHeadTemplateData> CREATOR =
             new Parcelable.Creator<HeadToHeadTemplateData>() { // from class:

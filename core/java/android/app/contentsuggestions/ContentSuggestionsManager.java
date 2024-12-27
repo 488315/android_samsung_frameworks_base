@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.concurrent.Executor;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class ContentSuggestionsManager {
     public static final String EXTRA_BITMAP = "android.contentsuggestions.extra.BITMAP";
     private static final int SYNC_CALLS_TIMEOUT_MS = 5000;

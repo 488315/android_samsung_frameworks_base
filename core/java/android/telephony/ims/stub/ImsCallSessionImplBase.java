@@ -31,7 +31,6 @@ import java.util.concurrent.Executor;
 import java.util.function.Supplier;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public class ImsCallSessionImplBase implements AutoCloseable {
     private static final String LOG_TAG = "ImsCallSessionImplBase";
     public static final int MEDIA_STREAM_DIRECTION_DOWNLINK = 2;

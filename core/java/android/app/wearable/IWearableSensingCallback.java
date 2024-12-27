@@ -9,7 +9,6 @@ import android.os.RemoteException;
 
 import com.android.internal.infra.AndroidFuture;
 
-/* loaded from: classes.dex */
 public interface IWearableSensingCallback extends IInterface {
     public static final String DESCRIPTOR = "android.app.wearable.IWearableSensingCallback";
 

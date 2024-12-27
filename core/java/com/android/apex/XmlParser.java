@@ -9,7 +9,6 @@ import java.io.InputStream;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 
-/* loaded from: classes4.dex */
 public class XmlParser {
     public static ApexInfoList readApexInfoList(InputStream in)
             throws XmlPullParserException, IOException, DatatypeConfigurationException {

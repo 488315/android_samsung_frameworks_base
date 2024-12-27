@@ -7,7 +7,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
-/* loaded from: classes6.dex */
 public final class DsmsThreadPoolExecutor extends ThreadPoolExecutor {
     private static final int KEEP_ALIVE_TIME_MS = 500;
     private static final int MAXIMUM_THREADS = 20;

@@ -29,7 +29,6 @@ import java.util.Iterator;
 import java.util.regex.Pattern;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes2.dex */
 public final class IntegritySeUtil {
     public static final int CLIENT2_INTEGRITY_COMPONENT_ERROR_ADMIN_RECEIVER = 64;
     public static final int CLIENT2_INTEGRITY_COMPONENT_ERROR_ALARM_SERVICE = 1024;

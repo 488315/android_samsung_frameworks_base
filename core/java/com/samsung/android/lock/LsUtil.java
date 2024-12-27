@@ -12,7 +12,6 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.Locale;
 
-/* loaded from: classes6.dex */
 public class LsUtil {
     private static final boolean DEBUG = LsConstants.DEBUG;
     private static final String EOL = "\n";

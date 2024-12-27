@@ -42,7 +42,6 @@ import java.util.Map;
 import java.util.function.Predicate;
 
 @RemoteViews.RemoteView
-/* loaded from: classes4.dex */
 public class ListView extends AbsListView {
     private static final float MAX_SCROLL_FACTOR = 0.33f;
     private static final int MIN_SCROLL_PREVIEW_PIXELS = 2;

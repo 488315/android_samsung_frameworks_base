@@ -23,7 +23,6 @@ import java.util.Map;
 import java.util.concurrent.Executor;
 
 @Deprecated
-/* loaded from: classes4.dex */
 public class PhoneStateListener {
     private static final boolean DBG = false;
 

@@ -8,7 +8,6 @@ import android.util.Log;
 import com.android.ims.internal.IImsUtListener;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public class ImsUtListener {
 
     @Deprecated public static final String BUNDLE_KEY_CLIR = "queryClir";

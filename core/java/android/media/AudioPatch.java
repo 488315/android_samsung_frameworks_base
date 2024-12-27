@@ -1,6 +1,5 @@
 package android.media;
 
-/* loaded from: classes2.dex */
 public class AudioPatch {
     private final AudioHandle mHandle;
     private final AudioPortConfig[] mSinks;

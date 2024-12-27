@@ -1,6 +1,5 @@
 package android.media;
 
-/* loaded from: classes2.dex */
 public @interface AudioPolicyForceUse {
     public static final int COMMUNICATION = 0;
     public static final int DOCK = 3;

@@ -33,7 +33,6 @@ import com.android.internal.infra.AndroidFuture;
 import java.util.List;
 import java.util.Map;
 
-/* loaded from: classes.dex */
 public interface IDevicePolicyManager extends IInterface {
     void acknowledgeDeviceCompliant() throws RemoteException;
 

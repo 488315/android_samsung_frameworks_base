@@ -1,6 +1,5 @@
 package com.android.internal.os;
 
-/* loaded from: classes5.dex */
 public final class KernelAllocationStats {
     public static native ProcessDmabuf[] getDmabufAllocations();
 

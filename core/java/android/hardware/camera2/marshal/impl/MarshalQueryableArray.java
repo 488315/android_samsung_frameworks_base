@@ -15,7 +15,6 @@ import java.nio.IntBuffer;
 import java.nio.LongBuffer;
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public class MarshalQueryableArray<T> implements MarshalQueryable<T> {
     private static final boolean DEBUG = false;
     private static final String TAG = MarshalQueryableArray.class.getSimpleName();

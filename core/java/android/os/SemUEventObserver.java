@@ -1,7 +1,6 @@
 package android.os;
 
 
-/* loaded from: classes3.dex */
 public abstract class SemUEventObserver {
     private UEventObserver mUEO =
             new UEventObserver() { // from class: android.os.SemUEventObserver.1

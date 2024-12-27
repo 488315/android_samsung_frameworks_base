@@ -7,7 +7,6 @@ import android.os.Parcelable;
 
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public class PeriodicSync implements Parcelable {
     public static final Parcelable.Creator<PeriodicSync> CREATOR =
             new Parcelable.Creator<PeriodicSync>() { // from class: android.content.PeriodicSync.1

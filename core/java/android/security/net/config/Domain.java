@@ -4,7 +4,6 @@ import com.android.internal.logging.nano.MetricsProto;
 
 import java.util.Locale;
 
-/* loaded from: classes3.dex */
 public final class Domain {
     public final String hostname;
     public final boolean subdomainsIncluded;

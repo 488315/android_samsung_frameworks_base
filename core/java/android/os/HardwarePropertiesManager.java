@@ -6,7 +6,6 @@ import android.util.Log;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes3.dex */
 public class HardwarePropertiesManager {
     public static final int DEVICE_TEMPERATURE_BATTERY = 2;
     public static final int DEVICE_TEMPERATURE_CPU = 0;

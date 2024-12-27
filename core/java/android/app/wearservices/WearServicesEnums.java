@@ -1,6 +1,5 @@
 package android.app.wearservices;
 
-/* loaded from: classes.dex */
 public final class WearServicesEnums {
     public static final int ACTION_ADD = 1;
     public static final int ACTION_REMOVE = 2;

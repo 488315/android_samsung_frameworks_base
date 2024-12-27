@@ -18,7 +18,6 @@ import com.samsung.android.globalactions.util.ConditionChecker;
 import com.samsung.android.globalactions.util.LogWrapper;
 import com.samsung.android.globalactions.util.SystemConditions;
 
-/* loaded from: classes6.dex */
 public class SamsungGlobalActionsAnimator implements GlobalActionsAnimator {
     private static final String TAG = "SamsungGlobalActionsAnimator";
     private ViewGroup mBackgroundView;

@@ -8,7 +8,6 @@ import java.util.zip.DataFormatException;
 import java.util.zip.Deflater;
 import java.util.zip.Inflater;
 
-/* loaded from: classes6.dex */
 public class ZipHandler {
     private static final String TAG = ZipHandler.class.getSimpleName();
 

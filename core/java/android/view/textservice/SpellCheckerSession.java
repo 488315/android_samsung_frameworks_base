@@ -20,7 +20,6 @@ import java.util.Locale;
 import java.util.Queue;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes4.dex */
 public class SpellCheckerSession {
     private static final boolean DBG = false;
     private static final int MSG_ON_GET_SUGGESTION_MULTIPLE = 1;

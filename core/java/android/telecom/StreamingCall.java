@@ -11,7 +11,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class StreamingCall implements Parcelable {
     public static final Parcelable.Creator<StreamingCall> CREATOR =
             new Parcelable.Creator<StreamingCall>() { // from class: android.telecom.StreamingCall.1

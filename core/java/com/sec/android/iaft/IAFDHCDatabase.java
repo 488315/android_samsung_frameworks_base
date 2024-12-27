@@ -4,7 +4,6 @@ import android.content.Context;
 
 import java.util.HashMap;
 
-/* loaded from: classes6.dex */
 public class IAFDHCDatabase {
     private static final int IAFDHCDBVersion = 5;
     private IAFDDiagnosis.IAFD_DATA mIafdHCDatabase;

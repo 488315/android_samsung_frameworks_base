@@ -1,6 +1,5 @@
 package com.android.framework.protobuf;
 
-/* loaded from: classes3.dex */
 final class Android {
     private static boolean ASSUME_ANDROID;
     private static final boolean IS_ROBOLECTRIC;

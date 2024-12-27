@@ -7,7 +7,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public final class DeviceProductInfo implements Parcelable {
     public static final int CONNECTION_TO_SINK_BUILT_IN = 1;
     public static final int CONNECTION_TO_SINK_DIRECT = 2;

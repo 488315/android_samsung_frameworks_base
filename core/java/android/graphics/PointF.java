@@ -4,7 +4,6 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes.dex */
 public class PointF implements Parcelable {
     public static final Parcelable.Creator<PointF> CREATOR =
             new Parcelable.Creator<PointF>() { // from class: android.graphics.PointF.1

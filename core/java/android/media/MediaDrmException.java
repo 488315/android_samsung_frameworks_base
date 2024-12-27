@@ -1,6 +1,5 @@
 package android.media;
 
-/* loaded from: classes2.dex */
 public class MediaDrmException extends Exception implements MediaDrmThrowable {
     private final int mErrorContext;
     private final int mOemError;

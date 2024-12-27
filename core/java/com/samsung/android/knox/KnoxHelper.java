@@ -9,7 +9,6 @@ import android.util.Log;
 import java.util.Collections;
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public class KnoxHelper {
     private static boolean DEBUG = false;
     static final String TAG = "KnoxHelper";

@@ -5,7 +5,6 @@ import android.hardware.scontext.SContextConstants;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 
-/* loaded from: classes5.dex */
 public class MonotonicCurveFit {
     private static final String TAG = "MonotonicCurveFit";
     private boolean mExtrapolate = true;

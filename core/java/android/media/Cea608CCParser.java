@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /* compiled from: ClosedCaptionRenderer.java */
-/* loaded from: classes2.dex */
 class Cea608CCParser {
     private static final int AOF = 34;
     private static final int AON = 35;

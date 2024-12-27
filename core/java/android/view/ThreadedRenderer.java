@@ -25,7 +25,6 @@ import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-/* loaded from: classes4.dex */
 public final class ThreadedRenderer extends HardwareRenderer {
     public static final String DEBUG_DIRTY_REGIONS_PROPERTY = "debug.hwui.show_dirty_regions";
     public static final String DEBUG_FORCE_DARK = "debug.hwui.force_dark";

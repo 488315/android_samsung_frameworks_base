@@ -31,7 +31,6 @@ import java.util.Collections;
 import java.util.List;
 
 @Deprecated
-/* loaded from: classes.dex */
 public abstract class LauncherActivity extends ListActivity {
     IconResizer mIconResizer;
     Intent mIntent;

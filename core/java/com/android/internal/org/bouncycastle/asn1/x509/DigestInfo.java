@@ -12,7 +12,6 @@ import com.android.internal.org.bouncycastle.util.Arrays;
 
 import java.util.Enumeration;
 
-/* loaded from: classes5.dex */
 public class DigestInfo extends ASN1Object {
     private AlgorithmIdentifier algId;
     private byte[] digest;

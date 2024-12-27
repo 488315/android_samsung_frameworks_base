@@ -4,7 +4,6 @@ import android.filterpacks.imageproc.DuotoneFilter;
 import android.media.effect.EffectContext;
 import android.media.effect.SingleFilterEffect;
 
-/* loaded from: classes2.dex */
 public class DuotoneEffect extends SingleFilterEffect {
     public DuotoneEffect(EffectContext context, String name) {
         super(context, name, DuotoneFilter.class, "image", "image", new Object[0]);

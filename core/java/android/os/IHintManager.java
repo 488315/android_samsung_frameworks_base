@@ -3,7 +3,6 @@ package android.os;
 import android.hardware.power.ChannelConfig;
 import android.hardware.power.SessionConfig;
 
-/* loaded from: classes3.dex */
 public interface IHintManager extends IInterface {
     public static final String DESCRIPTOR = "android.os.IHintManager";
 

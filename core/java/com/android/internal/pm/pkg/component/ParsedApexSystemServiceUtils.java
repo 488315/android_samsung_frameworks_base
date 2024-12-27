@@ -12,7 +12,6 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 
-/* loaded from: classes5.dex */
 public class ParsedApexSystemServiceUtils {
     public static ParseResult<ParsedApexSystemService> parseApexSystemService(
             Resources res, XmlResourceParser parser, ParseInput input)

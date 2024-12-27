@@ -1,6 +1,5 @@
 package android.hardware.tv.tuner;
 
-/* loaded from: classes2.dex */
 public @interface FrontendAtsc3Fec {
     public static final int AUTO = 1;
     public static final int BCH_LDPC_16K = 2;

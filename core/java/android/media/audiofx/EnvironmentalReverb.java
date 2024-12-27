@@ -2,7 +2,6 @@ package android.media.audiofx;
 
 import java.util.StringTokenizer;
 
-/* loaded from: classes2.dex */
 public class EnvironmentalReverb extends AudioEffect {
     public static final int PARAM_DECAY_HF_RATIO = 3;
     public static final int PARAM_DECAY_TIME = 2;

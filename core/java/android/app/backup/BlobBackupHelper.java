@@ -16,7 +16,6 @@ import java.util.zip.CRC32;
 import java.util.zip.DeflaterOutputStream;
 import java.util.zip.InflaterInputStream;
 
-/* loaded from: classes.dex */
 public abstract class BlobBackupHelper extends BackupHelperWithLogger {
     private static final boolean DEBUG = false;
     private static final String TAG = "BlobBackupHelper";

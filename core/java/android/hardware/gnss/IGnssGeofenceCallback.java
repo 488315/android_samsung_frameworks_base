@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes2.dex */
 public interface IGnssGeofenceCallback extends IInterface {
     public static final int AVAILABLE = 2;
     public static final String DESCRIPTOR =

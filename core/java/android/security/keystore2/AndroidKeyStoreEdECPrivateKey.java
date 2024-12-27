@@ -7,7 +7,6 @@ import android.system.keystore2.KeyDescriptor;
 import java.security.interfaces.EdECKey;
 import java.security.spec.NamedParameterSpec;
 
-/* loaded from: classes3.dex */
 public class AndroidKeyStoreEdECPrivateKey extends AndroidKeyStorePrivateKey implements EdECKey {
     public AndroidKeyStoreEdECPrivateKey(
             KeyDescriptor descriptor,

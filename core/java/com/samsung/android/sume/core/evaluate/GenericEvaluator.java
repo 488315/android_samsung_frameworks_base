@@ -7,7 +7,6 @@ import com.samsung.android.sume.core.Def;
 
 import java.util.stream.Stream;
 
-/* loaded from: classes6.dex */
 abstract class GenericEvaluator<T extends Comparable<T>> implements Evaluator, Parcelable {
     private static final String TAG = Def.tagOf((Class<?>) GenericEvaluator.class);
     T value;

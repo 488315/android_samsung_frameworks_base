@@ -11,7 +11,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.List;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class BatteryStatsManager {
     public static final int NUM_WIFI_STATES = 8;
     public static final int NUM_WIFI_SUPPL_STATES = 13;

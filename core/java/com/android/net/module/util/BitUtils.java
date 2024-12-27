@@ -2,7 +2,6 @@ package com.android.net.module.util;
 
 import com.android.internal.content.NativeLibraryHelper;
 
-/* loaded from: classes5.dex */
 public class BitUtils {
 
     @FunctionalInterface

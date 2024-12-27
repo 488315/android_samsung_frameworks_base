@@ -14,7 +14,6 @@ import java.io.FileDescriptor;
 import java.io.PrintWriter;
 
 @Deprecated
-/* loaded from: classes.dex */
 public abstract class FragmentHostCallback<E> extends FragmentContainer {
     private final Activity mActivity;
     private ArrayMap<String, LoaderManager> mAllLoaderManagers;

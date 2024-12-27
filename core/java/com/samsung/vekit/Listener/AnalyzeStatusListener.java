@@ -3,7 +3,6 @@ package com.samsung.vekit.Listener;
 import com.samsung.vekit.Common.Type.AnalyzeSolutionErrorType;
 import com.samsung.vekit.Common.Type.AnalyzeType;
 
-/* loaded from: classes6.dex */
 public interface AnalyzeStatusListener extends NativeInterfaceListener {
     void onAnalyzeCompleted();
 

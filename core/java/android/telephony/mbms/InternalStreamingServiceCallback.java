@@ -5,7 +5,6 @@ import android.os.RemoteException;
 
 import java.util.concurrent.Executor;
 
-/* loaded from: classes4.dex */
 public class InternalStreamingServiceCallback extends IStreamingServiceCallback.Stub {
     private final StreamingServiceCallback mAppCallback;
     private final Executor mExecutor;

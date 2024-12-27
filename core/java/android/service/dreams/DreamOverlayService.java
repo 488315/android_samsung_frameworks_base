@@ -10,7 +10,6 @@ import android.view.WindowManager;
 
 import java.util.concurrent.Executor;
 
-/* loaded from: classes3.dex */
 public abstract class DreamOverlayService extends Service {
     private static final boolean DEBUG = false;
     private static final String TAG = "DreamOverlayService";

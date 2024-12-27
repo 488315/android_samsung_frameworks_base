@@ -7,7 +7,6 @@ import android.os.HwParcel;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/* loaded from: classes6.dex */
 public final class SehSsReleaseComplete {
     public int size = 0;
     public int dataLen = 0;

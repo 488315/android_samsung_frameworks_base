@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public class FragmentAudio extends Content {
     private ArrayList<Long> bodyDurationList;
     private ArrayList<String> bodyPathList;

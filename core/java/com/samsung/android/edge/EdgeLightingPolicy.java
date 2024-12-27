@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* loaded from: classes6.dex */
 public final class EdgeLightingPolicy implements Parcelable {
     public static final Parcelable.Creator<EdgeLightingPolicy> CREATOR =
             new Parcelable.Creator<

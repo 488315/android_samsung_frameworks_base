@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public class SemArrayIndexer extends SemAbstractIndexer {
     private static final String TAG = "SemArrayIndexer";
     private static final boolean debug = false;

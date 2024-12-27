@@ -21,7 +21,6 @@ import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-/* loaded from: classes4.dex */
 public class HandwritingInitiator {
     private final int mHandwritingSlop;
     private final InputMethodManager mImm;

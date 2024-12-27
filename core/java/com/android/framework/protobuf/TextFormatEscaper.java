@@ -1,6 +1,5 @@
 package com.android.framework.protobuf;
 
-/* loaded from: classes3.dex */
 final class TextFormatEscaper {
 
     private interface ByteSequence {

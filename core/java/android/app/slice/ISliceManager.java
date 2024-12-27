@@ -7,7 +7,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes.dex */
 public interface ISliceManager extends IInterface {
     void applyRestore(byte[] bArr, int i) throws RemoteException;
 

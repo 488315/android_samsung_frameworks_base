@@ -2,7 +2,6 @@ package android.hardware.radio.V1_6;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class PbReceivedStatus {
     public static final byte PB_RECEIVED_ABORT = 3;
     public static final byte PB_RECEIVED_ERROR = 2;

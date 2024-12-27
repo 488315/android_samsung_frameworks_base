@@ -15,7 +15,6 @@ import android.util.Log;
 
 import com.android.internal.R;
 
-/* loaded from: classes6.dex */
 public class MaintenanceModeNotificationService extends Service {
     private static final String CHANNEL_ID = "maintenance_mode_channel";
     private static final String CHANNEL_NAME = "maintenance_mode";

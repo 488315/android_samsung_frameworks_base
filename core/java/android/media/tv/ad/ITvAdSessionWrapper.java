@@ -20,7 +20,6 @@ import com.android.internal.os.SomeArgs;
 
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public class ITvAdSessionWrapper extends ITvAdSession.Stub implements HandlerCaller.Callback {
     private static final int DO_CREATE_MEDIA_VIEW = 4;
     private static final int DO_DISPATCH_SURFACE_CHANGED = 3;

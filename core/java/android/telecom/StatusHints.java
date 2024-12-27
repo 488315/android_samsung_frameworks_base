@@ -13,7 +13,6 @@ import android.os.UserHandle;
 
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public final class StatusHints implements Parcelable {
     public static final Parcelable.Creator<StatusHints> CREATOR =
             new Parcelable.Creator<StatusHints>() { // from class: android.telecom.StatusHints.1

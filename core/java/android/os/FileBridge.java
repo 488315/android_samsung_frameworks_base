@@ -19,7 +19,6 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
 @Deprecated
-/* loaded from: classes3.dex */
 public class FileBridge extends Thread {
     private static final int CMD_CLOSE = 3;
     private static final int CMD_FSYNC = 2;

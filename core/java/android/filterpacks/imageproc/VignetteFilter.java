@@ -10,7 +10,6 @@ import android.filterfw.core.ShaderProgram;
 import android.filterfw.format.ImageFormat;
 import android.hardware.Camera;
 
-/* loaded from: classes.dex */
 public class VignetteFilter extends Filter {
     private int mHeight;
     private Program mProgram;

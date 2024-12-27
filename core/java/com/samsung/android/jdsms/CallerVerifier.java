@@ -3,7 +3,6 @@ package com.samsung.android.jdsms;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.media.MediaMetrics;
 
-/* loaded from: classes6.dex */
 final class CallerVerifier {
     private static final String BASE_CLASS = "com.samsung.android.jdsms.Sender";
     private static final String BASE_METHOD = "send";

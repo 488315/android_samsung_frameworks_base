@@ -23,7 +23,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public class KeyphraseEnrollmentInfo {
     public static final String ACTION_MANAGE_VOICE_KEYPHRASES =
             "com.android.intent.action.MANAGE_VOICE_KEYPHRASES";

@@ -10,7 +10,6 @@ import android.view.animation.Interpolator;
 import android.view.animation.PathInterpolator;
 import android.view.animation.Transformation;
 
-/* loaded from: classes5.dex */
 class SemDragAndDropAnimationCore {
     static final int SELECT_HIGHLIGHT_ANIM_DURATION = 150;
     private static final String TAG = "SemDragAndDropAnimationCore";

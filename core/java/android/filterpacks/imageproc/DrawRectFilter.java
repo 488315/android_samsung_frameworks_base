@@ -12,7 +12,6 @@ import android.filterfw.format.ObjectFormat;
 import android.filterfw.geometry.Quad;
 import android.opengl.GLES20;
 
-/* loaded from: classes.dex */
 public class DrawRectFilter extends Filter {
 
     @GenerateFieldPort(hasDefault = true, name = "colorBlue")

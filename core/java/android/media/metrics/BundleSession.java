@@ -7,7 +7,6 @@ import com.android.internal.util.AnnotationValidations;
 
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public final class BundleSession implements AutoCloseable {
     public static final String KEY_STATSD_ATOM = "bundlesession-statsd-atom";
     private final String mId;

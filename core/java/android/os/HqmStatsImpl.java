@@ -2,7 +2,6 @@ package android.os;
 
 import android.util.ArrayMap;
 
-/* loaded from: classes3.dex */
 public class HqmStatsImpl implements Parcelable {
     public static final int CF_SERVER = 1;
     public static final Parcelable.Creator<HqmStatsImpl> CREATOR =

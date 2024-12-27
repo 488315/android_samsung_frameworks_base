@@ -13,7 +13,6 @@ import com.android.telephony.Rlog;
 import java.util.concurrent.Executor;
 
 @Deprecated
-/* loaded from: classes4.dex */
 public class ImsConfig {
     public static final String ACTION_IMS_CONFIG_CHANGED =
             "com.android.intent.action.IMS_CONFIG_CHANGED";

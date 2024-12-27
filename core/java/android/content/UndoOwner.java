@@ -2,7 +2,6 @@ package android.content;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 
-/* loaded from: classes.dex */
 public class UndoOwner {
     Object mData;
     final UndoManager mManager;

@@ -14,7 +14,6 @@ import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Set;
 
-/* loaded from: classes4.dex */
 public class ServiceInfo {
     static final int MAP_LIMIT = 1000;
     private final String className;

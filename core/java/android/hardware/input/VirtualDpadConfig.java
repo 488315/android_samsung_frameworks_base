@@ -5,7 +5,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public final class VirtualDpadConfig extends VirtualInputDeviceConfig implements Parcelable {
     public static final Parcelable.Creator<VirtualDpadConfig> CREATOR =
             new Parcelable.Creator<

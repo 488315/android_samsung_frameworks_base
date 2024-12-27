@@ -51,7 +51,6 @@ import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-/* loaded from: classes3.dex */
 public abstract class AndroidKeyStoreKeyPairGeneratorSpi extends KeyPairGeneratorSpi {
     private static final int ALGORITHM_ED25519 = 1204;
     private static final int ALGORITHM_XDH = 1203;

@@ -1,6 +1,5 @@
 package com.samsung.android.media;
 
-/* loaded from: classes6.dex */
 public class SemTone {
     public static final int SEM_TONE_SECOND_CALL_WAITING = 199;
     public static final int TONE_CMAS = 201;

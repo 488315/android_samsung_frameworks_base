@@ -3,7 +3,6 @@ package com.android.internal.widget;
 import java.util.Random;
 
 /* compiled from: LockPatternUtils.java */
-/* loaded from: classes5.dex */
 class RandomString {
     RandomString() {}
 

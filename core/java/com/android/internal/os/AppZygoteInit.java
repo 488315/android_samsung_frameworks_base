@@ -11,7 +11,6 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 
-/* loaded from: classes5.dex */
 class AppZygoteInit {
     public static final String TAG = "AppZygoteInit";
     private static ZygoteServer sServer;

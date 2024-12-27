@@ -8,7 +8,6 @@ import android.os.UserManager;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
 public abstract class DevicePolicyManagerInternal {
 
     public interface OnCrossProfileWidgetProvidersChangeListener {

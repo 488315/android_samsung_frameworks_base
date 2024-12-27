@@ -2,7 +2,6 @@ package android.webkit;
 
 import android.content.Context;
 
-/* loaded from: classes4.dex */
 public abstract class WebViewDatabase {
     protected static final String LOGTAG = "webviewdatabase";
 

@@ -11,7 +11,6 @@ import com.samsung.android.globalactions.util.KeyGuardManagerWrapper;
 import com.samsung.android.globalactions.util.LogWrapper;
 import com.samsung.android.view.SemWindowManager;
 
-/* loaded from: classes6.dex */
 public class FrontLargeDisplayStrategy implements SecureConfirmStrategy, DisposingStrategy {
     private static final String TAG = "FrontLargeDisplayStrategy";
     private static SemWindowManager.FoldStateListener sFoldStateListener;

@@ -13,7 +13,6 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.List;
 
-/* loaded from: classes.dex */
 public class PropertyValuesHolder implements Cloneable {
     private Object mAnimatedValue;
     private TypeConverter mConverter;

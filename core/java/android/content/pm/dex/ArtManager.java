@@ -13,7 +13,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.concurrent.Executor;
 
 @SystemApi
-/* loaded from: classes.dex */
 public class ArtManager {
     public static final int PROFILE_APPS = 0;
     public static final int PROFILE_BOOT_IMAGE = 1;

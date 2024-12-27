@@ -12,7 +12,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public final class DataProfile implements Parcelable {
     public static final Parcelable.Creator<DataProfile> CREATOR =
             new Parcelable.Creator<

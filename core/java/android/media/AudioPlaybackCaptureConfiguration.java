@@ -10,7 +10,6 @@ import com.android.internal.util.Preconditions;
 import java.util.function.Predicate;
 import java.util.function.ToIntFunction;
 
-/* loaded from: classes2.dex */
 public final class AudioPlaybackCaptureConfiguration {
     private final AudioMixingRule mAudioMixingRule;
     private final MediaProjection mProjection;

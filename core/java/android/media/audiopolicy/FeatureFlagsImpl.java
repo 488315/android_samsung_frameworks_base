@@ -1,6 +1,5 @@
 package android.media.audiopolicy;
 
-/* loaded from: classes2.dex */
 public final class FeatureFlagsImpl implements FeatureFlags {
     @Override // android.media.audiopolicy.FeatureFlags
     public boolean audioMixOwnership() {

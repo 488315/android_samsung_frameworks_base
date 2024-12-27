@@ -1,6 +1,5 @@
 package android.content.res;
 
-/* loaded from: classes.dex */
 public interface FontScaleConverter {
     float convertDpToSp(float f);
 

@@ -4,7 +4,6 @@ import com.android.internal.org.bouncycastle.util.Properties;
 
 import java.math.BigInteger;
 
-/* loaded from: classes5.dex */
 public class RSAKeyParameters extends AsymmetricKeyParameter {
     private BigInteger exponent;
     private BigInteger modulus;

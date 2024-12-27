@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.util.Collection;
 import java.util.List;
 
-/* loaded from: classes2.dex */
 public class EnrollmentStageConfig implements Parcelable {
     public static final Parcelable.Creator<EnrollmentStageConfig> CREATOR =
             new Parcelable.Creator<EnrollmentStageConfig>() { // from class:

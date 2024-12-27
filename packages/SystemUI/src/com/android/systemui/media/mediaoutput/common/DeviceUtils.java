@@ -13,7 +13,6 @@ import kotlin.collections.CollectionsKt__CollectionsKt;
 import kotlin.jvm.functions.Function0;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public final class DeviceUtils {
     public static final DeviceUtils INSTANCE = new DeviceUtils();
     public static final Lazy isChinaSalesCode$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.media.mediaoutput.common.DeviceUtils$isChinaSalesCode$2

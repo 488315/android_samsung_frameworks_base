@@ -1,6 +1,5 @@
 package com.android.server.am;
 
-/* loaded from: classes5.dex */
 public final class ServiceRecordProto {
     public static final long ALLOW_WHILE_IN_USE_PERMISSION_IN_FGS = 1133871366171L;
     public static final long APP = 1146756268041L;

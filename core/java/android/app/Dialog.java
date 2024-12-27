@@ -46,7 +46,6 @@ import com.android.internal.policy.PhoneWindow;
 
 import java.lang.ref.WeakReference;
 
-/* loaded from: classes.dex */
 public class Dialog
         implements DialogInterface,
                 Window.Callback,

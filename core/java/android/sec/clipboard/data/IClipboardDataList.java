@@ -9,7 +9,6 @@ import android.os.RemoteException;
 import com.samsung.android.content.clipboard.data.SemClipData;
 import com.samsung.android.knox.analytics.database.Contract;
 
-/* loaded from: classes3.dex */
 public interface IClipboardDataList extends IInterface {
     public static final String DESCRIPTOR = "android.sec.clipboard.data.IClipboardDataList";
 

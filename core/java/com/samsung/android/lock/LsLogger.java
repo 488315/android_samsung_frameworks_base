@@ -8,7 +8,6 @@ import com.android.internal.util.ArrayUtils;
 import java.util.LinkedList;
 import java.util.Queue;
 
-/* loaded from: classes6.dex */
 public final class LsLogger {
     private static final int ACCUM_TIME_MS = 2000;
     private static final int MAX_LINES = 100;

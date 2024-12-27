@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public class DnsSvcbPacket extends DnsPacket {
     private static final String TAG = DnsSvcbPacket.class.getSimpleName();
     public static final int TYPE_SVCB = 64;

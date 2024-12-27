@@ -3,7 +3,6 @@ package android.media;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes2.dex */
 public class DecoderCapabilities {
 
     public enum AudioDecoder {

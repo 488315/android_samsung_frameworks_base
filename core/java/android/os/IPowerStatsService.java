@@ -1,6 +1,5 @@
 package android.os;
 
-/* loaded from: classes3.dex */
 public interface IPowerStatsService extends IInterface {
     public static final String DESCRIPTOR = "android.os.IPowerStatsService";
     public static final String KEY_ENERGY = "energy";

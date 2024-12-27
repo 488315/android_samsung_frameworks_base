@@ -11,7 +11,6 @@ import java.io.PrintWriter;
 import java.lang.reflect.Modifier;
 
 /* compiled from: LoaderManager.java */
-/* loaded from: classes.dex */
 class LoaderManagerImpl extends LoaderManager {
     static boolean DEBUG = false;
     static final String TAG = "LoaderManager";

@@ -4,7 +4,6 @@ import com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier;
 
 import com.samsung.android.media.AudioParameter;
 
-/* loaded from: classes5.dex */
 public interface TeleTrusTObjectIdentifiers {
     public static final ASN1ObjectIdentifier teleTrusTAlgorithm =
             new ASN1ObjectIdentifier("1.3.36.3");

@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 
-/* loaded from: classes.dex */
 public class InputStreamSource extends Filter {
 
     @GenerateFieldPort(name = "stream")

@@ -8,7 +8,6 @@ import android.view.WindowMetrics;
 
 import com.android.internal.R;
 
-/* loaded from: classes6.dex */
 public class WindowManagerUtils {
     static final int NAVIGATIONBAR_BOTTOM = 3;
     static final int NAVIGATIONBAR_LEFT = 1;

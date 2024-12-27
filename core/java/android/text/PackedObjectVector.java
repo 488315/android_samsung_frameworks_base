@@ -7,7 +7,6 @@ import com.android.internal.util.GrowingArrayUtils;
 
 import libcore.util.EmptyArray;
 
-/* loaded from: classes4.dex */
 class PackedObjectVector<E> {
     private int mColumns;
     private Object[] mValues = EmptyArray.OBJECT;

@@ -1,6 +1,5 @@
 package android.hardware.tv.tuner;
 
-/* loaded from: classes2.dex */
 public @interface FrontendDvbsRolloff {
     public static final int ROLLOFF_0_10 = 5;
     public static final int ROLLOFF_0_15 = 4;

@@ -15,7 +15,6 @@ import android.widget.TextView;
 
 import com.android.internal.R;
 
-/* loaded from: classes5.dex */
 public class HarmfulAppWarningActivity extends AlertActivity
         implements DialogInterface.OnClickListener {
     private static final String EXTRA_HARMFUL_APP_WARNING = "harmful_app_warning";

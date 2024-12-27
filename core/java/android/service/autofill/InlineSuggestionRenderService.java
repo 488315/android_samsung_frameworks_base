@@ -29,7 +29,6 @@ import java.lang.ref.WeakReference;
 import java.util.function.BiConsumer;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public abstract class InlineSuggestionRenderService extends Service {
     public static final String SERVICE_INTERFACE =
             "android.service.autofill.InlineSuggestionRenderService";

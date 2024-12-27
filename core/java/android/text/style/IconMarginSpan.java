@@ -6,7 +6,6 @@ import android.graphics.Paint;
 import android.text.Layout;
 import android.text.Spanned;
 
-/* loaded from: classes4.dex */
 public class IconMarginSpan implements LeadingMarginSpan, LineHeightSpan {
     private final Bitmap mBitmap;
     private final int mPad;

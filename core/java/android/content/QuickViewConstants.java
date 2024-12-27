@@ -1,6 +1,5 @@
 package android.content;
 
-/* loaded from: classes.dex */
 public class QuickViewConstants {
     public static final String FEATURE_DELETE = "android:delete";
     public static final String FEATURE_DOWNLOAD = "android:download";

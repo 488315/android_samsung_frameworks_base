@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes2.dex */
 public interface IMediaScannerService extends IInterface {
     void requestScanFile(String str, String str2, IMediaScannerListener iMediaScannerListener)
             throws RemoteException;

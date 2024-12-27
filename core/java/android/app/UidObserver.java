@@ -1,6 +1,5 @@
 package android.app;
 
-/* loaded from: classes.dex */
 public class UidObserver extends IUidObserver.Stub {
     @Override // android.app.IUidObserver
     public void onUidActive(int uid) {}

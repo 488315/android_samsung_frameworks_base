@@ -3,7 +3,6 @@ package com.android.systemui.doze.util;
 import android.util.MathUtils;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public abstract class BurnInHelperKt {
     public static final int getBurnInOffset(int i, boolean z) {
         return (int) zigzag(System.currentTimeMillis() / 60000.0f, i, z ? 83.0f : 521.0f);

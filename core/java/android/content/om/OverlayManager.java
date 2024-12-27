@@ -13,7 +13,6 @@ import com.android.internal.content.om.OverlayManagerImpl;
 import java.io.IOException;
 import java.util.List;
 
-/* loaded from: classes.dex */
 public class OverlayManager {
     public static final long SELF_TARGETING_OVERLAY = 205919743;
     private static final long THROW_SECURITY_EXCEPTIONS = 147340954;

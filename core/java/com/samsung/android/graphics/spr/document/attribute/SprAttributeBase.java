@@ -5,7 +5,6 @@ import com.samsung.android.graphics.spr.document.SprInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-/* loaded from: classes6.dex */
 public abstract class SprAttributeBase implements Cloneable {
     public static final byte TYPE_ANIMATOR_SET = 97;
     public static final byte TYPE_CLIP = 1;

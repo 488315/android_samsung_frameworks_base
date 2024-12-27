@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class TimeZoneCapabilitiesAndConfig implements Parcelable {
     public static final Parcelable.Creator<TimeZoneCapabilitiesAndConfig> CREATOR =
             new Parcelable.Creator<TimeZoneCapabilitiesAndConfig>() { // from class:

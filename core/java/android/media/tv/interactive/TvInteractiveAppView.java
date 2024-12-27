@@ -34,7 +34,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes3.dex */
 public class TvInteractiveAppView extends ViewGroup {
     public static final String BI_INTERACTIVE_APP_KEY_ALIAS = "alias";
     public static final String BI_INTERACTIVE_APP_KEY_CERTIFICATE = "certificate";

@@ -45,7 +45,6 @@ import java.util.Set;
 import java.util.concurrent.Executor;
 import java.util.function.IntConsumer;
 
-/* loaded from: classes.dex */
 public final class VirtualDeviceManager {
     public static final String ACTION_VIRTUAL_DEVICE_REMOVED =
             "android.companion.virtual.action.VIRTUAL_DEVICE_REMOVED";

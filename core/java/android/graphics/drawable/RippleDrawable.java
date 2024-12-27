@@ -38,7 +38,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Consumer;
 
-/* loaded from: classes.dex */
 public class RippleDrawable extends LayerDrawable {
     private static final int BACKGROUND_OPACITY_DURATION = 80;
     private static final int DEFAULT_EFFECT_COLOR = -1912602625;

@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.Map;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public abstract class AdvancedExtender {
     private static final String TAG = "AdvancedExtender";
     private final CameraManager mCameraManager;

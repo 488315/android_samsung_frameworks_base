@@ -2,7 +2,6 @@ package com.samsung.android.desktopmode;
 
 import android.app.admin.DevicePolicyResources;
 
-/* loaded from: classes6.dex */
 public class DesktopModeUiConstants {
     public static final String ACTION_DESKTOP_MODE_UPDATE_REQUEST =
             "com.samsung.android.desktopmode.action.DESKTOP_MODE_UPDATE_REQUEST";

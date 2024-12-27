@@ -5,7 +5,6 @@ import android.os.RemoteCallbackList;
 
 import java.util.function.Consumer;
 
-/* loaded from: classes5.dex */
 public class RemoteCallbackListExt<E extends IInterface> extends RemoteCallbackList<E> {
     public void broadcastAction(Consumer<E> action) {
         int itemCount = beginBroadcast();

@@ -21,7 +21,6 @@ import com.android.internal.util.function.pooled.PooledLambda;
 import java.util.UUID;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public abstract class SoundTriggerDetectionService extends Service {
     private static final boolean DEBUG = false;
     private static final String LOG_TAG = SoundTriggerDetectionService.class.getSimpleName();

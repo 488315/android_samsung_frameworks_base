@@ -24,7 +24,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public class WindowlessWindowManager implements IWindowSession {
     private static final String TAG = "WindowlessWindowManager";
     private final Configuration mConfiguration;

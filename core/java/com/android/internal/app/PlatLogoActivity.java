@@ -36,7 +36,6 @@ import org.json.JSONObject;
 
 import java.util.Random;
 
-/* loaded from: classes5.dex */
 public class PlatLogoActivity extends Activity {
     private static final String EGG_UNLOCK_SETTING = "egg_mode_v";
     private static final boolean FINISH_AFTER_NEXT_STAGE_LAUNCH = false;

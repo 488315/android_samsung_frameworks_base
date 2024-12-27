@@ -17,7 +17,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Objects;
 
-/* loaded from: classes5.dex */
 public class SmsHeader {
     public static final int ELT_ID_APPLICATION_PORT_ADDRESSING_16_BIT = 5;
     public static final int ELT_ID_APPLICATION_PORT_ADDRESSING_8_BIT = 4;

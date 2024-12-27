@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-/* loaded from: classes4.dex */
 public final class ContentCaptureHelper {
     private static final String TAG = ContentCaptureHelper.class.getSimpleName();
     public static boolean sVerbose = false;

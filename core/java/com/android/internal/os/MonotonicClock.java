@@ -17,7 +17,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 
-/* loaded from: classes5.dex */
 public class MonotonicClock {
     private static final String TAG = "MonotonicClock";
     public static final long UNDEFINED = -1;

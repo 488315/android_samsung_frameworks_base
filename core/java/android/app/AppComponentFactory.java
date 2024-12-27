@@ -5,7 +5,6 @@ import android.content.ContentProvider;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 
-/* loaded from: classes.dex */
 public class AppComponentFactory {
     public static final AppComponentFactory DEFAULT = new AppComponentFactory();
 

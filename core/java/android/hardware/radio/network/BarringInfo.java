@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public class BarringInfo implements Parcelable {
     public static final int BARRING_TYPE_CONDITIONAL = 1;
     public static final int BARRING_TYPE_NONE = 0;

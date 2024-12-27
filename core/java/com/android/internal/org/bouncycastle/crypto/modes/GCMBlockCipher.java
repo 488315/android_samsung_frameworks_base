@@ -16,7 +16,6 @@ import com.android.internal.org.bouncycastle.crypto.params.ParametersWithIV;
 import com.android.internal.org.bouncycastle.util.Arrays;
 import com.android.internal.org.bouncycastle.util.Pack;
 
-/* loaded from: classes5.dex */
 public class GCMBlockCipher implements AEADBlockCipher {
     private static final int BLOCK_SIZE = 16;
     private static final long MAX_INPUT_SIZE = 68719476704L;

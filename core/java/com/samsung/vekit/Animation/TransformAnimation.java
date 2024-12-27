@@ -10,7 +10,6 @@ import com.samsung.vekit.Common.VEContext;
 
 import java.util.ArrayList;
 
-/* loaded from: classes6.dex */
 public class TransformAnimation extends Animation<Matrix4> {
     public TransformAnimation(VEContext context, int id, String name) {
         super(context, AnimationType.TRANSFORM, id, name);

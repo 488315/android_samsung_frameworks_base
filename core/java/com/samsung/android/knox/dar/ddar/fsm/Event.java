@@ -2,7 +2,6 @@ package com.samsung.android.knox.dar.ddar.fsm;
 
 import com.android.internal.content.NativeLibraryHelper;
 
-/* loaded from: classes6.dex */
 public enum Event {
     DDAR_WORKSPACE_CREATED,
     DEVICE_AUTH_SUCCESS,

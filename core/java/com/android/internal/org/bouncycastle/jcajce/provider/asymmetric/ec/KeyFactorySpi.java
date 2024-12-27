@@ -26,7 +26,6 @@ import java.security.spec.ECPublicKeySpec;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
 
-/* loaded from: classes5.dex */
 public class KeyFactorySpi extends BaseKeyFactorySpi implements AsymmetricKeyInfoConverter {
     String algorithm;
     ProviderConfiguration configuration;

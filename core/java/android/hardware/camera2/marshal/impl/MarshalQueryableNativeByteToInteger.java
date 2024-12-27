@@ -6,7 +6,6 @@ import android.hardware.camera2.utils.TypeReference;
 
 import java.nio.ByteBuffer;
 
-/* loaded from: classes2.dex */
 public class MarshalQueryableNativeByteToInteger implements MarshalQueryable<Integer> {
     private static final int UINT8_MASK = 255;
 

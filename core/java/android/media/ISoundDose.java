@@ -11,7 +11,6 @@ import android.os.RemoteException;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public interface ISoundDose extends IInterface {
     public static final String DESCRIPTOR = "android.media.ISoundDose";
 

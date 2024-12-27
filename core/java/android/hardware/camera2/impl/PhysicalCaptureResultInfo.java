@@ -3,7 +3,6 @@ package android.hardware.camera2.impl;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public class PhysicalCaptureResultInfo implements Parcelable {
     public static final Parcelable.Creator<PhysicalCaptureResultInfo> CREATOR =
             new Parcelable.Creator<PhysicalCaptureResultInfo>() { // from class:

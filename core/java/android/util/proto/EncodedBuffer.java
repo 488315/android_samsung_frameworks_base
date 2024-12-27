@@ -7,7 +7,6 @@ import com.samsung.android.graphics.spr.document.animator.SprAnimatorBase;
 
 import java.util.ArrayList;
 
-/* loaded from: classes4.dex */
 public final class EncodedBuffer {
     private static final String TAG = "EncodedBuffer";
     private int mBufferCount;

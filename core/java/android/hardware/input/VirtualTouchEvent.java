@@ -9,7 +9,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public final class VirtualTouchEvent implements Parcelable {
     public static final int ACTION_CANCEL = 3;
     public static final int ACTION_DOWN = 0;

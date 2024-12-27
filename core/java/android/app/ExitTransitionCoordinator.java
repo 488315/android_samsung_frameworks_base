@@ -23,7 +23,6 @@ import com.android.internal.view.OneShotPreDrawListener;
 
 import java.util.ArrayList;
 
-/* loaded from: classes.dex */
 public class ExitTransitionCoordinator extends ActivityTransitionCoordinator {
     private static final String TAG = "ExitTransitionCoordinator";
     static long sMaxWaitMillis = 1000;

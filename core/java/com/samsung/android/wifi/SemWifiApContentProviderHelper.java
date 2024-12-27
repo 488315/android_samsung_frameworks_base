@@ -11,7 +11,6 @@ import android.util.Log;
 
 import com.samsung.android.wifi.ap.SemWifiApContentProvider;
 
-/* loaded from: classes6.dex */
 public class SemWifiApContentProviderHelper {
     public static final String KEY_AUTO_HOTSPOT_CONNECTED_USER = "auto_hotspot_connected_user";
     public static final String NAME = "name";

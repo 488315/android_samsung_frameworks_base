@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 
-/* loaded from: classes4.dex */
 public final class ProtoOutputStream extends ProtoStream {
     public static final String TAG = "ProtoOutputStream";
     private EncodedBuffer mBuffer;

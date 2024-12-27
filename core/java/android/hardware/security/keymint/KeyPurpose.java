@@ -1,6 +1,5 @@
 package android.hardware.security.keymint;
 
-/* loaded from: classes2.dex */
 public @interface KeyPurpose {
     public static final int AGREE_KEY = 6;
     public static final int ATTEST_KEY = 7;

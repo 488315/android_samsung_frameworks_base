@@ -3,7 +3,6 @@ package android.os;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/* loaded from: classes3.dex */
 public class HWParamResultData extends HWParamData {
     private long time = 0;
     private int server = -1;

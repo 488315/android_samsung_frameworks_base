@@ -19,7 +19,6 @@ import java.util.Map;
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 @ProvidesInterface(action = PluginKeyguardStatusView.ACTION, version = 0)
 @SupportVersionChecker
-/* loaded from: classes2.dex */
 public interface PluginKeyguardStatusView extends Plugin {
     public static final String ACTION = "com.samsung.systemui.action.PLUGIN_FACE_WIDGET";
     public static final int MAJOR_VERSION = 3;

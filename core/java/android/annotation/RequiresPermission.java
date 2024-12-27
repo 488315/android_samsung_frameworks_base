@@ -13,7 +13,6 @@ import java.lang.annotation.Target;
     ElementType.PARAMETER
 })
 @Retention(RetentionPolicy.CLASS)
-/* loaded from: classes.dex */
 public @interface RequiresPermission {
 
     @Target({ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER})

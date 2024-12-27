@@ -22,7 +22,6 @@ import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
-/* loaded from: classes6.dex */
 public abstract class MediaCodecFilter implements MediaInputStreamFilter, MediaOutputStreamFilter {
     private static final String TAG = Def.tagOf((Class<?>) MediaCodecFilter.class);
     protected final CodecDescriptor codecDescriptor;

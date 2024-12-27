@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes3.dex */
 public final class GameSessionActivityResult implements Parcelable {
     public static final Parcelable.Creator<GameSessionActivityResult> CREATOR =
             new Parcelable.Creator<

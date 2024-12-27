@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class EuiccProfileInfo implements Parcelable {
     public static final Parcelable.Creator<EuiccProfileInfo> CREATOR =
             new Parcelable.Creator<

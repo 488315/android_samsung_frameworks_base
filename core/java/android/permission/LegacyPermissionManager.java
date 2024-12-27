@@ -8,7 +8,6 @@ import android.os.UserHandle;
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 
-/* loaded from: classes3.dex */
 public final class LegacyPermissionManager {
     private final ILegacyPermissionManager mLegacyPermissionManager;
 

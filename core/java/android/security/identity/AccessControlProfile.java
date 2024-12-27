@@ -2,7 +2,6 @@ package android.security.identity;
 
 import java.security.cert.X509Certificate;
 
-/* loaded from: classes3.dex */
 public class AccessControlProfile {
     private AccessControlProfileId mAccessControlProfileId;
     private X509Certificate mReaderCertificate;

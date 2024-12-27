@@ -7,7 +7,6 @@ import com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier;
 import com.android.internal.org.bouncycastle.asn1.ASN1Primitive;
 import com.android.internal.org.bouncycastle.asn1.ASN1TaggedObject;
 
-/* loaded from: classes5.dex */
 public class X962Parameters extends ASN1Object implements ASN1Choice {
     private ASN1Primitive params;
 

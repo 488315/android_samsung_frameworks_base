@@ -1,7 +1,6 @@
 package android.util;
 
 @Deprecated
-/* loaded from: classes4.dex */
 public final class Config {
 
     @Deprecated public static final boolean DEBUG = false;

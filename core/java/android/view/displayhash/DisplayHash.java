@@ -8,7 +8,6 @@ import android.os.Parcelable;
 
 import com.android.internal.util.AnnotationValidations;
 
-/* loaded from: classes4.dex */
 public final class DisplayHash implements Parcelable {
     public static final Parcelable.Creator<DisplayHash> CREATOR =
             new Parcelable.Creator<

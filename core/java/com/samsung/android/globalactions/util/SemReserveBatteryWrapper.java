@@ -3,7 +3,6 @@ package com.samsung.android.globalactions.util;
 import android.content.Context;
 import android.provider.Settings;
 
-/* loaded from: classes6.dex */
 public class SemReserveBatteryWrapper {
     private final Context mContext;
     private boolean mConfigYuvaFeature = initYuvaFeature();

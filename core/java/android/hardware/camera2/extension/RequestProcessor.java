@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.concurrent.Executor;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public final class RequestProcessor {
     private static final String TAG = "RequestProcessor";
     private final IRequestProcessorImpl mRequestProcessor;

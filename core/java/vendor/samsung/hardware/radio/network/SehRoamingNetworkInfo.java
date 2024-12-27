@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.util.Arrays;
 import java.util.StringJoiner;
 
-/* loaded from: classes6.dex */
 public class SehRoamingNetworkInfo implements Parcelable {
     public static final Parcelable.Creator<SehRoamingNetworkInfo> CREATOR =
             new Parcelable.Creator<

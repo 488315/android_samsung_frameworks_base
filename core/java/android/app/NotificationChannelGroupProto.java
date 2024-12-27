@@ -1,6 +1,5 @@
 package android.app;
 
-/* loaded from: classes.dex */
 public final class NotificationChannelGroupProto {
     public static final long ALLOW_APP_OVERLAY = 1133871366150L;
     public static final long CHANNELS = 2246267895813L;

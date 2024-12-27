@@ -14,7 +14,6 @@ import com.samsung.android.globalactions.util.SamsungGlobalActionsAnalytics;
 import com.samsung.android.globalactions.util.SystemController;
 import com.samsung.android.view.SemWindowManager;
 
-/* loaded from: classes6.dex */
 public class MedicalInfoActionViewModel implements ActionViewModel {
     public static final String DISPLAY_CATEGORY_BUILTIN =
             "com.samsung.android.hardware.display.category.BUILTIN";

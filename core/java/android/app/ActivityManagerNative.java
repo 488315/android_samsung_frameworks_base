@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.IBinder;
 
 @Deprecated
-/* loaded from: classes.dex */
 public abstract class ActivityManagerNative {
     public static IActivityManager asInterface(IBinder obj) {
         return IActivityManager.Stub.asInterface(obj);

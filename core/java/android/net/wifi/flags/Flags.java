@@ -1,6 +1,5 @@
 package android.net.wifi.flags;
 
-/* loaded from: classes3.dex */
 public final class Flags {
     private static FeatureFlags FEATURE_FLAGS = new FeatureFlagsImpl();
     public static final String FLAG_GET_DEVICE_CROSS_AKM_ROAMING_SUPPORT =

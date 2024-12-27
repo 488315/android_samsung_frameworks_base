@@ -6,7 +6,6 @@ import android.graphics.BitmapFactory;
 import java.io.File;
 import java.lang.ref.WeakReference;
 
-/* loaded from: classes5.dex */
 public final class SemFilterBufferedProcessor {
     public static final int IMAGE_FORMAT_RGBA_8888 = 0;
     public static final int IMAGE_FORMAT_YUV_420_888 = 1;

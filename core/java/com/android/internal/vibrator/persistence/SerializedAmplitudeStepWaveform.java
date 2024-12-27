@@ -10,7 +10,6 @@ import com.android.modules.utils.TypedXmlSerializer;
 import java.io.IOException;
 import java.util.Arrays;
 
-/* loaded from: classes5.dex */
 final class SerializedAmplitudeStepWaveform implements SerializedVibrationEffect.SerializedSegment {
     private final int[] mAmplitudes;
     private final int mRepeatIndex;

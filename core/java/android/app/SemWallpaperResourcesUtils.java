@@ -16,7 +16,6 @@ import java.io.FilenameFilter;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-/* loaded from: classes.dex */
 public class SemWallpaperResourcesUtils {
     private static final String CHAMELEON_WALLPAPER_PATH =
             "/carrier/data/app/WallpaperChooser/Customization_DefaultBackground.jpg";

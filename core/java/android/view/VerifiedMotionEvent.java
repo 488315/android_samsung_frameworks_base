@@ -9,7 +9,6 @@ import java.lang.annotation.Annotation;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes4.dex */
 public final class VerifiedMotionEvent extends VerifiedInputEvent implements Parcelable {
     public static final Parcelable.Creator<VerifiedMotionEvent> CREATOR =
             new Parcelable.Creator<

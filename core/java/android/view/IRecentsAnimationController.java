@@ -11,7 +11,6 @@ import android.window.WindowAnimationState;
 
 import com.android.internal.os.IResultReceiver;
 
-/* loaded from: classes4.dex */
 public interface IRecentsAnimationController extends IInterface {
     void animateNavigationBarToApp(long j) throws RemoteException;
 

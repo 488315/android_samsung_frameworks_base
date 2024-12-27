@@ -12,7 +12,6 @@ import android.view.accessibility.AccessibilityManager;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.view.accessibility.AccessibilityNodeProvider;
 
-/* loaded from: classes5.dex */
 public abstract class ExploreByTouchHelper extends View.AccessibilityDelegate {
     public static final int HOST_ID = -1;
     public static final int INVALID_ID = Integer.MIN_VALUE;

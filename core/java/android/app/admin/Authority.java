@@ -4,7 +4,6 @@ import android.annotation.SystemApi;
 import android.os.Parcelable;
 
 @SystemApi
-/* loaded from: classes.dex */
 public abstract class Authority implements Parcelable {
     protected Authority() {}
 

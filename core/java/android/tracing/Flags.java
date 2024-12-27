@@ -1,6 +1,5 @@
 package android.tracing;
 
-/* loaded from: classes4.dex */
 public final class Flags {
     private static FeatureFlags FEATURE_FLAGS = new FeatureFlagsImpl();
     public static final String FLAG_PERFETTO_IME = "android.tracing.perfetto_ime";

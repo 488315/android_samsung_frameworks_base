@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.util.Arrays;
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public class Void implements Parcelable {
     public static final Parcelable.Creator<Void> CREATOR =
             new Parcelable.Creator<Void>() { // from class: android.media.audio.common.Void.1

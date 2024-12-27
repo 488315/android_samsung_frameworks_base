@@ -13,7 +13,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.ref.WeakReference;
 
-/* loaded from: classes4.dex */
 public final class InputWindowHandle {
     public float alpha;
     public boolean canOccludePresentation;

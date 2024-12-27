@@ -9,7 +9,6 @@ import java.lang.annotation.Target;
 @Target({ElementType.TYPE})
 @Repeatable(Container.class)
 @Retention(RetentionPolicy.RUNTIME)
-/* loaded from: classes.dex */
 public @interface RestrictedFor {
 
     @Target({ElementType.TYPE})

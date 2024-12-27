@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/* loaded from: classes4.dex */
 public class VendorConfigurationState implements Parcelable {
     public static final String CONFIG_CA_ENABLED = "CA_ENABLED";
     public static final String CONFIG_EGPRS_SUPPORT = "EGPRS_SUPPORT";

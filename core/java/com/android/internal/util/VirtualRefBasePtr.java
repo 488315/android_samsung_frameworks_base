@@ -1,6 +1,5 @@
 package com.android.internal.util;
 
-/* loaded from: classes5.dex */
 public final class VirtualRefBasePtr {
     private long mNativePtr;
 

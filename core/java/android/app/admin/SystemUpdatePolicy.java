@@ -29,7 +29,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-/* loaded from: classes.dex */
 public final class SystemUpdatePolicy implements Parcelable {
     public static final Parcelable.Creator<SystemUpdatePolicy> CREATOR =
             new Parcelable.Creator<

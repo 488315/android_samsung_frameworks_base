@@ -7,7 +7,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 
 @Deprecated
-/* loaded from: classes2.dex */
 public interface IActivityRecognitionHardwareWatcher extends IInterface {
     void onInstanceChanged(IActivityRecognitionHardware iActivityRecognitionHardware)
             throws RemoteException;

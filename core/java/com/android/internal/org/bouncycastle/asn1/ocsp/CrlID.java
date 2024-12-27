@@ -13,7 +13,6 @@ import com.android.internal.org.bouncycastle.asn1.DERTaggedObject;
 
 import java.util.Enumeration;
 
-/* loaded from: classes5.dex */
 public class CrlID extends ASN1Object {
     private ASN1Integer crlNum;
     private ASN1GeneralizedTime crlTime;

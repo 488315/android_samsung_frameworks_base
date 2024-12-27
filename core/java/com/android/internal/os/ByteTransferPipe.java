@@ -4,7 +4,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
-/* loaded from: classes5.dex */
 public class ByteTransferPipe extends TransferPipe {
     static final String TAG = "ByteTransferPipe";
     private ByteArrayOutputStream mOutputStream;

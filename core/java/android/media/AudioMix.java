@@ -7,7 +7,6 @@ import android.os.IBinder;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public class AudioMix implements Parcelable {
     public static final Parcelable.Creator<AudioMix> CREATOR =
             new Parcelable.Creator<AudioMix>() { // from class: android.media.AudioMix.1

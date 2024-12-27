@@ -10,7 +10,6 @@ import android.provider.Telephony;
 import android.text.TextUtils;
 import android.util.Log;
 
-/* loaded from: classes5.dex */
 public class CellBroadcastUtils {
     private static final String TAG = "CellBroadcastUtils";
     private static final boolean VDBG = false;

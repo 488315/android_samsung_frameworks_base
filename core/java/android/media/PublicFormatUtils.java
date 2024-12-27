@@ -1,6 +1,5 @@
 package android.media;
 
-/* loaded from: classes2.dex */
 class PublicFormatUtils {
     private static native int nativeGetHalDataspace(int i);
 

@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
-/* loaded from: classes3.dex */
 final class MediaDeviceFinderImpl extends MediaDeviceFinder {
     private static final String TAG_CLASS = "MediaDeviceFinderImpl";
     private static HashMap<String, Device.DeviceType> mDeviceEventToDeviceTypeMap;

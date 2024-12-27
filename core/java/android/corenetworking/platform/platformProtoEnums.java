@@ -1,6 +1,5 @@
 package android.corenetworking.platform;
 
-/* loaded from: classes.dex */
 public final class platformProtoEnums {
     public static final int CS_CONNECTED = 1;
     public static final int CS_DISCONNECTED = 2;

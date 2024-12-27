@@ -8,7 +8,6 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.widget.TextView;
 
-/* loaded from: classes4.dex */
 public class ArrowKeyMovementMethod extends BaseMovementMethod implements MovementMethod {
     private static final Object LAST_TAP_DOWN = new Object();
     private static ArrowKeyMovementMethod sInstance;

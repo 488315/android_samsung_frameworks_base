@@ -14,7 +14,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public class FabricatedOverlay {
     final FabricatedOverlayInternal mOverlay;
 

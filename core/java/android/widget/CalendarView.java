@@ -20,7 +20,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-/* loaded from: classes4.dex */
 public class CalendarView extends FrameLayout {
     private static final String DATE_FORMAT = "MM/dd/yyyy";
     private static final DateFormat DATE_FORMATTER = new SimpleDateFormat(DATE_FORMAT);

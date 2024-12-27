@@ -8,7 +8,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.text.TextUtils;
 
-/* loaded from: classes.dex */
 public interface IAssociationRequestCallback extends IInterface {
     public static final String DESCRIPTOR = "android.companion.IAssociationRequestCallback";
 

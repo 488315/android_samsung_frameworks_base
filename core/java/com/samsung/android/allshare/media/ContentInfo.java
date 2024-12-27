@@ -3,7 +3,6 @@ package com.samsung.android.allshare.media;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes3.dex */
 public class ContentInfo implements Parcelable {
     public static final Parcelable.Creator<ContentInfo> CREATOR =
             new Parcelable.Creator<

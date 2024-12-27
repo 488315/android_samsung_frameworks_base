@@ -8,7 +8,6 @@ import com.android.internal.widget.remotecompose.core.WireBuffer;
 
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public class DrawText extends PaintOperation {
     public static final Companion COMPANION = new Companion();
     int mContextEnd;

@@ -7,7 +7,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.view.translation.TranslationResponse;
 
-/* loaded from: classes3.dex */
 public interface ITranslationCallback extends IInterface {
     public static final String DESCRIPTOR = "android.service.translation.ITranslationCallback";
 

@@ -3,7 +3,6 @@ package android.app;
 import android.os.IRemoteCallback;
 import android.os.RemoteException;
 
-/* loaded from: classes.dex */
 public class UserSwitchObserver extends IUserSwitchObserver.Stub {
     @Override // android.app.IUserSwitchObserver
     public void onBeforeUserSwitching(int newUserId) throws RemoteException {}

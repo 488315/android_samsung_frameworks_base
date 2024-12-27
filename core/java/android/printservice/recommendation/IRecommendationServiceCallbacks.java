@@ -8,7 +8,6 @@ import android.os.RemoteException;
 
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public interface IRecommendationServiceCallbacks extends IInterface {
     void onRecommendationsUpdated(List<RecommendationInfo> list) throws RemoteException;
 

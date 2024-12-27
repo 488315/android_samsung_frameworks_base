@@ -48,7 +48,6 @@ import java.util.Queue;
 import java.util.function.Consumer;
 
 @RemoteViews.RemoteView
-/* loaded from: classes5.dex */
 public class ConversationLayout extends FrameLayout
         implements ImageMessageConsumer, IMessagingLayout {
     public static final int IMPORTANCE_ANIM_GROW_DURATION = 250;

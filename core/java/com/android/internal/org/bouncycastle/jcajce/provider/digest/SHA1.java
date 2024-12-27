@@ -9,7 +9,6 @@ import com.android.internal.org.bouncycastle.jcajce.provider.symmetric.util.Base
 import com.android.internal.org.bouncycastle.jcajce.provider.symmetric.util.BaseMac;
 import com.android.internal.org.bouncycastle.jcajce.provider.symmetric.util.PBESecretKeyFactory;
 
-/* loaded from: classes5.dex */
 public class SHA1 {
     private SHA1() {}
 

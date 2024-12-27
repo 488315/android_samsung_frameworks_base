@@ -8,7 +8,6 @@ import android.sysprop.InputProperties;
 import com.android.internal.R;
 import com.android.internal.hidden_from_bootclasspath.com.android.hardware.input.Flags;
 
-/* loaded from: classes2.dex */
 public class InputSettings {
     public static final float DEFAULT_MAXIMUM_OBSCURING_OPACITY_FOR_TOUCH = 0.8f;
     public static final int DEFAULT_POINTER_SPEED = 0;

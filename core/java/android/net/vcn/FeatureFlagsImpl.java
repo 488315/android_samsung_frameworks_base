@@ -1,6 +1,5 @@
 package android.net.vcn;
 
-/* loaded from: classes3.dex */
 public final class FeatureFlagsImpl implements FeatureFlags {
     @Override // android.net.vcn.FeatureFlags
     public boolean allowDisableIpsecLossDetector() {

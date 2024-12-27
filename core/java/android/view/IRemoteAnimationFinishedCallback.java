@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes4.dex */
 public interface IRemoteAnimationFinishedCallback extends IInterface {
     void onAnimationFinished() throws RemoteException;
 

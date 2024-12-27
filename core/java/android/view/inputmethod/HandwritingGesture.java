@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes4.dex */
 public abstract class HandwritingGesture {
     public static final int GESTURE_TYPE_DELETE = 4;
     public static final int GESTURE_TYPE_DELETE_RANGE = 64;

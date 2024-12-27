@@ -19,7 +19,6 @@ import com.android.internal.accessibility.util.AccessibilityUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public class AccessibilityShortcutChooserActivity extends Activity {
     private static final String KEY_ACCESSIBILITY_SHORTCUT_MENU_MODE =
             "accessibility_shortcut_menu_mode";

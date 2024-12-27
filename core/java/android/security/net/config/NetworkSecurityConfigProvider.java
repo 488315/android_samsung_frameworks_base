@@ -9,7 +9,6 @@ import libcore.net.NetworkSecurityPolicy;
 import java.security.Provider;
 import java.security.Security;
 
-/* loaded from: classes3.dex */
 public final class NetworkSecurityConfigProvider extends Provider {
     private static final String LOG_TAG = "nsconfig";
     private static final String PREFIX =

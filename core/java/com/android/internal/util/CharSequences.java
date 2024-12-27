@@ -1,6 +1,5 @@
 package com.android.internal.util;
 
-/* loaded from: classes5.dex */
 public class CharSequences {
     public static CharSequence forAsciiBytes(final byte[] bytes) {
         return new CharSequence() { // from class: com.android.internal.util.CharSequences.1

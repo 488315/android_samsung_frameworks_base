@@ -1,6 +1,5 @@
 package android.view.inputmethod;
 
-/* loaded from: classes4.dex */
 public final class EditorInfoProto {
     public static final long FIELD_ID = 1120986464261L;
     public static final long IME_OPTIONS = 1120986464258L;

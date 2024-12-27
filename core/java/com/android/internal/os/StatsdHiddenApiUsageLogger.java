@@ -9,7 +9,6 @@ import com.android.internal.util.FrameworkStatsLog;
 
 import dalvik.system.VMRuntime;
 
-/* loaded from: classes5.dex */
 class StatsdHiddenApiUsageLogger implements VMRuntime.HiddenApiUsageLogger {
     private static final StatsdHiddenApiUsageLogger sInstance = new StatsdHiddenApiUsageLogger();
     private final MetricsLogger mMetricsLogger = new MetricsLogger();

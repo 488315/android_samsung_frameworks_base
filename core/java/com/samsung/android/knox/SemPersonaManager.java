@@ -68,7 +68,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.function.Supplier;
 
-/* loaded from: classes6.dex */
 public class SemPersonaManager {
     public static final String ACCESS_TYPE_BLUETOOTH = "bluetooth";
     public static final String ACCESS_TYPE_SDCARD = "sdcard";

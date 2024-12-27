@@ -2,7 +2,6 @@ package android.provider;
 
 import android.net.Uri;
 
-/* loaded from: classes3.dex */
 public class SettingsSlicesContract {
     public static final String AUTHORITY = "android.settings.slices";
     public static final Uri BASE_URI =

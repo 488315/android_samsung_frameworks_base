@@ -14,7 +14,6 @@ import java.io.Writer;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes3.dex */
 public final class VibrationXmlSerializer {
     public static final int FLAG_ALLOW_HIDDEN_APIS = 1;
     public static final int FLAG_PRETTY_PRINT = 2;

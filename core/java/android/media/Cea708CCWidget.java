@@ -32,7 +32,6 @@ import java.util.Iterator;
 import java.util.List;
 
 /* compiled from: Cea708CaptionRenderer.java */
-/* loaded from: classes2.dex */
 class Cea708CCWidget extends ClosedCaptionWidget implements Cea708CCParser.DisplayListener {
     private final CCHandler mCCHandler;
 

@@ -1,6 +1,5 @@
 package android.security.identity;
 
-/* loaded from: classes3.dex */
 public class AccessControlProfileId {
     private int mId;
 

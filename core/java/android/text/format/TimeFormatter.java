@@ -16,7 +16,6 @@ import java.time.ZoneId;
 import java.util.Locale;
 import java.util.TimeZone;
 
-/* loaded from: classes4.dex */
 class TimeFormatter {
     private static final int DAYSPERLYEAR = 366;
     private static final int DAYSPERNYEAR = 365;

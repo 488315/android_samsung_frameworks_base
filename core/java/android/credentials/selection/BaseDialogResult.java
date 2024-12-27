@@ -8,7 +8,6 @@ import android.os.Parcelable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes.dex */
 public class BaseDialogResult implements Parcelable {
     public static final Parcelable.Creator<BaseDialogResult> CREATOR =
             new Parcelable.Creator<BaseDialogResult>() { // from class:

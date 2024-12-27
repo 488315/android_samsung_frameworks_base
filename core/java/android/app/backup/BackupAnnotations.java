@@ -3,7 +3,6 @@ package android.app.backup;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes.dex */
 public class BackupAnnotations {
 
     @Retention(RetentionPolicy.SOURCE)

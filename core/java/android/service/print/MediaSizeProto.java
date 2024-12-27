@@ -1,6 +1,5 @@
 package android.service.print;
 
-/* loaded from: classes3.dex */
 public final class MediaSizeProto {
     public static final long HEIGHT_MILS = 1120986464259L;
     public static final long ID = 1138166333441L;

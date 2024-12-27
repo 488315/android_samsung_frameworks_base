@@ -20,7 +20,6 @@ import java.security.spec.ECGenParameterSpec;
 import java.security.spec.ECParameterSpec;
 import java.security.spec.InvalidParameterSpecException;
 
-/* loaded from: classes5.dex */
 public class AlgorithmParametersSpi extends java.security.AlgorithmParametersSpi {
     private String curveName;
     private ECParameterSpec ecParameterSpec;

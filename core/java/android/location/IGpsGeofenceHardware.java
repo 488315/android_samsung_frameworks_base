@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes2.dex */
 public interface IGpsGeofenceHardware extends IInterface {
     boolean addCircularHardwareGeofence(
             int i, double d, double d2, double d3, int i2, int i3, int i4, int i5)

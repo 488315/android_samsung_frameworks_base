@@ -24,7 +24,6 @@ import java.security.spec.AlgorithmParameterSpec;
 import java.security.spec.DSAParameterSpec;
 import java.util.Hashtable;
 
-/* loaded from: classes5.dex */
 public class KeyPairGeneratorSpi extends KeyPairGenerator {
     DSAKeyPairGenerator engine;
     boolean initialised;

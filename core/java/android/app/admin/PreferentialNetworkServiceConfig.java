@@ -22,7 +22,6 @@ import java.util.function.Function;
 import java.util.function.IntFunction;
 import java.util.stream.Collectors;
 
-/* loaded from: classes.dex */
 public final class PreferentialNetworkServiceConfig implements Parcelable {
     private static final String ATTR_VALUE = "value";
     private static final String LOG_TAG = "PreferentialNetworkServiceConfig";

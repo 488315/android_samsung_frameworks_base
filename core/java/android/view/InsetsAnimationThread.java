@@ -3,7 +3,6 @@ package android.view;
 import android.os.Handler;
 import android.os.HandlerThread;
 
-/* loaded from: classes4.dex */
 public class InsetsAnimationThread extends HandlerThread {
     private static Handler sHandler;
     private static InsetsAnimationThread sInstance;

@@ -15,7 +15,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-/* loaded from: classes3.dex */
 public final class AppUriAuthenticationPolicy implements Parcelable {
     public static final Parcelable.Creator<AppUriAuthenticationPolicy> CREATOR =
             new Parcelable.Creator<

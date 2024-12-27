@@ -8,7 +8,6 @@ import android.text.TextUtils;
 import java.io.PrintWriter;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public final class RemoteAction implements Parcelable {
     public static final Parcelable.Creator<RemoteAction> CREATOR =
             new Parcelable.Creator<RemoteAction>() { // from class: android.app.RemoteAction.1

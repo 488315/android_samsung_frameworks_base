@@ -28,7 +28,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-/* loaded from: classes.dex */
 public final class UsageStatsManager {
     public static final String EXTRA_EVENT_ACTION = "android.app.usage.extra.EVENT_ACTION";
     public static final String EXTRA_EVENT_CATEGORY = "android.app.usage.extra.EVENT_CATEGORY";

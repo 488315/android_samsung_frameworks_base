@@ -7,7 +7,6 @@ import com.samsung.android.sume.core.Def;
 
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public class DeriveBufferGroup extends MediaBufferGroup {
     private MediaBuffer primaryBuffer;
     private static final String TAG = Def.tagOf((Class<?>) DeriveBufferGroup.class);

@@ -2,7 +2,6 @@ package com.android.internal.org.bouncycastle.crypto.params;
 
 import java.math.BigInteger;
 
-/* loaded from: classes5.dex */
 public class RSAPrivateCrtKeyParameters extends RSAKeyParameters {
     private BigInteger dP;
     private BigInteger dQ;

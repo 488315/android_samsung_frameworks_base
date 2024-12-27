@@ -1,6 +1,5 @@
 package com.sec.android.allshare.iface.message;
 
-/* loaded from: classes6.dex */
 public class EventMsg {
     public static final int AIRCONDITIONER = 4;
     public static final int ALLCONTROL_CHANGED_PROFILE = 1;

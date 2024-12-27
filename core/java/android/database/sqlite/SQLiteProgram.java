@@ -5,7 +5,6 @@ import android.os.CancellationSignal;
 
 import java.util.Arrays;
 
-/* loaded from: classes.dex */
 public abstract class SQLiteProgram extends SQLiteClosable {
     private static final String[] EMPTY_STRING_ARRAY = new String[0];
     private final Object[] mBindArgs;

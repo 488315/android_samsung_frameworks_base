@@ -1,6 +1,5 @@
 package android.util;
 
-/* loaded from: classes4.dex */
 public abstract class FloatProperty<T> extends Property<T, Float> {
     public abstract void setValue(T t, float f);
 

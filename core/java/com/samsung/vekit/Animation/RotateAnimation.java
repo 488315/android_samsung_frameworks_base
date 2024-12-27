@@ -11,7 +11,6 @@ import com.samsung.vekit.Common.VEContext;
 
 import java.util.ArrayList;
 
-/* loaded from: classes6.dex */
 public class RotateAnimation extends Animation<Vector3> {
     public RotateAnimation(VEContext context, int id, String name) {
         super(context, AnimationType.ROTATE, id, name);

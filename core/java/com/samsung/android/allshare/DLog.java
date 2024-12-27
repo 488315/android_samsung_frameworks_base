@@ -3,7 +3,6 @@ package com.samsung.android.allshare;
 import android.media.MediaMetrics;
 import android.util.Log;
 
-/* loaded from: classes3.dex */
 public final class DLog {
     private static final String MAIN_DEV_TAG = "AllShare(ASF-API)";
     private static final String PREFIX = "* catched :: * ";

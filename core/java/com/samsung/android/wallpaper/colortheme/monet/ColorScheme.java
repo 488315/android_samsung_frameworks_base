@@ -18,7 +18,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-/* loaded from: classes6.dex */
 public class ColorScheme {
     public static final float ACCENT1_CHROMA = 48.0f;
     public static final int GOOGLE_BLUE = -14979341;

@@ -4,7 +4,6 @@ import android.annotation.SystemApi;
 import android.util.secutil.LogSwitcher;
 
 @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
-/* loaded from: classes4.dex */
 public final class Slog {
     private Slog() {}
 

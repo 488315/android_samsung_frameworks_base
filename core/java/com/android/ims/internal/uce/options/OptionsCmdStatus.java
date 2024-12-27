@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import com.android.ims.internal.uce.common.CapInfo;
 import com.android.ims.internal.uce.common.StatusCode;
 
-/* loaded from: classes5.dex */
 public class OptionsCmdStatus implements Parcelable {
     public static final Parcelable.Creator<OptionsCmdStatus> CREATOR =
             new Parcelable.Creator<

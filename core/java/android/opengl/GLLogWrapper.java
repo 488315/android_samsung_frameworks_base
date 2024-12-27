@@ -26,7 +26,6 @@ import java.util.Arrays;
 
 import javax.microedition.khronos.opengles.GL;
 
-/* loaded from: classes3.dex */
 class GLLogWrapper extends GLWrapperBase {
     private static final int FORMAT_FIXED = 2;
     private static final int FORMAT_FLOAT = 1;

@@ -4,7 +4,6 @@ import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes.dex */
 public class StagedApexInfo implements Parcelable {
     public static final Parcelable.Creator<StagedApexInfo> CREATOR =
             new Parcelable.Creator<

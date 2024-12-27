@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public class CallForwardInfo implements Parcelable {
     public static final Parcelable.Creator<CallForwardInfo> CREATOR =
             new Parcelable.Creator<CallForwardInfo>() { // from class:

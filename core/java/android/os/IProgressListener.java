@@ -1,6 +1,5 @@
 package android.os;
 
-/* loaded from: classes3.dex */
 public interface IProgressListener extends IInterface {
     void onFinished(int i, Bundle bundle) throws RemoteException;
 

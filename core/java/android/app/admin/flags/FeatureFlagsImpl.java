@@ -1,6 +1,5 @@
 package android.app.admin.flags;
 
-/* loaded from: classes.dex */
 public final class FeatureFlagsImpl implements FeatureFlags {
     @Override // android.app.admin.flags.FeatureFlags
     public boolean allowQueryingProfileType() {

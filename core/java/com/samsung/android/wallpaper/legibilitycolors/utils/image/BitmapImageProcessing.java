@@ -8,7 +8,6 @@ import com.android.internal.graphics.ColorUtils;
 
 import com.samsung.android.wallpaper.legibilitycolors.utils.IUXColorUtils;
 
-/* loaded from: classes6.dex */
 public class BitmapImageProcessing {
     protected Bitmap.Config mConfig;
     protected final int mImageHeight;

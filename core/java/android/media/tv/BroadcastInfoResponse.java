@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes3.dex */
 public abstract class BroadcastInfoResponse implements Parcelable {
     public static final Parcelable.Creator<BroadcastInfoResponse> CREATOR =
             new Parcelable.Creator<BroadcastInfoResponse>() { // from class:

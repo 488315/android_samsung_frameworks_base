@@ -12,7 +12,6 @@ import android.view.accessibility.AccessibilityNodeInfo;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes4.dex */
 public class WindowInfo implements Parcelable {
     private static final int MAX_POOL_SIZE = 10;
     public IBinder activityToken;

@@ -1,6 +1,5 @@
 package com.android.internal.widget.remotecompose.core.operations.utilities.easing;
 
-/* loaded from: classes5.dex */
 class CubicEasing extends Easing {
     private static final float D_ERROR = 1.0E-4f;
     private static final float ERROR = 0.01f;

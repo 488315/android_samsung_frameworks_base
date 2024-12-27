@@ -2,7 +2,6 @@ package com.samsung.android.knox.analytics.util;
 
 import android.os.SemSystemProperties;
 
-/* loaded from: classes6.dex */
 public final class Log {
     static final boolean DEBUG = !SemSystemProperties.getBoolean("ro.product_ship", true);
 

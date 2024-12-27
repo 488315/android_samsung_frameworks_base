@@ -9,7 +9,6 @@ import android.os.Parcelable;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class SmartspaceConfig implements Parcelable {
     public static final Parcelable.Creator<SmartspaceConfig> CREATOR =
             new Parcelable.Creator<

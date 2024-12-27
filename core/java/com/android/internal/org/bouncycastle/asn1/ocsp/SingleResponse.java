@@ -11,7 +11,6 @@ import com.android.internal.org.bouncycastle.asn1.DERTaggedObject;
 import com.android.internal.org.bouncycastle.asn1.x509.Extensions;
 import com.android.internal.org.bouncycastle.asn1.x509.X509Extensions;
 
-/* loaded from: classes5.dex */
 public class SingleResponse extends ASN1Object {
     private CertID certID;
     private CertStatus certStatus;

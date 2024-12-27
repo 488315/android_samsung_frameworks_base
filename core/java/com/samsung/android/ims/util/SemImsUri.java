@@ -11,7 +11,6 @@ import gov.nist.javax.sip.parser.URLParser;
 
 import java.util.regex.Pattern;
 
-/* loaded from: classes6.dex */
 public class SemImsUri implements Parcelable {
     private static final String LOG_TAG = "SemImsUri";
     private String mMsisdn;

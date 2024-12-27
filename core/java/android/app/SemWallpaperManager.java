@@ -14,7 +14,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-/* loaded from: classes.dex */
 public interface SemWallpaperManager {
     default Drawable getDrawable(int which) {
         return semGetDrawable(which);

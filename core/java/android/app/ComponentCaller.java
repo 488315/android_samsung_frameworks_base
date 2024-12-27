@@ -5,7 +5,6 @@ import android.os.IBinder;
 
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public final class ComponentCaller {
     private final IBinder mActivityToken;
     private final IBinder mCallerToken;

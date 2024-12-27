@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/* loaded from: classes3.dex */
 public final class NetworkSecurityConfig {
     public static final boolean DEFAULT_CERTIFICATE_TRANSPARENCY_VERIFICATION_REQUIRED = false;
     public static final boolean DEFAULT_CLEARTEXT_TRAFFIC_PERMITTED = true;

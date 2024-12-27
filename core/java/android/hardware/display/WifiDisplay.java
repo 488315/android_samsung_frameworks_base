@@ -10,7 +10,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
-/* loaded from: classes2.dex */
 public final class WifiDisplay implements Parcelable {
     public static final int REMOTE_DISPLAY_PAUSED = 7;
     public static final int REMOTE_DISPLAY_RESUMED = 6;

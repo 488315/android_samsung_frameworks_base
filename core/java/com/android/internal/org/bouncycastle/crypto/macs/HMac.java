@@ -12,7 +12,6 @@ import com.android.internal.org.bouncycastle.util.Memoable;
 
 import java.util.Hashtable;
 
-/* loaded from: classes5.dex */
 public class HMac implements Mac {
     private static final byte IPAD = 54;
     private static final byte OPAD = 92;

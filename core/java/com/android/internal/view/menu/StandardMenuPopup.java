@@ -25,7 +25,6 @@ import com.android.internal.R;
 
 import java.util.Objects;
 
-/* loaded from: classes5.dex */
 final class StandardMenuPopup extends MenuPopup
         implements PopupWindow.OnDismissListener,
                 AdapterView.OnItemClickListener,

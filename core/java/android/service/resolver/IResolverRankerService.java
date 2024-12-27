@@ -8,7 +8,6 @@ import android.os.RemoteException;
 
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public interface IResolverRankerService extends IInterface {
     void predict(List<ResolverTarget> list, IResolverRankerResult iResolverRankerResult)
             throws RemoteException;

@@ -4,7 +4,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Arrays;
 
-/* loaded from: classes5.dex */
 public class Cuj {
     public static final int CUJ_BACK_PANEL_ARROW = 88;
     public static final int CUJ_BIOMETRIC_PROMPT_TRANSITION = 56;

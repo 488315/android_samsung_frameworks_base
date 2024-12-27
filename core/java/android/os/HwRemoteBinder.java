@@ -2,7 +2,6 @@ package android.os;
 
 import libcore.util.NativeAllocationRegistry;
 
-/* loaded from: classes3.dex */
 public class HwRemoteBinder implements IHwBinder {
     private static final String TAG = "HwRemoteBinder";
     private static final NativeAllocationRegistry sNativeRegistry;

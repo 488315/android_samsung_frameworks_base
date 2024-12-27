@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/* loaded from: classes.dex */
 public class FeatureFlags {
     private static final String TAG = "FeatureFlags";
     private static FeatureFlags sInstance;

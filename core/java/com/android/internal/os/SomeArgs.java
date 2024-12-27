@@ -1,6 +1,5 @@
 package com.android.internal.os;
 
-/* loaded from: classes5.dex */
 public final class SomeArgs {
     private static final int MAX_POOL_SIZE = 10;
     static final int WAIT_FINISHED = 2;

@@ -7,7 +7,6 @@ import android.tracing.perfetto.StartCallbackArguments;
 import android.tracing.perfetto.StopCallbackArguments;
 import android.util.proto.ProtoInputStream;
 
-/* loaded from: classes4.dex */
 public class TransitionDataSource extends DataSource<DataSourceInstance, Void, Void> {
     public static String DATA_SOURCE_NAME = "com.android.wm.shell.transition";
     private final Runnable mOnFlushStaticCallback;

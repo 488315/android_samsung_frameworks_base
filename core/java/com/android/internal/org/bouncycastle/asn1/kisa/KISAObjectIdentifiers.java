@@ -2,7 +2,6 @@ package com.android.internal.org.bouncycastle.asn1.kisa;
 
 import com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier;
 
-/* loaded from: classes5.dex */
 public interface KISAObjectIdentifiers {
     public static final ASN1ObjectIdentifier id_seedCBC =
             new ASN1ObjectIdentifier("1.2.410.200004.1.4");

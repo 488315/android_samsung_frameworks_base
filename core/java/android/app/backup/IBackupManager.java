@@ -14,7 +14,6 @@ import android.text.TextUtils;
 import java.util.List;
 import java.util.Map;
 
-/* loaded from: classes.dex */
 public interface IBackupManager extends IInterface {
     void acknowledgeFullBackupOrRestore(
             int i,

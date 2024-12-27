@@ -9,7 +9,6 @@ import android.os.RemoteException;
 
 import java.util.List;
 
-/* loaded from: classes2.dex */
 public interface IPreviewExtenderImpl extends IInterface {
     public static final String DESCRIPTOR =
             "android.hardware.camera2.extension.IPreviewExtenderImpl";

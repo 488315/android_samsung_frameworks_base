@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Handler;
 import android.util.Log;
 
-/* loaded from: classes4.dex */
 public class ScaleGestureDetector {
     private static final int ANCHORED_SCALE_MODE_DOUBLE_TAP = 1;
     private static final int ANCHORED_SCALE_MODE_NONE = 0;

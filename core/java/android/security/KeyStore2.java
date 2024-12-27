@@ -17,7 +17,6 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public class KeyStore2 {
     private static final String KEYSTORE2_SERVICE_NAME =
             "android.system.keystore2.IKeystoreService/default";

@@ -5,7 +5,6 @@ import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.service.gatekeeper.IGateKeeperService;
 
-/* loaded from: classes3.dex */
 public abstract class GateKeeper {
     public static final long INVALID_SECURE_USER_ID = 0;
 

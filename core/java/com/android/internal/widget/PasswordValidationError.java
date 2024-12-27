@@ -1,6 +1,5 @@
 package com.android.internal.widget;
 
-/* loaded from: classes5.dex */
 public class PasswordValidationError {
     private static final int BASE_MDM = 14;
     public static final int CONTAINS_INVALID_CHARACTERS = 2;

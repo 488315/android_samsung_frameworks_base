@@ -1,6 +1,5 @@
 package android.util;
 
-/* loaded from: classes4.dex */
 public class SparseSetArray<T> {
     private final SparseArray<ArraySet<T>> mData;
 

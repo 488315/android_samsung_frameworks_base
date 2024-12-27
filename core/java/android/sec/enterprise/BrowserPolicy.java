@@ -3,7 +3,6 @@ package android.sec.enterprise;
 import android.sec.enterprise.content.SecContentProviderURI;
 import android.util.Log;
 
-/* loaded from: classes3.dex */
 public class BrowserPolicy {
     private static String TAG = SecContentProviderURI.BROWSERPOLICY;
 

@@ -2,7 +2,6 @@ package com.samsung.android.authenticator;
 
 import java.util.Arrays;
 
-/* loaded from: classes5.dex */
 final class FingerprintTrustedApplication implements TrustedApplication {
     private static final String TAG = "FTA";
     private final int mHandle;

@@ -1,6 +1,5 @@
 package android.stats.launcher;
 
-/* loaded from: classes3.dex */
 public final class LauncherTarget {
     public static final int APP_ICON = 1;
     public static final long CONTAINER = 1159641169923L;

@@ -6,7 +6,6 @@ import java.lang.annotation.Target;
 
 @Target({ElementType.METHOD, ElementType.CONSTRUCTOR})
 @Documented
-/* loaded from: classes3.dex */
 @interface InlineMe {
     String[] imports() default {};
 

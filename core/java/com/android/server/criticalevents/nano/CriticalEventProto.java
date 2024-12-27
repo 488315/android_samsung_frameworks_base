@@ -9,7 +9,6 @@ import com.android.framework.protobuf.nano.WireFormatNano;
 
 import java.io.IOException;
 
-/* loaded from: classes5.dex */
 public final class CriticalEventProto extends MessageNano {
     public static final int ANR_FIELD_NUMBER = 4;
     public static final int DATA_APP = 1;

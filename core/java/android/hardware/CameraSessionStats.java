@@ -7,7 +7,6 @@ import android.util.Range;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes.dex */
 public class CameraSessionStats implements Parcelable {
     public static final int CAMERA_API_LEVEL_1 = 1;
     public static final int CAMERA_API_LEVEL_2 = 2;

@@ -6,7 +6,6 @@ import android.util.Log;
 
 import java.lang.ref.WeakReference;
 
-/* loaded from: classes6.dex */
 public class MPRecorderListener {
     private static final String TAG;
     private MPClientEventHandler mEventHandler;

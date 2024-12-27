@@ -4,7 +4,6 @@ import android.hardware.scontext.SContextConstants;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes6.dex */
 public class SemGeofence implements Parcelable {
     public static final Parcelable.Creator<SemGeofence> CREATOR =
             new Parcelable.Creator<

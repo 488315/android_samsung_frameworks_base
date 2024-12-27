@@ -11,7 +11,6 @@ import android.util.AttributeSet;
 import java.util.Calendar;
 
 @Deprecated
-/* loaded from: classes4.dex */
 public class DigitalClock extends TextView {
     Calendar mCalendar;
     String mFormat;

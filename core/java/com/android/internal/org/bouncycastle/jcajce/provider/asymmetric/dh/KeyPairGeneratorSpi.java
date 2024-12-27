@@ -21,7 +21,6 @@ import java.util.Hashtable;
 
 import javax.crypto.spec.DHParameterSpec;
 
-/* loaded from: classes5.dex */
 public class KeyPairGeneratorSpi extends KeyPairGenerator {
     DHBasicKeyPairGenerator engine;
     boolean initialised;

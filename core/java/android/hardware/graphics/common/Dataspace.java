@@ -1,6 +1,5 @@
 package android.hardware.graphics.common;
 
-/* loaded from: classes2.dex */
 public @interface Dataspace {
     public static final int ADOBE_RGB = 151715840;
     public static final int ARBITRARY = 1;

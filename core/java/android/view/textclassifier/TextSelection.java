@@ -13,7 +13,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public final class TextSelection implements Parcelable {
     public static final Parcelable.Creator<TextSelection> CREATOR =
             new Parcelable.Creator<

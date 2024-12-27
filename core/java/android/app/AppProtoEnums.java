@@ -1,6 +1,5 @@
 package android.app;
 
-/* loaded from: classes.dex */
 public final class AppProtoEnums {
     public static final int APP_OP_ACCEPT_HANDOVER = 74;
     public static final int APP_OP_ACCESS_ACCESSIBILITY = 88;

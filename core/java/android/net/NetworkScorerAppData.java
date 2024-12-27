@@ -6,7 +6,6 @@ import android.os.Parcelable;
 
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public final class NetworkScorerAppData implements Parcelable {
     public static final Parcelable.Creator<NetworkScorerAppData> CREATOR =
             new Parcelable.Creator<

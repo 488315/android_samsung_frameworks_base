@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.AttributeSet;
 
 @RemoteViews.RemoteView
-/* loaded from: classes4.dex */
 public class CheckBox extends CompoundButton {
     public CheckBox(Context context) {
         this(context, null);

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.hardware.SensorListener;
 
 @Deprecated
-/* loaded from: classes4.dex */
 public abstract class OrientationListener implements SensorListener {
     public static final int ORIENTATION_UNKNOWN = -1;
     private OrientationEventListener mOrientationEventLis;

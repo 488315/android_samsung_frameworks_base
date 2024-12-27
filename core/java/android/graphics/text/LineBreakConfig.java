@@ -9,7 +9,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Locale;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public final class LineBreakConfig implements Parcelable {
     public static final int HYPHENATION_DISABLED = 0;
     public static final int HYPHENATION_ENABLED = 1;

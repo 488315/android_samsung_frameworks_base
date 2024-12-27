@@ -41,7 +41,6 @@ import com.android.systemui.util.SystemUIAnalytics;
 import java.util.ArrayList;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public final class SoundModeTile extends SQSTileImpl {
     public static final Intent SOUNDMODE_SETTINGS;
     public static final String[] SOUND_MODE_LOGGING_VALUE = null;

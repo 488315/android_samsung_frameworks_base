@@ -4,7 +4,6 @@ import com.android.internal.org.bouncycastle.crypto.CipherKeyGenerator;
 import com.android.internal.org.bouncycastle.crypto.KeyGenerationParameters;
 import com.android.internal.org.bouncycastle.crypto.params.DESParameters;
 
-/* loaded from: classes5.dex */
 public class DESKeyGenerator extends CipherKeyGenerator {
     @Override // com.android.internal.org.bouncycastle.crypto.CipherKeyGenerator
     public void init(KeyGenerationParameters param) {

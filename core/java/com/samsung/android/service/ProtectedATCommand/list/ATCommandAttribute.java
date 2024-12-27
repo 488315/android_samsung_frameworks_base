@@ -1,6 +1,5 @@
 package com.samsung.android.service.ProtectedATCommand.list;
 
-/* loaded from: classes6.dex */
 public class ATCommandAttribute {
     private static final String AUTOBLOCKER_OPEN = "ABO";
     private static final String CARRIER_BLOCK = "CRB";

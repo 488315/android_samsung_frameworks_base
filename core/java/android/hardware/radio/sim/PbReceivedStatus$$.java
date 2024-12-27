@@ -5,7 +5,6 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import java.lang.reflect.Array;
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public interface PbReceivedStatus$$ {
     static String toString(byte _aidl_v) {
         return _aidl_v == 1

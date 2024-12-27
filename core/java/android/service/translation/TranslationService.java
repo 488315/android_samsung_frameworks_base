@@ -34,7 +34,6 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public abstract class TranslationService extends Service {
     public static final String SERVICE_INTERFACE = "android.service.translation.TranslationService";
     public static final String SERVICE_META_DATA = "android.translation_service";

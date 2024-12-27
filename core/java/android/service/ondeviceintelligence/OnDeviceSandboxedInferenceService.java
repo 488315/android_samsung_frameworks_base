@@ -47,7 +47,6 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public abstract class OnDeviceSandboxedInferenceService extends Service {
     public static final String DEVICE_CONFIG_UPDATE_BUNDLE_KEY = "device_config_update";
     public static final String INFERENCE_INFO_BUNDLE_KEY = "inference_info";

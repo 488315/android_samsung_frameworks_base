@@ -10,7 +10,6 @@ import android.os.ParcelFileDescriptor;
 import android.os.PermissionEnforcer;
 import android.os.RemoteException;
 
-/* loaded from: classes.dex */
 public interface ISerialManager extends IInterface {
     String[] getSerialPorts() throws RemoteException;
 

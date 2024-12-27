@@ -14,7 +14,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
-/* loaded from: classes5.dex */
 public class SplitAssetDependencyLoader extends SplitDependencyLoader<IllegalArgumentException>
         implements SplitAssetLoader {
     private final AssetManager[] mCachedAssetManagers;

@@ -2,7 +2,6 @@ package com.android.internal.org.bouncycastle.asn1.ntt;
 
 import com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier;
 
-/* loaded from: classes5.dex */
 public interface NTTObjectIdentifiers {
     public static final ASN1ObjectIdentifier id_camellia128_cbc =
             new ASN1ObjectIdentifier("1.2.392.200011.61.1.1.1.2");

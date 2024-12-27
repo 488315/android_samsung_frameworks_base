@@ -1,6 +1,5 @@
 package android.media;
 
-/* loaded from: classes2.dex */
 public @interface MediaResourceType {
     public static final int kBattery = 5;
     public static final int kCpuBoost = 4;

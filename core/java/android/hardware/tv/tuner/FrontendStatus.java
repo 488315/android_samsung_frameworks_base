@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public final class FrontendStatus implements Parcelable {
     public static final Parcelable.Creator<FrontendStatus> CREATOR =
             new Parcelable.Creator<

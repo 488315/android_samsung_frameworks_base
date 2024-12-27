@@ -1,6 +1,5 @@
 package com.android.framework.protobuf;
 
-/* loaded from: classes3.dex */
 final class ExtensionRegistryFactory {
     static final Class<?> EXTENSION_REGISTRY_CLASS = reflectExtensionRegistry();
     static final String FULL_REGISTRY_CLASS_NAME =

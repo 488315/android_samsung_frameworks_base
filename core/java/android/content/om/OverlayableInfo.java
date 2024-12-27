@@ -6,7 +6,6 @@ import com.android.internal.util.AnnotationValidations;
 
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public final class OverlayableInfo {
     public final String actor;
     public final String name;

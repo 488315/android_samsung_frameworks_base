@@ -1,6 +1,5 @@
 package com.android.internal.hidden_from_bootclasspath.android.content.pm;
 
-/* loaded from: classes5.dex */
 public final class FeatureFlagsImpl implements FeatureFlags {
     @Override // com.android.internal.hidden_from_bootclasspath.android.content.pm.FeatureFlags
     public boolean allowSdkSandboxQueryIntentActivities() {

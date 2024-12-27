@@ -9,7 +9,6 @@ import com.android.internal.org.bouncycastle.asn1.DERSequence;
 import com.android.internal.org.bouncycastle.asn1.DERTaggedObject;
 import com.android.internal.org.bouncycastle.asn1.x509.AlgorithmIdentifier;
 
-/* loaded from: classes5.dex */
 public class CMSAlgorithmProtection extends ASN1Object {
     public static final int MAC = 2;
     public static final int SIGNATURE = 1;

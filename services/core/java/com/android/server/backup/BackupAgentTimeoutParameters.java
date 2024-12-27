@@ -8,7 +8,6 @@ import android.util.KeyValueListParser;
 import android.util.KeyValueSettingObserver;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes.dex */
 public final class BackupAgentTimeoutParameters extends KeyValueSettingObserver {
     public static final long DEFAULT_FULL_BACKUP_AGENT_TIMEOUT_MILLIS = 300000;
     public static final long DEFAULT_KV_BACKUP_AGENT_TIMEOUT_MILLIS = 30000;

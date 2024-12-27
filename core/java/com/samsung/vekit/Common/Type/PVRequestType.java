@@ -1,6 +1,5 @@
 package com.samsung.vekit.Common.Type;
 
-/* loaded from: classes6.dex */
 public enum PVRequestType {
     SET_KEY_FRAMES(6),
     SET_DELETE_KEY_FRAME(7);

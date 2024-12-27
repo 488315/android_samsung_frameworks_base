@@ -6,7 +6,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class AlpFilterConfiguration extends FilterConfiguration {
     public static final int LENGTH_TYPE_UNDEFINED = 0;
     public static final int LENGTH_TYPE_WITHOUT_ADDITIONAL_HEADER = 1;

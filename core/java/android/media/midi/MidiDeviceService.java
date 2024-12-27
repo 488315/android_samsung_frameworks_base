@@ -7,7 +7,6 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.util.Log;
 
-/* loaded from: classes2.dex */
 public abstract class MidiDeviceService extends Service {
     public static final String SERVICE_INTERFACE = "android.media.midi.MidiDeviceService";
     private static final String TAG = "MidiDeviceService";

@@ -5,7 +5,6 @@ import android.view.ViewConfiguration;
 import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
 
-/* loaded from: classes4.dex */
 public class Scroller {
     private static final int DEFAULT_DURATION = 250;
     private static final float END_TENSION = 1.0f;

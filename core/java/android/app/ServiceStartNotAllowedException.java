@@ -1,6 +1,5 @@
 package android.app;
 
-/* loaded from: classes.dex */
 public abstract class ServiceStartNotAllowedException extends IllegalStateException {
     ServiceStartNotAllowedException(String message) {
         super(message);

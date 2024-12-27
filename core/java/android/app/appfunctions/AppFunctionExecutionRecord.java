@@ -18,7 +18,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public class AppFunctionExecutionRecord {
     AppFunctionException error;
     ExecuteAppFunctionAidlRequest requestInternal;

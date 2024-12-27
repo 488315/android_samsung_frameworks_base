@@ -14,7 +14,6 @@ import android.os.RemoteException;
 
 import com.android.internal.infra.AndroidFuture;
 
-/* loaded from: classes3.dex */
 public interface IOnDeviceSandboxedInferenceService extends IInterface {
     public static final String DESCRIPTOR =
             "android.service.ondeviceintelligence.IOnDeviceSandboxedInferenceService";

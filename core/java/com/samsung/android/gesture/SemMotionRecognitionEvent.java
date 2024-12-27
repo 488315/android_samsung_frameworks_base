@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.security.keystore.KeyProperties;
 
-/* loaded from: classes6.dex */
 public class SemMotionRecognitionEvent implements Parcelable {
     public static final int BLOW = 66;
     public static final int BOUNCE = 46;

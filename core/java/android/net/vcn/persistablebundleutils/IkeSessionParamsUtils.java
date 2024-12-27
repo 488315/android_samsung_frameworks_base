@@ -23,7 +23,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.function.ToIntFunction;
 
-/* loaded from: classes3.dex */
 public final class IkeSessionParamsUtils {
     private static final String CONFIG_REQUESTS_KEY = "CONFIG_REQUESTS_KEY";
     private static final String DPD_DELAY_SEC_KEY = "DPD_DELAY_SEC_KEY";

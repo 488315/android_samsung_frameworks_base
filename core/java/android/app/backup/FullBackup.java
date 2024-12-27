@@ -30,7 +30,6 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
-/* loaded from: classes.dex */
 public class FullBackup {
     public static final String APK_TREE_TOKEN = "a";
     public static final String APPS_PREFIX = "apps/";

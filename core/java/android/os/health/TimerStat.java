@@ -3,7 +3,6 @@ package android.os.health;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes3.dex */
 public final class TimerStat implements Parcelable {
     public static final Parcelable.Creator<TimerStat> CREATOR =
             new Parcelable.Creator<TimerStat>() { // from class: android.os.health.TimerStat.1

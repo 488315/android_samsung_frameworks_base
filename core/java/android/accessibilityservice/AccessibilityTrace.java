@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/* loaded from: classes.dex */
 public interface AccessibilityTrace {
     public static final long FLAGS_ACCESSIBILITY_INTERACTION_CLIENT = 262144;
     public static final long FLAGS_ACCESSIBILITY_INTERACTION_CONNECTION = 16;

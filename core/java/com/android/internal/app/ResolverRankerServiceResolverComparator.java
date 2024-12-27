@@ -35,7 +35,6 @@ import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-/* loaded from: classes5.dex */
 class ResolverRankerServiceResolverComparator extends AbstractResolverComparator {
     private static final int CONNECTION_COST_TIMEOUT_MILLIS = 200;
     private static final boolean DEBUG = false;

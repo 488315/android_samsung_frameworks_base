@@ -10,7 +10,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes.dex */
 public interface ITimeZoneDetectorService extends IInterface {
     public static final String DESCRIPTOR = "android.app.timezonedetector.ITimeZoneDetectorService";
 

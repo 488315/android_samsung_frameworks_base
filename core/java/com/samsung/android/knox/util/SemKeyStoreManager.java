@@ -4,7 +4,6 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 
-/* loaded from: classes6.dex */
 public class SemKeyStoreManager {
 
     @Deprecated(forRemoval = true, since = "16.0")

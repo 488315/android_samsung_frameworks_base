@@ -20,7 +20,6 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.UnaryOperator;
 
-/* loaded from: classes4.dex */
 public class SipDelegateConnectionAidlWrapper
         implements SipDelegateConnection, IBinder.DeathRecipient {
     private static final String LOG_TAG = "SipDelegateCAW";

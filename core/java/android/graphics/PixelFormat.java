@@ -3,7 +3,6 @@ package android.graphics;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes.dex */
 public class PixelFormat {
 
     @Deprecated public static final int A_8 = 8;

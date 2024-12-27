@@ -6,7 +6,6 @@ import android.os.Process;
 import android.os.SemSystemProperties;
 import android.os.SystemProperties;
 
-/* loaded from: classes6.dex */
 public class SecurityUtils {
     private static final String SERVICE_KEEPER_METHOD_NAME = "log";
     private static final String SERVICE_KEEPER_SERVICE_NAME = "KnoxAnalytics";

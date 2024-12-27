@@ -10,7 +10,6 @@ import android.os.RemoteException;
 
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public interface IIrisService extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.camera.iris.IIrisService";
 

@@ -4,7 +4,6 @@ import com.android.server.SecureKeyConst;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class Result {
     public static final int BAD_PARAMS = 2;
     public static final int NOT_INIT = 3;

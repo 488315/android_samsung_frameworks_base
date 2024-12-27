@@ -12,7 +12,6 @@ import com.android.internal.app.IVoiceActionCheckCallback;
 
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public interface IVoiceInteractionService extends IInterface {
     void detectorRemoteExceptionOccurred(IBinder iBinder, int i) throws RemoteException;
 

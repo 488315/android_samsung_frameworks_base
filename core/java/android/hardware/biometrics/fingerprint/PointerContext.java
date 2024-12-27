@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.util.Arrays;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public class PointerContext implements Parcelable {
     public static final Parcelable.Creator<PointerContext> CREATOR =
             new Parcelable.Creator<PointerContext>() { // from class:

@@ -6,7 +6,6 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.os.IBinder;
 
-/* loaded from: classes4.dex */
 public class ConfigurationHelper {
     private ConfigurationHelper() {}
 

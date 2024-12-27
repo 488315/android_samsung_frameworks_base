@@ -5,7 +5,6 @@ import android.text.TextUtils;
 import android.util.ArrayMap;
 import java.util.ArrayList;
 
-/* loaded from: classes.dex */
 public class UndoManager {
     public static final int MERGE_MODE_ANY = 2;
     public static final int MERGE_MODE_NONE = 0;

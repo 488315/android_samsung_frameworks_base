@@ -4,7 +4,6 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 /* compiled from: D8$$SyntheticClass */
-/* loaded from: classes2.dex */
 public final /* synthetic */ class MediaDrm$$ExternalSyntheticLambda0 implements Function {
     public final /* synthetic */ MediaDrm f$0;
 

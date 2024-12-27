@@ -254,7 +254,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @RemoteViews.RemoteView
-/* loaded from: classes4.dex */
 public class TextView extends View implements ViewTreeObserver.OnPreDrawListener {
     static final int ACCESSIBILITY_ACTION_PROCESS_TEXT_START_ID = 268435712;
     private static final int ACCESSIBILITY_ACTION_SHARE = 268435456;

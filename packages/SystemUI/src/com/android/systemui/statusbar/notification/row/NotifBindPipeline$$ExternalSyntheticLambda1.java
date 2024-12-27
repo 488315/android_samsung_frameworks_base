@@ -3,7 +3,6 @@ package com.android.systemui.statusbar.notification.row;
 import com.android.systemui.statusbar.notification.row.BindStage;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public final /* synthetic */ class NotifBindPipeline$$ExternalSyntheticLambda1 implements BindStage.StageCallback {
     public final /* synthetic */ NotifBindPipeline f$0;
 

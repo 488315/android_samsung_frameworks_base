@@ -23,7 +23,6 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 
-/* loaded from: classes2.dex */
 public final class SoundTriggerInstrumentation {
     private final GlobalCallback mClientCallback;
     private final Executor mGlobalCallbackExecutor;

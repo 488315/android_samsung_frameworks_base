@@ -8,7 +8,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.ByteBuffer;
 
-/* loaded from: classes3.dex */
 public class MemoryFile {
     private static String TAG = "MemoryFile";
     private boolean mAllowPurging = false;

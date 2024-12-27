@@ -14,7 +14,6 @@ import java.security.spec.X509EncodedKeySpec;
 import java.util.Date;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public final class ImsiEncryptionInfo implements Parcelable {
     public static final Parcelable.Creator<ImsiEncryptionInfo> CREATOR =
             new Parcelable.Creator<

@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.util.Log;
 
 @Deprecated
-/* loaded from: classes2.dex */
 public class SContextWakeUpVoiceAttribute extends SContextAttribute {
     private static final String TAG = "SContextWakeUpVoiceAttribute";
     private byte[] mGramData;

@@ -7,7 +7,6 @@ import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public class ParcelImage implements Parcelable {
     public static final Parcelable.Creator<ParcelImage> CREATOR =
             new Parcelable.Creator<

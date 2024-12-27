@@ -1,6 +1,5 @@
 package com.samsung.android.vibrator;
 
-/* loaded from: classes6.dex */
 public class VibrationTag {
     public static final String ALLOWED_IN_BACKGROUND_PROCESS = "ALLOWED_IN_BACKGROUND_PROCESS";
     public static final String INDIVIDUAL_INTENSITY = "INDIVIDUAL_INTENSITY";

@@ -1,6 +1,5 @@
 package android.audio.policy.configuration.V7_0;
 
-/* loaded from: classes.dex */
 public enum AudioGainMode {
     AUDIO_GAIN_MODE_JOINT("AUDIO_GAIN_MODE_JOINT"),
     AUDIO_GAIN_MODE_CHANNELS("AUDIO_GAIN_MODE_CHANNELS"),

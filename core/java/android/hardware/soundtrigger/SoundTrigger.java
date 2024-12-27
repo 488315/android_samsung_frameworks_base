@@ -30,7 +30,6 @@ import java.util.Objects;
 import java.util.UUID;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public class SoundTrigger {
     public static final String FAKE_HAL_ARCH = "injection";
     public static final int MODEL_PARAM_INVALID = -1;

@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/* loaded from: classes.dex */
 public class RestrictionsManager {
     public static final String ACTION_PERMISSION_RESPONSE_RECEIVED =
             "android.content.action.PERMISSION_RESPONSE_RECEIVED";

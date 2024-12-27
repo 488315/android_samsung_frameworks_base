@@ -9,7 +9,6 @@ import android.util.SparseIntArray;
 import java.util.Arrays;
 import java.util.function.Function;
 
-/* loaded from: classes3.dex */
 public final class MultiVibratorInfo extends VibratorInfo {
     private static final float EPSILON = 1.0E-5f;
     private static final String TAG = "MultiVibratorInfo";

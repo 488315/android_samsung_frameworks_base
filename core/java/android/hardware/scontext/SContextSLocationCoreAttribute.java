@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.util.Log;
 
 @Deprecated
-/* loaded from: classes2.dex */
 public class SContextSLocationCoreAttribute extends SContextAttribute {
     private static final String TAG = "SContextSLocationCoreAttribute";
     private int mAccuracy;

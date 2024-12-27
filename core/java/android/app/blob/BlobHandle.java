@@ -16,7 +16,6 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public final class BlobHandle implements Parcelable {
     public static final String ALGO_SHA_256 = "SHA-256";
     private static final int LIMIT_BLOB_LABEL_LENGTH = 100;

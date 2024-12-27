@@ -1,6 +1,5 @@
 package android.content.pm.parsing.result;
 
-/* loaded from: classes.dex */
 public interface ParseInput {
 
     public interface Callback {

@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import android.security.Credentials;
 import android.security.keystore.KeyProperties;
 
-/* loaded from: classes6.dex */
 public class SemInputConstants {
 
     public enum Command implements Parcelable {

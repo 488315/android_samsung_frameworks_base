@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Deprecated
-/* loaded from: classes4.dex */
 public class TabHost extends FrameLayout implements ViewTreeObserver.OnTouchModeChangeListener {
     private static final int TABWIDGET_LOCATION_BOTTOM = 3;
     private static final int TABWIDGET_LOCATION_LEFT = 0;

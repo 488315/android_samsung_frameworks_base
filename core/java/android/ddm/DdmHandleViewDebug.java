@@ -17,7 +17,6 @@ import java.io.OutputStreamWriter;
 import java.nio.BufferUnderflowException;
 import java.nio.ByteBuffer;
 
-/* loaded from: classes.dex */
 public class DdmHandleViewDebug extends DdmHandle {
     private static final int ERR_EXCEPTION = -3;
     private static final int ERR_INVALID_OP = -1;

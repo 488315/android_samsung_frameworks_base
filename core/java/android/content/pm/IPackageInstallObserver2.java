@@ -8,7 +8,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes.dex */
 public interface IPackageInstallObserver2 extends IInterface {
     void onPackageInstalled(String str, int i, String str2, Bundle bundle) throws RemoteException;
 

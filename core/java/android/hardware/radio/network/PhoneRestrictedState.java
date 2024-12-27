@@ -1,6 +1,5 @@
 package android.hardware.radio.network;
 
-/* loaded from: classes2.dex */
 public @interface PhoneRestrictedState {
     public static final int CS_ALL = 4;
     public static final int CS_EMERGENCY = 1;

@@ -8,7 +8,6 @@ import android.util.Log;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public class TvStreamConfig implements Parcelable {
     public static final int STREAM_TYPE_BUFFER_PRODUCER = 2;
     public static final int STREAM_TYPE_INDEPENDENT_VIDEO_SOURCE = 1;

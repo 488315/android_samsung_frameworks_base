@@ -10,7 +10,6 @@ import android.view.translation.TranslationContext;
 
 import com.android.internal.os.IResultReceiver;
 
-/* loaded from: classes3.dex */
 public interface ITranslationService extends IInterface {
     public static final String DESCRIPTOR = "android.service.translation.ITranslationService";
 

@@ -4,7 +4,6 @@ import android.os.Build;
 import android.os.SystemProperties;
 import android.util.Log;
 
-/* loaded from: classes6.dex */
 public final class SemGateConfig {
     public static final String ACTION_SCREEN_TEXT = "com.sec.android.gate.LCDTEXT";
     private static final String DEBUG_LEVEL_HIGH = "0x4948";

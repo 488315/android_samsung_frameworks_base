@@ -11,7 +11,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public final class BarringInfo implements Parcelable {
     public static final int BARRING_SERVICE_TYPE_CS_FALLBACK = 5;
     public static final int BARRING_SERVICE_TYPE_CS_SERVICE = 0;

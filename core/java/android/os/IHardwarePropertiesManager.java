@@ -1,6 +1,5 @@
 package android.os;
 
-/* loaded from: classes3.dex */
 public interface IHardwarePropertiesManager extends IInterface {
     CpuUsageInfo[] getCpuUsages(String str) throws RemoteException;
 

@@ -9,7 +9,6 @@ import org.xmlpull.v1.XmlSerializer;
 import java.io.IOException;
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public class CredentialManagementApp {
     private static final String KEY_PACKAGE_NAME = "package_name";
     private static final String TAG = "CredentialManagementApp";

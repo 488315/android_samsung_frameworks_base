@@ -3,7 +3,6 @@ package com.samsung.android.biometrics;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes5.dex */
 public interface SemBiometricConstants {
     public static final int CMD_SYSUI_ACQUIRED_EVENT = 201;
     public static final int CMD_SYSUI_ACQUIRED_VENDOR_EVENT = 202;

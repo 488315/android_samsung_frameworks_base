@@ -11,7 +11,6 @@ import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 
-/* loaded from: classes5.dex */
 public class DualDumpOutputStream {
     private static final String LOG_TAG = DualDumpOutputStream.class.getSimpleName();
     private final LinkedList<DumpObject> mDumpObjects;

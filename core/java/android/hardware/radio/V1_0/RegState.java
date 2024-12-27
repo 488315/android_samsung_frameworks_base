@@ -2,7 +2,6 @@ package android.hardware.radio.V1_0;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class RegState {
     public static final int NOT_REG_MT_NOT_SEARCHING_OP = 0;
     public static final int NOT_REG_MT_NOT_SEARCHING_OP_EM = 10;

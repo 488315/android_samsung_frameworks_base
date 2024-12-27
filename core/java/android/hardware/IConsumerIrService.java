@@ -9,7 +9,6 @@ import android.os.Parcel;
 import android.os.PermissionEnforcer;
 import android.os.RemoteException;
 
-/* loaded from: classes.dex */
 public interface IConsumerIrService extends IInterface {
     int[] getCarrierFrequencies() throws RemoteException;
 

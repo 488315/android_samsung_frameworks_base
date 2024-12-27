@@ -15,7 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 @Deprecated
-/* loaded from: classes4.dex */
 public class SlidingDrawer extends ViewGroup {
     private static final int ANIMATION_FRAME_DURATION = 16;
     private static final int COLLAPSED_FULL_CLOSED = -10002;

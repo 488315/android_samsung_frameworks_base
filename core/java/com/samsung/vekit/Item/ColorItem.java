@@ -7,7 +7,6 @@ import com.samsung.vekit.Common.Type.MeshType;
 import com.samsung.vekit.Common.VEContext;
 import com.samsung.vekit.Layer.Layer;
 
-/* loaded from: classes6.dex */
 public class ColorItem extends Item {
     private Color color;
     private float opacity;

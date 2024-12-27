@@ -7,7 +7,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.nio.Buffer;
 import java.nio.ShortBuffer;
 
-/* loaded from: classes.dex */
 public class Mesh {
     public static final int TRIANGLES = 0;
     public static final int TRIANGLE_STRIP = 1;

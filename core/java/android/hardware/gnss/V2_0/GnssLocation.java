@@ -7,7 +7,6 @@ import android.os.HwParcel;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public final class GnssLocation {
     public android.hardware.gnss.V1_0.GnssLocation v1_0 =
             new android.hardware.gnss.V1_0.GnssLocation();

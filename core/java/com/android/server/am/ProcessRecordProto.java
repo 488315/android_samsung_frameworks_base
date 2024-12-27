@@ -1,6 +1,5 @@
 package com.android.server.am;
 
-/* loaded from: classes5.dex */
 public final class ProcessRecordProto {
     public static final long APP_ID = 1120986464261L;
     public static final long ISOLATED_APP_ID = 1120986464262L;

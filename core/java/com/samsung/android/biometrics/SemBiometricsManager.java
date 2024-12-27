@@ -14,7 +14,6 @@ import javax.crypto.Cipher;
 import javax.crypto.Mac;
 
 @Deprecated(forRemoval = true, since = "15.5")
-/* loaded from: classes5.dex */
 public class SemBiometricsManager {
     public static final int ACQUIRED_GOOD = 0;
     public static final int ACQUIRED_HOLD_PHONE_CLOSER = 6;

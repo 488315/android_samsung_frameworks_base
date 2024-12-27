@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public final class AppInstallMetadata {
     private final Map<String, String> mAllowedInstallersAndCertificates;
     private final List<String> mAppCertificateLineage;

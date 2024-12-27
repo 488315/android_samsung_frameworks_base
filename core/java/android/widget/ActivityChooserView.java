@@ -21,7 +21,6 @@ import android.view.accessibility.AccessibilityNodeInfo;
 import com.android.internal.R;
 import com.android.internal.view.menu.ShowableListMenu;
 
-/* loaded from: classes4.dex */
 public class ActivityChooserView extends ViewGroup
         implements ActivityChooserModel.ActivityChooserModelClient {
     private static final String LOG_TAG = "ActivityChooserView";

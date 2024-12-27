@@ -28,7 +28,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.WeakHashMap;
 
-/* loaded from: classes4.dex */
 class SuggestionsAdapter extends ResourceCursorAdapter implements View.OnClickListener {
     private static final boolean DBG = false;
     private static final long DELETE_KEY_POST_DELAY = 500;

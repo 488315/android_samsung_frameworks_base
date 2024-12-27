@@ -31,7 +31,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/* loaded from: classes5.dex */
 public class CMSSignedData implements Encodable {
     private static final CMSSignedHelper HELPER = CMSSignedHelper.INSTANCE;
     ContentInfo contentInfo;

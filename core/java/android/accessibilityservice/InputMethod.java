@@ -12,7 +12,6 @@ import com.android.internal.inputmethod.IAccessibilityInputMethodSessionCallback
 import com.android.internal.inputmethod.IRemoteAccessibilityInputConnection;
 import com.android.internal.inputmethod.RemoteAccessibilityInputConnection;
 
-/* loaded from: classes.dex */
 public class InputMethod {
     private static final String LOG_TAG = "A11yInputMethod";
     private EditorInfo mInputEditorInfo;

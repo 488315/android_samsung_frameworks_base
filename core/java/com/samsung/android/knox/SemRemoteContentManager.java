@@ -10,7 +10,6 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public class SemRemoteContentManager {
     public static final int ERROR = -333;
     private static final String TAG = "SemRemoteContentManager";

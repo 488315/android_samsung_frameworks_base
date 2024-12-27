@@ -5,7 +5,6 @@ import android.hardware.biometrics.CryptoObject;
 import android.os.Bundle;
 import android.util.Slog;
 
-/* loaded from: classes2.dex */
 public class FaceCallback {
     private static final String TAG = " FaceCallback";
     private FaceManager.AuthenticationCallback mAuthenticationCallback;

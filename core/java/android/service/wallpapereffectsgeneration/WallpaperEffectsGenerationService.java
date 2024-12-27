@@ -19,7 +19,6 @@ import com.android.internal.util.function.pooled.PooledLambda;
 import java.util.function.BiConsumer;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public abstract class WallpaperEffectsGenerationService extends Service {
     private static final boolean DEBUG = false;
     public static final String SERVICE_INTERFACE =

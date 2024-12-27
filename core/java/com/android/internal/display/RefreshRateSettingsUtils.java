@@ -5,7 +5,6 @@ import android.hardware.display.DisplayManager;
 import android.util.Log;
 import android.view.Display;
 
-/* loaded from: classes5.dex */
 public class RefreshRateSettingsUtils {
     public static final float DEFAULT_REFRESH_RATE = 60.0f;
     private static final String TAG = "RefreshRateSettingsUtils";

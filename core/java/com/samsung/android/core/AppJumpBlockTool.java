@@ -27,7 +27,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public class AppJumpBlockTool {
     private static final String APP_JUMP_BLOCK_ALLOW_LIST =
             "com.samsung.ssd.wolfserver;com.tencent.mm;com.eg.android.AlipayGphone;-com.tencent.mobileqq;-com.sina.weibo";

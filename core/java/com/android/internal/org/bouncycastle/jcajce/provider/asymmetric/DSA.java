@@ -7,7 +7,6 @@ import com.android.internal.org.bouncycastle.jcajce.provider.config.Configurable
 import com.android.internal.org.bouncycastle.jcajce.provider.util.AsymmetricAlgorithmProvider;
 import com.android.internal.org.bouncycastle.jcajce.provider.util.AsymmetricKeyInfoConverter;
 
-/* loaded from: classes5.dex */
 public class DSA {
     private static final String PREFIX =
             "com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.dsa.";

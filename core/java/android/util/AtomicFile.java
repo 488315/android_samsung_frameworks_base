@@ -13,7 +13,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.function.Consumer;
 
-/* loaded from: classes4.dex */
 public class AtomicFile {
     private static final String LOG_TAG = "AtomicFile";
     private final File mBaseName;

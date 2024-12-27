@@ -13,7 +13,6 @@ import android.widget.RelativeLayout;
 import android.widget.RemoteViews;
 
 @RemoteViews.RemoteView
-/* loaded from: classes5.dex */
 public class TextProgressBar extends RelativeLayout
         implements Chronometer.OnChronometerTickListener {
     static final int CHRONOMETER_ID = 16908308;

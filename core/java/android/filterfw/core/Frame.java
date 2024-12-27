@@ -4,7 +4,6 @@ import android.graphics.Bitmap;
 
 import java.nio.ByteBuffer;
 
-/* loaded from: classes.dex */
 public abstract class Frame {
     public static final int NO_BINDING = 0;
     public static final long TIMESTAMP_NOT_SET = -2;

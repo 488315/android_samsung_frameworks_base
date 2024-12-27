@@ -12,7 +12,6 @@ import com.sec.android.allshare.iface.message.AllShareKey;
 
 import java.util.ArrayList;
 
-/* loaded from: classes3.dex */
 public class SimpleFolderItem extends Item implements IBundleHolder {
     private Bundle mBundle;
 

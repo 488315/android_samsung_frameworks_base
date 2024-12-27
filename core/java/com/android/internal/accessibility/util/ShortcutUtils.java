@@ -21,7 +21,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.StringJoiner;
 
-/* loaded from: classes5.dex */
 public final class ShortcutUtils {
     private static final TextUtils.SimpleStringSplitter sStringColonSplitter =
             new TextUtils.SimpleStringSplitter(ShortcutConstants.SERVICES_SEPARATOR);

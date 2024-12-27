@@ -12,7 +12,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/* loaded from: classes6.dex */
 public class SemImsRegistration implements Parcelable {
     public static final Parcelable.Creator<SemImsRegistration> CREATOR =
             new Parcelable.Creator<

@@ -2,7 +2,6 @@ package vendor.samsung.hardware.radio.V2_0;
 
 import java.util.ArrayList;
 
-/* loaded from: classes6.dex */
 public final class SehBearerStatus {
     public static final int NR_BEARER_STATUS_ALLOCATED = 1;
     public static final int NR_BEARER_STATUS_MMW_ALLOCATED = 2;

@@ -11,7 +11,6 @@ import javax.crypto.Mac;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKeyFactory;
 
-/* loaded from: classes5.dex */
 public class BCJcaJceHelper extends ProviderJcaJceHelper {
     private static volatile Provider bcProvider;
 

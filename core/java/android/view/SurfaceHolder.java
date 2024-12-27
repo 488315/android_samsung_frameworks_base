@@ -3,7 +3,6 @@ package android.view;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 
-/* loaded from: classes4.dex */
 public interface SurfaceHolder {
 
     @Deprecated public static final int SURFACE_TYPE_GPU = 2;

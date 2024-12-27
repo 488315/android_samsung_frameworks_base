@@ -8,7 +8,6 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.util.Singleton;
 
-/* loaded from: classes.dex */
 public class UriGrantsManager {
     private static final Singleton<IUriGrantsManager> IUriGrantsManagerSingleton =
             new Singleton<IUriGrantsManager>() { // from class: android.app.UriGrantsManager.1

@@ -7,7 +7,6 @@ import java.util.Map;
 import java.util.Set;
 
 @Deprecated
-/* loaded from: classes.dex */
 class FrameworkPackageUserStateDefault implements FrameworkPackageUserState {
     FrameworkPackageUserStateDefault() {}
 

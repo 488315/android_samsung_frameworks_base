@@ -18,7 +18,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Arrays;
 
-/* loaded from: classes5.dex */
 public class ModemPowerProfile {
     private static final String ATTR_LEVEL = "level";
     private static final String ATTR_NR_FREQUENCY = "nrFrequency";

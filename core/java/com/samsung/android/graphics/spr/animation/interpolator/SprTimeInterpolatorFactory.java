@@ -4,7 +4,6 @@ import android.animation.TimeInterpolator;
 
 import java.util.Hashtable;
 
-/* loaded from: classes6.dex */
 public class SprTimeInterpolatorFactory {
     private static Hashtable<Integer, SprTimeInterpolator> mTable;
 

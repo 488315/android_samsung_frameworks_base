@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.android.internal.R;
 
-/* loaded from: classes3.dex */
 public class SemSwitchPreferenceScreen extends SwitchPreference {
     @Deprecated
     public SemSwitchPreferenceScreen(

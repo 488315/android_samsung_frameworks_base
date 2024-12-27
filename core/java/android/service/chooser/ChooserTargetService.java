@@ -10,7 +10,6 @@ import android.os.RemoteException;
 import java.util.List;
 
 @Deprecated
-/* loaded from: classes3.dex */
 public abstract class ChooserTargetService extends Service {
     public static final String BIND_PERMISSION = "android.permission.BIND_CHOOSER_TARGET_SERVICE";
     private static final boolean DEBUG = false;

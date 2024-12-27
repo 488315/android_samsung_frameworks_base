@@ -7,7 +7,6 @@ import android.os.Parcelable;
 
 import java.util.List;
 
-/* loaded from: classes2.dex */
 public class FaceSensorPropertiesInternal extends SensorPropertiesInternal {
     public static final Parcelable.Creator<FaceSensorPropertiesInternal> CREATOR =
             new Parcelable.Creator<FaceSensorPropertiesInternal>() { // from class:

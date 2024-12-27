@@ -8,7 +8,6 @@ import android.os.RemoteException;
 import android.view.autofill.AutofillId;
 import android.view.inputmethod.InlineSuggestionsRequest;
 
-/* loaded from: classes5.dex */
 public interface IInlineSuggestionsRequestCallback extends IInterface {
     public static final String DESCRIPTOR =
             "com.android.internal.inputmethod.IInlineSuggestionsRequestCallback";

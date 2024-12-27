@@ -1,6 +1,5 @@
 package android.text;
 
-/* loaded from: classes4.dex */
 public class MultiSelection {
     public static final Object CURRENT_SELECTION_START = new START();
     public static final Object CURRENT_SELECTION_END = new END();

@@ -12,7 +12,6 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-/* loaded from: classes5.dex */
 public class WatchListDecorLayout extends FrameLayout
         implements ViewTreeObserver.OnScrollChangedListener {
     private View mBottomPanel;

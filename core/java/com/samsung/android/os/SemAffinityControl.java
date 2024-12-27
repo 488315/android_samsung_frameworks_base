@@ -10,7 +10,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-/* loaded from: classes6.dex */
 public class SemAffinityControl {
     private static final int HMP_CORE_FRONT = 0;
     private static final int HMP_CORE_REAR = 1;

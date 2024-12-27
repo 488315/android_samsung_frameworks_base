@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-/* loaded from: classes.dex */
 public class GestureStore {
     private static final short FILE_FORMAT_VERSION = 1;
     public static final int ORIENTATION_INVARIANT = 1;

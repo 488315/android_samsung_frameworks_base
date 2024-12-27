@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.util.HashMap;
 import java.util.Map;
 
-/* loaded from: classes.dex */
 public class BlockchainTZServiceCommnInfo implements Parcelable {
     public static final Parcelable.Creator<BlockchainTZServiceCommnInfo> CREATOR =
             new Parcelable.Creator<BlockchainTZServiceCommnInfo>() { // from class:

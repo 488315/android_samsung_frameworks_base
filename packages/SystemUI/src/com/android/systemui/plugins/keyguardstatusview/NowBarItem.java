@@ -11,7 +11,6 @@ import com.android.keyguard.EmergencyButton$$ExternalSyntheticOutline0;
 import java.util.ArrayList;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public class NowBarItem {
     public static final int COLOR_INVALID = 1;
     public static final String EXTRA_NOW_BAR_KEY = "android.nowBarKey";

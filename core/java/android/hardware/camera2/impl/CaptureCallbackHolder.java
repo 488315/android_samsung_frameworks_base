@@ -8,7 +8,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes2.dex */
 public class CaptureCallbackHolder {
     private final CaptureCallback mCallback;
     private final Executor mExecutor;

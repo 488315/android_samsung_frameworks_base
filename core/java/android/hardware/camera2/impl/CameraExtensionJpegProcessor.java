@@ -23,7 +23,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-/* loaded from: classes2.dex */
 public class CameraExtensionJpegProcessor implements ICaptureProcessorImpl {
     private static final int JPEG_APP_SEGMENT_SIZE = 65536;
     private static final int JPEG_QUEUE_SIZE = 1;

@@ -5,7 +5,6 @@ import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes3.dex */
 public class Authorization implements Parcelable {
     public static final Parcelable.Creator<Authorization> CREATOR =
             new Parcelable.Creator<

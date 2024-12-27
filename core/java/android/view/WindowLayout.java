@@ -8,7 +8,6 @@ import android.window.ClientWindowFrames;
 
 import com.samsung.android.multiwindow.MultiWindowCoreState;
 
-/* loaded from: classes4.dex */
 public class WindowLayout {
     private static final boolean DEBUG = false;
     static final int MAX_X = 100000;

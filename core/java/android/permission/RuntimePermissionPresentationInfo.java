@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import com.android.internal.util.Preconditions;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class RuntimePermissionPresentationInfo implements Parcelable {
     public static final Parcelable.Creator<RuntimePermissionPresentationInfo> CREATOR =
             new Parcelable.Creator<

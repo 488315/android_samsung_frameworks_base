@@ -6,7 +6,6 @@ import android.text.TextUtils;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class RemoteDisplayState implements Parcelable {
     public static final Parcelable.Creator<RemoteDisplayState> CREATOR =
             new Parcelable.Creator<

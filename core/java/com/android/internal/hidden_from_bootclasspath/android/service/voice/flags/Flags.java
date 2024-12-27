@@ -1,6 +1,5 @@
 package com.android.internal.hidden_from_bootclasspath.android.service.voice.flags;
 
-/* loaded from: classes5.dex */
 public final class Flags {
     private static FeatureFlags FEATURE_FLAGS = new FeatureFlagsImpl();
     public static final String FLAG_ALLOW_FOREGROUND_ACTIVITIES_IN_ON_SHOW =

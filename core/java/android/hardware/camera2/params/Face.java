@@ -3,7 +3,6 @@ package android.hardware.camera2.params;
 import android.graphics.Point;
 import android.graphics.Rect;
 
-/* loaded from: classes2.dex */
 public final class Face {
     public static final int ID_UNSUPPORTED = -1;
     public static final int SCORE_MAX = 100;

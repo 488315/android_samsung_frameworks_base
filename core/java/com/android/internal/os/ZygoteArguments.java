@@ -3,7 +3,6 @@ package com.android.internal.os;
 import java.io.EOFException;
 import java.util.ArrayList;
 
-/* loaded from: classes5.dex */
 class ZygoteArguments {
     boolean mAbiListQuery;
     String[] mAllowlistedDataInfoList;

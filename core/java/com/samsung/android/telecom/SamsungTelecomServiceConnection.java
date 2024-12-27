@@ -10,7 +10,6 @@ import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.util.Slog;
 
-/* loaded from: classes6.dex */
 public class SamsungTelecomServiceConnection {
     private static final String SERVICE_ACTION =
             "com.samsung.android.telecom.ISamsungTelecomService";

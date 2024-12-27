@@ -2,7 +2,6 @@ package com.android.internal.org.bouncycastle.crypto.params;
 
 import java.math.BigInteger;
 
-/* loaded from: classes5.dex */
 public class DSAPublicKeyParameters extends DSAKeyParameters {
     private static final BigInteger ONE = BigInteger.valueOf(1);
     private static final BigInteger TWO = BigInteger.valueOf(2);

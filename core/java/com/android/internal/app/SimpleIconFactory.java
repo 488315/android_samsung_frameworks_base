@@ -32,7 +32,6 @@ import java.util.Optional;
 import java.util.function.Consumer;
 
 @Deprecated
-/* loaded from: classes5.dex */
 public class SimpleIconFactory {
     private static final int AMBIENT_SHADOW_ALPHA = 7;
     private static final float BLUR_FACTOR = 0.03125f;

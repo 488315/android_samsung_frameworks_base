@@ -2,7 +2,6 @@ package android.companion.datatransfer;
 
 import android.os.Parcel;
 
-/* loaded from: classes.dex */
 public abstract class SystemDataTransferRequest {
     public static final int DATA_TYPE_PERMISSION_SYNC = 1;
     final int mAssociationId;

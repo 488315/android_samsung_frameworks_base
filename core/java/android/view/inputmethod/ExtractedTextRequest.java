@@ -3,7 +3,6 @@ package android.view.inputmethod;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes4.dex */
 public class ExtractedTextRequest implements Parcelable {
     public static final Parcelable.Creator<ExtractedTextRequest> CREATOR =
             new Parcelable.Creator<

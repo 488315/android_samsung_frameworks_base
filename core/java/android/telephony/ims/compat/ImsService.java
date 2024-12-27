@@ -14,7 +14,6 @@ import com.android.ims.internal.IImsMMTelFeature;
 import com.android.ims.internal.IImsRcsFeature;
 import com.android.ims.internal.IImsServiceController;
 
-/* loaded from: classes4.dex */
 public class ImsService extends Service {
     private static final String LOG_TAG = "ImsService(Compat)";
     public static final String SERVICE_INTERFACE = "android.telephony.ims.compat.ImsService";

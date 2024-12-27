@@ -7,7 +7,6 @@ import java.time.DateTimeException;
 import java.time.ZoneId;
 import java.util.Arrays;
 
-/* loaded from: classes3.dex */
 public class BestClock extends SimpleClock {
     private static final String TAG = "BestClock";
     private final Clock[] clocks;

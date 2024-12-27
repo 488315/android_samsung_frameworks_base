@@ -3,7 +3,6 @@ package android.telephony;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes4.dex */
 public class IccOpenLogicalChannelResponse implements Parcelable {
     public static final Parcelable.Creator<IccOpenLogicalChannelResponse> CREATOR =
             new Parcelable.Creator<

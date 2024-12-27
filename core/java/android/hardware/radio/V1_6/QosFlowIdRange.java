@@ -2,7 +2,6 @@ package android.hardware.radio.V1_6;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class QosFlowIdRange {
     public static final byte MAX = 63;
     public static final byte MIN = 1;

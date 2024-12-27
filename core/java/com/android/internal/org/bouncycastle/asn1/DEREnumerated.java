@@ -2,7 +2,6 @@ package com.android.internal.org.bouncycastle.asn1;
 
 import java.math.BigInteger;
 
-/* loaded from: classes5.dex */
 public class DEREnumerated extends ASN1Enumerated {
     DEREnumerated(byte[] bytes) {
         super(bytes);

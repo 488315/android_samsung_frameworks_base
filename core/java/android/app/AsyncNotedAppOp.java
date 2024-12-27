@@ -12,7 +12,6 @@ import com.android.internal.util.Preconditions;
 import java.lang.annotation.Annotation;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public final class AsyncNotedAppOp implements Parcelable {
     public static final Parcelable.Creator<AsyncNotedAppOp> CREATOR =
             new Parcelable.Creator<AsyncNotedAppOp>() { // from class: android.app.AsyncNotedAppOp.1

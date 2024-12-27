@@ -15,7 +15,6 @@ import android.printservice.recommendation.RecommendationInfo;
 
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public interface IPrintManager extends IInterface {
     void addPrintJobStateChangeListener(
             IPrintJobStateChangeListener iPrintJobStateChangeListener, int i, int i2)

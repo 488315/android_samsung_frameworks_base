@@ -4,7 +4,6 @@ import java.io.Closeable;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-/* loaded from: classes4.dex */
 public class XmlWriter implements Closeable {
     static final /* synthetic */ boolean $assertionsDisabled = false;
     private PrintWriter out;

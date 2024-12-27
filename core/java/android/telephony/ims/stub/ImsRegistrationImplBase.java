@@ -25,7 +25,6 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-/* loaded from: classes4.dex */
 public class ImsRegistrationImplBase {
     private static final String LOG_TAG = "ImsRegistrationImplBase";
     public static final int REASON_ALLOWED_NETWORK_TYPES_CHANGED = 3;

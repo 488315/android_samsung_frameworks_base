@@ -12,7 +12,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public abstract class CompanionDeviceService extends Service {
     private static final String LOG_TAG = "CDM_CompanionDeviceService";
     public static final String SERVICE_INTERFACE = "android.companion.CompanionDeviceService";

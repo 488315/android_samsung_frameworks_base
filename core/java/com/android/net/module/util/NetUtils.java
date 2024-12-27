@@ -8,7 +8,6 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Collection;
 
-/* loaded from: classes5.dex */
 public final class NetUtils {
     public static boolean addressTypeMatches(InetAddress left, InetAddress right) {
         return ((left instanceof Inet4Address) && (right instanceof Inet4Address))

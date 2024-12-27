@@ -3,7 +3,6 @@ package com.samsung.android.knox.dar.ddar.securesession;
 import java.util.Arrays;
 import java.util.Base64;
 
-/* loaded from: classes6.dex */
 public class Util {
     private static final char[] HEX_ARRAY = "0123456789ABCDEF".toCharArray();
 

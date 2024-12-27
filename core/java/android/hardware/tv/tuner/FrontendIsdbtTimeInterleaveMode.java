@@ -1,6 +1,5 @@
 package android.hardware.tv.tuner;
 
-/* loaded from: classes2.dex */
 public @interface FrontendIsdbtTimeInterleaveMode {
     public static final int AUTO = 1;
     public static final int INTERLEAVE_1_0 = 2;

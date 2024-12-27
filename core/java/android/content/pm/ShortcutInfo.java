@@ -39,7 +39,6 @@ import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-/* loaded from: classes.dex */
 public final class ShortcutInfo implements Parcelable {
     private static final String ANDROID_PACKAGE_NAME = "android";
     public static final int CLONE_REMOVE_FOR_APP_PREDICTION = 9;

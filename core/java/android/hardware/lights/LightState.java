@@ -4,7 +4,6 @@ import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public final class LightState implements Parcelable {
     public static final Parcelable.Creator<LightState> CREATOR =
             new Parcelable.Creator<

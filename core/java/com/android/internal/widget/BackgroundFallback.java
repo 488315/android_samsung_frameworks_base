@@ -5,7 +5,6 @@ import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
 
-/* loaded from: classes5.dex */
 public class BackgroundFallback {
     private Drawable mBackgroundFallback;
 

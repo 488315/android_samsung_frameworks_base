@@ -2,7 +2,6 @@ package android.text;
 
 import android.os.Parcel;
 
-/* loaded from: classes4.dex */
 public class Annotation implements ParcelableSpan {
     private final String mKey;
     private final String mValue;

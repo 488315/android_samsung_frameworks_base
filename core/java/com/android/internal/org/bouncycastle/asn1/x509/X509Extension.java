@@ -8,7 +8,6 @@ import com.android.internal.org.bouncycastle.asn1.ASN1Primitive;
 
 import java.io.IOException;
 
-/* loaded from: classes5.dex */
 public class X509Extension {
     boolean critical;
     ASN1OctetString value;

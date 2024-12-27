@@ -6,7 +6,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
 
-/* loaded from: classes5.dex */
 public class FeedsInfo implements Parcelable {
     public static final Parcelable.Creator<FeedsInfo> CREATOR =
             new Parcelable.Creator<

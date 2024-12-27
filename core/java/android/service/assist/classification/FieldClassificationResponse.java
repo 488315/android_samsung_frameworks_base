@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Set;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class FieldClassificationResponse implements Parcelable {
     public static final Parcelable.Creator<FieldClassificationResponse> CREATOR =
             new Parcelable.Creator<

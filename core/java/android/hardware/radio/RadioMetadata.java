@@ -20,7 +20,6 @@ import java.util.Objects;
 import java.util.Set;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public final class RadioMetadata implements Parcelable {
     public static final Parcelable.Creator<RadioMetadata> CREATOR;
     private static final ArrayMap<String, Integer> METADATA_KEYS_TYPE = new ArrayMap<>();

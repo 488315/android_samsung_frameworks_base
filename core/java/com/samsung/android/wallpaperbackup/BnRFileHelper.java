@@ -36,7 +36,6 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 
-/* loaded from: classes6.dex */
 public class BnRFileHelper {
     public static final int REQ_MINIMUM_SIZE = 10485760;
     public static final int SECURITY_LEVEL_HIGH = 1;

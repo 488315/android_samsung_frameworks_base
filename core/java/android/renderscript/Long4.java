@@ -1,7 +1,6 @@
 package android.renderscript;
 
 @Deprecated
-/* loaded from: classes3.dex */
 public class Long4 {
     public long w;
     public long x;

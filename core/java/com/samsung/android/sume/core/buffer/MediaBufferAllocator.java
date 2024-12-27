@@ -7,7 +7,6 @@ import com.samsung.android.sume.core.format.MediaFormat;
 import com.samsung.android.sume.core.format.MutableMediaFormat;
 import com.samsung.android.sume.core.format.UpdatableMediaFormat;
 
-/* loaded from: classes6.dex */
 abstract class MediaBufferAllocator {
     private static final String TAG = Def.tagOf((Class<?>) MediaBufferAllocator.class);
     protected Align align;

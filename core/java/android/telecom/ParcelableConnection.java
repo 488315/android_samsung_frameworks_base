@@ -10,7 +10,6 @@ import com.android.internal.telecom.IVideoProvider;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public final class ParcelableConnection implements Parcelable {
     public static final Parcelable.Creator<ParcelableConnection> CREATOR =
             new Parcelable.Creator<

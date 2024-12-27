@@ -12,7 +12,6 @@ import android.webkit.WebIconDatabase;
 
 import com.android.internal.R;
 
-/* loaded from: classes3.dex */
 public class Browser {
     public static final String EXTRA_APPLICATION_ID = "com.android.browser.application_id";
     public static final String EXTRA_CREATE_NEW_TAB = "create_new_tab";

@@ -14,7 +14,6 @@ import android.filterfw.format.ImageFormat;
 import android.util.Log;
 import android.view.SurfaceHolder;
 
-/* loaded from: classes.dex */
 public class SurfaceRenderFilter extends Filter implements SurfaceHolder.Callback {
     private static final String TAG = "SurfaceRenderFilter";
     private final int RENDERMODE_FILL_CROP;

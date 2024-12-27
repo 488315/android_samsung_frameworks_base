@@ -7,7 +7,6 @@ import java.lang.annotation.Target;
 
 @Target({ElementType.METHOD, ElementType.FIELD})
 @Retention(RetentionPolicy.SOURCE)
-/* loaded from: classes4.dex */
 public @interface InspectableProperty {
 
     @Target({ElementType.TYPE})

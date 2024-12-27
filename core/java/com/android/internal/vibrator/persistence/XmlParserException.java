@@ -4,7 +4,6 @@ import android.text.TextUtils;
 
 import org.xmlpull.v1.XmlPullParserException;
 
-/* loaded from: classes5.dex */
 public final class XmlParserException extends Exception {
     public static XmlParserException createFromPullParserException(
             String tagName, XmlPullParserException cause) {

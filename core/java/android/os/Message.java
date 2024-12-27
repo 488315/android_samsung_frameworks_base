@@ -3,7 +3,6 @@ package android.os;
 import android.util.TimeUtils;
 import android.util.proto.ProtoOutputStream;
 
-/* loaded from: classes3.dex */
 public final class Message implements Parcelable {
     static final int FLAGS_TO_CLEAR_ON_COPY_FROM = 1;
     static final int FLAG_ASYNCHRONOUS = 2;

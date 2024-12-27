@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes2.dex */
 public interface IContextHubClientCallback extends IInterface {
     void onClientAuthorizationChanged(long j, int i) throws RemoteException;
 

@@ -1,6 +1,5 @@
 package android.accounts;
 
-/* loaded from: classes.dex */
 public class NetworkErrorException extends AccountsException {
     public NetworkErrorException() {}
 

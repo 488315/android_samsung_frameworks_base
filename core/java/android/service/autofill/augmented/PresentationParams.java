@@ -6,7 +6,6 @@ import android.graphics.Rect;
 import java.io.PrintWriter;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public abstract class PresentationParams {
     abstract void dump(String str, PrintWriter printWriter);
 

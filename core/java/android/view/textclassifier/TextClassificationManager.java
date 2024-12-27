@@ -7,7 +7,6 @@ import com.android.internal.util.IndentingPrintWriter;
 
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public final class TextClassificationManager {
     private static final String LOG_TAG = "androidtc";
     private static final TextClassificationConstants sDefaultSettings =

@@ -11,7 +11,6 @@ import android.util.Log;
 
 import java.util.concurrent.Semaphore;
 
-/* loaded from: classes3.dex */
 public class SearchRecentSuggestions {
     private static final String LOG_TAG = "SearchSuggestions";
     private static final int MAX_HISTORY_COUNT = 250;

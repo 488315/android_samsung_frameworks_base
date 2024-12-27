@@ -16,7 +16,6 @@ import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 import java.util.function.IntConsumer;
 
-/* loaded from: classes4.dex */
 public interface InputConnection {
     public static final int CURSOR_UPDATE_FILTER_CHARACTER_BOUNDS = 8;
     public static final int CURSOR_UPDATE_FILTER_EDITOR_BOUNDS = 4;

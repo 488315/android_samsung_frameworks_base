@@ -18,7 +18,6 @@ import java.util.List;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
-/* loaded from: classes6.dex */
 public class TypefaceFinder {
     public static final String DEFAULT_FONT_VALUE = "default";
     private static final String FONT_ASSET_DIR = "xml";

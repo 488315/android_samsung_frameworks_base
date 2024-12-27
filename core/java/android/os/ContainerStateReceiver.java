@@ -7,7 +7,6 @@ import android.content.IntentFilter;
 import android.content.pm.UserInfo;
 import android.util.Log;
 
-/* loaded from: classes3.dex */
 public class ContainerStateReceiver extends BroadcastReceiver {
     public static final int CONTAINER_EVENT_ADMIN_LOCKED = 16;
     public static final int CONTAINER_EVENT_ADMIN_UNLOCKED = 17;

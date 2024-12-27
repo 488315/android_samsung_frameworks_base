@@ -8,7 +8,6 @@ import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Set;
 
-/* loaded from: classes4.dex */
 abstract class MapCollections<K, V> {
     MapCollections<K, V>.EntrySet mEntrySet;
     MapCollections<K, V>.KeySet mKeySet;

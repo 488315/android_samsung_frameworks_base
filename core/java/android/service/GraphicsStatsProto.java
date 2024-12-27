@@ -1,6 +1,5 @@
 package android.service;
 
-/* loaded from: classes3.dex */
 public final class GraphicsStatsProto {
     public static final int GL = 1;
     public static final long GPU_HISTOGRAM = 2246267895815L;

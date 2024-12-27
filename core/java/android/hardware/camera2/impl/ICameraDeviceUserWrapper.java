@@ -14,7 +14,6 @@ import android.os.RemoteException;
 import android.os.ServiceSpecificException;
 import android.view.Surface;
 
-/* loaded from: classes2.dex */
 public class ICameraDeviceUserWrapper {
     private final ICameraDeviceUser mRemoteDevice;
 

@@ -3,7 +3,6 @@ package com.android.framework.protobuf;
 import java.io.IOException;
 
 @CheckReturnValue
-/* loaded from: classes3.dex */
 abstract class UnknownFieldSchema<T, B> {
     abstract void addFixed32(B b, int i, int i2);
 

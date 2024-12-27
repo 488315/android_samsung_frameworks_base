@@ -2,7 +2,6 @@ package com.android.net.module.util;
 
 import android.telecom.Logging.Session;
 
-/* loaded from: classes5.dex */
 public class NetworkIdentityUtils {
     public static String scrubSubscriberId(String subscriberId) {
         if (subscriberId != null) {

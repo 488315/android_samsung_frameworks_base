@@ -11,7 +11,6 @@ import android.net.Uri;
 import android.os.RemoteException;
 import android.util.Pair;
 
-/* loaded from: classes3.dex */
 public class BrowserContract {
     public static final String AUTHORITY = "com.android.browser";
     public static final Uri AUTHORITY_URI = Uri.parse("content://com.android.browser");

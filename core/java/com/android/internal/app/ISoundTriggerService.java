@@ -11,7 +11,6 @@ import android.os.RemoteException;
 
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public interface ISoundTriggerService extends IInterface {
     ISoundTriggerSession attachAsMiddleman(
             Identity identity,

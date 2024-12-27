@@ -1,6 +1,5 @@
 package android.security.authorization;
 
-/* loaded from: classes3.dex */
 public @interface ResponseCode {
     public static final int AUTH_TOKEN_EXPIRED = 2;
     public static final int INVALID_ARGUMENT = 20;

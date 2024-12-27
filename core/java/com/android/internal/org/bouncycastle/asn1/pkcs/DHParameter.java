@@ -10,7 +10,6 @@ import com.android.internal.org.bouncycastle.asn1.DERSequence;
 import java.math.BigInteger;
 import java.util.Enumeration;
 
-/* loaded from: classes5.dex */
 public class DHParameter extends ASN1Object {
     ASN1Integer g;
     ASN1Integer l;

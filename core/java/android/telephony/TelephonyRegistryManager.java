@@ -35,7 +35,6 @@ import java.util.function.ToIntFunction;
 import java.util.stream.Collectors;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public class TelephonyRegistryManager {
     private static final long LISTEN_CODE_CHANGE = 147600208;
     public static final int SIM_ACTIVATION_TYPE_DATA = 1;

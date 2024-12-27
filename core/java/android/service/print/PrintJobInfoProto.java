@@ -1,6 +1,5 @@
 package android.service.print;
 
-/* loaded from: classes3.dex */
 public final class PrintJobInfoProto {
     public static final long ATTRIBUTES = 1146756268039L;
     public static final long CREATION_TIME = 1112396529670L;

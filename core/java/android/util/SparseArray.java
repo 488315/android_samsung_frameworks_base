@@ -5,7 +5,6 @@ import com.android.internal.util.GrowingArrayUtils;
 
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public class SparseArray<E> implements Cloneable {
     private static final Object DELETED = new Object();
     private boolean mGarbage;

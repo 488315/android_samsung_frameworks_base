@@ -2,7 +2,6 @@ package android.hardware.vibrator.V1_3;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class Effect {
     public static final int CLICK = 0;
     public static final int DOUBLE_CLICK = 1;

@@ -3,7 +3,6 @@ package com.android.framework.protobuf;
 import java.nio.ByteBuffer;
 
 @CheckReturnValue
-/* loaded from: classes3.dex */
 abstract class BufferAllocator {
     private static final BufferAllocator UNPOOLED =
             new BufferAllocator() { // from class: com.android.framework.protobuf.BufferAllocator.1

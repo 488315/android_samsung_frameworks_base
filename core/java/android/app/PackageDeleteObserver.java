@@ -3,7 +3,6 @@ package android.app;
 import android.content.Intent;
 import android.content.pm.IPackageDeleteObserver2;
 
-/* loaded from: classes.dex */
 public class PackageDeleteObserver {
     private final IPackageDeleteObserver2.Stub mBinder =
             new IPackageDeleteObserver2.Stub() { // from class: android.app.PackageDeleteObserver.1

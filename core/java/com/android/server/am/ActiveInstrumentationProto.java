@@ -1,6 +1,5 @@
 package com.android.server.am;
 
-/* loaded from: classes5.dex */
 public final class ActiveInstrumentationProto {
     public static final long ARGUMENTS = 1146756268042L;
     public static final long CLASS = 1146756268033L;

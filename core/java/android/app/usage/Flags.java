@@ -1,6 +1,5 @@
 package android.app.usage;
 
-/* loaded from: classes.dex */
 public final class Flags {
     private static FeatureFlags FEATURE_FLAGS = new FeatureFlagsImpl();
     public static final String FLAG_DISABLE_IDLE_CHECK = "android.app.usage.disable_idle_check";

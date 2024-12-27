@@ -4,7 +4,6 @@ import android.util.Log;
 
 import com.android.internal.os.IShellCallback;
 
-/* loaded from: classes3.dex */
 public class ShellCallback implements Parcelable {
     public static final Parcelable.Creator<ShellCallback> CREATOR =
             new Parcelable.Creator<ShellCallback>() { // from class: android.os.ShellCallback.1

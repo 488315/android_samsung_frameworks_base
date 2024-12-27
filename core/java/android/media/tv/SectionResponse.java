@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes3.dex */
 public final class SectionResponse extends BroadcastInfoResponse implements Parcelable {
     public static final Parcelable.Creator<SectionResponse> CREATOR =
             new Parcelable.Creator<

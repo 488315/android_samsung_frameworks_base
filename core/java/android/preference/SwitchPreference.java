@@ -14,7 +14,6 @@ import android.widget.Switch;
 import com.android.internal.R;
 
 @Deprecated
-/* loaded from: classes3.dex */
 public class SwitchPreference extends TwoStatePreference {
     private static final ClickListener mClickListener = new ClickListener();
     private final Listener mListener;

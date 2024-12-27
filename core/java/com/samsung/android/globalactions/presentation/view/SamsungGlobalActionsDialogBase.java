@@ -33,7 +33,6 @@ import com.samsung.android.globalactions.util.WindowManagerUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public abstract class SamsungGlobalActionsDialogBase
         implements ExtendableGlobalActionsView, ViewStateController {
     private static final String TAG = "SamsungGlobalActionsDialogBase";

@@ -12,7 +12,6 @@ import android.filterfw.format.ImageFormat;
 import java.util.Date;
 import java.util.Random;
 
-/* loaded from: classes.dex */
 public class DocumentaryFilter extends Filter {
     private final String mDocumentaryShader;
     private int mHeight;

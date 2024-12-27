@@ -8,7 +8,6 @@ import android.os.Parcelable;
 import android.text.Spanned;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public final class NanoAppRpcService implements Parcelable {
     public static final Parcelable.Creator<NanoAppRpcService> CREATOR =
             new Parcelable.Creator<NanoAppRpcService>() { // from class:

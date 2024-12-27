@@ -1,6 +1,5 @@
 package android.service.diskstats;
 
-/* loaded from: classes3.dex */
 public final class DiskStatsServiceDumpProto {
     public static final long BENCHMARKED_WRITE_SPEED_KBPS = 1120986464263L;
     public static final long CACHED_FOLDER_SIZES = 1146756268038L;

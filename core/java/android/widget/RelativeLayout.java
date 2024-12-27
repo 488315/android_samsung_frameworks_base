@@ -34,7 +34,6 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 @RemoteViews.RemoteView
-/* loaded from: classes4.dex */
 public class RelativeLayout extends ViewGroup {
     public static final int ABOVE = 2;
     public static final int ALIGN_BASELINE = 4;

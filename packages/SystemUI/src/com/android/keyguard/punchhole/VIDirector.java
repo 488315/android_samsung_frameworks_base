@@ -20,7 +20,6 @@ import com.android.systemui.util.DeviceState;
 import com.samsung.android.feature.SemFloatingFeature;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes.dex */
 public final class VIDirector {
     public static final String PUNCH_HOLE_VI_INFO = SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_LOCKSCREEN_CONFIG_PUNCHHOLE_VI");
     public PointF mCameraLocPercent;

@@ -1,6 +1,5 @@
 package com.android.server.am;
 
-/* loaded from: classes5.dex */
 public final class NeededUriGrantsProto {
     public static final long FLAGS = 1120986464259L;
     public static final long GRANTS = 2246267895812L;

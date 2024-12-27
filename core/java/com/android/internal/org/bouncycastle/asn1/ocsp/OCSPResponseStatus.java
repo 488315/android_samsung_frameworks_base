@@ -6,7 +6,6 @@ import com.android.internal.org.bouncycastle.asn1.ASN1Primitive;
 
 import java.math.BigInteger;
 
-/* loaded from: classes5.dex */
 public class OCSPResponseStatus extends ASN1Object {
     public static final int INTERNAL_ERROR = 2;
     public static final int MALFORMED_REQUEST = 1;

@@ -10,7 +10,6 @@ import com.android.internal.foldables.flags.Flags;
 
 import java.util.function.Supplier;
 
-/* loaded from: classes5.dex */
 public class FoldLockSettingAvailabilityProvider {
     private static final String TAG = "FoldLockSettingAvailabilityProvider";
     private final boolean mFoldLockBehaviorResourceValue;

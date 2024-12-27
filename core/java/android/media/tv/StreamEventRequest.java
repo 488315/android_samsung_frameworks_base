@@ -4,7 +4,6 @@ import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes3.dex */
 public final class StreamEventRequest extends BroadcastInfoRequest implements Parcelable {
     public static final Parcelable.Creator<StreamEventRequest> CREATOR =
             new Parcelable.Creator<

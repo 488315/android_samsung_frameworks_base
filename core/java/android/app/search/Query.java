@@ -6,7 +6,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class Query implements Parcelable {
     public static final Parcelable.Creator<Query> CREATOR =
             new Parcelable.Creator<Query>() { // from class: android.app.search.Query.1

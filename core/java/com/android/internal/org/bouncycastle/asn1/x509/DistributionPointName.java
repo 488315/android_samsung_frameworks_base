@@ -11,7 +11,6 @@ import com.android.internal.org.bouncycastle.asn1.ASN1TaggedObject;
 import com.android.internal.org.bouncycastle.asn1.DERTaggedObject;
 import com.android.internal.org.bouncycastle.util.Strings;
 
-/* loaded from: classes5.dex */
 public class DistributionPointName extends ASN1Object implements ASN1Choice {
     public static final int FULL_NAME = 0;
     public static final int NAME_RELATIVE_TO_CRL_ISSUER = 1;

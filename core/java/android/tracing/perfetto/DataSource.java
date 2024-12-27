@@ -2,7 +2,6 @@ package android.tracing.perfetto;
 
 import android.util.proto.ProtoInputStream;
 
-/* loaded from: classes4.dex */
 public abstract class DataSource<
         DataSourceInstanceType extends DataSourceInstance, TlsStateType, IncrementalStateType> {
     protected final long mNativeObj;

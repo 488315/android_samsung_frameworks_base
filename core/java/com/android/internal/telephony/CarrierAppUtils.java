@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/* loaded from: classes5.dex */
 public final class CarrierAppUtils {
     private static final boolean DEBUG = false;
     private static final String TAG = "CarrierAppUtils";

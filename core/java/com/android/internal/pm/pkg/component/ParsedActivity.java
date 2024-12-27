@@ -4,7 +4,6 @@ import android.content.pm.ActivityInfo;
 
 import java.util.Set;
 
-/* loaded from: classes5.dex */
 public interface ParsedActivity extends ParsedMainComponent {
     int getColorMode();
 

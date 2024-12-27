@@ -3,7 +3,6 @@ package android.app.usage;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes.dex */
 public final class AppStandbyInfo implements Parcelable {
     public static final Parcelable.Creator<AppStandbyInfo> CREATOR =
             new Parcelable.Creator<

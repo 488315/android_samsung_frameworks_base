@@ -1,6 +1,5 @@
 package com.android.internal.telephony;
 
-/* loaded from: classes5.dex */
 public class PhoneConstants {
     public static final int ACTIVE = 1;
     public static final int APN_ALREADY_ACTIVE = 0;

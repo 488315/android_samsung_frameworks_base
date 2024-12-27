@@ -26,7 +26,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.ToDoubleFunction;
 
-/* loaded from: classes4.dex */
 final class SmartSelectSprite {
     private static final int EXPAND_DURATION = 200;
     static final Comparator<RectF> RECTANGLE_COMPARATOR =

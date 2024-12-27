@@ -12,7 +12,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public final class PasswordMetrics implements Parcelable {
     private static final int CHAR_DIGIT = 2;
     private static final int CHAR_LOWER_CASE = 0;

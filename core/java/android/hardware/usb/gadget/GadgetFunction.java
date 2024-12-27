@@ -4,7 +4,6 @@ import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public class GadgetFunction implements Parcelable {
     public static final long ACCESSORY = 2;
     public static final long ADB = 1;

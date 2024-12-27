@@ -10,7 +10,6 @@ import android.os.RemoteException;
 import com.samsung.android.content.clipboard.IOnClipboardEventListener;
 import com.samsung.android.content.clipboard.data.SemClipData;
 
-/* loaded from: classes3.dex */
 public interface IClipboardService extends IInterface {
     public static final String DESCRIPTOR = "android.sec.clipboard.IClipboardService";
 

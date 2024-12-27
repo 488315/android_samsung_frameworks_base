@@ -1,6 +1,5 @@
 package android.internal.perfetto.protos;
 
-/* loaded from: classes2.dex */
 public final class ShellTransitionOuterClass {
 
     public final class ShellTransition {

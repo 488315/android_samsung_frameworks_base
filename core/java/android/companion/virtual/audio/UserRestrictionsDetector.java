@@ -7,7 +7,6 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.UserManager;
 
-/* loaded from: classes.dex */
 final class UserRestrictionsDetector extends BroadcastReceiver {
     private static final String TAG = "UserRestrictionsDetector";
     private final Context mContext;

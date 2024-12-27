@@ -13,7 +13,6 @@ import com.android.internal.os.BackgroundThread;
 
 import java.util.HashMap;
 
-/* loaded from: classes6.dex */
 public class CoreSaLogger {
     private static final String ADVANCED_TRACKING_ID = "408-399-975257";
     private static final String BASIC_TRACKING_ID = "4F4-399-995755";

@@ -23,7 +23,6 @@ import android.text.TextUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public class CallerInfoAsyncQuery {
     private static final boolean DBG = false;
     private static final boolean ENABLE_UNKNOWN_NUMBER_GEO_DESCRIPTION = true;

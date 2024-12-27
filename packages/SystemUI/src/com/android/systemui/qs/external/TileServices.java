@@ -48,7 +48,6 @@ import java.util.function.Consumer;
 import javax.inject.Provider;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public final class TileServices extends IQSService.Stub {
     public static final boolean DEBUG = !DeviceType.isShipBuild();
     public static final TileServices$$ExternalSyntheticLambda2 SERVICE_SORT = new TileServices$$ExternalSyntheticLambda2();

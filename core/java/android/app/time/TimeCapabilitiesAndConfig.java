@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class TimeCapabilitiesAndConfig implements Parcelable {
     public static final Parcelable.Creator<TimeCapabilitiesAndConfig> CREATOR =
             new Parcelable.Creator<TimeCapabilitiesAndConfig>() { // from class:

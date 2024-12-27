@@ -1,6 +1,5 @@
 package android.webkit;
 
-/* loaded from: classes4.dex */
 public final class Flags {
     private static FeatureFlags FEATURE_FLAGS = new FeatureFlagsImpl();
     public static final String FLAG_UPDATE_SERVICE_IPC_WRAPPER =

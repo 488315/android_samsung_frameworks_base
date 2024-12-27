@@ -6,7 +6,6 @@ import android.os.Parcelable;
 
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public final class RemoveSpaceGesture extends HandwritingGesture implements Parcelable {
     public static final Parcelable.Creator<RemoveSpaceGesture> CREATOR =
             new Parcelable.Creator<

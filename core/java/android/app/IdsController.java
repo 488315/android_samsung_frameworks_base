@@ -11,7 +11,6 @@ import android.view.ViewTreeObserver;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-/* loaded from: classes.dex */
 public final class IdsController {
     private static final String IDS_KEY = "IDSCount";
     private static final String IDS_URI = "android.app.ActivityThread.IDS";

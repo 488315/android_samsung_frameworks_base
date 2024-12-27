@@ -1,6 +1,5 @@
 package com.samsung.android.content.smartclip;
 
-/* loaded from: classes5.dex */
 public class SemSmartClipMetaTagType {
     public static final String APP_DEEP_LINK = "app_deep_link";
     public static final String APP_LAUNCH_INFO = "app_launch_info";

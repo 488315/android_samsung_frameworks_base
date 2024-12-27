@@ -2,7 +2,6 @@ package com.android.internal.util;
 
 import android.os.Message;
 
-/* loaded from: classes5.dex */
 public class State implements IState {
     protected State() {}
 

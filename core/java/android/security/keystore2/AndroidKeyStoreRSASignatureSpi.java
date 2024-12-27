@@ -5,7 +5,6 @@ import android.hardware.security.keymint.KeyParameter;
 import java.security.InvalidKeyException;
 import java.util.List;
 
-/* loaded from: classes3.dex */
 abstract class AndroidKeyStoreRSASignatureSpi extends AndroidKeyStoreSignatureSpiBase {
     private final int mKeymasterDigest;
     private final int mKeymasterPadding;

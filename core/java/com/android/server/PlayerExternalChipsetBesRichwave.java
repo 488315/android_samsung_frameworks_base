@@ -7,7 +7,6 @@ import android.util.Log;
 
 import com.samsung.android.common.AsPackageName;
 
-/* loaded from: classes5.dex */
 public class PlayerExternalChipsetBesRichwave extends PlayerExternalChipsetBes
         implements RichwaveTuningParameteres {
     private static final int SEEKTUNE_TIMEOUT = 2100;

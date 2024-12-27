@@ -16,7 +16,6 @@ import java.util.Iterator;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 @Deprecated
-/* loaded from: classes3.dex */
 public class RenderScript {
     public static final int CREATE_FLAG_LOW_LATENCY = 2;
     public static final int CREATE_FLAG_LOW_POWER = 4;

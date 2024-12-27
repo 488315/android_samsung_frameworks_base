@@ -12,7 +12,6 @@ import java.util.concurrent.Executor;
 import kotlin.text.StringsKt__IndentKt;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes3.dex */
 public final class LetterboxBackgroundProvider implements CoreStartable, Dumpable {
     public final Executor backgroundExecutor;
     public boolean isLetterboxBackgroundMultiColored;

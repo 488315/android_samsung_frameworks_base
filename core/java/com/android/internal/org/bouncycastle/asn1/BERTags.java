@@ -1,6 +1,5 @@
 package com.android.internal.org.bouncycastle.asn1;
 
-/* loaded from: classes5.dex */
 public interface BERTags {
     public static final int APPLICATION = 64;
     public static final int BIT_STRING = 3;

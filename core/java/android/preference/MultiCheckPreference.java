@@ -13,7 +13,6 @@ import com.android.internal.R;
 import java.util.Arrays;
 
 @Deprecated
-/* loaded from: classes3.dex */
 public class MultiCheckPreference extends DialogPreference {
     private CharSequence[] mEntries;
     private String[] mEntryValues;

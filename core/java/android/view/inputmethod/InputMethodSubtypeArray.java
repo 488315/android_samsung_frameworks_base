@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
-/* loaded from: classes4.dex */
 public class InputMethodSubtypeArray {
     private static final String TAG = "InputMethodSubtypeArray";
     private volatile byte[] mCompressedData;

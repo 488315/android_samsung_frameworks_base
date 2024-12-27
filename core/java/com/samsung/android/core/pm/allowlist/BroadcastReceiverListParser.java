@@ -22,7 +22,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.BiConsumer;
 
-/* loaded from: classes6.dex */
 public class BroadcastReceiverListParser {
     public static boolean FW_BR_ALLOW_LIST_WITH_SCPM = true;
     static final String TAG = "BRListParser";

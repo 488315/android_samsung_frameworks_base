@@ -3,7 +3,6 @@ package com.android.internal.telephony;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes5.dex */
 public class CallInfo implements Parcelable {
     public static final Parcelable.Creator<CallInfo> CREATOR =
             new Parcelable.Creator<

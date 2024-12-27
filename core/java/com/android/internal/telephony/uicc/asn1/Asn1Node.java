@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public final class Asn1Node {
     private static final int INT_BYTES = 4;
     private final List<Asn1Node> mChildren;

@@ -1,6 +1,5 @@
 package android.hardware.tv.tuner;
 
-/* loaded from: classes2.dex */
 public @interface DemuxIpFilterType {
     public static final int IP = 4;
     public static final int IP_PAYLOAD = 3;

@@ -3,7 +3,6 @@ package com.android.internal.org.bouncycastle.crypto.params;
 import com.android.internal.org.bouncycastle.crypto.CipherParameters;
 import com.android.internal.org.bouncycastle.util.Arrays;
 
-/* loaded from: classes5.dex */
 public class AEADParameters implements CipherParameters {
     private byte[] associatedText;
     private KeyParameter key;

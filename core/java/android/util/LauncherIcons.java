@@ -15,7 +15,6 @@ import android.media.audio.Enums;
 
 import com.android.internal.R;
 
-/* loaded from: classes4.dex */
 public final class LauncherIcons {
     private static final int AMBIENT_SHADOW_ALPHA = 30;
     private static final float ICON_SIZE_BLUR_FACTOR = 0.010416667f;

@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-/* loaded from: classes.dex */
 class NativeInterpreterWrapper implements AutoCloseable {
     private static final int ERROR_BUFFER_SIZE = 512;
     private long cancellationFlagHandle;

@@ -2,7 +2,6 @@ package com.samsung.android.sume.core.plugin;
 
 import java.util.function.Consumer;
 
-/* loaded from: classes6.dex */
 public class PluginAdapter<T extends PluginFixture<?>> implements Plugin<T> {
     private final Consumer<T> function;
     private final Class<T> pluginType;

@@ -16,7 +16,6 @@ import java.io.PrintWriter;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes4.dex */
 public class RemoteAnimationTarget implements Parcelable {
     public static final Parcelable.Creator<RemoteAnimationTarget> CREATOR =
             new Parcelable.Creator<

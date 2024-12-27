@@ -1,6 +1,5 @@
 package android.animation;
 
-/* loaded from: classes.dex */
 public class FloatArrayEvaluator implements TypeEvaluator<float[]> {
     private float[] mArray;
 

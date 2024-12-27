@@ -9,7 +9,6 @@ import java.io.PrintWriter;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public final class ManualTimeSuggestion implements Parcelable {
     public static final Parcelable.Creator<ManualTimeSuggestion> CREATOR =
             new Parcelable.Creator<ManualTimeSuggestion>() { // from class:

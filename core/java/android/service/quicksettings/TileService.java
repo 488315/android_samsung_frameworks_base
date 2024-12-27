@@ -26,7 +26,6 @@ import com.android.internal.R;
 
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public class TileService extends Service {
     public static final String ACTION_QS_TILE = "android.service.quicksettings.action.QS_TILE";
     public static final String ACTION_QS_TILE_PREFERENCES =

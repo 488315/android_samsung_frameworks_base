@@ -2,7 +2,6 @@ package android.view;
 
 import android.graphics.FrameInfo;
 
-/* loaded from: classes4.dex */
 public class ViewFrameInfo {
     public long drawStart;
     public long flags;

@@ -3,7 +3,6 @@ package android.hardware.biometrics;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes2.dex */
 public class BiometricFaceConstants {
     public static final int BIOMETRIC_ERROR_NO_DEVICE_CREDENTIAL = 14;
     public static final int BIOMETRIC_ERROR_POWER_PRESSED = 19;

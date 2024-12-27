@@ -7,7 +7,6 @@ import vendor.samsung.hardware.radio.V2_0.SehSignalBar;
 
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public class SignalBarInfo implements Parcelable {
     public static final Parcelable.Creator<SignalBarInfo> CREATOR =
             new Parcelable.Creator() { // from class: android.telephony.SignalBarInfo.1

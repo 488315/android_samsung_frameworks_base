@@ -4,7 +4,6 @@ import android.app.SearchManager;
 import android.graphics.RuntimeShader;
 import android.graphics.Shader;
 
-/* loaded from: classes.dex */
 final class RippleShader extends RuntimeShader {
     private static final double PI_ROTATE_LEFT = -0.02454369260617026d;
     private static final double PI_ROTATE_RIGHT = 0.02454369260617026d;

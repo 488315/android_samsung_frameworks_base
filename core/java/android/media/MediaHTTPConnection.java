@@ -18,7 +18,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/* loaded from: classes2.dex */
 public class MediaHTTPConnection extends IMediaHTTPConnection.Stub {
     private static final int CONNECT_TIMEOUT_MS = 30000;
     private static final int HTTP_TEMP_REDIRECT = 307;

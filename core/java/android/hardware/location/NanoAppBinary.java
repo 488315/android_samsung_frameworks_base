@@ -12,7 +12,6 @@ import java.nio.ByteOrder;
 import java.util.Arrays;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public final class NanoAppBinary implements Parcelable {
     private static final int EXPECTED_HEADER_VERSION = 1;
     private static final int EXPECTED_MAGIC_VALUE = 1330528590;

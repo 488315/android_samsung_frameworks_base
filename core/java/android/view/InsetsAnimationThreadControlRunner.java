@@ -12,7 +12,6 @@ import android.view.inputmethod.ImeTracker;
 
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public class InsetsAnimationThreadControlRunner implements InsetsAnimationControlRunner {
     private static final String TAG = "InsetsAnimThreadRunner";
     private final InsetsAnimationControlCallbacks mCallbacks = new AnonymousClass1();

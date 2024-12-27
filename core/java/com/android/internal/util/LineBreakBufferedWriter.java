@@ -4,7 +4,6 @@ import java.io.PrintWriter;
 import java.io.Writer;
 import java.util.Arrays;
 
-/* loaded from: classes5.dex */
 public class LineBreakBufferedWriter extends PrintWriter {
     private char[] buffer;
     private int bufferIndex;

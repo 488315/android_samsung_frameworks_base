@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes5.dex */
 public interface IImsServiceController extends IInterface {
     void addFeatureStatusCallback(
             int i, int i2, IImsFeatureStatusCallback iImsFeatureStatusCallback)

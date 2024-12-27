@@ -24,7 +24,6 @@ import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/* loaded from: classes2.dex */
 public final class MidiDeviceServer implements Closeable {
     private static final String TAG = "MidiDeviceServer";
     private static final int UNUSED_UID = -1;

@@ -13,7 +13,6 @@ import android.widget.Toast;
 import com.android.internal.R;
 import com.android.internal.telephony.util.TelephonyUtils;
 
-/* loaded from: classes4.dex */
 public final class LocationAccessPolicy {
     private static final boolean DBG = false;
     public static final int MAX_SDK_FOR_ANY_ENFORCEMENT = 10000;

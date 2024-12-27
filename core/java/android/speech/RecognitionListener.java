@@ -2,7 +2,6 @@ package android.speech;
 
 import android.os.Bundle;
 
-/* loaded from: classes3.dex */
 public interface RecognitionListener {
     void onBeginningOfSpeech();
 

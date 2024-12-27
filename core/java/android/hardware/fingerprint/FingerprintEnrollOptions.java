@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes2.dex */
 public class FingerprintEnrollOptions implements Parcelable {
     public static final Parcelable.Creator<FingerprintEnrollOptions> CREATOR =
             new Parcelable.Creator<FingerprintEnrollOptions>() { // from class:

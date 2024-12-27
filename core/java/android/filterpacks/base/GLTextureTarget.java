@@ -7,7 +7,6 @@ import android.filterfw.core.FrameFormat;
 import android.filterfw.core.GenerateFieldPort;
 import android.filterfw.format.ImageFormat;
 
-/* loaded from: classes.dex */
 public class GLTextureTarget extends Filter {
 
     @GenerateFieldPort(name = "texId")

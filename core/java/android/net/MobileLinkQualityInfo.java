@@ -2,7 +2,6 @@ package android.net;
 
 import android.os.Parcel;
 
-/* loaded from: classes3.dex */
 public class MobileLinkQualityInfo extends LinkQualityInfo {
     private int mMobileNetworkType = Integer.MAX_VALUE;
     private int mRssi = Integer.MAX_VALUE;

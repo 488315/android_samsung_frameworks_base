@@ -9,7 +9,6 @@ import android.view.SurfaceControl;
 
 import java.util.function.Consumer;
 
-/* loaded from: classes.dex */
 public final class BLASTBufferQueue {
     private static final boolean DEBUG_MERGE;
     private static String TAG = "BLASTBufferQueue_Java";

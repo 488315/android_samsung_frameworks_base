@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes3.dex */
 public class SystemVibrator extends Vibrator {
     private static final String TAG = "Vibrator";
     private final ArrayList<MultiVibratorStateListener> mBrokenListeners;

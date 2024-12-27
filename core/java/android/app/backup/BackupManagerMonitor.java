@@ -4,7 +4,6 @@ import android.annotation.SystemApi;
 import android.os.Bundle;
 
 @SystemApi
-/* loaded from: classes.dex */
 public class BackupManagerMonitor {
     public static final String EXTRA_LOG_AGENT_LOGGING_RESULTS =
             "android.app.backup.extra.LOG_AGENT_LOGGING_RESULTS";

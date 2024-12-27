@@ -29,7 +29,6 @@ import com.samsung.android.feature.SemGateConfig;
 import com.samsung.android.knox.restriction.IRestrictionPolicy;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes.dex */
 public final class AppNotRespondingDialog extends BaseErrorDialog implements View.OnClickListener {
     public final Data mData;
     public final AnonymousClass1 mHandler;

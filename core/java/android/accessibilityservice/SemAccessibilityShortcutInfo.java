@@ -2,7 +2,6 @@ package android.accessibilityservice;
 
 import android.graphics.drawable.Drawable;
 
-/* loaded from: classes.dex */
 public final class SemAccessibilityShortcutInfo {
     private final Drawable icon;
     private final String title;

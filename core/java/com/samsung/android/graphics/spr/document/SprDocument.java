@@ -34,7 +34,6 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* loaded from: classes6.dex */
 public class SprDocument implements Cloneable {
     public static final int ANIMATION_MODE_BATTERY = 10;
     public static final int ANIMATION_MODE_NONE = 0;

@@ -1,6 +1,5 @@
 package android.view;
 
-/* loaded from: classes4.dex */
 public final class DisplayInfoProto {
     public static final long APP_HEIGHT = 1120986464260L;
     public static final long APP_WIDTH = 1120986464259L;

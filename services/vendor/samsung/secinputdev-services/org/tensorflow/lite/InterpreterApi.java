@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-/* loaded from: classes.dex */
 public interface InterpreterApi extends AutoCloseable {
     void allocateTensors();
 

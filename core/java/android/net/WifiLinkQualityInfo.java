@@ -2,7 +2,6 @@ package android.net;
 
 import android.os.Parcel;
 
-/* loaded from: classes3.dex */
 public class WifiLinkQualityInfo extends LinkQualityInfo {
     private String mBssid;
     private int mType = Integer.MAX_VALUE;

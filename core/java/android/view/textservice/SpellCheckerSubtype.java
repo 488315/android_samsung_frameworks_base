@@ -17,7 +17,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
-/* loaded from: classes4.dex */
 public final class SpellCheckerSubtype implements Parcelable {
     private static final String EXTRA_VALUE_KEY_VALUE_SEPARATOR = "=";
     private static final String EXTRA_VALUE_PAIR_SEPARATOR = ",";

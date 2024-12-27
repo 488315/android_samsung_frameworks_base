@@ -9,7 +9,6 @@ import android.os.Parcel;
 import android.os.PermissionEnforcer;
 import android.os.RemoteException;
 
-/* loaded from: classes.dex */
 public interface IClipboard extends IInterface {
     void addPrimaryClipChangedListener(
             IOnPrimaryClipChangedListener iOnPrimaryClipChangedListener,

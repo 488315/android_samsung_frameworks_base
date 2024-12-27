@@ -4,7 +4,6 @@ import android.service.timezone.TimeZoneProviderService;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class SapResultCode {
     public static final int CARD_ALREADY_POWERED_OFF = 3;
     public static final int CARD_ALREADY_POWERED_ON = 5;

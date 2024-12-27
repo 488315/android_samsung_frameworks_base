@@ -19,7 +19,6 @@ import com.samsung.android.sepunion.UnionConstants;
 import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-/* loaded from: classes6.dex */
 public class CoverManager {
     public static final int COVER_MODE_HIDE_SVIEW_ONCE = 2;
     public static final int COVER_MODE_NONE = 0;

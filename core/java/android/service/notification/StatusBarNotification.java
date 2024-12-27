@@ -18,7 +18,6 @@ import com.android.internal.logging.nano.MetricsProto;
 
 import java.util.ArrayList;
 
-/* loaded from: classes3.dex */
 public class StatusBarNotification implements Parcelable {
     public static final Parcelable.Creator<StatusBarNotification> CREATOR =
             new Parcelable.Creator<

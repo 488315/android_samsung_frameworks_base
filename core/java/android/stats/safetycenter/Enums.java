@@ -1,6 +1,5 @@
 package android.stats.safetycenter;
 
-/* loaded from: classes3.dex */
 public final class Enums {
     public static final int PROFILE_TYPE_MANAGED = 2;
     public static final int PROFILE_TYPE_PERSONAL = 1;

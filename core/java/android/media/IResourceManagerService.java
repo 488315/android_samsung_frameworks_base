@@ -10,7 +10,6 @@ import com.samsung.android.media.IResourceManagerObserver;
 import com.samsung.android.media.IResourceManagerObserverClient;
 import com.samsung.android.media.MediaInfoParcel;
 
-/* loaded from: classes2.dex */
 public interface IResourceManagerService extends IInterface {
     public static final String DESCRIPTOR = "android.media.IResourceManagerService";
     public static final String kPolicySupportsMultipleSecureCodecs =

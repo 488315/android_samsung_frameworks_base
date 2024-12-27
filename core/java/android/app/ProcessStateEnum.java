@@ -1,6 +1,5 @@
 package android.app;
 
-/* loaded from: classes.dex */
 public @interface ProcessStateEnum {
     public static final int BACKUP = 9;
     public static final int BOUND_FOREGROUND_SERVICE = 5;

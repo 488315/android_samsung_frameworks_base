@@ -11,7 +11,6 @@ import com.android.internal.util.Preconditions;
 import java.util.Collection;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes2.dex */
 public class MultiResolutionImageReader implements AutoCloseable {
     private static final String TAG = "MultiResolutionImageReader";
     private final int mFormat;

@@ -5,7 +5,6 @@ import android.view.animation.ClipRectAnimation;
 import android.view.animation.Interpolator;
 import android.view.animation.Transformation;
 
-/* loaded from: classes5.dex */
 public class ClipRectTBAnimation extends ClipRectAnimation {
     private final int mFromTranslateY;
     private float mNormalizedTime;

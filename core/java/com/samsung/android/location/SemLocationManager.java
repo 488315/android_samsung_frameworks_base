@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public class SemLocationManager {
     public static final String ACTION_SERVICE_READY = "com.samsung.android.location.SERVICE_READY";
     public static final String BATCHED_LOCATION = "batchedlocation";

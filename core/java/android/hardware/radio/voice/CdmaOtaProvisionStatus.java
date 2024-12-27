@@ -1,6 +1,5 @@
 package android.hardware.radio.voice;
 
-/* loaded from: classes2.dex */
 public @interface CdmaOtaProvisionStatus {
     public static final int A_KEY_EXCHANGED = 2;
     public static final int COMMITTED = 8;

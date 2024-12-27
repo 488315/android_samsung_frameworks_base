@@ -35,7 +35,6 @@ import java.util.ArrayList;
 import java.util.function.Predicate;
 
 @RemoteViews.RemoteView
-/* loaded from: classes4.dex */
 public class SemHorizontalListView extends SemHorizontalAbsListView {
     private static final int BITS_PER_LONG = 64;
     private static final float MAX_SCROLL_FACTOR = 0.33f;

@@ -2,7 +2,6 @@ package android.net.http;
 
 import java.security.cert.X509Certificate;
 
-/* loaded from: classes3.dex */
 public class SslError {
     static final /* synthetic */ boolean $assertionsDisabled = false;
     public static final int SSL_DATE_INVALID = 4;

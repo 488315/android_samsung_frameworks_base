@@ -2,7 +2,6 @@ package android.text.style;
 
 import android.text.TextPaint;
 
-/* loaded from: classes4.dex */
 public abstract class MetricAffectingSpan extends CharacterStyle implements UpdateLayout {
     public abstract void updateMeasureState(TextPaint textPaint);
 

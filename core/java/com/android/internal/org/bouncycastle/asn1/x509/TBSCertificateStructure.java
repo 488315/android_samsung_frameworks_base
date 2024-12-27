@@ -9,7 +9,6 @@ import com.android.internal.org.bouncycastle.asn1.DERBitString;
 import com.android.internal.org.bouncycastle.asn1.pkcs.PKCSObjectIdentifiers;
 import com.android.internal.org.bouncycastle.asn1.x500.X500Name;
 
-/* loaded from: classes5.dex */
 public class TBSCertificateStructure extends ASN1Object
         implements X509ObjectIdentifiers, PKCSObjectIdentifiers {
     Time endDate;

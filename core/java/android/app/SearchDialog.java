@@ -31,7 +31,6 @@ import android.widget.TextView;
 
 import com.android.internal.R;
 
-/* loaded from: classes.dex */
 public class SearchDialog extends Dialog {
     private static final boolean DBG = false;
     private static final String IME_OPTION_NO_MICROPHONE = "nm";

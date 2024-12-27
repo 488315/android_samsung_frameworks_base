@@ -7,7 +7,6 @@ import com.android.server.am.ActivityManagerService;
 import com.android.server.vr.VrManagerService;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes2.dex */
 public final class VrController {
     public static final int[] ORIG_ENUMS = {0, 1, 2};
     public static final int[] PROTO_ENUMS = {0, 1, 2};

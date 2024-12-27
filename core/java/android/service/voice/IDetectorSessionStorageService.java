@@ -8,7 +8,6 @@ import android.os.RemoteException;
 
 import com.android.internal.infra.AndroidFuture;
 
-/* loaded from: classes3.dex */
 public interface IDetectorSessionStorageService extends IInterface {
     public static final String DESCRIPTOR = "android.service.voice.IDetectorSessionStorageService";
 

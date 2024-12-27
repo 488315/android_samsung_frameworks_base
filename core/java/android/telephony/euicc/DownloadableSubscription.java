@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/* loaded from: classes4.dex */
 public final class DownloadableSubscription implements Parcelable {
     public static final Parcelable.Creator<DownloadableSubscription> CREATOR =
             new Parcelable.Creator<

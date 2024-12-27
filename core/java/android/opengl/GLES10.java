@@ -4,7 +4,6 @@ import java.nio.Buffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
-/* loaded from: classes3.dex */
 public class GLES10 {
     public static final int GL_ADD = 260;
     public static final int GL_ALIASED_LINE_WIDTH_RANGE = 33902;

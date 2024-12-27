@@ -1,6 +1,5 @@
 package com.android.server.wm;
 
-/* loaded from: classes5.dex */
 public final class WindowContainerProto {
     public static final long CHILDREN = 2246267895813L;
     public static final long CONFIGURATION_CONTAINER = 1146756268033L;

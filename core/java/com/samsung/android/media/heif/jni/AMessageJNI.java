@@ -5,7 +5,6 @@ import android.util.Log;
 import java.io.FileDescriptor;
 import java.nio.ByteBuffer;
 
-/* loaded from: classes6.dex */
 public class AMessageJNI {
     private static final String TAG = "AMessageJNI";
     private long mNativeHandle;

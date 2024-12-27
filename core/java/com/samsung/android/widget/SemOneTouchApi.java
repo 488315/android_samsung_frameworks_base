@@ -51,7 +51,6 @@ import java.lang.ref.WeakReference;
 import java.lang.reflect.Field;
 import java.util.concurrent.atomic.AtomicReference;
 
-/* loaded from: classes6.dex */
 public class SemOneTouchApi {
     private static final String BUNDLE_KEY_ACTIVITY_NAME = "key_activity_name";
     private static final String BUNDLE_KEY_APP_PROCESS_NAME = "key_app_process_name";

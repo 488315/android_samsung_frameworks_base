@@ -6,7 +6,6 @@ import com.samsung.vekit.Common.Object.Filter;
 import com.samsung.vekit.Common.Type.ManagerType;
 import com.samsung.vekit.Common.VEContext;
 
-/* loaded from: classes6.dex */
 public class FilterManager extends Manager<Filter> {
     public FilterManager(VEContext context) {
         super(context, ManagerType.FILTER);

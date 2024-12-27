@@ -2,7 +2,6 @@ package com.google.android.gles_jni;
 
 import javax.microedition.khronos.egl.EGLSurface;
 
-/* loaded from: classes5.dex */
 public class EGLSurfaceImpl extends EGLSurface {
     long mEGLSurface;
 

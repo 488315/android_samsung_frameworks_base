@@ -2,7 +2,6 @@ package android.ddm;
 
 import org.apache.harmony.dalvik.ddmc.DdmServer;
 
-/* loaded from: classes.dex */
 public class DdmRegister {
     private DdmRegister() {}
 

@@ -5,7 +5,6 @@ import android.os.IBinder;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes.dex */
 public final class FailureDialogResult extends BaseDialogResult implements Parcelable {
     public static final Parcelable.Creator<FailureDialogResult> CREATOR =
             new Parcelable.Creator<FailureDialogResult>() { // from class:

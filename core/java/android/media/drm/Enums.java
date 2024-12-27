@@ -1,6 +1,5 @@
 package android.media.drm;
 
-/* loaded from: classes2.dex */
 public final class Enums {
     public static final int ABV_MODRM = 1;
     public static final int ADOBE_PRIMETIME = 2;

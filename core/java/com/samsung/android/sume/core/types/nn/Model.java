@@ -2,7 +2,6 @@ package com.samsung.android.sume.core.types.nn;
 
 import com.samsung.android.sume.core.types.NumericEnum;
 
-/* loaded from: classes6.dex */
 public enum Model implements NumericEnum {
     NONE(0),
     IMAGE_UPSCALER_X4(1),

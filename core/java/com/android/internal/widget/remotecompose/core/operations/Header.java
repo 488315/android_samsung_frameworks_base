@@ -11,7 +11,6 @@ import com.android.internal.widget.remotecompose.core.WireBuffer;
 
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public class Header implements RemoteComposeOperation {
     public static final Companion COMPANION = new Companion();
     public static final int MAJOR_VERSION = 0;

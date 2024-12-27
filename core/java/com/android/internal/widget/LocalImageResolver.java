@@ -15,7 +15,6 @@ import android.util.Size;
 
 import java.io.IOException;
 
-/* loaded from: classes5.dex */
 public class LocalImageResolver {
     static final int DEFAULT_MAX_SAFE_ICON_SIZE_PX = 480;
     public static final int NO_MAX_SIZE = -1;

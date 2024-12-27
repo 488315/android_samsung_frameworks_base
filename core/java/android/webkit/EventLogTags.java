@@ -2,7 +2,6 @@ package android.webkit;
 
 import android.util.EventLog;
 
-/* loaded from: classes4.dex */
 public class EventLogTags {
     public static final int BROWSER_DOUBLE_TAP_DURATION = 70102;
     public static final int BROWSER_SNAP_CENTER = 70150;

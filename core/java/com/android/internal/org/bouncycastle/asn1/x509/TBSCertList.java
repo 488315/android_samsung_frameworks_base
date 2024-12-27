@@ -15,7 +15,6 @@ import com.android.internal.org.bouncycastle.asn1.x500.X500Name;
 import java.util.Enumeration;
 import java.util.NoSuchElementException;
 
-/* loaded from: classes5.dex */
 public class TBSCertList extends ASN1Object {
     Extensions crlExtensions;
     X500Name issuer;

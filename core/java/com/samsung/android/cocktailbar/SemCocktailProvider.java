@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-/* loaded from: classes5.dex */
 public class SemCocktailProvider extends BroadcastReceiver {
     private static final String ACTION_COCKTAIL_DISABLED =
             "com.samsung.android.cocktail.action.COCKTAIL_DISABLED";

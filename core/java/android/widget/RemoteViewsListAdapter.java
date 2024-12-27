@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* loaded from: classes4.dex */
 public class RemoteViewsListAdapter extends BaseAdapter {
     private RemoteViews.ColorResources mColorResources;
     private Context mContext;

@@ -2,7 +2,6 @@ package android.media.permission;
 
 import android.os.Binder;
 
-/* loaded from: classes2.dex */
 public class ClearCallingIdentityContext implements SafeCloseable {
     private final long mRestoreKey = Binder.clearCallingIdentity();
 

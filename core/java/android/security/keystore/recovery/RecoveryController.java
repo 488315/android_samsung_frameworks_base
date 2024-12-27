@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.Map;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public class RecoveryController {
     private static final String APPLICATION_KEY_GRANT_PREFIX = "recoverable_key:";
     public static final int ERROR_BAD_CERTIFICATE_FORMAT = 25;

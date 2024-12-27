@@ -12,7 +12,6 @@ import com.android.internal.org.bouncycastle.util.encoders.Hex;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 
-/* loaded from: classes5.dex */
 public class SecP224R1Curve extends ECCurve.AbstractFp {
     private static final int SECP224R1_DEFAULT_COORDS = 2;
     protected SecP224R1Point infinity;

@@ -6,7 +6,6 @@ import android.os.Parcelable;
 
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public class SecurityAlgorithmUpdate implements Parcelable {
     public static final Parcelable.Creator<SecurityAlgorithmUpdate> CREATOR =
             new Parcelable.Creator<SecurityAlgorithmUpdate>() { // from class:

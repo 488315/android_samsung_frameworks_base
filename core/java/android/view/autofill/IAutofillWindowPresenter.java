@@ -9,7 +9,6 @@ import android.os.RemoteException;
 import android.view.ThreadedRenderer;
 import android.view.WindowManager;
 
-/* loaded from: classes4.dex */
 public interface IAutofillWindowPresenter extends IInterface {
     void hide(Rect rect) throws RemoteException;
 

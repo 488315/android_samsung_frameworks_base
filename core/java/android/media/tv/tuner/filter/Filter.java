@@ -10,7 +10,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.concurrent.Executor;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public class Filter implements AutoCloseable {
     public static final int MONITOR_EVENT_IP_CID_CHANGE = 2;
     public static final int MONITOR_EVENT_SCRAMBLING_STATUS = 1;

@@ -43,7 +43,6 @@ import java.util.ArrayList;
 import kotlin.jvm.functions.Function1;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public final class LockscreenNotificationManager implements ConfigurationController.ConfigurationListener, StatusBarStateController.StateListener, WakefulnessLifecycle.Observer, SemWindowManager.FoldStateListener {
     public static int mCurrentNotificationType;
     public int mBarState;

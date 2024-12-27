@@ -5,7 +5,6 @@ import android.content.ContentResolver;
 import android.graphics.Bitmap;
 
 @Deprecated
-/* loaded from: classes4.dex */
 public abstract class WebIconDatabase {
 
     @Deprecated

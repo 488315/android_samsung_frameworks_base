@@ -23,7 +23,6 @@ import java.util.Objects;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
-/* loaded from: classes4.dex */
 public abstract class LayoutInflater {
     private static final String ATTR_LAYOUT = "layout";
     private static final boolean DEBUG = false;

@@ -4,7 +4,6 @@ import android.net.INetworkManagementEventObserver;
 import android.net.LinkAddress;
 import android.net.RouteInfo;
 
-/* loaded from: classes5.dex */
 public class BaseNetworkObserver extends INetworkManagementEventObserver.Stub {
     @Override // android.net.INetworkManagementEventObserver
     public void interfaceStatusChanged(String iface, boolean up) {}

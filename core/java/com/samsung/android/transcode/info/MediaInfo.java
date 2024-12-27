@@ -16,7 +16,6 @@ import java.nio.ByteBuffer;
 import java.util.Map;
 import java.util.Optional;
 
-/* loaded from: classes6.dex */
 public class MediaInfo {
     private static final String TAG = "MediaInfo";
     private static final int VIDEO_FPS_BUF_COUNT = 5;

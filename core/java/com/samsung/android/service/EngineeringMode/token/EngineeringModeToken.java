@@ -4,7 +4,6 @@ import com.samsung.android.core.SizeCompatInfo;
 
 import java.util.ArrayList;
 
-/* loaded from: classes6.dex */
 public class EngineeringModeToken {
     private static EngineeringModeToken mEngineeringModeToken;
     private int mOTPtime;

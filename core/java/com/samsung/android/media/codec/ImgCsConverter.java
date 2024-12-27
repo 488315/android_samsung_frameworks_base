@@ -4,7 +4,6 @@ import android.graphics.ColorSpace;
 import android.media.ExifInterface;
 import android.util.Log;
 
-/* loaded from: classes6.dex */
 public class ImgCsConverter {
     private static final String TAG = "ImgCsConverter";
     private static final boolean DEBUG = Log.isLoggable(TAG, 3);

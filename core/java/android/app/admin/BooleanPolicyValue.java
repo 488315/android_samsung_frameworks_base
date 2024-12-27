@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public final class BooleanPolicyValue extends PolicyValue<Boolean> {
     public static final Parcelable.Creator<BooleanPolicyValue> CREATOR =
             new Parcelable.Creator<

@@ -5,7 +5,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @Deprecated
-/* loaded from: classes2.dex */
 public class SContextSensorStatusCheck extends SContextEventContext {
     public static final Parcelable.Creator<SContextSensorStatusCheck> CREATOR =
             new Parcelable.Creator<SContextSensorStatusCheck>() { // from class:

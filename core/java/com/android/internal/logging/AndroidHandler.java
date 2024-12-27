@@ -14,7 +14,6 @@ import java.util.logging.Level;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
-/* loaded from: classes5.dex */
 public class AndroidHandler extends Handler {
     private static final Formatter THE_FORMATTER =
             new Formatter() { // from class: com.android.internal.logging.AndroidHandler.1

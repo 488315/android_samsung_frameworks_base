@@ -29,7 +29,6 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
-/* loaded from: classes6.dex */
 public final class MediaFilterFactory {
     private static final String TAG = Def.tagOf((Class<?>) MediaFilterFactory.class);
     private Supplier<BufferChannel> bufferChannelSupplier;

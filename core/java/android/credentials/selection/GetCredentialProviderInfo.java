@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class GetCredentialProviderInfo {
     private final List<Entry> mActionChips;
     private final List<AuthenticationEntry> mAuthenticationEntries;

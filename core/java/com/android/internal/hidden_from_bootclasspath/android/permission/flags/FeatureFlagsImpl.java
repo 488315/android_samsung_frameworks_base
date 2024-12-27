@@ -1,6 +1,5 @@
 package com.android.internal.hidden_from_bootclasspath.android.permission.flags;
 
-/* loaded from: classes5.dex */
 public final class FeatureFlagsImpl implements FeatureFlags {
     @Override // com.android.internal.hidden_from_bootclasspath.android.permission.flags.FeatureFlags
     public boolean apexSignaturePermissionAllowlistEnabled() {

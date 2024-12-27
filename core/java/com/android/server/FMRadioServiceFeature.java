@@ -3,7 +3,6 @@ package com.android.server;
 import com.samsung.android.feature.SemCscFeature;
 import com.samsung.android.feature.SemFloatingFeature;
 
-/* loaded from: classes5.dex */
 public class FMRadioServiceFeature {
     public static final String BANDWIDTHAS_76000_108000 = "76000_108000";
     public static final String BANDWIDTHAS_76000_90000 = "76000_90000";

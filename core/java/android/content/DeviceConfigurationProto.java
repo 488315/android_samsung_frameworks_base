@@ -1,6 +1,5 @@
 package android.content;
 
-/* loaded from: classes.dex */
 public final class DeviceConfigurationProto {
     public static final long CPU_ARCHITECTURES = 2237677961228L;
     public static final long FEATURES = 2237677961227L;

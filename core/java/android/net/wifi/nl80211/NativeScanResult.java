@@ -13,7 +13,6 @@ import java.util.Arrays;
 import java.util.List;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class NativeScanResult implements Parcelable {
     public static final int BSS_CAPABILITY_APSD = 2048;
     public static final int BSS_CAPABILITY_CF_POLLABLE = 4;

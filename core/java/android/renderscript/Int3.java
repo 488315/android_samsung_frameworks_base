@@ -1,7 +1,6 @@
 package android.renderscript;
 
 @Deprecated
-/* loaded from: classes3.dex */
 public class Int3 {
     public int x;
     public int y;

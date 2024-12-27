@@ -24,7 +24,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public interface IContexthub extends android.hardware.contexthub.V1_0.IContexthub {
     public static final String kInterfaceName = "android.hardware.contexthub@1.1::IContexthub";
 

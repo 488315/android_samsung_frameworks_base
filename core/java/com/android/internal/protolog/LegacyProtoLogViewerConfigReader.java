@@ -16,7 +16,6 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.zip.GZIPInputStream;
 
-/* loaded from: classes5.dex */
 public class LegacyProtoLogViewerConfigReader {
     private static final String TAG = "ProtoLogViewerConfigReader";
     private Map<Long, String> mLogMessageMap = null;

@@ -39,7 +39,6 @@ import com.samsung.android.rune.CoreRune;
 import java.nio.ByteBuffer;
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public class TransitionAnimation {
     private static final int CLIP_REVEAL_TRANSLATION_Y_DP = 8;
     public static final int DEFAULT_APP_TRANSITION_DURATION = 336;

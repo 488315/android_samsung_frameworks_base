@@ -3,7 +3,6 @@ package com.android.ims.internal.uce.presence;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes5.dex */
 public class PresResInfo implements Parcelable {
     public static final Parcelable.Creator<PresResInfo> CREATOR =
             new Parcelable.Creator<

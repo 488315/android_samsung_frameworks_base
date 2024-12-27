@@ -2,7 +2,6 @@ package com.android.internal.util.function.pooled;
 
 import java.util.function.Predicate;
 
-/* loaded from: classes5.dex */
 public interface PooledPredicate<T> extends PooledLambda, Predicate<T> {
     @Override // com.android.internal.util.function.pooled.PooledLambda,
               // com.android.internal.util.function.pooled.PooledSupplier,

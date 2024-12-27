@@ -1,6 +1,5 @@
 package android.hardware.contexthub;
 
-/* loaded from: classes2.dex */
 public @interface Setting {
     public static final byte AIRPLANE_MODE = 4;
     public static final byte BT_MAIN = 6;

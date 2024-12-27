@@ -7,7 +7,6 @@ import com.android.internal.org.bouncycastle.asn1.ASN1TaggedObject;
 import com.android.internal.org.bouncycastle.asn1.DEROctetString;
 import com.android.internal.org.bouncycastle.util.Arrays;
 
-/* loaded from: classes5.dex */
 public class SubjectKeyIdentifier extends ASN1Object {
     private byte[] keyidentifier;
 

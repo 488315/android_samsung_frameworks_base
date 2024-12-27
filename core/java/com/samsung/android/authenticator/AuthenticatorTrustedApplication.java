@@ -1,6 +1,5 @@
 package com.samsung.android.authenticator;
 
-/* loaded from: classes5.dex */
 final class AuthenticatorTrustedApplication implements TrustedApplication {
     private static final String APP_ID = "authnr";
     private static final String TAG = "ATA";

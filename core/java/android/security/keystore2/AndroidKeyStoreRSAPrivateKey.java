@@ -7,7 +7,6 @@ import android.system.keystore2.KeyDescriptor;
 import java.math.BigInteger;
 import java.security.interfaces.RSAKey;
 
-/* loaded from: classes3.dex */
 public class AndroidKeyStoreRSAPrivateKey extends AndroidKeyStorePrivateKey implements RSAKey {
     private final BigInteger mModulus;
 

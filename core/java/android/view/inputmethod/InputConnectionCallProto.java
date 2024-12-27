@@ -1,6 +1,5 @@
 package android.view.inputmethod;
 
-/* loaded from: classes4.dex */
 public final class InputConnectionCallProto {
     public static final long GET_CURSOR_CAPS_MODE = 1146756268037L;
     public static final long GET_EXTRACTED_TEXT = 1146756268038L;

@@ -2,7 +2,6 @@ package android.content.pm;
 
 import android.os.RemoteException;
 
-/* loaded from: classes.dex */
 public class DataLoaderManager {
     private static final String TAG = "DataLoaderManager";
     private final IDataLoaderManager mService;

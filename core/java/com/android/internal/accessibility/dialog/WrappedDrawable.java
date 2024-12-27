@@ -4,7 +4,6 @@ import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.drawable.Drawable;
 
-/* loaded from: classes5.dex */
 public class WrappedDrawable extends Drawable {
     private final Drawable mDrawable;
 

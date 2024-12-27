@@ -8,7 +8,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 
-/* loaded from: classes6.dex */
 public abstract class ATCommandChecker {
     public static final int ATD = 1;
     public static final int ATDDDEXEERR = 0;

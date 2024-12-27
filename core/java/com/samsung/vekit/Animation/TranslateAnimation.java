@@ -11,7 +11,6 @@ import com.samsung.vekit.Common.VEContext;
 
 import java.util.ArrayList;
 
-/* loaded from: classes6.dex */
 public class TranslateAnimation extends Animation<Vector3<Float>> {
     public TranslateAnimation(VEContext context, int id, String name) {
         super(context, AnimationType.TRANSLATE, id, name);

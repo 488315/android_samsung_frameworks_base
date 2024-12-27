@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import com.android.internal.util.Preconditions;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class GameModeConfiguration implements Parcelable {
     public static final Parcelable.Creator<GameModeConfiguration> CREATOR =
             new Parcelable.Creator<

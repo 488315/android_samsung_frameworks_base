@@ -2,7 +2,6 @@ package com.android.modules.expresslog;
 
 import java.util.Arrays;
 
-/* loaded from: classes5.dex */
 public final class Histogram {
     private final BinOptions mBinOptions;
     private final String mMetricId;

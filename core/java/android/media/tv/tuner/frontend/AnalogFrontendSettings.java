@@ -7,7 +7,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public class AnalogFrontendSettings extends FrontendSettings {
     public static final int AFT_FLAG_FALSE = 2;
     public static final int AFT_FLAG_TRUE = 1;

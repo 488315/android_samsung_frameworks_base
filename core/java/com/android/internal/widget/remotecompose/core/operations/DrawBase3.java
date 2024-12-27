@@ -9,7 +9,6 @@ import com.android.internal.widget.remotecompose.core.WireBuffer;
 
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public abstract class DrawBase3 extends PaintOperation implements VariableSupport {
     public static final Companion COMPANION =
             new Companion(

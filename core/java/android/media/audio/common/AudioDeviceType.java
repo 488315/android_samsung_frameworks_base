@@ -1,6 +1,5 @@
 package android.media.audio.common;
 
-/* loaded from: classes2.dex */
 public @interface AudioDeviceType {
     public static final int IN_ACCESSORY = 2;
     public static final int IN_AFE_PROXY = 3;

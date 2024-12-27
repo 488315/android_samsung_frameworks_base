@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes2.dex */
 public interface IVibratorManager extends IInterface {
     public static final int CAP_MIXED_TRIGGER_COMPOSE = 64;
     public static final int CAP_MIXED_TRIGGER_ON = 16;

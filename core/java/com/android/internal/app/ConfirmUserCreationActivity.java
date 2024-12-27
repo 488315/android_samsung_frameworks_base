@@ -14,7 +14,6 @@ import android.util.Log;
 
 import com.android.internal.R;
 
-/* loaded from: classes5.dex */
 public class ConfirmUserCreationActivity extends AlertActivity
         implements DialogInterface.OnClickListener {
     private static final String TAG = "CreateUser";

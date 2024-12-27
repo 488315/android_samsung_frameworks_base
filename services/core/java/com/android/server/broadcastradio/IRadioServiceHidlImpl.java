@@ -30,7 +30,6 @@ import java.util.OptionalInt;
 import java.util.stream.Collectors;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes.dex */
 public final class IRadioServiceHidlImpl extends IRadioService.Stub {
     public final com.android.server.broadcastradio.hal1.BroadcastRadioService mHal1Client;
     public final com.android.server.broadcastradio.hal2.BroadcastRadioService mHal2Client;

@@ -15,7 +15,6 @@ import android.view.autofill.AutofillValue;
 import com.android.internal.R;
 
 @RemoteViews.RemoteView
-/* loaded from: classes4.dex */
 public class RadioGroup extends LinearLayout {
     private static final String LOG_TAG = RadioGroup.class.getSimpleName();
     private int mCheckedId;

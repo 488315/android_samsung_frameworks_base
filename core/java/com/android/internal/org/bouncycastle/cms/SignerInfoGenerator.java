@@ -25,7 +25,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-/* loaded from: classes5.dex */
 public class SignerInfoGenerator {
     private byte[] calculatedDigest;
     private X509CertificateHolder certHolder;

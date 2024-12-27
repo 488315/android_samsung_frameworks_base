@@ -6,7 +6,6 @@ import com.android.internal.org.bouncycastle.asn1.ASN1Primitive;
 import com.android.internal.org.bouncycastle.asn1.ASN1Sequence;
 import com.android.internal.org.bouncycastle.asn1.DERSequence;
 
-/* loaded from: classes5.dex */
 public class HeaderInfo extends ASN1Object {
     private HeaderInfo(ASN1Sequence seq) {}
 

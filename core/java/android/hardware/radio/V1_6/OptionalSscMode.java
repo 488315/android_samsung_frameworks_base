@@ -9,7 +9,6 @@ import android.os.HwParcel;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public final class OptionalSscMode {
     private byte hidl_d = 0;
     private Object hidl_o;

@@ -1,6 +1,5 @@
 package android.adservices.service;
 
-/* loaded from: classes.dex */
 public final class FledgeProtoEnums {
     public static final int BACKGROUND_KEY_FETCH_STATUS_NO_OP = 1;
     public static final int BACKGROUND_KEY_FETCH_STATUS_REFRESH_KEYS_INITIATED = 2;

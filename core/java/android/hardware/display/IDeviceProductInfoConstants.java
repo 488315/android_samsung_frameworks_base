@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes2.dex */
 public interface IDeviceProductInfoConstants extends IInterface {
     public static final int CONNECTION_TO_SINK_BUILT_IN = 1;
     public static final int CONNECTION_TO_SINK_DIRECT = 2;

@@ -3,7 +3,6 @@ package android.hardware.biometrics;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes2.dex */
 public interface BiometricConstants {
     public static final int BIOMETRIC_ACQUIRED_GOOD = 0;
     public static final int BIOMETRIC_ACQUIRED_IMAGER_DIRTY = 3;

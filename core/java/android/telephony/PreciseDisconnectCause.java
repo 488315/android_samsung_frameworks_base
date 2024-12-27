@@ -3,7 +3,6 @@ package android.telephony;
 import android.annotation.SystemApi;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public final class PreciseDisconnectCause {
     public static final int ACCESS_CLASS_BLOCKED = 260;
     public static final int ACCESS_INFORMATION_DISCARDED = 43;

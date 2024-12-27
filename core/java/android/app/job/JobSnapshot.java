@@ -3,7 +3,6 @@ package android.app.job;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes.dex */
 public class JobSnapshot implements Parcelable {
     public static final Parcelable.Creator<JobSnapshot> CREATOR =
             new Parcelable.Creator<JobSnapshot>() { // from class: android.app.job.JobSnapshot.1

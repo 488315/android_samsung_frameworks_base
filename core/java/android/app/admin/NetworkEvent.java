@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.ParcelFormatException;
 import android.os.Parcelable;
 
-/* loaded from: classes.dex */
 public abstract class NetworkEvent implements Parcelable {
     public static final Parcelable.Creator<NetworkEvent> CREATOR =
             new Parcelable.Creator<NetworkEvent>() { // from class: android.app.admin.NetworkEvent.1

@@ -1,6 +1,5 @@
 package com.android.server.am;
 
-/* loaded from: classes5.dex */
 public final class ActivityManagerServiceProto {
     public static final long ACTIVITIES = 1146756268033L;
     public static final long BROADCASTS = 1146756268034L;

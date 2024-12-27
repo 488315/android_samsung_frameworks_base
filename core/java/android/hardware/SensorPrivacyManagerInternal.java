@@ -1,6 +1,5 @@
 package android.hardware;
 
-/* loaded from: classes.dex */
 public abstract class SensorPrivacyManagerInternal {
 
     public interface OnSensorPrivacyChangedListener {

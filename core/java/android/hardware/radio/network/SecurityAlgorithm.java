@@ -1,6 +1,5 @@
 package android.hardware.radio.network;
 
-/* loaded from: classes2.dex */
 public @interface SecurityAlgorithm {
     public static final int A50 = 0;
     public static final int A51 = 1;

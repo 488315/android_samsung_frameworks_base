@@ -3,7 +3,6 @@ package android.app.pinner;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes.dex */
 public final class PinnedFileStat implements Parcelable {
     public static final Parcelable.Creator<PinnedFileStat> CREATOR =
             new Parcelable.Creator<

@@ -10,7 +10,6 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-/* loaded from: classes3.dex */
 final class SynthesisPlaybackQueueItem extends PlaybackQueueItem
         implements AudioTrack.OnPlaybackPositionUpdateListener {
     private static final boolean DBG = false;

@@ -7,7 +7,6 @@ import android.os.Parcelable;
 
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public final class AssociatedDevice implements Parcelable {
     private static final int BLUETOOTH_LE = 1;
     private static final int CLASSIC_BLUETOOTH = 0;

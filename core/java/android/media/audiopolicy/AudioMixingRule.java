@@ -18,7 +18,6 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public class AudioMixingRule implements Parcelable {
     public static final Parcelable.Creator<AudioMixingRule> CREATOR =
             new Parcelable.Creator<

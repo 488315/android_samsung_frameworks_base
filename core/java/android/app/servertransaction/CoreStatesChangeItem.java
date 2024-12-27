@@ -8,7 +8,6 @@ import android.os.Trace;
 
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public class CoreStatesChangeItem extends ClientTransactionItem {
     public static final Parcelable.Creator<CoreStatesChangeItem> CREATOR =
             new Parcelable.Creator<CoreStatesChangeItem>() { // from class:

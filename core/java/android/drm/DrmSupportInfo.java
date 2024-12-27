@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 @Deprecated
-/* loaded from: classes.dex */
 public class DrmSupportInfo {
     private final ArrayList<String> mFileSuffixList = new ArrayList<>();
     private final ArrayList<String> mMimeTypeList = new ArrayList<>();

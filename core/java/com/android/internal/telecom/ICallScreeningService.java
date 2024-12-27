@@ -7,7 +7,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.telecom.ParcelableCall;
 
-/* loaded from: classes5.dex */
 public interface ICallScreeningService extends IInterface {
     void screenCall(ICallScreeningAdapter iCallScreeningAdapter, ParcelableCall parcelableCall)
             throws RemoteException;

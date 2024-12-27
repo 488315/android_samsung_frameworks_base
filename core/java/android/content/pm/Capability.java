@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public final class Capability implements Parcelable {
     public static final Parcelable.Creator<Capability> CREATOR =
             new Parcelable.Creator<Capability>() { // from class: android.content.pm.Capability.1

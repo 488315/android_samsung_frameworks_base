@@ -2,7 +2,6 @@ package android.telephony;
 
 import java.util.UUID;
 
-/* loaded from: classes4.dex */
 public class TelephonyLocalConnection {
     private static ConnectionImpl sInstance;
 

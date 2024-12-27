@@ -5,7 +5,6 @@ import android.os.Parcelable;
 import android.os.PatternMatcher;
 import android.util.Printer;
 
-/* loaded from: classes.dex */
 public final class ProviderInfo extends ComponentInfo implements Parcelable {
     public static final Parcelable.Creator<ProviderInfo> CREATOR =
             new Parcelable.Creator<

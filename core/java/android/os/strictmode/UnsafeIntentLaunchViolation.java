@@ -4,7 +4,6 @@ import android.content.Intent;
 
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public final class UnsafeIntentLaunchViolation extends Violation {
     private transient Intent mIntent;
 

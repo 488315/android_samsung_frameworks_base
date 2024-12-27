@@ -9,7 +9,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class SoundTriggerFailure implements Parcelable {
     public static final Parcelable.Creator<SoundTriggerFailure> CREATOR =
             new Parcelable.Creator<

@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewParent;
 import android.view.ViewRootImpl;
 
-/* loaded from: classes6.dex */
 public final class SemTspStateManager {
     public static final String DEAD_ZONE_DIRECTION = "dead_zone_direction";
     public static final String DEAD_ZONE_LAND_X1 = "dead_zone_land_x1";

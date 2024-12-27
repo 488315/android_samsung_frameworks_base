@@ -17,7 +17,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.HashMap;
 import java.util.Map;
 
-/* loaded from: classes6.dex */
 public abstract class SemDvfsManager {
     private static final int ACQUIRE_PAIR_SIZE = 2;
     public static final int FREQUENCY_LIST_ALL = 0;

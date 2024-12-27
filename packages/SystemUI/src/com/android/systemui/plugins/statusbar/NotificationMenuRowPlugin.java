@@ -16,7 +16,6 @@ import java.util.ArrayList;
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 @Dependencies({@DependsOn(target = OnMenuEventListener.class), @DependsOn(target = MenuItem.class), @DependsOn(target = NotificationSwipeActionHelper.class), @DependsOn(target = NotificationSwipeActionHelper.SnoozeOption.class)})
 @ProvidesInterface(action = NotificationMenuRowPlugin.ACTION, version = 5)
-/* loaded from: classes2.dex */
 public interface NotificationMenuRowPlugin extends Plugin {
     public static final String ACTION = "com.android.systemui.action.PLUGIN_NOTIFICATION_MENU_ROW";
     public static final int VERSION = 5;

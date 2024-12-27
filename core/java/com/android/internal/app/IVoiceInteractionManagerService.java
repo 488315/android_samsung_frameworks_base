@@ -25,7 +25,6 @@ import android.service.voice.IVoiceInteractionSession;
 
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public interface IVoiceInteractionManagerService extends IInterface {
     boolean activeServiceSupportsAssist() throws RemoteException;
 

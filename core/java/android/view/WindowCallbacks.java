@@ -3,7 +3,6 @@ package android.view;
 import android.graphics.RecordingCanvas;
 import android.graphics.Rect;
 
-/* loaded from: classes4.dex */
 public interface WindowCallbacks {
     boolean onContentDrawn(int i, int i2, int i3, int i4);
 

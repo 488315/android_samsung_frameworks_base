@@ -11,7 +11,6 @@ import com.android.internal.org.bouncycastle.asn1.x509.X509Name;
 
 import java.math.BigInteger;
 
-/* loaded from: classes5.dex */
 public class IssuerAndSerialNumber extends ASN1Object {
     ASN1Integer certSerialNumber;
     X500Name name;

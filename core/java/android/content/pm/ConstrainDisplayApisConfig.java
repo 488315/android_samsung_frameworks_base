@@ -11,7 +11,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-/* loaded from: classes.dex */
 public final class ConstrainDisplayApisConfig {
     private static final String FLAG_ALWAYS_CONSTRAIN_DISPLAY_APIS =
             "always_constrain_display_apis";

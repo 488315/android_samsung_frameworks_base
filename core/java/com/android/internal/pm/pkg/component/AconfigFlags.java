@@ -20,7 +20,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-/* loaded from: classes5.dex */
 public class AconfigFlags {
     private static final String LOG_TAG = "AconfigFlags";
     private static final List<String> sTextProtoFilesOnDevice =

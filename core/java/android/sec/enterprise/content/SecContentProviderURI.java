@@ -4,7 +4,6 @@ import com.samsung.android.provider.SemKnoxPolicyContract;
 
 import java.util.Arrays;
 
-/* loaded from: classes3.dex */
 public class SecContentProviderURI {
     public static final String ACTION_GEARPOLICY_ENABLED_INTERNAL =
             "com.samsung.android.knox.intent.action.GEARPOLICY_ENABLE_INTERNAL";

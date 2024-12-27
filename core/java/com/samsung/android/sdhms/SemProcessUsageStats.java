@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public class SemProcessUsageStats implements Parcelable {
     public static final Parcelable.Creator<SemProcessUsageStats> CREATOR =
             new Parcelable.Creator<

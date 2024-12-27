@@ -13,7 +13,6 @@ import com.android.internal.org.bouncycastle.asn1.DLSequence;
 
 import java.util.Enumeration;
 
-/* loaded from: classes5.dex */
 public class ContentInfo extends ASN1Object implements PKCSObjectIdentifiers {
     private ASN1Encodable content;
     private ASN1ObjectIdentifier contentType;

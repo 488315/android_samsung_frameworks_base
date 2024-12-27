@@ -4,7 +4,6 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public final class PhysicalChannelConfigBand implements Parcelable {
     public static final Parcelable.Creator<PhysicalChannelConfigBand> CREATOR =
             new Parcelable.Creator<PhysicalChannelConfigBand>() { // from class:

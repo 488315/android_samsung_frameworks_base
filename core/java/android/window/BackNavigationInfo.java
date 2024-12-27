@@ -9,7 +9,6 @@ import android.os.RemoteCallback;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes4.dex */
 public final class BackNavigationInfo implements Parcelable {
     public static final Parcelable.Creator<BackNavigationInfo> CREATOR =
             new Parcelable.Creator<

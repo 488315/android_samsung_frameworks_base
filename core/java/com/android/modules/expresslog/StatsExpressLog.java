@@ -3,7 +3,6 @@ package com.android.modules.expresslog;
 import android.util.StatsEvent;
 import android.util.StatsLog;
 
-/* loaded from: classes5.dex */
 public final class StatsExpressLog {
     public static final byte ANNOTATION_ID_DEFAULT_STATE = 6;
     public static final byte ANNOTATION_ID_EXCLUSIVE_STATE = 4;

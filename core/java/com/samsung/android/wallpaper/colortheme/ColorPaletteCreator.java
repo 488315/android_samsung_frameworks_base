@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.ToIntFunction;
 
-/* loaded from: classes6.dex */
 public class ColorPaletteCreator {
     private static final float ACCENT1_SAT_DELTA = 0.3f;
     private static final float ACCENT1_SAT_MAX = 0.8f;

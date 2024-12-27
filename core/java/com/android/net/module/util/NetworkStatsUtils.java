@@ -4,7 +4,6 @@ import android.app.usage.NetworkStats;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.net.NetworkStats;
 
-/* loaded from: classes5.dex */
 public class NetworkStatsUtils {
     private static final int DEFAULT_NETWORK_ALL = -1;
     public static final String LIMIT_GLOBAL_ALERT = "globalAlert";

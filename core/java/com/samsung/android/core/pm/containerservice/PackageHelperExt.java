@@ -25,7 +25,6 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
 
-/* loaded from: classes6.dex */
 public class PackageHelperExt {
     private static final boolean DEBUG_MOVE = false;
     public static final int OperationSucceeded = 0;

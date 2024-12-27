@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes.dex */
 public interface IPackageDeleteObserver extends IInterface {
     void packageDeleted(String str, int i) throws RemoteException;
 

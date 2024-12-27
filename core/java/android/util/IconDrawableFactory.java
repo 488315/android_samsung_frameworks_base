@@ -18,7 +18,6 @@ import com.samsung.android.knox.SemPersonaManager;
 
 import java.util.function.Supplier;
 
-/* loaded from: classes4.dex */
 public class IconDrawableFactory {
     protected final Context mContext;
     protected final DevicePolicyManager mDpm;

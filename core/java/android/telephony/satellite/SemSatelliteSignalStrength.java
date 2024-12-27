@@ -6,7 +6,6 @@ import android.os.Parcelable;
 
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public final class SemSatelliteSignalStrength implements Parcelable {
     private static final String LOG_TAG = "SatelliteSignalStrength";
     private static final int RSSI_MAX = -51;

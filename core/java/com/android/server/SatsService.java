@@ -24,7 +24,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* loaded from: classes5.dex */
 public final class SatsService extends ISatsService.Stub {
     private static final String ACTION_EM_AT_ACTIVATION_REQUEST =
             "com.sec.atd.em_at_activation_request";

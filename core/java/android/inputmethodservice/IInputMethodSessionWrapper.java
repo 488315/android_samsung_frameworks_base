@@ -23,7 +23,6 @@ import com.android.internal.inputmethod.IRemoteInputConnection;
 import com.android.internal.os.HandlerCaller;
 import com.android.internal.os.SomeArgs;
 
-/* loaded from: classes2.dex */
 class IInputMethodSessionWrapper extends IInputMethodSession.Stub
         implements HandlerCaller.Callback {
     private static final int DO_APP_PRIVATE_COMMAND = 100;

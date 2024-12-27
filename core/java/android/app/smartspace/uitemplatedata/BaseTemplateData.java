@@ -9,7 +9,6 @@ import android.text.TextUtils;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes.dex */
 public class BaseTemplateData implements Parcelable {
     public static final Parcelable.Creator<BaseTemplateData> CREATOR =
             new Parcelable.Creator<BaseTemplateData>() { // from class:

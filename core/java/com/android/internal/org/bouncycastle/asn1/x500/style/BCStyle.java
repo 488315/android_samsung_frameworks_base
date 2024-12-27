@@ -19,7 +19,6 @@ import com.android.internal.org.bouncycastle.asn1.x509.X509ObjectIdentifiers;
 
 import java.util.Hashtable;
 
-/* loaded from: classes5.dex */
 public class BCStyle extends AbstractX500NameStyle {
     public static final X500NameStyle INSTANCE;
     public static final ASN1ObjectIdentifier C = new ASN1ObjectIdentifier("2.5.4.6").intern();

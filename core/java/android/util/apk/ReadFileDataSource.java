@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.security.DigestException;
 
-/* loaded from: classes4.dex */
 class ReadFileDataSource implements DataSource {
     private static final int CHUNK_SIZE = 1048576;
     private final FileDescriptor mFd;

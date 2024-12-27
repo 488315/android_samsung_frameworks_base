@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.RemoteException;
 import android.util.Slog;
 
-/* loaded from: classes6.dex */
 public final class SemSsdidManager {
     private static final String TAG = "SemSsdidManager";
     private ISemSsdidManagerService mService;

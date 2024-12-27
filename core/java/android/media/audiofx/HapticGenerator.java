@@ -5,7 +5,6 @@ import android.util.Log;
 
 import java.util.UUID;
 
-/* loaded from: classes2.dex */
 public class HapticGenerator extends AudioEffect implements AutoCloseable {
     private static final String TAG = "HapticGenerator";
     private AudioEffect mVolumeControlEffect;

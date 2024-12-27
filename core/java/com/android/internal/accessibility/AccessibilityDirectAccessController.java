@@ -42,7 +42,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.function.Consumer;
 
-/* loaded from: classes5.dex */
 public class AccessibilityDirectAccessController {
     private static final String TAG = "AccessibilityDirectAccessController";
     private static final AudioAttributes VIBRATION_ATTRIBUTES =

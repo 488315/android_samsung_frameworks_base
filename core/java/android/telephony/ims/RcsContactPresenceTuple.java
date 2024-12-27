@@ -19,7 +19,6 @@ import java.util.Collections;
 import java.util.List;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public final class RcsContactPresenceTuple implements Parcelable {
     public static final Parcelable.Creator<RcsContactPresenceTuple> CREATOR =
             new Parcelable.Creator<

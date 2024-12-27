@@ -6,7 +6,6 @@ import com.android.systemui.biometrics.domain.model.BiometricPromptRequest;
 import com.android.systemui.biometrics.shared.model.BiometricUserInfo;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes.dex */
 public final class BiometricPromptHeaderViewModelImpl implements CredentialHeaderViewModel {
     public final PromptContentView contentView;
     public final String description;

@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 
 import com.android.internal.R;
 
-/* loaded from: classes4.dex */
 public class Fade extends Visibility {
     private static boolean DBG = false;
     public static final int IN = 1;

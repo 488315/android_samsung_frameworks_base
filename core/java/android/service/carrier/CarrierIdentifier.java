@@ -9,7 +9,6 @@ import com.android.telephony.Rlog;
 
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public class CarrierIdentifier implements Parcelable {
     public static final Parcelable.Creator<CarrierIdentifier> CREATOR =
             new Parcelable.Creator<

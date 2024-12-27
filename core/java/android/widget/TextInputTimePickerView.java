@@ -13,7 +13,6 @@ import android.view.accessibility.AccessibilityManager;
 
 import com.android.internal.R;
 
-/* loaded from: classes4.dex */
 public class TextInputTimePickerView extends RelativeLayout {
     private static final int AM = 0;
     public static final int AMPM = 2;

@@ -2,7 +2,6 @@ package android.graphics;
 
 import com.android.internal.util.VirtualRefBasePtr;
 
-/* loaded from: classes.dex */
 public final class TextureLayer implements AutoCloseable {
     private VirtualRefBasePtr mFinalizer;
     private HardwareRenderer mRenderer;

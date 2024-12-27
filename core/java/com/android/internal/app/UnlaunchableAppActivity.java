@@ -25,7 +25,6 @@ import com.samsung.android.knox.SemPersonaManager;
 
 import java.util.function.Supplier;
 
-/* loaded from: classes5.dex */
 public class UnlaunchableAppActivity extends Activity
         implements DialogInterface.OnDismissListener, DialogInterface.OnClickListener {
     private static final String EXTRA_UNLAUNCHABLE_REASON = "unlaunchable_reason";

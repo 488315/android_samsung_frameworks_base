@@ -9,7 +9,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public final class SipDialogState implements Parcelable {
     public static final Parcelable.Creator<SipDialogState> CREATOR =
             new Parcelable.Creator<

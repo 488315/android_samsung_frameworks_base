@@ -3,7 +3,6 @@ package android.media.tv.tuner.frontend;
 import android.annotation.SystemApi;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public class Isdbs3FrontendCapabilities extends FrontendCapabilities {
     private final int mCodeRateCap;
     private final int mModulationCap;

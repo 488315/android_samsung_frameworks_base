@@ -18,7 +18,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
-/* loaded from: classes5.dex */
 public class TransferPipe implements Runnable, Closeable {
     static final boolean DEBUG = false;
     static final long DEFAULT_TIMEOUT = 5000;

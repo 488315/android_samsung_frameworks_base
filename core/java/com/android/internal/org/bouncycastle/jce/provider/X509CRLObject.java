@@ -45,7 +45,6 @@ import java.util.Set;
 
 import javax.security.auth.x500.X500Principal;
 
-/* loaded from: classes5.dex */
 public class X509CRLObject extends X509CRL {
     private CertificateList c;
     private int hashCodeValue;

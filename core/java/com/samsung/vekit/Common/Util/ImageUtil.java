@@ -10,7 +10,6 @@ import android.util.Log;
 
 import com.samsung.vekit.Common.Object.ImageInfo;
 
-/* loaded from: classes6.dex */
 public class ImageUtil {
     private static final String TAG = "ImageUtil";
     private static int height;

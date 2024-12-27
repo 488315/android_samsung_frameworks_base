@@ -8,7 +8,6 @@ import android.widget.BaseAdapter;
 
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public class AccountViewAdapter extends BaseAdapter {
     private Context mContext;
     private List<AccountElements> mData;

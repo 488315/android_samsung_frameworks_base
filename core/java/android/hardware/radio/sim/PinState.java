@@ -1,6 +1,5 @@
 package android.hardware.radio.sim;
 
-/* loaded from: classes2.dex */
 public @interface PinState {
     public static final int DISABLED = 3;
     public static final int ENABLED_BLOCKED = 4;

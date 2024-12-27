@@ -8,7 +8,6 @@ import android.system.keystore2.KeyMetadata;
 import java.security.PublicKey;
 import java.util.Arrays;
 
-/* loaded from: classes3.dex */
 public abstract class AndroidKeyStorePublicKey extends AndroidKeyStoreKey implements PublicKey {
     private final byte[] mCertificate;
     private final byte[] mCertificateChain;

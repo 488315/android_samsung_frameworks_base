@@ -9,7 +9,6 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.UUID;
 
-/* loaded from: classes4.dex */
 public final class TextClassificationSessionId implements Parcelable {
     public static final Parcelable.Creator<TextClassificationSessionId> CREATOR =
             new Parcelable.Creator<

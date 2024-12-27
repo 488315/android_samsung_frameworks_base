@@ -7,7 +7,6 @@ import com.android.internal.org.bouncycastle.crypto.DataLengthException;
 import com.android.internal.org.bouncycastle.crypto.OutputLengthException;
 import com.android.internal.org.bouncycastle.crypto.params.KeyParameter;
 
-/* loaded from: classes5.dex */
 public class DESedeEngine extends DESEngine {
     protected static final int BLOCK_SIZE = 8;
     private boolean forEncryption;

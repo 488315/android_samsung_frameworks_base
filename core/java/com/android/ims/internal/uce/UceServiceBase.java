@@ -8,7 +8,6 @@ import com.android.ims.internal.uce.presence.IPresenceService;
 import com.android.ims.internal.uce.uceservice.IUceListener;
 import com.android.ims.internal.uce.uceservice.IUceService;
 
-/* loaded from: classes5.dex */
 public abstract class UceServiceBase {
     private UceServiceBinder mBinder;
 

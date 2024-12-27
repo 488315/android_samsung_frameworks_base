@@ -13,7 +13,6 @@ import com.android.internal.R;
 
 import java.util.Arrays;
 
-/* loaded from: classes4.dex */
 public class RoundedCorners implements Parcelable {
     public static final int ROUNDED_CORNER_POSITION_LENGTH = 4;
     private static int sCachedDisplayHeight;

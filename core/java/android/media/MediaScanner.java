@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.os.RemoteException;
 
 @Deprecated
-/* loaded from: classes2.dex */
 public class MediaScanner implements AutoCloseable {
 
     @Deprecated private static final String[] FILES_PRESCAN_PROJECTION = new String[0];

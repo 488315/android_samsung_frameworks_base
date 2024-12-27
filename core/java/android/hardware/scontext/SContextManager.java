@@ -17,7 +17,6 @@ import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 @Deprecated
-/* loaded from: classes2.dex */
 public class SContextManager extends SemContextManager {
     private static final String TAG = "SContextManager";
     private HashMap<Integer, Integer> mAvailableServiceMap;

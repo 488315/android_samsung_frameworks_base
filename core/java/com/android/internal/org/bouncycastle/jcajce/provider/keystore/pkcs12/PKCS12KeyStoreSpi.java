@@ -101,7 +101,6 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.PBEParameterSpec;
 
-/* loaded from: classes5.dex */
 public class PKCS12KeyStoreSpi extends KeyStoreSpi
         implements PKCSObjectIdentifiers, X509ObjectIdentifiers, BCKeyStore {
     static final int CERTIFICATE = 1;

@@ -9,7 +9,6 @@ import android.telephony.ims.aidl.IImsRcsController;
 
 import com.android.internal.telephony.ITelephony;
 
-/* loaded from: classes4.dex */
 public class ImsManager {
     public static final String ACTION_FORBIDDEN_NO_SERVICE_AUTHORIZATION =
             "com.android.internal.intent.action.ACTION_FORBIDDEN_NO_SERVICE_AUTHORIZATION";

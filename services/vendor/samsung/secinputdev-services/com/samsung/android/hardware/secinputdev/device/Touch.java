@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
-/* loaded from: classes.dex */
 public class Touch extends SemInputDevice {
     private static final String SET_ALWAYS_LOW_POWER_MODE = "set_always_lpm";
     private static final String SET_AOD_ENABLE = "aod_enable";

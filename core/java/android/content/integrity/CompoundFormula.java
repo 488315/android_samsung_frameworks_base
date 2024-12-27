@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Predicate;
 
-/* loaded from: classes.dex */
 public final class CompoundFormula extends IntegrityFormula implements Parcelable {
     public static final int AND = 0;
     public static final Parcelable.Creator<CompoundFormula> CREATOR =

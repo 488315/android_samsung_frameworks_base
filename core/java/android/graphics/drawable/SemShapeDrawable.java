@@ -8,7 +8,6 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 
-/* loaded from: classes.dex */
 public class SemShapeDrawable extends GradientDrawable {
     static final String TAG = "SemShapeDrawable";
 

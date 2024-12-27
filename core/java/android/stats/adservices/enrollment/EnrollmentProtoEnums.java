@@ -1,6 +1,5 @@
 package android.stats.adservices.enrollment;
 
-/* loaded from: classes3.dex */
 public final class EnrollmentProtoEnums {
     public static final int DATASTORE_EXCEPTION_TRANSACTION_STATUS = 6;
     public static final int DB_NOT_FOUND_TRANSACTION_STATUS = 2;

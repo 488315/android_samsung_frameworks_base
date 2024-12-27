@@ -10,7 +10,6 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
-/* loaded from: classes.dex */
 public class GestureStroke {
     static final float TOUCH_TOLERANCE = 3.0f;
     public final RectF boundingBox;

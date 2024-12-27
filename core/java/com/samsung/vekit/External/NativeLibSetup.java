@@ -3,7 +3,6 @@ package com.samsung.vekit.External;
 import android.os.Build;
 import android.util.Log;
 
-/* loaded from: classes6.dex */
 class NativeLibSetup {
     private static final String TAG = "NativeLibSetup";
     private static final String list_tag = ".videoeditor.samsung";

@@ -11,7 +11,6 @@ import android.view.WindowManagerImpl;
 
 import java.lang.ref.Reference;
 
-/* loaded from: classes4.dex */
 public class WindowContext extends ContextWrapper implements WindowProvider {
     private final ComponentCallbacksController mCallbacksController;
     private final WindowContextController mController;

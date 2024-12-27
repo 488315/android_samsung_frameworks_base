@@ -2,7 +2,6 @@ package com.android.internal.telephony.gsm;
 
 import java.util.Objects;
 
-/* loaded from: classes5.dex */
 public final class SmsBroadcastConfigInfo {
     private int mFromCodeScheme;
     private int mFromServiceId;

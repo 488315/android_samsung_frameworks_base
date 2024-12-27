@@ -5,7 +5,6 @@ import android.content.pm.PackageManager;
 import android.security.net.config.ApplicationConfig;
 import android.security.net.config.ManifestConfigSource;
 
-/* loaded from: classes3.dex */
 public class NetworkSecurityPolicy {
     private static final NetworkSecurityPolicy INSTANCE = new NetworkSecurityPolicy();
 

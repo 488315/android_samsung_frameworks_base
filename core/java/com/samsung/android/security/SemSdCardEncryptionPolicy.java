@@ -3,7 +3,6 @@ package com.samsung.android.security;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes6.dex */
 public final class SemSdCardEncryptionPolicy
         implements Parcelable, Cloneable, Comparable<SemSdCardEncryptionPolicy> {
     public static final Parcelable.Creator<SemSdCardEncryptionPolicy> CREATOR =

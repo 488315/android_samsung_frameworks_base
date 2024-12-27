@@ -5,7 +5,6 @@ import android.graphics.Rect;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes4.dex */
 public class Gravity {
     public static final int AXIS_CLIP = 8;
     public static final int AXIS_PULL_AFTER = 4;

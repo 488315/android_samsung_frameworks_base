@@ -1,6 +1,5 @@
 package android.os;
 
-/* loaded from: classes3.dex */
 public interface ISchedulingPolicyService extends IInterface {
     int requestCpusetBoost(boolean z, IBinder iBinder) throws RemoteException;
 

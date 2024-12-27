@@ -4,7 +4,6 @@ import android.annotation.SystemApi;
 import android.util.MathUtils;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class ParcelableHolder implements Parcelable {
     public static final Parcelable.Creator<ParcelableHolder> CREATOR =
             new Parcelable.Creator<

@@ -26,7 +26,6 @@ import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes.dex */
 public final class HealthServiceWrapperAidl extends HealthServiceWrapper {
     static final String SERVICE_NAME =
             AudioOffloadInfo$$ExternalSyntheticOutline0.m(

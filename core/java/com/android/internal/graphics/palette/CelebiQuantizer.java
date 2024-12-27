@@ -2,7 +2,6 @@ package com.android.internal.graphics.palette;
 
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public class CelebiQuantizer implements Quantizer {
     private List<Palette.Swatch> mSwatches;
 

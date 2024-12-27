@@ -11,7 +11,6 @@ import java.util.Arrays;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public final class EuiccNotification implements Parcelable {
     public static final int ALL_EVENTS = 15;
     public static final Parcelable.Creator<EuiccNotification> CREATOR =

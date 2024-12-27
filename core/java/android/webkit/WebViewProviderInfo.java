@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import android.util.Base64;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public final class WebViewProviderInfo implements Parcelable {
     public static final Parcelable.Creator<WebViewProviderInfo> CREATOR =
             new Parcelable.Creator<

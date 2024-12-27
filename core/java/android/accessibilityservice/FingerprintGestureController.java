@@ -5,7 +5,6 @@ import android.os.RemoteException;
 import android.util.ArrayMap;
 import android.util.Log;
 
-/* loaded from: classes.dex */
 public final class FingerprintGestureController {
     public static final int FINGERPRINT_GESTURE_SWIPE_DOWN = 8;
     public static final int FINGERPRINT_GESTURE_SWIPE_LEFT = 2;

@@ -16,7 +16,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class UserProperties implements Parcelable {
     private static final String ATTR_ALLOW_STOPPING_USER_WITH_DELAYED_LOCKING =
             "allowStoppingUserWithDelayedLocking";

@@ -2,7 +2,6 @@ package com.android.internal.org.bouncycastle.util;
 
 import android.media.MediaMetrics;
 
-/* loaded from: classes5.dex */
 public class IPAddress {
     public static boolean isValid(String address) {
         return isValidIPv4(address) || isValidIPv6(address);

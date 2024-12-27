@@ -3,7 +3,6 @@ package android.media;
 import android.app.ActivityThread;
 import android.text.TextUtils;
 
-/* loaded from: classes2.dex */
 public class ToneGenerator {
     public static final int MAX_VOLUME = 100;
     public static final int MIN_VOLUME = 0;

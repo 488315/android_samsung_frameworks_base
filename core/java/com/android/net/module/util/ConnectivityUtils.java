@@ -5,7 +5,6 @@ import com.android.internal.midi.MidiConstants;
 import java.net.Inet6Address;
 import java.net.InetAddress;
 
-/* loaded from: classes5.dex */
 public final class ConnectivityUtils {
     private ConnectivityUtils() {}
 

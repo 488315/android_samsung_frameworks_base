@@ -8,7 +8,6 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public class ModelParameterRange implements Parcelable {
     public static final Parcelable.Creator<ModelParameterRange> CREATOR =
             new Parcelable.Creator<ModelParameterRange>() { // from class:

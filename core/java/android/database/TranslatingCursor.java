@@ -11,7 +11,6 @@ import com.android.internal.util.ArrayUtils;
 import java.util.Arrays;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public class TranslatingCursor extends CrossProcessCursorWrapper {
     private final int mAuxiliaryColumnIndex;
     private final Config mConfig;

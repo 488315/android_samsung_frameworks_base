@@ -62,7 +62,6 @@ import java.util.Set;
 import java.util.concurrent.TimeoutException;
 import java.util.function.BiConsumer;
 
-/* loaded from: classes.dex */
 public final class UiAutomation {
     private static final int CONNECTION_ID_UNDEFINED = -1;
     private static final long CONNECT_TIMEOUT_MILLIS = 5000;

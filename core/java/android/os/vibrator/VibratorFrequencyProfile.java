@@ -4,7 +4,6 @@ import android.os.VibratorInfo;
 
 import com.android.internal.util.Preconditions;
 
-/* loaded from: classes3.dex */
 public final class VibratorFrequencyProfile {
     private final VibratorInfo.FrequencyProfile mFrequencyProfile;
 

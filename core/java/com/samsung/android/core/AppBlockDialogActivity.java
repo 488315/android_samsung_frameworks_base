@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public class AppBlockDialogActivity extends AlertActivity implements AutoCloseable {
     public static final String TAG = "AppJumpBlockTool";
     private List<String> alwaysAllowPackageNameList = new ArrayList();

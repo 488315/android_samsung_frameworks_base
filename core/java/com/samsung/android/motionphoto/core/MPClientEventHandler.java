@@ -5,7 +5,6 @@ import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 
-/* loaded from: classes6.dex */
 public class MPClientEventHandler extends Handler {
     private static final String TAG = MPClientEventHandler.class.getSimpleName();
     private OnErrorListener mOnErrorListener;

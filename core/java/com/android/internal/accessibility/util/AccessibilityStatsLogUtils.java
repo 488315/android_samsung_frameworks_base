@@ -7,7 +7,6 @@ import android.provider.Settings;
 import com.android.internal.accessibility.AccessibilityShortcutController;
 import com.android.internal.util.FrameworkStatsLog;
 
-/* loaded from: classes5.dex */
 public final class AccessibilityStatsLogUtils {
     private static final int UNKNOWN_STATUS = 0;
     public static int ACCESSIBILITY_PRIVACY_WARNING_STATUS_SHOWN = 1;

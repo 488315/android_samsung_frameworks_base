@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 /* compiled from: DrmEventService.java */
-/* loaded from: classes5.dex */
 class DrmMediaResourceHelper {
     private String TAG = "DrmMediaResourceHelper";
     private SemMediaResourceHelper mSemMediaResourceHelper = null;

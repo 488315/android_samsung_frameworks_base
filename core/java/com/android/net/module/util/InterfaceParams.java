@@ -6,7 +6,6 @@ import android.text.TextUtils;
 import java.net.NetworkInterface;
 import java.net.SocketException;
 
-/* loaded from: classes5.dex */
 public class InterfaceParams {
     private static final int ETHER_MTU = 1500;
     private static final int IPV6_MIN_MTU = 1280;

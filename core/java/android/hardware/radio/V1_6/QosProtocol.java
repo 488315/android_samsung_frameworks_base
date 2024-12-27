@@ -4,7 +4,6 @@ import android.telephony.ims.SipDelegateImsConfiguration;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class QosProtocol {
     public static final byte AH = 51;
     public static final byte ESP = 50;

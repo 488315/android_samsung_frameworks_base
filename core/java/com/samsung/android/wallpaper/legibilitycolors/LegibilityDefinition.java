@@ -1,6 +1,5 @@
 package com.samsung.android.wallpaper.legibilitycolors;
 
-/* loaded from: classes6.dex */
 public class LegibilityDefinition {
     public static final int CONTENT_COLOR_DARK = -12303292;
     public static final float CONTENT_COLOR_DARK_BRIGHTNESS = 27.0f;

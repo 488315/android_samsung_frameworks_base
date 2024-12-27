@@ -15,7 +15,6 @@ import java.util.Objects;
 import java.util.Set;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public final class DeviceState {
     public static final int PROPERTY_APP_INACCESSIBLE = 9;
     public static final int PROPERTY_EMULATED_ONLY = 10;

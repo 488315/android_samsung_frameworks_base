@@ -14,7 +14,6 @@ import java.util.Objects;
 import java.util.Set;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class KnownNetwork implements Parcelable {
     public static final Parcelable.Creator<KnownNetwork> CREATOR =
             new Parcelable.Creator<

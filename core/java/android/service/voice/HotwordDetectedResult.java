@@ -26,7 +26,6 @@ import java.util.List;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class HotwordDetectedResult implements Parcelable {
     public static final int AUDIO_CHANNEL_UNSET = -1;
     public static final int BACKGROUND_AUDIO_POWER_UNSET = -1;

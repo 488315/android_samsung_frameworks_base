@@ -1,6 +1,5 @@
 package android.hardware.graphics.common;
 
-/* loaded from: classes2.dex */
 public @interface ColorTransform {
     public static final int ARBITRARY_MATRIX = 1;
     public static final int CORRECT_DEUTERANOPIA = 5;

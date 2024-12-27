@@ -4,7 +4,6 @@ import android.content.Context;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Binder;
 
-/* loaded from: classes6.dex */
 final class PolicyEnforcer {
     private static final String SUBTAG = "[POLICY] ";
     private static final UidAllowList mUidAllowList = new UidAllowList();

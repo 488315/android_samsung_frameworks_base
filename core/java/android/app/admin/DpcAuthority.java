@@ -5,7 +5,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class DpcAuthority extends Authority {
     public static final DpcAuthority DPC_AUTHORITY = new DpcAuthority();
     public static final Parcelable.Creator<DpcAuthority> CREATOR =

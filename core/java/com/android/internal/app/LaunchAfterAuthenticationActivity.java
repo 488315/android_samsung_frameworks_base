@@ -9,7 +9,6 @@ import android.util.Slog;
 
 import java.util.Objects;
 
-/* loaded from: classes5.dex */
 public class LaunchAfterAuthenticationActivity extends Activity {
     private static final String EXTRA_ON_SUCCESS_INTENT =
             "com.android.internal.app.extra.ON_SUCCESS_INTENT";

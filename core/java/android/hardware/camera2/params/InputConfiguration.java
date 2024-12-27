@@ -6,7 +6,6 @@ import com.android.internal.util.Preconditions;
 
 import java.util.Collection;
 
-/* loaded from: classes2.dex */
 public final class InputConfiguration {
     private final int mFormat;
     private final int mHeight;

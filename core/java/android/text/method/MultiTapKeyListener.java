@@ -10,7 +10,6 @@ import android.util.SparseArray;
 import android.view.KeyEvent;
 import android.view.View;
 
-/* loaded from: classes4.dex */
 public class MultiTapKeyListener extends BaseKeyListener implements SpanWatcher {
     private static MultiTapKeyListener[] sInstance =
             new MultiTapKeyListener[TextKeyListener.Capitalize.values().length * 2];

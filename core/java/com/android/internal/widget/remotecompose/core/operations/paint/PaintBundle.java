@@ -10,7 +10,6 @@ import com.android.internal.widget.remotecompose.core.operations.Utils;
 
 import java.util.Arrays;
 
-/* loaded from: classes5.dex */
 public class PaintBundle {
     public static final int ALPHA = 12;
     public static final int ANTI_ALIAS = 14;

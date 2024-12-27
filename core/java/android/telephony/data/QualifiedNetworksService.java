@@ -26,7 +26,6 @@ import java.util.function.Consumer;
 import java.util.function.ToIntFunction;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public abstract class QualifiedNetworksService extends Service {
     private static final int QNS_APN_THROTTLE_STATUS_CHANGED = 5;
     private static final int QNS_CREATE_NETWORK_AVAILABILITY_PROVIDER = 1;

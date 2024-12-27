@@ -15,7 +15,6 @@ import com.android.systemui.animation.TransitionAnimator;
 import kotlin.math.MathKt__MathJVMKt;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes.dex */
 public final class ActivityTransitionAnimator$AnimationDelegate$startAnimation$controller$1 implements ActivityTransitionAnimator.Controller {
     public final /* synthetic */ ActivityTransitionAnimator.Controller $$delegate_0;
     public final /* synthetic */ ActivityTransitionAnimator.Controller $delegate;

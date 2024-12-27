@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class ExternalTimeSuggestion implements Parcelable {
     public static final Parcelable.Creator<ExternalTimeSuggestion> CREATOR =
             new Parcelable.Creator<ExternalTimeSuggestion>() { // from class:

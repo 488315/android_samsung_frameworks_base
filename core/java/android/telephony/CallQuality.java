@@ -9,7 +9,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public final class CallQuality implements Parcelable {
     public static final int CALL_QUALITY_BAD = 4;
     public static final int CALL_QUALITY_EXCELLENT = 0;

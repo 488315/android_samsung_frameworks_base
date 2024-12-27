@@ -9,7 +9,6 @@ import com.android.systemui.statusbar.notification.collection.listbuilder.plugga
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 @CoordinatorScope
-/* loaded from: classes2.dex */
 public class SemPriorityCoordinator implements Coordinator {
     private static final String TAG = "SemPriorityCoordinator";
     private final NotifSectioner mNotifSectioner = new NotifSectioner("SemPriority", 9) { // from class: com.android.systemui.statusbar.notification.collection.coordinator.SemPriorityCoordinator.1

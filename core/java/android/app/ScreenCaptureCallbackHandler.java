@@ -6,7 +6,6 @@ import android.util.ArrayMap;
 
 import java.util.concurrent.Executor;
 
-/* loaded from: classes.dex */
 public class ScreenCaptureCallbackHandler {
     private final IBinder mActivityToken;
     private final ArrayMap<Activity.ScreenCaptureCallback, ScreenCaptureRegistration>

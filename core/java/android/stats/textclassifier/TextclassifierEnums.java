@@ -1,6 +1,5 @@
 package android.stats.textclassifier;
 
-/* loaded from: classes3.dex */
 public final class TextclassifierEnums {
     public static final int ACTIONS_GENERATED = 20;
     public static final int ACTIONS_SHOWN = 6;

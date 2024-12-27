@@ -10,7 +10,6 @@ import android.os.Parcelable;
 import java.util.Collection;
 import java.util.List;
 
-/* loaded from: classes2.dex */
 public class ParcelTotalCaptureResult implements Parcelable {
     public static final Parcelable.Creator<ParcelTotalCaptureResult> CREATOR =
             new Parcelable.Creator<ParcelTotalCaptureResult>() { // from class:

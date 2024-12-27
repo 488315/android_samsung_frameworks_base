@@ -42,7 +42,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public abstract class NotificationListenerService extends Service {
     public static final String ACTION_SETTINGS_HOME =
             "android.service.notification.action.SETTINGS_HOME";

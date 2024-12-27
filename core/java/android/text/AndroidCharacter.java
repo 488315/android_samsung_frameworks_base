@@ -1,7 +1,6 @@
 package android.text;
 
 @Deprecated
-/* loaded from: classes4.dex */
 public class AndroidCharacter {
     public static final int EAST_ASIAN_WIDTH_AMBIGUOUS = 1;
     public static final int EAST_ASIAN_WIDTH_FULL_WIDTH = 3;

@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Locale;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes.dex */
 public abstract class InputMethodInfoUtils {
     public static final Locale[] SEARCH_ORDER_OF_FALLBACK_LOCALES = {Locale.ENGLISH, Locale.US, Locale.UK};
     public static final Locale ENGLISH_LOCALE = new Locale("en");

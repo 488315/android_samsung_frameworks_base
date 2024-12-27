@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.function.IntFunction;
 import java.util.function.Predicate;
 
-/* loaded from: classes6.dex */
 public enum Vendor {
     NONE,
     QCOM,

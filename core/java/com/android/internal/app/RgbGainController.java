@@ -12,7 +12,6 @@ import android.util.Slog;
 
 import com.android.internal.logging.MetricsLogger;
 
-/* loaded from: classes5.dex */
 public final class RgbGainController {
     private static final boolean DEBUG = true;
     private static final String TAG = "RgbGainController";

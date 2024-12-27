@@ -1,7 +1,6 @@
 package android.os;
 
 
-/* loaded from: classes3.dex */
 public class ExternalVibrationScale implements Parcelable {
     public static final Parcelable.Creator<ExternalVibrationScale> CREATOR =
             new Parcelable.Creator<

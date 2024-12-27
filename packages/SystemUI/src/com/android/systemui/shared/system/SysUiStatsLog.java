@@ -5,7 +5,6 @@ import android.util.StatsLog;
 import com.samsung.android.knox.custom.IKnoxCustomManager;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public final class SysUiStatsLog {
     public static StatsEvent buildStatsEvent(int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9, int i10, int i11, int i12, int i13, int i14, int i15, int i16, int i17, int i18) {
         StatsEvent.Builder newBuilder = StatsEvent.newBuilder();

@@ -7,7 +7,6 @@ import android.widget.FrameLayout;
 import android.widget.RemoteViews;
 
 @RemoteViews.RemoteView
-/* loaded from: classes5.dex */
 public class NotificationVanishingFrameLayout extends FrameLayout {
     public NotificationVanishingFrameLayout(Context context) {
         this(context, null, 0, 0);

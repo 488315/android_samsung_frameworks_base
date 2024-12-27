@@ -12,7 +12,6 @@ import android.widget.Toast;
 
 import com.android.internal.R;
 
-/* loaded from: classes6.dex */
 public class MaintenanceModeProxyActivity extends Activity {
     private static final String TAG = "MaintenanceMode";
     private Context mContext;

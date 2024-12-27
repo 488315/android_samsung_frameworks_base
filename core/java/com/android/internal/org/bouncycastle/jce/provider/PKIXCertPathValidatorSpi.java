@@ -33,7 +33,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-/* loaded from: classes5.dex */
 public class PKIXCertPathValidatorSpi extends CertPathValidatorSpi {
     private final JcaJceHelper helper;
     private final boolean isForCRLCheck;

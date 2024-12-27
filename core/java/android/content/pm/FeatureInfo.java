@@ -5,7 +5,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.proto.ProtoOutputStream;
 
-/* loaded from: classes.dex */
 public class FeatureInfo implements Parcelable {
     public static final Parcelable.Creator<FeatureInfo> CREATOR =
             new Parcelable.Creator<FeatureInfo>() { // from class: android.content.pm.FeatureInfo.1

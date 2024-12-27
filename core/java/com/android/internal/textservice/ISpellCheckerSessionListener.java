@@ -8,7 +8,6 @@ import android.os.RemoteException;
 import android.view.textservice.SentenceSuggestionsInfo;
 import android.view.textservice.SuggestionsInfo;
 
-/* loaded from: classes5.dex */
 public interface ISpellCheckerSessionListener extends IInterface {
     void onGetSentenceSuggestions(SentenceSuggestionsInfo[] sentenceSuggestionsInfoArr)
             throws RemoteException;

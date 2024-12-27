@@ -8,7 +8,6 @@ import com.android.internal.util.Preconditions;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public final class ListEnabledProvidersResponse implements Parcelable {
     public static final Parcelable.Creator<ListEnabledProvidersResponse> CREATOR =
             new Parcelable.Creator<ListEnabledProvidersResponse>() { // from class:

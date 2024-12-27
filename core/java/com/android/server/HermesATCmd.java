@@ -5,7 +5,6 @@ import android.util.Log;
 
 import com.samsung.android.service.HermesService.HermesServiceManager;
 
-/* loaded from: classes5.dex */
 public class HermesATCmd implements IWorkOnAt {
     private static final String AT_COMMAND_HEADER = "AT";
     private static final String AT_COMMAND_HERMES = "ISOSECHW";

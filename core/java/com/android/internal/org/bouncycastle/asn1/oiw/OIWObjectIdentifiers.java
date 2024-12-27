@@ -2,7 +2,6 @@ package com.android.internal.org.bouncycastle.asn1.oiw;
 
 import com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier;
 
-/* loaded from: classes5.dex */
 public interface OIWObjectIdentifiers {
     public static final ASN1ObjectIdentifier md4WithRSA = new ASN1ObjectIdentifier("1.3.14.3.2.2");
     public static final ASN1ObjectIdentifier md5WithRSA = new ASN1ObjectIdentifier("1.3.14.3.2.3");

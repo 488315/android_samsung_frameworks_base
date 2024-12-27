@@ -1,6 +1,5 @@
 package android.nfc;
 
-/* loaded from: classes3.dex */
 public final class FeatureFlagsImpl implements FeatureFlags {
     @Override // android.nfc.FeatureFlags
     public boolean enableNfcCharging() {

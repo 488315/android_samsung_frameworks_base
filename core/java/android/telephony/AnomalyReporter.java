@@ -20,7 +20,6 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
-/* loaded from: classes4.dex */
 public final class AnomalyReporter {
     private static final String KEY_IS_TELEPHONY_ANOMALY_REPORT_ENABLED =
             "is_telephony_anomaly_report_enabled";

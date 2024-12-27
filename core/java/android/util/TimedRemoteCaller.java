@@ -4,7 +4,6 @@ import android.os.SystemClock;
 
 import java.util.concurrent.TimeoutException;
 
-/* loaded from: classes4.dex */
 public abstract class TimedRemoteCaller<T> {
     public static final long DEFAULT_CALL_TIMEOUT_MILLIS = 5000;
     private final long mCallTimeoutMillis;

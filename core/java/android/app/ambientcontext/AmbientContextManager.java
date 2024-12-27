@@ -20,7 +20,6 @@ import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class AmbientContextManager {
     public static final String EXTRA_AMBIENT_CONTEXT_EVENTS =
             "android.app.ambientcontext.extra.AMBIENT_CONTEXT_EVENTS";

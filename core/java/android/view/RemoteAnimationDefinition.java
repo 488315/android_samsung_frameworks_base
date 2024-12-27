@@ -8,7 +8,6 @@ import android.util.ArraySet;
 import android.util.Slog;
 import android.util.SparseArray;
 
-/* loaded from: classes4.dex */
 public class RemoteAnimationDefinition implements Parcelable {
     public static final Parcelable.Creator<RemoteAnimationDefinition> CREATOR =
             new Parcelable.Creator<

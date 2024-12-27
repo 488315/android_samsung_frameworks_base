@@ -2,7 +2,6 @@ package android.app;
 
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 class AppOpInfo {
     public final AppOpsManager.RestrictionBypass allowSystemRestrictionBypass;
     public final int code;

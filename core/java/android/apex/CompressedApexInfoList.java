@@ -4,7 +4,6 @@ import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes.dex */
 public class CompressedApexInfoList implements Parcelable {
     public static final Parcelable.Creator<CompressedApexInfoList> CREATOR =
             new Parcelable.Creator<

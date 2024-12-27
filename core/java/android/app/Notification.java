@@ -83,7 +83,6 @@ import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-/* loaded from: classes.dex */
 public class Notification implements Parcelable {
     public static final AudioAttributes AUDIO_ATTRIBUTES_DEFAULT;
     public static final int BADGE_ICON_LARGE = 2;

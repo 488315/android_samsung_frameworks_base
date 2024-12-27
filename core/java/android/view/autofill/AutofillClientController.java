@@ -22,7 +22,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-/* loaded from: classes4.dex */
 public final class AutofillClientController implements AutofillManager.AutofillClient, Dumpable {
     public static final String AUTOFILL_RESET_NEEDED = "@android:autofillResetNeeded";
     public static final String AUTO_FILL_AUTH_WHO_PREFIX = "@android:autoFillAuth:";

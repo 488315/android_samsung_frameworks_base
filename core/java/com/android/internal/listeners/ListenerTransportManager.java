@@ -7,7 +7,6 @@ import java.lang.ref.WeakReference;
 import java.util.Map;
 import java.util.WeakHashMap;
 
-/* loaded from: classes5.dex */
 public abstract class ListenerTransportManager<TTransport extends ListenerTransport<?>> {
     private final Map<Object, WeakReference<TTransport>> mRegistrations;
 

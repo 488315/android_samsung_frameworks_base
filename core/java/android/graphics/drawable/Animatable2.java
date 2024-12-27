@@ -1,6 +1,5 @@
 package android.graphics.drawable;
 
-/* loaded from: classes.dex */
 public interface Animatable2 extends Animatable {
     void clearAnimationCallbacks();
 

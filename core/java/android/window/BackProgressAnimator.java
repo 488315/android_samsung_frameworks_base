@@ -9,7 +9,6 @@ import com.android.internal.dynamicanimation.animation.FloatValueHolder;
 import com.android.internal.dynamicanimation.animation.SpringAnimation;
 import com.android.internal.dynamicanimation.animation.SpringForce;
 
-/* loaded from: classes4.dex */
 public class BackProgressAnimator implements DynamicAnimation.OnAnimationUpdateListener {
     private static final float FLING_FRICTION = 8.0f;
     private static final FloatProperty<BackProgressAnimator> PROGRESS_PROP =

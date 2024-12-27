@@ -4,7 +4,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Collection;
 
-/* loaded from: classes3.dex */
 public abstract class CredentialDataResult {
 
     public interface Entries {

@@ -3,7 +3,6 @@ package android.os;
 import android.util.Log;
 import android.util.Printer;
 
-/* loaded from: classes3.dex */
 public class Handler {
     private static final boolean FIND_POTENTIAL_LEAKS = false;
     private static Handler MAIN_THREAD_HANDLER = null;

@@ -7,7 +7,6 @@ import android.view.accessibility.AccessibilityNodeInfo;
 import com.android.internal.R;
 
 @RemoteViews.RemoteView
-/* loaded from: classes4.dex */
 public class RadioButton extends CompoundButton {
     public RadioButton(Context context) {
         this(context, null);

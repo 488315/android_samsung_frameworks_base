@@ -11,7 +11,6 @@ import com.android.internal.util.ExponentiallyBucketedHistogram;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-/* loaded from: classes.dex */
 public class QueuedWork {
     private static final boolean DEBUG = false;
     private static final long DELAY = 100;

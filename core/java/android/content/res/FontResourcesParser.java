@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/* loaded from: classes.dex */
 public class FontResourcesParser {
     private static final String TAG = "FontResourcesParser";
 

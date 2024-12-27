@@ -2,7 +2,6 @@ package com.android.internal.os;
 
 import android.os.Process;
 
-/* loaded from: classes5.dex */
 public final class SelectedProcessCpuThreadReader {
     private final String[] mCmdline;
     private KernelSingleProcessCpuThreadReader mKernelCpuThreadReader;

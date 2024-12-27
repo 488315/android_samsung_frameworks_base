@@ -15,7 +15,6 @@ import java.util.function.Consumer;
 
 /* JADX INFO: Access modifiers changed from: package-private */
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes3.dex */
 public class ProximitySensorImpl implements ProximitySensor {
     private static final boolean DEBUG;
     private static final long SECONDARY_PING_INTERVAL_MS = 5000;

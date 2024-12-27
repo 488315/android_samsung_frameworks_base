@@ -4,7 +4,6 @@ import android.app.SystemServiceRegistry;
 import android.content.Context;
 import android.os.IBinder;
 
-/* loaded from: classes.dex */
 public class BlobStoreManagerFrameworkInitializer {
     public static void initialize() {
         SystemServiceRegistry.registerContextAwareService(

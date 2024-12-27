@@ -30,7 +30,6 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
 @Deprecated
-/* loaded from: classes3.dex */
 public class SSLCertificateSocketFactory extends SSLSocketFactory {
     private static final TrustManager[] INSECURE_TRUST_MANAGER = {
         new X509TrustManager() { // from class: android.net.SSLCertificateSocketFactory.1

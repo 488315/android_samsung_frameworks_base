@@ -1,6 +1,5 @@
 package android.security;
 
-/* loaded from: classes3.dex */
 public final class Flags {
     private static FeatureFlags FEATURE_FLAGS = new FeatureFlagsImpl();
     public static final String FLAG_ASM_OPT_SYSTEM_INTO_ENFORCEMENT =

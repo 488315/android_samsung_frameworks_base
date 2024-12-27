@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class CarouselTemplateData extends BaseTemplateData {
     public static final Parcelable.Creator<CarouselTemplateData> CREATOR =
             new Parcelable.Creator<CarouselTemplateData>() { // from class:

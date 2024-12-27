@@ -26,7 +26,6 @@ import com.android.internal.app.SimpleIconFactory;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public final class SelectableTargetInfo implements ChooserTargetInfo {
     private static final String TAG = "SelectableTargetInfo";
     private final ResolveInfo mBackupResolveInfo;

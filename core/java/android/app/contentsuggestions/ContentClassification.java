@@ -6,7 +6,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class ContentClassification implements Parcelable {
     public static final Parcelable.Creator<ContentClassification> CREATOR =
             new Parcelable.Creator<ContentClassification>() { // from class:

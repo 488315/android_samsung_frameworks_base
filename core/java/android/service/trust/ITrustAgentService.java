@@ -10,7 +10,6 @@ import android.os.UserHandle;
 
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public interface ITrustAgentService extends IInterface {
     void onConfigure(List<PersistableBundle> list, IBinder iBinder) throws RemoteException;
 

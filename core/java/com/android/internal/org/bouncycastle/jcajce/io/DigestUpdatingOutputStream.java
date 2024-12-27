@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.security.MessageDigest;
 
-/* loaded from: classes5.dex */
 class DigestUpdatingOutputStream extends OutputStream {
     private MessageDigest digest;
 

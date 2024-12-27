@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /* compiled from: TtmlRenderer.java */
-/* loaded from: classes2.dex */
 class TtmlNode {
     public final String mAttributes;
     public final List<TtmlNode> mChildren = new ArrayList();

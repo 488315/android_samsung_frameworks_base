@@ -7,7 +7,6 @@ import android.view.View;
 
 import java.util.StringJoiner;
 
-/* loaded from: classes5.dex */
 public final class InputMethodDebug {
     private InputMethodDebug() {}
 

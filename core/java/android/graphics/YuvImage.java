@@ -2,7 +2,6 @@ package android.graphics;
 
 import java.io.OutputStream;
 
-/* loaded from: classes.dex */
 public class YuvImage {
     private static final int WORKING_COMPRESS_STORAGE = 4096;
     private static final String[] sSupportedFormats = {"NV21", "YUY2", "YCBCR_P010", "YUV_420_888"};

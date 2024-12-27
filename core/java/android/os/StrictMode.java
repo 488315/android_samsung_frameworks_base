@@ -72,7 +72,6 @@ import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 
-/* loaded from: classes3.dex */
 public final class StrictMode {
     private static final String CLEARTEXT_PROPERTY = "persist.sys.strictmode.clear";
     static final long DETECT_EXPLICIT_GC = 3400644;

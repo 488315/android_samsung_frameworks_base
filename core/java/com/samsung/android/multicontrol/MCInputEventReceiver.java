@@ -17,7 +17,6 @@ import android.view.WindowManager;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* loaded from: classes6.dex */
 public class MCInputEventReceiver extends InputEventReceiver {
     private final String ACTION_TRIGGERED;
     private final int DEFAULT_TRIGGER_THRESHOLD;

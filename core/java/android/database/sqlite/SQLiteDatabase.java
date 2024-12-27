@@ -52,7 +52,6 @@ import java.util.function.BinaryOperator;
 import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 
-/* loaded from: classes.dex */
 public final class SQLiteDatabase extends SQLiteClosable {
     static final /* synthetic */ boolean $assertionsDisabled = false;
     public static final int CONFLICT_ABORT = 2;

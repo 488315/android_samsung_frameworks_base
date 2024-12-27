@@ -16,7 +16,6 @@ import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
 import android.widget.ListView;
 
-/* loaded from: classes5.dex */
 public class SemSweepWaveFilter extends SemAbsSweepAnimationFilter {
     private static final boolean DEBUGGABLE = false;
     private static final int SWIPE_DURATION = 600;

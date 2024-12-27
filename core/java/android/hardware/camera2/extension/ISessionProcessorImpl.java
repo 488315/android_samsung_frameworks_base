@@ -14,7 +14,6 @@ import java.util.function.BiConsumer;
 import java.util.function.IntConsumer;
 import java.util.stream.IntStream;
 
-/* loaded from: classes2.dex */
 public interface ISessionProcessorImpl extends IInterface {
     public static final String DESCRIPTOR =
             "android.hardware.camera2.extension.ISessionProcessorImpl";

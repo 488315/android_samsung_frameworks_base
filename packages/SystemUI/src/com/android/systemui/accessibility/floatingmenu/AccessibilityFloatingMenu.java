@@ -11,7 +11,6 @@ import com.android.internal.accessibility.dialog.AccessibilityTargetHelper;
 import com.android.systemui.Prefs;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes.dex */
 public final class AccessibilityFloatingMenu implements IAccessibilityFloatingMenu {
     public final AnonymousClass1 mContentObserver;
     public final Context mContext;

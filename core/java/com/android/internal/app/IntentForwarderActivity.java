@@ -59,7 +59,6 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-/* loaded from: classes5.dex */
 public class IntentForwarderActivity extends Activity {
     public static final String EXTRA_SKIP_USER_CONFIRMATION =
             "com.android.internal.app.EXTRA_SKIP_USER_CONFIRMATION";

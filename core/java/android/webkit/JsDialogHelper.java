@@ -19,7 +19,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public class JsDialogHelper {
     public static final int ALERT = 1;
     public static final int CONFIRM = 2;

@@ -10,7 +10,6 @@ import com.android.internal.widget.remotecompose.core.WireBuffer;
 
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public class DrawBitmapInt extends PaintOperation {
     public static final Companion COMPANION = new Companion();
     int mContentDescId;

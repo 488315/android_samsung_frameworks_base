@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes2.dex */
 public interface IGnssPowerIndicationCallback extends IInterface {
     public static final int CAPABILITY_MULTIBAND_ACQUISITION = 16;
     public static final int CAPABILITY_MULTIBAND_TRACKING = 4;

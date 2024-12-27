@@ -3,7 +3,6 @@ package android.webkit;
 import java.io.OutputStream;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes4.dex */
 public abstract class TracingController {
     public abstract boolean isTracing();
 

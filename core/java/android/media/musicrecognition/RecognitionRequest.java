@@ -9,7 +9,6 @@ import android.os.Parcelable;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public final class RecognitionRequest implements Parcelable {
     public static final Parcelable.Creator<RecognitionRequest> CREATOR =
             new Parcelable.Creator<RecognitionRequest>() { // from class:

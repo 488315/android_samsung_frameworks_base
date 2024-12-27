@@ -34,7 +34,6 @@ import com.samsung.android.rune.CoreRune;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes4.dex */
 public final class PointerIcon implements Parcelable {
     static final /* synthetic */ boolean $assertionsDisabled = false;
     public static final float DEFAULT_POINTER_SCALE = 1.0f;

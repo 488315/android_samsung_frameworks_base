@@ -6,7 +6,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public class IsdbsFrontendSettings extends FrontendSettings {
     public static final int CODERATE_1_2 = 2;
     public static final int CODERATE_2_3 = 4;

@@ -4,7 +4,6 @@ import com.android.internal.org.bouncycastle.util.Pack;
 
 import java.math.BigInteger;
 
-/* loaded from: classes5.dex */
 public abstract class Nat256 {
     private static final long M = 4294967295L;
 

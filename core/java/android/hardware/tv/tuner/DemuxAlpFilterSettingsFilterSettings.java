@@ -3,7 +3,6 @@ package android.hardware.tv.tuner;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public final class DemuxAlpFilterSettingsFilterSettings implements Parcelable {
     public static final Parcelable.Creator<DemuxAlpFilterSettingsFilterSettings> CREATOR =
             new Parcelable.Creator<DemuxAlpFilterSettingsFilterSettings>() { // from class:

@@ -21,7 +21,6 @@ import java.util.List;
 import java.util.concurrent.Executor;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes3.dex */
 public class AsyncSensorManager extends SensorManager implements PluginListener<SensorManagerPlugin> {
     private static final String TAG = "AsyncSensorManager";
     private final Executor mExecutor;

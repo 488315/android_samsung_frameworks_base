@@ -1,6 +1,5 @@
 package com.android.server.am;
 
-/* loaded from: classes5.dex */
 public final class UserStateProto {
     public static final long STATE = 1159641169921L;
     public static final int STATE_BOOTING = 0;

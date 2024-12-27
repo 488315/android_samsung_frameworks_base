@@ -9,7 +9,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class VisualQueryDetectionServiceFailure implements Parcelable {
     public static final Parcelable.Creator<VisualQueryDetectionServiceFailure> CREATOR =
             new Parcelable.Creator<

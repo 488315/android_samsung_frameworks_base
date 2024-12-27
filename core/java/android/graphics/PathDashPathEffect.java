@@ -1,6 +1,5 @@
 package android.graphics;
 
-/* loaded from: classes.dex */
 public class PathDashPathEffect extends PathEffect {
     private static native long nativeCreate(long j, float f, float f2, int i);
 

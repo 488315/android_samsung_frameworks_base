@@ -66,7 +66,6 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
 
-/* loaded from: classes.dex */
 public abstract class ContentResolver implements ContentInterface {
     public static final String ANY_CURSOR_ITEM_TYPE = "vnd.android.cursor.item/*";
     public static final String CONTENT_SERVICE_NAME = "content";

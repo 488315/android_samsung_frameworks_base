@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public final class OverlayIdentifier implements Parcelable {
     public static final Parcelable.Creator<OverlayIdentifier> CREATOR =
             new Parcelable.Creator<

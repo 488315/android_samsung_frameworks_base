@@ -1,6 +1,5 @@
 package android.media.soundtrigger;
 
-/* loaded from: classes2.dex */
 public @interface RecognitionStatus {
     public static final int ABORTED = 1;
     public static final int FAILURE = 2;

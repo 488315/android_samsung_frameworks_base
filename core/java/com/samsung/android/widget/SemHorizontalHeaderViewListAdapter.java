@@ -12,7 +12,6 @@ import android.widget.WrapperListAdapter;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* loaded from: classes6.dex */
 public class SemHorizontalHeaderViewListAdapter implements WrapperListAdapter, Filterable {
     static final ArrayList<SemHorizontalListView.FixedViewInfo> EMPTY_INFO_LIST = new ArrayList<>();
     private final ListAdapter mAdapter;

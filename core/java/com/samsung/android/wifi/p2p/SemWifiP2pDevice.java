@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/* loaded from: classes6.dex */
 public class SemWifiP2pDevice implements Parcelable {
     public static final Parcelable.Creator<SemWifiP2pDevice> CREATOR =
             new Parcelable.Creator<

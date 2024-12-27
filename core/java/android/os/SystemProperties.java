@@ -19,7 +19,6 @@ import java.util.Map;
 import java.util.function.Predicate;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public class SystemProperties {
     public static final int PROP_NAME_MAX = Integer.MAX_VALUE;
     public static final int PROP_VALUE_MAX = 91;

@@ -11,7 +11,6 @@ import java.security.SignatureException;
 import java.security.SignatureSpi;
 import java.security.spec.AlgorithmParameterSpec;
 
-/* loaded from: classes5.dex */
 public abstract class DSABase extends SignatureSpi
         implements PKCSObjectIdentifiers, X509ObjectIdentifiers {
     protected Digest digest;

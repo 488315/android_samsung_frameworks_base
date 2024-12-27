@@ -2,7 +2,6 @@ package android.hardware.radio.V1_0;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class NvItem {
     public static final int CDMA_1X_ADVANCED_ENABLED = 57;
     public static final int CDMA_ACCOLC = 4;

@@ -2,7 +2,6 @@ package android.os;
 
 import java.util.concurrent.Executor;
 
-/* loaded from: classes3.dex */
 public class HandlerThread extends Thread {
     private volatile Executor mExecutor;
     private volatile Handler mHandler;

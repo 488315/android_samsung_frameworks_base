@@ -1,6 +1,5 @@
 package android.neuralnetworks;
 
-/* loaded from: classes3.dex */
 public final class Enums {
     public static final int DATA_CLASS_FLOAT16 = 3;
     public static final int DATA_CLASS_FLOAT32 = 2;

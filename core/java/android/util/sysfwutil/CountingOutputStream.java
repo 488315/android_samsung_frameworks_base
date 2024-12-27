@@ -3,7 +3,6 @@ package android.util.sysfwutil;
 import java.io.IOException;
 import java.io.OutputStream;
 
-/* loaded from: classes4.dex */
 public class CountingOutputStream extends OutputStream {
     private long mCount;
     private final OutputStream mOutputStream;

@@ -3,7 +3,6 @@ package android.security.identity;
 import java.util.Collection;
 import java.util.LinkedList;
 
-/* loaded from: classes3.dex */
 class CredstoreCredentialDataResult extends CredentialDataResult {
     CredstoreEntries mDeviceSignedEntries;
     ResultData mDeviceSignedResult;

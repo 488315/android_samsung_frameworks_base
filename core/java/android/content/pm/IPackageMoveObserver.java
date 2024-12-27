@@ -7,7 +7,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes.dex */
 public interface IPackageMoveObserver extends IInterface {
     void onCreated(int i, Bundle bundle) throws RemoteException;
 

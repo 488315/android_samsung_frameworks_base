@@ -42,7 +42,6 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 
 @Deprecated
-/* loaded from: classes3.dex */
 public class FontsContract {
     private static final long SYNC_FONT_FETCH_TIMEOUT_MS = 500;
     private static final String TAG = "FontsContract";

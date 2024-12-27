@@ -18,7 +18,6 @@ import java.util.List;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class SmartspaceTarget implements Parcelable {
     public static final Parcelable.Creator<SmartspaceTarget> CREATOR =
             new Parcelable.Creator<

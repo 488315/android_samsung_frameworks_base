@@ -20,7 +20,6 @@ import java.util.Set;
 
 import javax.security.auth.x500.X500Principal;
 
-/* loaded from: classes3.dex */
 class DelegatingX509Certificate extends X509Certificate {
     private final X509Certificate mDelegate;
 

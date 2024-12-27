@@ -56,7 +56,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes2.dex */
 public final class CameraExtensionSessionImpl extends CameraExtensionSession {
     private static final int PREVIEW_QUEUE_SIZE = 10;
     private static final String TAG = "CameraExtensionSessionImpl";

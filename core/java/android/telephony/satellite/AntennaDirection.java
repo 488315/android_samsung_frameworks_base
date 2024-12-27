@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public final class AntennaDirection implements Parcelable {
     public static final Parcelable.Creator<AntennaDirection> CREATOR =
             new Parcelable.Creator<

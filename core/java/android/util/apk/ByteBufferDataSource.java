@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.security.DigestException;
 
-/* loaded from: classes4.dex */
 class ByteBufferDataSource implements DataSource {
     private final ByteBuffer mBuf;
 

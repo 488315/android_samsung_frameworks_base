@@ -9,7 +9,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.ref.WeakReference;
 
-/* loaded from: classes4.dex */
 public abstract class AccessibilityRequestPreparer {
     public static final int REQUEST_TYPE_EXTRA_DATA = 1;
     private final int mAccessibilityViewId;

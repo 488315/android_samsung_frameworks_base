@@ -43,7 +43,6 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Consumer;
 
-/* loaded from: classes4.dex */
 public class SurfaceView extends View implements ViewRootImpl.SurfaceChangedCallback {
     private static final boolean DEBUG = true;
     private static final boolean DEBUG_POSITION = true;

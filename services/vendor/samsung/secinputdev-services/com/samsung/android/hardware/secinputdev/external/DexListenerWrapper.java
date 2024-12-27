@@ -6,7 +6,6 @@ import android.os.Handler;
 import com.samsung.android.desktopmode.SemDesktopModeManager;
 import com.samsung.android.desktopmode.SemDesktopModeState;
 
-/* loaded from: classes.dex */
 public class DexListenerWrapper extends ExternalService {
     private final SemDesktopModeManager.DesktopModeListener desktopModeListener;
 

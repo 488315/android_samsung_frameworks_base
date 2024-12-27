@@ -11,7 +11,6 @@ import com.android.internal.util.AnnotationValidations;
 import java.lang.annotation.Annotation;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class RuntimeAppOpAccessMessage implements Parcelable {
     public static final Parcelable.Creator<RuntimeAppOpAccessMessage> CREATOR =
             new Parcelable.Creator<RuntimeAppOpAccessMessage>() { // from class:

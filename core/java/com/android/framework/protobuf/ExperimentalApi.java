@@ -16,7 +16,6 @@ import java.lang.annotation.Target;
 })
 @Documented
 @Retention(RetentionPolicy.SOURCE)
-/* loaded from: classes3.dex */
 public @interface ExperimentalApi {
     String value() default "";
 }

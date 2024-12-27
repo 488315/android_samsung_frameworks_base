@@ -27,7 +27,6 @@ import java.util.function.ToDoubleFunction;
 import java.util.function.ToLongFunction;
 import java.util.stream.Collectors;
 
-/* loaded from: classes5.dex */
 public class LegacyProtoLogImpl implements IProtoLog {
     private static final int BUFFER_CAPACITY = 1048576;
     private static final long MAGIC_NUMBER_VALUE = 5138409603453637200L;

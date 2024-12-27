@@ -18,7 +18,6 @@ import org.json.JSONObject;
 
 import java.nio.ByteBuffer;
 
-/* loaded from: classes6.dex */
 public class SimgpPlugin implements Plugin<ImgpPlugin> {
     private static final String TAG = Def.tagOf((Class<?>) SimgpPlugin.class);
 

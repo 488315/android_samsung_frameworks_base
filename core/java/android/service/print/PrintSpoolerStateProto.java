@@ -1,6 +1,5 @@
 package android.service.print;
 
-/* loaded from: classes3.dex */
 public final class PrintSpoolerStateProto {
     public static final long INTERNAL_STATE = 1146756268035L;
     public static final long IS_BOUND = 1133871366146L;

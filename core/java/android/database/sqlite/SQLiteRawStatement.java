@@ -10,7 +10,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.ref.Reference;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public final class SQLiteRawStatement implements Closeable {
     private static final int SQLITE_BUSY = 5;
     public static final int SQLITE_DATA_TYPE_BLOB = 4;

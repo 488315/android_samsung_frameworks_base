@@ -26,7 +26,6 @@ import java.util.function.Consumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/* loaded from: classes.dex */
 public class SQLiteQueryBuilder {
     private static final int STRICT_COLUMNS = 2;
     private static final int STRICT_GRAMMAR = 4;

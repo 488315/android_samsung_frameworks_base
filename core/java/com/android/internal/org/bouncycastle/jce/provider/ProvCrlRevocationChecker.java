@@ -9,7 +9,6 @@ import java.security.cert.Certificate;
 import java.security.cert.X509Certificate;
 import java.util.Date;
 
-/* loaded from: classes5.dex */
 class ProvCrlRevocationChecker implements PKIXCertRevocationChecker {
     private Date currentDate = null;
     private final JcaJceHelper helper;

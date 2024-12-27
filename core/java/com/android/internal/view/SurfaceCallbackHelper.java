@@ -2,7 +2,6 @@ package com.android.internal.view;
 
 import android.view.SurfaceHolder;
 
-/* loaded from: classes5.dex */
 public class SurfaceCallbackHelper {
     int mFinishDrawingCollected = 0;
     int mFinishDrawingExpected = 0;

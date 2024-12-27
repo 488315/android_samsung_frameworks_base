@@ -10,7 +10,6 @@ import android.view.Surface;
 
 import java.util.concurrent.Executor;
 
-/* loaded from: classes2.dex */
 public abstract class CaptureCallback {
     private CameraCaptureSession.CaptureCallback mCallback;
     private Executor mExecutor;

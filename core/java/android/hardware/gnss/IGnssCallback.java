@@ -8,7 +8,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.RemoteException;
 
-/* loaded from: classes2.dex */
 public interface IGnssCallback extends IInterface {
     public static final int CAPABILITY_ANTENNA_INFO = 2048;
     public static final int CAPABILITY_CORRELATION_VECTOR = 4096;

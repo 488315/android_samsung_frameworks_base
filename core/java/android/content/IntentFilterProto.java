@@ -1,6 +1,5 @@
 package android.content;
 
-/* loaded from: classes.dex */
 public final class IntentFilterProto {
     public static final long ACTIONS = 2237677961217L;
     public static final long CATEGORIES = 2237677961218L;

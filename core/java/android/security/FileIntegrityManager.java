@@ -14,7 +14,6 @@ import java.io.IOException;
 import java.security.cert.CertificateEncodingException;
 import java.security.cert.X509Certificate;
 
-/* loaded from: classes3.dex */
 public final class FileIntegrityManager {
     private final Context mContext;
     private final IFileIntegrityService mService;

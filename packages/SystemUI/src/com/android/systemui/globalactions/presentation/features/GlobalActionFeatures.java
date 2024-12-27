@@ -10,7 +10,6 @@ import com.samsung.android.globalactions.util.SettingsWrapper;
 import com.samsung.android.globalactions.util.SystemPropertiesWrapper;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public final class GlobalActionFeatures implements Features {
     public static final String VALUE_SUB_DISPLAY_POLICY;
     public final Context mContext;

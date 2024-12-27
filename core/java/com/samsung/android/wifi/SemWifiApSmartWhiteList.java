@@ -15,7 +15,6 @@ import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/* loaded from: classes6.dex */
 public class SemWifiApSmartWhiteList {
     private static final int BUFFER_SIZE = 64;
     public static final int WL_ALREADY_IN_TABLE = 4;

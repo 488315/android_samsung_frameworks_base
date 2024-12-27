@@ -14,7 +14,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.function.IntFunction;
 
-/* loaded from: classes4.dex */
 public final class TranslationContext implements Parcelable {
     public static final Parcelable.Creator<TranslationContext> CREATOR =
             new Parcelable.Creator<

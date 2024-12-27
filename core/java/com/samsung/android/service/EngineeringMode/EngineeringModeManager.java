@@ -17,7 +17,6 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 
-/* loaded from: classes6.dex */
 public final class EngineeringModeManager {
     public static final int ALLOWED = 1;
     public static final int DEV_OK = -16777064;

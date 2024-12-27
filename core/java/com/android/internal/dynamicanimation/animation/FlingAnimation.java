@@ -1,7 +1,6 @@
 package com.android.internal.dynamicanimation.animation;
 
 
-/* loaded from: classes5.dex */
 public final class FlingAnimation extends DynamicAnimation<FlingAnimation> {
     private final DragForce mFlingForce;
 

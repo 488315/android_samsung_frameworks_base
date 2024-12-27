@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public class SatelliteSessionStats implements Parcelable {
     public static final Parcelable.Creator<SatelliteSessionStats> CREATOR =
             new Parcelable.Creator<

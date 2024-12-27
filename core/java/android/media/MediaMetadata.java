@@ -15,7 +15,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 import java.util.Set;
 
-/* loaded from: classes2.dex */
 public final class MediaMetadata implements Parcelable {
     public static final Parcelable.Creator<MediaMetadata> CREATOR;
     private static final SparseArray<String> EDITOR_KEY_MAPPING;

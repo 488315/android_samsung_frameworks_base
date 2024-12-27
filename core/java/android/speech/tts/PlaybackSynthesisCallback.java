@@ -2,7 +2,6 @@ package android.speech.tts;
 
 import android.util.Log;
 
-/* loaded from: classes3.dex */
 class PlaybackSynthesisCallback extends AbstractSynthesisCallback {
     private static final boolean DBG = false;
     private static final int MIN_AUDIO_BUFFER_SIZE = 8192;

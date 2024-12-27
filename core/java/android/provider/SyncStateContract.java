@@ -10,7 +10,6 @@ import android.net.Uri;
 import android.os.RemoteException;
 import android.util.Pair;
 
-/* loaded from: classes3.dex */
 public class SyncStateContract {
 
     public interface Columns extends BaseColumns {

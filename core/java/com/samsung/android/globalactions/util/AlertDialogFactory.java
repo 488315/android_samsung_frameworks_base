@@ -11,7 +11,6 @@ import android.widget.LinearLayout;
 
 import com.android.internal.R;
 
-/* loaded from: classes6.dex */
 public class AlertDialogFactory {
     private AlertDialog mAlertDialog;
     private AlertDialog.Builder mAlertDialogBuilder;

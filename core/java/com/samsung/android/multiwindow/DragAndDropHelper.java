@@ -5,7 +5,6 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Slog;
 
-/* loaded from: classes6.dex */
 public class DragAndDropHelper {
     private static final boolean DEBUG = false;
     private static final String TAG = "DragAndDropHelper";

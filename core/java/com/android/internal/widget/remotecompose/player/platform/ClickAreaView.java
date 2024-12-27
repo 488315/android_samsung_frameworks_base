@@ -5,7 +5,6 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.view.View;
 
-/* loaded from: classes5.dex */
 class ClickAreaView extends View {
     private boolean mDebug;
     private int mId;

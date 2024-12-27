@@ -1,6 +1,5 @@
 package android.nfc.cardemulation;
 
-/* loaded from: classes3.dex */
 public final class NfcFServiceInfoProto {
     public static final long COMPONENT_NAME = 1146756268033L;
     public static final long DESCRIPTION = 1138166333442L;

@@ -18,7 +18,6 @@ import android.view.ViewConfiguration;
 import android.widget.ListView;
 
 @Deprecated
-/* loaded from: classes5.dex */
 public class SemSweepListAnimator extends SemAbsSweepListAnimator {
     private static final boolean DEBUGGABLE = false;
     private static final boolean DEBUGGABLE_LOW = true;

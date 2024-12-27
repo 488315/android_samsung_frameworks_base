@@ -12,7 +12,6 @@ import com.android.internal.util.Preconditions;
 
 import java.util.Arrays;
 
-/* loaded from: classes3.dex */
 public final class LuhnChecksumValidator extends InternalValidator
         implements Validator, Parcelable {
     public static final Parcelable.Creator<LuhnChecksumValidator> CREATOR =

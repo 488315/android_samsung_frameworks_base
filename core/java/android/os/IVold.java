@@ -8,7 +8,6 @@ import com.samsung.android.media.AudioParameter;
 
 import java.io.FileDescriptor;
 
-/* loaded from: classes3.dex */
 public interface IVold extends IInterface {
     public static final int DDP_NG_ENOSPC = 2;
     public static final int DDP_NG_TOOBIG = 1;

@@ -1,6 +1,5 @@
 package com.android.server.biometrics;
 
-/* loaded from: classes5.dex */
 public final class SensorStateProto {
     public static final long CURRENT_STRENGTH = 1120986464259L;
     public static final int FACE = 2;

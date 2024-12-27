@@ -1,6 +1,5 @@
 package android.app.settings.mediaoutput;
 
-/* loaded from: classes.dex */
 public final class MediaOutputEnum {
     public static final int AVR = 600;
     public static final int BLUETOOTH = 300;

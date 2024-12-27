@@ -2,7 +2,6 @@ package android.audio.policy.configuration.V7_0;
 
 import android.app.slice.Slice;
 
-/* loaded from: classes.dex */
 public enum Role {
     sink("sink"),
     source(Slice.SUBTYPE_SOURCE);

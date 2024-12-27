@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-/* loaded from: classes3.dex */
 public final class PhoneAccount implements Parcelable {
     public static final int CAPABILITY_ADHOC_CONFERENCE_CALLING = 16384;
     public static final int CAPABILITY_CALL_COMPOSER = 32768;

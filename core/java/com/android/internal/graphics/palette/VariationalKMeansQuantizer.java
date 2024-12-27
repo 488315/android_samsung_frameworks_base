@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-/* loaded from: classes5.dex */
 public class VariationalKMeansQuantizer implements Quantizer {
     private static final boolean DEBUG = false;
     private static final String TAG = "KMeansQuantizer";

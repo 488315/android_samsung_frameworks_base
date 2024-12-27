@@ -8,7 +8,6 @@ import com.android.internal.org.bouncycastle.math.ec.PreCompInfo;
 
 import java.math.BigInteger;
 
-/* loaded from: classes5.dex */
 public abstract class EndoUtil {
     public static final String PRECOMP_NAME = "bc_endo";
 

@@ -35,7 +35,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.List;
 
-/* loaded from: classes.dex */
 public final class UiAutomationConnection extends IUiAutomationConnection.Stub {
     private static final int INITIAL_FROZEN_ROTATION_UNSPECIFIED = -1;
     private static final String TAG = "UiAutomationConnection";

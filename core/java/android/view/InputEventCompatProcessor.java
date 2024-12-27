@@ -5,7 +5,6 @@ import android.content.Context;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes4.dex */
 public class InputEventCompatProcessor {
     protected Context mContext;
     private List<InputEvent> mProcessedEvents = new ArrayList();

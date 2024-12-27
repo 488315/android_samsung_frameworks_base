@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.function.Consumer;
 
-/* loaded from: classes4.dex */
 public class WindowInfosListenerForTest {
     private static final String TAG = "WindowInfosListenerForTest";
     private ArrayMap<Consumer<List<WindowInfo>>, WindowInfosListener> mListeners = new ArrayMap<>();

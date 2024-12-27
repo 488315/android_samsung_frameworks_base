@@ -9,7 +9,6 @@ import dalvik.system.PathClassLoader;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 
-/* loaded from: classes6.dex */
 public class SemInputDeviceManagerLoader {
     private static final String SECINPUTDEV_SERVICE_CLASS =
             "com.samsung.android.hardware.secinputdev.SemInputDeviceManagerService";

@@ -3,7 +3,6 @@ package android.internal.wifi;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes2.dex */
 public final class WifiAnnotations {
 
     @Retention(RetentionPolicy.SOURCE)

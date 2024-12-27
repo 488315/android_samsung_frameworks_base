@@ -1,6 +1,5 @@
 package android.hardware;
 
-/* loaded from: classes.dex */
 public class SensorEvent {
     public int accuracy;
     public boolean firstEventAfterDiscontinuity;

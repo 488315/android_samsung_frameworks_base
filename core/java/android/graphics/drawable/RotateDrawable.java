@@ -15,7 +15,6 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 
-/* loaded from: classes.dex */
 public class RotateDrawable extends DrawableWrapper {
     private static final int MAX_LEVEL = 10000;
     private RotateState mState;

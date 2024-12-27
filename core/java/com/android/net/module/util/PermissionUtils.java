@@ -15,7 +15,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public final class PermissionUtils {
     public static boolean hasAnyPermissionOf(Context context, String... permissions) {
         for (String permission : permissions) {

@@ -4,7 +4,6 @@ import android.security.keystore.KeyProperties;
 
 import java.util.ArrayList;
 
-/* loaded from: classes6.dex */
 public final class SehSignalLevel {
     public static final int EXCELLLENT = 5;
     public static final int GOOD = 3;

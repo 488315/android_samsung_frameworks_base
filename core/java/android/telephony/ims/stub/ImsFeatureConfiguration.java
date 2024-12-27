@@ -9,7 +9,6 @@ import android.util.ArraySet;
 import java.util.Set;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public final class ImsFeatureConfiguration implements Parcelable {
     public static final Parcelable.Creator<ImsFeatureConfiguration> CREATOR =
             new Parcelable.Creator<

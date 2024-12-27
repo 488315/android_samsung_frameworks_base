@@ -18,7 +18,6 @@ import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.util.Arrays;
 
-/* loaded from: classes.dex */
 public class Signature implements Parcelable {
     public static final Parcelable.Creator<Signature> CREATOR =
             new Parcelable.Creator<Signature>() { // from class: android.content.pm.Signature.1

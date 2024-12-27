@@ -8,7 +8,6 @@ import android.text.format.DateFormat;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class VirtualSensorConfig implements Parcelable {
     public static final Parcelable.Creator<VirtualSensorConfig> CREATOR =
             new Parcelable.Creator<VirtualSensorConfig>() { // from class:

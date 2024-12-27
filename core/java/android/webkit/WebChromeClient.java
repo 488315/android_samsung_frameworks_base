@@ -7,7 +7,6 @@ import android.net.Uri;
 import android.os.Message;
 import android.view.View;
 
-/* loaded from: classes4.dex */
 public class WebChromeClient {
 
     public interface CustomViewCallback {

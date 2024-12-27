@@ -5,7 +5,6 @@ import com.android.internal.midi.MidiConstants;
 import java.io.ByteArrayOutputStream;
 import java.nio.charset.StandardCharsets;
 
-/* loaded from: classes3.dex */
 public final class Base64 {
     private static final byte[] BASE_64_ALPHABET = initializeBase64Alphabet();
     private static final byte END_OF_INPUT = -3;

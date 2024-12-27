@@ -1,7 +1,6 @@
 package android.provider;
 
 @Deprecated
-/* loaded from: classes3.dex */
 public interface SyncConstValue {
     public static final String NON_SYNCABLE_ACCOUNT = "non_syncable";
     public static final String NON_SYNCABLE_ACCOUNT_TYPE = "android.local";

@@ -8,7 +8,6 @@ import android.view.WindowManager;
 
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public final class AccessibilityWindowAttributes implements Parcelable {
     public static final Parcelable.Creator<AccessibilityWindowAttributes> CREATOR =
             new Parcelable.Creator<

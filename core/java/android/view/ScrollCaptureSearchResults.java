@@ -12,7 +12,6 @@ import java.util.Objects;
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 
-/* loaded from: classes4.dex */
 public final class ScrollCaptureSearchResults {
     private static final int AFTER = 1;
     private static final int BEFORE = -1;

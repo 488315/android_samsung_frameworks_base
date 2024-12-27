@@ -4,7 +4,6 @@ import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes3.dex */
 public class Voicemail implements Parcelable {
     public static final Parcelable.Creator<Voicemail> CREATOR =
             new Parcelable.Creator<Voicemail>() { // from class: android.telecom.Voicemail.1

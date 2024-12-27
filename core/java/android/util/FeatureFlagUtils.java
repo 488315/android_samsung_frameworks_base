@@ -10,7 +10,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-/* loaded from: classes4.dex */
 public class FeatureFlagUtils {
     private static final Map<String, String> DEFAULT_FLAGS = new HashMap();
     public static final String FFLAG_OVERRIDE_PREFIX = "sys.fflag.override.";

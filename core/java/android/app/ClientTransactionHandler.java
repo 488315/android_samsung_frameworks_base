@@ -20,7 +20,6 @@ import com.android.internal.content.ReferrerIntent;
 import java.util.List;
 import java.util.Map;
 
-/* loaded from: classes.dex */
 public abstract class ClientTransactionHandler {
     private boolean mIsExecutingLocalTransaction;
 

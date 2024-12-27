@@ -7,7 +7,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public final class GameScreenshotResult implements Parcelable {
     public static final Parcelable.Creator<GameScreenshotResult> CREATOR =
             new Parcelable.Creator<

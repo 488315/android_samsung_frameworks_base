@@ -1,6 +1,5 @@
 package android.hardware.radio.network;
 
-/* loaded from: classes2.dex */
 public @interface RegistrationFailCause {
     public static final int CALL_CANNOT_BE_IDENTIFIED = 38;
     public static final int CONDITIONAL_IE_ERROR = 100;

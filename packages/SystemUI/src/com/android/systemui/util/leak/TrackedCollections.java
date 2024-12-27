@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.function.Predicate;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes3.dex */
 public class TrackedCollections {
     private static final long HALFWAY_DELAY = 1800000;
     private static final long MILLIS_IN_MINUTE = 60000;

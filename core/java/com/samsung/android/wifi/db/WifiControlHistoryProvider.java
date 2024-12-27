@@ -19,7 +19,6 @@ import android.util.Log;
 import java.util.HashMap;
 import java.util.Map;
 
-/* loaded from: classes6.dex */
 public final class WifiControlHistoryProvider extends ContentProvider {
     public static final String AUTHORITY = "com.samsung.server.wifi";
     private static final int CODE = 1;

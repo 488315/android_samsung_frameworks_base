@@ -2,7 +2,6 @@ package android.media.audiofx;
 
 import android.util.Log;
 
-/* loaded from: classes2.dex */
 public class NoiseSuppressor extends AudioEffect {
     private static final String TAG = "NoiseSuppressor";
 

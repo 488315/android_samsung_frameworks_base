@@ -45,7 +45,6 @@ import com.android.server.pm.pkg.AndroidPackage;
 
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public class PackageInfoCommonUtils {
     private static final boolean DEBUG = false;
     private static final String TAG = "PackageParsing";

@@ -16,7 +16,6 @@ import android.view.flags.Flags;
 
 import com.android.internal.R;
 
-/* loaded from: classes4.dex */
 public class ViewConfiguration {
     private static final int A11Y_SHORTCUT_KEY_TIMEOUT = 3000;
     private static final int A11Y_SHORTCUT_KEY_TIMEOUT_AFTER_CONFIRMATION = 1000;

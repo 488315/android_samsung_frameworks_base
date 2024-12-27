@@ -6,7 +6,6 @@ import android.view.View;
 
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public final class AutofillId implements Parcelable {
     private static final int FLAG_HAS_SESSION = 4;
     private static final int FLAG_IS_VIRTUAL_INT = 1;

@@ -2,7 +2,6 @@ package android.filterfw.core;
 
 import android.util.Log;
 
-/* loaded from: classes.dex */
 public abstract class FilterPort {
     private static final String TAG = "FilterPort";
     protected Filter mFilter;

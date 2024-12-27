@@ -12,7 +12,6 @@ import android.view.autofill.AutofillValue;
 import java.util.List;
 import java.util.Map;
 
-/* loaded from: classes3.dex */
 public interface IAutofillFieldClassificationService extends IInterface {
     void calculateScores(
             RemoteCallback remoteCallback,

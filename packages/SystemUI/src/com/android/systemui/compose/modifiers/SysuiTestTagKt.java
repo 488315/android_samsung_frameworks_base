@@ -12,7 +12,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.reflect.KProperty;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes.dex */
 public abstract class SysuiTestTagKt {
     public static final Modifier sysuiResTag(Modifier modifier, String str) {
         return TestTagKt.testTag(SemanticsModifierKt.semantics(modifier, false, new Function1() { // from class: com.android.systemui.compose.modifiers.SysuiTestTagKt$sysuiResTag$1

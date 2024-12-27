@@ -1,6 +1,5 @@
 package android.os;
 
-/* loaded from: classes3.dex */
 public final class PowerManagerProto {
     public static final int USER_ACTIVITY_EVENT_ACCESSIBILITY = 3;
     public static final int USER_ACTIVITY_EVENT_BUTTON = 1;

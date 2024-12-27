@@ -1,6 +1,5 @@
 package vendor.samsung.hardware.radio.sim;
 
-/* loaded from: classes6.dex */
 public @interface SehPersoSubstate {
     public static final int IN_PROGRESS = 1;
     public static final int READY = 2;

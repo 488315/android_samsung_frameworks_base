@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public final class TimeZoneDetectorStatus implements Parcelable {
     public static final Parcelable.Creator<TimeZoneDetectorStatus> CREATOR =
             new Parcelable.Creator<TimeZoneDetectorStatus>() { // from class:

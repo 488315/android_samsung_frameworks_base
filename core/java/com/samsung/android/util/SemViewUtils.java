@@ -9,7 +9,6 @@ import android.util.TypedValue;
 
 import com.android.internal.R;
 
-/* loaded from: classes6.dex */
 public class SemViewUtils {
     private static final String TAG = "SemViewUtils";
 

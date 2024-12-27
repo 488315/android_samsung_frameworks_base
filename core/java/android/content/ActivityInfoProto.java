@@ -1,6 +1,5 @@
 package android.content;
 
-/* loaded from: classes.dex */
 public final class ActivityInfoProto {
     public static final int SCREEN_ORIENTATION_BEHIND = 3;
     public static final int SCREEN_ORIENTATION_FULL_SENSOR = 10;

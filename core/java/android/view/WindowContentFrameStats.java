@@ -3,7 +3,6 @@ package android.view;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes4.dex */
 public final class WindowContentFrameStats extends FrameStats implements Parcelable {
     public static final Parcelable.Creator<WindowContentFrameStats> CREATOR =
             new Parcelable.Creator<

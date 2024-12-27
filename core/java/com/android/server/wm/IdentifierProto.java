@@ -1,6 +1,5 @@
 package com.android.server.wm;
 
-/* loaded from: classes5.dex */
 public final class IdentifierProto {
     public static final long HASH_CODE = 1120986464257L;
     public static final long TITLE = 1138166333443L;

@@ -2,7 +2,6 @@ package com.android.internal.widget;
 
 import java.util.List;
 
-/* loaded from: classes5.dex */
 class OpReorderer {
     final Callback mCallback;
 

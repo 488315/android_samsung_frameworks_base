@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes3.dex */
 public interface ICredential extends IInterface {
     public static final String DESCRIPTOR = "android.security.identity.ICredential";
     public static final int STATUS_NOT_IN_REQUEST_MESSAGE = 3;

@@ -5,7 +5,6 @@ import android.os.Message;
 
 import com.samsung.android.media.fmradio.internal.IFMEventListener;
 
-/* loaded from: classes6.dex */
 public class SemFmEventListener {
     private static final int EVENT_AF_RECEIVED = 14;
     private static final int EVENT_AF_STARTED = 13;

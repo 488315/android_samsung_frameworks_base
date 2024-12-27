@@ -1,6 +1,5 @@
 package android.media;
 
-/* loaded from: classes2.dex */
 public class MediaCasStateException extends IllegalStateException {
     private final String mDiagnosticInfo;
     private final int mErrorCode;

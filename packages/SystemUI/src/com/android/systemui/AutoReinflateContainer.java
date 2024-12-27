@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Set;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes.dex */
 public final class AutoReinflateContainer extends FrameLayout {
     public static final Set SUPPORTED_CHANGES = Set.of(4, 512, Integer.MIN_VALUE, 4096, 1073741824);
     public final List mInflateListeners;

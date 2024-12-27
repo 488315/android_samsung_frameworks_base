@@ -7,7 +7,6 @@ import libcore.util.NativeAllocationRegistry;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes.dex */
 public class MeshSpecification {
     public static final int ALPHA_TYPE_OPAQUE = 1;
     public static final int ALPHA_TYPE_PREMULTIPLIED = 2;

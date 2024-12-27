@@ -26,7 +26,6 @@ import java.util.Set;
 import java.util.concurrent.Executor;
 import java.util.stream.Collectors;
 
-/* loaded from: classes4.dex */
 public class TelephonyCallback {
     public static final int DEFAULT_PER_PID_REGISTRATION_LIMIT = 50;
 

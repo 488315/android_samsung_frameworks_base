@@ -19,7 +19,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes4.dex */
 public final class InputDevice implements Parcelable {
     public static final Parcelable.Creator<InputDevice> CREATOR =
             new Parcelable.Creator<InputDevice>() { // from class: android.view.InputDevice.1

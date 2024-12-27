@@ -13,7 +13,6 @@ import com.android.internal.R;
 
 @RemoteViews.RemoteView
 @Deprecated
-/* loaded from: classes4.dex */
 public class AbsoluteLayout extends ViewGroup {
 
     public static class LayoutParams extends ViewGroup.LayoutParams {

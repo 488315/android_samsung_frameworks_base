@@ -3,7 +3,6 @@ package android.text;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 
-/* loaded from: classes4.dex */
 public class SpanSet<E> {
     private final Class<? extends E> classType;
     int numberOfSpans = 0;

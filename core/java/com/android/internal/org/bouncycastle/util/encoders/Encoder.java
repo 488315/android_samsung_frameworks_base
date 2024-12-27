@@ -3,7 +3,6 @@ package com.android.internal.org.bouncycastle.util.encoders;
 import java.io.IOException;
 import java.io.OutputStream;
 
-/* loaded from: classes5.dex */
 public interface Encoder {
     int decode(String str, OutputStream outputStream) throws IOException;
 

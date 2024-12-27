@@ -40,7 +40,6 @@ import com.android.internal.view.menu.MenuPresenter;
 import com.android.internal.view.menu.MenuView;
 import com.android.internal.view.menu.SubMenuBuilder;
 
-/* loaded from: classes5.dex */
 public class ActionBarView extends AbsActionBarView implements DecorToolbar {
     private static final int DEFAULT_CUSTOM_GRAVITY = 8388627;
     public static final int DISPLAY_DEFAULT = 0;

@@ -9,7 +9,6 @@ import java.util.Objects;
 import java.util.UUID;
 import java.util.function.IntFunction;
 
-/* loaded from: classes5.dex */
 public final class BitUtils {
     private BitUtils() {}
 

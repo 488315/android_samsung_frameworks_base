@@ -7,7 +7,6 @@ import android.os.HwParcel;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public final class LceStatusInfo {
     public int lceStatus = 0;
     public byte actualIntervalMs = 0;

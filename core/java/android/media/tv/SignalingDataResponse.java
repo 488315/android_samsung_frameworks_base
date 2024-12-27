@@ -9,7 +9,6 @@ import com.android.internal.util.AnnotationValidations;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public final class SignalingDataResponse extends BroadcastInfoResponse implements Parcelable {
     public static final Parcelable.Creator<SignalingDataResponse> CREATOR =
             new Parcelable.Creator<

@@ -2,7 +2,6 @@ package com.samsung.android.media.heif;
 
 import java.nio.ByteBuffer;
 
-/* loaded from: classes6.dex */
 public class SemHeifConfig {
     private ByteBuffer mCameraInfoBuffer;
     private ByteBuffer mExifBuffer;

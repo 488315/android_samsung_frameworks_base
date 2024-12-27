@@ -12,7 +12,6 @@ import vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
-/* loaded from: classes.dex */
 public class SysinputHAL_V1_2 implements SysinputHALInterface {
     private final String TAG;
     private ISehSysInputDev halService;

@@ -16,7 +16,6 @@ import com.android.internal.R;
 
 import java.util.ArrayList;
 
-/* loaded from: classes5.dex */
 public class ListMenuPresenter implements MenuPresenter, AdapterView.OnItemClickListener {
     private static final String TAG = "ListMenuPresenter";
     public static final String VIEWS_TAG = "android:menu:list";

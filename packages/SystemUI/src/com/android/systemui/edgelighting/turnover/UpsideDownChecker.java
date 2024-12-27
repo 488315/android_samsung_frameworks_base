@@ -10,7 +10,6 @@ import com.samsung.android.hardware.context.SemContextListener;
 import com.samsung.android.hardware.context.SemContextManager;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public final class UpsideDownChecker implements SemContextListener {
     public boolean mLastSensorValue;
     public TurnOverEdgeLighting.AnonymousClass2 mListener;

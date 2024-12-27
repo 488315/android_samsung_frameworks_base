@@ -16,7 +16,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes4.dex */
 public class ProvisioningManager {
 
     @SystemApi

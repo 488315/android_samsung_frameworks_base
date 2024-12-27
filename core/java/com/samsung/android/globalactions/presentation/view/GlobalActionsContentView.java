@@ -35,7 +35,6 @@ import com.samsung.android.globalactions.util.WindowManagerUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public class GlobalActionsContentView implements ContentView, ViewStateController {
     private static final int LAND_NUM_COLUMNS_4_ITEMS = 2;
     private static final int LAND_NUM_COLUMNS_MORE_THAN_4_ITEMS = 3;

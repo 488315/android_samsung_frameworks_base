@@ -1,6 +1,5 @@
 package android.hardware.graphics.common;
 
-/* loaded from: classes2.dex */
 public @interface Transform {
     public static final int FLIP_H = 1;
     public static final int FLIP_V = 2;

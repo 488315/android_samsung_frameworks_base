@@ -240,7 +240,6 @@ import libcore.io.IoUtils;
 import libcore.net.event.NetworkEventDispatcher;
 import org.json.JSONObject;
 
-/* loaded from: classes.dex */
 public final class ActivityThread extends ClientTransactionHandler implements ActivityThreadInternal {
     private static final int ACTIVITY_THREAD_CHECKIN_VERSION = 4;
     private static final long BINDER_CALLBACK_THROTTLE = 10100;

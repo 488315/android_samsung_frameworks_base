@@ -5,7 +5,6 @@ import android.hardware.scontext.SContextConstants;
 
 import com.android.internal.graphics.ColorUtils;
 
-/* loaded from: classes5.dex */
 public final class CamUtils {
     static final float[][] XYZ_TO_CAM16RGB = {
         new float[] {0.401288f, 0.650173f, -0.051461f},

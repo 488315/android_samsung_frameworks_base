@@ -10,7 +10,6 @@ import com.android.internal.org.bouncycastle.crypto.params.KeyParameter;
 import com.samsung.android.graphics.spr.document.animator.SprAnimatorBase;
 import com.samsung.android.graphics.spr.document.attribute.SprAttributeBase;
 
-/* loaded from: classes5.dex */
 public final class TwofishEngine implements BlockCipher {
     private static final int BLOCK_SIZE = 16;
     private static final int GF256_FDBK = 361;

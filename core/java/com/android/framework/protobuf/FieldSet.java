@@ -9,7 +9,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-/* loaded from: classes3.dex */
 final class FieldSet<T extends FieldDescriptorLite<T>> {
     private static final int DEFAULT_FIELD_MAP_ARRAY_SIZE = 16;
     private static final FieldSet DEFAULT_INSTANCE = new FieldSet(true);

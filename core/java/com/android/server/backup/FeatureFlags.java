@@ -1,6 +1,5 @@
 package com.android.server.backup;
 
-/* loaded from: classes5.dex */
 public interface FeatureFlags {
     boolean enableClearPipeAfterRestoreFile();
 

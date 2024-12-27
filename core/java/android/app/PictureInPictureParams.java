@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public final class PictureInPictureParams implements Parcelable {
     public static final Parcelable.Creator<PictureInPictureParams> CREATOR =
             new Parcelable.Creator<

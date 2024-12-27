@@ -28,7 +28,6 @@ import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.BiConsumer;
 
-/* loaded from: classes2.dex */
 public abstract class MediaRoute2ProviderService extends Service {
     public static final String CATEGORY_SELF_SCAN_ONLY =
             "android.media.MediaRoute2ProviderService.SELF_SCAN_ONLY";

@@ -5,7 +5,6 @@ import android.os.Handler;
 import com.android.server.pm.verify.domain.DomainVerificationService;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes2.dex */
 public final /* synthetic */ class PackageManagerService$$ExternalSyntheticLambda22
         implements PackageManagerServiceInjector.Producer, ApkChecksums.Injector.Producer {
     public final /* synthetic */ Object f$0;

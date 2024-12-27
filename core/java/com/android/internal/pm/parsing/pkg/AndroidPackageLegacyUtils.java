@@ -6,7 +6,6 @@ import android.content.pm.PackageInfo;
 import com.android.internal.pm.pkg.parsing.ParsingPackageHidden;
 import com.android.server.pm.pkg.AndroidPackage;
 
-/* loaded from: classes5.dex */
 public class AndroidPackageLegacyUtils {
     private AndroidPackageLegacyUtils() {}
 

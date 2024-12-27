@@ -14,7 +14,6 @@ import com.android.internal.telephony.util.ArrayUtils;
 import java.util.List;
 import java.util.Locale;
 
-/* loaded from: classes5.dex */
 public class SemTelephonyUtils {
     private static final String[] KOR_DOMESTIC_PROP_FOR_DS;
     private static final int NTCTYPE_COUNTRY = 3;

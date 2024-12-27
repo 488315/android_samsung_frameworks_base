@@ -5,7 +5,6 @@ import android.os.Bundle;
 
 import com.sec.android.allshare.iface.CVMessage;
 
-/* loaded from: classes3.dex */
 public interface IAllShareConnector {
 
     public enum AllShareServiceState {

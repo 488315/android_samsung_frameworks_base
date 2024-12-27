@@ -16,7 +16,6 @@ import com.android.internal.telephony.SemRILConstants;
 
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public interface IImsCallSession extends IInterface {
     void accept(int i, ImsStreamMediaProfile imsStreamMediaProfile) throws RemoteException;
 

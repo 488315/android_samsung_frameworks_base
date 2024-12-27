@@ -39,7 +39,6 @@ import java.util.function.ToIntFunction;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-/* loaded from: classes2.dex */
 public final class MediaRouter2Manager {
     public static final int REQUEST_ID_NONE = 0;
     private static final String TAG = "MR2Manager";

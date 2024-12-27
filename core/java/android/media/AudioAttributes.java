@@ -24,7 +24,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-/* loaded from: classes2.dex */
 public final class AudioAttributes implements Parcelable {
     public static final int ALLOW_CAPTURE_BY_ALL = 1;
     public static final int ALLOW_CAPTURE_BY_NONE = 3;

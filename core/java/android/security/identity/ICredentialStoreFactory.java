@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes3.dex */
 public interface ICredentialStoreFactory extends IInterface {
     public static final int CREDENTIAL_STORE_TYPE_DEFAULT = 0;
     public static final int CREDENTIAL_STORE_TYPE_DIRECT_ACCESS = 1;

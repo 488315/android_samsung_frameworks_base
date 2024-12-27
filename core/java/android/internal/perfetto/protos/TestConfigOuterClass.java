@@ -1,6 +1,5 @@
 package android.internal.perfetto.protos;
 
-/* loaded from: classes2.dex */
 public final class TestConfigOuterClass {
 
     public final class TestConfig {

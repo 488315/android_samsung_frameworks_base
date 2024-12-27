@@ -5,7 +5,6 @@ import com.samsung.android.knox.analytics.database.Contract;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/* loaded from: classes6.dex */
 public class Event extends JSONObject {
     private static final int DEFAULT_BULK_VALUE = 1;
     private int bulk;

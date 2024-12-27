@@ -9,7 +9,6 @@ import android.util.Log;
 import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
 
-/* loaded from: classes2.dex */
 public final class ParcelableMessageNanoCreator<T extends MessageNano>
         implements Parcelable.Creator<T> {
     private static final String TAG = "PMNCreator";

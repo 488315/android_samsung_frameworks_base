@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.text.Layout;
 import android.text.ParcelableSpan;
 
-/* loaded from: classes4.dex */
 public interface AlignmentSpan extends ParagraphStyle {
     Layout.Alignment getAlignment();
 

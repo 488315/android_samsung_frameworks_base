@@ -58,7 +58,6 @@ import java.util.function.IntFunction;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
-/* loaded from: classes4.dex */
 public class ViewDebug {
     private static final int CAPTURE_TIMEOUT = 6000;
     public static final boolean DEBUG_DRAG = false;

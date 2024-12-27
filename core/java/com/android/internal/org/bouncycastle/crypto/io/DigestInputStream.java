@@ -6,7 +6,6 @@ import java.io.FilterInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-/* loaded from: classes5.dex */
 public class DigestInputStream extends FilterInputStream {
     protected Digest digest;
 

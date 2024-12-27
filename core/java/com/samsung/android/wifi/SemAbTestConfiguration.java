@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-/* loaded from: classes6.dex */
 public class SemAbTestConfiguration implements Parcelable {
     public static final Parcelable.Creator<SemAbTestConfiguration> CREATOR =
             new Parcelable.Creator<

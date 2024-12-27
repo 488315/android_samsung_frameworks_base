@@ -38,7 +38,6 @@ import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-/* loaded from: classes.dex */
 final class SharedPreferencesImpl implements SharedPreferences {
     private static final long CALLBACK_ON_CLEAR_CHANGE = 119147584;
     private static final boolean DEBUG = false;

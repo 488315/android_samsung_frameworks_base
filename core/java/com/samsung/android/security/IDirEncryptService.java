@@ -7,7 +7,6 @@ import android.os.IVoldTaskListener;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes6.dex */
 public interface IDirEncryptService extends IInterface {
     int encryptStorage(String str) throws RemoteException;
 

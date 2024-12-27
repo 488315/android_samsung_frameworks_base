@@ -5,7 +5,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.ParcelableHolder;
 
-/* loaded from: classes2.dex */
 public final class OperationState implements Parcelable {
     public static final Parcelable.Creator<OperationState> CREATOR =
             new Parcelable.Creator<OperationState>() { // from class:

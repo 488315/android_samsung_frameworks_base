@@ -2,7 +2,6 @@ package android.hardware.radio.V1_5;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class Domain {
     public static final int CS = 1;
     public static final int PS = 2;

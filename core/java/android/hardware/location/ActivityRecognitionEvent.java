@@ -3,7 +3,6 @@ package android.hardware.location;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public class ActivityRecognitionEvent implements Parcelable {
     public static final Parcelable.Creator<ActivityRecognitionEvent> CREATOR =
             new Parcelable.Creator<ActivityRecognitionEvent>() { // from class:

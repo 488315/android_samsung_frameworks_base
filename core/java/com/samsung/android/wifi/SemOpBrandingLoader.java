@@ -2,7 +2,6 @@ package com.samsung.android.wifi;
 
 import android.os.SystemProperties;
 
-/* loaded from: classes6.dex */
 public class SemOpBrandingLoader {
     private static SemOpBrandingLoader sInstance = null;
     private SemVendor mVendor = getSalesCode();

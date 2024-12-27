@@ -4,7 +4,6 @@ import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes6.dex */
 public class SehSimLockInfo implements Parcelable {
     public static final Parcelable.Creator<SehSimLockInfo> CREATOR =
             new Parcelable.Creator<

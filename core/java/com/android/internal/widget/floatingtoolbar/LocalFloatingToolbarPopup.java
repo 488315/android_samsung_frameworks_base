@@ -60,7 +60,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-/* loaded from: classes5.dex */
 public final class LocalFloatingToolbarPopup implements FloatingToolbarPopup {
     private static final int MAX_OVERFLOW_SIZE = 4;
     private static final int MIN_OVERFLOW_SIZE = 1;

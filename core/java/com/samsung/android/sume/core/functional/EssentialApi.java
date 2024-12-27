@@ -16,5 +16,4 @@ import java.lang.annotation.Target;
 })
 @Documented
 @Retention(RetentionPolicy.CLASS)
-/* loaded from: classes6.dex */
 public @interface EssentialApi {}

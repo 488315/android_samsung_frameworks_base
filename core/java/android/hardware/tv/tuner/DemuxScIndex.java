@@ -1,6 +1,5 @@
 package android.hardware.tv.tuner;
 
-/* loaded from: classes2.dex */
 public @interface DemuxScIndex {
     public static final int B_FRAME = 4;
     public static final int I_FRAME = 1;

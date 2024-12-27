@@ -11,7 +11,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
 
-/* loaded from: classes5.dex */
 public class KernelCpuSpeedReader {
     private static final String TAG = "KernelCpuSpeedReader";
     private final long[] mDeltaSpeedTimesMs;

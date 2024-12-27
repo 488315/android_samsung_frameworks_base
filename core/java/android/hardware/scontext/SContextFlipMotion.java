@@ -5,7 +5,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @Deprecated
-/* loaded from: classes2.dex */
 public class SContextFlipMotion extends SContextEventContext {
     public static final Parcelable.Creator<SContextFlipMotion> CREATOR =
             new Parcelable.Creator<SContextFlipMotion>() { // from class:

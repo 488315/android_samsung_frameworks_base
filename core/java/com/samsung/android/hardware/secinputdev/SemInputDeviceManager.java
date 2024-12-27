@@ -3,7 +3,6 @@ package com.samsung.android.hardware.secinputdev;
 import android.os.IBinder;
 import android.util.Log;
 
-/* loaded from: classes6.dex */
 public class SemInputDeviceManager {
     public static final int CLEAR_COVER_CLOSED = 3;
     public static final int CLEAR_COVER_OPENED = 0;

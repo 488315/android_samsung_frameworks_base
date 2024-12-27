@@ -3,7 +3,6 @@ package com.samsung.android.core;
 import android.graphics.Rect;
 import android.hardware.input.KeyboardLayout;
 
-/* loaded from: classes6.dex */
 public class CompatUtils {
     public static final float SCALE_72 = 0.72f;
     private static final float SCALE_DECIMAL_PLACE = 100.0f;

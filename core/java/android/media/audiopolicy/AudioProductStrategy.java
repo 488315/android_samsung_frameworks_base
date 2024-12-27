@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public final class AudioProductStrategy implements Parcelable {
     private static final int AUDIO_FLAGS_AFFECT_STRATEGY_SELECTION = 13;
     public static final int DEFAULT_GROUP = -1;

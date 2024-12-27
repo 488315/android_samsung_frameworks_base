@@ -1,6 +1,5 @@
 package com.android.media.flags;
 
-/* loaded from: classes5.dex */
 public final class FeatureFlagsImpl implements FeatureFlags {
     @Override // com.android.media.flags.FeatureFlags
     public boolean adjustVolumeForForegroundAppPlayingAudioWithoutMediaSession() {

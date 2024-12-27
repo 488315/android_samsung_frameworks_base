@@ -3,7 +3,6 @@ package android.app.ondeviceintelligence;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes.dex */
 public class InferenceInfo implements Parcelable {
     public static final Parcelable.Creator<InferenceInfo> CREATOR =
             new Parcelable.Creator<InferenceInfo>() { // from class:

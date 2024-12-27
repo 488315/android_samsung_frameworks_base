@@ -5,7 +5,6 @@ import android.util.proto.ProtoOutputStream;
 
 import java.util.ArrayList;
 
-/* loaded from: classes5.dex */
 public class LocalLog {
     private final String mTag;
     private final int mMaxLines = 20;

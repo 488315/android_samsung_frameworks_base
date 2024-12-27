@@ -37,7 +37,6 @@ import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.function.IntConsumer;
 
-/* loaded from: classes.dex */
 public class ContextWrapper extends Context {
     Context mBase;
     public List<ComponentCallbacks> mCallbacksRegisteredToSuper;

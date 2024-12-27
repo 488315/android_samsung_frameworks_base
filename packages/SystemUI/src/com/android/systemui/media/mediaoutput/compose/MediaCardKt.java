@@ -90,7 +90,6 @@ import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public abstract class MediaCardKt {
     public static final void ControlArea(MediaInteraction mediaInteraction, Composer composer, final int i, final int i2) {
         MediaInteraction mediaInteraction2;

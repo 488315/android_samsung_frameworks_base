@@ -18,7 +18,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-/* loaded from: classes5.dex */
 public class ExtendedPKIXParameters extends PKIXParameters {
     public static final int CHAIN_VALIDITY_MODEL = 1;
     public static final int PKIX_VALIDITY_MODEL = 0;

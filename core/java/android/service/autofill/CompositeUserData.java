@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public final class CompositeUserData implements FieldClassificationUserData, Parcelable {
     public static final Parcelable.Creator<CompositeUserData> CREATOR =
             new Parcelable.Creator<

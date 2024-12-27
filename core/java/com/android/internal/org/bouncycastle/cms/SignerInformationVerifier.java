@@ -9,7 +9,6 @@ import com.android.internal.org.bouncycastle.operator.DigestCalculatorProvider;
 import com.android.internal.org.bouncycastle.operator.OperatorCreationException;
 import com.android.internal.org.bouncycastle.operator.SignatureAlgorithmIdentifierFinder;
 
-/* loaded from: classes5.dex */
 public class SignerInformationVerifier {
     private DigestCalculatorProvider digestProvider;
     private SignatureAlgorithmIdentifierFinder sigAlgorithmFinder;

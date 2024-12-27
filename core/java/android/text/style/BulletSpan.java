@@ -7,7 +7,6 @@ import android.text.Layout;
 import android.text.ParcelableSpan;
 import android.text.Spanned;
 
-/* loaded from: classes4.dex */
 public class BulletSpan implements LeadingMarginSpan, ParcelableSpan {
     private static final int STANDARD_BULLET_RADIUS = 4;
     private static final int STANDARD_COLOR = 0;

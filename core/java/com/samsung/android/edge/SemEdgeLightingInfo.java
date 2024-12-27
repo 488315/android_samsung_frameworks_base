@@ -8,7 +8,6 @@ import android.os.Parcelable;
 
 import java.util.Arrays;
 
-/* loaded from: classes6.dex */
 public final class SemEdgeLightingInfo implements Parcelable {
     public static final Parcelable.Creator<SemEdgeLightingInfo> CREATOR =
             new Parcelable.Creator<

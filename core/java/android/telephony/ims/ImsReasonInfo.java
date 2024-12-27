@@ -9,7 +9,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.HashMap;
 import java.util.Map;
 
-/* loaded from: classes4.dex */
 public final class ImsReasonInfo implements Parcelable {
     public static final int CODE_ACCESS_CLASS_BLOCKED = 1512;
     public static final int CODE_ANSWERED_ELSEWHERE = 1014;

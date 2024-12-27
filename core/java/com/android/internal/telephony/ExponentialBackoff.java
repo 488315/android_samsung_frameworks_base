@@ -3,7 +3,6 @@ package com.android.internal.telephony;
 import android.os.Handler;
 import android.os.Looper;
 
-/* loaded from: classes5.dex */
 public class ExponentialBackoff {
     private long mCurrentDelayMs;
     private final Handler mHandler;

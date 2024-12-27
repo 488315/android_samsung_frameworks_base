@@ -9,7 +9,6 @@ import java.io.IOException;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 
-/* loaded from: classes4.dex */
 public class ApexInfo {
     private Boolean isActive;
     private Boolean isFactory;

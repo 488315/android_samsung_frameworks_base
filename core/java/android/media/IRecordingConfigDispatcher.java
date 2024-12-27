@@ -8,7 +8,6 @@ import android.os.RemoteException;
 
 import java.util.List;
 
-/* loaded from: classes2.dex */
 public interface IRecordingConfigDispatcher extends IInterface {
     void dispatchRecordingConfigChange(List<AudioRecordingConfiguration> list)
             throws RemoteException;

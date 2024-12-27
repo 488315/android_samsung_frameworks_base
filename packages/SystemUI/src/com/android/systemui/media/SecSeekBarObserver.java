@@ -11,7 +11,6 @@ import com.android.systemui.media.audiovisseekbar.config.AudioVisSeekBarConfig;
 import com.android.systemui.media.audiovisseekbar.utils.animator.SingleStateValueAnimator;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public final class SecSeekBarObserver implements Observer {
     public final SecPlayerViewHolder holder;
 

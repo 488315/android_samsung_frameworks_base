@@ -1,6 +1,5 @@
 package com.android.server.job;
 
-/* loaded from: classes5.dex */
 public final class StateControllerProto {
     public static final long BACKGROUND = 1146756268033L;
     public static final long BATTERY = 1146756268034L;

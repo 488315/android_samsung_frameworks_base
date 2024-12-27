@@ -24,7 +24,6 @@ import java.nio.NioUtils;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-/* loaded from: classes2.dex */
 public class ImageWriter implements AutoCloseable {
     private final Object mCloseLock;
     private int mDataSpace;

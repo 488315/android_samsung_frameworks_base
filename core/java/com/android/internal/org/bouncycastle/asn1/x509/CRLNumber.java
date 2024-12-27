@@ -6,7 +6,6 @@ import com.android.internal.org.bouncycastle.asn1.ASN1Primitive;
 
 import java.math.BigInteger;
 
-/* loaded from: classes5.dex */
 public class CRLNumber extends ASN1Object {
     private BigInteger number;
 

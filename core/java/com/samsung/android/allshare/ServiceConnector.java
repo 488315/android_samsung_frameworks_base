@@ -27,7 +27,6 @@ import java.lang.ref.WeakReference;
 import java.util.HashSet;
 import java.util.Iterator;
 
-/* loaded from: classes3.dex */
 public class ServiceConnector {
     private static final String TAG_CONNECTOR = "ServiceConnector";
     private static WeakReference<Context> mContextRef = null;

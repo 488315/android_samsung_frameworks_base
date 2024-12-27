@@ -17,7 +17,6 @@ import android.view.Surface;
 
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public interface ITvInputManager extends IInterface {
     ITvInputHardware acquireTvInputHardware(
             int i,

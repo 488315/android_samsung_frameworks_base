@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.android.internal.R;
 
-/* loaded from: classes5.dex */
 public class MicroAlertController extends AlertController {
     public MicroAlertController(Context context, DialogInterface di, Window window) {
         super(context, di, window);

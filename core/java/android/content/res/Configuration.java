@@ -25,7 +25,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.Locale;
 
-/* loaded from: classes.dex */
 public final class Configuration implements Parcelable, Comparable<Configuration> {
     public static final int ASSETS_SEQ_UNDEFINED = 0;
     public static final int COLOR_MODE_HDR_MASK = 12;

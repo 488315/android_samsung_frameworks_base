@@ -3,7 +3,6 @@ package android.hardware.hdmi;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes2.dex */
 public final class HdmiUtils {
     public static final int HDMI_RELATIVE_POSITION_ABOVE = 5;
     public static final int HDMI_RELATIVE_POSITION_BELOW = 2;

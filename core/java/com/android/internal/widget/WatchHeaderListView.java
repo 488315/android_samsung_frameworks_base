@@ -11,7 +11,6 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.function.Predicate;
 
-/* loaded from: classes5.dex */
 public class WatchHeaderListView extends ListView {
     private View mTopPanel;
 

@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public class KeymasterArguments implements Parcelable {
     public static final long UINT32_MAX_VALUE = 4294967295L;
     private static final long UINT32_RANGE = 4294967296L;

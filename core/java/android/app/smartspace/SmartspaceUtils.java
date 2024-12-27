@@ -3,7 +3,6 @@ package android.app.smartspace;
 import android.app.smartspace.uitemplatedata.Text;
 import android.text.TextUtils;
 
-/* loaded from: classes.dex */
 public final class SmartspaceUtils {
     private SmartspaceUtils() {}
 

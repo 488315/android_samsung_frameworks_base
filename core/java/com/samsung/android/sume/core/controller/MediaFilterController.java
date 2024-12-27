@@ -43,7 +43,6 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-/* loaded from: classes6.dex */
 public class MediaFilterController implements MediaController<Response>, MessageConsumer {
     private static final String TAG = Def.tagOf((Class<?>) MediaFilterController.class);
     private MediaController.OnEventListener eventListener;

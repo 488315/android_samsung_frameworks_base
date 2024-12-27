@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public class HdmiDeviceInfo implements Parcelable {
     public static final int ADDR_INTERNAL = 0;
     public static final int ADDR_INVALID = -1;

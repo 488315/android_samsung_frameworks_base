@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public final class EpsBearerQosSessionAttributes implements Parcelable, QosSessionAttributes {
     private final long mGuaranteedDownlinkBitRate;
     private final long mGuaranteedUplinkBitRate;

@@ -9,7 +9,6 @@ import android.widget.BaseAdapter;
 import java.util.List;
 import java.util.function.BooleanSupplier;
 
-/* loaded from: classes5.dex */
 public class ActionsAdapter extends BaseAdapter {
     private final Context mContext;
     private final BooleanSupplier mDeviceProvisioned;

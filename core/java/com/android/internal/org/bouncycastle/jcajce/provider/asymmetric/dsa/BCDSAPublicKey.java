@@ -22,7 +22,6 @@ import java.security.interfaces.DSAPublicKey;
 import java.security.spec.DSAParameterSpec;
 import java.security.spec.DSAPublicKeySpec;
 
-/* loaded from: classes5.dex */
 public class BCDSAPublicKey implements DSAPublicKey {
     private static BigInteger ZERO = BigInteger.valueOf(0);
     private static final long serialVersionUID = 1752452449903495175L;

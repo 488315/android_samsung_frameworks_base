@@ -10,7 +10,6 @@ import android.widget.Checkable;
 import com.android.internal.R;
 
 @Deprecated
-/* loaded from: classes3.dex */
 public class CheckBoxPreference extends TwoStatePreference {
     public CheckBoxPreference(Context context, AttributeSet attrs, int defStyleAttr) {
         this(context, attrs, defStyleAttr, 0);

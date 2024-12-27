@@ -8,7 +8,6 @@ import com.android.internal.util.ArrayUtils;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes4.dex */
 public final class SuggestionsInfo implements Parcelable {
     public static final int RESULT_ATTR_DONT_SHOW_UI_FOR_SUGGESTIONS = 16;
     public static final int RESULT_ATTR_HAS_RECOMMENDED_SUGGESTIONS = 4;

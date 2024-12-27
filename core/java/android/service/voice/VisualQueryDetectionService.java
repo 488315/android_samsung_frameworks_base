@@ -29,7 +29,6 @@ import java.util.concurrent.ExecutionException;
 import java.util.function.IntConsumer;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public abstract class VisualQueryDetectionService extends Service
         implements SandboxedDetectionInitializer {
     static final /* synthetic */ boolean $assertionsDisabled = false;

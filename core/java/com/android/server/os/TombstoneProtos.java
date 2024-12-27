@@ -1,6 +1,5 @@
 package com.android.server.os;
 
-/* loaded from: classes5.dex */
 public final class TombstoneProtos {
     public static final int ARM32 = 0;
     public static final int ARM64 = 1;

@@ -3,7 +3,6 @@ package com.samsung.android.authenticator;
 import android.content.res.AssetFileDescriptor;
 
 @Deprecated(forRemoval = true, since = "15.5")
-/* loaded from: classes5.dex */
 public class SemTrustedApplicationExecutor {
     private static final String PERMISSION_REQUEST_AUTHNR_SERVICE =
             "com.samsung.android.permission.REQUEST_AUTHNR_SERVICE";

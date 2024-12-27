@@ -11,7 +11,6 @@ import java.nio.ByteBuffer;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public final class UaSecurityProtocolIdentifier implements Parcelable {
     public static final int ORG_3GPP = 1;
     public static final int ORG_3GPP2 = 2;

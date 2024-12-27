@@ -105,7 +105,6 @@ import java.util.concurrent.Executor;
 import java.util.function.IntConsumer;
 
 /* JADX INFO: Access modifiers changed from: package-private */
-/* loaded from: classes.dex */
 public class ContextImpl extends Context {
     private static final int CONTEXT_TYPE_ACTIVITY = 2;
     private static final int CONTEXT_TYPE_DISPLAY_CONTEXT = 1;

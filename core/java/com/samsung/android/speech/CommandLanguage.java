@@ -2,7 +2,6 @@ package com.samsung.android.speech;
 
 import com.samsung.android.core.AppJumpBlockTool;
 
-/* loaded from: classes6.dex */
 public class CommandLanguage {
     public static final String[][] CALL = {
         new String[] {"수신", "거절"},

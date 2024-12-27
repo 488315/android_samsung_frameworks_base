@@ -7,7 +7,6 @@ import java.lang.annotation.Target;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 
-/* loaded from: classes3.dex */
 public class HealthKeys {
     public static final int BASE_PACKAGE = 40000;
     public static final int BASE_PID = 20000;

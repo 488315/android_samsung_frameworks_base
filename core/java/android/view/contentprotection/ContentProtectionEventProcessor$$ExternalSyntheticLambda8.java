@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.function.Function;
 
 /* compiled from: D8$$SyntheticClass */
-/* loaded from: classes4.dex */
 public final /* synthetic */ class ContentProtectionEventProcessor$$ExternalSyntheticLambda8
         implements Function {
     @Override // java.util.function.Function

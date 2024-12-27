@@ -93,7 +93,6 @@ import kotlin.jvm.internal.Ref$ObjectRef;
 import kotlin.ranges.IntRange;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes3.dex */
 public class CardStackView extends FrameLayout {
     public static final PathInterpolator alphaInterpolator;
     public static final PathInterpolator collapseRootInterpolator;

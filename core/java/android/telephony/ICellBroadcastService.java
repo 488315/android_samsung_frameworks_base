@@ -11,7 +11,6 @@ import android.text.TextUtils;
 
 import java.util.List;
 
-/* loaded from: classes4.dex */
 public interface ICellBroadcastService extends IInterface {
     public static final String DESCRIPTOR = "android.telephony.ICellBroadcastService";
 

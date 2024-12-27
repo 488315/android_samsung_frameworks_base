@@ -16,7 +16,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Set;
 
-/* loaded from: classes3.dex */
 public class ResourceCertificateSource implements CertificateSource {
     private Set<X509Certificate> mCertificates;
     private Context mContext;

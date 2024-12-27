@@ -13,7 +13,6 @@ import org.xmlpull.v1.XmlSerializer;
 import java.io.IOException;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public class DeviceFilter {
     private static final String TAG = DeviceFilter.class.getSimpleName();
     public final int mClass;

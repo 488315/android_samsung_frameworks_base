@@ -20,7 +20,6 @@ import java.security.cert.CertificateException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/* loaded from: classes3.dex */
 class CredstorePresentationSession extends PresentationSession {
     private static final String TAG = "CredstorePresentationSession";
     private ISession mBinder;

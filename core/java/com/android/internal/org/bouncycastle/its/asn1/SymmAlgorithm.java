@@ -4,7 +4,6 @@ import com.android.internal.org.bouncycastle.asn1.ASN1Enumerated;
 import com.android.internal.org.bouncycastle.asn1.ASN1Object;
 import com.android.internal.org.bouncycastle.asn1.ASN1Primitive;
 
-/* loaded from: classes5.dex */
 public class SymmAlgorithm extends ASN1Object {
     public static SymmAlgorithm aes128Ccm = new SymmAlgorithm(new ASN1Enumerated(0));
     private ASN1Enumerated symmAlgorithm;

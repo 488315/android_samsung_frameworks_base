@@ -1,6 +1,5 @@
 package com.android.server.job;
 
-/* loaded from: classes5.dex */
 public final class JobPackageHistoryProto {
     public static final long HISTORY_EVENT = 2246267895809L;
     public static final int START_JOB = 1;

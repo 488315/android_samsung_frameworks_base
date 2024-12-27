@@ -2,7 +2,6 @@ package android.media.effect;
 
 import java.lang.reflect.Constructor;
 
-/* loaded from: classes2.dex */
 public class EffectFactory {
     public static final String EFFECT_AUTOFIX = "android.media.effect.effects.AutoFixEffect";
     public static final String EFFECT_BACKDROPPER =

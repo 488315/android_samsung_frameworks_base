@@ -20,7 +20,6 @@ import java.util.Objects;
 import java.util.Properties;
 import java.util.Set;
 
-/* loaded from: classes.dex */
 final class ProvisioningIntentHelper {
     private static final Map<String, Class> EXTRAS_TO_CLASS_MAP = createExtrasToClassMap();
     private static final String TAG = "ProvisioningIntentHelper";

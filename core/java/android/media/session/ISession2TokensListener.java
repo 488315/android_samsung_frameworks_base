@@ -9,7 +9,6 @@ import android.os.RemoteException;
 
 import java.util.List;
 
-/* loaded from: classes2.dex */
 public interface ISession2TokensListener extends IInterface {
     public static final String DESCRIPTOR = "android.media.session.ISession2TokensListener";
 

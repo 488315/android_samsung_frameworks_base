@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-/* loaded from: classes4.dex */
 public abstract class ResourceCursorTreeAdapter extends CursorTreeAdapter {
     private int mChildLayout;
     private int mCollapsedGroupLayout;

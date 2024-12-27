@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-/* loaded from: classes5.dex */
 public final class MidiDispatcher extends MidiReceiver {
     private final MidiReceiverFailureHandler mFailureHandler;
     private final CopyOnWriteArrayList<MidiReceiver> mReceivers;

@@ -39,7 +39,6 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Supplier;
 
-/* loaded from: classes2.dex */
 public final class MediaCodec {
     public static final int BUFFER_FLAG_CODEC_CONFIG = 2;
     public static final int BUFFER_FLAG_DECODE_ONLY = 32;

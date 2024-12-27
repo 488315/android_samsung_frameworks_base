@@ -8,7 +8,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.os.UserHandle;
 
-/* loaded from: classes.dex */
 public interface IOnAppsChangedListener extends IInterface {
     void onPackageAdded(UserHandle userHandle, String str) throws RemoteException;
 

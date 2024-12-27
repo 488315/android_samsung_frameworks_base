@@ -1,6 +1,5 @@
 package android.security.apc;
 
-/* loaded from: classes3.dex */
 public @interface ResponseCode {
     public static final int ABORTED = 2;
     public static final int CANCELLED = 1;

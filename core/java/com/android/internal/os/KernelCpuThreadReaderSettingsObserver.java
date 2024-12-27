@@ -15,7 +15,6 @@ import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/* loaded from: classes5.dex */
 public class KernelCpuThreadReaderSettingsObserver extends ContentObserver {
     private static final String COLLECTED_UIDS_DEFAULT = "0-0;1000-1000";
     private static final String COLLECTED_UIDS_SETTINGS_KEY = "collected_uids";

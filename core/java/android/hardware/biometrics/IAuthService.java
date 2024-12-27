@@ -12,7 +12,6 @@ import android.text.TextUtils;
 
 import java.util.List;
 
-/* loaded from: classes2.dex */
 public interface IAuthService extends IInterface {
     public static final String DESCRIPTOR = "android.hardware.biometrics.IAuthService";
 

@@ -32,7 +32,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Predicate;
 
-/* loaded from: classes4.dex */
 public final class TransitionInfo implements Parcelable {
     public static final Parcelable.Creator<TransitionInfo> CREATOR =
             new Parcelable.Creator<

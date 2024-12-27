@@ -6,7 +6,6 @@ import android.util.Slog;
 
 import java.util.function.Supplier;
 
-/* loaded from: classes.dex */
 public class Element {
     private static final String BAD_COMPONENT_NAME_CHARS = ";,[](){}:?%^*|/\\";
     private static final int DEFAULT_MAX_STRING_ATTR_LENGTH = 32768;

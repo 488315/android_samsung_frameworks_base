@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public class ParcelableCallAnalytics implements Parcelable {
     public static final int CALLTYPE_INCOMING = 1;
     public static final int CALLTYPE_OUTGOING = 2;

@@ -1,6 +1,5 @@
 package android.media;
 
-/* loaded from: classes2.dex */
 public final class AudioAttributesProto {
     public static final long CONTENT_TYPE = 1159641169922L;
     public static final long FLAGS = 1120986464259L;

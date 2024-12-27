@@ -8,7 +8,6 @@ import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.collections.EmptyList;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes3.dex */
 public final class BluetoothA2dpUtil {
     public static final BluetoothA2dpUtil INSTANCE = new BluetoothA2dpUtil();
 

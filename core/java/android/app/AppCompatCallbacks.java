@@ -7,7 +7,6 @@ import com.android.internal.compat.ChangeReporter;
 
 import java.util.Arrays;
 
-/* loaded from: classes.dex */
 public final class AppCompatCallbacks implements Compatibility.BehaviorChangeDelegate {
     private final ChangeReporter mChangeReporter;
     private final long[] mDisabledChanges;

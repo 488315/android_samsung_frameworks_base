@@ -8,7 +8,6 @@ import android.os.RemoteException;
 import java.util.List;
 
 @SystemApi
-/* loaded from: classes.dex */
 public class AppIntegrityManager {
     public static final String EXTRA_STATUS = "android.content.integrity.extra.STATUS";
     public static final int STATUS_FAILURE = 1;

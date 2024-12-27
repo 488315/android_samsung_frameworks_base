@@ -7,7 +7,6 @@ import android.view.MotionEvent;
 import android.view.ViewConfiguration;
 import android.widget.TextView;
 
-/* loaded from: classes4.dex */
 public class Touch {
     private Touch() {}
 

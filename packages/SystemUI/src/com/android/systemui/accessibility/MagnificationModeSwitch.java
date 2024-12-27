@@ -35,7 +35,6 @@ import java.util.Set;
 import java.util.function.Function;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes.dex */
 public final class MagnificationModeSwitch implements MagnificationGestureDetector.OnGestureListener, ComponentCallbacks {
     static final int DEFAULT_FADE_OUT_ANIMATION_DELAY_MS = 5000;
     static final long FADING_ANIMATION_DURATION_MS = 300;

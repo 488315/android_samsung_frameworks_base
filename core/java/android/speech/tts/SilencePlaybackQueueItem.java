@@ -2,7 +2,6 @@ package android.speech.tts;
 
 import android.os.ConditionVariable;
 
-/* loaded from: classes3.dex */
 class SilencePlaybackQueueItem extends PlaybackQueueItem {
     private final ConditionVariable mCondVar;
     private final long mSilenceDurationMs;

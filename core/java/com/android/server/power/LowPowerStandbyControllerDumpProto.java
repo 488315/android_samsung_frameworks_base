@@ -1,6 +1,5 @@
 package com.android.server.power;
 
-/* loaded from: classes5.dex */
 public final class LowPowerStandbyControllerDumpProto {
     public static final long ALLOWLIST = 2220498092042L;
     public static final long IDLE_SINCE_NON_INTERACTIVE = 1133871366152L;

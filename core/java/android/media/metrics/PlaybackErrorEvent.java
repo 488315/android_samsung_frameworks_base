@@ -8,7 +8,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public final class PlaybackErrorEvent extends Event implements Parcelable {
     public static final Parcelable.Creator<PlaybackErrorEvent> CREATOR =
             new Parcelable.Creator<PlaybackErrorEvent>() { // from class:

@@ -11,7 +11,6 @@ import com.samsung.android.sume.core.types.FlipType;
 import com.samsung.android.sume.core.types.MediaType;
 import com.samsung.android.sume.core.types.SplitType;
 
-/* loaded from: classes6.dex */
 public interface MutableMediaFormat extends MediaFormat, Copyable<MutableMediaFormat> {
     MutableMediaFormat set(MediaFilter.Option option);
 

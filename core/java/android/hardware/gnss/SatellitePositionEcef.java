@@ -5,7 +5,6 @@ import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public class SatellitePositionEcef implements Parcelable {
     public static final Parcelable.Creator<SatellitePositionEcef> CREATOR =
             new Parcelable.Creator<SatellitePositionEcef>() { // from class:

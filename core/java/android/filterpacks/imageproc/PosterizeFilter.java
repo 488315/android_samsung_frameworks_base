@@ -9,7 +9,6 @@ import android.filterfw.core.Program;
 import android.filterfw.core.ShaderProgram;
 import android.filterfw.format.ImageFormat;
 
-/* loaded from: classes.dex */
 public class PosterizeFilter extends Filter {
     private final String mPosterizeShader;
     private Program mProgram;

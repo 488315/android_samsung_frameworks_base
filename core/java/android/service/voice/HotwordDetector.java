@@ -9,7 +9,6 @@ import android.os.SharedMemory;
 import java.io.PrintWriter;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public interface HotwordDetector {
     public static final int DETECTOR_TYPE_NORMAL = 0;
     public static final int DETECTOR_TYPE_TRUSTED_HOTWORD_DSP = 1;

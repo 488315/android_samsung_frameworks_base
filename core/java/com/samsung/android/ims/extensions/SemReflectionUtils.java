@@ -6,7 +6,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-/* loaded from: classes6.dex */
 public class SemReflectionUtils {
     public static Field getField(Class<?> cls, String name) {
         Class<?> superClass = cls.getSuperclass();

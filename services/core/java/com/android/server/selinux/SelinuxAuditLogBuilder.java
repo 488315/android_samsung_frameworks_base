@@ -10,7 +10,6 @@ import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes2.dex */
 public final class SelinuxAuditLogBuilder {
     static final String CONFIG_SELINUX_AUDIT_DOMAIN = "selinux_audit_domain";
     public static final Matcher NO_OP_MATCHER = Pattern.compile("no-op^").matcher("");

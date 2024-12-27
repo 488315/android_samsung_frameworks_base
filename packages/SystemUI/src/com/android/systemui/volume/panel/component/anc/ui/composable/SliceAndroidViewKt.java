@@ -22,7 +22,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes3.dex */
 public abstract class SliceAndroidViewKt {
     public static final void SliceAndroidView(final Slice slice, Modifier modifier, final Function1 function1, final boolean z, Composer composer, final int i, final int i2) {
         ComposerImpl composerImpl = (ComposerImpl) composer;

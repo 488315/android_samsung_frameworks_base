@@ -41,7 +41,6 @@ import java.util.concurrent.Executor;
 import javax.crypto.Cipher;
 import javax.crypto.Mac;
 
-/* loaded from: classes5.dex */
 public class SemIrisManager {
     public static final String CLIENTSPEC_KEY_ALLOW_INDEXES = "request_template_index_list";
     public static final String CLIENT_KEY_PRIVILEGED_ATTR = "privileged_attr";

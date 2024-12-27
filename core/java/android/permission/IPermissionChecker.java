@@ -7,7 +7,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes3.dex */
 public interface IPermissionChecker extends IInterface {
     public static final String DESCRIPTOR = "android.permission.IPermissionChecker";
     public static final int PERMISSION_GRANTED = 0;

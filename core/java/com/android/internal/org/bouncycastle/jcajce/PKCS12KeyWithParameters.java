@@ -4,7 +4,6 @@ import com.android.internal.org.bouncycastle.util.Arrays;
 
 import javax.crypto.interfaces.PBEKey;
 
-/* loaded from: classes5.dex */
 public class PKCS12KeyWithParameters extends PKCS12Key implements PBEKey {
     private final int iterationCount;
     private final byte[] salt;

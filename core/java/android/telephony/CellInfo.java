@@ -7,7 +7,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public abstract class CellInfo implements Parcelable {
     public static final int CONNECTION_NONE = 0;
     public static final int CONNECTION_PRIMARY_SERVING = 1;

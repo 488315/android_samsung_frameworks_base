@@ -19,7 +19,6 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 
-/* loaded from: classes.dex */
 public abstract class DrawableWrapper extends Drawable implements Drawable.Callback {
     private Drawable mDrawable;
     private boolean mMutated;

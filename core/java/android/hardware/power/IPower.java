@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes2.dex */
 public interface IPower extends IInterface {
     public static final String DESCRIPTOR = "android$hardware$power$IPower".replace('$', '.');
     public static final String HASH = "d111735ed2b89b6c32443aac9b162b1afbbea3f2";

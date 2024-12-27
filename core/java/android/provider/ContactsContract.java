@@ -45,7 +45,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-/* loaded from: classes3.dex */
 public final class ContactsContract {
     public static final String AUTHORITY = "com.android.contacts";
     public static final Uri AUTHORITY_URI = Uri.parse("content://com.android.contacts");

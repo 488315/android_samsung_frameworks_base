@@ -8,7 +8,6 @@ import com.samsung.android.knox.analytics.database.Contract;
 import java.util.Vector;
 
 /* compiled from: WebVttRenderer.java */
-/* loaded from: classes2.dex */
 class WebVttParser {
     private static final String TAG = "WebVttParser";
     private TextTrackCue mCue;

@@ -5,7 +5,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.RemoteException;
 
-/* loaded from: classes6.dex */
 public class StandardPlusManager {
     private final Context mContext;
     private Looper mLooper;

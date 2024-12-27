@@ -2,7 +2,6 @@ package com.android.internal.org.bouncycastle.math.ec;
 
 import java.math.BigInteger;
 
-/* loaded from: classes5.dex */
 class Tnaf {
     public static final byte POW_2_WIDTH = 16;
     public static final byte WIDTH = 4;

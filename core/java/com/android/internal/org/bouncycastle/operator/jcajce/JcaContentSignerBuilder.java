@@ -38,7 +38,6 @@ import java.security.spec.MGF1ParameterSpec;
 import java.security.spec.PSSParameterSpec;
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public class JcaContentSignerBuilder {
     private OperatorHelper helper;
     private SecureRandom random;

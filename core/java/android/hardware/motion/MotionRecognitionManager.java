@@ -11,7 +11,6 @@ import com.samsung.android.gesture.SemMotionRecognitionManager;
 import java.util.ArrayList;
 
 @Deprecated
-/* loaded from: classes2.dex */
 public class MotionRecognitionManager extends SemMotionRecognitionManager {
     public static final int EVENT_CALL_POSE = 262144;
     public static final int EVENT_DIRECT_CALLING = 1024;

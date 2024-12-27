@@ -14,7 +14,6 @@ import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.util.Arrays;
 
-/* loaded from: classes6.dex */
 public class SemImageCrop {
     private static final int DEFAULT_HEADER_SIZE = 32;
     public static final int IMAGE_FILE_FORMAT_HEIC = 2;

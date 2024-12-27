@@ -2,7 +2,6 @@ package android.internal.framework.protobuf.nano;
 
 import java.io.IOException;
 
-/* loaded from: classes2.dex */
 public abstract class ExtendableMessageNano<M extends ExtendableMessageNano<M>>
         extends MessageNano {
     protected FieldArray unknownFieldData;

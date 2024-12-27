@@ -25,7 +25,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.function.Consumer;
 
-/* loaded from: classes3.dex */
 public class DefaultDialerManager {
     private static final String TAG = "DefaultDialerManager";
 

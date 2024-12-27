@@ -13,7 +13,6 @@ import android.os.UserHandle;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
 public interface ICrossProfileApps extends IInterface {
     boolean canConfigureInteractAcrossProfiles(int i, String str) throws RemoteException;
 

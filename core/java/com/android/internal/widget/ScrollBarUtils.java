@@ -1,6 +1,5 @@
 package com.android.internal.widget;
 
-/* loaded from: classes5.dex */
 public class ScrollBarUtils {
     public static int getThumbLength(int size, int thickness, int extent, int range) {
         int minLength = thickness * 2;

@@ -1,6 +1,5 @@
 package android.graphics;
 
-/* loaded from: classes.dex */
 public class SweepGradient extends Shader {
     private int mColor0;
     private int mColor1;

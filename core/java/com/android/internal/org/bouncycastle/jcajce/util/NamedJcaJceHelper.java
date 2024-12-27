@@ -27,7 +27,6 @@ import javax.crypto.Mac;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKeyFactory;
 
-/* loaded from: classes5.dex */
 public class NamedJcaJceHelper implements JcaJceHelper {
     protected final String providerName;
 

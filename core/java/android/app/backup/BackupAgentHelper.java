@@ -4,7 +4,6 @@ import android.os.ParcelFileDescriptor;
 
 import java.io.IOException;
 
-/* loaded from: classes.dex */
 public class BackupAgentHelper extends BackupAgent {
     static final String TAG = "BackupAgentHelper";
     BackupHelperDispatcher mDispatcher = new BackupHelperDispatcher();

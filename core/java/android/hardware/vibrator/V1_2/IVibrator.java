@@ -23,7 +23,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public interface IVibrator extends android.hardware.vibrator.V1_1.IVibrator {
     public static final String kInterfaceName = "android.hardware.vibrator@1.2::IVibrator";
 

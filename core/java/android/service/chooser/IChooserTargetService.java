@@ -8,7 +8,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes3.dex */
 public interface IChooserTargetService extends IInterface {
     void getChooserTargets(
             ComponentName componentName,

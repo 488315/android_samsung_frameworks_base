@@ -16,7 +16,6 @@ import java.util.Objects;
 import java.util.UUID;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class DomainVerificationInfo implements Parcelable {
     public static final Parcelable.Creator<DomainVerificationInfo> CREATOR;
     public static final int STATE_FIRST_VERIFIER_DEFINED = 1024;

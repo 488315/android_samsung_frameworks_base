@@ -7,7 +7,6 @@ import android.os.ResultReceiver;
 import com.android.internal.util.Preconditions;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class UserSelectionResult {
     private final String mEntryKey;
     private final String mEntrySubkey;

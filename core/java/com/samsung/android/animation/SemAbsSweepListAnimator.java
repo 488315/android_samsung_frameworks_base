@@ -14,7 +14,6 @@ import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
 import android.widget.ListView;
 
-/* loaded from: classes5.dex */
 abstract class SemAbsSweepListAnimator {
     private static final float COSINE_VALUE_THESHOLD = 0.57f;
     private static final boolean DEBUGGABLE = false;

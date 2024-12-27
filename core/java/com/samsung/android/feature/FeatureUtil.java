@@ -7,7 +7,6 @@ import android.util.Log;
 
 import java.io.File;
 
-/* loaded from: classes6.dex */
 class FeatureUtil {
     private static final String CARRIER_FEATURE_FILE_NAME = "customer_carrier_feature.json";
     private static final String CURRENT_MATCHED_CODE = "mdc.matched_code";

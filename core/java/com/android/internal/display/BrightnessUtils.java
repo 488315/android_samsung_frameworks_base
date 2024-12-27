@@ -2,7 +2,6 @@ package com.android.internal.display;
 
 import android.util.MathUtils;
 
-/* loaded from: classes5.dex */
 public class BrightnessUtils {
     private static final float A = 0.17883277f;
     private static final float B = 0.28466892f;

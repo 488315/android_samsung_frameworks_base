@@ -39,7 +39,6 @@ import java.util.function.Predicate;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-/* loaded from: classes6.dex */
 public class PluginFilterCreator implements MediaFilterCreator {
     private static final String TAG = Def.tagOf((Class<?>) PluginFilterCreator.class);
     private PluginStore pluginStore;

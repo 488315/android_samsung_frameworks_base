@@ -2,7 +2,6 @@ package com.samsung.vekit.Common.Object;
 
 import java.util.Vector;
 
-/* loaded from: classes6.dex */
 public class Vector4<T> {
     private final int X = 0;
     private final int Y = 1;

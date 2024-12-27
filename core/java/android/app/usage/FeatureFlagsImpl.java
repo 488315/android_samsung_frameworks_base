@@ -1,6 +1,5 @@
 package android.app.usage;
 
-/* loaded from: classes.dex */
 public final class FeatureFlagsImpl implements FeatureFlags {
     @Override // android.app.usage.FeatureFlags
     public boolean disableIdleCheck() {

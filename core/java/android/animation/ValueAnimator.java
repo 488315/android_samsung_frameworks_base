@@ -17,7 +17,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-/* loaded from: classes.dex */
 public class ValueAnimator extends Animator implements AnimationHandler.AnimationFrameCallback {
     private static final boolean DEBUG = false;
     public static final int INFINITE = -1;

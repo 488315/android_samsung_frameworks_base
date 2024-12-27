@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.RandomAccess;
 
-/* loaded from: classes3.dex */
 final class IntArrayList extends AbstractProtobufList<Integer>
         implements Internal.IntList, RandomAccess, PrimitiveNonBoxingCollection {
     private static final IntArrayList EMPTY_LIST = new IntArrayList(new int[0], 0);

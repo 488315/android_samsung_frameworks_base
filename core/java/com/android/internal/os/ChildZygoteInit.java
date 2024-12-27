@@ -5,7 +5,6 @@ import android.system.Os;
 import android.system.OsConstants;
 import android.util.Log;
 
-/* loaded from: classes5.dex */
 public class ChildZygoteInit {
     private static final String TAG = "ChildZygoteInit";
 

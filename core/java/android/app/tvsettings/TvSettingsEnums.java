@@ -1,6 +1,5 @@
 package android.app.tvsettings;
 
-/* loaded from: classes.dex */
 public final class TvSettingsEnums {
     public static final int ACCOUNT_CLASSIC = 318767104;
     public static final int ACCOUNT_CLASSIC_ADD_ACCOUNT = 329252864;

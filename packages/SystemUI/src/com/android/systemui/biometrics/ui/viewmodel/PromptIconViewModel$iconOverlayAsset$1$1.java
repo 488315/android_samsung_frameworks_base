@@ -14,7 +14,6 @@ import kotlin.jvm.functions.Function6;
 import kotlinx.coroutines.flow.StateFlowImpl;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes.dex */
 final class PromptIconViewModel$iconOverlayAsset$1$1 extends SuspendLambda implements Function6 {
     /* synthetic */ Object L$0;
     /* synthetic */ Object L$1;

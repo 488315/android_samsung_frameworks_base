@@ -1,6 +1,5 @@
 package android.media;
 
-/* loaded from: classes2.dex */
 public class AudioMixPortConfig extends AudioPortConfig {
     AudioMixPortConfig(
             AudioMixPort mixPort,

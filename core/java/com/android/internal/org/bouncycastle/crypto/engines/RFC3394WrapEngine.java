@@ -10,7 +10,6 @@ import com.android.internal.org.bouncycastle.crypto.params.ParametersWithIV;
 import com.android.internal.org.bouncycastle.crypto.params.ParametersWithRandom;
 import com.android.internal.org.bouncycastle.util.Arrays;
 
-/* loaded from: classes5.dex */
 public class RFC3394WrapEngine implements Wrapper {
     private BlockCipher engine;
     private boolean forWrapping;

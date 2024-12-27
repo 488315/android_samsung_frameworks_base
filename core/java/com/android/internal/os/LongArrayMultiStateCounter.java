@@ -14,7 +14,6 @@ import libcore.util.NativeAllocationRegistry;
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicReference;
 
-/* loaded from: classes5.dex */
 public final class LongArrayMultiStateCounter implements Parcelable {
     private static volatile NativeAllocationRegistry sRegistry;
     private final int mLength;

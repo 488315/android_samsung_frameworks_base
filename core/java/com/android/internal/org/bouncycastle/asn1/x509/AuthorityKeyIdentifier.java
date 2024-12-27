@@ -19,7 +19,6 @@ import com.android.internal.org.bouncycastle.util.encoders.Hex;
 import java.math.BigInteger;
 import java.util.Enumeration;
 
-/* loaded from: classes5.dex */
 public class AuthorityKeyIdentifier extends ASN1Object {
     GeneralNames certissuer;
     ASN1Integer certserno;

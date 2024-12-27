@@ -11,7 +11,6 @@ import android.util.AttributeSet;
 import com.android.internal.R;
 
 @Deprecated
-/* loaded from: classes3.dex */
 public class RingtonePreference extends Preference
         implements PreferenceManager.OnActivityResultListener {
     private static final String TAG = "RingtonePreference";

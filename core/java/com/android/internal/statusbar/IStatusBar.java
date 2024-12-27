@@ -25,7 +25,6 @@ import android.widget.RemoteViews;
 
 import com.android.internal.view.AppearanceRegion;
 
-/* loaded from: classes5.dex */
 public interface IStatusBar extends IInterface {
     void abortTransient(int i, int i2) throws RemoteException;
 

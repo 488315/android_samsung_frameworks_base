@@ -9,7 +9,6 @@ import android.telecom.CallException;
 
 import java.util.concurrent.Executor;
 
-/* loaded from: classes5.dex */
 public class TransactionalCall {
     private final CallAttributes mCallAttributes;
     private CallControl mCallControl;

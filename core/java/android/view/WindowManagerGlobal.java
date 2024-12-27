@@ -39,7 +39,6 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.IntConsumer;
 
-/* loaded from: classes4.dex */
 public final class WindowManagerGlobal {
     public static final int ADD_APP_EXITING = -4;
     public static final int ADD_BAD_APP_TOKEN = -1;

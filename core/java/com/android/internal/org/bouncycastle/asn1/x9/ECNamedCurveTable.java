@@ -7,7 +7,6 @@ import com.android.internal.org.bouncycastle.asn1.sec.SECNamedCurves;
 import java.util.Enumeration;
 import java.util.Vector;
 
-/* loaded from: classes5.dex */
 public class ECNamedCurveTable {
     public static X9ECParameters getByName(String name) {
         X9ECParameters ecP = X962NamedCurves.getByName(name);

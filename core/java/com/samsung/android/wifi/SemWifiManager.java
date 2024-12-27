@@ -30,7 +30,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes6.dex */
 public class SemWifiManager {
     public static final String ACTION_AUTO_WIFI_BUBBLE_TIP =
             "com.samsung.android.wifi.ACTION_AUTO_WIFI_BUBBLE_TIP";

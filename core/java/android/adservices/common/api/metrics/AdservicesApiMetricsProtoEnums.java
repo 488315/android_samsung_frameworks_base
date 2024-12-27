@@ -1,6 +1,5 @@
 package android.adservices.common.api.metrics;
 
-/* loaded from: classes.dex */
 public final class AdservicesApiMetricsProtoEnums {
     public static final int ADEXT_DATA_SERVICE = 6;
     public static final int ADID = 4;

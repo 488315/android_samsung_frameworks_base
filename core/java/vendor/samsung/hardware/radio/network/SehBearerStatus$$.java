@@ -5,7 +5,6 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import java.lang.reflect.Array;
 import java.util.StringJoiner;
 
-/* loaded from: classes6.dex */
 public interface SehBearerStatus$$ {
     static String toString(int _aidl_v) {
         return _aidl_v == 0

@@ -10,7 +10,6 @@ import android.window.SplashScreenView;
 
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public class TransferSplashScreenViewStateItem extends ActivityTransactionItem {
     public static final Parcelable.Creator<TransferSplashScreenViewStateItem> CREATOR =
             new Parcelable.Creator<TransferSplashScreenViewStateItem>() { // from class:

@@ -10,7 +10,6 @@ import com.android.internal.org.bouncycastle.asn1.ASN1TaggedObject;
 import com.android.internal.org.bouncycastle.asn1.DERBitString;
 import com.android.internal.org.bouncycastle.asn1.DERSequence;
 
-/* loaded from: classes5.dex */
 public class ObjectDigestInfo extends ASN1Object {
     public static final int otherObjectDigest = 2;
     public static final int publicKey = 0;

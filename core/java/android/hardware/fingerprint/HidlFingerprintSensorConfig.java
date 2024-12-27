@@ -9,7 +9,6 @@ import com.android.internal.R;
 
 import com.samsung.android.bio.fingerprint.SemFingerprintManager;
 
-/* loaded from: classes2.dex */
 public final class HidlFingerprintSensorConfig extends SensorProps {
     private static final boolean FEATURE_USE_SENSOR_RESOURCE_CONFIG = false;
     private int mModality;

@@ -7,7 +7,6 @@ import android.util.Log;
 
 import com.android.internal.os.RoSystemProperties;
 
-/* loaded from: classes3.dex */
 public final class FactoryTest {
     public static final int FACTORY_TEST_HIGH_LEVEL = 2;
     public static final int FACTORY_TEST_LOW_LEVEL = 1;

@@ -2,7 +2,6 @@ package android.view.accessibility;
 
 import android.view.MagnificationSpec;
 
-/* loaded from: classes4.dex */
 public interface MagnificationAnimationCallback {
     public static final MagnificationAnimationCallback STUB_ANIMATION_CALLBACK =
             new MagnificationAnimationCallback() { // from class:

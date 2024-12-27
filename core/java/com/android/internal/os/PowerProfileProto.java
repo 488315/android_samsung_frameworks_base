@@ -1,6 +1,5 @@
 package com.android.internal.os;
 
-/* loaded from: classes5.dex */
 public final class PowerProfileProto {
     public static final long AMBIENT_DISPLAY = 1103806595099L;
     public static final long AUDIO = 1103806595105L;

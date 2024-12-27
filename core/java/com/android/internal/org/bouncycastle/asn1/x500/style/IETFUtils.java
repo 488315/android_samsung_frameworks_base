@@ -18,7 +18,6 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Vector;
 
-/* loaded from: classes5.dex */
 public class IETFUtils {
     private static String unescape(String elt) {
         if (elt.length() == 0 || (elt.indexOf(92) < 0 && elt.indexOf(34) < 0)) {

@@ -7,7 +7,6 @@ import android.filterfw.core.FrameFormat;
 import android.filterfw.core.GenerateFieldPort;
 import android.filterfw.format.ObjectFormat;
 
-/* loaded from: classes.dex */
 public class SinWaveFilter extends Filter {
     private FrameFormat mOutputFormat;
 

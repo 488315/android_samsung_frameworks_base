@@ -9,7 +9,6 @@ import android.util.Log;
 import java.nio.ByteBuffer;
 import java.util.HashMap;
 
-/* loaded from: classes2.dex */
 public class MarshalQueryableEnum<T extends Enum<T>> implements MarshalQueryable<T> {
     private static final boolean DEBUG = false;
     private static final int UINT8_MASK = 255;

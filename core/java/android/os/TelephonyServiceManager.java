@@ -3,7 +3,6 @@ package android.os;
 import android.content.Context;
 import android.telephony.Rlog;
 
-/* loaded from: classes3.dex */
 public class TelephonyServiceManager {
 
     public static final class ServiceRegisterer {

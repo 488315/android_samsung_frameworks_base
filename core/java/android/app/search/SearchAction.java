@@ -13,7 +13,6 @@ import android.text.TextUtils;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class SearchAction implements Parcelable {
     public static final Parcelable.Creator<SearchAction> CREATOR =
             new Parcelable.Creator<

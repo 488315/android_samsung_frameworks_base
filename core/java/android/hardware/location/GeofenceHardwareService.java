@@ -8,7 +8,6 @@ import android.location.IGpsGeofenceHardware;
 import android.os.Binder;
 import android.os.IBinder;
 
-/* loaded from: classes2.dex */
 public class GeofenceHardwareService extends Service {
     private IBinder mBinder =
             new IGeofenceHardware

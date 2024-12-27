@@ -1,6 +1,5 @@
 package android.hardware.location;
 
-/* loaded from: classes2.dex */
 public final class ContextHubInfoProto {
     public static final long CHRE_PLATFORM_ID = 1112396529672L;
     public static final long ID = 1120986464257L;

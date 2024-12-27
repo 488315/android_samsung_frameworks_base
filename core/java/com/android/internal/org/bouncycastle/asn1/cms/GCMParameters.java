@@ -10,7 +10,6 @@ import com.android.internal.org.bouncycastle.asn1.DEROctetString;
 import com.android.internal.org.bouncycastle.asn1.DERSequence;
 import com.android.internal.org.bouncycastle.util.Arrays;
 
-/* loaded from: classes5.dex */
 public class GCMParameters extends ASN1Object {
     private int icvLen;
     private byte[] nonce;

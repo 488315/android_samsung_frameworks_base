@@ -37,7 +37,6 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-/* loaded from: classes5.dex */
 public class OverlayConfig {
     public static final int DEFAULT_PRIORITY = Integer.MAX_VALUE;
     public static final String PARTITION_ORDER_FILE_PATH = "/product/overlay/partition_order.xml";

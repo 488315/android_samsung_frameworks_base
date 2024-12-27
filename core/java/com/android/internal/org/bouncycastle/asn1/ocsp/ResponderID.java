@@ -10,7 +10,6 @@ import com.android.internal.org.bouncycastle.asn1.DEROctetString;
 import com.android.internal.org.bouncycastle.asn1.DERTaggedObject;
 import com.android.internal.org.bouncycastle.asn1.x500.X500Name;
 
-/* loaded from: classes5.dex */
 public class ResponderID extends ASN1Object implements ASN1Choice {
     private ASN1Encodable value;
 

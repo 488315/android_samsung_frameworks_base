@@ -2,7 +2,6 @@ package android.app.backup;
 
 import android.os.ParcelFileDescriptor;
 
-/* loaded from: classes.dex */
 public class FullBackupDataOutput {
     private final BackupDataOutput mData;
     private final long mQuota;

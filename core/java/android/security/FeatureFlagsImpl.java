@@ -1,6 +1,5 @@
 package android.security;
 
-/* loaded from: classes3.dex */
 public final class FeatureFlagsImpl implements FeatureFlags {
     @Override // android.security.FeatureFlags
     public boolean asmOptSystemIntoEnforcement() {

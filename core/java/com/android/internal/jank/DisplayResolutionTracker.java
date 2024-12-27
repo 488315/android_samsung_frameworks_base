@@ -10,7 +10,6 @@ import android.view.DisplayInfo;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes5.dex */
 public class DisplayResolutionTracker {
     public static final int RESOLUTION_FHD = 3;
     public static final int RESOLUTION_HD = 2;

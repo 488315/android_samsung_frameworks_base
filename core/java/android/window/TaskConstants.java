@@ -1,6 +1,5 @@
 package android.window;
 
-/* loaded from: classes4.dex */
 public class TaskConstants {
     public static final int TASK_CHILD_LAYER_COMPAT_UI = 10000;
     public static final int TASK_CHILD_LAYER_FLOATING_MENU = 70000;

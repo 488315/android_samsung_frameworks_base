@@ -1,6 +1,5 @@
 package com.android.internal.org.bouncycastle.asn1.x509;
 
-/* loaded from: classes5.dex */
 public interface NameConstraintValidator {
     void addExcludedSubtree(GeneralSubtree generalSubtree);
 

@@ -5,7 +5,6 @@ import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public class Ashmem implements Parcelable {
     public static final Parcelable.Creator<Ashmem> CREATOR =
             new Parcelable.Creator<Ashmem>() { // from class: android.hardware.common.Ashmem.1

@@ -11,7 +11,6 @@ import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 import java.util.HashMap;
 
-/* loaded from: classes5.dex */
 public class PduParser {
     static final /* synthetic */ boolean $assertionsDisabled = false;
     private static final boolean DEBUG = false;

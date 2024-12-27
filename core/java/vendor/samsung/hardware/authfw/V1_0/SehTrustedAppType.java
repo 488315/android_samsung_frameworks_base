@@ -2,7 +2,6 @@ package vendor.samsung.hardware.authfw.V1_0;
 
 import java.util.ArrayList;
 
-/* loaded from: classes6.dex */
 public final class SehTrustedAppType {
     public static final int ASSET_PASS_AUTHENTICATOR = 10000;
     public static final int ASSET_PASS_ESE = 10001;

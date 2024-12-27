@@ -10,7 +10,6 @@ import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.UserHandle;
 
-/* loaded from: classes5.dex */
 public abstract class PackageChangeReceiver extends BroadcastReceiver {
     private static HandlerThread sHandlerThread;
     static final IntentFilter sPackageIntentFilter = new IntentFilter();

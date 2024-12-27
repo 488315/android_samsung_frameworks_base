@@ -38,7 +38,6 @@ import java.security.spec.AlgorithmParameterSpec;
 import java.util.Enumeration;
 import java.util.Map;
 
-/* loaded from: classes5.dex */
 public class ECUtil {
     static int[] convertMidTerms(int[] k) {
         int[] res = new int[3];

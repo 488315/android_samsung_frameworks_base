@@ -11,7 +11,6 @@ import com.android.internal.org.bouncycastle.asn1.x500.X500Name;
 
 import java.util.Enumeration;
 
-/* loaded from: classes5.dex */
 public class CertificateList extends ASN1Object {
     int hashCodeValue;
     boolean isHashCodeSet = false;

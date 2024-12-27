@@ -29,7 +29,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes5.dex */
 public class OverlayManagerImpl {
     private static final boolean DEBUG = false;
     private static final String FRRO_EXTENSION = ".frro";

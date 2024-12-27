@@ -1,6 +1,5 @@
 package com.samsung.android.globalactions.presentation.viewmodel;
 
-/* loaded from: classes6.dex */
 public class ActionInfo {
     private String mName = "";
     private int mIconResId = -1;

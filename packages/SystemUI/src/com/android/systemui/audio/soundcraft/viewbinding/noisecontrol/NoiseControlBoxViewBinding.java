@@ -7,7 +7,6 @@ import com.android.systemui.audio.soundcraft.view.noisecontrol.NoiseControlBoxVi
 import com.android.systemui.audio.soundcraft.view.noisecontrol.NoiseControlLineView;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes.dex */
 public final class NoiseControlBoxViewBinding {
     public final ViewGroup boxContainer;
     public final ViewGroup effectView;

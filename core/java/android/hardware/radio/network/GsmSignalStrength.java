@@ -6,7 +6,6 @@ import android.os.Parcelable;
 
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public class GsmSignalStrength implements Parcelable {
     public static final Parcelable.Creator<GsmSignalStrength> CREATOR =
             new Parcelable.Creator<GsmSignalStrength>() { // from class:

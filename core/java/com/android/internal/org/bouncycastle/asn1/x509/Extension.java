@@ -13,7 +13,6 @@ import com.android.internal.org.bouncycastle.asn1.DERSequence;
 
 import java.io.IOException;
 
-/* loaded from: classes5.dex */
 public class Extension extends ASN1Object {
     private boolean critical;
     private ASN1ObjectIdentifier extnId;

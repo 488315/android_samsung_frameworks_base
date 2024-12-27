@@ -27,7 +27,6 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-/* loaded from: classes.dex */
 public class CrossProfileApps {
     public static final String ACTION_CAN_INTERACT_ACROSS_PROFILES_CHANGED =
             "android.content.pm.action.CAN_INTERACT_ACROSS_PROFILES_CHANGED";

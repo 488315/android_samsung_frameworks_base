@@ -37,7 +37,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
 @RemoteViews.RemoteView
-/* loaded from: classes4.dex */
 public class GridView extends AbsListView {
     public static final int AUTO_FIT = -1;
     public static final int NO_STRETCH = 0;

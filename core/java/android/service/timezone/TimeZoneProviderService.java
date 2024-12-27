@@ -16,7 +16,6 @@ import java.io.PrintWriter;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public abstract class TimeZoneProviderService extends Service {
     public static final String PRIMARY_LOCATION_TIME_ZONE_PROVIDER_SERVICE_INTERFACE =
             "android.service.timezone.PrimaryLocationTimeZoneProviderService";

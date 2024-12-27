@@ -7,7 +7,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.view.RemoteAnimationDefinition;
 
-/* loaded from: classes4.dex */
 public interface ITaskFragmentOrganizerController extends IInterface {
     public static final String DESCRIPTOR = "android.window.ITaskFragmentOrganizerController";
 

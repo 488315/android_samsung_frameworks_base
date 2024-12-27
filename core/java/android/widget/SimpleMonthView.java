@@ -33,7 +33,6 @@ import com.android.internal.widget.ExploreByTouchHelper;
 import java.text.NumberFormat;
 import java.util.Locale;
 
-/* loaded from: classes4.dex */
 class SimpleMonthView extends View {
     private static final int DAYS_IN_WEEK = 7;
     private static final int DEFAULT_SELECTED_DAY = -1;

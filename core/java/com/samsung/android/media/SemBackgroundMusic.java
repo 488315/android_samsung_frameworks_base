@@ -9,7 +9,6 @@ import java.io.FileDescriptor;
 import java.io.IOException;
 import java.util.ArrayList;
 
-/* loaded from: classes6.dex */
 public abstract class SemBackgroundMusic {
     private static final String TAG = "SemBackgroundMusic";
     protected ArrayList<BGMInfo> mBGMInfos = new ArrayList<>();

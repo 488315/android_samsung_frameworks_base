@@ -1,6 +1,5 @@
 package android.service.notification;
 
-/* loaded from: classes3.dex */
 public final class ManagedServicesProto {
     public static final long APPROVED = 2246267895810L;
     public static final long CAPTION = 1138166333441L;

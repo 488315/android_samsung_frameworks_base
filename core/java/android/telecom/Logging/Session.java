@@ -10,7 +10,6 @@ import android.util.Slog;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* loaded from: classes3.dex */
 public class Session {
     public static final String CONTINUE_SUBSESSION = "CONTINUE_SUBSESSION";
     public static final String CREATE_SUBSESSION = "CREATE_SUBSESSION";

@@ -1,6 +1,5 @@
 package android.os;
 
-/* loaded from: classes3.dex */
 public interface IThermalEventListener extends IInterface {
     void notifyThrottling(Temperature temperature) throws RemoteException;
 

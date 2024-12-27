@@ -5,7 +5,6 @@ import com.android.internal.util.Preconditions;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes3.dex */
 public final class CoolingDevice implements Parcelable {
     public static final Parcelable.Creator<CoolingDevice> CREATOR =
             new Parcelable.Creator<CoolingDevice>() { // from class: android.os.CoolingDevice.1

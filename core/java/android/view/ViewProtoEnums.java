@@ -1,6 +1,5 @@
 package android.view;
 
-/* loaded from: classes4.dex */
 public final class ViewProtoEnums {
     public static final int DISPLAY_STATE_DOZE = 3;
     public static final int DISPLAY_STATE_DOZE_SUSPEND = 4;

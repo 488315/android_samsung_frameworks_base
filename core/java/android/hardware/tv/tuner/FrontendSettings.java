@@ -4,7 +4,6 @@ import android.media.audio.common.AudioDeviceDescription;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public final class FrontendSettings implements Parcelable {
     public static final Parcelable.Creator<FrontendSettings> CREATOR =
             new Parcelable.Creator<FrontendSettings>() { // from class:

@@ -5,7 +5,6 @@ import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public class GnssClock implements Parcelable {
     public static final Parcelable.Creator<GnssClock> CREATOR =
             new Parcelable.Creator<GnssClock>() { // from class: android.hardware.gnss.GnssClock.1

@@ -8,7 +8,6 @@ import android.content.pm.parsing.result.ParseResult;
 import android.content.res.TypedArray;
 import android.text.TextUtils;
 
-/* loaded from: classes5.dex */
 public class ComponentParseUtils {
     public static boolean isImplicitlyExposedIntent(ParsedIntentInfo intentInfo) {
         IntentFilter intentFilter = intentInfo.getIntentFilter();

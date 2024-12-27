@@ -11,7 +11,6 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.nio.ByteBuffer;
 
-/* loaded from: classes.dex */
 public class SerializedFrame extends Frame {
     private static final int INITIAL_CAPACITY = 64;
     private DirectByteOutputStream mByteOutputStream;

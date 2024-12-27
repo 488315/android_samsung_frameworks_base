@@ -16,7 +16,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-/* loaded from: classes3.dex */
 final class RopeByteString extends ByteString {
     static final int[] minLengthByDepth = {
         1,

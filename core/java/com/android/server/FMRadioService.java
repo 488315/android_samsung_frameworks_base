@@ -41,7 +41,6 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Vector;
 
-/* loaded from: classes5.dex */
 public class FMRadioService extends IFMPlayer.Stub {
     private static final String ACTINON_ALARM_PLAY = "com.sec.android.app.voicecommand";
     private static final String ACTION_ALL_SOUND_OFF = "android.settings.ALL_SOUND_MUTE";

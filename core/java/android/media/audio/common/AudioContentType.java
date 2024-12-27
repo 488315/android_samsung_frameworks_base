@@ -1,6 +1,5 @@
 package android.media.audio.common;
 
-/* loaded from: classes2.dex */
 public @interface AudioContentType {
     public static final int MOVIE = 3;
     public static final int MUSIC = 2;

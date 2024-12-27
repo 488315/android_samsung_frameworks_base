@@ -18,7 +18,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.stream.Stream;
 
-/* loaded from: classes6.dex */
 public interface MediaFilter extends MessageConsumer, Operator {
     public static final int OPTION_ALLOW_PARTIAL_CONNECTION = 0;
     public static final int OPTION_AS_INPUT = 8;

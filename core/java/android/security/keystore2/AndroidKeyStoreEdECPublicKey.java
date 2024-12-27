@@ -14,7 +14,6 @@ import java.security.spec.NamedParameterSpec;
 import java.util.Arrays;
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public class AndroidKeyStoreEdECPublicKey extends AndroidKeyStorePublicKey
         implements EdECPublicKey {
     private static final byte[] DER_KEY_PREFIX = {

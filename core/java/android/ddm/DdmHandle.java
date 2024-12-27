@@ -4,7 +4,6 @@ import org.apache.harmony.dalvik.ddmc.ChunkHandler;
 
 import java.nio.ByteBuffer;
 
-/* loaded from: classes.dex */
 public abstract class DdmHandle extends ChunkHandler {
     public static String getString(ByteBuffer buf, int len) {
         char[] data = new char[len];

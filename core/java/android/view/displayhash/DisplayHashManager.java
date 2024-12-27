@@ -8,7 +8,6 @@ import android.view.WindowManagerGlobal;
 import java.util.Collections;
 import java.util.Set;
 
-/* loaded from: classes4.dex */
 public final class DisplayHashManager {
     private static final String TAG = "DisplayHashManager";
     private static Set<String> sSupportedHashAlgorithms;

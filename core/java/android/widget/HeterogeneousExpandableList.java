@@ -1,6 +1,5 @@
 package android.widget;
 
-/* loaded from: classes4.dex */
 public interface HeterogeneousExpandableList {
     int getChildType(int i, int i2);
 

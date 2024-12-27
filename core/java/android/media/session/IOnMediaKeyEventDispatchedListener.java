@@ -7,7 +7,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.view.KeyEvent;
 
-/* loaded from: classes2.dex */
 public interface IOnMediaKeyEventDispatchedListener extends IInterface {
     public static final String DESCRIPTOR =
             "android.media.session.IOnMediaKeyEventDispatchedListener";

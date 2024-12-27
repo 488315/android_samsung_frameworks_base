@@ -6,7 +6,6 @@ import android.os.Process;
 import android.permission.IPermissionChecker;
 import android.permission.PermissionCheckerManager;
 
-/* loaded from: classes.dex */
 public final class PermissionChecker {
     public static final int PERMISSION_GRANTED = 0;
     public static final int PERMISSION_HARD_DENIED = 2;

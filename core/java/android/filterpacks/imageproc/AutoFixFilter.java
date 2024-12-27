@@ -12,7 +12,6 @@ import android.filterfw.format.ImageFormat;
 
 import com.android.internal.logging.nano.MetricsProto;
 
-/* loaded from: classes.dex */
 public class AutoFixFilter extends Filter {
     private static final int[] normal_cdf = {
         9,

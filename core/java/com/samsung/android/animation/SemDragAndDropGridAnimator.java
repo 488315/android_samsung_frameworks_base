@@ -17,7 +17,6 @@ import android.widget.GridView;
 import java.util.HashSet;
 
 @Deprecated
-/* loaded from: classes5.dex */
 public class SemDragAndDropGridAnimator extends SemAbsDragAndDropAnimator {
     private static final String TAG = "SemDragAndDropGridAnimator";
     private GridView mGridView;

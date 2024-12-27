@@ -33,7 +33,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-/* loaded from: classes6.dex */
 public class MediaBufferFileReader {
     private static final String TAG = Def.tagOf((Class<?>) MediaBufferFileReader.class);
     private static final List<String> imageExt =

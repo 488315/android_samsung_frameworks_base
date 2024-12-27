@@ -15,7 +15,6 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
 
-/* loaded from: classes5.dex */
 class WebViewZygoteInit {
     public static final String TAG = "WebViewZygoteInit";
 

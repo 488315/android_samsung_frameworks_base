@@ -4,7 +4,6 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public final class Curve implements Parcelable {
     public static final Parcelable.Creator<Curve> CREATOR =
             new Parcelable.Creator<Curve>() { // from class: android.hardware.display.Curve.1

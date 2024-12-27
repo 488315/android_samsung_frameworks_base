@@ -11,7 +11,6 @@ import android.widget.ListView;
 
 import com.android.internal.app.AlertController;
 
-/* loaded from: classes5.dex */
 public final class ActionsDialog extends Dialog implements DialogInterface {
     private final ActionsAdapter mAdapter;
     private final AlertController mAlert;

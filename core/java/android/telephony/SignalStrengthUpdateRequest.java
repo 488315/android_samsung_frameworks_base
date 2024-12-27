@@ -19,7 +19,6 @@ import java.util.Set;
 import java.util.function.Function;
 import java.util.function.ToIntFunction;
 
-/* loaded from: classes4.dex */
 public final class SignalStrengthUpdateRequest implements Parcelable {
     public static final Parcelable.Creator<SignalStrengthUpdateRequest> CREATOR =
             new Parcelable.Creator<

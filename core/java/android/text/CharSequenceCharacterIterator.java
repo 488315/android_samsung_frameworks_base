@@ -2,7 +2,6 @@ package android.text;
 
 import java.text.CharacterIterator;
 
-/* loaded from: classes4.dex */
 public class CharSequenceCharacterIterator implements CharacterIterator {
     private final int mBeginIndex;
     private final CharSequence mCharSeq;

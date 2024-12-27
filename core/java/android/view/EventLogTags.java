@@ -2,7 +2,6 @@ package android.view;
 
 import android.util.EventLog;
 
-/* loaded from: classes4.dex */
 public class EventLogTags {
     public static final int IMF_IME_ANIM_CANCEL = 32008;
     public static final int IMF_IME_ANIM_FINISH = 32007;

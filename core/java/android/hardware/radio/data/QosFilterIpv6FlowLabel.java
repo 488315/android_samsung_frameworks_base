@@ -4,7 +4,6 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public final class QosFilterIpv6FlowLabel implements Parcelable {
     public static final Parcelable.Creator<QosFilterIpv6FlowLabel> CREATOR =
             new Parcelable.Creator<QosFilterIpv6FlowLabel>() { // from class:

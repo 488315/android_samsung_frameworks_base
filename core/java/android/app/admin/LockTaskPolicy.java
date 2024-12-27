@@ -10,7 +10,6 @@ import java.util.Objects;
 import java.util.Set;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class LockTaskPolicy extends PolicyValue<LockTaskPolicy> {
     public static final Parcelable.Creator<LockTaskPolicy> CREATOR =
             new Parcelable.Creator<

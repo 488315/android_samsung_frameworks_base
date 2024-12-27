@@ -5,7 +5,6 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
 
-/* loaded from: classes5.dex */
 public class PreferenceImageView extends ImageView {
     public PreferenceImageView(Context context) {
         this(context, null);

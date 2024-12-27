@@ -9,7 +9,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-/* loaded from: classes5.dex */
 public class IccPcscProvider {
     public static final int CONNECT = 4;
     public static final int DISCONNECT = 5;

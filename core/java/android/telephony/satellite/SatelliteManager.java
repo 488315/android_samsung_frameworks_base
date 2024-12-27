@@ -36,7 +36,6 @@ import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public final class SatelliteManager {
     public static final String ACTION_SATELLITE_START_NON_EMERGENCY_SESSION =
             "android.telephony.action.ACTION_SATELLITE_START_NON_EMERGENCY_SESSION";

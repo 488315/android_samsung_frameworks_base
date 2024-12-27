@@ -13,7 +13,6 @@ import java.util.Objects;
 import java.util.Set;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class HotspotNetwork implements Parcelable {
     public static final Parcelable.Creator<HotspotNetwork> CREATOR =
             new Parcelable.Creator<

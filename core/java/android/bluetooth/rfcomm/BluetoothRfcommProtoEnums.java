@@ -1,6 +1,5 @@
 package android.bluetooth.rfcomm;
 
-/* loaded from: classes.dex */
 public final class BluetoothRfcommProtoEnums {
     public static final int RFCOMM_CONN_RESULT_FAILURE_UNKNOWN = 0;
     public static final int RFCOMM_CONN_RESULT_GET_SOCKET_MANAGER_FAILED = 6;

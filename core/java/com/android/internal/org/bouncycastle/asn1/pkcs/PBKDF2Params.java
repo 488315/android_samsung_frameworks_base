@@ -15,7 +15,6 @@ import com.android.internal.org.bouncycastle.util.Arrays;
 import java.math.BigInteger;
 import java.util.Enumeration;
 
-/* loaded from: classes5.dex */
 public class PBKDF2Params extends ASN1Object {
     private static final AlgorithmIdentifier algid_hmacWithSHA1 =
             new AlgorithmIdentifier(PKCSObjectIdentifiers.id_hmacWithSHA1, DERNull.INSTANCE);

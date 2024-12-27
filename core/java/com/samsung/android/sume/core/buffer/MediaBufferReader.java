@@ -3,7 +3,6 @@ package com.samsung.android.sume.core.buffer;
 import com.samsung.android.sume.core.format.Shape;
 
 @FunctionalInterface
-/* loaded from: classes6.dex */
 public interface MediaBufferReader<T> {
     T get();
 

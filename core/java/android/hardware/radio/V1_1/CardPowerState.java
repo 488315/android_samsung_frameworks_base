@@ -2,7 +2,6 @@ package android.hardware.radio.V1_1;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class CardPowerState {
     public static final int POWER_DOWN = 0;
     public static final int POWER_UP = 1;

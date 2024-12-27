@@ -6,7 +6,6 @@ import android.os.Parcelable;
 
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public final class JoinOrSplitGesture extends HandwritingGesture implements Parcelable {
     public static final Parcelable.Creator<JoinOrSplitGesture> CREATOR =
             new Parcelable.Creator<

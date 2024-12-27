@@ -12,7 +12,6 @@ import java.io.DataOutputStream;
 import java.io.File;
 import java.util.concurrent.LinkedBlockingQueue;
 
-/* loaded from: classes6.dex */
 class AudioTask implements Runnable {
     static final int DEFAULT_BLOCK_SIZE = 320;
     private String mTAG = AudioTask.class.getSimpleName();

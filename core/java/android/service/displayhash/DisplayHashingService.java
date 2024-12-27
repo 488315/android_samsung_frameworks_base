@@ -22,7 +22,6 @@ import java.util.Map;
 import java.util.function.BiConsumer;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public abstract class DisplayHashingService extends Service {
     public static final String EXTRA_INTERVAL_BETWEEN_REQUESTS =
             "android.service.displayhash.extra.INTERVAL_BETWEEN_REQUESTS";

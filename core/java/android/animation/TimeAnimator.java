@@ -2,7 +2,6 @@ package android.animation;
 
 import android.view.animation.AnimationUtils;
 
-/* loaded from: classes.dex */
 public class TimeAnimator extends ValueAnimator {
     private TimeListener mListener;
     private long mPreviousTime = -1;

@@ -2,7 +2,6 @@ package android.util;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 
-/* loaded from: classes4.dex */
 public abstract class Spline {
     public abstract float interpolate(float f);
 

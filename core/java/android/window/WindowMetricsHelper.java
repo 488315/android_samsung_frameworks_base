@@ -4,7 +4,6 @@ import android.graphics.Rect;
 import android.view.WindowInsets;
 import android.view.WindowMetrics;
 
-/* loaded from: classes4.dex */
 public final class WindowMetricsHelper {
     private WindowMetricsHelper() {}
 

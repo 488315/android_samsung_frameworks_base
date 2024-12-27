@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @Deprecated
-/* loaded from: classes2.dex */
 public class SContext implements Parcelable {
     static final int REPORTING_MODE_BATCH = 5;
     static final int REPORTING_MODE_CONTINUOUS = 1;

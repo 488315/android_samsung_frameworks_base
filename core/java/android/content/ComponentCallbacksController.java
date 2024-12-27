@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-/* loaded from: classes.dex */
 public class ComponentCallbacksController {
     private List<ComponentCallbacks> mComponentCallbacks;
     private final Object mLock = new Object();

@@ -12,7 +12,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class TunedInfo implements Parcelable {
     public static final int APP_TAG_SELF = 0;
     public static final int APP_TYPE_NON_SYSTEM = 3;

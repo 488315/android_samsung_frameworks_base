@@ -1,7 +1,6 @@
 package android.os;
 
 
-/* loaded from: classes3.dex */
 public interface IUpdateEngineStable extends IInterface {
     public static final String DESCRIPTOR = "android$os$IUpdateEngineStable".replace('$', '.');
     public static final String HASH = "ee2e6f0bd51391955f79f4d5eeeafc37c668cd40";

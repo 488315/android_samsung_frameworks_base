@@ -4,7 +4,6 @@ import android.hardware.scontext.SContextConstants;
 
 import com.samsung.vekit.Common.Type.AxisType;
 
-/* loaded from: classes6.dex */
 public class Quaternion {
     public static final float EPSILON = 1.0E-5f;
     public double w;

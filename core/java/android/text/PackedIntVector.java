@@ -3,7 +3,6 @@ package android.text;
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.GrowingArrayUtils;
 
-/* loaded from: classes4.dex */
 public class PackedIntVector {
     private final int mColumns;
     private int[] mValueGap;

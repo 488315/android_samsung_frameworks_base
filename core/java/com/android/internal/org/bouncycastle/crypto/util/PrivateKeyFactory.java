@@ -33,7 +33,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigInteger;
 
-/* loaded from: classes5.dex */
 public class PrivateKeyFactory {
     public static AsymmetricKeyParameter createKey(byte[] privateKeyInfoData) throws IOException {
         return createKey(

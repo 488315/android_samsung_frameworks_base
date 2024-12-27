@@ -3,7 +3,6 @@ package com.samsung.android.sepunion;
 import android.content.Context;
 import android.content.pm.PackageManager;
 
-/* loaded from: classes6.dex */
 public class UnionUtils {
     private static final String FEATURE_NFC_AUTHENTICATION = "com.sec.feature.nfc_authentication";
     private static final String FEATURE_USB_AUTHENTICATION = "com.sec.feature.usb_authentication";

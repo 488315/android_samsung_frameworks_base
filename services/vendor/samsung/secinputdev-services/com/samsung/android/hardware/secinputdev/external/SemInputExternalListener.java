@@ -14,7 +14,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-/* loaded from: classes.dex */
 public class SemInputExternalListener implements SemInputExternal.IExternalEventRegister {
     private static final String DEX_LISTENER = "DexListenerWrapper";
     private static final String DISPLAY_LISTENER = "DisplayListenerWrapper";

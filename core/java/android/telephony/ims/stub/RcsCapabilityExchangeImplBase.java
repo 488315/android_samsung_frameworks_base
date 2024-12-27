@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Set;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public class RcsCapabilityExchangeImplBase {
     public static final int COMMAND_CODE_FETCH_ERROR = 3;
     public static final int COMMAND_CODE_GENERIC_FAILURE = 1;

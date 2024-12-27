@@ -11,7 +11,6 @@ import android.view.autofill.Helper;
 
 import com.android.internal.util.Preconditions;
 
-/* loaded from: classes3.dex */
 public final class VisibilitySetterAction extends InternalOnClickAction
         implements OnClickAction, Parcelable {
     public static final Parcelable.Creator<VisibilitySetterAction> CREATOR =

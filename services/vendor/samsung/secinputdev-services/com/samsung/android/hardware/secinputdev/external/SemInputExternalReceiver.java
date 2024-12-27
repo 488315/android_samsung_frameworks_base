@@ -14,7 +14,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-/* loaded from: classes.dex */
 public class SemInputExternalReceiver implements SemInputExternal.IExternalEventRegister {
     private static final String COVER_ATTACH_CHANGED_INTENT =
             "com.samsung.android.intent.action.COVER_ATTACH_CHANGED";

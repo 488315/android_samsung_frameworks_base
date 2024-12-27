@@ -7,7 +7,6 @@ import android.os.HwParcel;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public final class HubAppInfo {
     public android.hardware.contexthub.V1_0.HubAppInfo info_1_0 =
             new android.hardware.contexthub.V1_0.HubAppInfo();

@@ -9,7 +9,6 @@ import dalvik.system.CloseGuard;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/* loaded from: classes2.dex */
 public final class RemoteDisplay {
     public static final int DISPLAY_ERROR_CONNECTION_DROPPED = 2;
     public static final int DISPLAY_ERROR_UNKOWN = 1;

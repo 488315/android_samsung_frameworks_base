@@ -7,7 +7,6 @@ import com.android.framework.protobuf.nano.MessageNano;
 
 import java.io.IOException;
 
-/* loaded from: classes5.dex */
 public interface SystemMessageProto {
 
     public static final class SystemMessage extends MessageNano {

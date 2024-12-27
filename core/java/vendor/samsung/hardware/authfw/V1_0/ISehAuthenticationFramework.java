@@ -21,7 +21,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Objects;
 
-/* loaded from: classes6.dex */
 public interface ISehAuthenticationFramework extends IBase {
     public static final String kInterfaceName =
             "vendor.samsung.hardware.authfw@1.0::ISehAuthenticationFramework";

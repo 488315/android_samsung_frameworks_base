@@ -12,7 +12,6 @@ import java.util.Arrays;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class VisualQueryDetectedResult implements Parcelable {
     public static final Parcelable.Creator<VisualQueryDetectedResult> CREATOR =
             new Parcelable.Creator<

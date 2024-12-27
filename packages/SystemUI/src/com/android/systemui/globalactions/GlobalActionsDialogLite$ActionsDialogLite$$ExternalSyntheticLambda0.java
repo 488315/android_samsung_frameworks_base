@@ -5,7 +5,6 @@ import com.android.systemui.MultiListLayout;
 import com.android.systemui.globalactions.GlobalActionsDialogLite;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public final /* synthetic */ class GlobalActionsDialogLite$ActionsDialogLite$$ExternalSyntheticLambda0 {
     public final /* synthetic */ GlobalActionsDialogLite.ActionsDialogLite f$0;
 

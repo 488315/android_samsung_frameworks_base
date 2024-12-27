@@ -14,7 +14,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/* loaded from: classes3.dex */
 public class DelegatingCertPathValidatorHelper {
     public static final int ALERT = 1;
     public static final int AUDIT_LOG_GROUP_APPLICATION = 5;

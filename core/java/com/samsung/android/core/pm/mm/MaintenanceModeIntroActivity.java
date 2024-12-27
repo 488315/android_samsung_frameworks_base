@@ -37,7 +37,6 @@ import java.util.TimerTask;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-/* loaded from: classes6.dex */
 public class MaintenanceModeIntroActivity extends Activity {
     private static final long DUMP_CHECK_DELAY = 1000;
     private static final long DUMP_CHECK_INITIAL_DELAY = 10000;

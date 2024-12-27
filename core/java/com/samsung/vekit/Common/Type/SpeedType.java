@@ -1,6 +1,5 @@
 package com.samsung.vekit.Common.Type;
 
-/* loaded from: classes6.dex */
 public enum SpeedType {
     SPEED_1(0),
     SPEED_1_2(1),

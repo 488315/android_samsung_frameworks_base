@@ -7,7 +7,6 @@ import android.text.ParcelableSpan;
 import java.text.NumberFormat;
 import java.util.Locale;
 
-/* loaded from: classes4.dex */
 public class TtsSpan implements ParcelableSpan {
     public static final String ANIMACY_ANIMATE = "android.animate";
     public static final String ANIMACY_INANIMATE = "android.inanimate";

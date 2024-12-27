@@ -1,6 +1,5 @@
 package android.content;
 
-/* loaded from: classes.dex */
 public final class IntentProto {
     public static final long ACTION = 1138166333441L;
     public static final long CATEGORIES = 2237677961218L;

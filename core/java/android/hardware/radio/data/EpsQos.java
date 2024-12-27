@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public class EpsQos implements Parcelable {
     public static final Parcelable.Creator<EpsQos> CREATOR =
             new Parcelable.Creator<EpsQos>() { // from class: android.hardware.radio.data.EpsQos.1

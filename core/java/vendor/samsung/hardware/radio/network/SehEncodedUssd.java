@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.util.Arrays;
 import java.util.StringJoiner;
 
-/* loaded from: classes6.dex */
 public class SehEncodedUssd implements Parcelable {
     public static final Parcelable.Creator<SehEncodedUssd> CREATOR =
             new Parcelable.Creator<

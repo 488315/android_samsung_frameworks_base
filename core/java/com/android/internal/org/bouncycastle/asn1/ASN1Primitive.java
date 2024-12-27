@@ -3,7 +3,6 @@ package com.android.internal.org.bouncycastle.asn1;
 import java.io.IOException;
 import java.io.OutputStream;
 
-/* loaded from: classes5.dex */
 public abstract class ASN1Primitive extends ASN1Object {
     abstract boolean asn1Equals(ASN1Primitive aSN1Primitive);
 

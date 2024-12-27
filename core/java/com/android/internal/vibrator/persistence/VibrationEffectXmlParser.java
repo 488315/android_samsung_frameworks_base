@@ -6,7 +6,6 @@ import com.android.modules.utils.TypedXmlPullParser;
 
 import java.io.IOException;
 
-/* loaded from: classes5.dex */
 public class VibrationEffectXmlParser {
     public static XmlSerializedVibration<VibrationEffect> parseTag(
             TypedXmlPullParser parser, int flags) throws XmlParserException, IOException {

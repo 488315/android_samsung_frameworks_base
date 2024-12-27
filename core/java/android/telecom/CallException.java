@@ -8,7 +8,6 @@ import android.text.TextUtils;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes3.dex */
 public final class CallException extends RuntimeException implements Parcelable {
     public static final int CODE_CALL_CANNOT_BE_SET_TO_ACTIVE = 4;
     public static final int CODE_CALL_IS_NOT_BEING_TRACKED = 3;

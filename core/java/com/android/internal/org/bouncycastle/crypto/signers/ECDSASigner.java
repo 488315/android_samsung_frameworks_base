@@ -20,7 +20,6 @@ import com.android.internal.org.bouncycastle.util.BigIntegers;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 
-/* loaded from: classes5.dex */
 public class ECDSASigner implements ECConstants, DSAExt {
     private final DSAKCalculator kCalculator;
     private ECKeyParameters key;

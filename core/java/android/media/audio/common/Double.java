@@ -9,7 +9,6 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public class Double implements Parcelable {
     public static final Parcelable.Creator<Double> CREATOR =
             new Parcelable.Creator<Double>() { // from class: android.media.audio.common.Double.1

@@ -1,6 +1,5 @@
 package com.samsung.android.globalactions.presentation.viewmodel;
 
-/* loaded from: classes6.dex */
 public enum ViewType {
     TOP_VIEW(0),
     CENTER_ICON_1P_VIEW(1),

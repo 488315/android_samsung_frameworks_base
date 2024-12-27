@@ -1,6 +1,5 @@
 package android.app.admin.flags;
 
-/* loaded from: classes.dex */
 public interface FeatureFlags {
     boolean allowQueryingProfileType();
 

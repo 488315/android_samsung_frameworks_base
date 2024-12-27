@@ -3,7 +3,6 @@ package com.android.ims;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 
 @Deprecated
-/* loaded from: classes4.dex */
 public class ImsException extends Exception {
     private int mCode;
 

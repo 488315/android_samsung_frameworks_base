@@ -1,6 +1,5 @@
 package android.database;
 
-/* loaded from: classes.dex */
 public abstract class AbstractWindowedCursor extends AbstractCursor {
     protected CursorWindow mWindow;
 

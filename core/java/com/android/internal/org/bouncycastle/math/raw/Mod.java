@@ -4,7 +4,6 @@ import com.android.internal.org.bouncycastle.util.Integers;
 
 import java.util.Random;
 
-/* loaded from: classes5.dex */
 public abstract class Mod {
     private static final int M30 = 1073741823;
     private static final long M32L = 4294967295L;

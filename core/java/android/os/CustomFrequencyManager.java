@@ -3,7 +3,6 @@ package android.os;
 import android.content.Context;
 import android.util.Log;
 
-/* loaded from: classes3.dex */
 public class CustomFrequencyManager {
     public static final int CPUCTL = 17;
     public static final int CPUSET = 16;

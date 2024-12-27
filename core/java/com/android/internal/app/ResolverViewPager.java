@@ -7,7 +7,6 @@ import android.view.View;
 
 import com.android.internal.widget.ViewPager;
 
-/* loaded from: classes5.dex */
 public class ResolverViewPager extends ViewPager {
     private boolean mSwipingEnabled;
 

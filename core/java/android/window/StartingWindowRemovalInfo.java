@@ -8,7 +8,6 @@ import android.view.SurfaceControl;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes4.dex */
 public final class StartingWindowRemovalInfo implements Parcelable {
     public static final Parcelable.Creator<StartingWindowRemovalInfo> CREATOR =
             new Parcelable.Creator<

@@ -12,7 +12,6 @@ import com.android.internal.widget.remotecompose.core.WireBuffer;
 
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public class DrawTextAnchored extends PaintOperation implements VariableSupport {
     public static final int ANCHOR_MONOSPACE_MEASURE = 2;
     public static final int ANCHOR_TEXT_RTL = 1;

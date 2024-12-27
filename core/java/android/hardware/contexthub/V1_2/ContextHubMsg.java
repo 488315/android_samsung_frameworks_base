@@ -7,7 +7,6 @@ import android.os.HwParcel;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public final class ContextHubMsg {
     public android.hardware.contexthub.V1_0.ContextHubMsg msg_1_0 =
             new android.hardware.contexthub.V1_0.ContextHubMsg();

@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public class ExtensionOutputConfiguration {
     private final int mOutputConfigId;
     private final String mPhysicalCameraId;

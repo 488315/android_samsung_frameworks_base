@@ -15,7 +15,6 @@ import android.os.RemoteException;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
-/* loaded from: classes.dex */
 public interface IContentProvider extends IInterface {
     public static final int APPLY_BATCH_TRANSACTION = 20;
     public static final int BULK_INSERT_TRANSACTION = 13;

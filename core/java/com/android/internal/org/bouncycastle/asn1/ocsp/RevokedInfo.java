@@ -11,7 +11,6 @@ import com.android.internal.org.bouncycastle.asn1.DERSequence;
 import com.android.internal.org.bouncycastle.asn1.DERTaggedObject;
 import com.android.internal.org.bouncycastle.asn1.x509.CRLReason;
 
-/* loaded from: classes5.dex */
 public class RevokedInfo extends ASN1Object {
     private CRLReason revocationReason;
     private ASN1GeneralizedTime revocationTime;

@@ -6,7 +6,6 @@ import com.samsung.android.sume.core.plugin.PluginFixture;
 
 import java.util.function.Consumer;
 
-/* loaded from: classes6.dex */
 public abstract class PluginDecorateFilter<T extends PluginFixture<?>> extends DecorateFilter {
     protected T plugin;
 

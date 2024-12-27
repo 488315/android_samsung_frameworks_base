@@ -1,7 +1,6 @@
 package android.text;
 
 @Deprecated
-/* loaded from: classes4.dex */
 public class AlteredCharSequence implements CharSequence, GetChars {
     private char[] mChars;
     private int mEnd;

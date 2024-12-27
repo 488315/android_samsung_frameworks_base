@@ -1,6 +1,5 @@
 package android.stats.sysui;
 
-/* loaded from: classes3.dex */
 public final class NotificationEnums {
     public static final int IMPORTANCE_DEFAULT = 3;
     public static final int IMPORTANCE_HIGH = 4;

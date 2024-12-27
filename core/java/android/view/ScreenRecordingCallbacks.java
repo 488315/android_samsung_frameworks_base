@@ -11,7 +11,6 @@ import java.util.Objects;
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 
-/* loaded from: classes4.dex */
 public final class ScreenRecordingCallbacks {
     private static ScreenRecordingCallbacks sInstance;
     private static final Object sLock = new Object();

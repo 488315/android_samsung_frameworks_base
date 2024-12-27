@@ -26,7 +26,6 @@ import javax.crypto.ShortBufferException;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.PBEParameterSpec;
 
-/* loaded from: classes5.dex */
 public class BaseStreamCipher extends BaseWrapCipher implements PBE {
     private Class[] availableSpecs;
     private StreamCipher cipher;

@@ -32,7 +32,6 @@ import com.samsung.android.mcf.ble.BleScanner;
 import java.util.ArrayList;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes.dex */
 public final class McfManager {
     public static final byte[] mScanFilterData = {
         66, 4, 0, HwConstants.IQ_CONFIG_POS_WIFI_ENABLED, 0, 0, 0, 0, 8

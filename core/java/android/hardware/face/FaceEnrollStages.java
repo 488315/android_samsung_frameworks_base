@@ -3,7 +3,6 @@ package android.hardware.face;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes2.dex */
 public final class FaceEnrollStages {
     public static final int ENROLLING_MOVEMENT_1 = 4;
     public static final int ENROLLING_MOVEMENT_2 = 5;

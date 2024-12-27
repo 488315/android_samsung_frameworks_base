@@ -4,7 +4,6 @@ import com.samsung.android.media.AudioTag;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class SensorType {
     public static final int ACCELEROMETER = 1;
     public static final int AMBIENT_LIGHT_SENSOR = 6;

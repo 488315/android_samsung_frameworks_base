@@ -5,7 +5,6 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 
-/* loaded from: classes4.dex */
 public class TextSwitcher extends ViewSwitcher {
     public TextSwitcher(Context context) {
         super(context);

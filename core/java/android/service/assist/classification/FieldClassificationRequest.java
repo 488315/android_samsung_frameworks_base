@@ -9,7 +9,6 @@ import android.os.Parcelable;
 import com.android.internal.util.AnnotationValidations;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class FieldClassificationRequest implements Parcelable {
     public static final Parcelable.Creator<FieldClassificationRequest> CREATOR =
             new Parcelable.Creator<

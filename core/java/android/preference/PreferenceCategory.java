@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.AttributeSet;
 
 @Deprecated
-/* loaded from: classes3.dex */
 public class PreferenceCategory extends PreferenceGroup {
     private static final String TAG = "PreferenceCategory";
 

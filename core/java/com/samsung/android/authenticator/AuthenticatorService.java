@@ -9,7 +9,6 @@ import com.samsung.android.authnrservice.manager.ISemAuthnrService;
 import java.util.Collections;
 import java.util.List;
 
-/* loaded from: classes5.dex */
 final class AuthenticatorService {
     private static final String SERVICE_NAME = "SemAuthnrService";
     private static final String TAG = "AS";

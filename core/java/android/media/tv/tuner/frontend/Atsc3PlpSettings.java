@@ -3,7 +3,6 @@ package android.media.tv.tuner.frontend;
 import android.annotation.SystemApi;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public class Atsc3PlpSettings {
     private final int mCodeRate;
     private final int mFec;

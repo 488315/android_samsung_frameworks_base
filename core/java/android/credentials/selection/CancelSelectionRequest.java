@@ -9,7 +9,6 @@ import android.os.Parcelable;
 import com.android.internal.util.AnnotationValidations;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class CancelSelectionRequest implements Parcelable {
     public static final Parcelable.Creator<CancelSelectionRequest> CREATOR =
             new Parcelable.Creator<CancelSelectionRequest>() { // from class:

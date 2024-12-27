@@ -7,7 +7,6 @@ import android.util.SparseLongArray;
 import java.io.PrintWriter;
 import java.util.function.Supplier;
 
-/* loaded from: classes5.dex */
 public class ProviderAccessStats {
     private final Object mLock = new Object();
     private final long mStartUptime = SystemClock.uptimeMillis();

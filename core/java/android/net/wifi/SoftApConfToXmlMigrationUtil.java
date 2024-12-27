@@ -21,7 +21,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
-/* loaded from: classes3.dex */
 public final class SoftApConfToXmlMigrationUtil {
     private static final int CONFIG_STORE_DATA_VERSION = 3;
     private static final String LEGACY_AP_CONFIG_FILE = "softap.conf";

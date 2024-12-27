@@ -25,7 +25,6 @@ import java.util.Arrays;
 import java.util.Locale;
 import java.util.UUID;
 
-/* loaded from: classes2.dex */
 public class ConversionUtil {
     public static SoundTrigger.ModuleProperties aidl2apiModuleDescriptor(
             SoundTriggerModuleDescriptor aidlDesc) {

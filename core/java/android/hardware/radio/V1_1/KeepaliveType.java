@@ -2,7 +2,6 @@ package android.hardware.radio.V1_1;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class KeepaliveType {
     public static final int NATT_IPV4 = 0;
     public static final int NATT_IPV6 = 1;

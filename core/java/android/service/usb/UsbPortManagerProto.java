@@ -1,6 +1,5 @@
 package android.service.usb;
 
-/* loaded from: classes3.dex */
 public final class UsbPortManagerProto {
     public static final long ENABLE_USB_DATA_SIGNALING = 1133871366147L;
     public static final long HAL_VERSION = 1159641169924L;

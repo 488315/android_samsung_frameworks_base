@@ -9,7 +9,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class AppTargetEvent implements Parcelable {
     public static final int ACTION_DISMISS = 2;
     public static final int ACTION_LAUNCH = 1;

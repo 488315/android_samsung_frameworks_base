@@ -3,7 +3,6 @@ package android.webkit;
 import android.annotation.SystemApi;
 import android.os.Handler;
 
-/* loaded from: classes4.dex */
 public abstract class WebMessagePort {
     public abstract void close();
 

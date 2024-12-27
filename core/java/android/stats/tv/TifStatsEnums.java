@@ -1,6 +1,5 @@
 package android.stats.tv;
 
-/* loaded from: classes3.dex */
 public final class TifStatsEnums {
     public static final int COMPONENT = 1004;
     public static final int COMPOSITE = 1001;

@@ -4,7 +4,6 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.SystemClock;
 
-/* loaded from: classes.dex */
 public class SyncContext {
     private static final long HEARTBEAT_SEND_INTERVAL_IN_MS = 1000;
     private long mLastHeartbeatSendTime = 0;

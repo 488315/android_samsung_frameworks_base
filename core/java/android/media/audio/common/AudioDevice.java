@@ -8,7 +8,6 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public class AudioDevice implements Parcelable {
     public static final Parcelable.Creator<AudioDevice> CREATOR =
             new Parcelable.Creator<

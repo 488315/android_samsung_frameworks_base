@@ -15,7 +15,6 @@ import java.security.spec.ECFieldF2m;
 import java.security.spec.ECFieldFp;
 import java.security.spec.EllipticCurve;
 
-/* loaded from: classes5.dex */
 public class ECNamedCurveSpec extends java.security.spec.ECParameterSpec {
     private String name;
 

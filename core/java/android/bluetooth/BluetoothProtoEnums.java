@@ -1,6 +1,5 @@
 package android.bluetooth;
 
-/* loaded from: classes.dex */
 public final class BluetoothProtoEnums {
     public static final int A2DP_ALREADY_CONNECTING = 102005;
     public static final int A2DP_CONNECTION_ACL_DISCONNECTED = 102001;

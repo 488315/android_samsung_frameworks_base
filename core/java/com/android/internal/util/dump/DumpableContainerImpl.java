@@ -12,7 +12,6 @@ import java.io.PrintWriter;
 import java.util.Objects;
 import java.util.function.Supplier;
 
-/* loaded from: classes5.dex */
 public final class DumpableContainerImpl implements DumpableContainer {
     private static final boolean DEBUG = false;
     private static final String TAG = DumpableContainerImpl.class.getSimpleName();

@@ -3,7 +3,6 @@ package android.security.keymaster;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes3.dex */
 public class ExportResult implements Parcelable {
     public static final Parcelable.Creator<ExportResult> CREATOR =
             new Parcelable.Creator<

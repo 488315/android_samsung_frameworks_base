@@ -13,7 +13,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
-/* loaded from: classes4.dex */
 public class HashedStringCache {
     private static final long DAYS_TO_MILLIS = 86400000;
     private static final boolean DEBUG = false;

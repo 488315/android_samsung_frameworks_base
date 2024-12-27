@@ -6,7 +6,6 @@ import com.android.graphics.hwui.flags.Flags;
 
 import java.util.function.Consumer;
 
-/* loaded from: classes4.dex */
 class HdrRenderState implements Consumer<Display> {
     private static final boolean FLAG_ANIMATE_ENABLED = Flags.animateHdrTransitions();
     private static final float TRANSITION_PER_MS = 0.01f;

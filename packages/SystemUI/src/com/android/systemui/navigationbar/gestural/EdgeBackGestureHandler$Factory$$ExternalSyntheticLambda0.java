@@ -5,7 +5,6 @@ import com.android.systemui.navigationbar.gestural.EdgeBackGestureHandler;
 import kotlin.jvm.functions.Function0;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public final /* synthetic */ class EdgeBackGestureHandler$Factory$$ExternalSyntheticLambda0 implements Function0 {
     public final /* synthetic */ EdgeBackGestureHandler.Factory f$0;
     public final /* synthetic */ Context f$1;

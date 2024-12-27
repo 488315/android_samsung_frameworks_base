@@ -2,7 +2,6 @@ package android.hardware.radio.V1_6;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class HandoverFailureMode {
     public static final byte DO_FALLBACK = 1;
     public static final byte LEGACY = 0;

@@ -4,7 +4,6 @@ import android.security.keystore.KeyProperties;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class RadioError {
     public static final int ABORTED = 65;
     public static final int ACCESS_BARRED = 68;

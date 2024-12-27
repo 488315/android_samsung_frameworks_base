@@ -21,7 +21,6 @@ import android.view.View;
 
 import com.android.internal.util.Preconditions;
 
-/* loaded from: classes4.dex */
 public class BaseInputConnection implements InputConnection {
     private static final boolean DEBUG = false;
     private static final String TAG = "BaseInputConnection";

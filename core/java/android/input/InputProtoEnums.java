@@ -1,6 +1,5 @@
 package android.input;
 
-/* loaded from: classes2.dex */
 public final class InputProtoEnums {
     public static final int ACCESSIBILITY_ALL_APPS = 23;
     public static final int ALL_APPS = 20;

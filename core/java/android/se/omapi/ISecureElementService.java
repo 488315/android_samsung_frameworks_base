@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes3.dex */
 public interface ISecureElementService extends IInterface {
     public static final String HASH = "894069bcfe4f35ceb2088278ddf87c83adee8014";
     public static final int VERSION = 1;

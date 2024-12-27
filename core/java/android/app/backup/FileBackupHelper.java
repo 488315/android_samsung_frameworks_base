@@ -5,7 +5,6 @@ import android.os.ParcelFileDescriptor;
 
 import java.io.File;
 
-/* loaded from: classes.dex */
 public class FileBackupHelper extends FileBackupHelperBase implements BackupHelper {
     private static final boolean DEBUG = false;
     private static final String TAG = "FileBackupHelper";

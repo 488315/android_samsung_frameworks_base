@@ -1,6 +1,5 @@
 package com.android.internal.org.bouncycastle.asn1.x500.style;
 
-/* loaded from: classes5.dex */
 public class X500NameTokenizer {
     private StringBuffer buf;
     private int index;

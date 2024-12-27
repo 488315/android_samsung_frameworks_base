@@ -3,7 +3,6 @@ package android.filterfw.core;
 import android.os.AsyncTask;
 import android.util.Log;
 
-/* loaded from: classes.dex */
 public class AsyncRunner extends GraphRunner {
     private static final String TAG = "AsyncRunner";
     private boolean isProcessing;

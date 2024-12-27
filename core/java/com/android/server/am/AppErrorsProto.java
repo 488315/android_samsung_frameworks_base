@@ -1,6 +1,5 @@
 package com.android.server.am;
 
-/* loaded from: classes5.dex */
 public final class AppErrorsProto {
     public static final long BAD_PROCESSES = 2246267895811L;
     public static final long NOW_UPTIME_MS = 1112396529665L;

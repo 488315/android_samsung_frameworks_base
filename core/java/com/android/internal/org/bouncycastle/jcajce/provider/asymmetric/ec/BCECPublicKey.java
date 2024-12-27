@@ -32,7 +32,6 @@ import java.security.spec.ECPoint;
 import java.security.spec.ECPublicKeySpec;
 import java.security.spec.EllipticCurve;
 
-/* loaded from: classes5.dex */
 public class BCECPublicKey
         implements ECPublicKey,
                 com.android.internal.org.bouncycastle.jce.interfaces.ECPublicKey,

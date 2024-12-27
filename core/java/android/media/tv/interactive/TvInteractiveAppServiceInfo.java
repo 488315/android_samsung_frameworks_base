@@ -24,7 +24,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public final class TvInteractiveAppServiceInfo implements Parcelable {
     public static final Parcelable.Creator<TvInteractiveAppServiceInfo> CREATOR =
             new Parcelable.Creator<

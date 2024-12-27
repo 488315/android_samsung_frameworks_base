@@ -5,7 +5,6 @@ import android.util.proto.ProtoOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes4.dex */
 public class TracingContext<
         DataSourceInstanceType extends DataSourceInstance, TlsStateType, IncrementalStateType> {
     private final DataSource<DataSourceInstanceType, TlsStateType, IncrementalStateType>

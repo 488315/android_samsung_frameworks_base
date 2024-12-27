@@ -5,7 +5,6 @@ import android.content.Context;
 import android.provider.Settings;
 import android.text.TextUtils;
 
-/* loaded from: classes5.dex */
 public class ConnectivitySettingsUtils {
     public static final String PRIVATE_DNS_DEFAULT_MODE = "private_dns_default_mode";
     public static final String PRIVATE_DNS_MODE = "private_dns_mode";

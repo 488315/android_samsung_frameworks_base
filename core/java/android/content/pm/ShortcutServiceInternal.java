@@ -13,7 +13,6 @@ import com.android.internal.infra.AndroidFuture;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
 public abstract class ShortcutServiceInternal {
 
     public interface ShortcutChangeListener {

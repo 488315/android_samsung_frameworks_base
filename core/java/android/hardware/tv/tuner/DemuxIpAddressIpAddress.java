@@ -3,7 +3,6 @@ package android.hardware.tv.tuner;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public final class DemuxIpAddressIpAddress implements Parcelable {
     public static final Parcelable.Creator<DemuxIpAddressIpAddress> CREATOR =
             new Parcelable.Creator<DemuxIpAddressIpAddress>() { // from class:

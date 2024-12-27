@@ -3,7 +3,6 @@ package android.media;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes2.dex */
 public final class SyncParams {
     public static final int AUDIO_ADJUST_MODE_DEFAULT = 0;
     public static final int AUDIO_ADJUST_MODE_RESAMPLE = 2;

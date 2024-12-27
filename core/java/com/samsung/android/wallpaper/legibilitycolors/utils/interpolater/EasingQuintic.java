@@ -1,7 +1,6 @@
 package com.samsung.android.wallpaper.legibilitycolors.utils.interpolater;
 
 
-/* loaded from: classes6.dex */
 public class EasingQuintic implements IEasing {
     private static EasingQuintic mInstance = null;
 

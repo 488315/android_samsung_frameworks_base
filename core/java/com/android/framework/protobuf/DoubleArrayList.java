@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.RandomAccess;
 
-/* loaded from: classes3.dex */
 final class DoubleArrayList extends AbstractProtobufList<Double>
         implements Internal.DoubleList, RandomAccess, PrimitiveNonBoxingCollection {
     private static final DoubleArrayList EMPTY_LIST = new DoubleArrayList(new double[0], 0);

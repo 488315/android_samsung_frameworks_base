@@ -6,7 +6,6 @@ import com.android.internal.org.bouncycastle.asn1.x509.GeneralName;
 import com.android.internal.org.bouncycastle.asn1.x509.GeneralSubtree;
 import com.android.internal.org.bouncycastle.asn1.x509.NameConstraintValidatorException;
 
-/* loaded from: classes5.dex */
 public class PKIXNameConstraintValidator {
     com.android.internal.org.bouncycastle.asn1.x509.PKIXNameConstraintValidator validator =
             new com.android.internal.org.bouncycastle.asn1.x509.PKIXNameConstraintValidator();

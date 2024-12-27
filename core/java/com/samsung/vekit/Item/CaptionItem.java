@@ -5,7 +5,6 @@ import com.samsung.vekit.Common.VEContext;
 import com.samsung.vekit.Content.Content;
 import com.samsung.vekit.Layer.Layer;
 
-/* loaded from: classes6.dex */
 public class CaptionItem extends Item {
     public CaptionItem(VEContext context, int id, String name) {
         super(context, ItemType.CAPTION, id, name);

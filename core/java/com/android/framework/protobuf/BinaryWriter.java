@@ -11,7 +11,6 @@ import java.util.Map;
 import java.util.Queue;
 
 @CheckReturnValue
-/* loaded from: classes3.dex */
 abstract class BinaryWriter extends ByteOutput implements Writer {
     public static final int DEFAULT_CHUNK_SIZE = 4096;
     private static final int MAP_KEY_NUMBER = 1;

@@ -6,7 +6,6 @@ import com.samsung.vekit.Common.Type.ContentType;
 import com.samsung.vekit.Common.Type.ElementType;
 import com.samsung.vekit.Common.VEContext;
 
-/* loaded from: classes6.dex */
 public class Content extends Element {
     protected ContentColorType colorType;
     protected ContentType contentType;

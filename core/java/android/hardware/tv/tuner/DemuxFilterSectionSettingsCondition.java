@@ -3,7 +3,6 @@ package android.hardware.tv.tuner;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public final class DemuxFilterSectionSettingsCondition implements Parcelable {
     public static final Parcelable.Creator<DemuxFilterSectionSettingsCondition> CREATOR =
             new Parcelable.Creator<DemuxFilterSectionSettingsCondition>() { // from class:

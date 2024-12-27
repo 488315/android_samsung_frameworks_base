@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
-/* loaded from: classes.dex */
 public class AppWidgetProvider extends BroadcastReceiver {
     private static final String TAG = "AppWidgetProvider";
 

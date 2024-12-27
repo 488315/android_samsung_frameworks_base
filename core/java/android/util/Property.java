@@ -1,6 +1,5 @@
 package android.util;
 
-/* loaded from: classes4.dex */
 public abstract class Property<T, V> {
     private final String mName;
     private final Class<V> mType;

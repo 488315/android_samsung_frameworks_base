@@ -1,6 +1,5 @@
 package android.content;
 
-/* loaded from: classes.dex */
 public final class ConfigurationProto {
     public static final long COLOR_MODE = 1155346202630L;
     public static final long DENSITY_DPI = 1155346202642L;

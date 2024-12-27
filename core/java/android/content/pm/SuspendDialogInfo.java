@@ -17,7 +17,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class SuspendDialogInfo implements Parcelable {
     public static final int BUTTON_ACTION_MORE_DETAILS = 0;
     public static final int BUTTON_ACTION_UNSUSPEND = 1;

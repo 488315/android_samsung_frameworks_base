@@ -5,7 +5,6 @@ import android.os.IBinder;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes.dex */
 public class AttributionSourceState implements Parcelable {
     public static final Parcelable.Creator<AttributionSourceState> CREATOR =
             new Parcelable.Creator<AttributionSourceState>() { // from class:

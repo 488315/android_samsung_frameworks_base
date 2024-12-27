@@ -11,7 +11,6 @@ import com.android.internal.widget.InlinePresentationStyleUtils;
 
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public final class InlinePresentationSpec implements Parcelable {
     public static final Parcelable.Creator<InlinePresentationSpec> CREATOR =
             new Parcelable.Creator<

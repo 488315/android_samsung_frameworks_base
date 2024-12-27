@@ -15,7 +15,6 @@ import java.util.ArrayDeque;
 import java.util.Objects;
 import java.util.Queue;
 
-/* loaded from: classes3.dex */
 public class TvRecordingClient {
     private static final boolean DEBUG = false;
     private static final String TAG = "TvRecordingClient";

@@ -3,7 +3,6 @@ package android.telephony.ims;
 import android.annotation.SystemApi;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public interface SipDelegateConnection {
     void cleanupSession(String str);
 

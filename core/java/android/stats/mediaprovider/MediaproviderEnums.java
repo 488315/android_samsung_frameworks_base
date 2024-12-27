@@ -1,6 +1,5 @@
 package android.stats.mediaprovider;
 
-/* loaded from: classes3.dex */
 public final class MediaproviderEnums {
     public static final int EXTERNAL_OTHER = 3;
     public static final int EXTERNAL_PRIMARY = 2;

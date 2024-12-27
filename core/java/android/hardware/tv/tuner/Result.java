@@ -1,6 +1,5 @@
 package android.hardware.tv.tuner;
 
-/* loaded from: classes2.dex */
 public @interface Result {
     public static final int INVALID_ARGUMENT = 4;
     public static final int INVALID_STATE = 3;

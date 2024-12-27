@@ -59,7 +59,6 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.PBEParameterSpec;
 
-/* loaded from: classes5.dex */
 public class BaseBlockCipher extends BaseWrapCipher implements PBE {
     private static final int BUF_SIZE = 512;
     private static final Class gcmSpecClass =

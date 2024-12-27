@@ -8,7 +8,6 @@ import com.android.internal.midi.MidiConstants;
 import com.samsung.android.graphics.spr.document.animator.SprAnimatorBase;
 import com.samsung.android.graphics.spr.document.attribute.SprAttributeBase;
 
-/* loaded from: classes5.dex */
 public final class SecureKeyConst {
     public static final String AT_CMD_DRK_V1_WRITING_END = "FF";
     public static final String AT_CMD_DRK_V2_VERSION = "01";

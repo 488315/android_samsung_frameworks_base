@@ -15,7 +15,6 @@ import com.android.internal.org.bouncycastle.asn1.x509.AlgorithmIdentifier;
 
 import java.util.Enumeration;
 
-/* loaded from: classes5.dex */
 public class SignerInfo extends ASN1Object {
     private ASN1Set authenticatedAttributes;
     private AlgorithmIdentifier digAlgorithm;

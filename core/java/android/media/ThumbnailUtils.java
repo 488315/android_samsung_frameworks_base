@@ -28,7 +28,6 @@ import java.util.Comparator;
 import java.util.Objects;
 import java.util.function.ToIntFunction;
 
-/* loaded from: classes2.dex */
 public class ThumbnailUtils {
     private static final int OPTIONS_NONE = 0;
     public static final int OPTIONS_RECYCLE_INPUT = 2;

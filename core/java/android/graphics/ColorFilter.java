@@ -2,7 +2,6 @@ package android.graphics;
 
 import libcore.util.NativeAllocationRegistry;
 
-/* loaded from: classes.dex */
 public class ColorFilter {
     private long mNativeInstance;
 

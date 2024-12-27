@@ -27,7 +27,6 @@ import javax.crypto.interfaces.DHPublicKey;
 import javax.crypto.spec.DHParameterSpec;
 import javax.crypto.spec.DHPublicKeySpec;
 
-/* loaded from: classes5.dex */
 public class BCDHPublicKey implements DHPublicKey {
     static final long serialVersionUID = -216691575254424324L;
     private transient DHPublicKeyParameters dhPublicKey;

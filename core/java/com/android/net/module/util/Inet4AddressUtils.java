@@ -4,7 +4,6 @@ import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-/* loaded from: classes5.dex */
 public class Inet4AddressUtils {
     public static Inet4Address intToInet4AddressHTL(int hostAddress) {
         return intToInet4AddressHTH(Integer.reverseBytes(hostAddress));

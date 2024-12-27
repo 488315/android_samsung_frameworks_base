@@ -18,7 +18,6 @@ import android.widget.RemoteViews;
 import java.util.List;
 import java.util.Map;
 
-/* loaded from: classes5.dex */
 public interface IAppWidgetService extends IInterface {
     int allocateAppWidgetId(String str, int i) throws RemoteException;
 

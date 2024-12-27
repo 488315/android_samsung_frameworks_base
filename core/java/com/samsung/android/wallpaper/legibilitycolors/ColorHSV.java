@@ -2,7 +2,6 @@ package com.samsung.android.wallpaper.legibilitycolors;
 
 import com.samsung.android.wallpaper.legibilitycolors.utils.IUXColorUtils;
 
-/* loaded from: classes6.dex */
 public class ColorHSV {
     int avgColor = 0;
     float avgH = 0.0f;

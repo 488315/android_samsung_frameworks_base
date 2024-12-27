@@ -10,7 +10,6 @@ import org.xmlpull.v1.XmlSerializer;
 
 import java.io.IOException;
 
-/* loaded from: classes.dex */
 public interface XmlSerializerAndParser<T> {
     T createFromXml(TypedXmlPullParser typedXmlPullParser)
             throws IOException, XmlPullParserException;

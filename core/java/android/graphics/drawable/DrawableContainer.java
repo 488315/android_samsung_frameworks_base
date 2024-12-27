@@ -11,7 +11,6 @@ import android.graphics.Rect;
 import android.os.SystemClock;
 import android.util.SparseArray;
 
-/* loaded from: classes.dex */
 public class DrawableContainer extends Drawable implements Drawable.Callback {
     private static final boolean DEBUG = false;
     private static final boolean DEFAULT_DITHER = true;

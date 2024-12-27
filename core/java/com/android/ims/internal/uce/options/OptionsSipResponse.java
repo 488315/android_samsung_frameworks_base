@@ -3,7 +3,6 @@ package com.android.ims.internal.uce.options;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes5.dex */
 public class OptionsSipResponse implements Parcelable {
     public static final Parcelable.Creator<OptionsSipResponse> CREATOR =
             new Parcelable.Creator<

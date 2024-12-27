@@ -17,7 +17,6 @@ import android.provider.Settings;
 
 import com.samsung.android.feature.SemFloatingFeature;
 
-/* loaded from: classes6.dex */
 public class SemEmergencyManager {
     private static boolean EMERGENCY_FEATURES_SUPPORTED = false;
     private static final boolean SERVICE_DBG = false;

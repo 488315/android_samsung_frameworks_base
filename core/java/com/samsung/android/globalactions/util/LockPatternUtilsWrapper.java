@@ -11,7 +11,6 @@ import android.view.WindowManagerGlobal;
 import com.android.internal.widget.ILockSettings;
 import com.android.internal.widget.LockPatternUtils;
 
-/* loaded from: classes6.dex */
 public class LockPatternUtilsWrapper {
     private static final String TAG = "LockPatternUtilsWrapper";
     private final Context mContext;

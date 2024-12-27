@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes2.dex */
 public interface IContextHubCallback extends IInterface {
     public static final int CONTEXTHUB_NAN_TRANSACTION_TIMEOUT_MS = 10000;
     public static final String DESCRIPTOR =

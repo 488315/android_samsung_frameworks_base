@@ -8,7 +8,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes6.dex */
 public interface ICoverManager extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.cover.ICoverManager";
 

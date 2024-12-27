@@ -15,7 +15,6 @@ import com.android.internal.inputmethod.IRemoteInputConnection;
 
 import java.io.FileDescriptor;
 
-/* loaded from: classes5.dex */
 public interface ISpenGestureService extends IInterface {
     public static final String DESCRIPTOR =
             "com.samsung.android.content.smartclip.ISpenGestureService";

@@ -1,6 +1,5 @@
 package android.media.soundtrigger;
 
-/* loaded from: classes2.dex */
 public @interface RecognitionMode {
     public static final int GENERIC_TRIGGER = 8;
     public static final int USER_AUTHENTICATION = 4;

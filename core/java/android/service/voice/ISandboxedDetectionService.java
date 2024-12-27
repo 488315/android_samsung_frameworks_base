@@ -15,7 +15,6 @@ import android.os.SharedMemory;
 import android.speech.IRecognitionServiceManager;
 import android.view.contentcapture.IContentCaptureManager;
 
-/* loaded from: classes3.dex */
 public interface ISandboxedDetectionService extends IInterface {
     public static final String DESCRIPTOR = "android.service.voice.ISandboxedDetectionService";
 

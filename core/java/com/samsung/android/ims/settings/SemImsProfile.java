@@ -11,7 +11,6 @@ import org.json.JSONObject;
 
 import java.util.Locale;
 
-/* loaded from: classes6.dex */
 public class SemImsProfile implements Parcelable {
     public static final Parcelable.Creator<SemImsProfile> CREATOR =
             new Parcelable.Creator<

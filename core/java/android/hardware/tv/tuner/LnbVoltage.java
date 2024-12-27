@@ -1,6 +1,5 @@
 package android.hardware.tv.tuner;
 
-/* loaded from: classes2.dex */
 public @interface LnbVoltage {
     public static final int NONE = 0;
     public static final int VOLTAGE_11V = 2;

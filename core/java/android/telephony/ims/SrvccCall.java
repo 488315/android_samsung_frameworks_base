@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public final class SrvccCall implements Parcelable {
     public static final Parcelable.Creator<SrvccCall> CREATOR =
             new Parcelable.Creator<SrvccCall>() { // from class: android.telephony.ims.SrvccCall.1

@@ -26,7 +26,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
-/* loaded from: classes5.dex */
 public class X509AttributeCertificateHolder implements Encodable, Serializable {
     private static Attribute[] EMPTY_ARRAY = new Attribute[0];
     private static final long serialVersionUID = 20170722001L;

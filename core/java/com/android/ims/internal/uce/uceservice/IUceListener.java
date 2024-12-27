@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes5.dex */
 public interface IUceListener extends IInterface {
     void setStatus(int i) throws RemoteException;
 

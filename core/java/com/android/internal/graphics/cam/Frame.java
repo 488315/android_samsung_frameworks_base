@@ -3,7 +3,6 @@ package com.android.internal.graphics.cam;
 import android.hardware.scontext.SContextConstants;
 import android.util.MathUtils;
 
-/* loaded from: classes5.dex */
 public final class Frame {
     public static final Frame DEFAULT =
             make(

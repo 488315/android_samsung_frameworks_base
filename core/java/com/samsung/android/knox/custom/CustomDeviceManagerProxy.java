@@ -4,7 +4,6 @@ import android.sec.enterprise.EnterpriseDeviceManager;
 import android.sec.enterprise.IEDMProxy;
 import android.util.Log;
 
-/* loaded from: classes6.dex */
 public class CustomDeviceManagerProxy {
     public static final int DESTINATION_ADDRESS = 332;
     public static final int KEYBOARD_MODE_NORMAL = 0;

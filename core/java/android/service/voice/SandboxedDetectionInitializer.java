@@ -10,7 +10,6 @@ import android.os.SharedMemory;
 import java.util.function.IntConsumer;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public interface SandboxedDetectionInitializer {
     public static final int INITIALIZATION_STATUS_SUCCESS = 0;
     public static final int INITIALIZATION_STATUS_UNKNOWN = 100;

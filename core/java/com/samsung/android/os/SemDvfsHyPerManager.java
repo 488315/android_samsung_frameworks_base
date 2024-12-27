@@ -2,7 +2,6 @@ package com.samsung.android.os;
 
 import android.content.Context;
 
-/* loaded from: classes6.dex */
 public class SemDvfsHyPerManager extends SemDvfsManager {
     protected SemDvfsHyPerManager(Context context, String packageName, int type) {
         super(context, packageName, type);

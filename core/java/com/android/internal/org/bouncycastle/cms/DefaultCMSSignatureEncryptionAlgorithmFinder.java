@@ -10,7 +10,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-/* loaded from: classes5.dex */
 public class DefaultCMSSignatureEncryptionAlgorithmFinder
         implements CMSSignatureEncryptionAlgorithmFinder {
     private static final Set RSA_PKCS1d5 = new HashSet();

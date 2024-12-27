@@ -26,7 +26,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public class ParsedIntentInfoUtils {
     public static final boolean DEBUG = false;
     private static final String TAG = "PackageParsing";

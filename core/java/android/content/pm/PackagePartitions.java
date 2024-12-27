@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Function;
 
-/* loaded from: classes.dex */
 public class PackagePartitions {
     public static final String FINGERPRINT = getFingerprint();
     public static final int PARTITION_ODM = 2;

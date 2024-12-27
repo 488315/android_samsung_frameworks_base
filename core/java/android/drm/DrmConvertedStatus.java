@@ -1,7 +1,6 @@
 package android.drm;
 
 @Deprecated
-/* loaded from: classes.dex */
 public class DrmConvertedStatus {
     public static final int STATUS_ERROR = 3;
     public static final int STATUS_INPUTDATA_ERROR = 2;

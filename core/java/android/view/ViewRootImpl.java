@@ -168,7 +168,6 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-/* loaded from: classes4.dex */
 public final class ViewRootImpl
         implements ViewParent,
                 View.AttachInfo.Callbacks,

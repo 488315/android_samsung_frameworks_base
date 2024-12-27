@@ -7,7 +7,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.TreeMap;
 
-/* loaded from: classes.dex */
 class InstanceLearner extends Learner {
     private static final Comparator<Prediction> sComparator =
             new Comparator<Prediction>() { // from class: android.gesture.InstanceLearner.1

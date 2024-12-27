@@ -3,7 +3,6 @@ package android.os;
 import android.annotation.SystemApi;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class RemoteCallback implements Parcelable {
     public static final Parcelable.Creator<RemoteCallback> CREATOR =
             new Parcelable.Creator<RemoteCallback>() { // from class: android.os.RemoteCallback.3

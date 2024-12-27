@@ -18,7 +18,6 @@ import com.android.internal.widget.NotificationExpandButton;
 import java.util.ArrayList;
 
 @RemoteViews.RemoteView
-/* loaded from: classes4.dex */
 public class NotificationHeaderView extends RelativeLayout {
     private boolean mAcceptAllTouches;
     private View mAltExpandTarget;

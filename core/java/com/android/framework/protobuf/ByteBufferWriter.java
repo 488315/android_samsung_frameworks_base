@@ -9,7 +9,6 @@ import java.lang.reflect.Field;
 import java.nio.ByteBuffer;
 import java.nio.channels.WritableByteChannel;
 
-/* loaded from: classes3.dex */
 final class ByteBufferWriter {
     private static final float BUFFER_REALLOCATION_THRESHOLD = 0.5f;
     private static final int MAX_CACHED_BUFFER_SIZE = 16384;

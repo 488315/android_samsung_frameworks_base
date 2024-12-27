@@ -8,7 +8,6 @@ import android.util.Log;
 
 import java.util.HashMap;
 
-/* loaded from: classes6.dex */
 public class SemShareLogging {
     private static final boolean DEBUG = false;
     private static final String TAG = "SemShareLogging";

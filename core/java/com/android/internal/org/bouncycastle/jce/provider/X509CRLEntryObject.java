@@ -27,7 +27,6 @@ import java.util.Set;
 
 import javax.security.auth.x500.X500Principal;
 
-/* loaded from: classes5.dex */
 public class X509CRLEntryObject extends X509CRLEntry {
     private TBSCertList.CRLEntry c;
     private X500Name certificateIssuer;

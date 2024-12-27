@@ -11,7 +11,6 @@ import java.util.Map;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-/* loaded from: classes6.dex */
 public final class SemMediaPostProcessor {
     private long mNativeContext;
     private final Lock mNativeContextLock = new ReentrantLock();

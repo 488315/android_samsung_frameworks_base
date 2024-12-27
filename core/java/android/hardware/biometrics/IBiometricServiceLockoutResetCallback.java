@@ -7,7 +7,6 @@ import android.os.IRemoteCallback;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes2.dex */
 public interface IBiometricServiceLockoutResetCallback extends IInterface {
     public static final String DESCRIPTOR =
             "android.hardware.biometrics.IBiometricServiceLockoutResetCallback";

@@ -7,7 +7,6 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public class ContextHubIntentEvent {
     private final int mClientAuthorizationState;
     private final ContextHubInfo mContextHubInfo;

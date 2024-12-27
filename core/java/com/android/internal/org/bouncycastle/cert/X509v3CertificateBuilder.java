@@ -27,7 +27,6 @@ import java.util.Date;
 import java.util.Enumeration;
 import java.util.Locale;
 
-/* loaded from: classes5.dex */
 public class X509v3CertificateBuilder {
     private ExtensionsGenerator extGenerator;
     private V3TBSCertificateGenerator tbsGen;

@@ -34,7 +34,6 @@ import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.Predicate;
 
-/* loaded from: classes.dex */
 public class IntentFilter implements Parcelable {
     private static final String ACTION_STR = "action";
     private static final String AGLOB_STR = "aglob";

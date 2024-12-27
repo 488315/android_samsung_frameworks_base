@@ -19,7 +19,6 @@ import java.util.Iterator;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BiConsumer;
 
-/* loaded from: classes.dex */
 public abstract class AbstractThreadedSyncAdapter {
     private static final boolean ENABLE_LOG;
 

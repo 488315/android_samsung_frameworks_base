@@ -1,6 +1,5 @@
 package android.audio.policy.configuration.V7_0;
 
-/* loaded from: classes.dex */
 public enum DeviceCategory {
     DEVICE_CATEGORY_HEADSET("DEVICE_CATEGORY_HEADSET"),
     DEVICE_CATEGORY_SPEAKER("DEVICE_CATEGORY_SPEAKER"),

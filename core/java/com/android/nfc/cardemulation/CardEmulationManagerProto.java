@@ -1,6 +1,5 @@
 package com.android.nfc.cardemulation;
 
-/* loaded from: classes5.dex */
 public final class CardEmulationManagerProto {
     public static final long AID_CACHE = 1146756268037L;
     public static final long ENABLED_NFC_F_SERVICES = 1146756268036L;

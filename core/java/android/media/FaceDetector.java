@@ -4,7 +4,6 @@ import android.graphics.Bitmap;
 import android.graphics.PointF;
 import android.util.Log;
 
-/* loaded from: classes2.dex */
 public class FaceDetector {
     private static boolean sInitialized;
     private byte[] mBWBuffer;

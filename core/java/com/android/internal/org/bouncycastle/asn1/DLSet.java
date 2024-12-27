@@ -2,7 +2,6 @@ package com.android.internal.org.bouncycastle.asn1;
 
 import java.io.IOException;
 
-/* loaded from: classes5.dex */
 public class DLSet extends ASN1Set {
     private int bodyLength;
 

@@ -18,7 +18,6 @@ import com.samsung.android.util.SemLog;
 import java.io.FileDescriptor;
 import java.util.ArrayList;
 
-/* loaded from: classes5.dex */
 public class SpenGestureManager {
     private static String TAG = "SpenGestureManager";
     private ISpenGestureService mService = null;

@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes.dex */
 public final class VersionedPackage implements Parcelable {
     public static final Parcelable.Creator<VersionedPackage> CREATOR =
             new Parcelable.Creator<

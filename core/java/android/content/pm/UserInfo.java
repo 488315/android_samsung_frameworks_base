@@ -13,7 +13,6 @@ import com.android.internal.R;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes.dex */
 public class UserInfo implements Parcelable {
     public static final int ATTR_ADMIN_LOCKED = 8;
     public static final int ATTR_DEVICE_COMPROMISED = 4;

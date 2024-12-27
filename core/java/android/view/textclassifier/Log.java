@@ -1,6 +1,5 @@
 package android.view.textclassifier;
 
-/* loaded from: classes4.dex */
 public final class Log {
     static final boolean ENABLE_FULL_LOGGING =
             android.util.Log.isLoggable(TextClassifier.LOG_TAG, 2);

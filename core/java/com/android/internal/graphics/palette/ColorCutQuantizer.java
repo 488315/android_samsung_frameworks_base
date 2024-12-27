@@ -10,7 +10,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.PriorityQueue;
 
-/* loaded from: classes5.dex */
 final class ColorCutQuantizer implements Quantizer {
     static final int COMPONENT_BLUE = -1;
     static final int COMPONENT_GREEN = -2;

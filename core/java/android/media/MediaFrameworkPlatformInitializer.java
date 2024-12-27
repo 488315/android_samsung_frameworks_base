@@ -8,7 +8,6 @@ import com.android.internal.util.Preconditions;
 
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public class MediaFrameworkPlatformInitializer {
     private static volatile MediaServiceManager sMediaServiceManager;
 

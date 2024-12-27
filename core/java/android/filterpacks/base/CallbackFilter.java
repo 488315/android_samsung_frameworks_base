@@ -8,7 +8,6 @@ import android.filterfw.core.GenerateFinalPort;
 import android.os.Handler;
 import android.os.Looper;
 
-/* loaded from: classes.dex */
 public class CallbackFilter extends Filter {
 
     @GenerateFinalPort(hasDefault = true, name = "callUiThread")

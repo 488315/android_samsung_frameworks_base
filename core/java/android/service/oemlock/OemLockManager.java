@@ -4,7 +4,6 @@ import android.annotation.SystemApi;
 import android.os.RemoteException;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public class OemLockManager {
     private IOemLockService mService;
 

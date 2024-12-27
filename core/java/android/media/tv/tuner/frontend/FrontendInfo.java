@@ -7,7 +7,6 @@ import java.util.Arrays;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public class FrontendInfo {
     private final long mAcquireRange;
     private final int mExclusiveGroupId;

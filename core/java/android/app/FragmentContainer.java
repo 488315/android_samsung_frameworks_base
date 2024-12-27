@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 
 @Deprecated
-/* loaded from: classes.dex */
 public abstract class FragmentContainer {
     public abstract <T extends View> T onFindViewById(int i);
 

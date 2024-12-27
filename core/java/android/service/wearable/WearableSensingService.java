@@ -37,7 +37,6 @@ import java.util.concurrent.TimeoutException;
 import java.util.function.Consumer;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public abstract class WearableSensingService extends Service {
     public static final String HOTWORD_AUDIO_STREAM_BUNDLE_KEY =
             "android.app.wearable.HotwordAudioStreamBundleKey";

@@ -12,7 +12,6 @@ import android.os.RemoteException;
 
 import java.util.List;
 
-/* loaded from: classes2.dex */
 public interface IContextHubService extends IInterface {
     IContextHubClient createClient(
             int i, IContextHubClientCallback iContextHubClientCallback, String str, String str2)

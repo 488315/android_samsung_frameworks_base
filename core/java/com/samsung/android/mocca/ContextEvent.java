@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import java.io.Serializable;
 import java.util.Arrays;
 
-/* loaded from: classes6.dex */
 public final class ContextEvent implements Serializable, Parcelable {
     public static final Parcelable.Creator<ContextEvent> CREATOR =
             new Parcelable.Creator<

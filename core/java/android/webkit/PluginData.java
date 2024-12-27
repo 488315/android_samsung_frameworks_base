@@ -4,7 +4,6 @@ import java.io.InputStream;
 import java.util.Map;
 
 @Deprecated
-/* loaded from: classes4.dex */
 public final class PluginData {
     private long mContentLength;
     private Map<String, String[]> mHeaders;

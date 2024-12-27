@@ -1,6 +1,5 @@
 package android.hardware.usb.gadget;
 
-/* loaded from: classes2.dex */
 public @interface Status {
     public static final int CONFIGURATION_NOT_SUPPORTED = 4;
     public static final int ERROR = 1;

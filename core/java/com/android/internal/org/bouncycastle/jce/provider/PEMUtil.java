@@ -8,7 +8,6 @@ import com.android.internal.org.bouncycastle.util.encoders.Base64;
 import java.io.IOException;
 import java.io.InputStream;
 
-/* loaded from: classes5.dex */
 public class PEMUtil {
     private final String _footer1;
     private final String _footer2;

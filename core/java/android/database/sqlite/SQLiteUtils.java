@@ -1,6 +1,5 @@
 package android.database.sqlite;
 
-/* loaded from: classes.dex */
 public class SQLiteUtils {
     private static final String TAG = "SQLiteUtils";
     private static final char[] hexArray = "0123456789ABCDEF".toCharArray();

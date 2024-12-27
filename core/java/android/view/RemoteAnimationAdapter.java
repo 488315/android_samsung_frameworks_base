@@ -4,7 +4,6 @@ import android.app.IApplicationThread;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes4.dex */
 public class RemoteAnimationAdapter implements Parcelable {
     public static final Parcelable.Creator<RemoteAnimationAdapter> CREATOR =
             new Parcelable.Creator<

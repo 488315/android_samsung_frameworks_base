@@ -15,7 +15,6 @@ import com.samsung.android.knox.zt.devicetrust.IEndpointMonitorListener;
 
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public interface IDarManagerService extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.knox.dar.IDarManagerService";
 

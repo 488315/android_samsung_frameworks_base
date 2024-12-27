@@ -11,7 +11,6 @@ import java.io.UnsupportedEncodingException;
 import java.security.GeneralSecurityException;
 import java.security.InvalidKeyException;
 
-/* loaded from: classes6.dex */
 class EncryptedCursor extends AbstractCursor {
     private static int INITIAL_VALUE = -99;
     CryptoHandler mCryptoHandler;

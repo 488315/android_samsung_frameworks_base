@@ -1,6 +1,5 @@
 package android.hardware.radio.network;
 
-/* loaded from: classes2.dex */
 public @interface RegState {
     public static final int NOT_REG_MT_NOT_SEARCHING_OP = 0;
     public static final int NOT_REG_MT_NOT_SEARCHING_OP_EM = 10;

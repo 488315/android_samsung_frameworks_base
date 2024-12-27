@@ -5,7 +5,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @Deprecated
-/* loaded from: classes2.dex */
 public class SContextFlatMotionForTableMode extends SContextEventContext {
     public static final Parcelable.Creator<SContextFlatMotionForTableMode> CREATOR =
             new Parcelable.Creator<SContextFlatMotionForTableMode>() { // from class:

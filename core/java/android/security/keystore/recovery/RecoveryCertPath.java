@@ -10,7 +10,6 @@ import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public final class RecoveryCertPath implements Parcelable {
     private static final String CERT_PATH_ENCODING = "PkiPath";
     public static final Parcelable.Creator<RecoveryCertPath> CREATOR =

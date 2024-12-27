@@ -12,7 +12,6 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public final class F2fsUtils {
     private static final String COMPRESSION_FEATURE = "compression";
     private static final boolean DEBUG_F2FS = false;

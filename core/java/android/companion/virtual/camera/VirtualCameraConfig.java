@@ -14,7 +14,6 @@ import java.util.Set;
 import java.util.concurrent.Executor;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class VirtualCameraConfig implements Parcelable {
     public static final Parcelable.Creator<VirtualCameraConfig> CREATOR =
             new Parcelable.Creator<VirtualCameraConfig>() { // from class:

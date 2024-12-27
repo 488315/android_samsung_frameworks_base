@@ -5,7 +5,6 @@ import java.nio.ByteOrder;
 import java.util.HashMap;
 import java.util.Set;
 
-/* loaded from: classes6.dex */
 public final class Tlv {
     public static final int TAG_LENGTH_FIELD_LEN = 3;
     public static final int TLV_TAG_DN_QUALIFIER = 6;

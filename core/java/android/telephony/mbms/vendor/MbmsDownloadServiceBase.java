@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.Map;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public class MbmsDownloadServiceBase extends IMbmsDownloadService.Stub {
     private final Map<IBinder, DownloadStatusListener> mDownloadStatusListenerBinderMap =
             new HashMap();

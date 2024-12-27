@@ -26,7 +26,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
-/* loaded from: classes.dex */
 public class LocaleConfig implements Parcelable {
     public static final Parcelable.Creator<LocaleConfig> CREATOR =
             new Parcelable.Creator<LocaleConfig>() { // from class: android.app.LocaleConfig.1

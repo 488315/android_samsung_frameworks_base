@@ -1,6 +1,5 @@
 package android.os;
 
-/* loaded from: classes3.dex */
 public final class IncidentMetadata {
     public static final int AUTOMATIC = 0;
     public static final long DEST = 1159641169923L;

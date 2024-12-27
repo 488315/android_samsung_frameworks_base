@@ -9,7 +9,6 @@ import com.samsung.android.transcode.core.EncodeVideo;
 
 import java.io.IOException;
 
-/* loaded from: classes6.dex */
 public class SemVideoTranscoder {
     private EncodeVideo mEncodeVideo = new EncodeVideo();
     private ProgressEventListener mProgressEventListener;

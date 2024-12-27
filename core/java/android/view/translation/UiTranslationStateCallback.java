@@ -2,7 +2,6 @@ package android.view.translation;
 
 import android.icu.util.ULocale;
 
-/* loaded from: classes4.dex */
 public interface UiTranslationStateCallback {
     void onFinished();
 

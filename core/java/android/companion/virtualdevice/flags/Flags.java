@@ -1,6 +1,5 @@
 package android.companion.virtualdevice.flags;
 
-/* loaded from: classes.dex */
 public final class Flags {
     private static FeatureFlags FEATURE_FLAGS = new FeatureFlagsImpl();
     public static final String FLAG_CAMERA_DEVICE_AWARENESS =

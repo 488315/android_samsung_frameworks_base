@@ -9,7 +9,6 @@ import android.os.RemoteException;
 import android.text.TextUtils;
 import android.widget.RemoteViews;
 
-/* loaded from: classes3.dex */
 public interface IQSTileService extends IInterface {
     void onClick(IBinder iBinder) throws RemoteException;
 

@@ -17,7 +17,6 @@ import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public class IccUtils {
     static final int FPLMN_BYTE_SIZE = 3;
     private static final char[] HEX_CHARS = {

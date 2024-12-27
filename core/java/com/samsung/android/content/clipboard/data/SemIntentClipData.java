@@ -10,7 +10,6 @@ import android.sec.clipboard.util.Log;
 
 import java.net.URISyntaxException;
 
-/* loaded from: classes5.dex */
 public class SemIntentClipData extends SemClipData {
     private static final String TAG = "SemIntentClipData";
     private static final long serialVersionUID = 1;

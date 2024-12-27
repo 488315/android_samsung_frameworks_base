@@ -24,7 +24,6 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
-/* loaded from: classes6.dex */
 public class GenericMediaBuffer<T> extends MediaBufferBase {
     private T data;
     private final Class<T> dataClass;

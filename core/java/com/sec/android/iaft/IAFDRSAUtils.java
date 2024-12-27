@@ -15,7 +15,6 @@ import java.security.spec.X509EncodedKeySpec;
 
 import javax.crypto.Cipher;
 
-/* loaded from: classes6.dex */
 public class IAFDRSAUtils {
     public static final String KEY_ALGORITHM = "RSA";
     private static final int MAX_DECRYPT_BLOCK = 128;

@@ -2,7 +2,6 @@ package android.credentials;
 
 import com.android.internal.util.Preconditions;
 
-/* loaded from: classes.dex */
 public class ClearCredentialStateException extends Exception {
     public static final String TYPE_UNKNOWN =
             "android.credentials.ClearCredentialStateException.TYPE_UNKNOWN";

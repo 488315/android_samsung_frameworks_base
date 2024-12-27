@@ -17,7 +17,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-/* loaded from: classes5.dex */
 public final class TelephonyPermissions {
     private static final boolean DBG = false;
     private static final String LOG_TAG = "TelephonyPermissions";

@@ -2,7 +2,6 @@ package com.android.internal.org.bouncycastle.cert;
 
 import java.io.IOException;
 
-/* loaded from: classes5.dex */
 public class CertIOException extends IOException {
     private Throwable cause;
 

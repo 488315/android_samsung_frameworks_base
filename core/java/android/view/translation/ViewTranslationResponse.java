@@ -14,7 +14,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-/* loaded from: classes4.dex */
 public final class ViewTranslationResponse implements Parcelable {
     public static final Parcelable.Creator<ViewTranslationResponse> CREATOR =
             new Parcelable.Creator<

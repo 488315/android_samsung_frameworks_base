@@ -21,7 +21,6 @@ import java.util.List;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public final class ContentCaptureEvent implements Parcelable {
     public static final int MAX_INVALID_VALUE = -1;
     public static final int TYPE_CONTEXT_UPDATED = 6;

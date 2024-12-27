@@ -1,6 +1,5 @@
 package android.stats.tls;
 
-/* loaded from: classes3.dex */
 public final class Enums {
     public static final int SOURCE_GMS = 2;
     public static final int SOURCE_MAINLINE = 1;

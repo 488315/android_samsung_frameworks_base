@@ -9,7 +9,6 @@ import android.os.SemSimpleNetworkStats;
 
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public interface IBatteryStatsCallback extends IInterface {
     public static final String DESCRIPTOR = "com.android.internal.app.IBatteryStatsCallback";
 

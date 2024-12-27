@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes6.dex */
 public class SemContextSlocationArDistance extends SemContextEventContext {
     public static final Parcelable.Creator<SemContextSlocationArDistance> CREATOR =
             new Parcelable.Creator<

@@ -8,7 +8,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.StringTokenizer;
 import java.util.UUID;
 
-/* loaded from: classes2.dex */
 public class SemSoundAlive extends AudioEffect {
     public static final UUID EFFECT_TYPE_SOUNDALIVE =
             UUID.fromString("c4da1d1f-7cdf-42e2-ba60-efc7eb3508a3");

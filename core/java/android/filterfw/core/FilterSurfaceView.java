@@ -5,7 +5,6 @@ import android.util.AttributeSet;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-/* loaded from: classes.dex */
 public class FilterSurfaceView extends SurfaceView implements SurfaceHolder.Callback {
     private static int STATE_ALLOCATED = 0;
     private static int STATE_CREATED = 1;

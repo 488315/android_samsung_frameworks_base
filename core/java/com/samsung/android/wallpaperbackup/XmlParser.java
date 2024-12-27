@@ -19,7 +19,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
-/* loaded from: classes6.dex */
 public class XmlParser extends DefaultHandler {
     private final String TAG = "XmlParser";
     private boolean mCurrentElement = false;

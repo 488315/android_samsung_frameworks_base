@@ -41,7 +41,6 @@ import java.util.Arrays;
 import java.util.Objects;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public final class PowerUI implements CoreStartable, ConfigurationController.ConfigurationListener, CommandQueue.Callbacks {
     public static final boolean DEBUG = Log.isLoggable("PowerUI", 3);
     public final BroadcastDispatcher mBroadcastDispatcher;

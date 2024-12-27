@@ -25,7 +25,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-/* loaded from: classes6.dex */
 public interface MediaBuffer extends Parcelable, Copyable<MediaBuffer> {
     public static final int BUFFER_FLAG_PACKED_EVALUATION_BUFFER = 2;
     public static final int BUFFER_FLAG_PACKED_IO_BUFFERS = 1;

@@ -20,7 +20,6 @@ import com.android.internal.telephony.PublishDialog;
 
 import java.util.List;
 
-/* loaded from: classes4.dex */
 public interface IImsMmTelFeature extends IInterface {
     public static final String DESCRIPTOR = "android.telephony.ims.aidl.IImsMmTelFeature";
 

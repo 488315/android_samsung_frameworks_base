@@ -29,7 +29,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.function.Predicate;
 
-/* loaded from: classes4.dex */
 public class ApnSetting implements Parcelable {
     private static final Map<Integer, String> APN_TYPE_INT_MAP;
     private static final Map<String, Integer> APN_TYPE_STRING_MAP = new ArrayMap();

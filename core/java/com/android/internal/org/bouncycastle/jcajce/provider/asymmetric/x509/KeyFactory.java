@@ -14,7 +14,6 @@ import java.security.spec.KeySpec;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 
-/* loaded from: classes5.dex */
 public class KeyFactory extends KeyFactorySpi {
     @Override // java.security.KeyFactorySpi
     protected PrivateKey engineGeneratePrivate(KeySpec keySpec) throws InvalidKeySpecException {

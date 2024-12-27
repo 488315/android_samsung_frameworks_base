@@ -15,7 +15,6 @@ import java.security.interfaces.ECPublicKey;
 import java.security.spec.ECParameterSpec;
 import java.security.spec.ECPoint;
 
-/* loaded from: classes5.dex */
 public class ECKeyUtil {
     public static ECPublicKey createKeyWithCompression(ECPublicKey ecPublicKey) {
         return new ECPublicKeyWithCompression(ecPublicKey);

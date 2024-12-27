@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.io.InputStream;
 
 @Deprecated(forRemoval = true, since = "15.0")
-/* loaded from: classes6.dex */
 public class SemHEIFCodec {
     public static final int ENCODING_TYPE_JPEG_SQUEEZER = 1;
     private static final int IMAGE_TYPE_COVER = 0;

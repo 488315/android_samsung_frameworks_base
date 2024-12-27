@@ -10,7 +10,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public final class ImsCallForwardInfo implements Parcelable {
     public static final int CDIV_CF_REASON_ALL = 4;
     public static final int CDIV_CF_REASON_ALL_CONDITIONAL = 5;

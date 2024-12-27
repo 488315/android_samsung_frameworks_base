@@ -23,7 +23,6 @@ import android.widget.TextView;
 import com.android.internal.R;
 
 @Deprecated
-/* loaded from: classes3.dex */
 public abstract class PreferenceFragment extends Fragment
         implements PreferenceManager.OnPreferenceTreeClickListener {
     private static final int FIRST_REQUEST_CODE = 100;

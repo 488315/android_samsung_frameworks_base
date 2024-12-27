@@ -5,7 +5,6 @@ import android.util.ArrayMap;
 
 import dalvik.system.PathClassLoader;
 
-/* loaded from: classes5.dex */
 public final class SystemServerClassLoaderFactory {
     private static final ArrayMap<String, PathClassLoader> sLoadedPaths = new ArrayMap<>();
 

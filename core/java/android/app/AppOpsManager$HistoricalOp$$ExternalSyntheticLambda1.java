@@ -5,7 +5,6 @@ import android.util.LongSparseLongArray;
 import java.util.function.Supplier;
 
 /* compiled from: D8$$SyntheticClass */
-/* loaded from: classes.dex */
 public final /* synthetic */ class AppOpsManager$HistoricalOp$$ExternalSyntheticLambda1
         implements Supplier {
     public final /* synthetic */ AppOpsManager.HistoricalOp f$0;

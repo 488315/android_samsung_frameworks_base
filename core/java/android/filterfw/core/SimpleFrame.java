@@ -6,7 +6,6 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 
 import java.nio.ByteBuffer;
 
-/* loaded from: classes.dex */
 public class SimpleFrame extends Frame {
     private Object mObject;
 

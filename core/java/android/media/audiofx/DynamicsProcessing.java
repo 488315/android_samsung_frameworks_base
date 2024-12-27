@@ -7,7 +7,6 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.StringTokenizer;
 
-/* loaded from: classes2.dex */
 public final class DynamicsProcessing extends AudioEffect {
     private static final int CHANNEL_COUNT_MAX = 32;
     private static final float CHANNEL_DEFAULT_INPUT_GAIN = 0.0f;

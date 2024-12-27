@@ -16,7 +16,6 @@ import java.util.Objects;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-/* loaded from: classes4.dex */
 public final class SystemTextClassifier implements TextClassifier {
     private static final String LOG_TAG = "androidtc";
     private TextClassificationSessionId mSessionId;

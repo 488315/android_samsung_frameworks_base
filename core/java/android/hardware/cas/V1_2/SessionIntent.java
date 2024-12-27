@@ -2,7 +2,6 @@ package android.hardware.cas.V1_2;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class SessionIntent {
     public static final int LIVE = 0;
     public static final int PLAYBACK = 1;

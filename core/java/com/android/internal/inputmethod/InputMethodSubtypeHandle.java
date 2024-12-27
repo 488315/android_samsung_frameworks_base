@@ -14,7 +14,6 @@ import java.lang.annotation.Target;
 import java.security.InvalidParameterException;
 import java.util.Objects;
 
-/* loaded from: classes5.dex */
 public final class InputMethodSubtypeHandle implements Parcelable {
     public static final Parcelable.Creator<InputMethodSubtypeHandle> CREATOR =
             new Parcelable.Creator<

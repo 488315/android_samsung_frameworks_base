@@ -12,7 +12,6 @@ import com.android.internal.org.bouncycastle.asn1.DERSequence;
 import com.android.internal.org.bouncycastle.asn1.DERTaggedObject;
 import com.android.internal.org.bouncycastle.util.Strings;
 
-/* loaded from: classes5.dex */
 public class IssuingDistributionPoint extends ASN1Object {
     private DistributionPointName distributionPoint;
     private boolean indirectCRL;

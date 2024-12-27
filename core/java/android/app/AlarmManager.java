@@ -24,7 +24,6 @@ import java.util.Objects;
 import java.util.WeakHashMap;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes.dex */
 public class AlarmManager {
     public static final String ACTION_ALARM_CLOCK_CHANGED =
             "com.samsung.android.action.ALARM_CLOCK_CHANGED";

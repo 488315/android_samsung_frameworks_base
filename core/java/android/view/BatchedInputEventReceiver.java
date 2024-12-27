@@ -4,7 +4,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Trace;
 
-/* loaded from: classes4.dex */
 public class BatchedInputEventReceiver extends InputEventReceiver {
     private final BatchedInputRunnable mBatchedInputRunnable;
     private boolean mBatchedInputScheduled;

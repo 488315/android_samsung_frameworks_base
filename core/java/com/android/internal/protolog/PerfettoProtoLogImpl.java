@@ -40,7 +40,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 
-/* loaded from: classes5.dex */
 public class PerfettoProtoLogImpl implements IProtoLog {
     private static final String LOG_TAG = "ProtoLog";
     private static final int STACK_SIZE_TO_PROTO_LOG_ENTRY_CALL = 12;

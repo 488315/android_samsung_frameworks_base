@@ -13,7 +13,6 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 
 import java.lang.annotation.Annotation;
 
-/* loaded from: classes5.dex */
 public class AnnotationValidations {
     private AnnotationValidations() {}
 

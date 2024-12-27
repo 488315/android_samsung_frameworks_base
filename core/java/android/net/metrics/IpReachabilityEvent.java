@@ -9,7 +9,6 @@ import com.android.internal.util.MessageUtils;
 
 @SystemApi
 @Deprecated
-/* loaded from: classes3.dex */
 public final class IpReachabilityEvent implements IpConnectivityLog.Event {
     public static final Parcelable.Creator<IpReachabilityEvent> CREATOR =
             new Parcelable.Creator<

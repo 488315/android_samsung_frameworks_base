@@ -7,7 +7,6 @@ import com.android.systemui.edgelighting.effect.container.EdgeLightingDialog;
 import com.android.systemui.edgelighting.utils.Utils;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public abstract class AbsEdgeLightingView extends FrameLayout {
     public EdgeLightingDialog.AnonymousClass4 mEdgeListener;
     public int mScreenHeight;

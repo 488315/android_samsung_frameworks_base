@@ -12,7 +12,6 @@ import com.android.internal.org.bouncycastle.util.Arrays;
 
 import java.security.SecureRandom;
 
-/* loaded from: classes5.dex */
 public class OAEPEncoding implements AsymmetricBlockCipher {
     private byte[] defHash;
     private AsymmetricBlockCipher engine;

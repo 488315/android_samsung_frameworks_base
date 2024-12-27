@@ -9,7 +9,6 @@ import android.hardware.camera2.utils.TypeReference;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 
-/* loaded from: classes2.dex */
 public class MarshalQueryableReprocessFormatsMap implements MarshalQueryable<ReprocessFormatsMap> {
 
     private class MarshalerReprocessFormatsMap extends Marshaler<ReprocessFormatsMap> {

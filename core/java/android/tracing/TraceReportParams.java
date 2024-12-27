@@ -5,7 +5,6 @@ import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
 import android.os.Parcelable;
 
-/* loaded from: classes4.dex */
 public class TraceReportParams implements Parcelable {
     public static final Parcelable.Creator<TraceReportParams> CREATOR =
             new Parcelable.Creator<

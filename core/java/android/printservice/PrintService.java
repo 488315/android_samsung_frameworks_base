@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public abstract class PrintService extends Service {
     private static final boolean DEBUG = false;
     public static final String EXTRA_CAN_SELECT_PRINTER =

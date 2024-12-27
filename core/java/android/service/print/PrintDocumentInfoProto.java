@@ -1,6 +1,5 @@
 package android.service.print;
 
-/* loaded from: classes3.dex */
 public final class PrintDocumentInfoProto {
     public static final long CONTENT_TYPE = 1120986464259L;
     public static final long DATA_SIZE = 1112396529668L;

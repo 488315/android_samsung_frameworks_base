@@ -1,6 +1,5 @@
 package android.net.wifi;
 
-/* loaded from: classes3.dex */
 public final class WifiProtoEnums {
     public static final int ADMIN = 2;
     public static final int AUTH_TYPE_FILS_SHA256 = 15;

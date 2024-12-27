@@ -13,7 +13,6 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Random;
 
-/* loaded from: classes3.dex */
 public class RapporEncoder implements DifferentialPrivacyEncoder {
     private static final byte[] INSECURE_SECRET = {
         -41,

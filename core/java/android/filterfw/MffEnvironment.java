@@ -5,7 +5,6 @@ import android.filterfw.core.FilterContext;
 import android.filterfw.core.FrameManager;
 import android.filterfw.core.GLEnvironment;
 
-/* loaded from: classes.dex */
 public class MffEnvironment {
     private FilterContext mContext;
 

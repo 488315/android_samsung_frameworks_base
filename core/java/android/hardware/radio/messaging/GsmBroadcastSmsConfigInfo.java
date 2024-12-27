@@ -6,7 +6,6 @@ import android.os.Parcelable;
 
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public class GsmBroadcastSmsConfigInfo implements Parcelable {
     public static final Parcelable.Creator<GsmBroadcastSmsConfigInfo> CREATOR =
             new Parcelable.Creator<GsmBroadcastSmsConfigInfo>() { // from class:

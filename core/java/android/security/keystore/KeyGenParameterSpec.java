@@ -12,7 +12,6 @@ import java.util.Set;
 
 import javax.security.auth.x500.X500Principal;
 
-/* loaded from: classes3.dex */
 public final class KeyGenParameterSpec implements AlgorithmParameterSpec, UserAuthArgs {
     private final String mAttestKeyAlias;
     private final byte[] mAttestationChallenge;

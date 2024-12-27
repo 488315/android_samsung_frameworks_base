@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 import com.android.internal.telephony.util.TelephonyUtils;
 
-/* loaded from: classes4.dex */
 public final class SemSatSimAuthReqData implements Parcelable {
     public static final Parcelable.Creator<SemSatSimAuthReqData> CREATOR =
             new Parcelable.Creator<

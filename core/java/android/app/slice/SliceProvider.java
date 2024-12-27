@@ -32,7 +32,6 @@ import java.util.List;
 import java.util.Set;
 
 @Deprecated
-/* loaded from: classes.dex */
 public abstract class SliceProvider extends ContentProvider {
     private static final boolean DEBUG = false;
     public static final String EXTRA_BIND_URI = "slice_uri";

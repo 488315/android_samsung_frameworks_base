@@ -15,7 +15,6 @@ import java.util.Objects;
 import java.util.concurrent.Executor;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-/* loaded from: classes6.dex */
 public class MPSurfaceReader implements AutoCloseable {
     private static final int ACQUIRE_MAX_IMAGES = 2;
     private static final int ACQUIRE_NO_BUFS = 1;

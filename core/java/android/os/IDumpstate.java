@@ -2,7 +2,6 @@ package android.os;
 
 import java.io.FileDescriptor;
 
-/* loaded from: classes3.dex */
 public interface IDumpstate extends IInterface {
     public static final int BUGREPORT_FLAG_DEFER_CONSENT = 2;
     public static final int BUGREPORT_FLAG_KEEP_BUGREPORT_ON_RETRIEVAL = 4;

@@ -10,7 +10,6 @@ import android.view.animation.PathInterpolator;
 import kotlin.Unit;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public abstract class ViewAnimationController {
     public final KeyguardTouchAnimator keyguardTouchAnimator;
     public final Interpolator SINE_OUT_33 = new PathInterpolator(0.17f, 0.17f, 0.67f, 1.0f);

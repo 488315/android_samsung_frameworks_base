@@ -10,7 +10,6 @@ import com.android.internal.org.bouncycastle.util.Selector;
 
 import java.math.BigInteger;
 
-/* loaded from: classes5.dex */
 public class X509CertificateHolderSelector implements Selector {
     private X500Name issuer;
     private BigInteger serialNumber;

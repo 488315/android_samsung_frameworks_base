@@ -7,7 +7,6 @@ import android.util.Size;
 
 import com.android.internal.util.Preconditions;
 
-/* loaded from: classes2.dex */
 public final class MeteringRectangle {
     public static final int METERING_WEIGHT_DONT_CARE = 0;
     public static final int METERING_WEIGHT_MAX = 1000;

@@ -1,6 +1,5 @@
 package android.service.print;
 
-/* loaded from: classes3.dex */
 public final class ActivePrintServiceProto {
     public static final long COMPONENT_NAME = 1146756268033L;
     public static final long HAS_ACTIVE_PRINT_JOBS = 1133871366149L;

@@ -6,7 +6,6 @@ import android.net.Uri;
 
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public interface IDirector {
 
     public interface ProgressUpdateListener {

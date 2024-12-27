@@ -37,7 +37,6 @@ import com.samsung.android.sdhms.SemAppRestrictionManager;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
 public interface IActivityManager extends IInterface {
     void addApplicationStartInfoCompleteListener(
             IApplicationStartInfoCompleteListener iApplicationStartInfoCompleteListener, int i)

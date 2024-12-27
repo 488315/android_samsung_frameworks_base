@@ -15,7 +15,6 @@ import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-/* loaded from: classes2.dex */
 public final class MediaFormat {
     public static final int COLOR_RANGE_FULL = 1;
     public static final int COLOR_RANGE_LIMITED = 2;

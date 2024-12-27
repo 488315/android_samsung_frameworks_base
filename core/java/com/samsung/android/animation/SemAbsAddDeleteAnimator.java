@@ -14,7 +14,6 @@ import android.view.animation.PathInterpolator;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* loaded from: classes5.dex */
 abstract class SemAbsAddDeleteAnimator {
     Runnable mDeleteRunnable;
     View mHostView;

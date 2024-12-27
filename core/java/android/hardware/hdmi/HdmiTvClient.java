@@ -10,7 +10,6 @@ import java.util.Collections;
 import java.util.List;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public final class HdmiTvClient extends HdmiClient {
     private static final String TAG = "HdmiTvClient";
     public static final int VENDOR_DATA_SIZE = 16;

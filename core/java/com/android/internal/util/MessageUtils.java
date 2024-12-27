@@ -6,7 +6,6 @@ import android.util.SparseArray;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
-/* loaded from: classes5.dex */
 public class MessageUtils {
     private static final boolean DBG = false;
     private static final String TAG = MessageUtils.class.getSimpleName();

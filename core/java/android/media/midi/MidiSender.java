@@ -1,6 +1,5 @@
 package android.media.midi;
 
-/* loaded from: classes2.dex */
 public abstract class MidiSender {
     public abstract void onConnect(MidiReceiver midiReceiver);
 

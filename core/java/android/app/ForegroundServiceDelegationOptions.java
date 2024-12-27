@@ -8,7 +8,6 @@ import com.samsung.android.media.AudioTag;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes.dex */
 public class ForegroundServiceDelegationOptions {
     public static final int DELEGATION_SERVICE_CAMERA = 7;
     public static final int DELEGATION_SERVICE_CONNECTED_DEVICE = 5;

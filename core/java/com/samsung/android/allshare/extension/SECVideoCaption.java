@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-/* loaded from: classes3.dex */
 public class SECVideoCaption {
     private static final String TAG_CLASS = "SECVideoCaption";
     private static String mSubTitleURL;

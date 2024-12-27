@@ -11,7 +11,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public final class ImsExternalCallState implements Parcelable {
     public static final int CALL_STATE_CONFIRMED = 1;
     public static final int CALL_STATE_TERMINATED = 2;

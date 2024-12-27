@@ -18,7 +18,6 @@ import com.android.internal.app.ResolverListAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public class DisplayResolveInfo implements TargetInfo, Parcelable {
     public static final Parcelable.Creator<DisplayResolveInfo> CREATOR =
             new Parcelable.Creator<

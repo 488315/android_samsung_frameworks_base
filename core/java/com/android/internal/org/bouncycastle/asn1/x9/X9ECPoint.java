@@ -8,7 +8,6 @@ import com.android.internal.org.bouncycastle.math.ec.ECCurve;
 import com.android.internal.org.bouncycastle.math.ec.ECPoint;
 import com.android.internal.org.bouncycastle.util.Arrays;
 
-/* loaded from: classes5.dex */
 public class X9ECPoint extends ASN1Object {
     private ECCurve c;
     private final ASN1OctetString encoding;

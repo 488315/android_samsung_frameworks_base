@@ -10,7 +10,6 @@ import java.util.regex.Pattern;
 
 @SystemApi
 @Deprecated
-/* loaded from: classes3.dex */
 public class WifiKey implements Parcelable {
     public final String bssid;
     public final String ssid;

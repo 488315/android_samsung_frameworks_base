@@ -3,7 +3,6 @@ package android.hardware.hdmi;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes2.dex */
 public final class HdmiControlServiceWrapper {
     public static final int DEVICE_PURE_CEC_SWITCH = 6;
     private List<HdmiPortInfo> mInfoList = null;

@@ -5,7 +5,6 @@ import android.filterfw.core.FilterContext;
 import android.filterfw.core.GLEnvironment;
 import android.opengl.GLES20;
 
-/* loaded from: classes2.dex */
 public class EffectContext {
     private EffectFactory mFactory;
     private final int GL_STATE_FBO = 0;

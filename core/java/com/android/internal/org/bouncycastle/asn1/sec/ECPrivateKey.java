@@ -17,7 +17,6 @@ import com.android.internal.org.bouncycastle.util.BigIntegers;
 import java.math.BigInteger;
 import java.util.Enumeration;
 
-/* loaded from: classes5.dex */
 public class ECPrivateKey extends ASN1Object {
     private ASN1Sequence seq;
 

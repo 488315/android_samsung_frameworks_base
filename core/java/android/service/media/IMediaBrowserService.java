@@ -9,7 +9,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.os.ResultReceiver;
 
-/* loaded from: classes3.dex */
 public interface IMediaBrowserService extends IInterface {
     void addSubscription(
             String str,

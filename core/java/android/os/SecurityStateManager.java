@@ -2,7 +2,6 @@ package android.os;
 
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public class SecurityStateManager {
     public static final String KEY_KERNEL_VERSION = "kernel_version";
     public static final String KEY_SYSTEM_SPL = "system_spl";

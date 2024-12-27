@@ -21,7 +21,6 @@ import com.android.internal.R;
 
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 final class NavigationBarController {
     private final Callback mImpl;
 

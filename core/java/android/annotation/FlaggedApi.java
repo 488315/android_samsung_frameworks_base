@@ -13,7 +13,6 @@ import java.lang.annotation.Target;
     ElementType.ANNOTATION_TYPE
 })
 @Retention(RetentionPolicy.CLASS)
-/* loaded from: classes.dex */
 public @interface FlaggedApi {
     String value();
 }

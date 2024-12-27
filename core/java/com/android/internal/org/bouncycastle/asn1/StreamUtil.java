@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.channels.FileChannel;
 
-/* loaded from: classes5.dex */
 class StreamUtil {
     StreamUtil() {}
 

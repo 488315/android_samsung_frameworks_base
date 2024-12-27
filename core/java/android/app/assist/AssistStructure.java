@@ -50,7 +50,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public class AssistStructure implements Parcelable {
     private static final boolean DEBUG_PARCEL = false;
     private static final boolean DEBUG_PARCEL_CHILDREN = false;

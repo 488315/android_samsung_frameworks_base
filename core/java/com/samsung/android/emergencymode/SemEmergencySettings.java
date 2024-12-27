@@ -14,7 +14,6 @@ import com.android.internal.telephony.TelephonyProperties;
 
 import java.util.Arrays;
 
-/* loaded from: classes6.dex */
 public class SemEmergencySettings {
     private static final String TAG = "SemEmergencySettings";
 

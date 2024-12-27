@@ -20,7 +20,6 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-/* loaded from: classes6.dex */
 public class ContentFilter extends DecorateFilter {
     private static final String TAG = Def.tagOf((Class<?>) ContentFilter.class);
     private final Map<Integer, Object> filterMap;

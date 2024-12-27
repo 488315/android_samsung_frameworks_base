@@ -13,7 +13,6 @@ import com.samsung.vekit.Common.VEContext;
 import com.samsung.vekit.Content.Content;
 import com.samsung.vekit.Layer.Layer;
 
-/* loaded from: classes6.dex */
 public class ImageItem extends Item {
     private Filter filter;
     private float filterIntensity;

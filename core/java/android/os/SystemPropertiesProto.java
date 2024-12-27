@@ -1,6 +1,5 @@
 package android.os;
 
-/* loaded from: classes3.dex */
 public final class SystemPropertiesProto {
     public static final long AAC_DRC = 1146756268034L;
     public static final long AAUDIO = 1146756268035L;

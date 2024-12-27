@@ -8,7 +8,6 @@ import com.android.internal.os.Zygote;
 
 import dalvik.system.VMRuntime;
 
-/* loaded from: classes3.dex */
 public class AppZygote {
     private static final String LOG_TAG = "AppZygote";
     private final ApplicationInfo mAppInfo;

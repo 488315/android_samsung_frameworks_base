@@ -42,7 +42,6 @@ import java.util.List;
 import java.util.function.Consumer;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public abstract class AugmentedAutofillService extends Service {
     public static final String SERVICE_INTERFACE =
             "android.service.autofill.augmented.AugmentedAutofillService";

@@ -6,7 +6,6 @@ import android.telephony.TelephonyManager;
 
 import com.android.internal.telephony.TelephonyProperties;
 
-/* loaded from: classes6.dex */
 public class TelephonyManagerWrapper {
     private final boolean mHasTelephonyRadio;
     private final TelephonyManager mTelephonyManager;

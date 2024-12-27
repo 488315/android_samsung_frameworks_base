@@ -8,7 +8,6 @@ import com.android.internal.util.Preconditions;
 
 import java.io.PrintWriter;
 
-/* loaded from: classes.dex */
 public final class LocusId implements Parcelable {
     public static final Parcelable.Creator<LocusId> CREATOR =
             new Parcelable.Creator<LocusId>() { // from class: android.content.LocusId.1

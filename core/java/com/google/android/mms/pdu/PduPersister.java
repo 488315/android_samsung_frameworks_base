@@ -36,7 +36,6 @@ import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.function.Predicate;
 
-/* loaded from: classes5.dex */
 public class PduPersister {
     static final /* synthetic */ boolean $assertionsDisabled = false;
     private static final HashMap<Integer, Integer> CHARSET_COLUMN_INDEX_MAP;

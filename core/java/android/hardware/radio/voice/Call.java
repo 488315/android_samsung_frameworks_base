@@ -8,7 +8,6 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public class Call implements Parcelable {
     public static final Parcelable.Creator<Call> CREATOR =
             new Parcelable.Creator<Call>() { // from class: android.hardware.radio.voice.Call.1

@@ -1,6 +1,5 @@
 package android.graphics;
 
-/* loaded from: classes.dex */
 public final class BlendModeColorFilter extends ColorFilter {
     final int mColor;
     private final BlendMode mMode;

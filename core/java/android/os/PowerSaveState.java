@@ -1,7 +1,6 @@
 package android.os;
 
 
-/* loaded from: classes3.dex */
 public class PowerSaveState implements Parcelable {
     public static final Parcelable.Creator<PowerSaveState> CREATOR =
             new Parcelable.Creator<PowerSaveState>() { // from class: android.os.PowerSaveState.1

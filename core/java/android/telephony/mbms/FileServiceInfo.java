@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-/* loaded from: classes4.dex */
 public final class FileServiceInfo extends ServiceInfo implements Parcelable {
     public static final Parcelable.Creator<FileServiceInfo> CREATOR =
             new Parcelable.Creator<

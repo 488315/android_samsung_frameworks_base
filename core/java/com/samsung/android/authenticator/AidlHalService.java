@@ -11,7 +11,6 @@ import vendor.samsung.hardware.authfw.SehResult;
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 
-/* loaded from: classes5.dex */
 final class AidlHalService implements XidlHalService, IBinder.DeathRecipient {
     private static final String TAG = "AHS";
     private ISehAuthenticationFramework mService = null;

@@ -15,7 +15,6 @@ import android.widget.SpinnerAdapter;
 import com.android.internal.view.menu.MenuBuilder;
 import com.android.internal.view.menu.MenuPresenter;
 
-/* loaded from: classes5.dex */
 public interface DecorToolbar {
     void animateToVisibility(int i);
 

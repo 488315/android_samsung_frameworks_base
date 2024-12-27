@@ -16,7 +16,6 @@ import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.RSAPublicKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 
-/* loaded from: classes3.dex */
 public class AndroidKeyStoreKeyFactorySpi extends KeyFactorySpi {
     @Override // java.security.KeyFactorySpi
     protected <T extends KeySpec> T engineGetKeySpec(Key key, Class<T> keySpecClass)

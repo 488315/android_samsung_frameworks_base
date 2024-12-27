@@ -5,7 +5,6 @@ import android.graphics.Rect;
 import android.icu.util.Calendar;
 import android.util.AttributeSet;
 
-/* loaded from: classes4.dex */
 class CalendarViewMaterialDelegate extends CalendarView.AbstractCalendarViewDelegate {
     private final DayPickerView mDayPickerView;
     private CalendarView.OnDateChangeListener mOnDateChangeListener;

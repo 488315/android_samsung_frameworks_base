@@ -4,7 +4,6 @@ import android.annotation.SystemApi;
 import android.location.Location;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public abstract class GeofenceHardwareCallback {
     public void onGeofenceTransition(
             int geofenceId,

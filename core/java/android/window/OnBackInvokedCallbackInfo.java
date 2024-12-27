@@ -3,7 +3,6 @@ package android.window;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes4.dex */
 public final class OnBackInvokedCallbackInfo implements Parcelable {
     public static final Parcelable.Creator<OnBackInvokedCallbackInfo> CREATOR =
             new Parcelable.Creator<

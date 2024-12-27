@@ -10,7 +10,6 @@ import android.os.PersistableBundle;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class ManagedProfileProvisioningParams implements Parcelable {
     private static final String ACCOUNT_TO_MIGRATE_PROVIDED_PARAM = "ACCOUNT_TO_MIGRATE_PROVIDED";
     public static final Parcelable.Creator<ManagedProfileProvisioningParams> CREATOR =

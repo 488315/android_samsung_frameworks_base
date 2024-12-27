@@ -1,6 +1,5 @@
 package android.hardware.radio;
 
-/* loaded from: classes2.dex */
 public @interface AccessNetwork {
     public static final int CDMA2000 = 4;
     public static final int EUTRAN = 3;

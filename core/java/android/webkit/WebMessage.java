@@ -1,6 +1,5 @@
 package android.webkit;
 
-/* loaded from: classes4.dex */
 public class WebMessage {
     private String mData;
     private WebMessagePort[] mPorts;

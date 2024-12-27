@@ -19,7 +19,6 @@ import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
-/* loaded from: classes4.dex */
 public class TransitionInflater {
     private static final Class<?>[] sConstructorSignature = {Context.class, AttributeSet.class};
     private static final ArrayMap<String, Constructor> sConstructors = new ArrayMap<>();

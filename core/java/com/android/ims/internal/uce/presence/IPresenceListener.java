@@ -8,7 +8,6 @@ import android.os.RemoteException;
 
 import com.android.ims.internal.uce.common.StatusCode;
 
-/* loaded from: classes5.dex */
 public interface IPresenceListener extends IInterface {
     void capInfoReceived(String str, PresTupleInfo[] presTupleInfoArr) throws RemoteException;
 

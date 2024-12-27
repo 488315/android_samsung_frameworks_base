@@ -6,7 +6,6 @@ import android.content.pm.SignedPackageParcel;
 import java.util.List;
 import java.util.Map;
 
-/* loaded from: classes3.dex */
 public interface ISystemConfig extends IInterface {
     public static final String DESCRIPTOR = "android.os.ISystemConfig";
 

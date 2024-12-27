@@ -1,6 +1,5 @@
 package android.hardware.tv.tuner;
 
-/* loaded from: classes2.dex */
 public @interface AudioPreselectionRenderingIndicationType {
     public static final int HEADPHONE = 4;
     public static final int NOT_INDICATED = 0;

@@ -4,7 +4,6 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes3.dex */
 public final class TelephonyNetworkSpecifier extends NetworkSpecifier implements Parcelable {
     public static final Parcelable.Creator<TelephonyNetworkSpecifier> CREATOR =
             new Parcelable.Creator<

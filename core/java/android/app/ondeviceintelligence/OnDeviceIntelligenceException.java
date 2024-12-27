@@ -7,7 +7,6 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;
 
 @SystemApi
-/* loaded from: classes.dex */
 public class OnDeviceIntelligenceException extends Exception {
     public static final int ON_DEVICE_INTELLIGENCE_SERVICE_UNAVAILABLE = 100;
     public static final int PROCESSING_ERROR_BAD_DATA = 2;

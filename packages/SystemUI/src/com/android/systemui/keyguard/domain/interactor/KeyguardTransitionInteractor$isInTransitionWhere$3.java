@@ -10,7 +10,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 final class KeyguardTransitionInteractor$isInTransitionWhere$3 extends SuspendLambda implements Function2 {
     final /* synthetic */ Function2 $fromToStatePredicate;
     /* synthetic */ Object L$0;

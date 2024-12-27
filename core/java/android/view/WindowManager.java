@@ -48,7 +48,6 @@ import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 import java.util.function.IntConsumer;
 
-/* loaded from: classes4.dex */
 public interface WindowManager extends ViewManager {
     public static final boolean ACTIVITY_EMBEDDING_GUARD_WITH_ANDROID_15;
     public static final int COMPAT_SMALL_COVER_SCREEN_OPT_IN = 1;

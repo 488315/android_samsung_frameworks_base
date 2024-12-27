@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/* loaded from: classes2.dex */
 public class PromptInfo implements Parcelable {
     public static final Parcelable.Creator<PromptInfo> CREATOR =
             new Parcelable.Creator<

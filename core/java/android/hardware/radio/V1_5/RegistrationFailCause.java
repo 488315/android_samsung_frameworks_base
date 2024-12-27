@@ -4,7 +4,6 @@ import android.security.keystore.KeyProperties;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class RegistrationFailCause {
     public static final int CALL_CANNOT_BE_IDENTIFIED = 38;
     public static final int CONDITIONAL_IE_ERROR = 100;

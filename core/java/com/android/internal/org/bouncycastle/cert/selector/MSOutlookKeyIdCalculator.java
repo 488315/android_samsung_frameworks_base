@@ -6,7 +6,6 @@ import com.android.internal.org.bouncycastle.util.Pack;
 
 import java.io.IOException;
 
-/* loaded from: classes5.dex */
 class MSOutlookKeyIdCalculator {
     MSOutlookKeyIdCalculator() {}
 

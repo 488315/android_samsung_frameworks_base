@@ -11,7 +11,6 @@ import com.android.internal.org.bouncycastle.jcajce.provider.util.AsymmetricKeyI
 import java.util.HashMap;
 import java.util.Map;
 
-/* loaded from: classes5.dex */
 public class RSA {
     private static final String PREFIX =
             "com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.rsa.";

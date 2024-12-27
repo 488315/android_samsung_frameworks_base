@@ -8,7 +8,6 @@ import android.os.Parcelable;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class NativeWifiClient implements Parcelable {
     public static final Parcelable.Creator<NativeWifiClient> CREATOR =
             new Parcelable.Creator<

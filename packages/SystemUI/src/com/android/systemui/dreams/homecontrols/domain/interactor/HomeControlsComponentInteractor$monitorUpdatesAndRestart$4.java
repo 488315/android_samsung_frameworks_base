@@ -6,7 +6,6 @@ import kotlin.jvm.internal.AdaptedFunctionReference;
 import kotlin.jvm.internal.Intrinsics;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 final /* synthetic */ class HomeControlsComponentInteractor$monitorUpdatesAndRestart$4 extends AdaptedFunctionReference implements Function3 {
     public static final HomeControlsComponentInteractor$monitorUpdatesAndRestart$4 INSTANCE = new HomeControlsComponentInteractor$monitorUpdatesAndRestart$4();
 

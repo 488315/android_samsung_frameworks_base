@@ -14,7 +14,6 @@ import android.util.Log;
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 
-/* loaded from: classes3.dex */
 public abstract class CarrierService extends Service {
     public static final String CARRIER_SERVICE_INTERFACE = "android.service.carrier.CarrierService";
     private static final String LOG_TAG = "CarrierService";

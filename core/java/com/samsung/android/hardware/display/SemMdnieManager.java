@@ -3,7 +3,6 @@ package com.samsung.android.hardware.display;
 import android.os.RemoteException;
 import android.util.Slog;
 
-/* loaded from: classes6.dex */
 public final class SemMdnieManager {
     public static final int CONTENT_MODE_BROWSER = 8;
     public static final int CONTENT_MODE_CAMERA = 4;

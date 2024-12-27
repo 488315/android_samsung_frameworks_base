@@ -3,7 +3,6 @@ package android.os;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public class BluetoothBatteryStats implements Parcelable {
     public static final Parcelable.Creator<BluetoothBatteryStats> CREATOR =
             new Parcelable.Creator<

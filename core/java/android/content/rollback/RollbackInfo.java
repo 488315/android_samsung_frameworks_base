@@ -8,7 +8,6 @@ import android.os.Parcelable;
 import java.util.List;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class RollbackInfo implements Parcelable {
     public static final Parcelable.Creator<RollbackInfo> CREATOR =
             new Parcelable.Creator<

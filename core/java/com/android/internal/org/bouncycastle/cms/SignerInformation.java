@@ -34,7 +34,6 @@ import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public class SignerInformation {
     private final CMSProcessable content;
     private final ASN1ObjectIdentifier contentType;

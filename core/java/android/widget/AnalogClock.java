@@ -34,7 +34,6 @@ import java.util.Locale;
 
 @RemoteViews.RemoteView
 @Deprecated
-/* loaded from: classes4.dex */
 public class AnalogClock extends View {
     private static final String LOG_TAG = "AnalogClock";
     private boolean mChanged;

@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
 
-/* loaded from: classes4.dex */
 public final class CompletionInfo implements Parcelable {
     public static final Parcelable.Creator<CompletionInfo> CREATOR =
             new Parcelable.Creator<

@@ -7,7 +7,6 @@ import android.text.TextUtils;
 
 import com.android.internal.pm.parsing.pkg.PackageImpl;
 
-/* loaded from: classes5.dex */
 public class ParsedServiceImpl extends ParsedMainComponentImpl
         implements ParsedService, Parcelable {
     public static final Parcelable.Creator<ParsedServiceImpl> CREATOR =

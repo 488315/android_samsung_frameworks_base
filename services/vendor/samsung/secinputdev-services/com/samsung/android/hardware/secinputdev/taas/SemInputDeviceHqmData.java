@@ -11,7 +11,6 @@ import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.function.BiFunction;
 
-/* loaded from: classes.dex */
 public class SemInputDeviceHqmData {
     private static final String CASE_PATH = "/data/vendor/taas/";
     private static final int TAAS_EFS_MAX_COUNT = 50;

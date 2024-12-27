@@ -6,7 +6,6 @@ import android.os.Parcelable;
 
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public class KeepaliveStatus implements Parcelable {
     public static final int CODE_ACTIVE = 0;
     public static final int CODE_INACTIVE = 1;

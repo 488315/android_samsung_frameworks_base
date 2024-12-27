@@ -8,7 +8,6 @@ import android.os.RemoteException;
 
 import java.util.List;
 
-/* loaded from: classes4.dex */
 public interface IAccessibilityInteractionConnectionCallback extends IInterface {
     void sendAttachOverlayResult(int i, int i2) throws RemoteException;
 

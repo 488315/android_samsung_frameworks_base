@@ -12,7 +12,6 @@ import android.os.RemoteException;
 import java.util.Collection;
 import java.util.List;
 
-/* loaded from: classes2.dex */
 public interface IGnssDebug extends IInterface {
     public static final String DESCRIPTOR = "android$hardware$gnss$IGnssDebug".replace('$', '.');
     public static final String HASH = "fc957f1d3d261d065ff5e5415f2d21caa79c310f";

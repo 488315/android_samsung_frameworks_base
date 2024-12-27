@@ -3,7 +3,6 @@ package com.samsung.android.knox.util;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes6.dex */
 public class SemCertByte implements Parcelable {
 
     @Deprecated(forRemoval = true, since = "16.0")

@@ -3,7 +3,6 @@ package com.android.internal.org.bouncycastle.asn1.x500;
 import com.android.internal.org.bouncycastle.asn1.ASN1Encodable;
 import com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier;
 
-/* loaded from: classes5.dex */
 public interface X500NameStyle {
     boolean areEqual(X500Name x500Name, X500Name x500Name2);
 

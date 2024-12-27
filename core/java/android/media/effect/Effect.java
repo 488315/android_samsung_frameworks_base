@@ -1,6 +1,5 @@
 package android.media.effect;
 
-/* loaded from: classes2.dex */
 public abstract class Effect {
     public abstract void apply(int i, int i2, int i3, int i4);
 

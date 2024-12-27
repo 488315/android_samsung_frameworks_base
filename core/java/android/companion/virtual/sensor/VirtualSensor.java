@@ -8,7 +8,6 @@ import android.os.Parcelable;
 import android.os.RemoteException;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class VirtualSensor implements Parcelable {
     public static final Parcelable.Creator<VirtualSensor> CREATOR =
             new Parcelable.Creator<VirtualSensor>() { // from class:

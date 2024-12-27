@@ -18,7 +18,6 @@ import com.android.internal.R;
 
 import java.util.Locale;
 
-/* loaded from: classes5.dex */
 public class AccessibilityServiceWarning {
     public static AlertDialog createAccessibilityServiceWarningDialog(
             Context context,

@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes2.dex */
 public final class DeviceStateManagerGlobal {
     private static final boolean DEBUG = Build.IS_DEBUGGABLE;
     public static final int FOLD_STATE_CLOSE = 0;

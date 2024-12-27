@@ -4,7 +4,6 @@ import android.hardware.common.NativeHandle;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public final class DestinationBuffer implements Parcelable {
     public static final Parcelable.Creator<DestinationBuffer> CREATOR =
             new Parcelable.Creator<

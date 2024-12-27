@@ -6,7 +6,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes5.dex */
 public class AndroidPackageSplitImpl implements AndroidPackageSplit {
     private final String mClassLoaderName;
     private List<AndroidPackageSplit> mDependencies = Collections.emptyList();

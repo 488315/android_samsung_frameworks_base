@@ -15,7 +15,6 @@ import java.nio.charset.CharsetEncoder;
 import java.nio.charset.CoderResult;
 import java.nio.charset.CodingErrorAction;
 
-/* loaded from: classes5.dex */
 public class FastPrintWriter extends PrintWriter {
     private final boolean mAutoFlush;
     private final int mBufferLen;

@@ -39,7 +39,6 @@ import javax.crypto.ShortBufferException;
 import javax.crypto.spec.OAEPParameterSpec;
 import javax.crypto.spec.PSource;
 
-/* loaded from: classes5.dex */
 public class CipherSpi extends BaseCipherSpi {
     private BaseCipherSpi.ErasableOutputStream bOut;
     private AsymmetricBlockCipher cipher;

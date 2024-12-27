@@ -1,6 +1,5 @@
 package android.view.contentcapture.flags;
 
-/* loaded from: classes4.dex */
 public final class Flags {
     private static FeatureFlags FEATURE_FLAGS = new FeatureFlagsImpl();
     public static final String FLAG_RUN_ON_BACKGROUND_THREAD_ENABLED =

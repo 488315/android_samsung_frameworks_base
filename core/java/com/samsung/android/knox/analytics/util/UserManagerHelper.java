@@ -13,7 +13,6 @@ import com.samsung.android.knox.SemPersonaManager;
 
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public class UserManagerHelper {
     private static final String TAG = "[KnoxAnalytics] " + UserManagerHelper.class.getSimpleName();
     private static final int USER_TYPE_APP_SEPARATION = 11;

@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-/* loaded from: classes.dex */
 public class Quad {
     public Point p0;
     public Point p1;

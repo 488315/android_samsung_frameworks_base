@@ -6,7 +6,6 @@ import android.os.Bundle;
 
 import java.util.ArrayList;
 
-/* loaded from: classes4.dex */
 public final class ExtrasUtils {
     private static final String ACTIONS_INTENTS = "actions-intents";
     private static final String ACTION_INTENT = "action-intent";

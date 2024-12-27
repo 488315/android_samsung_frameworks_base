@@ -8,7 +8,6 @@ import android.os.RemoteException;
 
 import java.util.List;
 
-/* loaded from: classes4.dex */
 public interface IMbmsDownloadSessionCallback extends IInterface {
     void onError(int i, String str) throws RemoteException;
 

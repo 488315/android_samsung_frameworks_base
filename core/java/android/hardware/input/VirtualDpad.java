@@ -12,7 +12,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public class VirtualDpad extends VirtualInputDevice {
     private final Set<Integer> mSupportedKeyCodes;
 

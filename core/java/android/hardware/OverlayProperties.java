@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 import libcore.util.NativeAllocationRegistry;
 
-/* loaded from: classes.dex */
 public final class OverlayProperties implements Parcelable {
     private static OverlayProperties sDefaultOverlayProperties;
     private Runnable mCloser;

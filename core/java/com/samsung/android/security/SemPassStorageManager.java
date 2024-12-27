@@ -11,7 +11,6 @@ import com.samsung.android.media.AudioParameter;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes6.dex */
 public class SemPassStorageManager {
     public static final int RESULT_ERROR_DESTROY_STORAGE_FAILED = -7;
     public static final int RESULT_ERROR_EVICT_KEY_FAILED = -6;

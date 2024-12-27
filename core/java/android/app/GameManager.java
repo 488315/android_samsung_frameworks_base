@@ -11,7 +11,6 @@ import android.os.ServiceManager;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes.dex */
 public final class GameManager {
     public static final int GAME_MODE_BATTERY = 3;
     public static final int GAME_MODE_CUSTOM = 4;

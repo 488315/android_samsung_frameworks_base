@@ -36,7 +36,6 @@ import android.util.SparseArray;
 import com.samsung.android.util.CustomizedTextParser;
 import java.io.Closeable;
 
-/* loaded from: classes.dex */
 public final class StringBlock implements Closeable {
     private static final String TAG = "AssetManager";
     private static final boolean localLOGV = false;

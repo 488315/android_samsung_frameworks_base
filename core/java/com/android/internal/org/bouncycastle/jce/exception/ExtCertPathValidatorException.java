@@ -3,7 +3,6 @@ package com.android.internal.org.bouncycastle.jce.exception;
 import java.security.cert.CertPath;
 import java.security.cert.CertPathValidatorException;
 
-/* loaded from: classes5.dex */
 public class ExtCertPathValidatorException extends CertPathValidatorException
         implements ExtException {
     private Throwable cause;

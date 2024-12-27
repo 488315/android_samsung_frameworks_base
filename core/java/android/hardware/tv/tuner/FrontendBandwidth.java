@@ -3,7 +3,6 @@ package android.hardware.tv.tuner;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public final class FrontendBandwidth implements Parcelable {
     public static final Parcelable.Creator<FrontendBandwidth> CREATOR =
             new Parcelable.Creator<FrontendBandwidth>() { // from class:

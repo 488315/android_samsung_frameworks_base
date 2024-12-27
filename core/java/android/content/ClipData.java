@@ -28,7 +28,6 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes.dex */
 public class ClipData implements Parcelable {
     private static final String TAG = "ClipData";
     private String mCallingPackageName;

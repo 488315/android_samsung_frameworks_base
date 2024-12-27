@@ -12,7 +12,6 @@ import android.view.SurfaceControl;
 import android.view.WindowInsets;
 import android.view.WindowManager;
 
-/* loaded from: classes4.dex */
 public final class StartingWindowInfo implements Parcelable {
     public static final Parcelable.Creator<StartingWindowInfo> CREATOR =
             new Parcelable.Creator<

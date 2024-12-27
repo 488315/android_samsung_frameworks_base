@@ -11,7 +11,6 @@ import android.view.SurfaceControl;
 
 import com.samsung.android.rune.CoreRune;
 
-/* loaded from: classes4.dex */
 public class WindowOrganizer {
     private static final Singleton<IWindowOrganizerController> IWindowOrganizerControllerSingleton =
             new Singleton<

@@ -7,7 +7,6 @@ import com.samsung.android.globalactions.util.ConditionChecker;
 import com.samsung.android.globalactions.util.LogWrapper;
 import com.samsung.android.globalactions.util.SystemConditions;
 
-/* loaded from: classes6.dex */
 public class SafetyCareStrategy implements InitializationStrategy, DefaultActionsCreationStrategy {
     private static final String TAG = "SafetyCareStrategy";
     private final ConditionChecker mConditionChecker;

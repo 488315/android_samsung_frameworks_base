@@ -1,6 +1,5 @@
 package android.service;
 
-/* loaded from: classes3.dex */
 public final class ServiceProtoEnums {
     public static final int COMPLIANCE_WARNING_BC_1_2 = 2;
     public static final int COMPLIANCE_WARNING_DEBUG_ACCESSORY = 1;

@@ -11,7 +11,6 @@ import java.security.spec.InvalidParameterSpecException;
 
 import javax.crypto.spec.IvParameterSpec;
 
-/* loaded from: classes5.dex */
 public class IvAlgorithmParameters extends BaseAlgorithmParameters {
     private byte[] iv;
 

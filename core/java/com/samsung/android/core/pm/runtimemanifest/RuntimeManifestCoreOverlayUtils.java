@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
-/* loaded from: classes6.dex */
 public class RuntimeManifestCoreOverlayUtils {
     public static final boolean DEBUG = true;
     public static final String TAG = "RuntimeManifestUtils";

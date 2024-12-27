@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import java.util.Locale;
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public final class SystemTextClassifierMetadata implements Parcelable {
     public static final Parcelable.Creator<SystemTextClassifierMetadata> CREATOR =
             new Parcelable.Creator<

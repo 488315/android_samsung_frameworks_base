@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public final class LongPolicyValue extends PolicyValue<Long> {
     public static final Parcelable.Creator<LongPolicyValue> CREATOR =
             new Parcelable.Creator<

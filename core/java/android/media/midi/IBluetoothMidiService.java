@@ -7,7 +7,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes2.dex */
 public interface IBluetoothMidiService extends IInterface {
     IBinder addBluetoothDevice(BluetoothDevice bluetoothDevice) throws RemoteException;
 

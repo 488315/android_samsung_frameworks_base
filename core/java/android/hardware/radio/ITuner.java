@@ -15,7 +15,6 @@ import java.util.function.BiConsumer;
 import java.util.function.IntConsumer;
 import java.util.stream.IntStream;
 
-/* loaded from: classes2.dex */
 public interface ITuner extends IInterface {
     void cancel() throws RemoteException;
 

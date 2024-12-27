@@ -1,6 +1,5 @@
 package android.media.audio.common;
 
-/* loaded from: classes2.dex */
 public @interface AudioUsage {
     public static final int ALARM = 4;
     public static final int ANNOUNCEMENT = 1003;

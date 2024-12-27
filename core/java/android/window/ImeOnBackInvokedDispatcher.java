@@ -14,7 +14,6 @@ import java.util.Iterator;
 import java.util.Objects;
 import java.util.function.Consumer;
 
-/* loaded from: classes4.dex */
 public class ImeOnBackInvokedDispatcher implements OnBackInvokedDispatcher, Parcelable {
     public static final Parcelable.Creator<ImeOnBackInvokedDispatcher> CREATOR =
             new Parcelable.Creator<

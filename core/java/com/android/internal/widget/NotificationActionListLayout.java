@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 @RemoteViews.RemoteView
-/* loaded from: classes5.dex */
 public class NotificationActionListLayout extends LinearLayout {
     public static final Comparator<TextViewInfo> MEASURE_ORDER_COMPARATOR =
             new Comparator() { // from class:

@@ -4,7 +4,6 @@ import com.android.internal.logging.nano.MetricsProto;
 
 import java.math.BigInteger;
 
-/* loaded from: classes5.dex */
 public abstract class WNafUtil {
     private static final int[] DEFAULT_WINDOW_SIZE_CUTOFFS = {
         13,

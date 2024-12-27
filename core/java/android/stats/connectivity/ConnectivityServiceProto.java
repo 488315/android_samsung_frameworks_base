@@ -1,6 +1,5 @@
 package android.stats.connectivity;
 
-/* loaded from: classes3.dex */
 public final class ConnectivityServiceProto {
     public static final int METERED_NO = 1;
     public static final int METERED_TEMPORARILY_UNMETERED = 3;

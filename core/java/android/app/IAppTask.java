@@ -8,7 +8,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes.dex */
 public interface IAppTask extends IInterface {
     void finishAndRemoveTask() throws RemoteException;
 

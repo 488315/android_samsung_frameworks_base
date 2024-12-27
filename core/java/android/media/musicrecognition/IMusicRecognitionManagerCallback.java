@@ -8,7 +8,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes2.dex */
 public interface IMusicRecognitionManagerCallback extends IInterface {
     public static final String DESCRIPTOR =
             "android.media.musicrecognition.IMusicRecognitionManagerCallback";

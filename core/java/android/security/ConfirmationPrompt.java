@@ -11,7 +11,6 @@ import android.util.Log;
 import java.util.Locale;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes3.dex */
 public class ConfirmationPrompt {
     private static final String TAG = "ConfirmationPrompt";
     private ConfirmationCallback mCallback;

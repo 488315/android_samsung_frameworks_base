@@ -10,7 +10,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public final class TextLanguage implements Parcelable {
     public static final Parcelable.Creator<TextLanguage> CREATOR =
             new Parcelable.Creator<

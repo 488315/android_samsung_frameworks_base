@@ -9,7 +9,6 @@ import java.util.List;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 
-/* loaded from: classes.dex */
 public class Modules {
     private List<Module> module;
 

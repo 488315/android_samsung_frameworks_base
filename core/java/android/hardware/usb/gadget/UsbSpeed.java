@@ -1,6 +1,5 @@
 package android.hardware.usb.gadget;
 
-/* loaded from: classes2.dex */
 public @interface UsbSpeed {
     public static final int FULLSPEED = 1;
     public static final int HIGHSPEED = 2;

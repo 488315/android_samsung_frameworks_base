@@ -2,7 +2,6 @@ package android.hardware.gnss.measurement_corrections.V1_0;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class GnssSingleSatCorrectionFlags {
     public static final short HAS_EXCESS_PATH_LENGTH = 2;
     public static final short HAS_EXCESS_PATH_LENGTH_UNC = 4;

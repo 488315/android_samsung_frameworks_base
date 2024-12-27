@@ -7,7 +7,6 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.Random;
 
-/* loaded from: classes5.dex */
 public final class MacAddressUtils {
     private static final int ETHER_ADDR_LEN = 6;
     private static final long VALID_LONG_MASK = 281474976710655L;

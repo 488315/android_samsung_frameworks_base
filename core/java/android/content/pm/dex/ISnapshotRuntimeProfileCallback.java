@@ -7,7 +7,6 @@ import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
 
-/* loaded from: classes.dex */
 public interface ISnapshotRuntimeProfileCallback extends IInterface {
     void onError(int i) throws RemoteException;
 

@@ -1,6 +1,5 @@
 package org.tensorflow.lite;
 
-/* loaded from: classes.dex */
 final class NativeSignatureRunnerWrapper {
     private final long errorHandle;
     private boolean isMemoryAllocated = false;

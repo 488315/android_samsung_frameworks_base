@@ -1,6 +1,5 @@
 package com.samsung.android.common;
 
-/* loaded from: classes5.dex */
 public final class AsProperty {
     public static final String PROP_ALL_SOUND_MUTE = "persist.audio.allsoundmute";
     public static final String PROP_AUDIO_SYS_SILENT = "persist.sys.silent";

@@ -9,7 +9,6 @@ import com.android.internal.org.bouncycastle.asn1.DERUTF8String;
 
 import java.io.IOException;
 
-/* loaded from: classes5.dex */
 public class X509DefaultEntryConverter extends X509NameEntryConverter {
     @Override // com.android.internal.org.bouncycastle.asn1.x509.X509NameEntryConverter
     public ASN1Primitive getConvertedValue(ASN1ObjectIdentifier oid, String value) {

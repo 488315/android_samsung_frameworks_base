@@ -12,7 +12,6 @@ import android.view.inputmethod.ImeTracker;
 
 import com.android.internal.infra.AndroidFuture;
 
-/* loaded from: classes5.dex */
 public interface IImeTracker extends IInterface {
     public static final String DESCRIPTOR = "com.android.internal.inputmethod.IImeTracker";
 

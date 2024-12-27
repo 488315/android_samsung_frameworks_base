@@ -7,7 +7,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes.dex */
 public interface IActivityController extends IInterface {
     boolean activityResuming(String str) throws RemoteException;
 

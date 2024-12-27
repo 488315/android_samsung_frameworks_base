@@ -2,7 +2,6 @@ package android.animation;
 
 import android.graphics.Rect;
 
-/* loaded from: classes.dex */
 public class RectEvaluator implements TypeEvaluator<Rect> {
     private Rect mRect;
 

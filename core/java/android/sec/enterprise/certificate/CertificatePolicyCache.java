@@ -11,7 +11,6 @@ import android.os.UserHandle;
 import android.sec.enterprise.EnterpriseDeviceManager;
 import android.util.Log;
 
-/* loaded from: classes3.dex */
 public class CertificatePolicyCache {
     public static final String ACTION_CERTIFICATE_POLICY_CHANGED_INTERNAL =
             "com.samsung.android.knox.intent.action.CERTIFICATE_POLICY_CHANGED_INTERNAL";

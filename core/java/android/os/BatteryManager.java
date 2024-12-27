@@ -7,7 +7,6 @@ import com.android.internal.app.IBatteryStats;
 
 import com.samsung.android.os.SemCompanionDeviceBatteryInfo;
 
-/* loaded from: classes3.dex */
 public class BatteryManager {
     public static final String ACTION_BATTERY_CONNECTION_STATE_CHANGED =
             "com.samsung.server.BatteryService.action.BATTERY_CONNECTION_STATE_CHANGED";

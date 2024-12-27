@@ -2,7 +2,6 @@ package android.webkit;
 
 import android.annotation.SystemApi;
 
-/* loaded from: classes4.dex */
 public class JsResult {
     private final ResultReceiver mReceiver;
     private boolean mResult;

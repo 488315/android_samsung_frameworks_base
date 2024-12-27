@@ -10,7 +10,6 @@ import java.security.PrivilegedAction;
 import java.util.ArrayList;
 import java.util.Vector;
 
-/* loaded from: classes5.dex */
 public final class Strings {
     private static String LINE_SEPARATOR;
 

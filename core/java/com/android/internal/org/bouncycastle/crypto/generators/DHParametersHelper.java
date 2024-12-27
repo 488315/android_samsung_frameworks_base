@@ -7,7 +7,6 @@ import java.math.BigInteger;
 import java.security.SecureRandom;
 import java.util.logging.Logger;
 
-/* loaded from: classes5.dex */
 class DHParametersHelper {
     private static final Logger logger = Logger.getLogger(DHParametersHelper.class.getName());
     private static final BigInteger ONE = BigInteger.valueOf(1);

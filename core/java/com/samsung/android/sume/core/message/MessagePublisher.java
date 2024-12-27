@@ -13,7 +13,6 @@ import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-/* loaded from: classes6.dex */
 public class MessagePublisher {
     private final Function<Integer, List<MessageChannel>> messageChannelQuery;
     private final MessageProducer messageProducer = new MessageProducerImpl(this);

@@ -16,7 +16,6 @@ import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public final class ProgramSelector implements Parcelable {
     public static final Parcelable.Creator<ProgramSelector> CREATOR =
             new Parcelable.Creator<

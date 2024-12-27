@@ -11,7 +11,6 @@ import android.view.inputmethod.InputMethod;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes.dex */
 public class AppsQueryHelper {
     private List<ApplicationInfo> mAllApps;
     private final IPackageManager mPackageManager;

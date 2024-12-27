@@ -15,7 +15,6 @@ import java.util.concurrent.Executor;
 
 @SystemApi
 @Deprecated
-/* loaded from: classes3.dex */
 public class NetworkScoreManager {
 
     @Deprecated

@@ -33,7 +33,6 @@ import javax.crypto.KeyAgreement;
 import javax.crypto.Mac;
 import javax.crypto.SecretKey;
 
-/* loaded from: classes3.dex */
 public class AndroidKeyStoreProvider extends Provider {
     private static final String DESEDE_SYSTEM_PROPERTY = "ro.hardware.keystore_desede";
     private static final String ED25519_OID = "1.3.101.112";

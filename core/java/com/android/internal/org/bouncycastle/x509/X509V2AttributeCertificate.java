@@ -31,7 +31,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/* loaded from: classes5.dex */
 public class X509V2AttributeCertificate implements X509AttributeCertificate {
     private AttributeCertificate cert;
     private Date notAfter;

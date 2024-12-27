@@ -12,7 +12,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.view.Surface;
 
-/* loaded from: classes2.dex */
 public interface ICameraDeviceUser extends IInterface {
     public static final int AUDIO_RESTRICTION_NONE = 0;
     public static final int AUDIO_RESTRICTION_VIBRATION = 1;

@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import com.android.internal.util.Preconditions;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class AdminPermissionControlParams implements Parcelable {
     public static final Parcelable.Creator<AdminPermissionControlParams> CREATOR =
             new Parcelable.Creator<

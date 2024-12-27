@@ -2,7 +2,6 @@ package com.android.internal.org.bouncycastle.jce.provider;
 
 import com.android.internal.org.bouncycastle.jce.exception.ExtException;
 
-/* loaded from: classes5.dex */
 public class AnnotatedException extends Exception implements ExtException {
     private Throwable _underlyingException;
 

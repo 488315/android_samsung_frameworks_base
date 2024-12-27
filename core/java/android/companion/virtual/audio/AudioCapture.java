@@ -8,7 +8,6 @@ import android.util.Log;
 import java.nio.ByteBuffer;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class AudioCapture {
     private static final String TAG = "AudioCapture";
     private final AudioFormat mAudioFormat;

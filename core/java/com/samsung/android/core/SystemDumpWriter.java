@@ -19,7 +19,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Locale;
 
-/* loaded from: classes6.dex */
 public class SystemDumpWriter implements AutoCloseable {
     private static final String FILE_DUMPSYS = "log/dumpsys_";
     private static final int MAX_COUNT_SAVED = 3;

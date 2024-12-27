@@ -2,7 +2,6 @@ package com.samsung.android.displayquality;
 
 import android.util.Slog;
 
-/* loaded from: classes6.dex */
 public final class SemDisplayQualityManager {
     private static final String TAG = "SemDisplayQualityManager";
     private static final boolean mEnabled = SemDisplayQualityFeature.ENABLED;

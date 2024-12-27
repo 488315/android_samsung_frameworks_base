@@ -11,7 +11,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class HotwordRejectedResult implements Parcelable {
     public static final int CONFIDENCE_LEVEL_HIGH = 3;
     public static final int CONFIDENCE_LEVEL_LOW = 1;

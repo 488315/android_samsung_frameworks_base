@@ -10,7 +10,6 @@ import android.view.View;
 import com.android.internal.R;
 import com.android.internal.widget.ScrollBarUtils;
 
-/* loaded from: classes4.dex */
 public class ScrollBarDrawable extends Drawable implements Drawable.Callback {
     private boolean mAlwaysDrawHorizontalTrack;
     private boolean mAlwaysDrawVerticalTrack;

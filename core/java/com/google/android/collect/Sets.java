@@ -7,7 +7,6 @@ import java.util.HashSet;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-/* loaded from: classes5.dex */
 public class Sets {
     public static <K> HashSet<K> newHashSet() {
         return new HashSet<>();

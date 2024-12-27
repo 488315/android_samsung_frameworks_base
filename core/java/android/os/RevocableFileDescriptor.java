@@ -14,7 +14,6 @@ import java.io.FileDescriptor;
 import java.io.IOException;
 import java.io.InterruptedIOException;
 
-/* loaded from: classes3.dex */
 public class RevocableFileDescriptor {
     private static final boolean DEBUG = true;
     private static final String TAG = "RevocableFileDescriptor";

@@ -47,7 +47,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.function.Consumer;
 
-/* loaded from: classes3.dex */
 public class DreamService extends Service implements Window.Callback {
     public static final boolean DEFAULT_SHOW_COMPLICATIONS = false;
     public static final int DREAM_CATEGORY_DEFAULT = 0;

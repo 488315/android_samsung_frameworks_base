@@ -1,6 +1,5 @@
 package com.android.server.wm;
 
-/* loaded from: classes5.dex */
 public final class WindowManagerTraceFileProto {
     public static final long ENTRY = 2246267895810L;
     public static final int INVALID = 0;

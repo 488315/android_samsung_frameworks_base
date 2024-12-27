@@ -4,7 +4,6 @@ import android.hardware.scontext.SContextConstants;
 
 import java.util.ArrayList;
 
-/* loaded from: classes.dex */
 public class MatrixCursor extends AbstractCursor {
     private final int columnCount;
     private final String[] columnNames;

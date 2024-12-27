@@ -17,7 +17,6 @@ import java.util.Objects;
 import java.util.concurrent.RejectedExecutionException;
 import java.util.function.BiConsumer;
 
-/* loaded from: classes.dex */
 public class ClientTransactionListenerController {
     private static final String TAG = "ClientTransactionListenerController";
     private static ClientTransactionListenerController sController;

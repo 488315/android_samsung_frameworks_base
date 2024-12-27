@@ -1,6 +1,5 @@
 package android.chre.flags;
 
-/* loaded from: classes.dex */
 public interface FeatureFlags {
     boolean abortIfNoContextHubFound();
 

@@ -8,7 +8,6 @@ import android.widget.RemoteViews;
 import java.util.ArrayList;
 
 @RemoteViews.RemoteView
-/* loaded from: classes5.dex */
 public class MediaNotificationView extends FrameLayout {
     private ArrayList<VisibilityChangeListener> mListeners;
 

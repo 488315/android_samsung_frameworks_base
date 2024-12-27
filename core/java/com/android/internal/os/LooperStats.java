@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ThreadLocalRandom;
 
-/* loaded from: classes5.dex */
 public class LooperStats implements Looper.Observer {
     public static final String DEBUG_ENTRY_PREFIX = "__DEBUG_";
     public static final boolean DEFAULT_IGNORE_BATTERY_STATUS = false;

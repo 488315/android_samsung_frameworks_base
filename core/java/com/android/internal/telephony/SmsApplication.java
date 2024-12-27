@@ -65,7 +65,6 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-/* loaded from: classes5.dex */
 public final class SmsApplication {
     public static final String ACTION_DEFAULT_SMS_PACKAGE_CHANGED_INTERNAL =
             "android.provider.action.DEFAULT_SMS_PACKAGE_CHANGED_INTERNAL";

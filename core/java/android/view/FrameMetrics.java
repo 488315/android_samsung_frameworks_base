@@ -3,7 +3,6 @@ package android.view;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes4.dex */
 public final class FrameMetrics {
     public static final int ANIMATION_DURATION = 2;
     public static final int COMMAND_ISSUE_DURATION = 6;

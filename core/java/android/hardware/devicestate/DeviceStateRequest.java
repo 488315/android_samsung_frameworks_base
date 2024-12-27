@@ -3,7 +3,6 @@ package android.hardware.devicestate;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes2.dex */
 public final class DeviceStateRequest {
     public static final int FLAG_CANCEL_WHEN_BASE_CHANGES = 1;
     public static final int FLAG_CANCEL_WHEN_FULL_OPEN = 8;

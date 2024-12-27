@@ -2,7 +2,6 @@ package android.filterfw.core;
 
 import java.util.Set;
 
-/* loaded from: classes.dex */
 public class RoundRobinScheduler extends Scheduler {
     private int mLastPos;
 

@@ -1,6 +1,5 @@
 package android.filterpacks.performance;
 
-/* loaded from: classes.dex */
 public class Throughput {
     private final int mPeriodFrames;
     private final int mPeriodTime;

@@ -4,7 +4,6 @@ import android.app.ActionBar;
 import android.view.View;
 import android.widget.AdapterView;
 
-/* loaded from: classes5.dex */
 class NavItemSelectedListener implements AdapterView.OnItemSelectedListener {
     private final ActionBar.OnNavigationListener mListener;
 

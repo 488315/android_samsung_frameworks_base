@@ -7,7 +7,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.view.WindowManager;
 
-/* loaded from: classes3.dex */
 public interface IDreamOverlayClient extends IInterface {
     public static final String DESCRIPTOR = "android.service.dreams.IDreamOverlayClient";
 

@@ -15,7 +15,6 @@ import com.android.systemui.util.settings.SecureSettings;
 import kotlin.Unit;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes.dex */
 public final class MagnificationSettingsController implements ComponentCallbacks {
     public static final Range A11Y_ACTION_SCALE_RANGE = new Range(Float.valueOf(1.0f), Float.valueOf(8.0f));
     public final Configuration mConfiguration;

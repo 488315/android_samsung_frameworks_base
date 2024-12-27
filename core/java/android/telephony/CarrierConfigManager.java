@@ -26,7 +26,6 @@ import java.util.Objects;
 import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
 
-/* loaded from: classes4.dex */
 public class CarrierConfigManager {
     public static final String ACTION_CARRIER_CONFIG_CHANGED =
             "android.telephony.action.CARRIER_CONFIG_CHANGED";

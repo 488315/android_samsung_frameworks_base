@@ -5,7 +5,6 @@ import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public class MappableFile implements Parcelable {
     public static final Parcelable.Creator<MappableFile> CREATOR =
             new Parcelable.Creator<

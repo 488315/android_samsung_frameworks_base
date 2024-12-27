@@ -3,7 +3,6 @@ package com.samsung.android.provider;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes6.dex */
 public class Feature implements Parcelable {
     public static final Parcelable.Creator<Feature> CREATOR =
             new Parcelable.Creator<

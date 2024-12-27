@@ -3,7 +3,6 @@ package com.samsung.android.knox.sdp.core;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes6.dex */
 public class SdpEngineInfo implements Parcelable {
     private String mAlias;
     private int mFlags;

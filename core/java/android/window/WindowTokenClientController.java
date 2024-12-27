@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.IWindowManager;
 import android.view.WindowManagerGlobal;
 
-/* loaded from: classes4.dex */
 public class WindowTokenClientController {
     private static final String TAG = WindowTokenClientController.class.getSimpleName();
     private static WindowTokenClientController sController;

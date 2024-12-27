@@ -3,7 +3,6 @@ package android.media.tv.tuner.frontend;
 import android.annotation.SystemApi;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public class DvbsCodeRate {
     private final int mBitsPer1000Symbol;
     private final long mInnerFec;

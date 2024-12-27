@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.FileDescriptor;
 import java.io.IOException;
 
-/* loaded from: classes3.dex */
 public class SELinux {
     private static final int SELINUX_ANDROID_RESTORECON_CROSS_FILESYSTEMS = 64;
     private static final int SELINUX_ANDROID_RESTORECON_DATADATA = 16;

@@ -1,6 +1,5 @@
 package com.samsung.android.hardware.secinputdev.taas;
 
-/* loaded from: classes.dex */
 public class SemInputTaasCaseFactory {
     public static final String TAAS_CASEA = "CASA";
     public static final String TAAS_CASEB = "CASB";

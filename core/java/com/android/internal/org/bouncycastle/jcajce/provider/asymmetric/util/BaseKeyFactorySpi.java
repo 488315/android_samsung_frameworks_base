@@ -13,7 +13,6 @@ import java.security.spec.KeySpec;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 
-/* loaded from: classes5.dex */
 public abstract class BaseKeyFactorySpi extends KeyFactorySpi
         implements AsymmetricKeyInfoConverter {
     @Override // java.security.KeyFactorySpi

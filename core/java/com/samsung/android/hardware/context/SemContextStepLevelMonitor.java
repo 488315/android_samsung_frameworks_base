@@ -5,7 +5,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @Deprecated(forRemoval = true, since = "15.5")
-/* loaded from: classes6.dex */
 public class SemContextStepLevelMonitor extends SemContextEventContext {
     public static final int HISTORY_MODE = 1;
     public static final int NORMAL_MODE = 0;

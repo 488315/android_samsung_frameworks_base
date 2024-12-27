@@ -5,7 +5,6 @@ import android.privacy.DifferentialPrivacyEncoder;
 import android.privacy.internal.rappor.RapporConfig;
 import android.privacy.internal.rappor.RapporEncoder;
 
-/* loaded from: classes3.dex */
 public class LongitudinalReportingEncoder implements DifferentialPrivacyEncoder {
     private static final boolean DEBUG = false;
     private static final String PRR1_ENCODER_ID = "prr1_encoder_id";

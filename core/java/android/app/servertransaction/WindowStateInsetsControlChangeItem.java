@@ -12,7 +12,6 @@ import android.view.InsetsState;
 
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public class WindowStateInsetsControlChangeItem extends WindowStateTransactionItem {
     public static final Parcelable.Creator<WindowStateInsetsControlChangeItem> CREATOR =
             new Parcelable.Creator<WindowStateInsetsControlChangeItem>() { // from class:

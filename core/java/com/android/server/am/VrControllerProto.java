@@ -1,6 +1,5 @@
 package com.android.server.am;
 
-/* loaded from: classes5.dex */
 public final class VrControllerProto {
     public static final int FLAG_NON_VR_MODE = 0;
     public static final int FLAG_PERSISTENT_VR_MODE = 2;

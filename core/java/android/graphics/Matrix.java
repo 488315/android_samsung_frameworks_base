@@ -7,7 +7,6 @@ import libcore.util.NativeAllocationRegistry;
 
 import java.io.PrintWriter;
 
-/* loaded from: classes.dex */
 public class Matrix {
     public static final Matrix IDENTITY_MATRIX =
             new Matrix() { // from class: android.graphics.Matrix.1

@@ -9,7 +9,6 @@ import android.os.RemoteException;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
 public interface ICacheQuotaService extends IInterface {
     void computeCacheQuotaHints(RemoteCallback remoteCallback, List<CacheQuotaHint> list)
             throws RemoteException;

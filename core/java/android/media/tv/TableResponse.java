@@ -5,7 +5,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.SharedMemory;
 
-/* loaded from: classes3.dex */
 public final class TableResponse extends BroadcastInfoResponse implements Parcelable {
     public static final Parcelable.Creator<TableResponse> CREATOR =
             new Parcelable.Creator<

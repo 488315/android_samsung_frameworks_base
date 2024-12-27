@@ -12,7 +12,6 @@ import com.android.internal.util.Preconditions;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public final class BatchUpdates implements Parcelable {
     public static final Parcelable.Creator<BatchUpdates> CREATOR =
             new Parcelable.Creator<

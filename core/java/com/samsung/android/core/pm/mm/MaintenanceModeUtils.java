@@ -41,7 +41,6 @@ import com.samsung.android.wallpaperbackup.BnRConstants;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public class MaintenanceModeUtils {
     private static final String ACTION_LAUNCH_MYFILES_STORAGE_ANALYSIS =
             "com.sec.android.app.myfiles.RUN_STORAGE_ANALYSIS";

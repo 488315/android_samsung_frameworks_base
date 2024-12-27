@@ -14,7 +14,6 @@ import android.view.ThreadedRenderer;
 
 import com.android.internal.app.IVoiceInteractionSessionShowCallback;
 
-/* loaded from: classes3.dex */
 public interface IVoiceInteractionSession extends IInterface {
     void closeSystemDialogs() throws RemoteException;
 

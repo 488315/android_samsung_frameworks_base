@@ -1,6 +1,5 @@
 package com.android.server.telecom.flags;
 
-/* loaded from: classes5.dex */
 public interface FeatureFlags {
     boolean addCallUriForMissedCalls();
 

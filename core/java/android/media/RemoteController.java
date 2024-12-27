@@ -19,7 +19,6 @@ import android.view.KeyEvent;
 import java.util.List;
 
 @Deprecated
-/* loaded from: classes2.dex */
 public final class RemoteController {
     private static final boolean DEBUG = false;
     private static final int MAX_BITMAP_DIMENSION = 512;

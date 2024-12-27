@@ -1,6 +1,5 @@
 package android.hardware.radio.network;
 
-/* loaded from: classes2.dex */
 public @interface CellularIdentifier {
     public static final int IMEI = 2;
     public static final int IMSI = 1;

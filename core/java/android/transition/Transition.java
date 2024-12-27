@@ -27,7 +27,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.StringTokenizer;
 
-/* loaded from: classes4.dex */
 public abstract class Transition implements Cloneable {
     static final boolean DBG = false;
     private static final String LOG_TAG = "Transition";

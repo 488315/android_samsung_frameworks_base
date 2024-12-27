@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.function.IntFunction;
 import java.util.function.Supplier;
 
-/* loaded from: classes5.dex */
 public class RingBuffer<T> {
     private final T[] mBuffer;
     private long mCursor;

@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes.dex */
 public class RuleSet {
     private final List<Rule> mRules;
     private final String mVersion;

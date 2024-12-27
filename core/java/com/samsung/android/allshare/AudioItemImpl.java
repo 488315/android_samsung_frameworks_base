@@ -10,7 +10,6 @@ import com.sec.android.allshare.iface.message.AllShareKey;
 
 import java.util.ArrayList;
 
-/* loaded from: classes3.dex */
 final class AudioItemImpl extends Item implements IBundleHolder, Parcelable {
     public static final Parcelable.Creator<AudioItemImpl> CREATOR =
             new Parcelable.Creator<

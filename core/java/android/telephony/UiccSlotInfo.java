@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public class UiccSlotInfo implements Parcelable {
     public static final int CARD_STATE_INFO_ABSENT = 1;
     public static final int CARD_STATE_INFO_ERROR = 3;

@@ -18,7 +18,6 @@ import java.util.Objects;
 import java.util.function.UnaryOperator;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public final class CarrierRestrictionRules implements Parcelable {
     public static final int CARRIER_RESTRICTION_DEFAULT_ALLOWED = 1;
     public static final int CARRIER_RESTRICTION_DEFAULT_NOT_ALLOWED = 0;

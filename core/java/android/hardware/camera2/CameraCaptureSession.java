@@ -8,7 +8,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes2.dex */
 public abstract class CameraCaptureSession implements AutoCloseable {
     public static final int SESSION_ID_NONE = -1;
 

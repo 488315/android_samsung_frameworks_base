@@ -23,7 +23,6 @@ import android.view.accessibility.AccessibilityEvent;
 import com.android.internal.R;
 import com.android.internal.policy.PhoneWindow;
 
-/* loaded from: classes5.dex */
 public class SemUiSupportService extends Service implements Window.Callback, KeyEvent.Callback {
     private static final String TAG = "SemUiSupportService";
     protected Context mContext;

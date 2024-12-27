@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public class ActivityRelaunchItem extends ActivityTransactionItem {
     public static final Parcelable.Creator<ActivityRelaunchItem> CREATOR =
             new Parcelable.Creator<ActivityRelaunchItem>() { // from class:

@@ -1,6 +1,5 @@
 package android.filterfw.core;
 
-/* loaded from: classes.dex */
 public class StreamPort extends InputPort {
     private Frame mFrame;
     private boolean mPersistent;

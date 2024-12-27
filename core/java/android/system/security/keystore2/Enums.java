@@ -1,6 +1,5 @@
 package android.system.security.keystore2;
 
-/* loaded from: classes3.dex */
 public final class Enums {
     public static final int AES = 32;
     public static final int ALGORITHM_UNSPECIFIED = 0;

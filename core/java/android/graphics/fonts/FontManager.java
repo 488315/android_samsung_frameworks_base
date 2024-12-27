@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes.dex */
 public class FontManager {
     public static final int RESULT_ERROR_DOWNGRADING = -5;
     public static final int RESULT_ERROR_FAILED_TO_OPEN_FONT_FILE = -10001;

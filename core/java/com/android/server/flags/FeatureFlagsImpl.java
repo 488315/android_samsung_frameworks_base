@@ -1,6 +1,5 @@
 package com.android.server.flags;
 
-/* loaded from: classes5.dex */
 public final class FeatureFlagsImpl implements FeatureFlags {
     @Override // com.android.server.flags.FeatureFlags
     public boolean disableSystemCompaction() {

@@ -3,7 +3,6 @@ package android.hardware.hdmi;
 import android.annotation.SystemApi;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public abstract class HdmiRecordListener {
     public abstract HdmiRecordSources.RecordSource onOneTouchRecordSourceRequested(int i);
 

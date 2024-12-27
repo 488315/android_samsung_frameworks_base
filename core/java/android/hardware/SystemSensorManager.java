@@ -31,7 +31,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-/* loaded from: classes.dex */
 public class SystemSensorManager extends SensorManager {
     private static final int CAPPED_SAMPLING_PERIOD_US = 5000;
     private static final int CAPPED_SAMPLING_RATE_LEVEL = 1;

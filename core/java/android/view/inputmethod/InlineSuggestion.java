@@ -25,7 +25,6 @@ import java.util.Objects;
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 
-/* loaded from: classes4.dex */
 public final class InlineSuggestion implements Parcelable {
     public static final Parcelable.Creator<InlineSuggestion> CREATOR;
     private static final String TAG = "InlineSuggestion";

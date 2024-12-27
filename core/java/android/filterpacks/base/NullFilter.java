@@ -3,7 +3,6 @@ package android.filterpacks.base;
 import android.filterfw.core.Filter;
 import android.filterfw.core.FilterContext;
 
-/* loaded from: classes.dex */
 public class NullFilter extends Filter {
     public NullFilter(String name) {
         super(name);

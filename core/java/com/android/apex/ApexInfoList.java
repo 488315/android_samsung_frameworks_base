@@ -9,7 +9,6 @@ import java.util.List;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 
-/* loaded from: classes4.dex */
 public class ApexInfoList {
     private List<ApexInfo> apexInfo;
 

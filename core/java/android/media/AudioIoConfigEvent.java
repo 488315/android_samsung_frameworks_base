@@ -1,6 +1,5 @@
 package android.media;
 
-/* loaded from: classes2.dex */
 public @interface AudioIoConfigEvent {
     public static final int CLIENT_STARTED = 8;
     public static final int DS_INFO_CHANGED = 9;

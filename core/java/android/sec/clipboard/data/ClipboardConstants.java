@@ -3,7 +3,6 @@ package android.sec.clipboard.data;
 import android.net.Uri;
 import android.os.Build;
 
-/* loaded from: classes3.dex */
 public class ClipboardConstants {
     public static final int ADD_ITEM = 1;
     public static final int CAT_USERID_ADJUST_FACTOR = 1000;

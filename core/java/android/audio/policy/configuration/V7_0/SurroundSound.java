@@ -7,7 +7,6 @@ import java.io.IOException;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 
-/* loaded from: classes.dex */
 public class SurroundSound {
     private SurroundFormats formats;
 

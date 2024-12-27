@@ -15,7 +15,6 @@ import android.widget.Space;
 
 import com.android.internal.R;
 
-/* loaded from: classes2.dex */
 public final class NavigationBarInflaterView extends FrameLayout {
     private static final String ABSOLUTE_SUFFIX = "A";
     private static final String ABSOLUTE_VERTICAL_CENTERED_SUFFIX = "C";

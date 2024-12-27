@@ -4,7 +4,6 @@ import android.util.Log;
 
 import java.io.InputStream;
 
-/* loaded from: classes.dex */
 public class BlocklistChecker {
     public static final String EMPTY_STRING = "";
     private static final String TAG = "listChecker";

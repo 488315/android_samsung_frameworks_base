@@ -17,7 +17,6 @@ import kotlin.jvm.internal.FunctionReferenceImpl;
 import kotlin.jvm.internal.Intrinsics;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes.dex */
 final /* synthetic */ class SecControlsUiControllerImpl$show$3 extends FunctionReferenceImpl implements Function2 {
     public SecControlsUiControllerImpl$show$3(Object obj) {
         super(2, obj, SecControlsUiControllerImpl.class, "showNonMainView", "showNonMainView(Ljava/util/List;Ljava/util/List;)V", 0);

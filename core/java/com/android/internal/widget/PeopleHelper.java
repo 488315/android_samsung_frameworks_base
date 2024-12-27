@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-/* loaded from: classes5.dex */
 public class PeopleHelper {
     private static final float COLOR_SHIFT_AMOUNT = 60.0f;
     private static final Pattern IGNORABLE_CHAR_PATTERN = Pattern.compile("[\\p{C}\\p{Z}]");

@@ -17,7 +17,6 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.function.Consumer;
 
-/* loaded from: classes.dex */
 public class SQLiteTokenizer {
     public static final int OPTION_NONE = 0;
     public static final int OPTION_TOKEN_ONLY = 1;

@@ -7,7 +7,6 @@ import android.os.HwParcel;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public final class CellInfoNr {
     public NrSignalStrength signalStrength = new NrSignalStrength();
     public CellIdentityNr cellidentity = new CellIdentityNr();

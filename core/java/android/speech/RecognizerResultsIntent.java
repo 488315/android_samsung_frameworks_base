@@ -1,6 +1,5 @@
 package android.speech;
 
-/* loaded from: classes3.dex */
 public class RecognizerResultsIntent {
     public static final String ACTION_VOICE_SEARCH_RESULTS =
             "android.speech.action.VOICE_SEARCH_RESULTS";

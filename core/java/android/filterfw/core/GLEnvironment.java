@@ -6,7 +6,6 @@ import android.os.Looper;
 import android.util.Log;
 import android.view.Surface;
 
-/* loaded from: classes.dex */
 public class GLEnvironment {
     private int glEnvId;
     private boolean mManageContext = true;

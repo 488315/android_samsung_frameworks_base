@@ -2,7 +2,6 @@ package com.samsung.android.authenticator;
 
 import android.os.ParcelFileDescriptor;
 
-/* loaded from: classes5.dex */
 final class TadTrustedApplication implements TrustedApplication {
     private static final String TAG = "TTA";
     private final int mHandle;

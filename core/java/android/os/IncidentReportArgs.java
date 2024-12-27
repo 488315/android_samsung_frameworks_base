@@ -6,7 +6,6 @@ import android.util.IntArray;
 import java.util.ArrayList;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class IncidentReportArgs implements Parcelable {
     public static final Parcelable.Creator<IncidentReportArgs> CREATOR =
             new Parcelable.Creator<

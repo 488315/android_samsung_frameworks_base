@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-/* loaded from: classes4.dex */
 public abstract class InputEvent implements Parcelable {
     protected static final int PARCEL_TOKEN_KEY_EVENT = 2;
     protected static final int PARCEL_TOKEN_MOTION_EVENT = 1;

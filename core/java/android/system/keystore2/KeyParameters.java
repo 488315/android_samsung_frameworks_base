@@ -5,7 +5,6 @@ import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes3.dex */
 public class KeyParameters implements Parcelable {
     public static final Parcelable.Creator<KeyParameters> CREATOR =
             new Parcelable.Creator<

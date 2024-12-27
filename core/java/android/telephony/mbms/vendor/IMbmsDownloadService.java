@@ -14,7 +14,6 @@ import android.telephony.mbms.IMbmsDownloadSessionCallback;
 
 import java.util.List;
 
-/* loaded from: classes4.dex */
 public interface IMbmsDownloadService extends IInterface {
     int addProgressListener(
             DownloadRequest downloadRequest, IDownloadProgressListener iDownloadProgressListener)

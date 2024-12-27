@@ -5,7 +5,6 @@ import android.net.Uri;
 
 import java.util.ArrayList;
 
-/* loaded from: classes3.dex */
 public abstract class Device {
     public abstract DeviceDomain getDeviceDomain();
 

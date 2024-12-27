@@ -9,7 +9,6 @@ import android.os.UserHandle;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class AppTarget implements Parcelable {
     public static final Parcelable.Creator<AppTarget> CREATOR =
             new Parcelable.Creator<AppTarget>() { // from class: android.app.prediction.AppTarget.1

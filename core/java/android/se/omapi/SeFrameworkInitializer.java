@@ -3,7 +3,6 @@ package android.se.omapi;
 import android.annotation.SystemApi;
 
 @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
-/* loaded from: classes3.dex */
 public class SeFrameworkInitializer {
     private static volatile SeServiceManager sSeServiceManager;
 

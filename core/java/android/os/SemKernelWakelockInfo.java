@@ -1,7 +1,6 @@
 package android.os;
 
 
-/* loaded from: classes3.dex */
 public class SemKernelWakelockInfo
         implements Cloneable, Parcelable, Comparable<SemKernelWakelockInfo> {
     public static final Parcelable.Creator<SemKernelWakelockInfo> CREATOR =

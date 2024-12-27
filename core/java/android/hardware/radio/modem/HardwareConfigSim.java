@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public class HardwareConfigSim implements Parcelable {
     public static final Parcelable.Creator<HardwareConfigSim> CREATOR =
             new Parcelable.Creator<HardwareConfigSim>() { // from class:

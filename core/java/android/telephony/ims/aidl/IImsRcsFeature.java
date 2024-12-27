@@ -10,7 +10,6 @@ import android.telephony.ims.feature.CapabilityChangeRequest;
 
 import java.util.List;
 
-/* loaded from: classes4.dex */
 public interface IImsRcsFeature extends IInterface {
     public static final String DESCRIPTOR = "android.telephony.ims.aidl.IImsRcsFeature";
 

@@ -21,7 +21,6 @@ import com.google.android.mms.ContentType;
 import java.io.IOException;
 import java.util.concurrent.Callable;
 
-/* loaded from: classes5.dex */
 public class ImageUtils {
     private static final int ALPHA_TOLERANCE = 50;
     private static final int COMPACT_BITMAP_SIZE = 64;

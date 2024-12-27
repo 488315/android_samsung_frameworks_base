@@ -8,7 +8,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.RemoteException;
 
-/* loaded from: classes2.dex */
 public interface IGnssNavigationMessageCallback extends IInterface {
     public static final String DESCRIPTOR =
             "android$hardware$gnss$IGnssNavigationMessageCallback".replace('$', '.');

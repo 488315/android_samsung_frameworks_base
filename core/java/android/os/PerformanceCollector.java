@@ -2,7 +2,6 @@ package android.os;
 
 import java.util.ArrayList;
 
-/* loaded from: classes3.dex */
 public class PerformanceCollector {
     public static final String METRIC_KEY_CPU_TIME = "cpu_time";
     public static final String METRIC_KEY_EXECUTION_TIME = "execution_time";

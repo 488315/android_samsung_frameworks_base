@@ -1,6 +1,5 @@
 package android.hardware.tv.tuner;
 
-/* loaded from: classes2.dex */
 public @interface FrontendStatusReadiness {
     public static final int STABLE = 3;
     public static final int UNAVAILABLE = 1;

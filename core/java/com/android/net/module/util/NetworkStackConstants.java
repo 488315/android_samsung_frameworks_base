@@ -8,7 +8,6 @@ import java.net.Inet6Address;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-/* loaded from: classes5.dex */
 public final class NetworkStackConstants {
     public static final int ARP_ETHER_IPV4_LEN = 42;
     public static final int ARP_HWTYPE_ETHER = 1;

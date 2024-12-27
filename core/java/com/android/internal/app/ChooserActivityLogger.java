@@ -6,7 +6,6 @@ import com.android.internal.logging.InstanceId;
 import com.android.internal.logging.UiEventLogger;
 import com.android.internal.logging.nano.MetricsProto;
 
-/* loaded from: classes5.dex */
 public interface ChooserActivityLogger {
     InstanceId getInstanceId();
 

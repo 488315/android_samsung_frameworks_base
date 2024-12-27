@@ -9,7 +9,6 @@ import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
 
-/* loaded from: classes3.dex */
 public interface IPrintDocumentAdapter extends IInterface {
     void finish() throws RemoteException;
 

@@ -5,7 +5,6 @@ import com.android.internal.org.bouncycastle.crypto.CryptoServicesRegistrar;
 
 import java.security.SecureRandom;
 
-/* loaded from: classes5.dex */
 public class ParametersWithRandom implements CipherParameters {
     private CipherParameters parameters;
     private SecureRandom random;

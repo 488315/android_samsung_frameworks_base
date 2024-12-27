@@ -9,7 +9,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringWriter;
 
-/* loaded from: classes.dex */
 public abstract class GraphReader {
     protected KeyValueMap mReferences = new KeyValueMap();
 

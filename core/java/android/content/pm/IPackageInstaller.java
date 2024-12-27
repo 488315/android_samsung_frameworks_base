@@ -17,7 +17,6 @@ import android.os.UserHandle;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
 public interface IPackageInstaller extends IInterface {
     void abandonSession(int i) throws RemoteException;
 

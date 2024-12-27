@@ -7,7 +7,6 @@ import android.view.MotionEvent;
 
 import com.android.internal.inputmethod.IRemoteInputConnection;
 
-/* loaded from: classes4.dex */
 public interface InputMethodSession {
 
     public interface EventCallback {

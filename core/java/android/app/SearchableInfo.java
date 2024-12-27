@@ -24,7 +24,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 
-/* loaded from: classes.dex */
 public final class SearchableInfo implements Parcelable {
     public static final Parcelable.Creator<SearchableInfo> CREATOR =
             new Parcelable.Creator<SearchableInfo>() { // from class: android.app.SearchableInfo.1

@@ -4,7 +4,6 @@ import com.android.modules.utils.BasicShellCommandHandler;
 
 import java.io.PrintStream;
 
-/* loaded from: classes5.dex */
 public abstract class BaseCommand {
     public static final String FATAL_ERROR_CODE = "Error type 1";
     public static final String NO_CLASS_ERROR_CODE = "Error type 3";

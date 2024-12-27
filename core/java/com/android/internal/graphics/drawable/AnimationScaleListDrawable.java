@@ -16,7 +16,6 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 
-/* loaded from: classes5.dex */
 public class AnimationScaleListDrawable extends DrawableContainer implements Animatable {
     private static final String TAG = "AnimationScaleListDrawable";
     private AnimationScaleListState mAnimationScaleListState;

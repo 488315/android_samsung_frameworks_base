@@ -11,7 +11,6 @@ import android.text.TextUtils;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
 public interface IBlobStoreManager extends IInterface {
     public static final String DESCRIPTOR = "android.app.blob.IBlobStoreManager";
 

@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 @Deprecated
-/* loaded from: classes.dex */
 public class DrmInfoRequest {
     public static final String ACCOUNT_ID = "account_id";
     public static final String SEM_DAY = "day";

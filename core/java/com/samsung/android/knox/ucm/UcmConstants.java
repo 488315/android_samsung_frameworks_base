@@ -1,6 +1,5 @@
 package com.samsung.android.knox.ucm;
 
-/* loaded from: classes6.dex */
 public interface UcmConstants {
     public static final String ACTION_UCM_COMPLETED_PROVISIONING_CANCELLED =
             "com.samsung.android.knox.ucm.action.UCM_COMPLETED_PROVISIONING_CANCELLED";

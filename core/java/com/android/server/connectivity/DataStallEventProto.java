@@ -1,6 +1,5 @@
 package com.android.server.connectivity;
 
-/* loaded from: classes5.dex */
 public final class DataStallEventProto {
     public static final int AP_BAND_2GHZ = 1;
     public static final int AP_BAND_5GHZ = 2;

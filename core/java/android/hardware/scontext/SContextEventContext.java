@@ -6,7 +6,6 @@ import android.os.Parcel;
 import com.samsung.android.hardware.context.SemContextEventContext;
 
 @Deprecated
-/* loaded from: classes2.dex */
 public class SContextEventContext extends SemContextEventContext {
     public SContextEventContext() {}
 

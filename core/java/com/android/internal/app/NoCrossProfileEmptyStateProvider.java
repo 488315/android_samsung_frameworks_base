@@ -7,7 +7,6 @@ import android.os.UserHandle;
 
 import java.util.function.Supplier;
 
-/* loaded from: classes5.dex */
 public class NoCrossProfileEmptyStateProvider
         implements AbstractMultiProfilePagerAdapter.EmptyStateProvider {
     private final AbstractMultiProfilePagerAdapter.CrossProfileIntentsChecker

@@ -10,7 +10,6 @@ import java.util.NoSuchElementException;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.UnaryOperator;
 
-/* loaded from: classes4.dex */
 public class BinderCacheManager<T extends IInterface> {
     private final BinderInterfaceFactory<T> mBinderInterfaceFactory;
     private final AtomicReference<BinderCacheManager<T>.BinderDeathTracker> mCachedConnection =

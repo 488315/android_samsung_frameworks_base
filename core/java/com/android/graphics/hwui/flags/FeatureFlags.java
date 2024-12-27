@@ -1,6 +1,5 @@
 package com.android.graphics.hwui.flags;
 
-/* loaded from: classes3.dex */
 public interface FeatureFlags {
     boolean animateHdrTransitions();
 

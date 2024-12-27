@@ -7,7 +7,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/* loaded from: classes6.dex */
 public class MediaParserDescriptor extends MFDescriptorBase {
     private long maxDurationUs;
     private final List<MediaType> mediaTypeList;

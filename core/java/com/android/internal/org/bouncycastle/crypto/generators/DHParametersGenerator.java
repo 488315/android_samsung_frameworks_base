@@ -6,7 +6,6 @@ import com.android.internal.org.bouncycastle.crypto.params.DHValidationParameter
 import java.math.BigInteger;
 import java.security.SecureRandom;
 
-/* loaded from: classes5.dex */
 public class DHParametersGenerator {
     private static final BigInteger TWO = BigInteger.valueOf(2);
     private int certainty;

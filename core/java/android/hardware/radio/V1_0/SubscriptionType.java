@@ -2,7 +2,6 @@ package android.hardware.radio.V1_0;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class SubscriptionType {
     public static final int SUBSCRIPTION_1 = 0;
     public static final int SUBSCRIPTION_2 = 1;

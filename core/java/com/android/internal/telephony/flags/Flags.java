@@ -1,6 +1,5 @@
 package com.android.internal.telephony.flags;
 
-/* loaded from: classes5.dex */
 public final class Flags {
     private static FeatureFlags FEATURE_FLAGS = new FeatureFlagsImpl();
     public static final String FLAG_ADD_ANOMALY_WHEN_NOTIFY_CONFIG_CHANGED_WITH_INVALID_PHONE =

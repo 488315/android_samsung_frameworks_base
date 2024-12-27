@@ -1,6 +1,5 @@
 package com.android.internal.org.bouncycastle.asn1;
 
-/* loaded from: classes5.dex */
 public class ASN1EncodableVector {
     private static final int DEFAULT_CAPACITY = 10;
     static final ASN1Encodable[] EMPTY_ELEMENTS = new ASN1Encodable[0];

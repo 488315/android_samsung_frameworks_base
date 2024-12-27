@@ -6,7 +6,6 @@ import android.view.IWindow;
 
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public abstract class WindowStateTransactionItem extends ClientTransactionItem {
     private IWindow mWindow;
 

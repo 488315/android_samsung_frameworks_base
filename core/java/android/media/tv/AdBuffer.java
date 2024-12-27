@@ -9,7 +9,6 @@ import com.android.internal.util.AnnotationValidations;
 
 import java.io.IOException;
 
-/* loaded from: classes3.dex */
 public final class AdBuffer implements Parcelable {
     public static final Parcelable.Creator<AdBuffer> CREATOR =
             new Parcelable.Creator<AdBuffer>() { // from class: android.media.tv.AdBuffer.1

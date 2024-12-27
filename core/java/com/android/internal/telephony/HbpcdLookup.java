@@ -3,7 +3,6 @@ package com.android.internal.telephony;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
-/* loaded from: classes5.dex */
 public class HbpcdLookup {
     public static final String AUTHORITY = "hbpcd_lookup";
     public static final Uri CONTENT_URI = Uri.parse("content://hbpcd_lookup");

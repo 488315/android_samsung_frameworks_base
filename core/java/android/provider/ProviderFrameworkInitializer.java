@@ -3,7 +3,6 @@ package android.provider;
 import android.app.SystemServiceRegistry;
 import android.content.Context;
 
-/* loaded from: classes3.dex */
 public class ProviderFrameworkInitializer {
     private ProviderFrameworkInitializer() {}
 

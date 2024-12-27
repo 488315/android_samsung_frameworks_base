@@ -4,7 +4,6 @@ import android.filterfw.core.Frame;
 import android.media.effect.EffectContext;
 import android.media.effect.FilterEffect;
 
-/* loaded from: classes2.dex */
 public class IdentityEffect extends FilterEffect {
     public IdentityEffect(EffectContext context, String name) {
         super(context, name);

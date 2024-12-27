@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public final class PhoneCapability implements Parcelable {
     public static final Parcelable.Creator<PhoneCapability> CREATOR;
     public static final PhoneCapability DEFAULT_DSDS_CAPABILITY;

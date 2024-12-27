@@ -5,7 +5,6 @@ import android.os.CancellationSignal;
 
 import java.util.function.Consumer;
 
-/* loaded from: classes4.dex */
 public interface ScrollCaptureCallback {
     void onScrollCaptureEnd(Runnable runnable);
 

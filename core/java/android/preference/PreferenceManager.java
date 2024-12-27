@@ -20,7 +20,6 @@ import java.util.HashSet;
 import java.util.List;
 
 @Deprecated
-/* loaded from: classes3.dex */
 public class PreferenceManager {
     public static final String KEY_HAS_SET_DEFAULT_VALUES = "_has_set_default_values";
     public static final String METADATA_KEY_PREFERENCES = "android.preference";

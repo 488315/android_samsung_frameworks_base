@@ -1,6 +1,5 @@
 package com.android.input.flags;
 
-/* loaded from: classes5.dex */
 public final class Flags {
     private static FeatureFlags FEATURE_FLAGS = new FeatureFlagsImpl();
     public static final String FLAG_A11Y_CRASH_ON_INCONSISTENT_EVENT_STREAM =

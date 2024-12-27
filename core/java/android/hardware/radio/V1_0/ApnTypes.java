@@ -6,7 +6,6 @@ import com.samsung.android.hardware.secinputdev.SemInputDeviceManager;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class ApnTypes {
     public static final int ALL = 1023;
     public static final int CBS = 128;

@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 
 @Deprecated
-/* loaded from: classes5.dex */
 public class JournaledFile {
     File mReal;
     File mTemp;

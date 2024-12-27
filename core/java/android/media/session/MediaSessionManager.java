@@ -25,7 +25,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes2.dex */
 public final class MediaSessionManager {
 
     @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)

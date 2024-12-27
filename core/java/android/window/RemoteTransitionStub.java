@@ -4,7 +4,6 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.view.SurfaceControl;
 
-/* loaded from: classes4.dex */
 public abstract class RemoteTransitionStub extends IRemoteTransition.Stub {
     @Override // android.window.IRemoteTransition
     public void mergeAnimation(

@@ -1,7 +1,6 @@
 package android.os;
 
 
-/* loaded from: classes3.dex */
 public class ConnectionInfo implements Parcelable {
     public static final Parcelable.Creator<ConnectionInfo> CREATOR =
             new Parcelable.Creator<ConnectionInfo>() { // from class: android.os.ConnectionInfo.1

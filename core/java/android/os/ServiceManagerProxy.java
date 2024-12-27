@@ -2,7 +2,6 @@ package android.os;
 
 
 /* compiled from: ServiceManagerNative.java */
-/* loaded from: classes3.dex */
 class ServiceManagerProxy implements IServiceManager {
     private IBinder mRemote;
     private IServiceManager mServiceManager;

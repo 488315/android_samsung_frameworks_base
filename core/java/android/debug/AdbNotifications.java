@@ -12,7 +12,6 @@ import android.provider.Settings;
 import com.android.internal.R;
 import com.android.internal.notification.SystemNotificationChannels;
 
-/* loaded from: classes.dex */
 public final class AdbNotifications {
     private static final String ADB_NOTIFICATION_CHANNEL_ID_TV = "usbdevicemanager.adb.tv";
 

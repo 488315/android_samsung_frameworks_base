@@ -6,7 +6,6 @@ import android.view.SurfaceControl;
 import java.util.List;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes4.dex */
 public class DisplayAreaOrganizer extends WindowOrganizer {
     public static final int FEATURE_DEFAULT_TASK_CONTAINER = 1;
     public static final int FEATURE_FULLSCREEN_MAGNIFICATION = 5;

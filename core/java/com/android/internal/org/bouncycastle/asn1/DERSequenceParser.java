@@ -2,7 +2,6 @@ package com.android.internal.org.bouncycastle.asn1;
 
 import java.io.IOException;
 
-/* loaded from: classes5.dex */
 public class DERSequenceParser implements ASN1SequenceParser {
     private ASN1StreamParser _parser;
 

@@ -3,7 +3,6 @@ package android.graphics;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes.dex */
 public final class Insets implements Parcelable {
     public final int bottom;
     public final int left;

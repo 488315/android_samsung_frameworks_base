@@ -9,7 +9,6 @@ import android.filterfw.core.NativeProgram;
 import android.filterfw.core.Program;
 import android.filterfw.format.ImageFormat;
 
-/* loaded from: classes.dex */
 public class ToRGBFilter extends Filter {
     private int mInputBPP;
     private FrameFormat mLastFormat;

@@ -7,7 +7,6 @@ import com.android.modules.utils.TypedXmlSerializer;
 
 import java.io.IOException;
 
-/* loaded from: classes5.dex */
 final class SerializedCompositionPrimitive implements SerializedVibrationEffect.SerializedSegment {
     private final int mPrimitiveDelayMs;
     private final XmlConstants.PrimitiveEffectName mPrimitiveName;

@@ -4,7 +4,6 @@ import android.security.keystore.KeyProperties;
 
 import java.util.ArrayList;
 
-/* loaded from: classes6.dex */
 public final class SehLockType {
     public static final int ACL = 11;
     public static final int FD = 4;

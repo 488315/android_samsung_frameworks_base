@@ -19,7 +19,6 @@ import java.security.interfaces.RSAPrivateKey;
 import java.security.spec.RSAPrivateKeySpec;
 import java.util.Enumeration;
 
-/* loaded from: classes5.dex */
 public class BCRSAPrivateKey implements RSAPrivateKey, PKCS12BagAttributeCarrier {
     private static BigInteger ZERO = BigInteger.valueOf(0);
     static final long serialVersionUID = 5110188922551353628L;

@@ -17,7 +17,6 @@ import android.view.View;
 
 import java.lang.ref.WeakReference;
 
-/* loaded from: classes4.dex */
 public class TextKeyListener extends BaseKeyListener implements SpanWatcher {
     static final int AUTO_CAP = 1;
     static final int AUTO_PERIOD = 4;

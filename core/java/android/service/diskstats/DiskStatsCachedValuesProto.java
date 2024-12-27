@@ -1,6 +1,5 @@
 package android.service.diskstats;
 
-/* loaded from: classes3.dex */
 public final class DiskStatsCachedValuesProto {
     public static final long AGG_APPS_CACHE_SIZE_KB = 1112396529666L;
     public static final long AGG_APPS_DATA_SIZE_KB = 1112396529674L;

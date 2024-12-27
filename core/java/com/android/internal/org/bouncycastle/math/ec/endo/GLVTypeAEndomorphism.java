@@ -6,7 +6,6 @@ import com.android.internal.org.bouncycastle.math.ec.ScaleYNegateXPointMap;
 
 import java.math.BigInteger;
 
-/* loaded from: classes5.dex */
 public class GLVTypeAEndomorphism implements GLVEndomorphism {
     protected final GLVTypeAParameters parameters;
     protected final ECPointMap pointMap;

@@ -4,7 +4,6 @@ import android.media.midi.MidiReceiver;
 
 import java.io.IOException;
 
-/* loaded from: classes5.dex */
 public class MidiEventScheduler extends EventScheduler {
     private static final int POOL_EVENT_SIZE = 16;
     private static final String TAG = "MidiEventScheduler";

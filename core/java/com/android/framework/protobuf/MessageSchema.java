@@ -16,7 +16,6 @@ import java.util.Map;
 import sun.misc.Unsafe;
 
 @CheckReturnValue
-/* loaded from: classes3.dex */
 final class MessageSchema<T> implements Schema<T> {
     private static final int ENFORCE_UTF8_MASK = 536870912;
     private static final int FIELD_TYPE_MASK = 267386880;

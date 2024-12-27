@@ -7,7 +7,6 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.HashMap;
 
-/* loaded from: classes5.dex */
 public class BinderTransactionNameResolver {
     private static final Method NO_GET_DEFAULT_TRANSACTION_NAME_METHOD;
     private final HashMap<Class<? extends Binder>, Method> mGetDefaultTransactionNameMethods =

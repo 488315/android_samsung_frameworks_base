@@ -8,7 +8,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.view.SurfaceControlViewHost;
 
-/* loaded from: classes3.dex */
 public interface IInlineSuggestionUiCallback extends IInterface {
     public static final String DESCRIPTOR = "android.service.autofill.IInlineSuggestionUiCallback";
 

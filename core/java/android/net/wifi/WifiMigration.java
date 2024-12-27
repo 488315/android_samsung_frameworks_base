@@ -26,7 +26,6 @@ import java.util.Objects;
 import java.util.Set;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class WifiMigration {
     private static final String LEGACY_WIFI_STORE_DIRECTORY_NAME = "wifi";
     public static final int STORE_FILE_SHARED_GENERAL = 0;

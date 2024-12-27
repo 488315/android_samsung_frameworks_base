@@ -1,6 +1,5 @@
 package android.os.storage;
 
-/* loaded from: classes3.dex */
 public class StorageResultCode {
     public static final int OperationFailedInternalError = -1;
     public static final int OperationFailedMediaBlank = -3;

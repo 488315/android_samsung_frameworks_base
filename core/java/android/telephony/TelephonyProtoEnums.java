@@ -1,6 +1,5 @@
 package android.telephony;
 
-/* loaded from: classes4.dex */
 public final class TelephonyProtoEnums {
     public static final int APN_PROTOCOL_IPV4 = 0;
     public static final int APN_PROTOCOL_IPV4V6 = 2;

@@ -6,7 +6,6 @@ import android.os.Parcelable;
 
 import com.android.internal.org.bouncycastle.cms.CMSAttributeTableGenerator;
 
-/* loaded from: classes2.dex */
 public final class KeyParameterValue implements Parcelable {
     public static final Parcelable.Creator<KeyParameterValue> CREATOR =
             new Parcelable.Creator<KeyParameterValue>() { // from class:

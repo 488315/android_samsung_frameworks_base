@@ -3,7 +3,6 @@ package com.samsung.android.wifi;
 import android.content.Context;
 import android.util.Log;
 
-/* loaded from: classes6.dex */
 public class SemWifiApAutoHotspotHelper {
     public static final String KEY_CAN_AUTO_HOTSPOT_BE_ENABLED = "key_can_auto_hotspot_be_enabled";
     private static String TAG = SemWifiApAutoHotspotHelper.class.getSimpleName();

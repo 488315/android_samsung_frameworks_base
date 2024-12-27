@@ -5,7 +5,6 @@ import android.database.DataSetObserver;
 import android.view.View;
 import android.view.ViewGroup;
 
-/* loaded from: classes4.dex */
 public abstract class BaseAdapter implements ListAdapter, SpinnerAdapter {
     private CharSequence[] mAutofillOptions;
     private final DataSetObservable mDataSetObservable = new DataSetObservable();

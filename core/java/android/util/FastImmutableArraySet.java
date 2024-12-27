@@ -3,7 +3,6 @@ package android.util;
 import java.util.AbstractSet;
 import java.util.Iterator;
 
-/* loaded from: classes4.dex */
 public final class FastImmutableArraySet<T> extends AbstractSet<T> {
     T[] mContents;
     FastIterator<T> mIterator;

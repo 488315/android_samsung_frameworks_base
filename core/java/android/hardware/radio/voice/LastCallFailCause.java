@@ -1,6 +1,5 @@
 package android.hardware.radio.voice;
 
-/* loaded from: classes2.dex */
 public @interface LastCallFailCause {
     public static final int ACCESS_CLASS_BLOCKED = 260;
     public static final int ACCESS_INFORMATION_DISCARDED = 43;

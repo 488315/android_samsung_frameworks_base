@@ -8,7 +8,6 @@ import android.os.UserHandle;
 
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public final class PhoneAccountHandle implements Parcelable {
     private final ComponentName mComponentName;
     private final String mId;

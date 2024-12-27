@@ -4,7 +4,6 @@ import android.Manifest;
 import android.app.ActivityThread;
 import android.content.IntentSender;
 
-/* loaded from: classes3.dex */
 public interface IRecoverySystem extends IInterface {
     boolean allocateSpaceForUpdate(String str) throws RemoteException;
 

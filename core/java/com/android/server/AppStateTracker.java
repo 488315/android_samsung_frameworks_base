@@ -1,6 +1,5 @@
 package com.android.server;
 
-/* loaded from: classes5.dex */
 public interface AppStateTracker {
     public static final String TAG = "AppStateTracker";
 

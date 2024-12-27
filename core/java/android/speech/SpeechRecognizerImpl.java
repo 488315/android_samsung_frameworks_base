@@ -20,7 +20,6 @@ import java.util.Queue;
 import java.util.concurrent.Executor;
 import java.util.concurrent.LinkedBlockingQueue;
 
-/* loaded from: classes3.dex */
 class SpeechRecognizerImpl extends SpeechRecognizer {
     private static final boolean DBG = false;
     private static final int MSG_CANCEL = 3;

@@ -1,6 +1,5 @@
 package android.content.pm;
 
-/* loaded from: classes.dex */
 public final class ApplicationInfoProto {
     public static final long CLASS_LOADER_NAME = 1138166333454L;
     public static final long DATA_DIR = 1138166333453L;

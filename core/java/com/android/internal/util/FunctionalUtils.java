@@ -9,7 +9,6 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-/* loaded from: classes5.dex */
 public class FunctionalUtils {
 
     @FunctionalInterface

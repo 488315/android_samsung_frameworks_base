@@ -5,7 +5,6 @@ import android.service.timezone.TimeZoneProviderService;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class RadioCapabilityStatus {
     public static final int FAIL = 2;
     public static final int NONE = 0;

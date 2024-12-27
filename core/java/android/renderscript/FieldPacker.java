@@ -5,7 +5,6 @@ import android.util.Log;
 import java.util.BitSet;
 
 @Deprecated
-/* loaded from: classes3.dex */
 public class FieldPacker {
     private BitSet mAlignment;
     private byte[] mData;

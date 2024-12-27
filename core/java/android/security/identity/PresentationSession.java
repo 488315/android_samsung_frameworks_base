@@ -4,7 +4,6 @@ import java.security.InvalidKeyException;
 import java.security.KeyPair;
 import java.security.PublicKey;
 
-/* loaded from: classes3.dex */
 public abstract class PresentationSession {
     public abstract CredentialDataResult getCredentialData(
             String str, CredentialDataRequest credentialDataRequest)

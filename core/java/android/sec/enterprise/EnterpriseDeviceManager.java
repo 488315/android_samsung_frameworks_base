@@ -8,7 +8,6 @@ import android.sec.enterprise.kioskmode.KioskMode;
 
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public class EnterpriseDeviceManager {
     public static final String ACTION_KNOXFRAMEWORK_SYSTEMUI_UPDATE_INTENT_INTERNAL =
             "com.samsung.android.knox.intent.action.KNOXFRAMEWORK_SYSTEMUI_UPDATE_INTENT_INTERNAL";

@@ -38,7 +38,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/* loaded from: classes4.dex */
 public abstract class AbsSeekBar extends ProgressBar {
     private static final int MUTE_VIB_DISTANCE_LVL = 400;
     private static final int MUTE_VIB_DURATION = 500;

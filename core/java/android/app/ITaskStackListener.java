@@ -8,7 +8,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.window.TaskSnapshot;
 
-/* loaded from: classes.dex */
 public interface ITaskStackListener extends IInterface {
     public static final int FORCED_RESIZEABLE_REASON_DEX_FREEFORM = 4;
     public static final int FORCED_RESIZEABLE_REASON_FREEFORM = 3;

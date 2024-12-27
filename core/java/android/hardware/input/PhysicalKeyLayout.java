@@ -8,7 +8,6 @@ import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 import java.lang.runtime.ObjectMethods;
 
-/* loaded from: classes2.dex */
 final class PhysicalKeyLayout {
     private static final SparseIntArray DEFAULT_KEYCODE_FOR_SCANCODE = new SparseIntArray();
     private static final int SCANCODE_0 = 11;

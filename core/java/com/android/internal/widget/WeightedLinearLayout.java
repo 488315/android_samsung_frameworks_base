@@ -9,7 +9,6 @@ import android.widget.LinearLayout;
 
 import com.android.internal.R;
 
-/* loaded from: classes5.dex */
 public class WeightedLinearLayout extends LinearLayout {
     private float mMajorWeightMax;
     private float mMajorWeightMin;

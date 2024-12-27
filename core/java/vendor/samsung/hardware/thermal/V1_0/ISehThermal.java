@@ -29,7 +29,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Objects;
 
-/* loaded from: classes6.dex */
 public interface ISehThermal extends IThermal {
     public static final String kInterfaceName = "vendor.samsung.hardware.thermal@1.0::ISehThermal";
 

@@ -18,7 +18,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Supplier;
 
-/* loaded from: classes5.dex */
 public class SystemNotificationChannels {
 
     @Deprecated public static String VIRTUAL_KEYBOARD = "VIRTUAL_KEYBOARD";

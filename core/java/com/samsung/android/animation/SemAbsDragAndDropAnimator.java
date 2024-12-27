@@ -15,7 +15,6 @@ import android.view.animation.PathInterpolator;
 import android.view.animation.Transformation;
 
 @Deprecated
-/* loaded from: classes5.dex */
 public abstract class SemAbsDragAndDropAnimator {
     static final int BITMAP_ALPHA = 179;
     static final int DND_AUTO_SCROLL_DELTA_VALUE = 7;

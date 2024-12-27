@@ -11,7 +11,6 @@ import com.android.framework.protobuf.nano.WireFormatNano;
 
 import java.io.IOException;
 
-/* loaded from: classes5.dex */
 public interface GnssLogsProto {
 
     public static final class GnssLog extends MessageNano {

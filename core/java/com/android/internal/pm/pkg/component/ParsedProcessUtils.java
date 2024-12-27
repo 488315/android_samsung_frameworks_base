@@ -20,7 +20,6 @@ import org.xmlpull.v1.XmlPullParserException;
 import java.io.IOException;
 import java.util.Set;
 
-/* loaded from: classes5.dex */
 public class ParsedProcessUtils {
     private static ParseResult<Set<String>> parseDenyPermission(
             Set<String> perms, Resources res, XmlResourceParser parser, ParseInput input)

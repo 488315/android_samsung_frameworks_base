@@ -7,7 +7,6 @@ import com.android.internal.util.Preconditions;
 import java.util.ArrayList;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public class HwAudioSource extends PlayerBase {
     private final AudioAttributes mAudioAttributes;
     private final AudioDeviceInfo mAudioDeviceInfo;

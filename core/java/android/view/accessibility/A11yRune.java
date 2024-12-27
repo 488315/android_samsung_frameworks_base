@@ -7,7 +7,6 @@ import android.os.SemSystemProperties;
 
 import com.samsung.android.feature.SemFloatingFeature;
 
-/* loaded from: classes4.dex */
 public class A11yRune {
     public static final boolean A11Y_ADV_BOOL_FLASH_NOTIFICATION = true;
     public static final boolean A11Y_COLOR_BOOL_SUPPORT_AMOLED_DISPLAY = true;

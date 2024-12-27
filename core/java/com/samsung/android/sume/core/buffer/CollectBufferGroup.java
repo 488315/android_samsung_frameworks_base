@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-/* loaded from: classes6.dex */
 public class CollectBufferGroup extends MediaBufferGroup {
     private static final String TAG = Def.tagOf((Class<?>) CollectBufferGroup.class);
     public static final Parcelable.Creator<CollectBufferGroup> CREATOR =

@@ -20,7 +20,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
 
-/* loaded from: classes6.dex */
 public class SemMediaCaptureClient extends ClientImpl {
     private final SemMediaCapture mCapture;
 

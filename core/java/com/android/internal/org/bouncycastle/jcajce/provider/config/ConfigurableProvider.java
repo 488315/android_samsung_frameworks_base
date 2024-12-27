@@ -5,7 +5,6 @@ import com.android.internal.org.bouncycastle.jcajce.provider.util.AsymmetricKeyI
 
 import java.util.Map;
 
-/* loaded from: classes5.dex */
 public interface ConfigurableProvider {
     public static final String ACCEPTABLE_EC_CURVES = "acceptableEcCurves";
     public static final String ADDITIONAL_EC_PARAMETERS = "additionalEcParameters";

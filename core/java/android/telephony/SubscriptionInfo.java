@@ -31,7 +31,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-/* loaded from: classes4.dex */
 public class SubscriptionInfo implements Parcelable {
     public static final Parcelable.Creator<SubscriptionInfo> CREATOR =
             new Parcelable.Creator<

@@ -3,7 +3,6 @@ package com.android.ims.internal.uce.options;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes5.dex */
 public class OptionsCmdId implements Parcelable {
     public static final Parcelable.Creator<OptionsCmdId> CREATOR =
             new Parcelable.Creator<

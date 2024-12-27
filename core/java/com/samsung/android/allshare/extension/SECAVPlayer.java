@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-/* loaded from: classes3.dex */
 public class SECAVPlayer extends AVPlayer
         implements AVPlayer.IAVPlayerEventListener,
                 AVPlayer.IAVPlayerExtensionEventListener,

@@ -1,6 +1,5 @@
 package com.samsung.android.hardware.context;
 
-/* loaded from: classes6.dex */
 public class SemContextConstants {
     static final int ABNORMAL_PRESSURE = 41;
     static final int ACTIVE_TIME_MONITOR = 34;

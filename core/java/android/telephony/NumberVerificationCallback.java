@@ -6,7 +6,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public interface NumberVerificationCallback {
     public static final int REASON_CONCURRENT_REQUESTS = 4;
     public static final int REASON_IN_ECBM = 5;

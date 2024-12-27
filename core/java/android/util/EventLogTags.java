@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 
 @Deprecated
-/* loaded from: classes4.dex */
 public class EventLogTags {
 
     public static class Description {

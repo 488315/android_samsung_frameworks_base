@@ -5,7 +5,6 @@ import android.util.Log;
 
 import java.nio.charset.Charset;
 
-/* loaded from: classes6.dex */
 public class IntegrityControlCheckCenter {
     public static final int COMPONENT_TYPE_HARD_INTEGRITY = 1;
     public static final int COMPONENT_TYPE_SOFT_INTEGRITY = 2;

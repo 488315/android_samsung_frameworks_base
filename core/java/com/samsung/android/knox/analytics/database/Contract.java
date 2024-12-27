@@ -2,7 +2,6 @@ package com.samsung.android.knox.analytics.database;
 
 import android.net.Uri;
 
-/* loaded from: classes6.dex */
 public final class Contract {
     public static final String AUTHORITY = "com.samsung.android.knox.analytics.provider";
     public static final Uri CONTENT_URI =

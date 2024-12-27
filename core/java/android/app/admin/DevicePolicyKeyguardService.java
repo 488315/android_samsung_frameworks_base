@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.SurfaceControlViewHost;
 
 @SystemApi
-/* loaded from: classes.dex */
 public class DevicePolicyKeyguardService extends Service {
     private static final String TAG = "DevicePolicyKeyguardService";
     private IKeyguardCallback mCallback;

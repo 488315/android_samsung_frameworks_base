@@ -6,7 +6,6 @@ import android.os.IBinder;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes.dex */
 public class RefreshCallbackItem extends ActivityTransactionItem {
     public static final Parcelable.Creator<RefreshCallbackItem> CREATOR =
             new Parcelable.Creator<RefreshCallbackItem>() { // from class:

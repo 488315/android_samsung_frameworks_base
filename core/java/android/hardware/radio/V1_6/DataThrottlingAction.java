@@ -2,7 +2,6 @@ package android.hardware.radio.V1_6;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class DataThrottlingAction {
     public static final byte HOLD = 3;
     public static final byte NO_DATA_THROTTLING = 0;

@@ -5,7 +5,6 @@ import com.android.internal.org.bouncycastle.util.Integers;
 
 import java.math.BigInteger;
 
-/* loaded from: classes5.dex */
 public class DHPublicKeyParameters extends DHKeyParameters {
     private static final BigInteger ONE = BigInteger.valueOf(1);
     private static final BigInteger TWO = BigInteger.valueOf(2);

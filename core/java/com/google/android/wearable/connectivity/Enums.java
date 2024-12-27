@@ -1,6 +1,5 @@
 package com.google.android.wearable.connectivity;
 
-/* loaded from: classes5.dex */
 public final class Enums {
     public static final int ACL_CONNECT = 1;
     public static final int ACL_DISCONNECT = 2;

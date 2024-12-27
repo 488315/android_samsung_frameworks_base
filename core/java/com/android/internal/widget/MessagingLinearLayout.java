@@ -14,7 +14,6 @@ import android.widget.RemoteViews;
 import com.android.internal.R;
 
 @RemoteViews.RemoteView
-/* loaded from: classes5.dex */
 public class MessagingLinearLayout extends ViewGroup {
     private static final boolean TRACE_ONMEASURE = Build.isDebuggable();
     private int mMaxDisplayedLines;

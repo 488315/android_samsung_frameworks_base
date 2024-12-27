@@ -1,6 +1,5 @@
 package android.chre.flags;
 
-/* loaded from: classes.dex */
 public final class FeatureFlagsImpl implements FeatureFlags {
     @Override // android.chre.flags.FeatureFlags
     public boolean abortIfNoContextHubFound() {

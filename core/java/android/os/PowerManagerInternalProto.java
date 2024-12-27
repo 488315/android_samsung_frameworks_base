@@ -1,6 +1,5 @@
 package android.os;
 
-/* loaded from: classes3.dex */
 public final class PowerManagerInternalProto {
     public static final int WAKEFULNESS_ASLEEP = 0;
     public static final int WAKEFULNESS_AWAKE = 1;

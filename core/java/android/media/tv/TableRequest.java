@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes3.dex */
 public final class TableRequest extends BroadcastInfoRequest implements Parcelable {
     public static final Parcelable.Creator<TableRequest> CREATOR =
             new Parcelable.Creator<TableRequest>() { // from class: android.media.tv.TableRequest.1

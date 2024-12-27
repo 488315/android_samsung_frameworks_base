@@ -21,7 +21,6 @@ import java.util.List;
 import java.util.function.Consumer;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public abstract class CellBroadcastService extends Service {
     public static final String CELL_BROADCAST_SERVICE_INTERFACE =
             "android.telephony.CellBroadcastService";

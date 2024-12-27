@@ -26,7 +26,6 @@ import java.util.function.IntPredicate;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
-/* loaded from: classes6.dex */
 public class ImgpDecorateFilter extends DecorateFilter {
     private static final String TAG = Def.tagOf((Class<?>) ImgpDecorateFilter.class);
     private MediaFilter postFilter;

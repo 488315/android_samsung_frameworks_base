@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
-/* loaded from: classes6.dex */
 public class ServiceProxySupplier implements Supplier<ServiceProxy> {
     private static final String TAG = Def.tagOf((Class<?>) ServiceProxySupplier.class);
     protected final Map<Integer, Object> options;

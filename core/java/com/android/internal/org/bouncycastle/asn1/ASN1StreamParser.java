@@ -4,7 +4,6 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-/* loaded from: classes5.dex */
 public class ASN1StreamParser {
     private final InputStream _in;
     private final int _limit;

@@ -3,7 +3,6 @@ package com.android.internal.logging;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes5.dex */
 public final class InstanceId implements Parcelable {
     public static final Parcelable.Creator<InstanceId> CREATOR =
             new Parcelable.Creator<

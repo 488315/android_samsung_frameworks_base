@@ -9,7 +9,6 @@ import java.util.List;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 
-/* loaded from: classes.dex */
 public class Volume {
     private DeviceCategory deviceCategory;
     private List<String> point;

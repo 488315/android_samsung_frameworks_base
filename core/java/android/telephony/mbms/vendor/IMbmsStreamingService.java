@@ -11,7 +11,6 @@ import android.telephony.mbms.IStreamingServiceCallback;
 
 import java.util.List;
 
-/* loaded from: classes4.dex */
 public interface IMbmsStreamingService extends IInterface {
     void dispose(int i) throws RemoteException;
 

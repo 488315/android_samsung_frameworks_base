@@ -1,6 +1,5 @@
 package com.samsung.android.provider;
 
-/* loaded from: classes6.dex */
 public class SemKnoxPolicyContract {
     private static final String AUTHORITY = "com.sec.knox.provider";
     public static final String AUTHORITY2 = "com.sec.knox.provider2";

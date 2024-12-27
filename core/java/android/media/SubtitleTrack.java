@@ -12,7 +12,6 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.Vector;
 
-/* loaded from: classes2.dex */
 public abstract class SubtitleTrack implements MediaTimeProvider.OnMediaTimeListener {
     private static final String TAG = "SubtitleTrack";
     private MediaFormat mFormat;

@@ -7,7 +7,6 @@ import com.android.internal.org.bouncycastle.util.BigIntegers;
 
 import java.math.BigInteger;
 
-/* loaded from: classes5.dex */
 public class IValue extends ASN1Object {
     private final BigInteger value;
 

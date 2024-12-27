@@ -9,7 +9,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public class Descrambler implements AutoCloseable {
     public static final int PID_TYPE_MMTP = 2;
     public static final int PID_TYPE_T = 1;

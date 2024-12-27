@@ -1,6 +1,5 @@
 package android.filterfw.core;
 
-/* loaded from: classes.dex */
 public class OutputPort extends FilterPort {
     protected InputPort mBasePort;
     protected InputPort mTargetPort;

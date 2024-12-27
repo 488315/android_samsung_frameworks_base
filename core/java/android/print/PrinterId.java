@@ -6,7 +6,6 @@ import android.os.Parcelable;
 
 import com.android.internal.util.Preconditions;
 
-/* loaded from: classes3.dex */
 public final class PrinterId implements Parcelable {
     public static final Parcelable.Creator<PrinterId> CREATOR =
             new Parcelable.Creator<PrinterId>() { // from class: android.print.PrinterId.1

@@ -3,7 +3,6 @@ package android.media.tv;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes3.dex */
 public final class TsResponse extends BroadcastInfoResponse implements Parcelable {
     public static final Parcelable.Creator<TsResponse> CREATOR =
             new Parcelable.Creator<TsResponse>() { // from class: android.media.tv.TsResponse.1

@@ -11,7 +11,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public final class ManualTimeZoneSuggestion implements Parcelable {
     public static final Parcelable.Creator<ManualTimeZoneSuggestion> CREATOR =
             new Parcelable.Creator<ManualTimeZoneSuggestion>() { // from class:

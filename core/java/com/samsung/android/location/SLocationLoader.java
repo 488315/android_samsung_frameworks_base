@@ -7,7 +7,6 @@ import android.util.Log;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 
-/* loaded from: classes6.dex */
 public class SLocationLoader {
     private static final String CLASS_SLocationService =
             "com.samsung.android.location.SLocationService";

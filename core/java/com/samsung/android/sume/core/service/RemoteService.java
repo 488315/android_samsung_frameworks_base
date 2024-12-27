@@ -24,7 +24,6 @@ import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 
-/* loaded from: classes6.dex */
 public abstract class RemoteService extends ServiceStub
         implements ServiceController, MediaController.OnEventListener {
     private static final String TAG = Def.tagOf((Class<?>) RemoteService.class);

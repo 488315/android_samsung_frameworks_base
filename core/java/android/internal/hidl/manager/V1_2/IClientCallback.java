@@ -21,7 +21,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public interface IClientCallback extends IBase {
     public static final String kInterfaceName = "android.hidl.manager@1.2::IClientCallback";
 

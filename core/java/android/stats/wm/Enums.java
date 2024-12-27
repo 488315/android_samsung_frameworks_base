@@ -1,6 +1,5 @@
 package android.stats.wm;
 
-/* loaded from: classes3.dex */
 public final class Enums {
     public static final int ROTATION_0 = 1;
     public static final int ROTATION_180 = 3;

@@ -9,7 +9,6 @@ import android.telephony.ims.SipDetails;
 import java.util.Set;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public interface CapabilityExchangeEventListener {
 
     public interface OptionsRequestCallback {

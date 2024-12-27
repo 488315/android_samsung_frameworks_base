@@ -152,7 +152,6 @@ import kotlin.sequences.SequencesKt___SequencesKt;
 import noticolorpicker.NotificationColorPicker;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public class NotificationStackScrollLayout extends ViewGroup implements Dumpable, NotificationScrollView, PanelScreenShotLogger.LogProvider {
     public static final boolean DEBUG_DISABLE_SHOW_NEW_NOTIF_ONLY = SystemProperties.getBoolean("debug.noti.disable_new_notif_only", false);
     static final float RUBBER_BAND_FACTOR_NORMAL = 0.1f;

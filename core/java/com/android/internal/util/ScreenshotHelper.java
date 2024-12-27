@@ -21,7 +21,6 @@ import com.android.internal.R;
 
 import java.util.function.Consumer;
 
-/* loaded from: classes5.dex */
 public class ScreenshotHelper {
     public static final int SCREENSHOT_MSG_PROCESS_COMPLETE = 2;
     public static final int SCREENSHOT_MSG_URI = 1;

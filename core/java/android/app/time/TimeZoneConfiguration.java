@@ -10,7 +10,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class TimeZoneConfiguration implements Parcelable {
     public static final Parcelable.Creator<TimeZoneConfiguration> CREATOR =
             new Parcelable.Creator<TimeZoneConfiguration>() { // from class:

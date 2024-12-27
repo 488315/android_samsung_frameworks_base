@@ -1,6 +1,5 @@
 package android.filterfw.core;
 
-/* loaded from: classes.dex */
 public class NativeBuffer {
     private Frame mAttachedFrame;
     private long mDataPointer;

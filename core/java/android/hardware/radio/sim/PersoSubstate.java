@@ -1,6 +1,5 @@
 package android.hardware.radio.sim;
 
-/* loaded from: classes2.dex */
 public @interface PersoSubstate {
     public static final int IN_PROGRESS = 1;
     public static final int READY = 2;

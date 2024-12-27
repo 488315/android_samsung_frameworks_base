@@ -4,7 +4,6 @@ import android.system.ErrnoException;
 import android.system.Os;
 import android.system.StructStatVfs;
 
-/* loaded from: classes3.dex */
 public class StatFs {
     private StructStatVfs mStat;
 

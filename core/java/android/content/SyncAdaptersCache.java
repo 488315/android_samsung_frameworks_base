@@ -20,7 +20,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
-/* loaded from: classes.dex */
 public class SyncAdaptersCache extends RegisteredServicesCache<SyncAdapterType> {
     private static final String ATTRIBUTES_NAME = "sync-adapter";
     private static final String SERVICE_INTERFACE = "android.content.SyncAdapter";

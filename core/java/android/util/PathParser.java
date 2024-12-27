@@ -4,7 +4,6 @@ import android.graphics.Path;
 
 import dalvik.annotation.optimization.FastNative;
 
-/* loaded from: classes4.dex */
 public class PathParser {
     static final String LOGTAG = PathParser.class.getSimpleName();
 

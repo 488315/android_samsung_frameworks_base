@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public final class CellInfoLte extends CellInfo implements Parcelable {
     public static final Parcelable.Creator<CellInfoLte> CREATOR =
             new Parcelable.Creator<CellInfoLte>() { // from class: android.telephony.CellInfoLte.1

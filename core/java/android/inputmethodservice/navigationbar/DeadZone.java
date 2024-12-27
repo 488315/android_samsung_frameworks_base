@@ -8,7 +8,6 @@ import android.util.FloatProperty;
 import android.util.Log;
 import android.view.MotionEvent;
 
-/* loaded from: classes2.dex */
 final class DeadZone {
     private static final boolean CHATTY = true;
     public static final boolean DEBUG = false;

@@ -10,7 +10,6 @@ import android.os.HwParcel;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public final class SetupDataCallResult {
     public int cause = 0;
     public int suggestedRetryTime = 0;

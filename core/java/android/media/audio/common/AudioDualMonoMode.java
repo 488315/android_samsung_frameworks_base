@@ -1,6 +1,5 @@
 package android.media.audio.common;
 
-/* loaded from: classes2.dex */
 public @interface AudioDualMonoMode {
     public static final int LL = 2;
     public static final int LR = 1;

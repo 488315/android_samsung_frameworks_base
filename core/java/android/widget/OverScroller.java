@@ -15,7 +15,6 @@ import com.samsung.android.rune.CoreRune;
 
 import java.lang.reflect.Array;
 
-/* loaded from: classes4.dex */
 public class OverScroller {
     private static final int DEFAULT_DURATION = 250;
     private static final int FLING_MODE = 1;

@@ -11,7 +11,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-/* loaded from: classes6.dex */
 public class InternalRegionDecoder {
     public static final int IMAGE_TYPE_COVER = 0;
     public static final int IMAGE_TYPE_GAINMAP = 2;

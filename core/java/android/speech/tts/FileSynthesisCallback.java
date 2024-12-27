@@ -10,7 +10,6 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.channels.FileChannel;
 
-/* loaded from: classes3.dex */
 class FileSynthesisCallback extends AbstractSynthesisCallback {
     private static final boolean DBG = false;
     private static final int MAX_AUDIO_BUFFER_SIZE = 8192;

@@ -10,7 +10,6 @@ import com.android.internal.telephony.util.TelephonyUtils;
 import com.android.telephony.Rlog;
 
 @Deprecated
-/* loaded from: classes4.dex */
 public class CdmaCellLocation extends CellLocation {
     public static final int INVALID_LAT_LONG = Integer.MAX_VALUE;
     private int mBaseStationId;

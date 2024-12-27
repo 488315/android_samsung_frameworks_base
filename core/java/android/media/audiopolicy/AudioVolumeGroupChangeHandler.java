@@ -10,7 +10,6 @@ import com.android.internal.util.Preconditions;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public class AudioVolumeGroupChangeHandler {
     private static final int AUDIOVOLUMEGROUP_EVENT_NEW_LISTENER = 4;
     private static final int AUDIOVOLUMEGROUP_EVENT_VOLUME_CHANGED = 1000;

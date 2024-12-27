@@ -16,7 +16,6 @@ import java.util.Locale;
 import java.util.Random;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class InstantAppResolveInfo implements Parcelable {
     private static final String SHA_ALGORITHM = "SHA-256";
     private final InstantAppDigest mDigest;

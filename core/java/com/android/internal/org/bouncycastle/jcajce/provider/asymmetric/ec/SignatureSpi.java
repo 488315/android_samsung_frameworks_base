@@ -17,7 +17,6 @@ import java.security.InvalidKeyException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 
-/* loaded from: classes5.dex */
 public class SignatureSpi extends DSABase {
     SignatureSpi(Digest digest, DSAExt signer, DSAEncoding encoding) {
         super(digest, signer, encoding);

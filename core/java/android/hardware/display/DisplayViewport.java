@@ -8,7 +8,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public final class DisplayViewport {
     public static final int VIEWPORT_EXTERNAL = 2;
     public static final int VIEWPORT_EXTERNAL_DEX = 100;

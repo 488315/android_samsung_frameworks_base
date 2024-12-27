@@ -5,7 +5,6 @@ import android.content.Context;
 
 import com.android.internal.accessibility.util.ShortcutUtils;
 
-/* loaded from: classes5.dex */
 class AccessibilityServiceTarget extends AccessibilityTarget {
     private final AccessibilityServiceInfo mAccessibilityServiceInfo;
 

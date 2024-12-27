@@ -28,7 +28,6 @@ import java.util.concurrent.Flow;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-/* loaded from: classes3.dex */
 public abstract class ControlsProviderService extends Service {
     public static final String ACTION_ADD_CONTROL = "android.service.controls.action.ADD_CONTROL";
     public static final String CALLBACK_BUNDLE = "CALLBACK_BUNDLE";

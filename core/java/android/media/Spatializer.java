@@ -14,7 +14,6 @@ import java.util.Objects;
 import java.util.concurrent.Executor;
 import java.util.function.Supplier;
 
-/* loaded from: classes2.dex */
 public class Spatializer {
 
     @SystemApi(client = SystemApi.Client.PRIVILEGED_APPS)

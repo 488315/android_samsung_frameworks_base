@@ -8,7 +8,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class TvContentRatingSystemInfo implements Parcelable {
     public static final Parcelable.Creator<TvContentRatingSystemInfo> CREATOR =
             new Parcelable.Creator<

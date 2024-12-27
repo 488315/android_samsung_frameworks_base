@@ -12,7 +12,6 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.UUID;
 
-/* loaded from: classes3.dex */
 public final class IncrementalStorage {
     private static final int INCFS_MAX_ADD_DATA_SIZE = 128;
     private static final int INCFS_MAX_HASH_SIZE = 32;

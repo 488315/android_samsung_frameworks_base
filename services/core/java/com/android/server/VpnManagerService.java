@@ -61,7 +61,6 @@ import java.util.List;
 import java.util.Objects;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes.dex */
 public class VpnManagerService extends IVpnManager.Stub {
     public static final boolean DBG = Debug.semIsProductDev();
     public final Object knoxVpnLock;

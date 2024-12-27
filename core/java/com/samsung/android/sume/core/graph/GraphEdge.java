@@ -10,7 +10,6 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-/* loaded from: classes6.dex */
 public class GraphEdge {
     public static int INVALID_ID = -1;
     private final BufferChannel bufferChannel;

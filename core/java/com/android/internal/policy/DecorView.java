@@ -98,7 +98,6 @@ import com.samsung.android.util.SemViewUtils;
 import java.util.List;
 import java.util.function.Consumer;
 
-/* loaded from: classes5.dex */
 public class DecorView extends FrameLayout implements RootViewSurfaceTaker, WindowCallbacks {
     private static final boolean DEBUG_KNOX = false;
     private static final String DEBUG_KNOX_TAG = "DecorView_KNOX";

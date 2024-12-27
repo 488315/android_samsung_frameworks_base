@@ -3,7 +3,6 @@ package com.android.internal.widget.remotecompose.core.operations;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.telecom.Logging.Session;
 
-/* loaded from: classes5.dex */
 public class Utils {
     public static float asNan(int v) {
         return Float.intBitsToFloat((-8388608) | v);

@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.util.Log;
 
 @Deprecated
-/* loaded from: classes2.dex */
 public class SContextInactiveTimerAttribute extends SContextAttribute {
     private static final String TAG = "SContextInactiveTimerAttribute";
     private int mAlertCount;

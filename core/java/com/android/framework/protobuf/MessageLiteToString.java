@@ -14,7 +14,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
-/* loaded from: classes3.dex */
 final class MessageLiteToString {
     private static final String BUILDER_LIST_SUFFIX = "OrBuilderList";
     private static final String BYTES_SUFFIX = "Bytes";

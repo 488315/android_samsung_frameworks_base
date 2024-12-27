@@ -1,6 +1,5 @@
 package com.android.server.wm;
 
-/* loaded from: classes5.dex */
 public final class WindowStateProto {
     public static final long ANIMATING_EXIT = 1133871366158L;
     public static final long ANIMATOR = 1146756268045L;

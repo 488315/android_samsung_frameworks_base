@@ -1,6 +1,5 @@
 package android.media;
 
-/* loaded from: classes2.dex */
 public class MediaCasException extends Exception {
     private MediaCasException(String detailMessage) {
         super(detailMessage);

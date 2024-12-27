@@ -9,7 +9,6 @@ import com.android.internal.org.bouncycastle.asn1.ASN1Sequence;
 import com.android.internal.org.bouncycastle.asn1.ASN1Set;
 import com.android.internal.org.bouncycastle.asn1.DERSequence;
 
-/* loaded from: classes5.dex */
 public class Attribute extends ASN1Object {
     private ASN1ObjectIdentifier attrType;
     private ASN1Set attrValues;

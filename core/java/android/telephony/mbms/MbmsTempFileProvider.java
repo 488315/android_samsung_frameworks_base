@@ -15,7 +15,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public class MbmsTempFileProvider extends ContentProvider {
     public static final String TEMP_FILE_ROOT_PREF_FILE_NAME = "MbmsTempFileRootPrefs";
     public static final String TEMP_FILE_ROOT_PREF_NAME = "mbms_temp_file_root";

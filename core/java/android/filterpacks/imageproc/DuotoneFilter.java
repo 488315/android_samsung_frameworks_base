@@ -11,7 +11,6 @@ import android.filterfw.core.ShaderProgram;
 import android.filterfw.format.ImageFormat;
 import android.graphics.Color;
 
-/* loaded from: classes.dex */
 public class DuotoneFilter extends Filter {
     private final String mDuotoneShader;
 

@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import com.samsung.android.knox.analytics.database.Contract;
 
-/* loaded from: classes6.dex */
 public class DatabaseCleanResult {
     private static final String TAG =
             "[KnoxAnalytics] " + DatabaseCleanResult.class.getSimpleName();

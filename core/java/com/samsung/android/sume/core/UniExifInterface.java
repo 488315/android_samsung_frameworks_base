@@ -18,7 +18,6 @@ import java.util.Arrays;
 import java.util.Optional;
 import java.util.function.Function;
 
-/* loaded from: classes6.dex */
 public class UniExifInterface extends ExifInterface {
     ByteBuffer originExifBuffer;
     File tempFile;

@@ -15,7 +15,6 @@ import android.view.autofill.AutofillValue;
 
 import com.android.internal.R;
 
-/* loaded from: classes4.dex */
 public abstract class AbsSpinner extends AdapterView<SpinnerAdapter> {
     private static final String LOG_TAG = AbsSpinner.class.getSimpleName();
     SpinnerAdapter mAdapter;

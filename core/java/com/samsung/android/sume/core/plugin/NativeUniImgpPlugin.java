@@ -52,7 +52,6 @@ import java.util.function.IntFunction;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-/* loaded from: classes6.dex */
 public class NativeUniImgpPlugin implements Plugin<ImgpPlugin>, Operator {
     private static final String TAG = Def.tagOf((Class<?>) NativeUniImgpPlugin.class);
     private final ReentrantLock lock = new ReentrantLock();

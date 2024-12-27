@@ -10,7 +10,6 @@ import android.filterfw.format.ImageFormat;
 import android.filterfw.format.ObjectFormat;
 import android.filterfw.geometry.Quad;
 
-/* loaded from: classes.dex */
 public class DrawOverlayFilter extends Filter {
     private ShaderProgram mProgram;
 

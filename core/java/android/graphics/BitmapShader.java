@@ -5,7 +5,6 @@ import com.android.graphics.hwui.flags.Flags;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes.dex */
 public class BitmapShader extends Shader {
     public static final int FILTER_MODE_DEFAULT = 0;
     public static final int FILTER_MODE_LINEAR = 2;

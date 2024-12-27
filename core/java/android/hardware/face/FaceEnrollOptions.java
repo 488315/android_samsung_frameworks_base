@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes2.dex */
 public class FaceEnrollOptions implements Parcelable {
     public static final Parcelable.Creator<FaceEnrollOptions> CREATOR =
             new Parcelable.Creator<

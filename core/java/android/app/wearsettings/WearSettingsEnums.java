@@ -1,6 +1,5 @@
 package android.app.wearsettings;
 
-/* loaded from: classes.dex */
 public final class WearSettingsEnums {
     public static final int ACCESSIBILITY_COLOR_CORRECTION = 416;
     public static final int ACCESSIBILITY_COLOR_CORRECTION_DEUTERANOMALY = 418;

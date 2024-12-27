@@ -23,7 +23,6 @@ import com.samsung.vekit.Control.VEController;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/* loaded from: classes6.dex */
 public class NativeInterface {
     private static final int MAX_ALLOWED_INSTANCES = 1;
     private static Integer sInstanceIdCnt = 0;

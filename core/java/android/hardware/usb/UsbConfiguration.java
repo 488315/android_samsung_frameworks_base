@@ -6,7 +6,6 @@ import android.os.Parcelable;
 
 import com.android.internal.util.Preconditions;
 
-/* loaded from: classes2.dex */
 public class UsbConfiguration implements Parcelable {
     private static final int ATTR_REMOTE_WAKEUP = 32;
     private static final int ATTR_SELF_POWERED = 64;

@@ -4,7 +4,6 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class EmergencyCallRouting {
     public static final int EMERGENCY = 1;
     public static final int NORMAL = 2;

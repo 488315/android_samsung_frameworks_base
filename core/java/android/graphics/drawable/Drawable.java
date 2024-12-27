@@ -35,7 +35,6 @@ import java.lang.ref.WeakReference;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 
-/* loaded from: classes.dex */
 public abstract class Drawable {
     private int mLayoutDirection;
     private static final Rect ZERO_BOUNDS_RECT = new Rect();

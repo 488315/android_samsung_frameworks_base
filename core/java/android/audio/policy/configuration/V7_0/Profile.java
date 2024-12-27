@@ -12,7 +12,6 @@ import java.util.List;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 
-/* loaded from: classes.dex */
 public class Profile {
     private List<AudioChannelMask> channelMasks;
     private AudioEncapsulationType encapsulationType;

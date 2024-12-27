@@ -8,7 +8,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-/* loaded from: classes3.dex */
 public final class VpnProfileState implements Parcelable {
     public static final Parcelable.Creator<VpnProfileState> CREATOR =
             new Parcelable.Creator<VpnProfileState>() { // from class: android.net.VpnProfileState.1

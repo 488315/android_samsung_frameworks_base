@@ -1,7 +1,6 @@
 package android.os;
 
 
-/* loaded from: classes3.dex */
 public class ServiceDebugInfo implements Parcelable {
     public static final Parcelable.Creator<ServiceDebugInfo> CREATOR =
             new Parcelable.Creator<

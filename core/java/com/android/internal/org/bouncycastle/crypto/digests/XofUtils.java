@@ -1,6 +1,5 @@
 package com.android.internal.org.bouncycastle.crypto.digests;
 
-/* loaded from: classes5.dex */
 public class XofUtils {
     public static byte[] leftEncode(long strLen) {
         byte n = 1;

@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Function;
 
-/* loaded from: classes4.dex */
 public final class TextLinksParams {
     private static final Function<TextLinks.TextLink, TextLinks.TextLinkSpan> DEFAULT_SPAN_FACTORY =
             new Function() { // from class:

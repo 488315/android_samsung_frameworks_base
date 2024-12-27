@@ -22,7 +22,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public interface ISap extends android.hardware.radio.V1_0.ISap {
     public static final String kInterfaceName = "android.hardware.radio@1.1::ISap";
 

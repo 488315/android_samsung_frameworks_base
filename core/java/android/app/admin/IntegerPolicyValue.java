@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public final class IntegerPolicyValue extends PolicyValue<Integer> {
     public static final Parcelable.Creator<IntegerPolicyValue> CREATOR =
             new Parcelable.Creator<

@@ -3,7 +3,6 @@ package android.hardware;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes.dex */
 public final class DataSpace {
     public static final int DATASPACE_ADOBE_RGB = 151715840;
     public static final int DATASPACE_BT2020 = 147193856;

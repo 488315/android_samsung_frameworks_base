@@ -11,7 +11,6 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.Set;
 
-/* loaded from: classes2.dex */
 public final class KeyphraseMetadata implements Parcelable {
     public static final Parcelable.Creator<KeyphraseMetadata> CREATOR =
             new Parcelable.Creator<KeyphraseMetadata>() { // from class:

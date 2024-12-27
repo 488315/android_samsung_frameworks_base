@@ -14,7 +14,6 @@ import android.text.TextUtils;
 
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public interface INotificationListener extends IInterface {
     void onActionClicked(String str, Notification.Action action, int i) throws RemoteException;
 

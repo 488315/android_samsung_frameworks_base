@@ -3,7 +3,6 @@ package com.android.systemui.statusbar.phone;
 import android.view.animation.Interpolator;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes3.dex */
 public final class BounceInterpolator implements Interpolator {
     @Override // android.animation.TimeInterpolator
     public final float getInterpolation(float f) {

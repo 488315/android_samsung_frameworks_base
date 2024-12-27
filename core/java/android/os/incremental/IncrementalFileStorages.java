@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
-/* loaded from: classes3.dex */
 public final class IncrementalFileStorages {
     private static final String SYSTEM_DATA_LOADER_PACKAGE = "android";
     private static final String TAG = "IncrementalFileStorages";

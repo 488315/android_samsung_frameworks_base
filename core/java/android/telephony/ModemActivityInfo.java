@@ -11,7 +11,6 @@ import java.util.Arrays;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public final class ModemActivityInfo implements Parcelable {
     private static final int TX_POWER_LEVELS = 5;
     public static final int TX_POWER_LEVEL_0 = 0;

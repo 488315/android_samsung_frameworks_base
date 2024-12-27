@@ -1,6 +1,5 @@
 package android.hardware.health.V1_0;
 
-/* loaded from: classes2.dex */
 public class Constants {
     public static final int BATTERY_HEALTH_COLD = 7;
     public static final int BATTERY_HEALTH_DEAD = 4;

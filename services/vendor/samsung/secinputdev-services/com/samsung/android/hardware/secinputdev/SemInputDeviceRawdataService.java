@@ -15,7 +15,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicIntegerArray;
 
-/* loaded from: classes.dex */
 public class SemInputDeviceRawdataService {
     private static final int RAWDATA_POSTFIX_SIZE = 1;
     private static final int RAWDATA_PREFIX_SIZE = 4;

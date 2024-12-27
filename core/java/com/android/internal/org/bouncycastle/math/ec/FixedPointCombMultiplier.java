@@ -4,7 +4,6 @@ import com.android.internal.org.bouncycastle.math.raw.Nat;
 
 import java.math.BigInteger;
 
-/* loaded from: classes5.dex */
 public class FixedPointCombMultiplier extends AbstractECMultiplier {
     @Override // com.android.internal.org.bouncycastle.math.ec.AbstractECMultiplier
     protected ECPoint multiplyPositive(ECPoint p, BigInteger k) {

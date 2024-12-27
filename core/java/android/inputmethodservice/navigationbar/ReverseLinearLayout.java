@@ -9,7 +9,6 @@ import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 class ReverseLinearLayout extends LinearLayout {
     private boolean mIsAlternativeOrder;
     private boolean mIsLayoutReverse;

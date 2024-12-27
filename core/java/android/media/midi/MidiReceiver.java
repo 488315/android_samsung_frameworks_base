@@ -2,7 +2,6 @@ package android.media.midi;
 
 import java.io.IOException;
 
-/* loaded from: classes2.dex */
 public abstract class MidiReceiver {
     private final int mMaxMessageSize;
 

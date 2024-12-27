@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-/* loaded from: classes5.dex */
 public class CMSProcessableByteArray implements CMSTypedData, CMSReadable {
     private final byte[] bytes;
     private final ASN1ObjectIdentifier type;

@@ -8,7 +8,6 @@ import android.util.Log;
 
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public class ChimeraMemManager {
     private static final String TAG = "ChimeraMemManager";
     private static final Object mLock = new Object();

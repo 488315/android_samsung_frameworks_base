@@ -7,7 +7,6 @@ import android.os.HwParcel;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public final class CdmaBroadcastSmsConfigInfo {
     public int serviceCategory = 0;
     public int language = 0;

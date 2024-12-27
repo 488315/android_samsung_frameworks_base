@@ -12,7 +12,6 @@ import com.samsung.android.knox.ContainerProxy;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public abstract class CoreFlags {
     private static final List<SyncableFlag> sKnownFlags = new ArrayList();
     public static BooleanFlag BOOL_FLAG =

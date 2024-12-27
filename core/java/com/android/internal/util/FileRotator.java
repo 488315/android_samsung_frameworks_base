@@ -21,7 +21,6 @@ import java.util.function.ToLongFunction;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-/* loaded from: classes5.dex */
 public class FileRotator {
     private static final boolean LOGD = false;
     private static final String SUFFIX_BACKUP = ".backup";

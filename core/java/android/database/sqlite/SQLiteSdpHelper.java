@@ -7,7 +7,6 @@ import android.util.Log;
 
 import com.samsung.android.knox.dar.IDarManagerService;
 
-/* loaded from: classes.dex */
 public class SQLiteSdpHelper {
     private static final String TAG = "SQLiteSdpHelper";
     private static final boolean mIsSdpSupported = false;

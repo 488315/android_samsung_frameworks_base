@@ -19,7 +19,6 @@ import java.util.concurrent.Executor;
 import java.util.stream.Collectors;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public final class HdmiControlManager {
     public static final String ACTION_ON_ACTIVE_SOURCE_RECOVERED_DISMISS_UI =
             "android.hardware.hdmi.action.ON_ACTIVE_SOURCE_RECOVERED_DISMISS_UI";

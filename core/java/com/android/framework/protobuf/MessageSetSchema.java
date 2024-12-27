@@ -5,7 +5,6 @@ import java.util.Iterator;
 import java.util.Map;
 
 @CheckReturnValue
-/* loaded from: classes3.dex */
 final class MessageSetSchema<T> implements Schema<T> {
     private final MessageLite defaultInstance;
     private final ExtensionSchema<?> extensionSchema;

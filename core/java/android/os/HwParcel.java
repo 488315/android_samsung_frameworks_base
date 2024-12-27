@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public class HwParcel {
     public static final int STATUS_SUCCESS = 0;
     private static final String TAG = "HwParcel";

@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes5.dex */
 public interface IUpdateVerifierInterface extends IInterface {
     public static final String DESCRIPTOR = "com.android.internal.widget.IUpdateVerifierInterface";
 

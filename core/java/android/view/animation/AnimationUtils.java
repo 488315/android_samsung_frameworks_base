@@ -17,7 +17,6 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 
-/* loaded from: classes4.dex */
 public class AnimationUtils {
     private static final int SEQUENTIALLY = 1;
     private static final String TAG = "AnimationUtils";

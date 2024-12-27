@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-/* loaded from: classes5.dex */
 class DateUtil {
     private static Long ZERO = longValueOf(0);
     private static final Map localeCache = new HashMap();

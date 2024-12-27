@@ -16,7 +16,6 @@ import android.os.UserHandle;
 
 import java.util.List;
 
-/* loaded from: classes2.dex */
 public interface IUsbManager extends IInterface {
     void addAccessoryPackagesToPreferenceDenied(
             UsbAccessory usbAccessory, String[] strArr, UserHandle userHandle)

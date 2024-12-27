@@ -8,7 +8,6 @@ import android.util.Log;
 import java.nio.ByteBuffer;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class AudioInjection {
     private static final String TAG = "AudioInjection";
     private final AudioFormat mAudioFormat;

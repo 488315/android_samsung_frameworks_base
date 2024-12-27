@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.RemoteException;
 import android.util.Log;
 
-/* loaded from: classes6.dex */
 public class SemHwrsManager {
     private static final String TAG = "[HWRS_SYS]SemHwrsManager";
     private final Context mContext;

@@ -16,7 +16,6 @@ import com.samsung.android.knox.zt.internal.KnoxZtInternalConst;
 
 import java.lang.ref.WeakReference;
 
-/* loaded from: classes.dex */
 public abstract class JobServiceEngine {
     private static final int MSG_EXECUTE_JOB = 0;
     private static final int MSG_GET_TRANSFERRED_DOWNLOAD_BYTES = 3;

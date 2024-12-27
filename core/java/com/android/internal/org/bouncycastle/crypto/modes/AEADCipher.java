@@ -4,7 +4,6 @@ import com.android.internal.org.bouncycastle.crypto.CipherParameters;
 import com.android.internal.org.bouncycastle.crypto.DataLengthException;
 import com.android.internal.org.bouncycastle.crypto.InvalidCipherTextException;
 
-/* loaded from: classes5.dex */
 public interface AEADCipher {
     int doFinal(byte[] bArr, int i) throws IllegalStateException, InvalidCipherTextException;
 

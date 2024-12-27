@@ -1,6 +1,5 @@
 package android.os;
 
-/* loaded from: classes3.dex */
 public final class IncidentHeaderProto {
     public static final long ALERT_ID = 1112396529665L;
     public static final long CONFIG_KEY = 1146756268035L;

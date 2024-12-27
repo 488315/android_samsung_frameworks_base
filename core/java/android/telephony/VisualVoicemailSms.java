@@ -5,7 +5,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.telecom.PhoneAccountHandle;
 
-/* loaded from: classes4.dex */
 public final class VisualVoicemailSms implements Parcelable {
     public static final Parcelable.Creator<VisualVoicemailSms> CREATOR =
             new Parcelable.Creator<

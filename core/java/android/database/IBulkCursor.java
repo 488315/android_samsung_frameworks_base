@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.os.IInterface;
 import android.os.RemoteException;
 
-/* loaded from: classes.dex */
 public interface IBulkCursor extends IInterface {
     public static final int CLOSE_TRANSACTION = 7;
     public static final int DEACTIVATE_TRANSACTION = 2;

@@ -12,7 +12,6 @@ import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-/* loaded from: classes3.dex */
 class SmallSortedMap<K extends Comparable<K>, V> extends AbstractMap<K, V> {
     private List<SmallSortedMap<K, V>.Entry> entryList;
     private boolean isImmutable;

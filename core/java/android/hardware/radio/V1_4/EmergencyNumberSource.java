@@ -2,7 +2,6 @@ package android.hardware.radio.V1_4;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class EmergencyNumberSource {
     public static final int DEFAULT = 8;
     public static final int MODEM_CONFIG = 4;

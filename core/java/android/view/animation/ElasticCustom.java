@@ -1,6 +1,5 @@
 package android.view.animation;
 
-/* loaded from: classes4.dex */
 public class ElasticCustom extends BaseInterpolator {
     private float mAmplitude;
     private float mPeriod;

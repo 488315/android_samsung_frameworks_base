@@ -56,7 +56,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.RejectedExecutionException;
 
-/* loaded from: classes5.dex */
 public class ResolverListAdapter extends BaseAdapter {
     private static String PACKAGE_NAME_GOOGLE_MESSAGES = "com.google.android.apps.messaging";
     private static String PACKAGE_NAME_SAMSUNG_MESSAGES = "com.samsung.android.messaging";

@@ -10,7 +10,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.nio.channels.Channel;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-/* loaded from: classes.dex */
 public final class SensorDirectChannel implements Channel {
     public static final int RATE_FAST = 2;
     public static final int RATE_NORMAL = 1;

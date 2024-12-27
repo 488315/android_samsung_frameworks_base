@@ -17,7 +17,6 @@ import android.view.View;
 
 import com.android.internal.R;
 
-/* loaded from: classes4.dex */
 public class QuickContactBadge extends ImageView implements View.OnClickListener {
     static final int EMAIL_ID_COLUMN_INDEX = 0;
     static final int EMAIL_LOOKUP_STRING_COLUMN_INDEX = 1;

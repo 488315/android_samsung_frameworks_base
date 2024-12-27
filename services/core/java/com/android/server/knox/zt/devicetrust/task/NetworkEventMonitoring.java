@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes.dex */
 public class NetworkEventMonitoring extends SchedulableMonitoringTask {
     public static final int SYSTEM_UID = 1000;
     public static final int TAG_NETWORK_EVENT_UNKNOWN = -1;

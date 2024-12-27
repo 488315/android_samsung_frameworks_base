@@ -12,7 +12,6 @@ import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-/* loaded from: classes4.dex */
 public final class CellSignalStrengthNr extends CellSignalStrength implements Parcelable {
     private static final String TAG = "CellSignalStrengthNr";
     public static final int UNKNOWN_ASU_LEVEL = 99;

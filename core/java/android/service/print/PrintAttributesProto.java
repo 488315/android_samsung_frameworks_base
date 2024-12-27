@@ -1,6 +1,5 @@
 package android.service.print;
 
-/* loaded from: classes3.dex */
 public final class PrintAttributesProto {
     public static final long COLOR_MODE = 1159641169925L;
     public static final int COLOR_MODE_COLOR = 2;

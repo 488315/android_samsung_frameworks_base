@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes2.dex */
 public final class Light implements Parcelable {
     public static final Parcelable.Creator<Light> CREATOR =
             new Parcelable.Creator<Light>() { // from class: android.hardware.lights.Light.1

@@ -7,7 +7,6 @@ import android.view.inputmethod.InputMethodManager;
 
 import com.android.internal.inputmethod.InputMethodDebug;
 
-/* loaded from: classes4.dex */
 public final class ImeFocusController {
     private static final boolean DEBUG = Debug.semIsProductDev();
     private static final String TAG = "ImeFocusController";

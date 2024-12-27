@@ -10,7 +10,6 @@ import com.samsung.android.sume.core.filter.factory.MediaFilterFactory;
 
 import java.util.function.Consumer;
 
-/* loaded from: classes6.dex */
 public abstract class MFGraphUnitFactory {
     private final MediaFilterFactory mediaFilterFactory;
 

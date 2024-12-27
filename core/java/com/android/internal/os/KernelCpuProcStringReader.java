@@ -14,7 +14,6 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-/* loaded from: classes5.dex */
 public class KernelCpuProcStringReader {
     private static final int ERROR_THRESHOLD = 5;
     private static final long FRESHNESS = 500;

@@ -3,7 +3,6 @@ package android.opengl;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 
-/* loaded from: classes3.dex */
 public class GLES31Ext {
     public static final int GL_BLEND_ADVANCED_COHERENT_KHR = 37509;
     public static final int GL_BUFFER_KHR = 33504;

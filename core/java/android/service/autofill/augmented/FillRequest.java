@@ -12,7 +12,6 @@ import android.view.inputmethod.InlineSuggestionsRequest;
 import com.android.internal.util.AnnotationValidations;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class FillRequest {
     private final InlineSuggestionsRequest mInlineSuggestionsRequest;
     private final AugmentedAutofillService.AutofillProxy mProxy;

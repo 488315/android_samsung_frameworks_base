@@ -2,7 +2,6 @@ package android.os;
 
 import com.android.internal.util.FrameworkStatsLog;
 
-/* loaded from: classes3.dex */
 public final class OomKillRecord {
     private long mAnonRssInKb;
     private long mFileRssInKb;

@@ -9,7 +9,6 @@ import com.android.internal.org.bouncycastle.operator.ContentSigner;
 import com.android.internal.org.bouncycastle.operator.DigestCalculatorProvider;
 import com.android.internal.org.bouncycastle.operator.OperatorCreationException;
 
-/* loaded from: classes5.dex */
 public class SignerInfoGeneratorBuilder {
     private DigestCalculatorProvider digestProvider;
     private boolean directSignature;

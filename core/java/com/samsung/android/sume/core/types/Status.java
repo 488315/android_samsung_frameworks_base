@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
-/* loaded from: classes6.dex */
 public enum Status {
     OK(0),
     ERROR_NOT_SUPPORTED(-1),

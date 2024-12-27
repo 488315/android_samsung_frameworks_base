@@ -15,7 +15,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public class SystemConfigManager {
     private static final String TAG = SystemConfigManager.class.getSimpleName();
     private final ISystemConfig mInterface =

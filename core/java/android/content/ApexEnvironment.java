@@ -8,7 +8,6 @@ import java.io.File;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes.dex */
 public class ApexEnvironment {
     private static final String APEX_DATA = "apexdata";
     private final String mApexModuleName;

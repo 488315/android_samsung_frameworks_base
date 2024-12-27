@@ -21,7 +21,6 @@ import com.samsung.android.rune.PMRune;
 
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public class LauncherActivityInfo {
     private static final String TAG = "LauncherActivityInfo";
     private static final UnicodeSet TRIMMABLE_CHARACTERS =

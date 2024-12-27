@@ -1,6 +1,5 @@
 package com.android.server.am;
 
-/* loaded from: classes5.dex */
 public final class ActivityManagerServiceDumpBroadcastsProto {
     public static final long BROADCAST_QUEUE = 2246267895811L;
     public static final long HANDLER = 1146756268037L;

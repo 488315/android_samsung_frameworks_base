@@ -3,7 +3,6 @@ package android.security.net.config;
 import java.security.cert.X509Certificate;
 import java.util.Set;
 
-/* loaded from: classes3.dex */
 public interface CertificateSource {
     Set<X509Certificate> findAllByIssuerAndSignature(X509Certificate x509Certificate);
 

@@ -1,6 +1,5 @@
 package com.android.internal.org.bouncycastle.util;
 
-/* loaded from: classes5.dex */
 public class Integers {
     public static int numberOfLeadingZeros(int i) {
         return Integer.numberOfLeadingZeros(i);

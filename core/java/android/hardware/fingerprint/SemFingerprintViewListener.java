@@ -1,6 +1,5 @@
 package android.hardware.fingerprint;
 
-/* loaded from: classes2.dex */
 public interface SemFingerprintViewListener {
     public static final int EVT_AUTHENTICATION_SUCCEEDED = 100;
     public static final int EVT_DISMISS = 3;

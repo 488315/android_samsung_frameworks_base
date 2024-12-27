@@ -10,7 +10,6 @@ import android.os.Looper;
 import android.os.SystemClock;
 
 @Deprecated
-/* loaded from: classes2.dex */
 public class RemoteControlClient {
     private static final boolean DEBUG = false;
     public static final int DEFAULT_PLAYBACK_VOLUME = 15;

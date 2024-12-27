@@ -4,7 +4,6 @@ import android.content.pm.SigningDetails;
 
 import com.android.server.pm.pkg.AndroidPackage;
 
-/* loaded from: classes5.dex */
 public interface ParsedPackage extends AndroidPackage {
     ParsedPackage addUsesLibrary(int i, String str);
 

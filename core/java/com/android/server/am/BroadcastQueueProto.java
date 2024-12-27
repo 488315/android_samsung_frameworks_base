@@ -1,6 +1,5 @@
 package com.android.server.am;
 
-/* loaded from: classes5.dex */
 public final class BroadcastQueueProto {
     public static final long FROZEN_BROADCASTS = 2246267895816L;
     public static final long HISTORICAL_BROADCASTS = 2246267895813L;

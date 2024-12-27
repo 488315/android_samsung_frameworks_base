@@ -7,7 +7,6 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes4.dex */
 public class AccessibilityRecord {
     protected static final boolean DEBUG_CONCISE_TOSTRING = false;
     private static final int GET_SOURCE_PREFETCH_FLAGS = 7;

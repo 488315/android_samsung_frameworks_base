@@ -4,7 +4,6 @@ import android.util.Log;
 
 import java.util.HashMap;
 
-/* loaded from: classes.dex */
 public class OneShotScheduler extends RoundRobinScheduler {
     private static final String TAG = "OneShotScheduler";
     private final boolean mLogVerbose;

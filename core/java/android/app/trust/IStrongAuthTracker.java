@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes.dex */
 public interface IStrongAuthTracker extends IInterface {
     void onIsNonStrongBiometricAllowedChanged(boolean z, int i) throws RemoteException;
 

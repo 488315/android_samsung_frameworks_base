@@ -12,7 +12,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
-/* loaded from: classes5.dex */
 public class VZWAVSLibrary {
     private static final String URI_TEMPLATE = "content://%s/apis";
     private static final String CERT_FP_MVS =

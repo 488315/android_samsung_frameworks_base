@@ -25,7 +25,6 @@ import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.jar.Attributes;
 
-/* loaded from: classes4.dex */
 class StrictJarVerifier {
     private static final String[] DIGEST_ALGORITHMS = {
         KeyProperties.DIGEST_SHA512, KeyProperties.DIGEST_SHA384, "SHA-256", "SHA1"

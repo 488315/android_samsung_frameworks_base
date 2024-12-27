@@ -13,7 +13,6 @@ import android.view.inputmethod.InputMethodManager;
 import com.samsung.android.desktopmode.SemDesktopModeManager;
 import com.samsung.android.desktopmode.SemDesktopModeState;
 
-/* loaded from: classes2.dex */
 final class SemDesktopModeManagerWrapper {
     static final Uri DEX_CONTENT_URI =
             Uri.parse(

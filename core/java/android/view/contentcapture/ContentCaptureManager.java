@@ -36,7 +36,6 @@ import java.util.Set;
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 
-/* loaded from: classes4.dex */
 public final class ContentCaptureManager {
     public static final int DATA_SHARE_ERROR_CONCURRENT_REQUEST = 2;
     public static final int DATA_SHARE_ERROR_TIMEOUT_INTERRUPTED = 3;

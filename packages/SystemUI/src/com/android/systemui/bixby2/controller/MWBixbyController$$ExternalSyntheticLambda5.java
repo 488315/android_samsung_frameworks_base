@@ -1,7 +1,6 @@
 package com.android.systemui.bixby2.controller;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes.dex */
 public final /* synthetic */ class MWBixbyController$$ExternalSyntheticLambda5 implements Runnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ MWBixbyController f$0;

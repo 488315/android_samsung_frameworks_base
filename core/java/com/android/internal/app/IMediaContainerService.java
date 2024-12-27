@@ -10,7 +10,6 @@ import android.os.RemoteException;
 
 import com.android.internal.os.IParcelFileDescriptorFactory;
 
-/* loaded from: classes5.dex */
 public interface IMediaContainerService extends IInterface {
     long calculateInstalledSize(String str, String str2) throws RemoteException;
 

@@ -9,7 +9,6 @@ import com.android.internal.R;
 
 import java.util.ArrayList;
 
-/* loaded from: classes5.dex */
 public class NfcResolverActivity extends ResolverActivity {
     @Override // com.android.internal.app.ResolverActivity, android.app.Activity
     protected void onCreate(Bundle savedInstanceState) {

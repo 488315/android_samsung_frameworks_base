@@ -2,7 +2,6 @@ package android.os;
 
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public interface IIdmap2 extends IInterface {
     public static final String DESCRIPTOR = "android.os.IIdmap2";
 

@@ -6,7 +6,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.view.View;
 
-/* loaded from: classes4.dex */
 public abstract class SemRemoteViewsAnimation implements Parcelable {
     protected final long MAX_DURATION = 4000;
     protected boolean mIsExpired;

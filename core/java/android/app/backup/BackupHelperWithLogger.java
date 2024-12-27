@@ -2,7 +2,6 @@ package android.app.backup;
 
 import android.os.ParcelFileDescriptor;
 
-/* loaded from: classes.dex */
 public abstract class BackupHelperWithLogger implements BackupHelper {
     private boolean mIsLoggerSet = false;
     private BackupRestoreEventLogger mLogger;

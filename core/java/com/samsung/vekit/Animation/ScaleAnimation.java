@@ -11,7 +11,6 @@ import com.samsung.vekit.Common.VEContext;
 
 import java.util.ArrayList;
 
-/* loaded from: classes6.dex */
 public class ScaleAnimation extends Animation<Vector3> {
     public ScaleAnimation(VEContext context, int id, String name) {
         super(context, AnimationType.SCALE, id, name);

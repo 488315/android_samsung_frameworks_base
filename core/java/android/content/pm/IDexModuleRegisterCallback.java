@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes.dex */
 public interface IDexModuleRegisterCallback extends IInterface {
     void onDexModuleRegistered(String str, boolean z, String str2) throws RemoteException;
 

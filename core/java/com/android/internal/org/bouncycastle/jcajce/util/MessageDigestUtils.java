@@ -10,7 +10,6 @@ import com.android.internal.org.bouncycastle.asn1.pkcs.PKCSObjectIdentifiers;
 import java.util.HashMap;
 import java.util.Map;
 
-/* loaded from: classes5.dex */
 public class MessageDigestUtils {
     private static Map<ASN1ObjectIdentifier, String> digestOidMap = new HashMap();
 

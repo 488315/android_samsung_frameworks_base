@@ -6,7 +6,6 @@ import android.os.Parcelable;
 
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public class EvdoSignalStrength implements Parcelable {
     public static final Parcelable.Creator<EvdoSignalStrength> CREATOR =
             new Parcelable.Creator<EvdoSignalStrength>() { // from class:

@@ -9,7 +9,6 @@ import com.android.internal.widget.IRemoteViewsFactory;
 
 import java.util.HashMap;
 
-/* loaded from: classes4.dex */
 public abstract class RemoteViewsService extends Service {
     private static final String LOG_TAG = "RemoteViewsService";
     private static final HashMap<Intent.FilterComparison, RemoteViewsFactory> sRemoteViewFactories =

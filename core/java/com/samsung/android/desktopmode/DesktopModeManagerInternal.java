@@ -3,7 +3,6 @@ package com.samsung.android.desktopmode;
 import android.content.res.Configuration;
 import android.os.Bundle;
 
-/* loaded from: classes6.dex */
 public abstract class DesktopModeManagerInternal {
     public static final int MODETOMODE_DUAL_TO_STANDALONE = 1;
     public static final int MODETOMODE_NONE = -1;

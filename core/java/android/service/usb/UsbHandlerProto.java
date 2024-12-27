@@ -1,6 +1,5 @@
 package android.service.usb;
 
-/* loaded from: classes3.dex */
 public final class UsbHandlerProto {
     public static final long ADB_ENABLED = 1133871366158L;
     public static final long AUDIO_ACCESSORY_CONNECTED = 1133871366157L;

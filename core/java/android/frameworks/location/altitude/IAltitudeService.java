@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes.dex */
 public interface IAltitudeService extends IInterface {
     public static final String DESCRIPTOR =
             "android$frameworks$location$altitude$IAltitudeService".replace('$', '.');

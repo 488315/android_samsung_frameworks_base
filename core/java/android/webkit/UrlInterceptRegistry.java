@@ -5,7 +5,6 @@ import java.util.LinkedList;
 import java.util.Map;
 
 @Deprecated
-/* loaded from: classes4.dex */
 public final class UrlInterceptRegistry {
     private static final String LOGTAG = "intercept";
     private static boolean mDisabled = false;

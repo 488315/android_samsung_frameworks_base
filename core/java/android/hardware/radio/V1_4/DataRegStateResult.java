@@ -9,7 +9,6 @@ import android.os.HwParcel;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public final class DataRegStateResult {
     public android.hardware.radio.V1_2.DataRegStateResult base =
             new android.hardware.radio.V1_2.DataRegStateResult();

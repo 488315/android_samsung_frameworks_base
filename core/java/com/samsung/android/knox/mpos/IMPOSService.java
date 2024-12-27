@@ -7,7 +7,6 @@ import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
 
-/* loaded from: classes6.dex */
 public interface IMPOSService extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.knox.mpos.IMPOSService";
 

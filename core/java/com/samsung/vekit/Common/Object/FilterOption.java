@@ -1,6 +1,5 @@
 package com.samsung.vekit.Common.Object;
 
-/* loaded from: classes6.dex */
 public class FilterOption {
     private float contrast;
     private float grain;

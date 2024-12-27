@@ -7,7 +7,6 @@ import javax.inject.Provider;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 /* renamed from: com.android.systemui.util.wakelock.DelayedWakeLock_Factory, reason: case insensitive filesystem */
-/* loaded from: classes3.dex */
 public final class C0296DelayedWakeLock_Factory {
     private final Provider bgHandlerProvider;
     private final Provider contextProvider;

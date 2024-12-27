@@ -23,7 +23,6 @@ import java.util.HashMap;
 import java.util.Objects;
 import java.util.Set;
 
-/* loaded from: classes2.dex */
 public final class StreamConfigurationMap {
     private static final long DURATION_20FPS_NS = 50000000;
     private static final int DURATION_MIN_FRAME = 0;

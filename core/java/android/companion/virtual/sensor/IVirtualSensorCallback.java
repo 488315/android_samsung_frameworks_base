@@ -7,7 +7,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.os.SharedMemory;
 
-/* loaded from: classes.dex */
 public interface IVirtualSensorCallback extends IInterface {
     public static final String DESCRIPTOR =
             "android.companion.virtual.sensor.IVirtualSensorCallback";

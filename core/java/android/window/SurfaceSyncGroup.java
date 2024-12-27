@@ -25,7 +25,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-/* loaded from: classes4.dex */
 public final class SurfaceSyncGroup {
     private static final boolean DEBUG = false;
     private static final int MAX_COUNT = 100;

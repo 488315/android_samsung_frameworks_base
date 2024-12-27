@@ -9,7 +9,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public final class DeviceStateSensorOrientationMap {
     public static final long FOLDED = 4;
     public static final long NORMAL = 0;

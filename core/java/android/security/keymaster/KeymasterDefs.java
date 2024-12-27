@@ -5,7 +5,6 @@ import com.android.server.SecureKeyConst;
 import java.util.HashMap;
 import java.util.Map;
 
-/* loaded from: classes3.dex */
 public final class KeymasterDefs {
     public static final int HW_AUTH_BIOMETRIC = 2;
     public static final int HW_AUTH_PASSWORD = 1;

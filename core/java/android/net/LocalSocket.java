@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-/* loaded from: classes3.dex */
 public class LocalSocket implements Closeable {
     public static final int SOCKET_DGRAM = 1;
     public static final int SOCKET_SEQPACKET = 3;

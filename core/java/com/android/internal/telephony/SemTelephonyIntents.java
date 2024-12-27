@@ -1,6 +1,5 @@
 package com.android.internal.telephony;
 
-/* loaded from: classes5.dex */
 public class SemTelephonyIntents {
     public static final String ACTION_AUDIO_RECEIVER_SAR =
             "android.samsung.media.action.receiver_sar";

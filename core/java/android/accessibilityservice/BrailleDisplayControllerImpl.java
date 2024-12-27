@@ -14,7 +14,6 @@ import java.io.IOException;
 import java.util.Objects;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes.dex */
 public final class BrailleDisplayControllerImpl implements BrailleDisplayController {
     private static final boolean IS_HIDRAW_SUPPORTED =
             SystemProperties.getBoolean("ro.accessibility.support_hidraw", true);

@@ -19,7 +19,6 @@ import com.android.window.flags.Flags;
 
 import java.lang.ref.WeakReference;
 
-/* loaded from: classes4.dex */
 public class WindowTokenClient extends Binder {
     private static final String TAG = WindowTokenClient.class.getSimpleName();
     private boolean mShouldDumpConfigForIme;

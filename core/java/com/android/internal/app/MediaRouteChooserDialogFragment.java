@@ -6,7 +6,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 
-/* loaded from: classes5.dex */
 public class MediaRouteChooserDialogFragment extends DialogFragment {
     private final String ARGUMENT_ROUTE_TYPES = "routeTypes";
     private View.OnClickListener mExtendedSettingsClickListener;

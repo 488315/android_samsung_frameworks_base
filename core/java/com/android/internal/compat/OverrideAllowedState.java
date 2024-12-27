@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes5.dex */
 public final class OverrideAllowedState implements Parcelable {
     public static final int ALLOWED = 0;
     public static final Parcelable.Creator<OverrideAllowedState> CREATOR =

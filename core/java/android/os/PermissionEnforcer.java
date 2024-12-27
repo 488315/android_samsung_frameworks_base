@@ -5,7 +5,6 @@ import android.content.AttributionSource;
 import android.content.Context;
 import android.content.PermissionChecker;
 
-/* loaded from: classes3.dex */
 public class PermissionEnforcer {
     private static final String ACCESS_DENIED = "Access denied, requires: ";
     private final Context mContext;

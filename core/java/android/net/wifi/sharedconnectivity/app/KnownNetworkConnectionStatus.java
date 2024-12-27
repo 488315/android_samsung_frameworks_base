@@ -11,7 +11,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class KnownNetworkConnectionStatus implements Parcelable {
     public static final int CONNECTION_STATUS_SAVED = 1;
     public static final int CONNECTION_STATUS_SAVE_FAILED = 2;

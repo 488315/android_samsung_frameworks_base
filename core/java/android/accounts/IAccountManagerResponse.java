@@ -7,7 +7,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes.dex */
 public interface IAccountManagerResponse extends IInterface {
     void onError(int i, String str) throws RemoteException;
 

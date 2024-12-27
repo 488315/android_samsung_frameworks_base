@@ -10,7 +10,6 @@ import android.view.Surface;
 
 import com.samsung.android.transcode.util.LogS;
 
-/* loaded from: classes6.dex */
 public class InputSurface {
     private static final int EGL_OPENGL_ES2_BIT = 4;
     private static final int EGL_RECORDABLE_ANDROID = 12610;

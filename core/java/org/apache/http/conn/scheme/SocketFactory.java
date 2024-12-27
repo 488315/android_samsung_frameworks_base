@@ -9,7 +9,6 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 @Deprecated
-/* loaded from: classes6.dex */
 public interface SocketFactory {
     Socket connectSocket(
             Socket socket,

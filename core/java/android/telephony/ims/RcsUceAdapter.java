@@ -22,7 +22,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes4.dex */
 public class RcsUceAdapter {
 
     @Deprecated public static final int CAPABILITY_TYPE_OPTIONS_UCE = 1;

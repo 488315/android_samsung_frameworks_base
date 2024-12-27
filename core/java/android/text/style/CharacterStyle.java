@@ -2,7 +2,6 @@ package android.text.style;
 
 import android.text.TextPaint;
 
-/* loaded from: classes4.dex */
 public abstract class CharacterStyle {
     public abstract void updateDrawState(TextPaint textPaint);
 

@@ -6,7 +6,6 @@ import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public enum FieldType {
     DOUBLE(0, Collection.SCALAR, JavaType.DOUBLE),
     FLOAT(1, Collection.SCALAR, JavaType.FLOAT),

@@ -5,7 +5,6 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Rect;
 
-/* loaded from: classes6.dex */
 public class ThemeChecker {
     private static final String TAG = "ThemeChecker";
     private final Context mContext;

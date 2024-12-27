@@ -1,7 +1,6 @@
 package android.os;
 
 
-/* loaded from: classes3.dex */
 public class CreateAppDataArgs implements Parcelable {
     public static final Parcelable.Creator<CreateAppDataArgs> CREATOR =
             new Parcelable.Creator<

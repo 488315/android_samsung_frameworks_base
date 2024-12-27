@@ -17,7 +17,6 @@ import java.util.Objects;
 import java.util.concurrent.Executor;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class CarrierMessagingServiceWrapper implements AutoCloseable {
     private volatile CarrierMessagingServiceConnection mCarrierMessagingServiceConnection;
     private Context mContext;

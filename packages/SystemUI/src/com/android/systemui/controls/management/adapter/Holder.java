@@ -7,7 +7,6 @@ import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes.dex */
 public abstract class Holder extends RecyclerView.ViewHolder {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */

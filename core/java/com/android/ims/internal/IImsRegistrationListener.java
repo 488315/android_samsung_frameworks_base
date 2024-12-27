@@ -8,7 +8,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.telephony.ims.ImsReasonInfo;
 
-/* loaded from: classes5.dex */
 public interface IImsRegistrationListener extends IInterface {
     void registrationAssociatedUriChanged(Uri[] uriArr) throws RemoteException;
 

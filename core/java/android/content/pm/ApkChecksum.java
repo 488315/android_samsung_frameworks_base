@@ -15,7 +15,6 @@ import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.util.Arrays;
 
-/* loaded from: classes.dex */
 public final class ApkChecksum implements Parcelable {
     public static final Parcelable.Creator<ApkChecksum> CREATOR =
             new Parcelable.Creator<ApkChecksum>() { // from class: android.content.pm.ApkChecksum.1

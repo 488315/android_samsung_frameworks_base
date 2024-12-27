@@ -3,7 +3,6 @@ package com.samsung.android.camera.iris;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes5.dex */
 public final class Iris implements Parcelable {
     public static final Parcelable.Creator<Iris> CREATOR =
             new Parcelable.Creator<Iris>() { // from class: com.samsung.android.camera.iris.Iris.1

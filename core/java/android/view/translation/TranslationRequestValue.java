@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public final class TranslationRequestValue implements Parcelable {
     public static final Parcelable.Creator<TranslationRequestValue> CREATOR =
             new Parcelable.Creator<

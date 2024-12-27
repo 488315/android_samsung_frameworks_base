@@ -1,6 +1,5 @@
 package android.system.keystore2;
 
-/* loaded from: classes3.dex */
 public @interface ResponseCode {
     public static final int BACKEND_BUSY = 18;
     public static final int GET_ATTESTATION_APPLICATION_ID_FAILED = 27;

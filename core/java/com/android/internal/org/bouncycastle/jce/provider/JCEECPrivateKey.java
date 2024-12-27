@@ -40,7 +40,6 @@ import java.security.spec.ECParameterSpec;
 import java.security.spec.EllipticCurve;
 import java.util.Enumeration;
 
-/* loaded from: classes5.dex */
 public class JCEECPrivateKey
         implements ECPrivateKey,
                 com.android.internal.org.bouncycastle.jce.interfaces.ECPrivateKey,

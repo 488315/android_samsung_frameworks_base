@@ -9,7 +9,6 @@ import com.android.internal.telephony.SemTelephonyUtils;
 
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public final class CellIdentityCdma extends CellIdentity {
     private static final int BASESTATION_ID_MAX = 65535;
     private static final boolean DBG = false;

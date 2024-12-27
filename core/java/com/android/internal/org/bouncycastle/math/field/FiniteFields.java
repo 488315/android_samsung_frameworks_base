@@ -2,7 +2,6 @@ package com.android.internal.org.bouncycastle.math.field;
 
 import java.math.BigInteger;
 
-/* loaded from: classes5.dex */
 public abstract class FiniteFields {
     static final FiniteField GF_2 = new PrimeField(BigInteger.valueOf(2));
     static final FiniteField GF_3 = new PrimeField(BigInteger.valueOf(3));

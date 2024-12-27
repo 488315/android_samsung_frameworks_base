@@ -1,6 +1,5 @@
 package com.android.server.vibrator;
 
-/* loaded from: classes5.dex */
 public final class VibratorManagerServiceDumpProto {
     public static final long ALARM_DEFAULT_INTENSITY = 1120986464275L;
     public static final long ALARM_INTENSITY = 1120986464274L;

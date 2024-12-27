@@ -17,7 +17,6 @@ import android.view.Surface;
 import com.android.internal.os.HandlerCaller;
 import com.android.internal.os.SomeArgs;
 
-/* loaded from: classes3.dex */
 public class ITvInputSessionWrapper extends ITvInputSession.Stub implements HandlerCaller.Callback {
     private static final int DO_APP_PRIVATE_COMMAND = 9;
     private static final int DO_CREATE_OVERLAY_VIEW = 10;

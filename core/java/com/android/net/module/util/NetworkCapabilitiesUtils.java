@@ -2,7 +2,6 @@ package com.android.net.module.util;
 
 import android.net.NetworkCapabilities;
 
-/* loaded from: classes5.dex */
 public final class NetworkCapabilitiesUtils {
     private static final int[] DISPLAY_TRANSPORT_PRIORITIES = {4, 0, 5, 2, 1, 3, 8, 10};
     private static final long FORCE_RESTRICTED_CAPABILITIES = 608174080;

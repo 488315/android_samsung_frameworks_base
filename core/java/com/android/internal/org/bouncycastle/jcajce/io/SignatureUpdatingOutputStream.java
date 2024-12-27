@@ -5,7 +5,6 @@ import java.io.OutputStream;
 import java.security.Signature;
 import java.security.SignatureException;
 
-/* loaded from: classes5.dex */
 class SignatureUpdatingOutputStream extends OutputStream {
     private Signature sig;
 

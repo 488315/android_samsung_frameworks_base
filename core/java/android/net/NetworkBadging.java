@@ -9,7 +9,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @Deprecated
-/* loaded from: classes3.dex */
 public class NetworkBadging {
     public static final int BADGING_4K = 30;
     public static final int BADGING_HD = 20;

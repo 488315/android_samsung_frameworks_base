@@ -1,6 +1,5 @@
 package com.android.nfc.cardemulation;
 
-/* loaded from: classes5.dex */
 public final class PreferredServicesProto {
     public static final long CURRENT_PREFERRED = 1146756268034L;
     public static final long FOREGROUND_CURRENT = 1146756268033L;

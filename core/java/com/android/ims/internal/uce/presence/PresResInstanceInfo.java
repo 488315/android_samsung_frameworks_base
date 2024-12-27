@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 import java.util.Arrays;
 
-/* loaded from: classes5.dex */
 public class PresResInstanceInfo implements Parcelable {
     public static final Parcelable.Creator<PresResInstanceInfo> CREATOR =
             new Parcelable.Creator<

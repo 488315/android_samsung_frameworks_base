@@ -9,7 +9,6 @@ import java.util.Collections;
 import java.util.List;
 
 @Deprecated
-/* loaded from: classes3.dex */
 public final class FontRequest {
     private final List<List<byte[]>> mCertificates;
     private final String mIdentifier;

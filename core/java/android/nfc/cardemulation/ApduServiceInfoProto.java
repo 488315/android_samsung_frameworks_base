@@ -1,6 +1,5 @@
 package android.nfc.cardemulation;
 
-/* loaded from: classes3.dex */
 public final class ApduServiceInfoProto {
     public static final long AUTO_TRANSACT_MAPPING = 2246267895818L;
     public static final long AUTO_TRANSACT_PATTERNS = 2246267895819L;

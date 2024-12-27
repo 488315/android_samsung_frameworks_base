@@ -15,7 +15,6 @@ import com.android.internal.org.bouncycastle.util.Arrays;
 
 import java.math.BigInteger;
 
-/* loaded from: classes5.dex */
 public class X9ECParameters extends ASN1Object implements X9ObjectIdentifiers {
     private static final BigInteger ONE = BigInteger.valueOf(1);
     private ECCurve curve;

@@ -12,7 +12,6 @@ import java.io.Writer;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 
-/* loaded from: classes.dex */
 final class BackStackRecord extends FragmentTransaction
         implements FragmentManager.BackStackEntry, FragmentManagerImpl.OpGenerator {
     static final int OP_ADD = 1;

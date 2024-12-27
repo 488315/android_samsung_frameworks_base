@@ -6,7 +6,6 @@ import com.samsung.android.globalactions.presentation.strategies.ActionInteracti
 import com.samsung.android.globalactions.util.ResourcesWrapper;
 import com.samsung.android.globalactions.util.ToastController;
 
-/* loaded from: classes6.dex */
 public class DemoModeStrategy implements ActionInteractionStrategy {
     private final ResourcesWrapper mResourcesWrapper;
     private final ToastController mToastController;

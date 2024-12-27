@@ -10,7 +10,6 @@ import android.os.Parcel;
 import android.os.PermissionEnforcer;
 import android.os.RemoteException;
 
-/* loaded from: classes.dex */
 public interface IAccountAuthenticator extends IInterface {
     void addAccount(
             IAccountAuthenticatorResponse iAccountAuthenticatorResponse,

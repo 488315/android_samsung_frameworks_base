@@ -4,7 +4,6 @@ import android.content.Context;
 
 import com.samsung.android.service.vaultkeeper.VaultKeeperManager;
 
-/* loaded from: classes5.dex */
 public class CassATCmd implements IWorkOnAt {
     private static final String AT_COMMAND_CASS = "MGRTCASS";
     private static final String AT_RESPONSE_CONN_FAILED = "NG_FAILEDCONNECTION";

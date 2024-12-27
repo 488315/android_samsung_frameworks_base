@@ -1,7 +1,6 @@
 package android.os;
 
 
-/* loaded from: classes3.dex */
 public final class SemSimpleNetworkStats implements Parcelable {
     private long mRxBytes;
     private long mTxBytes;

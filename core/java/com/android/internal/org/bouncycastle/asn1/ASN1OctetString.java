@@ -8,7 +8,6 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-/* loaded from: classes5.dex */
 public abstract class ASN1OctetString extends ASN1Primitive implements ASN1OctetStringParser {
     byte[] string;
 

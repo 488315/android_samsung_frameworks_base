@@ -21,7 +21,6 @@ import kotlin.jvm.internal.Ref$IntRef;
 import kotlin.jvm.internal.Ref$ObjectRef;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes.dex */
 public final class KeyguardSecurityViewTransition extends Transition {
     public final long SEC_SECURITY_SHIFT_ANIMATION_DURATION_MS = 450;
     public final PathInterpolator transitionPathInterpolator = new PathInterpolator(0.22f, 0.25f, 0.0f, 1.0f);

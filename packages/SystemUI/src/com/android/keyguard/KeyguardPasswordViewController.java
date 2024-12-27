@@ -36,7 +36,6 @@ import java.util.Iterator;
 import java.util.List;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes.dex */
 public class KeyguardPasswordViewController extends KeyguardSecAbsKeyInputViewController {
     public final InputMethodManager mInputMethodManager;
     public final KeyguardPasswordViewController$$ExternalSyntheticLambda6 mKeyListener;

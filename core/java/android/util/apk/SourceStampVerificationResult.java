@@ -4,7 +4,6 @@ import java.security.cert.Certificate;
 import java.util.Collections;
 import java.util.List;
 
-/* loaded from: classes4.dex */
 public final class SourceStampVerificationResult {
     private final Certificate mCertificate;
     private final List<? extends Certificate> mCertificateLineage;

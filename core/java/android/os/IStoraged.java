@@ -1,6 +1,5 @@
 package android.os;
 
-/* loaded from: classes3.dex */
 public interface IStoraged extends IInterface {
     int getRecentPerf() throws RemoteException;
 

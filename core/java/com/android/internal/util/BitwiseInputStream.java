@@ -2,7 +2,6 @@ package com.android.internal.util;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 
-/* loaded from: classes5.dex */
 public class BitwiseInputStream {
     private byte[] mBuf;
     private int mEnd;

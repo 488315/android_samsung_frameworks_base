@@ -25,7 +25,6 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes.dex */
 public final class NSKmlWriter {
     public static final double sThirtyRadian = Math.toRadians(30.0d);
     public static final double sSixtyRadian = Math.toRadians(90.0d);

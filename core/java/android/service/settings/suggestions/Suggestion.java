@@ -11,7 +11,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class Suggestion implements Parcelable {
     public static final Parcelable.Creator<Suggestion> CREATOR =
             new Parcelable.Creator<

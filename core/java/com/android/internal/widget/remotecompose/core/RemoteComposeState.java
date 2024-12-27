@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
-/* loaded from: classes5.dex */
 public class RemoteComposeState {
     private static final int MAX_FLOATS = 500;
     public static final int START_ID = 42;

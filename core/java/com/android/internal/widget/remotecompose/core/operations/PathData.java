@@ -13,7 +13,6 @@ import com.android.internal.widget.remotecompose.core.WireBuffer;
 import java.util.Arrays;
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public class PathData implements Operation, VariableSupport {
     public static final int CLOSE = 15;
     public static final int CONIC = 13;

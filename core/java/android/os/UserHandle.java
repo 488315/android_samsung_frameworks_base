@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-/* loaded from: classes3.dex */
 public final class UserHandle implements Parcelable {
     public static final int AID_APP_END = 19999;
     public static final int AID_APP_START = 10000;

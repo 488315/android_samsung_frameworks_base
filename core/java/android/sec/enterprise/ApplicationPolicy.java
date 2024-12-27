@@ -2,7 +2,6 @@ package android.sec.enterprise;
 
 import android.util.Log;
 
-/* loaded from: classes3.dex */
 public class ApplicationPolicy {
     public static final int NOTIFICATION_MODE_BLOCK_ALL = 2;
     public static final int NOTIFICATION_MODE_BLOCK_TEXT = 3;

@@ -18,7 +18,6 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/* loaded from: classes5.dex */
 public class CertBlocklist {
     private static final Logger logger = Logger.getLogger(CertBlocklist.class.getName());
     public final Set<byte[]> pubkeyBlocklist;

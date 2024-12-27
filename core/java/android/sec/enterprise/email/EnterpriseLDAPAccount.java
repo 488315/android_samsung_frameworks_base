@@ -3,7 +3,6 @@ package android.sec.enterprise.email;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes3.dex */
 public class EnterpriseLDAPAccount implements Parcelable {
     public static final String ACTION_CREATE_LDAP_ACCOUNT =
             "com.samsung.android.knox.intent.action.CREATE_LDAPACCOUNT_INTERNAL";

@@ -6,7 +6,6 @@ import com.android.internal.util.AnnotationValidations;
 
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public final class PlaybackSession implements AutoCloseable {
     private boolean mClosed = false;
     private final String mId;

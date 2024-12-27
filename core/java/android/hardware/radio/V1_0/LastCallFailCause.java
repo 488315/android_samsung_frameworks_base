@@ -4,7 +4,6 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class LastCallFailCause {
     public static final int ACCESS_CLASS_BLOCKED = 260;
     public static final int ACCESS_INFORMATION_DISCARDED = 43;

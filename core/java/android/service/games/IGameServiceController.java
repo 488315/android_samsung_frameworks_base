@@ -9,7 +9,6 @@ import android.os.Parcel;
 import android.os.PermissionEnforcer;
 import android.os.RemoteException;
 
-/* loaded from: classes3.dex */
 public interface IGameServiceController extends IInterface {
     public static final String DESCRIPTOR = "android.service.games.IGameServiceController";
 

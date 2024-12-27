@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Locale;
 
-/* loaded from: classes4.dex */
 public class CaptioningManager {
     private static final int DEFAULT_ENABLED = 0;
     private static final float DEFAULT_FONT_SCALE = 1.0f;

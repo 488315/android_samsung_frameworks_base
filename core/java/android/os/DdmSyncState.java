@@ -3,7 +3,6 @@ package android.os;
 import java.util.Arrays;
 import java.util.function.Function;
 
-/* loaded from: classes3.dex */
 public final class DdmSyncState {
     private static int sCurrentStageIndex = 0;
 

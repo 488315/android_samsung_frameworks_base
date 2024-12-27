@@ -7,7 +7,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes5.dex */
 public interface IWapPushManager extends IInterface {
     boolean addPackage(
             String str, String str2, String str3, String str4, int i, boolean z, boolean z2)

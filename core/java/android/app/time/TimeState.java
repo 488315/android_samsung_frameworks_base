@@ -9,7 +9,6 @@ import java.io.PrintWriter;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class TimeState implements Parcelable {
     public static final Parcelable.Creator<TimeState> CREATOR =
             new Parcelable.Creator<TimeState>() { // from class: android.app.time.TimeState.1

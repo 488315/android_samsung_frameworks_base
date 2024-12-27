@@ -12,7 +12,6 @@ import java.util.function.Function;
 import java.util.function.IntFunction;
 import java.util.stream.Collectors;
 
-/* loaded from: classes2.dex */
 public class AidlConversion {
     private static native int aidl2legacy_AudioChannelLayout_Parcel_audio_channel_mask_t(
             Parcel parcel, boolean z);

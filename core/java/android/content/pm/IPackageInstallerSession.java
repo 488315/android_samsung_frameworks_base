@@ -14,7 +14,6 @@ import android.os.RemoteException;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
 public interface IPackageInstallerSession extends IInterface {
     void abandon() throws RemoteException;
 

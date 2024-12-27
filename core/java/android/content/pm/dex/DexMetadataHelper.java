@@ -29,7 +29,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.zip.ZipEntry;
 
-/* loaded from: classes.dex */
 public class DexMetadataHelper {
     private static final String DEX_METADATA_FILE_EXTENSION = ".dm";
     private static final String PROPERTY_DM_FSVERITY_REQUIRED = "pm.dexopt.dm.require_fsverity";

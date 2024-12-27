@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.RandomAccess;
 
 @CheckReturnValue
-/* loaded from: classes3.dex */
 final class SchemaUtil {
     private static final int DEFAULT_LOOK_UP_START_NUMBER = 40;
     private static final Class<?> GENERATED_MESSAGE_CLASS = getGeneratedMessageClass();

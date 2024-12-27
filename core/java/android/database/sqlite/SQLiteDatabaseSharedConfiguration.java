@@ -1,6 +1,5 @@
 package android.database.sqlite;
 
-/* loaded from: classes.dex */
 public final class SQLiteDatabaseSharedConfiguration {
     private static final long MEDIA_STORE_AUTOCHECK_POINT = 256;
     private static final String MEDIA_STORE_EXTERNAL_DB =

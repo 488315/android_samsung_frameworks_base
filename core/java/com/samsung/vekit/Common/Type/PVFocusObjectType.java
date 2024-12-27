@@ -1,6 +1,5 @@
 package com.samsung.vekit.Common.Type;
 
-/* loaded from: classes6.dex */
 public enum PVFocusObjectType {
     NONE(-1),
     HUMAN_FACE(0),

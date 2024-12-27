@@ -49,7 +49,6 @@ import java.util.Locale;
 import java.util.Objects;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes.dex */
 public final class KeyguardSecSimPukViewController extends KeyguardSimPukViewController {
     public AlertDialog mCarrierDialog;
     public final ConfigurationController mConfigurationController;

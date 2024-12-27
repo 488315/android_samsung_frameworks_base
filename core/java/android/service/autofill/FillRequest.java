@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.IntFunction;
 
-/* loaded from: classes3.dex */
 public final class FillRequest implements Parcelable {
     public static final Parcelable.Creator<FillRequest> CREATOR =
             new Parcelable.Creator<

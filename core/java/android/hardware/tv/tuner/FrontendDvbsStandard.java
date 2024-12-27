@@ -1,6 +1,5 @@
 package android.hardware.tv.tuner;
 
-/* loaded from: classes2.dex */
 public @interface FrontendDvbsStandard {
     public static final byte AUTO = 1;
     public static final byte S = 2;

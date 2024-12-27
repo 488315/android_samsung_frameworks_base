@@ -12,7 +12,6 @@ import android.window.ActivityWindowInfo;
 
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public class ActivityConfigurationChangeItem extends ActivityTransactionItem {
     public static final Parcelable.Creator<ActivityConfigurationChangeItem> CREATOR =
             new Parcelable.Creator<ActivityConfigurationChangeItem>() { // from class:

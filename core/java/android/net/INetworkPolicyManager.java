@@ -12,7 +12,6 @@ import android.telephony.SubscriptionPlan;
 
 import java.util.Map;
 
-/* loaded from: classes3.dex */
 public interface INetworkPolicyManager extends IInterface {
     void addUidPolicy(int i, int i2) throws RemoteException;
 

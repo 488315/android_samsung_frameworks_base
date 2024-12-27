@@ -2,7 +2,6 @@ package android.filterfw.geometry;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 
-/* loaded from: classes.dex */
 public class Point {
     public float x;
     public float y;

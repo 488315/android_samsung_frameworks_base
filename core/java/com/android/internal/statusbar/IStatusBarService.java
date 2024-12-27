@@ -30,7 +30,6 @@ import com.samsung.android.globalactions.presentation.viewmodel.DefaultActionNam
 
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public interface IStatusBarService extends IInterface {
     void addTile(ComponentName componentName) throws RemoteException;
 

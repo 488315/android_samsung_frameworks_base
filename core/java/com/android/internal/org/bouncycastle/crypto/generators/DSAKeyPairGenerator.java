@@ -14,7 +14,6 @@ import com.android.internal.org.bouncycastle.util.BigIntegers;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 
-/* loaded from: classes5.dex */
 public class DSAKeyPairGenerator implements AsymmetricCipherKeyPairGenerator {
     private static final BigInteger ONE = BigInteger.valueOf(1);
     private DSAKeyGenerationParameters param;

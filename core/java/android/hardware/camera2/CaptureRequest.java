@@ -36,7 +36,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-/* loaded from: classes2.dex */
 public final class CaptureRequest extends CameraMetadata<Key<?>> implements Parcelable {
     public static final int REQUEST_TYPE_COUNT = 3;
     public static final int REQUEST_TYPE_REGULAR = 0;

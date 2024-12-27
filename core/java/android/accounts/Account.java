@@ -13,7 +13,6 @@ import com.android.internal.transition.EpicenterTranslateClipReveal;
 
 import java.util.Set;
 
-/* loaded from: classes.dex */
 public class Account implements Parcelable {
     private static final String TAG = "Account";
     private final String accessId;

@@ -1,6 +1,5 @@
 package android.server.location;
 
-/* loaded from: classes3.dex */
 public final class ServerLocationProtoEnums {
     public static final int ACCEPTED_LOCATION_PROVIDED = 2;
     public static final int ACCEPTED_NO_LOCATION_PROVIDED = 1;

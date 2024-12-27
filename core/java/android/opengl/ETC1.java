@@ -2,7 +2,6 @@ package android.opengl;
 
 import java.nio.Buffer;
 
-/* loaded from: classes3.dex */
 public class ETC1 {
     public static final int DECODED_BLOCK_SIZE = 48;
     public static final int ENCODED_BLOCK_SIZE = 8;

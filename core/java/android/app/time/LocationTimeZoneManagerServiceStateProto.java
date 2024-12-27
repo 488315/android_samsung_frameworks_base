@@ -1,6 +1,5 @@
 package android.app.time;
 
-/* loaded from: classes.dex */
 public final class LocationTimeZoneManagerServiceStateProto {
     public static final long CONTROLLER_STATES = 2259152797700L;
     public static final long LAST_EVENT = 1146756268033L;

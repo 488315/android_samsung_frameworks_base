@@ -19,7 +19,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Enumeration;
 
-/* loaded from: classes5.dex */
 public class X509ExtensionUtil {
     public static ASN1Primitive fromExtensionValue(byte[] encodedValue) throws IOException {
         ASN1OctetString octs = (ASN1OctetString) ASN1Primitive.fromByteArray(encodedValue);

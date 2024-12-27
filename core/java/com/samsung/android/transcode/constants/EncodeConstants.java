@@ -2,7 +2,6 @@ package com.samsung.android.transcode.constants;
 
 import java.util.ArrayList;
 
-/* loaded from: classes6.dex */
 public class EncodeConstants {
     public static final int Error_Codec_Config = -1003;
     public static final int Error_Invalid_File = -1001;

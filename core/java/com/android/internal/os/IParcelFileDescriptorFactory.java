@@ -8,7 +8,6 @@ import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
 import android.telephony.ims.RcsContactPresenceTuple;
 
-/* loaded from: classes5.dex */
 public interface IParcelFileDescriptorFactory extends IInterface {
     ParcelFileDescriptor open(String str, int i) throws RemoteException;
 

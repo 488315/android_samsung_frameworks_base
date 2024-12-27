@@ -1,6 +1,5 @@
 package com.android.server.wm;
 
-/* loaded from: classes5.dex */
 public final class WindowTokenProto {
     public static final long HASH_CODE = 1120986464258L;
     public static final long PAUSED = 1133871366150L;

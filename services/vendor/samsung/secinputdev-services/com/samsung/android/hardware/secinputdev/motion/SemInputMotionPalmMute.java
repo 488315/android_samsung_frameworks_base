@@ -24,7 +24,6 @@ import java.nio.MappedByteBuffer;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* loaded from: classes.dex */
 public class SemInputMotionPalmMute extends SemInputMotion {
     private static final String PERMISSION_PALM_MOTION = "com.samsung.permission.PALM_MOTION";
     private static final String TAG = "SemInputMotionPalmMute";

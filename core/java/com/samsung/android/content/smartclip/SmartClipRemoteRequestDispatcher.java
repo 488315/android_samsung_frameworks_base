@@ -23,7 +23,6 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* loaded from: classes5.dex */
 public class SmartClipRemoteRequestDispatcher {
     private static final String KEY_AIR_COMMAND_HIT_TEST_RESULT = "result";
     private static final String KEY_EVENT_INJECTION_EVENTS = "events";

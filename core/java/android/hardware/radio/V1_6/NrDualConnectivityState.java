@@ -2,7 +2,6 @@ package android.hardware.radio.V1_6;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class NrDualConnectivityState {
     public static final byte DISABLE = 2;
     public static final byte DISABLE_IMMEDIATE = 3;

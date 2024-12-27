@@ -14,7 +14,6 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 
-/* loaded from: classes6.dex */
 public class RenderTexture_GL_OES {
     private static final String A_POSITION = "a_Position";
     private static final String A_TEXTURE_COORDINATES = "a_TextureCoordinates";

@@ -7,7 +7,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-/* loaded from: classes5.dex */
 public class CoreDocument {
     String mContentDescription;
     ArrayList<Operation> mOperations;

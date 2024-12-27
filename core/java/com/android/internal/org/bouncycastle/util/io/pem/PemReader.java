@@ -8,7 +8,6 @@ import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public class PemReader extends BufferedReader {
     private static final String BEGIN = "-----BEGIN ";
     private static final String END = "-----END ";

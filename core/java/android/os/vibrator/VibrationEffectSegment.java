@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.VibratorInfo;
 
-/* loaded from: classes3.dex */
 public abstract class VibrationEffectSegment implements Parcelable {
     public static final Parcelable.Creator<VibrationEffectSegment> CREATOR =
             new Parcelable.Creator<

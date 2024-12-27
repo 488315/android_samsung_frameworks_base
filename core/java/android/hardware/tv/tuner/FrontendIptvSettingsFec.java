@@ -4,7 +4,6 @@ import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public class FrontendIptvSettingsFec implements Parcelable {
     public static final Parcelable.Creator<FrontendIptvSettingsFec> CREATOR =
             new Parcelable.Creator<FrontendIptvSettingsFec>() { // from class:

@@ -14,7 +14,6 @@ import android.opengl.Matrix;
 import android.os.ConditionVariable;
 import android.util.Log;
 
-/* loaded from: classes.dex */
 public class SurfaceTextureSource extends Filter {
 
     @GenerateFieldPort(hasDefault = true, name = "closeOnTimeout")

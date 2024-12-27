@@ -6,7 +6,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class DtmbFrontendSettings extends FrontendSettings {
     public static final int BANDWIDTH_6MHZ = 4;
     public static final int BANDWIDTH_8MHZ = 2;

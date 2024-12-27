@@ -14,7 +14,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-/* loaded from: classes6.dex */
 public interface Graph<T> {
     void pause();
 

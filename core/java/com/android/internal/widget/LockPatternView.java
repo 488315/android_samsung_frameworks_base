@@ -41,7 +41,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public class LockPatternView extends View {
     private static final int ALPHA_MAX_VALUE = 255;
     private static final int ASPECT_LOCK_HEIGHT = 2;

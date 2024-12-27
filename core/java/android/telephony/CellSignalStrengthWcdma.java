@@ -9,7 +9,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public final class CellSignalStrengthWcdma extends CellSignalStrength implements Parcelable {
     private static final boolean DBG = false;
     private static final String DEFAULT_LEVEL_CALCULATION_METHOD = "rssi";

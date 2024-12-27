@@ -1,6 +1,5 @@
 package android.text.format;
 
-/* loaded from: classes4.dex */
 public class TimeMigrationUtils {
     private TimeMigrationUtils() {}
 

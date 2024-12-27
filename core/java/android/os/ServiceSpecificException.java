@@ -4,7 +4,6 @@ import android.annotation.SystemApi;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public class ServiceSpecificException extends RuntimeException {
     public final int errorCode;
 

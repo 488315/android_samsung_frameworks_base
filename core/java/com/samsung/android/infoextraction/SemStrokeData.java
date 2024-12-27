@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public class SemStrokeData implements Parcelable {
     public static final Parcelable.Creator<SemStrokeData> CREATOR =
             new Parcelable.Creator<

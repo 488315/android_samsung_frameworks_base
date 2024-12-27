@@ -14,7 +14,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.StringJoiner;
 
-/* loaded from: classes5.dex */
 public final class DnsSvcbRecord extends DnsPacket.DnsRecord {
     private static final int KEY_ALPN = 1;
     private static final int KEY_DOHPATH = 7;

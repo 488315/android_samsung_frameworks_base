@@ -8,7 +8,6 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.util.Slog;
 
-/* loaded from: classes5.dex */
 public class ShutdownActivity extends Activity {
     private static final String TAG = "ShutdownActivity";
     private boolean mConfirm;

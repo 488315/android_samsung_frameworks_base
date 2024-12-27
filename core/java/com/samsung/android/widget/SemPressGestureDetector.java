@@ -49,7 +49,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
-/* loaded from: classes6.dex */
 public class SemPressGestureDetector {
     private static final int BIXBY_TOUCH_DETECTOR_VERSION = 3;
     private static final String CALL_METHOD = "send_bixby_touch_event";

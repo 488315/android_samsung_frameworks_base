@@ -27,7 +27,6 @@ import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 import java.security.spec.AlgorithmParameterSpec;
 
-/* loaded from: classes5.dex */
 public class DigestSignatureSpi extends SignatureSpi {
     private AlgorithmIdentifier algId;
     private AsymmetricBlockCipher cipher;

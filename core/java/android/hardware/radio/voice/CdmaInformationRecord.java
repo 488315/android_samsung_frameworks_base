@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.util.Arrays;
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public class CdmaInformationRecord implements Parcelable {
     public static final int CDMA_MAX_NUMBER_OF_INFO_RECS = 10;
     public static final Parcelable.Creator<CdmaInformationRecord> CREATOR =

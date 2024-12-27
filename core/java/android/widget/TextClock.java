@@ -37,7 +37,6 @@ import java.util.Date;
 import java.util.TimeZone;
 
 @RemoteViews.RemoteView
-/* loaded from: classes4.dex */
 public class TextClock extends TextView {
 
     @Deprecated public static final CharSequence DEFAULT_FORMAT_12_HOUR = "h:mm a";

@@ -6,7 +6,6 @@ import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.text.style.SpellCheckSpan;
 
-/* loaded from: classes4.dex */
 public final class TextInfo implements Parcelable {
     public static final Parcelable.Creator<TextInfo> CREATOR =
             new Parcelable.Creator<TextInfo>() { // from class: android.view.textservice.TextInfo.1

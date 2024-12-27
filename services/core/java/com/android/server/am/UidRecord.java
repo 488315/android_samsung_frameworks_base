@@ -11,7 +11,6 @@ import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
 import java.util.function.Consumer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes.dex */
 public final class UidRecord {
     public static final int[] ORIG_ENUMS = {1, 2, 4, 8, 16, 32, Integer.MIN_VALUE};
     public static final int[] PROTO_ENUMS = {0, 1, 2, 3, 4, 5, 6};

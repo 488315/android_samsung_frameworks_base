@@ -10,7 +10,6 @@ import java.util.Objects;
 import java.util.regex.Pattern;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public final class PhoneNumberRange implements Parcelable {
     public static final Parcelable.Creator<PhoneNumberRange> CREATOR =
             new Parcelable.Creator<

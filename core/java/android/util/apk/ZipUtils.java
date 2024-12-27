@@ -7,7 +7,6 @@ import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
-/* loaded from: classes4.dex */
 abstract class ZipUtils {
     private static final int UINT16_MAX_VALUE = 65535;
     private static final int ZIP64_EOCD_LOCATOR_SIG_REVERSE_BYTE_ORDER = 1347094023;

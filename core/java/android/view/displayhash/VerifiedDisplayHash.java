@@ -10,7 +10,6 @@ import com.android.internal.util.AnnotationValidations;
 
 import java.lang.annotation.Annotation;
 
-/* loaded from: classes4.dex */
 public final class VerifiedDisplayHash implements Parcelable {
     public static final Parcelable.Creator<VerifiedDisplayHash> CREATOR =
             new Parcelable.Creator<

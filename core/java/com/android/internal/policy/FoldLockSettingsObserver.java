@@ -8,7 +8,6 @@ import android.provider.Settings;
 
 import java.util.Set;
 
-/* loaded from: classes5.dex */
 public class FoldLockSettingsObserver extends ContentObserver {
     public static final String SETTING_VALUE_DEFAULT = "selective_stay_awake_key";
     public static final String SETTING_VALUE_SELECTIVE_STAY_AWAKE = "selective_stay_awake_key";

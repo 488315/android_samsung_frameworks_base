@@ -3,7 +3,6 @@ package com.sec.android.allshare.iface;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes6.dex */
 public class EventControl implements Parcelable {
     public static final Parcelable.Creator<EventControl> CREATOR =
             new Parcelable.Creator<

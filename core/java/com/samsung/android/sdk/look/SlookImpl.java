@@ -16,7 +16,6 @@ import com.samsung.android.cocktailbar.CocktailBarManager;
 
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public class SlookImpl {
     private static final int AIRBUTTON = 1;
     private static final int COCKTAIL_BAR = 6;

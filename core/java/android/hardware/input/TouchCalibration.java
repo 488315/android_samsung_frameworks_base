@@ -3,7 +3,6 @@ package android.hardware.input;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public class TouchCalibration implements Parcelable {
     private final float mXOffset;
     private final float mXScale;

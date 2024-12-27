@@ -13,7 +13,6 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 
-/* loaded from: classes.dex */
 public class AnimationDrawable extends DrawableContainer implements Runnable, Animatable {
     private boolean mAnimating;
     private AnimationState mAnimationState;

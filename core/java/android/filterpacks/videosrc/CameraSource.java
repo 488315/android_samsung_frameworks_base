@@ -18,7 +18,6 @@ import android.util.Log;
 import java.io.IOException;
 import java.util.List;
 
-/* loaded from: classes.dex */
 public class CameraSource extends Filter {
     private static final int NEWFRAME_TIMEOUT = 100;
     private static final int NEWFRAME_TIMEOUT_REPEAT = 10;

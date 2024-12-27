@@ -11,7 +11,6 @@ import com.android.internal.org.bouncycastle.util.Selector;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public class AttributeCertificateIssuer implements Selector {
     final ASN1Encodable form;
 

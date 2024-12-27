@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public class ExtensionConfiguration {
     private int mColorSpace = -1;
     private final List<ExtensionOutputConfiguration> mOutputs;

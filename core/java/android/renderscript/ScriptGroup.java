@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 
 @Deprecated
-/* loaded from: classes3.dex */
 public final class ScriptGroup extends BaseObj {
     private static final String TAG = "ScriptGroup";
     private List<Closure> mClosures;

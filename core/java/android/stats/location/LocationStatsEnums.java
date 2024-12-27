@@ -1,6 +1,5 @@
 package android.stats.location;
 
-/* loaded from: classes3.dex */
 public final class LocationStatsEnums {
     public static final int ACCURACY_BLOCK = 102;
     public static final int ACCURACY_CITY = 104;

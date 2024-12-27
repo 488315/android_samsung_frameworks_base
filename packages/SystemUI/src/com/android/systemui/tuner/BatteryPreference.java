@@ -13,7 +13,6 @@ import com.android.systemui.tuner.TunerService;
 import com.samsung.android.knox.custom.IKnoxCustomManager;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes3.dex */
 public class BatteryPreference extends DropDownPreference implements TunerService.Tunable {
     public final String mBattery;
     public boolean mBatteryEnabled;

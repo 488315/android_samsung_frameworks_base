@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes3.dex */
 public interface IPersistentDataBlockService extends IInterface {
     boolean deactivateFactoryResetProtection(byte[] bArr) throws RemoteException;
 

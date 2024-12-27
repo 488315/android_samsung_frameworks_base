@@ -7,7 +7,6 @@ import android.os.Parcel;
 import android.os.PersistableBundle;
 import android.os.RemoteException;
 
-/* loaded from: classes.dex */
 public interface IFeatureDetailsCallback extends IInterface {
     public static final String DESCRIPTOR =
             "android.app.ondeviceintelligence.IFeatureDetailsCallback";

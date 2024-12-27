@@ -27,7 +27,6 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes.dex */
 public final class VoiceInteractor {
     static final boolean DEBUG = false;
     public static final String KEY_CANCELLATION_SIGNAL = "key_cancellation_signal";

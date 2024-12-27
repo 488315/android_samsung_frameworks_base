@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes3.dex */
 public interface ITextToSpeechCallback extends IInterface {
     void onAudioAvailable(String str, byte[] bArr) throws RemoteException;
 

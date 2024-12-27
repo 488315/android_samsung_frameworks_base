@@ -14,7 +14,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes2.dex */
 public class BiometricManager {
     public static final int BIOMETRIC_ERROR_HW_UNAVAILABLE = 1;
     public static final int BIOMETRIC_ERROR_LOCKOUT = 7;

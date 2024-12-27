@@ -5,7 +5,6 @@ import android.util.Log;
 
 import javax.crypto.SecretKey;
 
-/* loaded from: classes6.dex */
 public class UcmKeyStoreSecretKey extends UcmKeyStoreKey implements SecretKey {
     private static final String TAG = UcmKeyStoreSecretKey.class.getSimpleName();
 

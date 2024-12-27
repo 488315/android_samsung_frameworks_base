@@ -31,7 +31,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-/* loaded from: classes6.dex */
 public class CodecsHelper {
     private static final int AUTHOR_SAMSUNG_CAMERA = 0;
     private static final int AUTHOR_SAMSUNG_EDITOR = 8;

@@ -12,7 +12,6 @@ import android.view.KeyEvent;
 
 import java.util.List;
 
-/* loaded from: classes2.dex */
 public interface ISessionManager extends IInterface {
     void addOnMediaKeyEventDispatchedListener(
             IOnMediaKeyEventDispatchedListener iOnMediaKeyEventDispatchedListener)

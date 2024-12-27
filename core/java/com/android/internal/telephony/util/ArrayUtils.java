@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Objects;
 
-/* loaded from: classes5.dex */
 public final class ArrayUtils {
     private ArrayUtils() {}
 

@@ -7,7 +7,6 @@ import android.os.Parcelable;
 
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public final class ExecuteAppFunctionResponse implements Parcelable {
     public static final Parcelable.Creator<ExecuteAppFunctionResponse> CREATOR =
             new Parcelable.Creator<ExecuteAppFunctionResponse>() { // from class:

@@ -35,7 +35,6 @@ import java.util.concurrent.Executor;
 import javax.crypto.Cipher;
 import javax.crypto.Mac;
 
-/* loaded from: classes5.dex */
 public class SemBioFaceManager {
     public static final String BUNDLE_AUTH_COORDINATE_H = "auth_coordinate_h";
     public static final String BUNDLE_AUTH_COORDINATE_TOKEN = "auth_coordinate_token";

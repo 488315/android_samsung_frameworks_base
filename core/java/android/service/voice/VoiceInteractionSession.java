@@ -62,7 +62,6 @@ import java.util.concurrent.Executor;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
-/* loaded from: classes3.dex */
 public class VoiceInteractionSession implements KeyEvent.Callback, ComponentCallbacks2 {
     static final boolean DEBUG = false;
     public static final String KEY_FOREGROUND_ACTIVITIES =

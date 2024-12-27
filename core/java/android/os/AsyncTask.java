@@ -19,7 +19,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Deprecated
-/* loaded from: classes3.dex */
 public abstract class AsyncTask<Params, Progress, Result> {
     private static final int BACKUP_POOL_SIZE = 5;
     private static final int CORE_POOL_SIZE = 1;

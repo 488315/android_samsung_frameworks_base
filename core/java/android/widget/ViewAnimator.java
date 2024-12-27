@@ -14,7 +14,6 @@ import android.view.inspector.PropertyReader;
 
 import com.android.internal.R;
 
-/* loaded from: classes4.dex */
 public class ViewAnimator extends FrameLayout {
     boolean mAnimateFirstTime;
     boolean mFirstTime;

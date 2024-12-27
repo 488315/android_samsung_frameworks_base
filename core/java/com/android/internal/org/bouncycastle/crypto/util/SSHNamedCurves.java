@@ -15,7 +15,6 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
-/* loaded from: classes5.dex */
 public class SSHNamedCurves {
     private static final Map<String, ASN1ObjectIdentifier> oidMap =
             Collections.unmodifiableMap(

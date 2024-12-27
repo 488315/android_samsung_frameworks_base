@@ -11,7 +11,6 @@ import com.samsung.android.hardware.secinputdev.SemInputDeviceManager;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public class ClassLoaderFactory {
     private static final String PATH_CLASS_LOADER_NAME = PathClassLoader.class.getName();
     private static final String DEX_CLASS_LOADER_NAME = DexClassLoader.class.getName();

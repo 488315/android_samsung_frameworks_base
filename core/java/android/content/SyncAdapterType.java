@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
 
-/* loaded from: classes.dex */
 public class SyncAdapterType implements Parcelable {
     public static final Parcelable.Creator<SyncAdapterType> CREATOR =
             new Parcelable.Creator<

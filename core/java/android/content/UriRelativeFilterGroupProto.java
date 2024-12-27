@@ -1,6 +1,5 @@
 package android.content;
 
-/* loaded from: classes.dex */
 public final class UriRelativeFilterGroupProto {
     public static final long ACTION = 1159641169921L;
     public static final int ACTION_ALLOW = 0;

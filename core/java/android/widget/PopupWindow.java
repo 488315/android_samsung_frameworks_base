@@ -44,7 +44,6 @@ import com.samsung.android.view.SemWindowManager;
 import java.lang.ref.WeakReference;
 import java.util.List;
 
-/* loaded from: classes4.dex */
 public class PopupWindow {
     private static final int ANIMATION_STYLE_DEFAULT = -1;
     private static final int DEFAULT_ANCHORED_GRAVITY = 8388659;

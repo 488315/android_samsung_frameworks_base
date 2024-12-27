@@ -26,7 +26,6 @@ import javax.crypto.interfaces.DHPrivateKey;
 import javax.crypto.spec.DHParameterSpec;
 import javax.crypto.spec.DHPrivateKeySpec;
 
-/* loaded from: classes5.dex */
 public class JCEDHPrivateKey implements DHPrivateKey, PKCS12BagAttributeCarrier {
     static final long serialVersionUID = 311058815616901812L;
     private PKCS12BagAttributeCarrier attrCarrier = new PKCS12BagAttributeCarrierImpl();

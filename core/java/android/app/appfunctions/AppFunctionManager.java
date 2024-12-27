@@ -13,7 +13,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes.dex */
 public final class AppFunctionManager {
     public static final int APP_FUNCTION_STATE_DEFAULT = 0;
     public static final int APP_FUNCTION_STATE_DISABLED = 2;

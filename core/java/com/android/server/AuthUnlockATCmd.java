@@ -7,7 +7,6 @@ import android.util.Slog;
 
 import java.nio.charset.StandardCharsets;
 
-/* loaded from: classes5.dex */
 public class AuthUnlockATCmd implements IWorkOnAt {
     private static final String AT_COMMAND_FRPUNLCK = "FRPUNLCK";
     private static final String AT_COMMAND_HEADER = "AT";

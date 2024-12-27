@@ -2,7 +2,6 @@ package android.media;
 
 import java.util.UUID;
 
-/* loaded from: classes2.dex */
 public final class MediaCrypto {
     private long mNativeContext;
 

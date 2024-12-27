@@ -5,7 +5,6 @@ import android.util.proto.ProtoOutputStream;
 
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public interface JobSchedulerInternal {
     void addBackingUpUid(int i);
 

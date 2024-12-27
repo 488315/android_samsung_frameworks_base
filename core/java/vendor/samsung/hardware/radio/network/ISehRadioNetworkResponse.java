@@ -8,7 +8,6 @@ import android.os.RemoteException;
 
 import vendor.samsung.hardware.radio.SehRadioResponseInfo;
 
-/* loaded from: classes6.dex */
 public interface ISehRadioNetworkResponse extends IInterface {
     public static final String DESCRIPTOR =
             "vendor$samsung$hardware$radio$network$ISehRadioNetworkResponse".replace('$', '.');

@@ -15,7 +15,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.function.Predicate;
 
-/* loaded from: classes.dex */
 public final class CredentialDescription implements Parcelable {
     public static final Parcelable.Creator<CredentialDescription> CREATOR =
             new Parcelable.Creator<CredentialDescription>() { // from class:

@@ -12,7 +12,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes6.dex */
 public final class SemMobileWipsScanResultAdapter implements Parcelable {
     public static final int CHANNEL_WIDTH_160MHZ = 3;
     public static final int CHANNEL_WIDTH_20MHZ = 0;

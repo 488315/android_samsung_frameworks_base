@@ -10,7 +10,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 
-/* loaded from: classes3.dex */
 public final class LocaleList implements Parcelable {
     private static final int NUM_PSEUDO_LOCALES = 2;
     private static final String STRING_AR_XB = "ar-XB";

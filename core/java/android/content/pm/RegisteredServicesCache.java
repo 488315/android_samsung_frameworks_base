@@ -46,7 +46,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-/* loaded from: classes.dex */
 public abstract class RegisteredServicesCache<V> {
     private static final boolean DEBUG = false;
     protected static final String REGISTERED_SERVICES_DIR = "registered_services";

@@ -7,7 +7,6 @@ import android.util.Log;
 
 import com.android.internal.net.ConnectivityBlobStore;
 
-/* loaded from: classes3.dex */
 public class WifiBlobStore extends ConnectivityBlobStore {
     private static final String DB_NAME = "WifiBlobStore.db";
     private static final String LEGACY_KEYSTORE_SERVICE_NAME = "android.security.legacykeystore";

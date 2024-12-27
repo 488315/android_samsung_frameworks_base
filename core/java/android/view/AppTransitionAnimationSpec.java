@@ -5,7 +5,6 @@ import android.hardware.HardwareBuffer;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes4.dex */
 public class AppTransitionAnimationSpec implements Parcelable {
     public static final Parcelable.Creator<AppTransitionAnimationSpec> CREATOR =
             new Parcelable.Creator<

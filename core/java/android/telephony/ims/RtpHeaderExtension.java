@@ -8,7 +8,6 @@ import java.util.Arrays;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public final class RtpHeaderExtension implements Parcelable {
     public static final Parcelable.Creator<RtpHeaderExtension> CREATOR =
             new Parcelable.Creator<

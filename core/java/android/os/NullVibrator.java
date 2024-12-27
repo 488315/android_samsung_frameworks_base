@@ -1,6 +1,5 @@
 package android.os;
 
-/* loaded from: classes3.dex */
 public class NullVibrator extends Vibrator {
     private static final NullVibrator sInstance = new NullVibrator();
 

@@ -4,7 +4,6 @@ import android.media.AudioFormat;
 import android.media.AudioTrack;
 import android.util.Log;
 
-/* loaded from: classes3.dex */
 class BlockingAudioTrack {
     private static final boolean DBG = false;
     private static final long MAX_PROGRESS_WAIT_MS = 2500;

@@ -1,6 +1,5 @@
 package android.content.res;
 
-/* loaded from: classes.dex */
 public final class FeatureFlagsImpl implements FeatureFlags {
     @Override // android.content.res.FeatureFlags
     public boolean assetFileDescriptorFrro() {

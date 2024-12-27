@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStreamWriter;
 
-/* loaded from: classes6.dex */
 public class FontWriter {
     public static final String NEW_FONT_DIRECTORY = "/data/app_fonts/";
     public static final String SANS_LOC_NAME = "sans.loc";

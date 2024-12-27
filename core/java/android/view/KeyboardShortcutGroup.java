@@ -10,7 +10,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-/* loaded from: classes4.dex */
 public final class KeyboardShortcutGroup implements Parcelable {
     public static final Parcelable.Creator<KeyboardShortcutGroup> CREATOR =
             new Parcelable.Creator<

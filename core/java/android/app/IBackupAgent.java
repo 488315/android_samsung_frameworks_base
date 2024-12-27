@@ -14,7 +14,6 @@ import com.android.internal.infra.AndroidFuture;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
 public interface IBackupAgent extends IInterface {
     void clearBackupRestoreEventLogger() throws RemoteException;
 

@@ -6,7 +6,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 
-/* loaded from: classes6.dex */
 public class SemContextPedometerAttribute extends SemContextAttribute {
     public static final Parcelable.Creator<SemContextPedometerAttribute> CREATOR =
             new Parcelable.Creator<

@@ -4,7 +4,6 @@ import android.annotation.SystemApi;
 import android.net.Network;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public interface PacProcessor {
     String findProxyForUrl(String str);
 

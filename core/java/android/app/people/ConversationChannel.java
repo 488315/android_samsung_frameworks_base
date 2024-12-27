@@ -9,7 +9,6 @@ import android.os.Parcelable;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes.dex */
 public final class ConversationChannel implements Parcelable {
     public static final Parcelable.Creator<ConversationChannel> CREATOR =
             new Parcelable.Creator<

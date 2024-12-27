@@ -5,7 +5,6 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
-/* loaded from: classes3.dex */
 class MtpPropertyGroup {
     private static final String PATH_WHERE = "_data=?";
     private static final String TAG = MtpPropertyGroup.class.getSimpleName();

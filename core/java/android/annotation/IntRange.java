@@ -13,7 +13,6 @@ import java.lang.annotation.Target;
     ElementType.ANNOTATION_TYPE
 })
 @Retention(RetentionPolicy.SOURCE)
-/* loaded from: classes.dex */
 public @interface IntRange {
     long from() default Long.MIN_VALUE;
 

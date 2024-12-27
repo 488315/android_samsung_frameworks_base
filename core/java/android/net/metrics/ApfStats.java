@@ -6,7 +6,6 @@ import android.os.Parcelable;
 
 @SystemApi
 @Deprecated
-/* loaded from: classes3.dex */
 public final class ApfStats implements IpConnectivityLog.Event {
     public static final Parcelable.Creator<ApfStats> CREATOR =
             new Parcelable.Creator<ApfStats>() { // from class: android.net.metrics.ApfStats.1

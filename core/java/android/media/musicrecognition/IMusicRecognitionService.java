@@ -8,7 +8,6 @@ import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
 
-/* loaded from: classes2.dex */
 public interface IMusicRecognitionService extends IInterface {
     public static final String DESCRIPTOR =
             "android.media.musicrecognition.IMusicRecognitionService";

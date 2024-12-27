@@ -17,7 +17,6 @@ import com.android.internal.app.IAppOpsService;
 import java.lang.ref.WeakReference;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public abstract class PlayerBase {
     private static final boolean DEBUG = false;
     private static final boolean DEBUG_APP_OPS = false;

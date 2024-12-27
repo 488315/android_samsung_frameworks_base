@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public abstract class AbstractMessageLite<
                 MessageType extends AbstractMessageLite<MessageType, BuilderType>,
                 BuilderType extends Builder<MessageType, BuilderType>>

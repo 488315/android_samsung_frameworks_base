@@ -6,7 +6,6 @@ import android.graphics.Rect;
 
 import java.util.function.Consumer;
 
-/* loaded from: classes4.dex */
 public class SyncRtSurfaceTransactionApplier {
     public static final int FLAG_ALL = -1;
     public static final int FLAG_ALPHA = 1;

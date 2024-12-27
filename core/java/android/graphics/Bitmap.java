@@ -28,7 +28,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.WeakHashMap;
 
-/* loaded from: classes.dex */
 public final class Bitmap implements Parcelable {
     public static final int DENSITY_NONE = 0;
     private static final long NATIVE_ALLOCATION_SIZE = 32;

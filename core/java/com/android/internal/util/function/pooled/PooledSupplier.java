@@ -7,7 +7,6 @@ import java.util.function.IntSupplier;
 import java.util.function.LongSupplier;
 import java.util.function.Supplier;
 
-/* loaded from: classes5.dex */
 public interface PooledSupplier<T>
         extends PooledLambda, Supplier<T>, FunctionalUtils.ThrowingSupplier<T> {
 

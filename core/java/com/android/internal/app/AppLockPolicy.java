@@ -31,7 +31,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public class AppLockPolicy {
     public static final String ACTIVE_LOCKED_PACKAGES = "applock_locked_packages";
     private static final String APPLOCK_ENABLED = "app_lock_enabled";

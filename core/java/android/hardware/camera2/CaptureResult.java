@@ -26,7 +26,6 @@ import android.util.Size;
 
 import java.util.List;
 
-/* loaded from: classes2.dex */
 public class CaptureResult extends CameraMetadata<Key<?>> {
     private static final String TAG = "CaptureResult";
     private static final boolean VERBOSE = false;

@@ -16,7 +16,6 @@ import kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$combineUnsafe$Flow
 import kotlinx.coroutines.flow.internal.ChannelFlowTransformLatest;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes3.dex */
 public final class UnfoldTransitionInteractor {
     public final ConfigurationInteractor configurationInteractor;
     public final UnfoldTransitionRepository repository;

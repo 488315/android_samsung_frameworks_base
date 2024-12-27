@@ -8,7 +8,6 @@ import android.window.ClientWindowFrames;
 
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public final class WindowRelayoutResult implements Parcelable {
     public static final Parcelable.Creator<WindowRelayoutResult> CREATOR =
             new Parcelable.Creator<

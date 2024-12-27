@@ -1,7 +1,6 @@
 package com.android.framework.protobuf;
 
 @CheckReturnValue
-/* loaded from: classes3.dex */
 final class RawMessageInfo implements MessageInfo {
     private final MessageLite defaultInstance;
     private final int flags;

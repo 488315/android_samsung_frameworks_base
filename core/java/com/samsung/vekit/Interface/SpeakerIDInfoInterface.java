@@ -4,7 +4,6 @@ import com.samsung.vekit.Common.Object.SpeakerIDInfo;
 
 import java.util.HashMap;
 
-/* loaded from: classes6.dex */
 public interface SpeakerIDInfoInterface<T> {
     void addSpeakerIDInfo(String str, SpeakerIDInfo speakerIDInfo);
 

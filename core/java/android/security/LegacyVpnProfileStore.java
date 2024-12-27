@@ -6,7 +6,6 @@ import android.os.StrictMode;
 import android.security.legacykeystore.ILegacyKeystore;
 import android.util.Log;
 
-/* loaded from: classes3.dex */
 public class LegacyVpnProfileStore {
     private static final String LEGACY_KEYSTORE_SERVICE_NAME = "android.security.legacykeystore";
     public static final int PROFILE_NOT_FOUND = 7;

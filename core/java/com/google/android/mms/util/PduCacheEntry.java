@@ -2,7 +2,6 @@ package com.google.android.mms.util;
 
 import com.google.android.mms.pdu.GenericPdu;
 
-/* loaded from: classes5.dex */
 public final class PduCacheEntry {
     private final int mMessageBox;
     private final GenericPdu mPdu;

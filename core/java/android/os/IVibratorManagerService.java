@@ -6,7 +6,6 @@ import android.app.ActivityThread;
 import com.samsung.android.edge.EdgeManagerInternal;
 import com.samsung.android.vibrator.VibrationDebugInfo;
 
-/* loaded from: classes3.dex */
 public interface IVibratorManagerService extends IInterface {
     public static final String DESCRIPTOR = "android.os.IVibratorManagerService";
 

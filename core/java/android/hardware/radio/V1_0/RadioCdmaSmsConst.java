@@ -2,7 +2,6 @@ package android.hardware.radio.V1_0;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class RadioCdmaSmsConst {
     public static final int ADDRESS_MAX = 36;
     public static final int BEARER_DATA_MAX = 255;

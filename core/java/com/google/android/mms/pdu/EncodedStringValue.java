@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
-/* loaded from: classes5.dex */
 public class EncodedStringValue implements Cloneable {
     private static final boolean DEBUG = false;
     private static final boolean LOCAL_LOGV = false;

@@ -7,7 +7,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.service.voice.VisualQueryAttentionResult;
 
-/* loaded from: classes5.dex */
 public interface IVisualQueryDetectionAttentionListener extends IInterface {
     public static final String DESCRIPTOR =
             "com.android.internal.app.IVisualQueryDetectionAttentionListener";

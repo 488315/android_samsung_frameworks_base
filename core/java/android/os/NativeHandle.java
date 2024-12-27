@@ -10,7 +10,6 @@ import java.io.FileDescriptor;
 import java.io.IOException;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class NativeHandle implements Closeable {
     private FileDescriptor[] mFds;
     private int[] mInts;

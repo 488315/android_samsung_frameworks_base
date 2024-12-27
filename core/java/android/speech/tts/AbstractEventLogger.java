@@ -2,7 +2,6 @@ package android.speech.tts;
 
 import android.os.SystemClock;
 
-/* loaded from: classes3.dex */
 abstract class AbstractEventLogger {
     protected final int mCallerPid;
     protected final int mCallerUid;

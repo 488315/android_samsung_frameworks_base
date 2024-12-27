@@ -25,7 +25,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-/* loaded from: classes4.dex */
 public interface TextClassifier {
     public static final int DEFAULT_SYSTEM = 2;
     public static final String EXTRA_FROM_TEXT_CLASSIFIER =

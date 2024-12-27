@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 
-/* loaded from: classes5.dex */
 public class SemSmartClipExtendedMetaTag extends SemSmartClipMetaTag implements Parcelable {
     public static final Parcelable.Creator<SemSmartClipExtendedMetaTag> CREATOR =
             new Parcelable.Creator<

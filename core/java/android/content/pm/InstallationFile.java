@@ -3,7 +3,6 @@ package android.content.pm;
 import android.annotation.SystemApi;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class InstallationFile {
     private final InstallationFileParcel mParcel = new InstallationFileParcel();
 

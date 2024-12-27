@@ -5,7 +5,6 @@ import android.util.Log;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public class ContextHubTransactionHelper {
     private static final String TAG = "ContextHubTransactionHelper";
 

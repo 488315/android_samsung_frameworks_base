@@ -26,7 +26,6 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.TrustManagerFactory;
 
 @Deprecated
-/* loaded from: classes6.dex */
 public class SSLSocketFactory implements LayeredSocketFactory {
     public static final String SSL = "SSL";
     public static final String SSLV2 = "SSLv2";

@@ -4,7 +4,6 @@ import android.os.UserHandle;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
 public abstract class CrossProfileAppsInternal {
     public abstract List<UserHandle> getTargetUserProfiles(String str, int i);
 

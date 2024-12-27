@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-/* loaded from: classes3.dex */
 public final class TvRecordingInfo implements Parcelable {
     public static final Parcelable.Creator<TvRecordingInfo> CREATOR =
             new Parcelable.Creator<

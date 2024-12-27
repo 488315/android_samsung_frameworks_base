@@ -2,7 +2,6 @@ package com.samsung.android.contextengine;
 
 import android.content.Context;
 
-/* loaded from: classes5.dex */
 public class SemContextEngineManager {
     private static final String TAG = SemContextEngineManager.class.getSimpleName();
     private final Context mContext;

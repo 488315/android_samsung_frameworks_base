@@ -8,7 +8,6 @@ import com.android.internal.org.bouncycastle.asn1.ASN1TaggedObject;
 import com.android.internal.org.bouncycastle.asn1.DERSequence;
 import com.android.internal.org.bouncycastle.asn1.DERTaggedObject;
 
-/* loaded from: classes5.dex */
 public class V2Form extends ASN1Object {
     IssuerSerial baseCertificateID;
     GeneralNames issuerName;

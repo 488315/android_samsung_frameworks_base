@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
-/* loaded from: classes3.dex */
 final class ImageViewerImpl extends ImageViewer implements IBundleHolder, IHandlerHolder {
     private static final String TAG_CLASS = "ImageViewerImpl";
     private IAllShareConnector mAllShareConnector;

@@ -1,6 +1,5 @@
 package com.google.android.mms.pdu;
 
-/* loaded from: classes5.dex */
 public class Base64 {
     static final int BASELENGTH = 255;
     static final int FOURBYTE = 4;

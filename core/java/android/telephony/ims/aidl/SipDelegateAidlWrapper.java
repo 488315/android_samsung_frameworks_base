@@ -16,7 +16,6 @@ import java.util.Collections;
 import java.util.Set;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes4.dex */
 public class SipDelegateAidlWrapper implements DelegateStateCallback, DelegateMessageCallback {
     private static final String LOG_TAG = "SipDelegateAW";
     private volatile SipDelegate mDelegate;

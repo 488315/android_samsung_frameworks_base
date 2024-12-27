@@ -12,7 +12,6 @@ import java.security.cert.CRL;
 import java.security.cert.X509CRL;
 import java.security.cert.X509CRLSelector;
 
-/* loaded from: classes5.dex */
 public class X509CRLStoreSelector extends X509CRLSelector implements Selector {
     private X509AttributeCertificate attrCertChecking;
     private boolean deltaCRLIndicator = false;

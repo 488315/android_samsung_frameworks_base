@@ -1,6 +1,5 @@
 package android.bluetooth.le;
 
-/* loaded from: classes.dex */
 public final class BluetoothLEProtoEnums {
     public static final int ADV_STATUS_FAILED_ALREADY_STARTED = 4;
     public static final int ADV_STATUS_FAILED_DATA_TOO_LARGE = 2;

@@ -21,7 +21,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public final class UserData implements FieldClassificationUserData, Parcelable {
     public static final Parcelable.Creator<UserData> CREATOR =
             new Parcelable.Creator<UserData>() { // from class: android.service.autofill.UserData.1

@@ -1,6 +1,5 @@
 package android.service.restricted_image;
 
-/* loaded from: classes3.dex */
 public final class RestrictedImageProto {
     public static final long IMAGE_DATA = 1151051235330L;
     public static final long METADATA = 1151051235331L;

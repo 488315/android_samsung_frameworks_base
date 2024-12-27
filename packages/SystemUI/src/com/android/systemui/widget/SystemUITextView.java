@@ -24,7 +24,6 @@ import com.android.systemui.wallpaper.WallpaperUtils;
 import java.util.concurrent.Executor;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes3.dex */
 public class SystemUITextView extends TextView implements SystemUIWidgetCallback {
     public final int mAttrCount;
     public final BlurSettingsListener mBlurSettings;

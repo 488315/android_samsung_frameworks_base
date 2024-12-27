@@ -10,7 +10,6 @@ import android.util.Log;
 
 import com.android.internal.os.Zygote;
 
-/* loaded from: classes4.dex */
 public class WebViewZygote {
     private static final String LOGTAG = "WebViewZygote";
     private static final Object sLock = new Object();

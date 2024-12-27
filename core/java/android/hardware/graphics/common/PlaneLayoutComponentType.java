@@ -1,6 +1,5 @@
 package android.hardware.graphics.common;
 
-/* loaded from: classes2.dex */
 public @interface PlaneLayoutComponentType {
     public static final long A = 1073741824;
     public static final long B = 4096;

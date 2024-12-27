@@ -1,6 +1,5 @@
 package android.hardware.security.keymint;
 
-/* loaded from: classes2.dex */
 public @interface Algorithm {
     public static final int AES = 32;
     public static final int EC = 3;

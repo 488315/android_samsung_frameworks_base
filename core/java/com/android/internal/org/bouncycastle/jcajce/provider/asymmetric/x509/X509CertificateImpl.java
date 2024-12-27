@@ -69,7 +69,6 @@ import java.util.Set;
 
 import javax.security.auth.x500.X500Principal;
 
-/* loaded from: classes5.dex */
 abstract class X509CertificateImpl extends X509Certificate implements BCX509Certificate {
     protected BasicConstraints basicConstraints;
     protected JcaJceHelper bcHelper;

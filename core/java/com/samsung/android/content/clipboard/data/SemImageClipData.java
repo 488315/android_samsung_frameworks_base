@@ -22,7 +22,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 
-/* loaded from: classes5.dex */
 public class SemImageClipData extends SemClipData {
     private static final String TAG = "SemImageClipData";
     private static final long serialVersionUID = 1;

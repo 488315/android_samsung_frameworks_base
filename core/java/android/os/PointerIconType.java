@@ -1,6 +1,5 @@
 package android.os;
 
-/* loaded from: classes3.dex */
 public @interface PointerIconType {
     public static final int ALIAS = 1010;
     public static final int ALL_SCROLL = 1013;

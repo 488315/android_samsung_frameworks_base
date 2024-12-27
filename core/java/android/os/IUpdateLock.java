@@ -1,6 +1,5 @@
 package android.os;
 
-/* loaded from: classes3.dex */
 public interface IUpdateLock extends IInterface {
     void acquireUpdateLock(IBinder iBinder, String str) throws RemoteException;
 

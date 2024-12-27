@@ -15,7 +15,6 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public final class PrinterDiscoverySession {
     private static final String LOG_TAG = "PrinterDiscoverySession";
     private static final int MSG_PRINTERS_ADDED = 1;

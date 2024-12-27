@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public class LinkAddress implements Parcelable {
     public static final int ADDRESS_PROPERTY_DEPRECATED = 32;
     public static final int ADDRESS_PROPERTY_NONE = 0;

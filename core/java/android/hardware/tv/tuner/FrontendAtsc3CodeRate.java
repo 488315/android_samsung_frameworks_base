@@ -1,6 +1,5 @@
 package android.hardware.tv.tuner;
 
-/* loaded from: classes2.dex */
 public @interface FrontendAtsc3CodeRate {
     public static final int AUTO = 1;
     public static final int CODERATE_10_15 = 512;

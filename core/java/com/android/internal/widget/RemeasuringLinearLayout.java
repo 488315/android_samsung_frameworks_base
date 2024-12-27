@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 @RemoteViews.RemoteView
-/* loaded from: classes5.dex */
 public class RemeasuringLinearLayout extends NotificationOptimizedLinearLayout {
     private ArrayList<View> mMatchParentViews;
 

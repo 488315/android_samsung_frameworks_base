@@ -19,7 +19,6 @@ import java.util.Iterator;
 import java.util.Objects;
 import java.util.Set;
 
-/* loaded from: classes3.dex */
 public class NetworkPolicy implements Parcelable, Comparable<NetworkPolicy> {
     public static final int CYCLE_NONE = -1;
     private static final long DEFAULT_MTU = 1500;

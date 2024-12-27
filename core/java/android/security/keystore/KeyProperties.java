@@ -13,7 +13,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Locale;
 
-/* loaded from: classes3.dex */
 public abstract class KeyProperties {
     public static final int AUTH_BIOMETRIC_STRONG = 2;
     public static final int AUTH_DEVICE_CREDENTIAL = 1;

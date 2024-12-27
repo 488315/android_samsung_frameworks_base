@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-/* loaded from: classes5.dex */
 public class PrivateKeyAnnotator {
     public static AnnotatedPrivateKey annotate(PrivateKey privKey, String label) {
         return new AnnotatedPrivateKey(privKey, label);

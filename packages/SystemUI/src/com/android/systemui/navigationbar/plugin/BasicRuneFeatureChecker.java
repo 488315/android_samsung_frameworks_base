@@ -5,7 +5,6 @@ import com.android.systemui.util.DeviceType;
 import com.samsung.systemui.splugins.navigationbar.FeatureChecker;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public final class BasicRuneFeatureChecker implements FeatureChecker {
     @Override // com.samsung.systemui.splugins.navigationbar.FeatureChecker
     public final boolean isDeviceSupportLargeCoverScreen() {

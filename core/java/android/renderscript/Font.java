@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Deprecated
-/* loaded from: classes3.dex */
 public class Font extends BaseObj {
     private static Map<String, FontFamily> sFontFamilyMap;
     private static final String[] sSansNames = {

@@ -20,7 +20,6 @@ import android.widget.SeekBar;
 
 import com.android.internal.R;
 
-/* loaded from: classes5.dex */
 public class MediaRouteControllerDialog extends AlertDialog {
     private static final int VOLUME_UPDATE_DELAY_MILLIS = 250;
     private boolean mAttachedToWindow;

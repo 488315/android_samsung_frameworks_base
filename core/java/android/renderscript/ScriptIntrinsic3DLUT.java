@@ -2,7 +2,6 @@ package android.renderscript;
 
 
 @Deprecated
-/* loaded from: classes3.dex */
 public final class ScriptIntrinsic3DLUT extends ScriptIntrinsic {
     private Element mElement;
     private Allocation mLUT;

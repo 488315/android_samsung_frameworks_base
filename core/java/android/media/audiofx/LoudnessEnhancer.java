@@ -4,7 +4,6 @@ import android.util.Log;
 
 import java.util.StringTokenizer;
 
-/* loaded from: classes2.dex */
 public class LoudnessEnhancer extends AudioEffect {
     public static final int PARAM_TARGET_GAIN_MB = 0;
     private static final String TAG = "LoudnessEnhancer";

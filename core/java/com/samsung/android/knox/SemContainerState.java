@@ -5,7 +5,6 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.ContainerStateReceiver;
 
-/* loaded from: classes6.dex */
 public class SemContainerState {
     private static final int CONTAINER_MODE_LAUNCHER = 1;
     private static final int CONTAINER_MODE_PERSONAL = 0;

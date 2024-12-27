@@ -12,7 +12,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.function.Supplier;
 
-/* loaded from: classes4.dex */
 public class SystemPerformanceHinter {
     public static final int HINT_ADPF = 4;
     public static final int HINT_ALL = 7;

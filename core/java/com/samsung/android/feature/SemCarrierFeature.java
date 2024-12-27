@@ -7,7 +7,6 @@ import android.util.Log;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/* loaded from: classes6.dex */
 public class SemCarrierFeature {
     private static final String DEBUG_LEVEL_HIGH = "0x4948";
     private Map<Integer, Integer> mCanonicalId;

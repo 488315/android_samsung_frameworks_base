@@ -1,6 +1,5 @@
 package com.android.sdksandbox.flags;
 
-/* loaded from: classes5.dex */
 public final class FeatureFlagsImpl implements FeatureFlags {
     @Override // com.android.sdksandbox.flags.FeatureFlags
     public boolean firstAndLastSdkSandboxUidPublic() {

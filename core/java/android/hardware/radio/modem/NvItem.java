@@ -1,7 +1,6 @@
 package android.hardware.radio.modem;
 
 @Deprecated
-/* loaded from: classes2.dex */
 public @interface NvItem {
     public static final int CDMA_1X_ADVANCED_ENABLED = 57;
     public static final int CDMA_ACCOLC = 4;

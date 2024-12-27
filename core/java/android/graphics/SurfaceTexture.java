@@ -9,7 +9,6 @@ import android.view.flags.Flags;
 
 import java.lang.ref.WeakReference;
 
-/* loaded from: classes.dex */
 public class SurfaceTexture {
     private final Looper mCreatorLooper;
     private long mFrameAvailableListener;

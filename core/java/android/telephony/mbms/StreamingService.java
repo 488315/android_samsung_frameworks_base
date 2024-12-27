@@ -9,7 +9,6 @@ import android.util.Log;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes4.dex */
 public class StreamingService implements AutoCloseable {
     public static final int BROADCAST_METHOD = 1;
     private static final String LOG_TAG = "MbmsStreamingService";

@@ -1,6 +1,5 @@
 package org.tensorflow.lite;
 
-/* loaded from: classes.dex */
 public final class TensorFlowLite {
     private static final String ALTERNATE_LIBNAME = "tensorflowlite_jni_stable";
     private static final String LIBNAME = "tensorflowlite_jni.secinput.samsung";

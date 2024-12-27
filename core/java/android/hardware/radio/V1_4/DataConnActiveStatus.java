@@ -2,7 +2,6 @@ package android.hardware.radio.V1_4;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class DataConnActiveStatus {
     public static final int ACTIVE = 2;
     public static final int DORMANT = 1;

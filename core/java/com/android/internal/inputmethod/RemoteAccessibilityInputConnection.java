@@ -6,7 +6,6 @@ import android.view.inputmethod.TextAttribute;
 
 import java.util.concurrent.CompletableFuture;
 
-/* loaded from: classes5.dex */
 public final class RemoteAccessibilityInputConnection {
     private static final int MAX_WAIT_TIME_MILLIS = 2000;
     private static final String TAG = "RemoteA11yInputConnection";

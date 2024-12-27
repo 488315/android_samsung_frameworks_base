@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/* loaded from: classes.dex */
 public class PdfDocument {
     private Page mCurrentPage;
     private final byte[] mChunk = new byte[4096];

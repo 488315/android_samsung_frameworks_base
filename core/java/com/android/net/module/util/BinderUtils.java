@@ -2,7 +2,6 @@ package com.android.net.module.util;
 
 import android.os.Binder;
 
-/* loaded from: classes5.dex */
 public class BinderUtils {
 
     @FunctionalInterface

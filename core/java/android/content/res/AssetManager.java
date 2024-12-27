@@ -31,7 +31,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public final class AssetManager implements AutoCloseable {
     public static final int ACCESS_BUFFER = 3;
     public static final int ACCESS_RANDOM = 1;

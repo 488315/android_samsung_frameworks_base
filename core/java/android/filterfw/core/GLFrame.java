@@ -6,7 +6,6 @@ import android.opengl.GLES20;
 
 import java.nio.ByteBuffer;
 
-/* loaded from: classes.dex */
 public class GLFrame extends Frame {
     public static final int EXISTING_FBO_BINDING = 101;
     public static final int EXISTING_TEXTURE_BINDING = 100;

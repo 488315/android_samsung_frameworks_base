@@ -39,7 +39,6 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.regex.Pattern;
 
-/* loaded from: classes4.dex */
 public class SelectionActionModeHelper {
     private static final String LOG_TAG = "SelectActionModeHelper";
     private final Editor mEditor;

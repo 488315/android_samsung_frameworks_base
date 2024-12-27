@@ -8,7 +8,6 @@ import android.os.PatternMatcher;
 import java.util.regex.Pattern;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes.dex */
 public abstract class StringFilter implements Filter {
     public final AnonymousClass1 mValueProvider;
     public static final AnonymousClass1 COMPONENT = new AnonymousClass1("component", 0);

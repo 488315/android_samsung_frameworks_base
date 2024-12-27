@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import android.os.PersistableBundle;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class TokenInfo implements Parcelable {
     public static final Parcelable.Creator<TokenInfo> CREATOR =
             new Parcelable.Creator<

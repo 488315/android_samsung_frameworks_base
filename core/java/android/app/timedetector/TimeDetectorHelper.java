@@ -5,7 +5,6 @@ import android.os.Environment;
 
 import java.time.Instant;
 
-/* loaded from: classes.dex */
 public class TimeDetectorHelper {
     private static final int MANUAL_SUGGESTION_YEAR_MAX_WITHOUT_Y2038_ISSUE = 2100;
     private static final int MANUAL_SUGGESTION_YEAR_MAX_WITH_Y2038_ISSUE = 2037;

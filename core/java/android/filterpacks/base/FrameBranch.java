@@ -6,7 +6,6 @@ import android.filterfw.core.Frame;
 import android.filterfw.core.FrameFormat;
 import android.filterfw.core.GenerateFinalPort;
 
-/* loaded from: classes.dex */
 public class FrameBranch extends Filter {
 
     @GenerateFinalPort(hasDefault = true, name = "outputs")

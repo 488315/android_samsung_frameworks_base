@@ -10,7 +10,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Arrays;
 import java.util.List;
 
-/* loaded from: classes.dex */
 public interface Cursor extends Closeable {
     public static final int FIELD_TYPE_BLOB = 4;
     public static final int FIELD_TYPE_FLOAT = 2;

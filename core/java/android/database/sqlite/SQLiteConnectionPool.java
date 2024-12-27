@@ -34,7 +34,6 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 
-/* loaded from: classes.dex */
 public final class SQLiteConnectionPool implements Closeable {
     static final /* synthetic */ boolean $assertionsDisabled = false;
     public static final int CONNECTION_FLAG_INTERACTIVE = 4;

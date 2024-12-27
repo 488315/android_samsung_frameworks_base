@@ -6,7 +6,6 @@ import android.os.Parcelable;
 
 import com.android.internal.util.AnnotationValidations;
 
-/* loaded from: classes2.dex */
 public class InputSensorInfo implements Parcelable {
     public static final Parcelable.Creator<InputSensorInfo> CREATOR =
             new Parcelable.Creator<

@@ -7,7 +7,6 @@ import com.android.internal.org.bouncycastle.asn1.ASN1TaggedObject;
 
 import java.math.BigInteger;
 
-/* loaded from: classes5.dex */
 public class DHPublicKey extends ASN1Object {
     private ASN1Integer y;
 

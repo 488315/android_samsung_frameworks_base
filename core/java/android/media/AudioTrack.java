@@ -32,7 +32,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes2.dex */
 public class AudioTrack extends PlayerBase implements AudioRouting, VolumeAutomation {
     private static final int AUDIO_OUTPUT_FLAG_DEEP_BUFFER = 8;
     private static final int AUDIO_OUTPUT_FLAG_FAST = 4;

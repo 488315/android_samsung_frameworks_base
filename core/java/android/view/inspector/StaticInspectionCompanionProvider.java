@@ -1,6 +1,5 @@
 package android.view.inspector;
 
-/* loaded from: classes4.dex */
 public class StaticInspectionCompanionProvider implements InspectionCompanionProvider {
     private static final String COMPANION_SUFFIX = "$InspectionCompanion";
 

@@ -1,6 +1,5 @@
 package com.android.server.power;
 
-/* loaded from: classes5.dex */
 public final class PowerManagerServiceDumpProto {
     public static final long ACTIVE_WAKE_LOCKS = 1146756268048L;
     public static final long ARE_UIDS_CHANGED = 1133871366188L;

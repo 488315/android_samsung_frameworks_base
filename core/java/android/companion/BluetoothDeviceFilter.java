@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
-/* loaded from: classes.dex */
 public final class BluetoothDeviceFilter implements DeviceFilter<BluetoothDevice> {
     public static final Parcelable.Creator<BluetoothDeviceFilter> CREATOR =
             new Parcelable.Creator<BluetoothDeviceFilter>() { // from class:

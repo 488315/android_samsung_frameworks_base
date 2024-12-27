@@ -8,7 +8,6 @@ import android.os.RemoteException;
 
 import com.sec.android.iaft.callback.IIAFTCallback;
 
-/* loaded from: classes6.dex */
 public interface IIAFTManagerService extends IInterface {
     public static final String DESCRIPTOR = "com.sec.android.iaft.IIAFTManagerService";
 

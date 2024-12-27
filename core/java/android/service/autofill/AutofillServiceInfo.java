@@ -34,7 +34,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public final class AutofillServiceInfo {
     private static final ComponentName CREDMAN_SERVICE_COMPONENT_NAME =
             new ComponentName(

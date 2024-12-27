@@ -10,7 +10,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Arrays;
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public abstract class TextClassifierEvent implements Parcelable {
     public static final int CATEGORY_CONVERSATION_ACTIONS = 3;
     public static final int CATEGORY_LANGUAGE_DETECTION = 4;

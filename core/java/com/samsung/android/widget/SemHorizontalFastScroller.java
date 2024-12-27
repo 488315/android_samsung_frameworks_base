@@ -31,7 +31,6 @@ import com.android.internal.R;
 
 import com.samsung.android.wallpaperbackup.GenerateXML;
 
-/* loaded from: classes6.dex */
 public class SemHorizontalFastScroller {
     private static final int DURATION_CROSS_FADE = 50;
     private static final int DURATION_FADE_IN = 150;

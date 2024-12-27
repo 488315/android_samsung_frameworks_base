@@ -4,7 +4,6 @@ import android.annotation.SystemApi;
 import android.content.Context;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public class DeviceIdleManager {
     private final Context mContext;
     private final IDeviceIdleController mService;

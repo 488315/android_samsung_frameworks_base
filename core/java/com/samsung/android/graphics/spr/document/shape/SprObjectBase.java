@@ -27,7 +27,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* loaded from: classes6.dex */
 public abstract class SprObjectBase implements Cloneable {
     public static final byte TYPE_CIRCLE = 1;
     public static final byte TYPE_ELLIPSE = 2;

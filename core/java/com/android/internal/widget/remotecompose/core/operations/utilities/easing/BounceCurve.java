@@ -1,6 +1,5 @@
 package com.android.internal.widget.remotecompose.core.operations.utilities.easing;
 
-/* loaded from: classes5.dex */
 public class BounceCurve extends Easing {
     private static final float D1 = 2.75f;
     private static final float N1 = 7.5625f;

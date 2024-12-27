@@ -1,6 +1,5 @@
 package com.samsung.android.build;
 
-/* loaded from: classes5.dex */
 public class BuildProperties {
     public static final boolean ENG = false;
     public static final String PROJECT_NAME = "e3q";

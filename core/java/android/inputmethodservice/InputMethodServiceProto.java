@@ -1,6 +1,5 @@
 package android.inputmethodservice;
 
-/* loaded from: classes2.dex */
 public final class InputMethodServiceProto {
     public static final long CANDIDATES_VIEW_STARTED = 1133871366156L;
     public static final long CANDIDATES_VISIBILITY = 1120986464275L;

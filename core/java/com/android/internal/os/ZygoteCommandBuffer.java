@@ -5,7 +5,6 @@ import android.net.LocalSocket;
 import java.io.FileDescriptor;
 import java.lang.ref.Reference;
 
-/* loaded from: classes5.dex */
 class ZygoteCommandBuffer implements AutoCloseable {
     private long mNativeBuffer;
     private final int mNativeSocket;

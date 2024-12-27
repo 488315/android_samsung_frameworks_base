@@ -15,7 +15,6 @@ import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/* loaded from: classes4.dex */
 public class EventLog {
     private static final String COMMENT_PATTERN = "^\\s*(#.*)?$";
     private static final String TAG = "EventLog";

@@ -15,7 +15,6 @@ import java.util.Arrays;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-/* loaded from: classes6.dex */
 public abstract class LocalService extends ServiceStub {
     private static final String TAG = Def.tagOf((Class<?>) LocalService.class);
     protected Binder binder = new LocalBinder();

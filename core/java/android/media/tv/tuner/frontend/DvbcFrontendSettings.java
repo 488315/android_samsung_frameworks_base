@@ -7,7 +7,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public class DvbcFrontendSettings extends FrontendSettings {
     public static final int ANNEX_A = 1;
     public static final int ANNEX_B = 2;

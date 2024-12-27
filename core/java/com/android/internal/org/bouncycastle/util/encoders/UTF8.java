@@ -2,7 +2,6 @@ package com.android.internal.org.bouncycastle.util.encoders;
 
 import com.samsung.android.graphics.spr.document.animator.SprAnimatorBase;
 
-/* loaded from: classes5.dex */
 public class UTF8 {
     private static final byte C_CR1 = 1;
     private static final byte C_CR2 = 2;

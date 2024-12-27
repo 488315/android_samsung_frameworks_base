@@ -27,7 +27,6 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 
-/* loaded from: classes.dex */
 public class AdaptiveIconDrawable extends Drawable implements Drawable.Callback {
     private static final int BACKGROUND_ID = 0;
     private static final float DEFAULT_VIEW_PORT_SCALE = 0.6666667f;

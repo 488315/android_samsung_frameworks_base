@@ -3,7 +3,6 @@ package com.android.internal.org.bouncycastle.jcajce.provider.config;
 import java.io.OutputStream;
 import java.security.KeyStore;
 
-/* loaded from: classes5.dex */
 public class PKCS12StoreParameter
         extends com.android.internal.org.bouncycastle.jcajce.PKCS12StoreParameter {
     public PKCS12StoreParameter(OutputStream out, char[] password) {

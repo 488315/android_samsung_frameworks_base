@@ -3,7 +3,6 @@ package com.android.internal.org.bouncycastle.jce.provider;
 import java.io.OutputStream;
 import java.security.KeyStore;
 
-/* loaded from: classes5.dex */
 public class JDKPKCS12StoreParameter implements KeyStore.LoadStoreParameter {
     private OutputStream outputStream;
     private KeyStore.ProtectionParameter protectionParameter;

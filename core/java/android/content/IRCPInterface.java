@@ -12,7 +12,6 @@ import com.samsung.android.knox.SemIRCPCallback;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
 public interface IRCPInterface extends IInterface {
     public static final String DESCRIPTOR = "android.content.IRCPInterface";
 

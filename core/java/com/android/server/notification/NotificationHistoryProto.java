@@ -1,6 +1,5 @@
 package com.android.server.notification;
 
-/* loaded from: classes5.dex */
 public final class NotificationHistoryProto {
     public static final long MAJOR_VERSION = 1120986464258L;
     public static final long NOTIFICATION = 2246267895811L;

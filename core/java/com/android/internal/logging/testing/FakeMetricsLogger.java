@@ -7,7 +7,6 @@ import com.android.internal.logging.MetricsLogger;
 import java.util.LinkedList;
 import java.util.Queue;
 
-/* loaded from: classes5.dex */
 public class FakeMetricsLogger extends MetricsLogger {
     private Queue<LogMaker> logs = new LinkedList();
 

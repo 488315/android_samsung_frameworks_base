@@ -6,7 +6,6 @@ import android.view.ViewConfiguration;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes4.dex */
 public class EditorTouchState {
     private float mInitialDragDirectionXYRatio;
     private boolean mIsOnHandle;

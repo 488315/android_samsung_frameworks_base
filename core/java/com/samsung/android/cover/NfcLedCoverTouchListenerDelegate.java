@@ -7,7 +7,6 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.RemoteException;
 
-/* loaded from: classes6.dex */
 class NfcLedCoverTouchListenerDelegate extends INfcLedCoverTouchListenerCallback.Stub {
     private static final int MSG_LISTEN_COVER_TOUCH_ACCEPT = 0;
     private static final int MSG_LISTEN_COVER_TOUCH_REJECT = 1;

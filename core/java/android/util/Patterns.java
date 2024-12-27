@@ -5,7 +5,6 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/* loaded from: classes4.dex */
 public class Patterns {
     private static final String EMAIL_ADDRESS_DOMAIN =
             "(?=.{1,255}(?:\\s|$|^))([a-zA-Z0-9["

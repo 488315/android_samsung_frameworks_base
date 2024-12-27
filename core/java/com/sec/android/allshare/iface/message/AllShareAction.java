@@ -1,6 +1,5 @@
 package com.sec.android.allshare.iface.message;
 
-/* loaded from: classes6.dex */
 public class AllShareAction {
     public static final String ACTION_AV_PLAYER_CONTROL_CAPTION =
             "com.sec.android.allshare.action.ACTION_AV_PLAYER_CONTROL_CAPTION";

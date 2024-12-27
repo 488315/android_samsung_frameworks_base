@@ -8,7 +8,6 @@ import android.text.TextUtils;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes3.dex */
 public final class CallEndpointException extends RuntimeException implements Parcelable {
     public static final String CHANGE_ERROR = "ChangeErrorKey";
     public static final Parcelable.Creator<CallEndpointException> CREATOR =

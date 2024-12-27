@@ -38,7 +38,6 @@ import javax.crypto.Cipher;
 import javax.crypto.KeyAgreement;
 import javax.crypto.Mac;
 
-/* loaded from: classes2.dex */
 public class BiometricPrompt implements BiometricAuthenticator, BiometricConstants {
     public static final int AUTHENTICATION_RESULT_TYPE_BIOMETRIC = 2;
     public static final int AUTHENTICATION_RESULT_TYPE_DEVICE_CREDENTIAL = 1;

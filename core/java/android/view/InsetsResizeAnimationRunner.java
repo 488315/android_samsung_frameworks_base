@@ -13,7 +13,6 @@ import android.view.inputmethod.ImeTracker;
 
 import com.samsung.android.rune.CoreRune;
 
-/* loaded from: classes4.dex */
 public class InsetsResizeAnimationRunner
         implements InsetsAnimationControlRunner,
                 InternalInsetsAnimationController,

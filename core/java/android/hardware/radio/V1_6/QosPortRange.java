@@ -2,7 +2,6 @@ package android.hardware.radio.V1_6;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class QosPortRange {
     public static final short MAX = -1;
     public static final short MIN = 20;

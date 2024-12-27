@@ -29,7 +29,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
-/* loaded from: classes.dex */
 public abstract class ForegroundServiceTypePolicy {
     static final boolean DEBUG_FOREGROUND_SERVICE_TYPE_POLICY = false;
     private static final boolean DEFAULT_FGS_TYPE_FG_PERM_ENFORCEMENT_FLAG_VALUE = true;

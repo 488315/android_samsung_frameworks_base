@@ -7,7 +7,6 @@ import com.android.internal.org.bouncycastle.util.encoders.Hex;
 
 import java.io.IOException;
 
-/* loaded from: classes5.dex */
 public abstract class X509NameEntryConverter {
     public abstract ASN1Primitive getConvertedValue(
             ASN1ObjectIdentifier aSN1ObjectIdentifier, String str);

@@ -31,7 +31,6 @@ import java.io.File;
 import java.lang.reflect.Method;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public final class WebViewFactory {
     private static final String CHROMIUM_WEBVIEW_FACTORY =
             "com.android.webview.chromium.WebViewChromiumFactoryProviderForT";

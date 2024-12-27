@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/* loaded from: classes.dex */
 public final class DnsEvent extends NetworkEvent implements Parcelable {
     public static final Parcelable.Creator<DnsEvent> CREATOR =
             new Parcelable.Creator<DnsEvent>() { // from class: android.app.admin.DnsEvent.1

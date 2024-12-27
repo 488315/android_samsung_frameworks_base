@@ -1,6 +1,5 @@
 package android.media;
 
-/* loaded from: classes2.dex */
 public @interface MediaResourceSubType {
     public static final int kHwAudioCodec = 1;
     public static final int kHwImageCodec = 5;

@@ -11,7 +11,6 @@ import java.util.Objects;
 import java.util.Set;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public final class DelegateRegistrationState implements Parcelable {
     public static final Parcelable.Creator<DelegateRegistrationState> CREATOR =
             new Parcelable.Creator<

@@ -2,7 +2,6 @@ package com.android.internal.org.bouncycastle.asn1.x509;
 
 import com.android.internal.org.bouncycastle.asn1.DERBitString;
 
-/* loaded from: classes5.dex */
 public class ReasonFlags extends DERBitString {
     public static final int AA_COMPROMISE = 32768;
     public static final int AFFILIATION_CHANGED = 16;

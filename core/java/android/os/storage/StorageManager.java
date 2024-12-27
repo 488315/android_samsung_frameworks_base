@@ -81,7 +81,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/* loaded from: classes3.dex */
 public class StorageManager {
     public static final String ACTION_CLEAR_APP_CACHE = "android.os.storage.action.CLEAR_APP_CACHE";
     public static final String ACTION_MANAGE_STORAGE = "android.os.storage.action.MANAGE_STORAGE";

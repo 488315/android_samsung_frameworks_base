@@ -10,7 +10,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 
-/* loaded from: classes4.dex */
 public final class PixelCopy {
     public static final int ERROR_DESTINATION_INVALID = 5;
     public static final int ERROR_SOURCE_INVALID = 4;

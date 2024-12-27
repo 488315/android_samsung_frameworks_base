@@ -1,6 +1,5 @@
 package com.android.server.wm;
 
-/* loaded from: classes5.dex */
 public final class ImeInsetsSourceProviderProto {
     public static final long IME_TARGET_FROM_IME = 1146756268034L;
     public static final long INSETS_SOURCE_PROVIDER = 1146756268033L;

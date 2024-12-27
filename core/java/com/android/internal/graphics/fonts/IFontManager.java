@@ -13,7 +13,6 @@ import android.text.FontConfig;
 
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public interface IFontManager extends IInterface {
     public static final String DESCRIPTOR = "com.android.internal.graphics.fonts.IFontManager";
 

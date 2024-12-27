@@ -25,7 +25,6 @@ import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public class VisualQueryDetector {
     private static final boolean DEBUG = false;
     private static final int SETTINGS_DISABLE_BIT = 0;

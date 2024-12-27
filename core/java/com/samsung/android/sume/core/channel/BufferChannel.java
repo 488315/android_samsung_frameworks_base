@@ -5,7 +5,6 @@ import com.samsung.android.sume.core.buffer.MediaBuffer;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes6.dex */
 public interface BufferChannel extends Channel<MediaBuffer> {
     public static final int DEFAULT = 0;
     public static final int SUPPLY = 1;

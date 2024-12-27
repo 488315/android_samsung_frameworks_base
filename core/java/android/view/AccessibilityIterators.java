@@ -5,7 +5,6 @@ import android.content.res.Configuration;
 import java.text.BreakIterator;
 import java.util.Locale;
 
-/* loaded from: classes4.dex */
 public final class AccessibilityIterators {
 
     public interface TextSegmentIterator {

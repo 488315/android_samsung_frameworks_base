@@ -14,7 +14,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public class CertStoreCollectionSpi extends CertStoreSpi {
     private CollectionCertStoreParameters params;
 

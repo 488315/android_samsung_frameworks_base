@@ -34,7 +34,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public final class SemExecutableInfo implements Parcelable {
     private static final String CLASSNAME_PREFIX_FOR_SEC_PRODUCT_FEATURE = "SecProductFeature_";
     private static final String CSC_FEATURE_PREFIX = "CscFeature_";

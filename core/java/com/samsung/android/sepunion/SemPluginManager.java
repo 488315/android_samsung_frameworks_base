@@ -6,7 +6,6 @@ import android.os.RemoteException;
 
 import com.samsung.android.cover.CoverState;
 
-/* loaded from: classes6.dex */
 public class SemPluginManager {
     private static final String TAG = SemPluginManager.class.getSimpleName();
     private Context mContext;

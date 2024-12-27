@@ -7,7 +7,6 @@ import android.view.SurfaceControl;
 
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public final class TaskFragmentParentInfo implements Parcelable {
     public static final Parcelable.Creator<TaskFragmentParentInfo> CREATOR =
             new Parcelable.Creator<

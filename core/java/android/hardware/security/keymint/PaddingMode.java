@@ -1,6 +1,5 @@
 package android.hardware.security.keymint;
 
-/* loaded from: classes2.dex */
 public @interface PaddingMode {
     public static final int NONE = 1;
     public static final int PKCS7 = 64;

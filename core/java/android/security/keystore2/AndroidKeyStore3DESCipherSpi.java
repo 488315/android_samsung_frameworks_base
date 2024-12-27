@@ -17,7 +17,6 @@ import java.util.List;
 
 import javax.crypto.spec.IvParameterSpec;
 
-/* loaded from: classes3.dex */
 public abstract class AndroidKeyStore3DESCipherSpi extends AndroidKeyStoreCipherSpiBase {
     private static final int BLOCK_SIZE_BYTES = 8;
     private byte[] mIv;

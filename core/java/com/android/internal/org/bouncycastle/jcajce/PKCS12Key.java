@@ -4,7 +4,6 @@ import android.security.KeyChain;
 
 import com.android.internal.org.bouncycastle.crypto.PBEParametersGenerator;
 
-/* loaded from: classes5.dex */
 public class PKCS12Key implements PBKDFKey {
     private final char[] password;
     private final boolean useWrongZeroLengthConversion;

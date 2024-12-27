@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public class SmartPopupViewUtil {
     public static final String ACTION_DEMO_RESET_STARTED = "com.samsung.sea.rm.DEMO_RESET_STARTED";
     public static final String ACTION_SOFT_RESET = "com.samsung.intent.action.SETTINGS_SOFT_RESET";

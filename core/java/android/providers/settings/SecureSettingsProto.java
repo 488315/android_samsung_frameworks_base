@@ -1,6 +1,5 @@
 package android.providers.settings;
 
-/* loaded from: classes3.dex */
 public final class SecureSettingsProto {
     public static final long ACCESSIBILITY = 1146756268034L;
     public static final long ADAPTIVE_CONNECTIVITY_ENABLED = 1146756268116L;

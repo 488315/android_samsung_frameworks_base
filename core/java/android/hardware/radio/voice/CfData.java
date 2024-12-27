@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.util.Arrays;
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public class CfData implements Parcelable {
     public static final Parcelable.Creator<CfData> CREATOR =
             new Parcelable.Creator<CfData>() { // from class: android.hardware.radio.voice.CfData.1

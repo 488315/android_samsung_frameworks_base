@@ -4,7 +4,6 @@ import android.service.timezone.TimeZoneProviderService;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class CdmaSmsErrorClass {
     public static final int ERROR = 1;
     public static final int NO_ERROR = 0;

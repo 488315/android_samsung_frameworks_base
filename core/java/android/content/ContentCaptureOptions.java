@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-/* loaded from: classes.dex */
 public final class ContentCaptureOptions implements Parcelable {
     public final ContentProtectionOptions contentProtectionOptions;
     public final boolean disableFlushForViewTreeAppearing;

@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-/* loaded from: classes3.dex */
 public final class FieldClassification implements Parcelable {
     public static final Parcelable.Creator<FieldClassification> CREATOR =
             new Parcelable.Creator<

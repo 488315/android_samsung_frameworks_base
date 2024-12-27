@@ -2,7 +2,6 @@ package android.view;
 
 import java.util.concurrent.Executor;
 
-/* loaded from: classes4.dex */
 public abstract class TunnelModeEnabledListener {
     private final Executor mExecutor;
     private long mNativeListener = nativeCreate(this);

@@ -32,7 +32,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 
-/* loaded from: classes.dex */
 public class SemWallpaperResourcesInfo {
     protected static final boolean DEBUG = Debug.semIsProductDev();
     protected static final String TAG = "WallpaperResourcesInfo";

@@ -9,7 +9,6 @@ import android.filterfw.core.Program;
 import android.filterfw.core.ShaderProgram;
 import android.filterfw.format.ImageFormat;
 
-/* loaded from: classes.dex */
 public class FisheyeFilter extends Filter {
     private static final String TAG = "FisheyeFilter";
     private static final String mFisheyeShader =

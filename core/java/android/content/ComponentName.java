@@ -7,7 +7,6 @@ import android.util.proto.ProtoOutputStream;
 
 import java.io.PrintWriter;
 
-/* loaded from: classes.dex */
 public final class ComponentName implements Parcelable, Cloneable, Comparable<ComponentName> {
     public static final Parcelable.Creator<ComponentName> CREATOR =
             new Parcelable.Creator<ComponentName>() { // from class: android.content.ComponentName.1

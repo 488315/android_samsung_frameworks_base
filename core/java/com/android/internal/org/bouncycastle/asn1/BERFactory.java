@@ -1,6 +1,5 @@
 package com.android.internal.org.bouncycastle.asn1;
 
-/* loaded from: classes5.dex */
 class BERFactory {
     static final BERSequence EMPTY_SEQUENCE = new BERSequence();
     static final BERSet EMPTY_SET = new BERSet();

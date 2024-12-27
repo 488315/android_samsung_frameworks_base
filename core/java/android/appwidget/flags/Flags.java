@@ -1,6 +1,5 @@
 package android.appwidget.flags;
 
-/* loaded from: classes.dex */
 public final class Flags {
     private static FeatureFlags FEATURE_FLAGS = new FeatureFlagsImpl();
     public static final String FLAG_DRAW_DATA_PARCEL = "android.appwidget.flags.draw_data_parcel";

@@ -11,7 +11,6 @@ import com.android.framework.protobuf.nano.WireFormatNano;
 
 import java.io.IOException;
 
-/* loaded from: classes5.dex */
 public final class MapParamsProto extends MessageNano {
     private static volatile MapParamsProto[] _emptyArray;
     public int cacheTileS2Level;

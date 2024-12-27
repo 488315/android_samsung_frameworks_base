@@ -8,7 +8,6 @@ import com.android.systemui.R;
 import com.android.systemui.statusbar.phone.IndicatorScaleGardener;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes3.dex */
 public final class OngoingActivityController$addDecoratorForRecyclerView$1 extends RecyclerView.ItemDecoration {
     public final /* synthetic */ OngoingActivityController this$0;
 

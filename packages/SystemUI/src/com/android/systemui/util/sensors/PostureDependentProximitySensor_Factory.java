@@ -6,7 +6,6 @@ import com.android.systemui.util.concurrency.Execution;
 import dagger.internal.Provider;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes3.dex */
 public final class PostureDependentProximitySensor_Factory implements Provider {
     private final javax.inject.Provider delayableExecutorProvider;
     private final javax.inject.Provider devicePostureControllerProvider;

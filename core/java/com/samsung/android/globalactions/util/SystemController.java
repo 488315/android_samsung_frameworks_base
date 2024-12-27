@@ -16,7 +16,6 @@ import com.android.internal.logging.MetricsLogger;
 import com.samsung.android.emergencymode.SemEmergencyConstants;
 import com.samsung.android.emergencymode.SemEmergencyManager;
 
-/* loaded from: classes6.dex */
 public class SystemController {
     private static final String ACTION_CLEAR_COVER_STATE_CHANGE = "com.samsung.cover.STATE_CHANGE";
     private static final String ACTION_NETWORK_MODE_CHANGED =

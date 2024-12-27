@@ -2,7 +2,6 @@ package android.view;
 
 import android.os.IBinder;
 
-/* loaded from: classes4.dex */
 public final class InputApplicationHandle {
     public final long dispatchingTimeoutMillis;
     public final String name;

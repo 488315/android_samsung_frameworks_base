@@ -11,7 +11,6 @@ import android.view.InputDevice;
 
 import com.samsung.android.vibrator.VibrationDebugInfo;
 
-/* loaded from: classes2.dex */
 public class InputDeviceVibratorManager extends VibratorManager
         implements InputManager.InputDeviceListener {
     private static final boolean DEBUG = false;

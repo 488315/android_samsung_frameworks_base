@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.accessibility.AccessibilityNodeInfo;
 
-/* loaded from: classes4.dex */
 public class SeekBar extends AbsSeekBar {
     private OnSeekBarChangeListener mOnSeekBarChangeListener;
     private SemOnSeekBarHoverListener mOnSeekBarHoverListener;

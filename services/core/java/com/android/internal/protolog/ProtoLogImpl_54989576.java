@@ -9,7 +9,6 @@ import com.android.internal.protolog.common.LogLevel;
 import java.util.TreeMap;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes.dex */
 public abstract class ProtoLogImpl_54989576 {
     public static IProtoLog sServiceInstance;
     public static final TreeMap sLogGroups =

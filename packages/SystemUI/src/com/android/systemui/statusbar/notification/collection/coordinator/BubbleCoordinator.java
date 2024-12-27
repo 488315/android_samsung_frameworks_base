@@ -34,7 +34,6 @@ import java.util.function.Supplier;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 @CoordinatorScope
-/* loaded from: classes2.dex */
 public class BubbleCoordinator implements Coordinator {
     private static final String TAG = "BubbleCoordinator";
     private final Optional<BubblesManager> mBubblesManagerOptional;

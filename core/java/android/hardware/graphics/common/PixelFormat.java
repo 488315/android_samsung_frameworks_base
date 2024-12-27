@@ -1,6 +1,5 @@
 package android.hardware.graphics.common;
 
-/* loaded from: classes2.dex */
 public @interface PixelFormat {
     public static final int BGRA_8888 = 5;
     public static final int BLOB = 33;

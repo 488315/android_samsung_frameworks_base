@@ -4,7 +4,6 @@ import android.util.SparseArray;
 
 import com.android.internal.util.Preconditions;
 
-/* loaded from: classes5.dex */
 public abstract class PerUser<T> extends SparseArray<T> {
     protected abstract T create(int i);
 

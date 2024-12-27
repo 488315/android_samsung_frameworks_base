@@ -7,7 +7,6 @@ import android.util.Log;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-/* loaded from: classes6.dex */
 public class IAFDSocketFdServer {
     private static final int CIPER_POS = 2;
     static final String DECRYPT_ARDB_NAME = "ardbhotfix_db.bin.enc.dec";

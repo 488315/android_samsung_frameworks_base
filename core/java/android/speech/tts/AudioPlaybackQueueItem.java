@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.os.ConditionVariable;
 import android.util.Log;
 
-/* loaded from: classes3.dex */
 class AudioPlaybackQueueItem extends PlaybackQueueItem {
     private static final String TAG = "TTS.AudioQueueItem";
     private final TextToSpeechService.AudioOutputParams mAudioParams;

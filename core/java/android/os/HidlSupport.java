@@ -14,7 +14,6 @@ import java.util.function.ToIntFunction;
 import java.util.stream.IntStream;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public class HidlSupport {
     @SystemApi
     public static native int getPidIfSharable();

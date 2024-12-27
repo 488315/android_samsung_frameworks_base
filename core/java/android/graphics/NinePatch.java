@@ -1,6 +1,5 @@
 package android.graphics;
 
-/* loaded from: classes.dex */
 public class NinePatch {
     private final Bitmap mBitmap;
     public long mNativeChunk;

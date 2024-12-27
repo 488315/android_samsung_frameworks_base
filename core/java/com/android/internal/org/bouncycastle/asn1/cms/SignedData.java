@@ -15,7 +15,6 @@ import com.android.internal.org.bouncycastle.asn1.DERTaggedObject;
 
 import java.util.Enumeration;
 
-/* loaded from: classes5.dex */
 public class SignedData extends ASN1Object {
     private static final ASN1Integer VERSION_1 = new ASN1Integer(1);
     private static final ASN1Integer VERSION_3 = new ASN1Integer(3);

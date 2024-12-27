@@ -33,7 +33,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes2.dex */
 public class MediaRecorder
         implements AudioRouting,
                 AudioRecordingMonitor,

@@ -11,7 +11,6 @@ import com.samsung.android.ims.util.SemImsUri;
 
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public class SemCapabilityListener {
     private static final boolean DBG = false;
     private static final String LOG_TAG = "SemCapabilityListener";

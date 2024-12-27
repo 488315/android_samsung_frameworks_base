@@ -13,7 +13,6 @@ import android.util.Pools;
 
 import java.util.Arrays;
 
-/* loaded from: classes4.dex */
 public class MeasuredParagraph {
     private static final char OBJECT_REPLACEMENT_CHARACTER = 65532;
     private static final Pools.SynchronizedPool<MeasuredParagraph> sPool =

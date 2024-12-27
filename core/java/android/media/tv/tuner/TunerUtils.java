@@ -1,6 +1,5 @@
 package android.media.tv.tuner;
 
-/* loaded from: classes3.dex */
 public final class TunerUtils {
     public static int getFilterSubtype(int mainType, int subtype) {
         if (mainType == 1) {

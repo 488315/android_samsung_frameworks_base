@@ -16,7 +16,6 @@ import com.samsung.android.wallpaperbackup.GenerateXML;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-/* loaded from: classes5.dex */
 public final class DumpUtils {
     public static final String[] ADJ_MEM_NAMES_CSV;
     static final int[] ADJ_MEM_PROTO_ENUMS;

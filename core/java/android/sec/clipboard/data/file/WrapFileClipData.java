@@ -13,7 +13,6 @@ import com.samsung.android.content.clipboard.data.SemTextClipData;
 import java.io.File;
 import java.io.Serializable;
 
-/* loaded from: classes3.dex */
 public class WrapFileClipData implements Serializable {
     private static final String TAG = "WrapFileClipData";
     private static final long serialVersionUID = 1;

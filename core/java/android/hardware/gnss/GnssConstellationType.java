@@ -1,6 +1,5 @@
 package android.hardware.gnss;
 
-/* loaded from: classes2.dex */
 public @interface GnssConstellationType {
     public static final int BEIDOU = 5;
     public static final int GALILEO = 6;

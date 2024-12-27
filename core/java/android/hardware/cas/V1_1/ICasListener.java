@@ -21,7 +21,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public interface ICasListener extends android.hardware.cas.V1_0.ICasListener {
     public static final String kInterfaceName = "android.hardware.cas@1.1::ICasListener";
 

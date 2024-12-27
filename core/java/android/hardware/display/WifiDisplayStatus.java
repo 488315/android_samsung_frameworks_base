@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 import java.util.Arrays;
 
-/* loaded from: classes2.dex */
 public final class WifiDisplayStatus implements Parcelable {
     public static final Parcelable.Creator<WifiDisplayStatus> CREATOR =
             new Parcelable.Creator<WifiDisplayStatus>() { // from class:

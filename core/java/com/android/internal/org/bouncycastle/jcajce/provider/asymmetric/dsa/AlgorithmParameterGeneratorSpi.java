@@ -15,7 +15,6 @@ import java.security.SecureRandom;
 import java.security.spec.AlgorithmParameterSpec;
 import java.security.spec.DSAParameterSpec;
 
-/* loaded from: classes5.dex */
 public class AlgorithmParameterGeneratorSpi extends BaseAlgorithmParameterGeneratorSpi {
     protected DSAParameterGenerationParameters params;
     protected SecureRandom random;

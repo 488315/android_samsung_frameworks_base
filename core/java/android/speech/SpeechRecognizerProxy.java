@@ -7,7 +7,6 @@ import android.util.CloseGuard;
 import java.lang.ref.Reference;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes3.dex */
 class SpeechRecognizerProxy extends SpeechRecognizer {
     private final CloseGuard mCloseGuard = new CloseGuard();
     private final SpeechRecognizer mDelegate;

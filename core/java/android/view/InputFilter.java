@@ -5,7 +5,6 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.RemoteException;
 
-/* loaded from: classes4.dex */
 public abstract class InputFilter extends IInputFilter.Stub {
     private static final int MSG_INPUT_EVENT = 3;
     private static final int MSG_INSTALL = 1;

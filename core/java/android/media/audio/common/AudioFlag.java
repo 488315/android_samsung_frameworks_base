@@ -1,6 +1,5 @@
 package android.media.audio.common;
 
-/* loaded from: classes2.dex */
 public @interface AudioFlag {
     public static final int AUDIBILITY_ENFORCED = 1;
     public static final int BEACON = 8;

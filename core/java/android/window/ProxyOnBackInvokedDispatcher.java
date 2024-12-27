@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
-/* loaded from: classes4.dex */
 public class ProxyOnBackInvokedDispatcher implements OnBackInvokedDispatcher {
     private final WindowOnBackInvokedDispatcher.Checker mChecker;
     private ImeOnBackInvokedDispatcher mImeDispatcher;

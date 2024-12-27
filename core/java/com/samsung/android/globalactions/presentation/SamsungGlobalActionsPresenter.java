@@ -31,7 +31,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.function.Predicate;
 
-/* loaded from: classes6.dex */
 public class SamsungGlobalActionsPresenter implements SamsungGlobalActions {
     private static final String TAG = "SamsungGlobalActionsPresenter";
     public ActionViewModel mActionConfirming;

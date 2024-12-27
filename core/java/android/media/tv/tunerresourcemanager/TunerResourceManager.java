@@ -8,7 +8,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes3.dex */
 public class TunerResourceManager {
     public static final int INVALID_OWNER_ID = -1;
     public static final int INVALID_RESOURCE_HANDLE = -1;

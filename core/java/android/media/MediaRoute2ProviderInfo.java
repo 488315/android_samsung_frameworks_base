@@ -10,7 +10,6 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public final class MediaRoute2ProviderInfo implements Parcelable {
     public static final Parcelable.Creator<MediaRoute2ProviderInfo> CREATOR =
             new Parcelable.Creator<MediaRoute2ProviderInfo>() { // from class:

@@ -1,6 +1,5 @@
 package android.text;
 
-/* loaded from: classes4.dex */
 public class SpannableString extends SpannableStringInternal
         implements CharSequence, GetChars, Spannable {
     @Override // android.text.SpannableStringInternal

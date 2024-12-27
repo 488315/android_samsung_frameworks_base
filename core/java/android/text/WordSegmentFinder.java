@@ -3,7 +3,6 @@ package android.text;
 import android.icu.util.ULocale;
 import android.text.method.WordIterator;
 
-/* loaded from: classes4.dex */
 public class WordSegmentFinder extends SegmentFinder {
     private final CharSequence mText;
     private final WordIterator mWordIterator;

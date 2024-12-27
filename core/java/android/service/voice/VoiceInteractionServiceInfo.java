@@ -19,7 +19,6 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 
-/* loaded from: classes3.dex */
 public class VoiceInteractionServiceInfo {
     static final String TAG = "VoiceInteractionServiceInfo";
     private String mHotwordDetectionService;

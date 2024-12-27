@@ -5,7 +5,6 @@ import android.content.res.Resources;
 
 import com.android.internal.util.Preconditions;
 
-/* loaded from: classes2.dex */
 public final class ImsConfigurationTracker {
     private static final int CONFIG_CHANGED = -1;
     private Configuration mLastKnownConfig = null;

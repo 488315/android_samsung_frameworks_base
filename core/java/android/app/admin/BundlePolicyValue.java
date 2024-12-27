@@ -7,7 +7,6 @@ import android.os.Parcelable;
 
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public final class BundlePolicyValue extends PolicyValue<Bundle> {
     public static final Parcelable.Creator<BundlePolicyValue> CREATOR =
             new Parcelable.Creator<

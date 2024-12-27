@@ -1,6 +1,5 @@
 package android.view;
 
-/* loaded from: classes4.dex */
 public final class SurfaceSession {
     private long mNativeClient = nativeCreate();
 

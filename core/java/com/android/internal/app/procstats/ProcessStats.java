@@ -44,7 +44,6 @@ import java.util.function.Consumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/* loaded from: classes5.dex */
 public final class ProcessStats implements Parcelable {
     public static final int ADD_PSS_EXTERNAL = 3;
     public static final int ADD_PSS_EXTERNAL_SLOW = 4;

@@ -18,7 +18,6 @@ import java.math.BigInteger;
 import java.security.interfaces.RSAPublicKey;
 import java.security.spec.RSAPublicKeySpec;
 
-/* loaded from: classes5.dex */
 public class BCRSAPublicKey implements RSAPublicKey {
     static final AlgorithmIdentifier DEFAULT_ALGORITHM_IDENTIFIER =
             new AlgorithmIdentifier(PKCSObjectIdentifiers.rsaEncryption, DERNull.INSTANCE);

@@ -6,7 +6,6 @@ import android.text.TextUtils;
 
 import com.android.internal.util.Preconditions;
 
-/* loaded from: classes3.dex */
 public class RapporConfig implements DifferentialPrivacyConfig {
     private static final String ALGORITHM_NAME = "Rappor";
     final String mEncoderId;

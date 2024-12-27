@@ -3,7 +3,6 @@ package android.hardware.biometrics;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes2.dex */
 public interface AuthenticateOptions {
     public static final int DISPLAY_STATE_AOD = 4;
     public static final int DISPLAY_STATE_LOCKSCREEN = 1;

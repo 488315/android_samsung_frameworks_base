@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 
-/* loaded from: classes.dex */
 class ConfigurationChangedListenerController {
     private final Object mLock = new Object();
     private final List<ListenerContainer> mListenerContainers = new ArrayList();

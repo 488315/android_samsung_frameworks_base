@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 import com.android.framework.protobuf.nano.MessageNano;
 
-/* loaded from: classes3.dex */
 public abstract class ParcelableMessageNano extends MessageNano implements Parcelable {
     @Override // android.os.Parcelable
     public int describeContents() {

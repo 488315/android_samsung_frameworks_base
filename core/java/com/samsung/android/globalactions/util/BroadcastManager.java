@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 
-/* loaded from: classes6.dex */
 public class BroadcastManager {
     public static final String ACTION_KEYGUARD_STATE_UPDATE =
             "com.samsung.keyguard.KEYGUARD_STATE_UPDATE";

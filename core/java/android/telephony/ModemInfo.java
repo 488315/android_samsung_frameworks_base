@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public class ModemInfo implements Parcelable {
     public static final Parcelable.Creator<ModemInfo> CREATOR =
             new Parcelable.Creator() { // from class: android.telephony.ModemInfo.1

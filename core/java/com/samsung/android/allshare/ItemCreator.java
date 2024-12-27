@@ -7,7 +7,6 @@ import com.sec.android.allshare.iface.message.AllShareKey;
 
 import java.util.Date;
 
-/* loaded from: classes3.dex */
 class ItemCreator {
     ItemCreator() {}
 

@@ -4,7 +4,6 @@ import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
 
-/* loaded from: classes.dex */
 public class KeyValueMap extends HashMap<String, Object> {
     public void setKeyValues(Object... keyValues) {
         if (keyValues.length % 2 != 0) {

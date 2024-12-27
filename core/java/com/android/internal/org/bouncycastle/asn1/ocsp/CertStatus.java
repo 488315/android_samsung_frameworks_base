@@ -8,7 +8,6 @@ import com.android.internal.org.bouncycastle.asn1.ASN1TaggedObject;
 import com.android.internal.org.bouncycastle.asn1.DERNull;
 import com.android.internal.org.bouncycastle.asn1.DERTaggedObject;
 
-/* loaded from: classes5.dex */
 public class CertStatus extends ASN1Object implements ASN1Choice {
     private int tagNo;
     private ASN1Encodable value;

@@ -23,7 +23,6 @@ import android.widget.LinearLayout;
 
 import com.android.internal.R;
 
-/* loaded from: classes5.dex */
 public final class MenuItemImpl implements MenuItem, SemMenuItem {
     private static final int CHECKABLE = 1;
     private static final int CHECKED = 2;

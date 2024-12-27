@@ -1,6 +1,5 @@
 package com.samsung.vekit.Common.Object;
 
-/* loaded from: classes6.dex */
 public class DoodlePoint {
     private float pressure;
     private float tanX;

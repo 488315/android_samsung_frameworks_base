@@ -14,7 +14,6 @@ import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-/* loaded from: classes3.dex */
 public final class CallAudioState implements Parcelable {
     public static final Parcelable.Creator<CallAudioState> CREATOR =
             new Parcelable.Creator<

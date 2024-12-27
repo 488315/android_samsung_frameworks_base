@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-/* loaded from: classes5.dex */
 public class ParsingUtils {
     public static final String ANDROID_RES_NAMESPACE = "http://schemas.android.com/apk/res/android";
     public static final int DEFAULT_MAX_SDK_VERSION = Integer.MAX_VALUE;

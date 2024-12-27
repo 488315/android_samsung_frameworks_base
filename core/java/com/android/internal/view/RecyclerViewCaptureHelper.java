@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 
 import java.util.function.Consumer;
 
-/* loaded from: classes5.dex */
 public class RecyclerViewCaptureHelper implements ScrollCaptureViewHelper<ViewGroup> {
     private static final String TAG = "RVCaptureHelper";
     private int mOverScrollMode;

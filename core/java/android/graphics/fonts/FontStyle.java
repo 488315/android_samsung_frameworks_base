@@ -6,7 +6,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public final class FontStyle {
     public static final int FONT_SLANT_ITALIC = 1;
     public static final int FONT_SLANT_UPRIGHT = 0;

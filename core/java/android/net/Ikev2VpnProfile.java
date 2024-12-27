@@ -35,7 +35,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public final class Ikev2VpnProfile extends PlatformVpnProfile {
     private static final String ANDROID_KEYSTORE_PROVIDER = "AndroidKeyStore";
     public static final List<String> DEFAULT_ALGORITHMS;

@@ -4,7 +4,6 @@ import android.annotation.SystemApi;
 import android.media.tv.tuner.TunerVersionChecker;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class IpFilterConfiguration extends FilterConfiguration {
     public static final int INVALID_IP_FILTER_CONTEXT_ID = -1;
     private final byte[] mDstIpAddress;

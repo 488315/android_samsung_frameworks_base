@@ -1,6 +1,5 @@
 package com.samsung.vekit.Common.Object;
 
-/* loaded from: classes6.dex */
 public class ImageInfo {
     private final int height;
     private final int orientation;

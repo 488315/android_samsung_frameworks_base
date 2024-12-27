@@ -1,6 +1,5 @@
 package com.samsung.android.knox.zt.internal;
 
-/* loaded from: classes6.dex */
 public class KnoxZtInternalConst {
     public static final String SERVICE_KNOX_ZT_INTERNAL = "knoxztinternal";
 

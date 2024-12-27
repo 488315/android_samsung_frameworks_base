@@ -1,6 +1,5 @@
 package com.samsung.vekit.Common.Type;
 
-/* loaded from: classes6.dex */
 public enum FpsType {
     FPS_30(0),
     FPS_60(1),

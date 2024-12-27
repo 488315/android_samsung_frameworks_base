@@ -7,7 +7,6 @@ import android.filterfw.core.Frame;
 
 import com.samsung.epic.Request;
 
-/* loaded from: classes2.dex */
 public class SingleFilterEffect extends FilterEffect {
     protected FilterFunction mFunction;
     protected String mInputName;

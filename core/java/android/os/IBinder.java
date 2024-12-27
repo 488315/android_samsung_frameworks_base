@@ -2,7 +2,6 @@ package android.os;
 
 import java.io.FileDescriptor;
 
-/* loaded from: classes3.dex */
 public interface IBinder {
     public static final int DUMP_TRANSACTION = 1598311760;
     public static final int FIRST_CALL_TRANSACTION = 1;

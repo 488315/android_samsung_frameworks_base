@@ -35,7 +35,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
-/* loaded from: classes.dex */
 public class DownloadManager {
     static final /* synthetic */ boolean $assertionsDisabled = false;
     public static final String ACTION_DOWNLOAD_COMPLETE = "android.intent.action.DOWNLOAD_COMPLETE";

@@ -14,7 +14,6 @@ import org.apache.harmony.dalvik.ddmc.DdmServer;
 
 import java.nio.ByteBuffer;
 
-/* loaded from: classes.dex */
 public class DdmHandleHello extends DdmHandle {
     private static final int CLIENT_PROTOCOL_VERSION = 1;
     public static final int CHUNK_HELO = ChunkHandler.type("HELO");

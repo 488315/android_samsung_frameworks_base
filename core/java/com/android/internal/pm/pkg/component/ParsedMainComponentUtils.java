@@ -14,7 +14,6 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 
-/* loaded from: classes5.dex */
 class ParsedMainComponentUtils {
     private static final String TAG = "PackageParsing";
 

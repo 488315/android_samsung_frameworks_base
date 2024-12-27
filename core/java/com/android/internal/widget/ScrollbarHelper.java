@@ -2,7 +2,6 @@ package com.android.internal.widget;
 
 import android.view.View;
 
-/* loaded from: classes5.dex */
 class ScrollbarHelper {
     ScrollbarHelper() {}
 

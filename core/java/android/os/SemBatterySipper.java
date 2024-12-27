@@ -5,7 +5,6 @@ import android.hardware.scontext.SContextConstants;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public class SemBatterySipper implements Parcelable {
     public static final Parcelable.Creator<SemBatterySipper> CREATOR =
             new Parcelable.Creator<

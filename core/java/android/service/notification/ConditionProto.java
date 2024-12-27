@@ -1,6 +1,5 @@
 package android.service.notification;
 
-/* loaded from: classes3.dex */
 public final class ConditionProto {
     public static final long FLAGS = 1120986464263L;
     public static final long ICON = 1120986464261L;

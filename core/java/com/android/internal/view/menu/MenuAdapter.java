@@ -7,7 +7,6 @@ import android.widget.BaseAdapter;
 
 import java.util.ArrayList;
 
-/* loaded from: classes5.dex */
 public class MenuAdapter extends BaseAdapter {
     MenuBuilder mAdapterMenu;
     private int mExpandedIndex = -1;

@@ -13,7 +13,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Vector;
 
-/* loaded from: classes6.dex */
 public class SEFHelper {
     public static final String SLOW_MOTION_DATA = "SlowMotion_Data";
     public static final String SUPER_SLOW_MOTION_DATA = "Super_SlowMotion_Data";

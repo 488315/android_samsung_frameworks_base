@@ -12,7 +12,6 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.Set;
 
-/* loaded from: classes4.dex */
 public class CapabilityExchangeAidlWrapper implements CapabilityExchangeEventListener {
     private static final String LOG_TAG = "CapExchangeListener";
     private final ICapabilityExchangeEventListener mListenerBinder;

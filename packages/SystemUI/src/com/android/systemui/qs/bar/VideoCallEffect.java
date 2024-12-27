@@ -25,7 +25,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public final class VideoCallEffect implements VideoCallMicModeBar.VideoCallMicModeBarBase {
     public static final Uri URI_VSET_APP_STATUS_DATA;
     public final VideoCallEffect$contentObserver$1 contentObserver;

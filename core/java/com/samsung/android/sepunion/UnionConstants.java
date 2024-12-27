@@ -4,7 +4,6 @@ import android.util.ArrayMap;
 
 import com.samsung.android.feature.SemFloatingFeature;
 
-/* loaded from: classes6.dex */
 public final class UnionConstants {
     public static final String BUNDLE_KEY_COMPONENT = "component";
     public static final String BUNDLE_KEY_COMPONENT_LIST = "component_list";

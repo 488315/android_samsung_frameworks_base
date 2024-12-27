@@ -4,7 +4,6 @@ import java.nio.Buffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
-/* loaded from: classes3.dex */
 public class GLES20 {
     public static final int GL_ACTIVE_ATTRIBUTES = 35721;
     public static final int GL_ACTIVE_ATTRIBUTE_MAX_LENGTH = 35722;

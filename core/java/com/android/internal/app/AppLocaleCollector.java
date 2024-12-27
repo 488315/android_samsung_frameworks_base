@@ -23,7 +23,6 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-/* loaded from: classes5.dex */
 public class AppLocaleCollector implements LocalePickerWithRegion.LocaleCollectorBase {
     private static final boolean ENABLED = true;
     private static final String PROP_APP_LANGUAGE_SUGGESTION =

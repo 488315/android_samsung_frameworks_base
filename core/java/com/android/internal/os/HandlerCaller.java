@@ -6,7 +6,6 @@ import android.os.Looper;
 import android.os.Message;
 
 @Deprecated
-/* loaded from: classes5.dex */
 public class HandlerCaller {
     final Callback mCallback;
     final Handler mH;

@@ -22,7 +22,6 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/* loaded from: classes5.dex */
 public class SemAddDeleteHorizontalListAnimator extends SemAbsAddDeleteAnimator {
     private static String TAG = "SemAddDeleteHListAnimator";
     private SemHorizontalListView mHorizontalListView;

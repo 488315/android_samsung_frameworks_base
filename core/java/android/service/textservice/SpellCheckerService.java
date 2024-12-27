@@ -21,7 +21,6 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Locale;
 
-/* loaded from: classes3.dex */
 public abstract class SpellCheckerService extends Service {
     private static final boolean DBG = false;
     public static final String SERVICE_INTERFACE =

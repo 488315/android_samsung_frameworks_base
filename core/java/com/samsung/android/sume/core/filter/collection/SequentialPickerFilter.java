@@ -20,7 +20,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-/* loaded from: classes6.dex */
 public class SequentialPickerFilter extends SequentialFilter {
     private final List<Pair<Evaluator, MediaFilter>> evaluateFilters;
 

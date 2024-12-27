@@ -8,7 +8,6 @@ import android.filterfw.format.ObjectFormat;
 
 import java.util.Locale;
 
-/* loaded from: classes.dex */
 public class ToUpperCase extends Filter {
     private FrameFormat mOutputFormat;
 

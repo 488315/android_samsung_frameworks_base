@@ -5,7 +5,6 @@ import com.android.compose.animation.scene.LowestZIndexScenePicker;
 import com.samsung.systemui.splugins.lockstar.PluginLockStar;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes.dex */
 public final class Communal$Elements {
     public static final Communal$Elements INSTANCE = new Communal$Elements();
     public static final ElementKey Scrim = new ElementKey("Scrim", null, LowestZIndexScenePicker.INSTANCE, 2, null);

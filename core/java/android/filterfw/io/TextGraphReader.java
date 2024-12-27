@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.regex.Pattern;
 
-/* loaded from: classes.dex */
 public class TextGraphReader extends GraphReader {
     private KeyValueMap mBoundReferences;
     private ArrayList<Command> mCommands = new ArrayList<>();

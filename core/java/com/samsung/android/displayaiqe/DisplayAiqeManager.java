@@ -5,7 +5,6 @@ import android.content.Context;
 import android.os.RemoteException;
 import android.util.Slog;
 
-/* loaded from: classes6.dex */
 public class DisplayAiqeManager {
     private static final String TAG = "DisplayAiqeManager";
     private final Context mContext;

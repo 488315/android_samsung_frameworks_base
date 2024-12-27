@@ -7,7 +7,6 @@ import android.util.Log;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes2.dex */
 public final class Rating implements Parcelable {
     public static final Parcelable.Creator<Rating> CREATOR =
             new Parcelable.Creator<Rating>() { // from class: android.media.Rating.1

@@ -16,7 +16,6 @@ import java.util.List;
 
 import javax.crypto.spec.IvParameterSpec;
 
-/* loaded from: classes3.dex */
 abstract class AndroidKeyStoreUnauthenticatedAESCipherSpi extends AndroidKeyStoreCipherSpiBase {
     private static final int BLOCK_SIZE_BYTES = 16;
     private byte[] mIv;

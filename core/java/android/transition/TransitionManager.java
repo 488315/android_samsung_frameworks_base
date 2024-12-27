@@ -9,7 +9,6 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* loaded from: classes4.dex */
 public class TransitionManager {
     private static String LOG_TAG = "TransitionManager";
     private static Transition sDefaultTransition = new AutoTransition();

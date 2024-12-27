@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/* loaded from: classes6.dex */
 public class RuntimeManifestPolicies {
     public static final String TAG = "RuntimeManifestPolicies";
     private final List<PolicyInfo> mApplications = new ArrayList();

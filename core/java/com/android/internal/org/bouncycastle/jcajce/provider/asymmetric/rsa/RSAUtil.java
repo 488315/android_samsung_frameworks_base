@@ -13,7 +13,6 @@ import java.security.interfaces.RSAPrivateCrtKey;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 
-/* loaded from: classes5.dex */
 public class RSAUtil {
     public static final ASN1ObjectIdentifier[] rsaOids = {
         PKCSObjectIdentifiers.rsaEncryption,

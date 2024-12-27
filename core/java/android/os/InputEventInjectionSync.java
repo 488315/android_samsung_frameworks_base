@@ -1,6 +1,5 @@
 package android.os;
 
-/* loaded from: classes3.dex */
 public @interface InputEventInjectionSync {
     public static final int NONE = 0;
     public static final int WAIT_FOR_FINISHED = 2;

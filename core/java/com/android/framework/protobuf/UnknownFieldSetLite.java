@@ -3,7 +3,6 @@ package com.android.framework.protobuf;
 import java.io.IOException;
 import java.util.Arrays;
 
-/* loaded from: classes3.dex */
 public final class UnknownFieldSetLite {
     private static final UnknownFieldSetLite DEFAULT_INSTANCE =
             new UnknownFieldSetLite(0, new int[0], new Object[0], false);

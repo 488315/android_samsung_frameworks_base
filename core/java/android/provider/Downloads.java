@@ -4,7 +4,6 @@ import android.content.Context;
 import android.net.Uri;
 import android.service.timezone.TimeZoneProviderService;
 
-/* loaded from: classes3.dex */
 public final class Downloads {
     public static final String CALL_CREATE_EXTERNAL_PUBLIC_DIR = "create_external_public_dir";
     public static final String CALL_MEDIASTORE_DOWNLOADS_DELETED = "mediastore_downloads_deleted";

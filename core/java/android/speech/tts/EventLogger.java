@@ -2,7 +2,6 @@ package android.speech.tts;
 
 import android.text.TextUtils;
 
-/* loaded from: classes3.dex */
 class EventLogger extends AbstractEventLogger {
     private final SynthesisRequest mRequest;
 

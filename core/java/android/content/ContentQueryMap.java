@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Observable;
 
-/* loaded from: classes.dex */
 public class ContentQueryMap extends Observable {
     private String[] mColumnNames;
     private ContentObserver mContentObserver;

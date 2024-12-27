@@ -9,7 +9,6 @@ import com.android.framework.protobuf.nano.WireFormatNano;
 
 import java.io.IOException;
 
-/* loaded from: classes3.dex */
 public final class StringList extends MessageNano {
     private static volatile StringList[] _emptyArray;
     public String[] stringValue;

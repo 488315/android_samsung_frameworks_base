@@ -58,7 +58,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.BiConsumer;
 
-/* loaded from: classes2.dex */
 public class CameraDeviceImpl extends CameraDevice implements IBinder.DeathRecipient {
     static final long CHECK_PARAMS_IN_IS_SESSION_CONFIGURATION_SUPPORTED = 320741775;
     private static final long NANO_PER_SECOND = 1000000000;

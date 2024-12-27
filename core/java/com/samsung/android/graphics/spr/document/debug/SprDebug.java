@@ -18,7 +18,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.reflect.Method;
 
-/* loaded from: classes6.dex */
 public class SprDebug {
     public static final int DEBUG_HIGH = 3;
     public static final int DEBUG_LOW = 1;

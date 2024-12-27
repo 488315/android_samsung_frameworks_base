@@ -19,7 +19,6 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/* loaded from: classes4.dex */
 public final class URLUtil {
     static final String ASSET_BASE = "file:///android_asset/";
     static final String CONTENT_BASE = "content:";

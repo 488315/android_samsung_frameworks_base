@@ -5,7 +5,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.telephony.satellite.AntennaPosition;
 
-/* loaded from: classes4.dex */
 public class SatelliteCapabilities implements Parcelable {
     public static final Parcelable.Creator<SatelliteCapabilities> CREATOR =
             new Parcelable.Creator<

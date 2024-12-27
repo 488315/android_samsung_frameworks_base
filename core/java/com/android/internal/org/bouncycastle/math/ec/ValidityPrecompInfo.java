@@ -1,6 +1,5 @@
 package com.android.internal.org.bouncycastle.math.ec;
 
-/* loaded from: classes5.dex */
 class ValidityPrecompInfo implements PreCompInfo {
     static final String PRECOMP_NAME = "bc_validity";
     private boolean failed = false;

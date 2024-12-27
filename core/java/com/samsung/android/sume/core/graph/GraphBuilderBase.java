@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-/* loaded from: classes6.dex */
 public abstract class GraphBuilderBase<T> implements GraphBuilder<T> {
     protected List<GraphNode<T>> graphNodes = new ArrayList();
 

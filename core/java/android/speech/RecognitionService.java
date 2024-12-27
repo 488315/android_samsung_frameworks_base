@@ -24,7 +24,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.function.Consumer;
 
-/* loaded from: classes3.dex */
 public abstract class RecognitionService extends Service {
     private static final boolean DBG = false;
     private static final int DEFAULT_MAX_CONCURRENT_SESSIONS_COUNT = 1;

@@ -12,7 +12,6 @@ import java.util.Arrays;
 import java.util.List;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public final class EuiccRulesAuthTable implements Parcelable {
     public static final Parcelable.Creator<EuiccRulesAuthTable> CREATOR =
             new Parcelable.Creator<

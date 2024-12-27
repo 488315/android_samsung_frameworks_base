@@ -4,7 +4,6 @@ import com.android.internal.org.bouncycastle.asn1.ASN1Object;
 import com.android.internal.org.bouncycastle.asn1.ASN1Primitive;
 import com.android.internal.org.bouncycastle.asn1.DERBitString;
 
-/* loaded from: classes5.dex */
 public class KeyUsage extends ASN1Object {
     public static final int cRLSign = 2;
     public static final int dataEncipherment = 16;

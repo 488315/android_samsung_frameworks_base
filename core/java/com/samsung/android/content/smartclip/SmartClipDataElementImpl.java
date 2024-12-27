@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 
-/* loaded from: classes5.dex */
 public class SmartClipDataElementImpl implements SemSmartClipDataElement {
     protected static final String TAG = "SmartClipDataElementImpl";
     protected SmartClipDataElementImpl mFirstChild;

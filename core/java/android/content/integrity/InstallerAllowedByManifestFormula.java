@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 import java.util.Map;
 
-/* loaded from: classes.dex */
 public class InstallerAllowedByManifestFormula extends IntegrityFormula implements Parcelable {
     public static final Parcelable.Creator<InstallerAllowedByManifestFormula> CREATOR =
             new Parcelable.Creator<InstallerAllowedByManifestFormula>() { // from class:

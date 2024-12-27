@@ -25,7 +25,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* loaded from: classes.dex */
 public class AnimatorInflater {
     private static final boolean DBG_ANIMATOR_INFLATER = false;
     private static final int SEQUENTIALLY = 1;

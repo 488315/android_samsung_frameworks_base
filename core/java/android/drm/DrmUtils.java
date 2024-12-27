@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 @Deprecated
-/* loaded from: classes.dex */
 public class DrmUtils {
     static byte[] readBytes(String path) throws IOException {
         File file = new File(path);

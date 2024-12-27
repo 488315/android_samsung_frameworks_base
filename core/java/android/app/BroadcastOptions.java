@@ -10,7 +10,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public class BroadcastOptions extends ComponentOptions {
     public static final long CHANGE_ALWAYS_DISABLED = 210856463;
     public static final long CHANGE_ALWAYS_ENABLED = 209888056;

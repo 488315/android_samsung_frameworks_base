@@ -4,7 +4,6 @@ import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes.dex */
 public class PairDevice implements Parcelable {
     public static final Parcelable.Creator<PairDevice> CREATOR =
             new Parcelable.Creator<PairDevice>() { // from class: android.debug.PairDevice.1

@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class AmbientContextDetectionResult implements Parcelable {
     public static final Parcelable.Creator<AmbientContextDetectionResult> CREATOR =
             new Parcelable.Creator<

@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class RadioChainInfo implements Parcelable {
     public static final Parcelable.Creator<RadioChainInfo> CREATOR =
             new Parcelable.Creator<

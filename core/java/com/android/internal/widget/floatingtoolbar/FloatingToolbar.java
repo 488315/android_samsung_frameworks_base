@@ -19,7 +19,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes5.dex */
 public final class FloatingToolbar {
     public static final String FLOATING_TOOLBAR_TAG = "floating_toolbar";
     private static final MenuItem.OnMenuItemClickListener NO_OP_MENUITEM_CLICK_LISTENER =

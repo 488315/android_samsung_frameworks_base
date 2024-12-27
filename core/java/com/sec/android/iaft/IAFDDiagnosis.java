@@ -20,7 +20,6 @@ import com.samsung.android.hardware.secinputdev.SemInputDeviceManager;
 import java.util.HashMap;
 import java.util.Locale;
 
-/* loaded from: classes6.dex */
 public class IAFDDiagnosis {
     private static final int EXP_REPAIRINFO_AppFlag = 3;
     private static final int EXP_REPAIRINFO_MainLan = 4;

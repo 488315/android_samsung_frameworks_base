@@ -1,6 +1,5 @@
 package android.service.autofill;
 
-/* loaded from: classes3.dex */
 public final class Flags {
     private static FeatureFlags FEATURE_FLAGS = new FeatureFlagsImpl();
     public static final String FLAG_ADD_LAST_FOCUSED_ID_TO_CLIENT_STATE =

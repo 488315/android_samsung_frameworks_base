@@ -9,7 +9,6 @@ import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
 
-/* loaded from: classes3.dex */
 final class OnTranslationResultCallbackWrapper implements Consumer<TranslationResponse> {
     private static final String TAG = "OnTranslationResultCallback";
     private final ITranslationCallback mCallback;

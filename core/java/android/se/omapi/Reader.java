@@ -7,7 +7,6 @@ import android.util.Log;
 
 import java.io.IOException;
 
-/* loaded from: classes3.dex */
 public final class Reader {
     private static final String TAG = "OMAPI.Reader";
     private final Object mLock = new Object();

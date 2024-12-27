@@ -8,7 +8,6 @@ import android.util.Log;
 
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public abstract class PolicyUpdateReceiver extends BroadcastReceiver {
     public static final String ACTION_DEVICE_POLICY_CHANGED =
             "android.app.admin.action.DEVICE_POLICY_CHANGED";

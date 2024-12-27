@@ -7,7 +7,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.os.ResultReceiver;
 
-/* loaded from: classes3.dex */
 public interface ICarrierService extends IInterface {
     void getCarrierConfig(int i, CarrierIdentifier carrierIdentifier, ResultReceiver resultReceiver)
             throws RemoteException;

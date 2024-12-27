@@ -1,6 +1,5 @@
 package android.service.usb;
 
-/* loaded from: classes3.dex */
 public final class UsbUserPermissionsManagerProto {
     public static final long ACCESSORY_PERMISSIONS = 2246267895811L;
     public static final long ACCESSORY_PERSISTENT_PERMISSIONS = 2246267895813L;

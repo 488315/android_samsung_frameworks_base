@@ -17,7 +17,6 @@ import java.io.IOException;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class IntentFilterPolicyKey extends PolicyKey {
     public static final Parcelable.Creator<IntentFilterPolicyKey> CREATOR =
             new Parcelable.Creator<IntentFilterPolicyKey>() { // from class:

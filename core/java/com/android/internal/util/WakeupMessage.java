@@ -5,7 +5,6 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 
-/* loaded from: classes5.dex */
 public class WakeupMessage implements AlarmManager.OnAlarmListener {
     private final AlarmManager mAlarmManager;
     protected final int mArg1;

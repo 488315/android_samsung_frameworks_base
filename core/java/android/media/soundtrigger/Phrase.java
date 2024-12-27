@@ -8,7 +8,6 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public class Phrase implements Parcelable {
     public static final Parcelable.Creator<Phrase> CREATOR =
             new Parcelable.Creator<Phrase>() { // from class: android.media.soundtrigger.Phrase.1

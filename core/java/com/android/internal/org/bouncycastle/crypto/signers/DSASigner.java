@@ -13,7 +13,6 @@ import com.android.internal.org.bouncycastle.util.BigIntegers;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 
-/* loaded from: classes5.dex */
 public class DSASigner implements DSAExt {
     private final DSAKCalculator kCalculator;
     private DSAKeyParameters key;

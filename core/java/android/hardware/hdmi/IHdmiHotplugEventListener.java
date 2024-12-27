@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes2.dex */
 public interface IHdmiHotplugEventListener extends IInterface {
     void onReceived(HdmiHotplugEvent hdmiHotplugEvent) throws RemoteException;
 

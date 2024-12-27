@@ -6,7 +6,6 @@ import android.os.IBinder;
 import android.util.Log;
 import android.window.ScreenCapture;
 
-/* loaded from: classes4.dex */
 public class SemSurfaceControl {
     private static final String TAG = "SemSurfaceControl";
 

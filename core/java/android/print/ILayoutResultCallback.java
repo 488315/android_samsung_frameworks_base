@@ -8,7 +8,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.text.TextUtils;
 
-/* loaded from: classes3.dex */
 public interface ILayoutResultCallback extends IInterface {
     void onLayoutCanceled(int i) throws RemoteException;
 

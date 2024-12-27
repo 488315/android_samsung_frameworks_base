@@ -8,7 +8,6 @@ import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-/* loaded from: classes3.dex */
 public class RootElement extends Element {
     final Handler handler;
 

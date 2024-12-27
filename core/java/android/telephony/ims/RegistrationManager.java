@@ -13,7 +13,6 @@ import java.util.Map;
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 
-/* loaded from: classes4.dex */
 public interface RegistrationManager {
     public static final Map<Integer, Integer> IMS_REG_TO_ACCESS_TYPE_MAP =
             Map.of(-1, -1, 0, 1, 3, 1, 1, 2, 2, 2);

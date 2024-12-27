@@ -4,7 +4,6 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-/* loaded from: classes6.dex */
 public class TypefaceParser extends DefaultHandler {
     private static final String ATTR_NAME = "displayname";
     private static final String NODE_DROIDNAME = "droidname";

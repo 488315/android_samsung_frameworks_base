@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 import java.util.Objects;
 
-/* loaded from: classes6.dex */
 public class SplitActivityInfo implements Parcelable {
     public static final String ANY_ACTIVITY = "*";
     public static final Parcelable.Creator<SplitActivityInfo> CREATOR =

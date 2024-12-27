@@ -1,6 +1,5 @@
 package com.android.os.dnd;
 
-/* loaded from: classes5.dex */
 public final class DNDProtoEnums {
     public static final int AUTOMATIC_RULE = 2;
     public static final int CHANNEL_POLICY_NONE = 2;

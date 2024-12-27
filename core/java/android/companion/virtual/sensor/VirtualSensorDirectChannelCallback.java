@@ -4,7 +4,6 @@ import android.annotation.SystemApi;
 import android.os.SharedMemory;
 
 @SystemApi
-/* loaded from: classes.dex */
 public interface VirtualSensorDirectChannelCallback {
     void onDirectChannelConfigured(int i, VirtualSensor virtualSensor, int i2, int i3);
 

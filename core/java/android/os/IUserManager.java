@@ -7,7 +7,6 @@ import android.graphics.Bitmap;
 
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public interface IUserManager extends IInterface {
     void addUserRestrictionsListener(IUserRestrictionsListener iUserRestrictionsListener)
             throws RemoteException;

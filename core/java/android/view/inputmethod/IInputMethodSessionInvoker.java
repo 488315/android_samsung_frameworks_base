@@ -11,7 +11,6 @@ import android.util.Log;
 import com.android.internal.inputmethod.IInputMethodSession;
 import com.android.internal.inputmethod.IRemoteInputConnection;
 
-/* loaded from: classes4.dex */
 final class IInputMethodSessionInvoker {
     private static final String TAG = "InputMethodSessionWrapper";
     private static Handler sAsyncBinderEmulationHandler;

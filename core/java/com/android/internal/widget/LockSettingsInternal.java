@@ -5,7 +5,6 @@ import android.app.admin.PasswordMetrics;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes5.dex */
 public abstract class LockSettingsInternal {
     public static final int ARM_REBOOT_ERROR_ESCROW_NOT_READY = 2;
     public static final int ARM_REBOOT_ERROR_KEYSTORE_FAILURE = 6;

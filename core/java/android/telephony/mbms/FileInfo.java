@@ -7,7 +7,6 @@ import android.os.Parcelable;
 
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public final class FileInfo implements Parcelable {
     public static final Parcelable.Creator<FileInfo> CREATOR =
             new Parcelable.Creator<FileInfo>() { // from class: android.telephony.mbms.FileInfo.1

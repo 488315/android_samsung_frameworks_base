@@ -4,7 +4,6 @@ import android.text.TextUtils;
 
 import java.util.regex.Pattern;
 
-/* loaded from: classes3.dex */
 public class HtmlUtils {
     private static final String HTML_ENTITY = "&[^;]+;";
     public static final String HTML_LINE_FEED = "&#10;";

@@ -1,6 +1,5 @@
 package com.samsung.android.sume.core.functional;
 
-/* loaded from: classes6.dex */
 public interface PlaceHolder<T> {
     boolean isEmpty();
 

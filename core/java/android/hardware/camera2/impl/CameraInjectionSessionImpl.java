@@ -13,7 +13,6 @@ import com.android.internal.util.function.pooled.PooledLambda;
 import java.util.concurrent.Executor;
 import java.util.function.BiConsumer;
 
-/* loaded from: classes2.dex */
 public class CameraInjectionSessionImpl extends CameraInjectionSession
         implements IBinder.DeathRecipient {
     private static final String TAG = "CameraInjectionSessionImpl";

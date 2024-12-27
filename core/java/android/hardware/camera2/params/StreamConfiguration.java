@@ -5,7 +5,6 @@ import android.util.Size;
 
 import com.android.internal.util.Preconditions;
 
-/* loaded from: classes2.dex */
 public class StreamConfiguration {
     protected int mFormat;
     protected int mHeight;

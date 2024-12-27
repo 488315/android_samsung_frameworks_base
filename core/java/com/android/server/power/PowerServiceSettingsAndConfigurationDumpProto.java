@@ -1,6 +1,5 @@
 package com.android.server.power;
 
-/* loaded from: classes5.dex */
 public final class PowerServiceSettingsAndConfigurationDumpProto {
     public static final long ARE_DREAMS_ACTIVATED_ON_DOCK_BY_DEFAULT_CONFIG = 1133871366154L;
     public static final long ARE_DREAMS_ACTIVATED_ON_SLEEP_BY_DEFAULT_CONFIG = 1133871366153L;

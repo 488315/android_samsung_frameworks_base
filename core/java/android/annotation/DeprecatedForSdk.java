@@ -15,7 +15,6 @@ import java.lang.annotation.Target;
     ElementType.TYPE
 })
 @Retention(RetentionPolicy.SOURCE)
-/* loaded from: classes.dex */
 public @interface DeprecatedForSdk {
     Class<?>[] allowIn() default {};
 

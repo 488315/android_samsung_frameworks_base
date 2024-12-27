@@ -3,7 +3,6 @@ package android.telephony.euicc;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes4.dex */
 public final class EuiccInfo implements Parcelable {
     public static final Parcelable.Creator<EuiccInfo> CREATOR =
             new Parcelable.Creator<EuiccInfo>() { // from class: android.telephony.euicc.EuiccInfo.1

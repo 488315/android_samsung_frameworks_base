@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.Arrays;
 
 @Deprecated
-/* loaded from: classes.dex */
 public class DrmRights {
     private String mAccountId;
     private byte[] mData;

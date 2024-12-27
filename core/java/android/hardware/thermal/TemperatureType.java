@@ -1,6 +1,5 @@
 package android.hardware.thermal;
 
-/* loaded from: classes2.dex */
 public @interface TemperatureType {
     public static final int AMBIENT = 18;
     public static final int BATTERY = 2;

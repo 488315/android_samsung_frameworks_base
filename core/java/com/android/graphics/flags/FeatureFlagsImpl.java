@@ -1,6 +1,5 @@
 package com.android.graphics.flags;
 
-/* loaded from: classes3.dex */
 public final class FeatureFlagsImpl implements FeatureFlags {
     @Override // com.android.graphics.flags.FeatureFlags
     public boolean exactComputeBounds() {

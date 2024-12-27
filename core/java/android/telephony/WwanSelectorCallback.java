@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.function.Consumer;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public interface WwanSelectorCallback {
     void onDomainSelected(int i, boolean z);
 

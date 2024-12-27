@@ -5,7 +5,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @Deprecated
-/* loaded from: classes2.dex */
 public class SContextHallSensor extends SContextEventContext {
     public static final Parcelable.Creator<SContextHallSensor> CREATOR =
             new Parcelable.Creator<SContextHallSensor>() { // from class:

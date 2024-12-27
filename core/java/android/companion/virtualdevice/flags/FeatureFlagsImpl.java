@@ -1,6 +1,5 @@
 package android.companion.virtualdevice.flags;
 
-/* loaded from: classes.dex */
 public final class FeatureFlagsImpl implements FeatureFlags {
     @Override // android.companion.virtualdevice.flags.FeatureFlags
     public boolean cameraDeviceAwareness() {

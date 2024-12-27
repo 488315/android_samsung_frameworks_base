@@ -14,7 +14,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes2.dex */
 public final class PlaybackState implements Parcelable {
     public static final long ACTION_FAST_FORWARD = 64;
     public static final long ACTION_PAUSE = 2;

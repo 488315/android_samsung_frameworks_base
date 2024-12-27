@@ -5,7 +5,6 @@ import android.os.Parcelable;
 import android.view.View;
 import android.view.accessibility.AccessibilityNodeInfo;
 
-/* loaded from: classes4.dex */
 public class AccessibilityURLSpan extends URLSpan implements Parcelable {
     final AccessibilityClickableSpan mAccessibilityClickableSpan;
 

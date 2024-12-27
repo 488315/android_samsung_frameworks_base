@@ -2,7 +2,6 @@ package com.samsung.android.emergencymode;
 
 import android.net.Uri;
 
-/* loaded from: classes6.dex */
 public class SemEmergencyConstants {
     public static final String ACTION = "action";
     public static final int ALARM_ALLOW = 4;

@@ -1,6 +1,5 @@
 package android.media.editing;
 
-/* loaded from: classes2.dex */
 public final class Enums {
     public static final int ERROR_CODE_AUDIO_PROCESSING_FAILED = 18;
     public static final int ERROR_CODE_DECODER_INIT_FAILED = 11;

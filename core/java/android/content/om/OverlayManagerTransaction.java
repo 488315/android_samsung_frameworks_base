@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public final class OverlayManagerTransaction implements Parcelable {
     public static final Parcelable.Creator<OverlayManagerTransaction> CREATOR =
             new Parcelable.Creator<OverlayManagerTransaction>() { // from class:

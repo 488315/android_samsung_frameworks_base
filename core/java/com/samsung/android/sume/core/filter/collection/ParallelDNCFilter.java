@@ -18,7 +18,6 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
-/* loaded from: classes6.dex */
 public class ParallelDNCFilter extends ParallelFilter {
     private final BufferChannel inChannel;
     private final BufferChannel outChannel;

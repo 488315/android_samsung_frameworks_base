@@ -9,7 +9,6 @@ import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes4.dex */
 public final class JsonReader implements Closeable {
     private static final String FALSE = "false";
     private static final String TRUE = "true";

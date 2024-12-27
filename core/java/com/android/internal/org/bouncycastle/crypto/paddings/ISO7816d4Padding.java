@@ -4,7 +4,6 @@ import com.android.internal.org.bouncycastle.crypto.InvalidCipherTextException;
 
 import java.security.SecureRandom;
 
-/* loaded from: classes5.dex */
 public class ISO7816d4Padding implements BlockCipherPadding {
     @Override // com.android.internal.org.bouncycastle.crypto.paddings.BlockCipherPadding
     public void init(SecureRandom random) throws IllegalArgumentException {}

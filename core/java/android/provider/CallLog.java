@@ -39,7 +39,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes3.dex */
 public class CallLog {
     public static final String AUTHORITY = "call_log";
     private static final String LOG_TAG = "CallLog";

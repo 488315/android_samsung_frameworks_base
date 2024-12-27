@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.List;
 
 @CheckReturnValue
-/* loaded from: classes3.dex */
 final class StructuralMessageInfo implements MessageInfo {
     private final int[] checkInitialized;
     private final MessageLite defaultInstance;

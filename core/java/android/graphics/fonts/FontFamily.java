@@ -14,7 +14,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.Set;
 
-/* loaded from: classes.dex */
 public final class FontFamily {
     private static final String TAG = "FontFamily";
     private final long mNativePtr;

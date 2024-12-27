@@ -25,7 +25,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/* loaded from: classes.dex */
 public class CameraLightSensorManager {
     private short listenerRegistered;
     private ServiceConnection mCameraLightSensorConnection;

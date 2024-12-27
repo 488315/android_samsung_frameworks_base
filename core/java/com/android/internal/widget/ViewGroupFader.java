@@ -6,7 +6,6 @@ import android.view.ViewGroup;
 import android.view.animation.BaseInterpolator;
 import android.view.animation.PathInterpolator;
 
-/* loaded from: classes5.dex */
 class ViewGroupFader {
     private static final float ALPHA_LOWER_BOUND = 0.5f;
     private static final float CHAINED_BOUNDS_BOTTOM_FRACTION = 0.2f;

@@ -6,7 +6,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.concurrent.ConcurrentHashMap;
 
-/* loaded from: classes6.dex */
 public class SemWifiP2pDeviceList {
     private final ConcurrentHashMap<String, SemWifiP2pDevice> mDevices = new ConcurrentHashMap<>();
 

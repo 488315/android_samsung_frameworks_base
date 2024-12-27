@@ -4,7 +4,6 @@ import android.graphics.Bitmap;
 
 import com.samsung.android.sume.core.Def;
 
-/* loaded from: classes6.dex */
 public enum ColorSpace implements NumericEnum {
     NONE(0),
     BT601(1),

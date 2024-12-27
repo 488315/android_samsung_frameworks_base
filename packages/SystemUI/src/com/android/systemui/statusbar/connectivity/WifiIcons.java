@@ -7,7 +7,6 @@ import com.android.settingslib.flags.Flags;
 import com.android.systemui.statusbar.pipeline.wifi.ui.util.SamsungWifiIcons;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public final class WifiIcons {
     public static final int[][] QS_WIFI_SIGNAL_STRENGTH;
     public static final SignalIcon$IconGroup UNMERGED_WIFI;

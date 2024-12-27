@@ -1,6 +1,5 @@
 package android.view;
 
-/* loaded from: classes4.dex */
 public final class RemoteAnimationTargetProto {
     public static final long CLIP_RECT = 1146756268037L;
     public static final long CONTENT_INSETS = 1146756268038L;

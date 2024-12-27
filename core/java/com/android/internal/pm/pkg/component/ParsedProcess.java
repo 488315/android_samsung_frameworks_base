@@ -4,7 +4,6 @@ import android.util.ArrayMap;
 
 import java.util.Set;
 
-/* loaded from: classes5.dex */
 public interface ParsedProcess {
     ArrayMap<String, String> getAppClassNamesByPackage();
 

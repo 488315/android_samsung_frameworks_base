@@ -11,7 +11,6 @@ import com.android.internal.org.bouncycastle.asn1.ASN1TaggedObject;
 import com.android.internal.org.bouncycastle.asn1.DLSequence;
 import com.android.internal.org.bouncycastle.asn1.DLTaggedObject;
 
-/* loaded from: classes5.dex */
 public class SafeBag extends ASN1Object {
     private ASN1Set bagAttributes;
     private ASN1ObjectIdentifier bagId;

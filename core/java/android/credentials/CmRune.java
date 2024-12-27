@@ -1,6 +1,5 @@
 package android.credentials;
 
-/* loaded from: classes.dex */
 public class CmRune {
     public static final boolean CREDENTIAL_MANAGER_BOOL_GET_FLOW_CUSTOM_SORT_TO_DISPLAY = true;
     public static final boolean CREDENTIAL_MANAGER_BOOL_GET_FLOW_DEFAULT_PROVIDER = true;

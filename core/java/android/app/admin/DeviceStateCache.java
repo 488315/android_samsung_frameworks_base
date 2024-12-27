@@ -2,7 +2,6 @@ package android.app.admin;
 
 import com.android.server.LocalServices;
 
-/* loaded from: classes.dex */
 public abstract class DeviceStateCache {
     public abstract boolean isDeviceProvisioned();
 

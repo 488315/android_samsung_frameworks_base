@@ -16,7 +16,6 @@ import java.security.cert.X509CRLSelector;
 import java.security.cert.X509Certificate;
 import java.util.Collection;
 
-/* loaded from: classes5.dex */
 public class PKIXCRLStoreSelector<T extends CRL> implements Selector<T> {
     private final CRLSelector baseSelector;
     private final boolean completeCRLEnabled;

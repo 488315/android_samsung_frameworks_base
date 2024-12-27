@@ -4,7 +4,6 @@ import android.hardware.biometrics.BiometricAuthenticator;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public final class Face extends BiometricAuthenticator.Identifier {
     public static final Parcelable.Creator<Face> CREATOR =
             new Parcelable.Creator<Face>() { // from class: android.hardware.face.Face.1

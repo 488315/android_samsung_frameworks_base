@@ -11,7 +11,6 @@ import java.util.Objects;
 import java.util.concurrent.Executor;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public class MusicRecognitionManager {
     public static final int RECOGNITION_FAILED_AUDIO_UNAVAILABLE = 7;
     public static final int RECOGNITION_FAILED_NOT_FOUND = 1;

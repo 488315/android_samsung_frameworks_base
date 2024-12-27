@@ -7,7 +7,6 @@ import android.util.AttributeSet;
 import com.android.internal.R;
 
 @Deprecated
-/* loaded from: classes4.dex */
 public class TwoLineListItem extends RelativeLayout {
     private TextView mText1;
     private TextView mText2;

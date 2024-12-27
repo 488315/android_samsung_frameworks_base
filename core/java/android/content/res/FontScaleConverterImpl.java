@@ -4,7 +4,6 @@ import android.util.MathUtils;
 
 import java.util.Arrays;
 
-/* loaded from: classes.dex */
 public class FontScaleConverterImpl implements FontScaleConverter {
     public final float[] mFromSpValues;
     public final float[] mToDpValues;

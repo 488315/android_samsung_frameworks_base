@@ -8,7 +8,6 @@ import java.security.cert.X509Certificate;
 import java.util.Date;
 import java.util.Set;
 
-/* loaded from: classes3.dex */
 public class TrustedCertificateStoreAdapter extends TrustedCertificateStore {
     private final NetworkSecurityConfig mConfig;
 

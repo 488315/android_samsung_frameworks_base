@@ -101,7 +101,6 @@ import java.util.function.Predicate;
 import java.util.function.ToIntFunction;
 import libcore.io.IoUtils;
 
-/* loaded from: classes.dex */
 public class WallpaperManager implements SemWallpaperManager {
     public static final String ACTION_CHANGE_LIVE_WALLPAPER = "android.service.wallpaper.CHANGE_LIVE_WALLPAPER";
     public static final String ACTION_CROP_AND_SET_WALLPAPER = "android.service.wallpaper.CROP_AND_SET_WALLPAPER";

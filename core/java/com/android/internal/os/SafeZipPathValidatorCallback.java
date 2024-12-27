@@ -5,7 +5,6 @@ import dalvik.system.ZipPathValidator;
 import java.io.File;
 import java.util.zip.ZipException;
 
-/* loaded from: classes5.dex */
 public class SafeZipPathValidatorCallback implements ZipPathValidator.Callback {
     public static final long VALIDATE_ZIP_PATH_FOR_PATH_TRAVERSAL = 242716250;
 

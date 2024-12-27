@@ -5,7 +5,6 @@ import android.util.Log;
 import java.io.InputStream;
 import java.util.Vector;
 
-/* loaded from: classes6.dex */
 public class HEIFParser {
     private static final String TAG = "HEIFParser";
     InputStream mData;

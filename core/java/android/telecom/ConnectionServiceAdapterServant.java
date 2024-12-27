@@ -15,7 +15,6 @@ import com.android.internal.telecom.RemoteServiceCallback;
 
 import java.util.List;
 
-/* loaded from: classes3.dex */
 final class ConnectionServiceAdapterServant {
     private static final int MSG_ADD_CONFERENCE_CALL = 10;
     private static final int MSG_ADD_EXISTING_CONNECTION = 21;

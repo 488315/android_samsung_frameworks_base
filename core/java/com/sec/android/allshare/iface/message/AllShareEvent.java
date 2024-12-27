@@ -1,6 +1,5 @@
 package com.sec.android.allshare.iface.message;
 
-/* loaded from: classes6.dex */
 public class AllShareEvent {
     public static final String EVENT_AIRPLANE_MODE_OFF =
             "com.sec.android.allshare.event.EVENT_AIRPLANE_MODE_OFF";

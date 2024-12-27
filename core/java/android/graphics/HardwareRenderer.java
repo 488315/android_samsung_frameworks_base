@@ -33,7 +33,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes.dex */
 public class HardwareRenderer {
     public static final int CACHE_LIMIT_DEFAULT = 0;
     public static final int CACHE_LIMIT_HIGHER_BIG = 3;

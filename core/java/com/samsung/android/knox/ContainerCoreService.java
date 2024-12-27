@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
 
-/* loaded from: classes6.dex */
 public abstract class ContainerCoreService extends Service {
     public abstract Bundle onCommandReceived(String str, Bundle bundle);
 

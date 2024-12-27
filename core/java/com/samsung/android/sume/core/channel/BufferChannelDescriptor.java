@@ -2,7 +2,6 @@ package com.samsung.android.sume.core.channel;
 
 import java.io.Serializable;
 
-/* loaded from: classes6.dex */
 public class BufferChannelDescriptor implements Serializable {
     int capacity;
     int type;

@@ -39,7 +39,6 @@ import java.util.function.BiConsumer;
 import java.util.function.IntConsumer;
 import java.util.stream.IntStream;
 
-/* loaded from: classes.dex */
 public interface INotificationManager extends IInterface {
     String addAutomaticZenRule(AutomaticZenRule automaticZenRule, String str, boolean z)
             throws RemoteException;

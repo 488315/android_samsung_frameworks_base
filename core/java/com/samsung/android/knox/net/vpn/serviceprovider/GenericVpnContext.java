@@ -3,7 +3,6 @@ package com.samsung.android.knox.net.vpn.serviceprovider;
 import android.content.Context;
 import android.content.ContextWrapper;
 
-/* loaded from: classes6.dex */
 public class GenericVpnContext extends ContextWrapper {
     public static final boolean CONNECTING = true;
     public static final boolean DISCONNECTING = false;

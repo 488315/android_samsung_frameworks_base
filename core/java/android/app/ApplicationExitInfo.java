@@ -26,7 +26,6 @@ import java.util.Date;
 import java.util.Objects;
 import java.util.zip.GZIPInputStream;
 
-/* loaded from: classes.dex */
 public final class ApplicationExitInfo implements Parcelable {
     public static final Parcelable.Creator<ApplicationExitInfo> CREATOR =
             new Parcelable.Creator<

@@ -1,6 +1,5 @@
 package com.android.server.power;
 
-/* loaded from: classes5.dex */
 public final class WirelessChargerDetectorProto {
     public static final long DETECTION_START_TIME_MS = 1112396529669L;
     public static final long FIRST_SAMPLE = 1146756268041L;

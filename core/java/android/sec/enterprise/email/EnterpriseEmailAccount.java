@@ -3,7 +3,6 @@ package android.sec.enterprise.email;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes3.dex */
 public class EnterpriseEmailAccount implements Parcelable {
     public static final Parcelable.Creator<EnterpriseEmailAccount> CREATOR =
             new Parcelable.Creator<

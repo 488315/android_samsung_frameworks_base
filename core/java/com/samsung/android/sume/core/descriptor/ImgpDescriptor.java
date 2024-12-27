@@ -5,7 +5,6 @@ import com.samsung.android.sume.core.format.MutableMediaFormat;
 import com.samsung.android.sume.core.plugin.ImgpPlugin;
 import com.samsung.android.sume.core.types.ImgpType;
 
-/* loaded from: classes6.dex */
 public class ImgpDescriptor extends PluginDescriptor {
     private static final String TAG = Def.tagOf((Class<?>) ImgpDescriptor.class);
 

@@ -56,7 +56,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Supplier;
 import java.util.stream.IntStream;
 
-/* loaded from: classes3.dex */
 public class MtpDatabase implements AutoCloseable {
     static final String AGENT_PACKAGE_NAME = "com.sec.android.easyMover.Agent";
     static final String AGENT_SERVICE_NAME = "com.sec.android.easyMover.Agent.RemoteService";

@@ -15,7 +15,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.IntBuffer;
 
-/* loaded from: classes6.dex */
 public class BitmapHelper {
     static Bitmap.CompressFormat mCompressFormat = Bitmap.CompressFormat.PNG;
     static int mCompressQuality = 100;

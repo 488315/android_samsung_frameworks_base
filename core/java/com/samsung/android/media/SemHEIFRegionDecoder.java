@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.io.InputStream;
 
 @Deprecated(forRemoval = true, since = "15.0")
-/* loaded from: classes6.dex */
 public class SemHEIFRegionDecoder {
     private static final String TAG = "SemHEIFRegionDecoder";
     private static boolean mLibraryLoaded = false;

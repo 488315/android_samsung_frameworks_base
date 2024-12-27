@@ -10,7 +10,6 @@ import android.filterfw.core.ShaderProgram;
 import android.filterfw.format.ImageFormat;
 import android.graphics.Color;
 
-/* loaded from: classes.dex */
 public class TintFilter extends Filter {
     private Program mProgram;
     private int mTarget;

@@ -8,7 +8,6 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public class PhraseRecognitionExtra implements Parcelable {
     public static final Parcelable.Creator<PhraseRecognitionExtra> CREATOR =
             new Parcelable.Creator<PhraseRecognitionExtra>() { // from class:

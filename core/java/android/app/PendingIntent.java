@@ -32,7 +32,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes.dex */
 public final class PendingIntent implements Parcelable {
     public static final long BLOCK_MUTABLE_IMPLICIT_PENDING_INTENT = 236704164;
     public static final int FLAG_ALLOW_UNSAFE_IMPLICIT_INTENT = 16777216;

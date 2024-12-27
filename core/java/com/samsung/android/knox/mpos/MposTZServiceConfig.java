@@ -4,7 +4,6 @@ import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes6.dex */
 public class MposTZServiceConfig implements Parcelable {
     private static final String QSEE_UNKNOWN_PROCESS = "unknown";
     private static final String QSEE_UNKNOWN_ROOT = "unknown";

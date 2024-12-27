@@ -1,6 +1,5 @@
 package android.media;
 
-/* loaded from: classes2.dex */
 public @interface AudioPolicyForcedConfig {
     public static final int ANALOG_DOCK = 8;
     public static final int BT_A2DP = 4;

@@ -2,7 +2,6 @@ package android.util;
 
 import java.util.Calendar;
 
-/* loaded from: classes4.dex */
 public class MonthDisplayHelper {
     private Calendar mCalendar;
     private int mNumDaysInMonth;

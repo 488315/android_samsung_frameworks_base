@@ -2,7 +2,6 @@ package com.android.internal.org.bouncycastle.math.ec;
 
 import java.math.BigInteger;
 
-/* loaded from: classes5.dex */
 class ZTauElement {
     public final BigInteger u;
     public final BigInteger v;

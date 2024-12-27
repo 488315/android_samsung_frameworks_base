@@ -7,7 +7,6 @@ import android.text.TextUtils;
 
 import com.android.internal.util.Preconditions;
 
-/* loaded from: classes3.dex */
 public class LongitudinalReportingConfig implements DifferentialPrivacyConfig {
     private static final String ALGORITHM_NAME = "LongitudinalReporting";
     private final String mEncoderId;

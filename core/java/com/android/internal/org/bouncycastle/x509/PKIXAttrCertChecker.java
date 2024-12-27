@@ -5,7 +5,6 @@ import java.security.cert.CertPathValidatorException;
 import java.util.Collection;
 import java.util.Set;
 
-/* loaded from: classes5.dex */
 public abstract class PKIXAttrCertChecker implements Cloneable {
     public abstract void check(
             X509AttributeCertificate x509AttributeCertificate,

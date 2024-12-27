@@ -1,7 +1,6 @@
 package android.media;
 
 /* compiled from: WebVttRenderer.java */
-/* loaded from: classes2.dex */
 class TextTrackRegion {
     static final int SCROLL_VALUE_NONE = 300;
     static final int SCROLL_VALUE_SCROLL_UP = 301;

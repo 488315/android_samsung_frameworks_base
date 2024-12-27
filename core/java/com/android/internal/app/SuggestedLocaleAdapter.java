@@ -22,7 +22,6 @@ import java.util.Iterator;
 import java.util.Locale;
 import java.util.Set;
 
-/* loaded from: classes5.dex */
 public class SuggestedLocaleAdapter extends BaseAdapter implements Filterable {
     protected static final int APP_LANGUAGE_PICKER_TYPE_COUNT = 6;
     protected static final int MIN_REGIONS_FOR_SUGGESTIONS = 6;

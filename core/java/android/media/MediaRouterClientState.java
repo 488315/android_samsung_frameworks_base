@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class MediaRouterClientState implements Parcelable {
     public static final Parcelable.Creator<MediaRouterClientState> CREATOR =
             new Parcelable.Creator<MediaRouterClientState>() { // from class:

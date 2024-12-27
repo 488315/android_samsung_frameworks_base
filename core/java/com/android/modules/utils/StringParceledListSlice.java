@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import java.util.Collections;
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public class StringParceledListSlice extends BaseParceledListSlice<String> {
     public static final Parcelable.ClassLoaderCreator<StringParceledListSlice> CREATOR =
             new Parcelable.ClassLoaderCreator<

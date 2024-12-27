@@ -17,7 +17,6 @@ import android.os.UserHandle;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes.dex */
 public class PeopleSpaceTile implements Parcelable {
     public static final int BLOCK_CONVERSATIONS = 2;
     public static final Parcelable.Creator<PeopleSpaceTile> CREATOR =

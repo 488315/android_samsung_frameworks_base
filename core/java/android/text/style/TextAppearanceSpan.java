@@ -13,7 +13,6 @@ import android.text.format.DateFormat;
 
 import com.android.internal.R;
 
-/* loaded from: classes4.dex */
 public class TextAppearanceSpan extends MetricAffectingSpan implements ParcelableSpan {
     private final boolean mElegantTextHeight;
     private final String mFamilyName;

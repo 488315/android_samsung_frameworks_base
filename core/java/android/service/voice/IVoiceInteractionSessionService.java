@@ -7,7 +7,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes3.dex */
 public interface IVoiceInteractionSessionService extends IInterface {
     void newSession(IBinder iBinder, Bundle bundle, int i) throws RemoteException;
 

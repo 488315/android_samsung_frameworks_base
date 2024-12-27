@@ -41,7 +41,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public final class Magnifier {
     private static final float FISHEYE_RAMP_WIDTH = 12.0f;
     private static final int NONEXISTENT_PREVIOUS_CONFIG_VALUE = -1;

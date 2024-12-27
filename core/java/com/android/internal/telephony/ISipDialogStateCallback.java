@@ -9,7 +9,6 @@ import android.telephony.ims.SipDialogState;
 
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public interface ISipDialogStateCallback extends IInterface {
     public static final String DESCRIPTOR =
             "com.android.internal.telephony.ISipDialogStateCallback";

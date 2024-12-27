@@ -6,7 +6,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
 
-/* loaded from: classes.dex */
 public class LabeledIntent extends Intent {
     public static final Parcelable.Creator<LabeledIntent> CREATOR =
             new Parcelable.Creator<

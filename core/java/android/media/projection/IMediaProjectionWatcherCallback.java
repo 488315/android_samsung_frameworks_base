@@ -7,7 +7,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.view.ContentRecordingSession;
 
-/* loaded from: classes2.dex */
 public interface IMediaProjectionWatcherCallback extends IInterface {
     void onRecordingSessionSet(
             MediaProjectionInfo mediaProjectionInfo,

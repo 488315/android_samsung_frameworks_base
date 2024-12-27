@@ -7,7 +7,6 @@ import android.os.PersistableBundle;
 
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public final class TunnelConnectionParamsUtils {
     private static final int EXPECTED_BUNDLE_KEY_CNT = 1;
     private static final String PARAMS_TYPE_IKE = "IKE";

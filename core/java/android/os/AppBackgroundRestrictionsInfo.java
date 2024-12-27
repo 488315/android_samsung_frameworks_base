@@ -1,6 +1,5 @@
 package android.os;
 
-/* loaded from: classes3.dex */
 public final class AppBackgroundRestrictionsInfo {
     public static final int BACKGROUND_RESTRICTED = 2;
     public static final int BATTERY_EXEMPTION_TRACKER = 2;

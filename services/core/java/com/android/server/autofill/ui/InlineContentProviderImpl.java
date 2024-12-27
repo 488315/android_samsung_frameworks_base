@@ -9,7 +9,6 @@ import com.android.server.FgThread;
 import com.android.server.autofill.Helper;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes.dex */
 public final class InlineContentProviderImpl extends IInlineContentProvider.Stub {
     public final Handler mHandler = FgThread.getHandler();
     public boolean mProvideContentCalled = false;

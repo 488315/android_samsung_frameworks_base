@@ -2,7 +2,6 @@ package android.hardware.radio.V1_0;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class PersoSubstate {
     public static final int IN_PROGRESS = 1;
     public static final int READY = 2;

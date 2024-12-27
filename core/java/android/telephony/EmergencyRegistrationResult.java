@@ -8,7 +8,6 @@ import android.text.TextUtils;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public final class EmergencyRegistrationResult implements Parcelable {
     public static final Parcelable.Creator<EmergencyRegistrationResult> CREATOR =
             new Parcelable.Creator<

@@ -7,7 +7,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.view.inputmethod.EditorInfo;
 
-/* loaded from: classes5.dex */
 public interface IAccessibilityInputMethodSession extends IInterface {
     public static final String DESCRIPTOR =
             "com.android.internal.inputmethod.IAccessibilityInputMethodSession";

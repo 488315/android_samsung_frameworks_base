@@ -5,7 +5,6 @@ import android.os.Process;
 import java.io.IOException;
 import java.nio.file.Path;
 
-/* loaded from: classes5.dex */
 public class ProcTimeInStateReader {
     private static final String TAG = "ProcTimeInStateReader";
     private long[] mFrequenciesKhz;

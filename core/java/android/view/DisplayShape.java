@@ -14,7 +14,6 @@ import com.android.internal.R;
 
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public final class DisplayShape implements Parcelable {
     private final int mDisplayHeight;
     public final String mDisplayShapeSpec;

@@ -3,7 +3,6 @@ package android.telephony;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes4.dex */
 public class Annotation {
 
     @Retention(RetentionPolicy.SOURCE)

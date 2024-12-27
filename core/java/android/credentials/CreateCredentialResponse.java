@@ -9,7 +9,6 @@ import com.android.internal.util.AnnotationValidations;
 
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public final class CreateCredentialResponse implements Parcelable {
     public static final Parcelable.Creator<CreateCredentialResponse> CREATOR =
             new Parcelable.Creator<CreateCredentialResponse>() { // from class:

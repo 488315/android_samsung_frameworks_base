@@ -8,7 +8,6 @@ import android.os.Parcelable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes5.dex */
 public class AODToast implements Parcelable {
     public static final Parcelable.Creator<AODToast> CREATOR =
             new Parcelable.Creator<AODToast>() { // from class: com.samsung.android.aod.AODToast.1

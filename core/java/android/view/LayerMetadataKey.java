@@ -1,6 +1,5 @@
 package android.view;
 
-/* loaded from: classes4.dex */
 public @interface LayerMetadataKey {
     public static final int METADATA_ACCESSIBILITY_ID = 5;
     public static final int METADATA_DEQUEUE_TIME = 7;

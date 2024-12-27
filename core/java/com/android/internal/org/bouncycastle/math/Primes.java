@@ -7,7 +7,6 @@ import com.android.internal.org.bouncycastle.util.BigIntegers;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 
-/* loaded from: classes5.dex */
 public abstract class Primes {
     public static final int SMALL_FACTOR_LIMIT = 211;
     private static final BigInteger ONE = BigInteger.valueOf(1);

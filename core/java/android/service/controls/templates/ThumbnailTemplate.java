@@ -7,7 +7,6 @@ import android.os.Bundle;
 import com.android.internal.R;
 import com.android.internal.util.Preconditions;
 
-/* loaded from: classes3.dex */
 public final class ThumbnailTemplate extends ControlTemplate {
     private static final String KEY_ACTIVE = "key_active";
     private static final String KEY_CONTENT_DESCRIPTION = "key_content_description";

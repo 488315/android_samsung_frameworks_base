@@ -13,7 +13,6 @@ import com.samsung.android.rune.CoreRune;
 import java.util.Arrays;
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public final class PictureInPictureSurfaceTransaction implements Parcelable {
     public static final Parcelable.Creator<PictureInPictureSurfaceTransaction> CREATOR =
             new Parcelable.Creator<

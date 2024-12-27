@@ -6,7 +6,6 @@ import android.util.SparseArray;
 
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-/* loaded from: classes5.dex */
 public abstract class KernelCpuUidBpfMapReader {
     private static final int ERROR_THRESHOLD = 5;
     private static final long FRESHNESS_MS = 500;

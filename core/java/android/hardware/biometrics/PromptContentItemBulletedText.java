@@ -3,7 +3,6 @@ package android.hardware.biometrics;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public final class PromptContentItemBulletedText implements PromptContentItemParcelable {
     public static final Parcelable.Creator<PromptContentItemBulletedText> CREATOR =
             new Parcelable.Creator<PromptContentItemBulletedText>() { // from class:

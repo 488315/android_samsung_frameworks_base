@@ -10,7 +10,6 @@ import android.widget.LinearLayout;
 
 import com.android.internal.R;
 
-/* loaded from: classes5.dex */
 public class AlertDialogLayout extends LinearLayout {
     public AlertDialogLayout(Context context) {
         super(context);

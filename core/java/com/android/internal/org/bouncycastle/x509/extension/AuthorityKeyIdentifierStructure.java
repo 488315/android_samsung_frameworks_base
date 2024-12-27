@@ -16,7 +16,6 @@ import java.security.PublicKey;
 import java.security.cert.CertificateParsingException;
 import java.security.cert.X509Certificate;
 
-/* loaded from: classes5.dex */
 public class AuthorityKeyIdentifierStructure extends AuthorityKeyIdentifier {
     public AuthorityKeyIdentifierStructure(byte[] encodedValue) throws IOException {
         super((ASN1Sequence) X509ExtensionUtil.fromExtensionValue(encodedValue));

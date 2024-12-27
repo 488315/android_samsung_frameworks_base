@@ -14,7 +14,6 @@ import android.os.ParcelFileDescriptor;
 import java.io.IOException;
 import java.io.InputStream;
 
-/* loaded from: classes.dex */
 final class DisabledWallpaperManager extends WallpaperManager {
     private static final boolean DEBUG = false;
     private static final String TAG = DisabledWallpaperManager.class.getSimpleName();

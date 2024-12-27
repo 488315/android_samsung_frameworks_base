@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 import java.security.cert.Certificate;
 
-/* loaded from: classes6.dex */
 public class SemCertAndroidKeyStore implements Parcelable {
 
     @Deprecated(forRemoval = true, since = "16.0")

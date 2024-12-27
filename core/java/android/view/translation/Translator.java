@@ -20,7 +20,6 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
-/* loaded from: classes4.dex */
 public class Translator {
     public static final String EXTRA_SERVICE_BINDER = "binder";
     public static final String EXTRA_SESSION_ID = "sessionId";

@@ -12,7 +12,6 @@ import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-/* loaded from: classes2.dex */
 class CallbackUtil {
     private static final String TAG = "CallbackUtil";
 

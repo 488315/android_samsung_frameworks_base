@@ -85,7 +85,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Supplier;
 
-/* loaded from: classes3.dex */
 public abstract class WallpaperService extends Service {
     static final boolean DEBUG = false;
     private static final long DEFAULT_UPDATE_SCREENSHOT_DURATION = 60000;

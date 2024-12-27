@@ -8,7 +8,6 @@ import android.os.RemoteException;
 
 import com.samsung.android.cover.CoverState;
 
-/* loaded from: classes6.dex */
 public interface IPluginManager extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.sepunion.IPluginManager";
 

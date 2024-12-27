@@ -29,7 +29,6 @@ import java.util.Objects;
 import java.util.RandomAccess;
 import java.util.Set;
 
-/* loaded from: classes3.dex */
 public abstract class Uri implements Parcelable, Comparable<Uri> {
     private static final String DEFAULT_ENCODING = "UTF-8";
     private static final int NOT_CALCULATED = -2;

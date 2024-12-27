@@ -2,7 +2,6 @@ package android.os.incremental;
 
 import android.os.PersistableBundle;
 
-/* loaded from: classes3.dex */
 public class IncrementalMetrics {
     private final PersistableBundle mData;
 

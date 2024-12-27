@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public final class UrspRule implements Parcelable {
     public static final Parcelable.Creator<UrspRule> CREATOR =
             new Parcelable.Creator<UrspRule>() { // from class: android.telephony.data.UrspRule.1

@@ -7,7 +7,6 @@ import android.os.Bundle;
 import java.util.List;
 import java.util.Map;
 
-/* loaded from: classes5.dex */
 public interface ParsedComponent {
     int getBanner();
 

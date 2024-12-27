@@ -13,7 +13,6 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
 
-/* loaded from: classes4.dex */
 public abstract class BaseKeyListener extends MetaKeyKeyListener implements KeyListener {
     private static final int CARRIAGE_RETURN = 13;
     private static final int LINE_FEED = 10;

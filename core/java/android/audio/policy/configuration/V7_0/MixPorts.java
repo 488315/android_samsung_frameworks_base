@@ -11,7 +11,6 @@ import java.util.List;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 
-/* loaded from: classes.dex */
 public class MixPorts {
     private List<MixPort> mixPort;
 

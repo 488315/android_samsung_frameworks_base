@@ -20,7 +20,6 @@ import com.samsung.android.knox.dar.ddar.IDualDarAuthProgressCallback;
 import java.util.List;
 import java.util.Map;
 
-/* loaded from: classes5.dex */
 public interface ILockSettings extends IInterface {
     long addWeakEscrowToken(
             byte[] bArr, int i, IWeakEscrowTokenActivatedListener iWeakEscrowTokenActivatedListener)

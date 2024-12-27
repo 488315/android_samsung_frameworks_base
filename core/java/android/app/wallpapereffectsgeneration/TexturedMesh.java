@@ -9,7 +9,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class TexturedMesh implements Parcelable {
     public static final Parcelable.Creator<TexturedMesh> CREATOR =
             new Parcelable.Creator<TexturedMesh>() { // from class:

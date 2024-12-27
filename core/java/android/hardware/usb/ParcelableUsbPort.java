@@ -3,7 +3,6 @@ package android.hardware.usb;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public final class ParcelableUsbPort implements Parcelable {
     public static final Parcelable.Creator<ParcelableUsbPort> CREATOR =
             new Parcelable.Creator<

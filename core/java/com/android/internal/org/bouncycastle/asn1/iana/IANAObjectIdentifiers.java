@@ -2,7 +2,6 @@ package com.android.internal.org.bouncycastle.asn1.iana;
 
 import com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier;
 
-/* loaded from: classes5.dex */
 public interface IANAObjectIdentifiers {
     public static final ASN1ObjectIdentifier internet = new ASN1ObjectIdentifier("1.3.6.1");
     public static final ASN1ObjectIdentifier directory = internet.branch("1");

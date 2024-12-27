@@ -12,7 +12,6 @@ import java.util.Objects;
 import java.util.Set;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class DomainVerificationRequest implements Parcelable {
     public static final Parcelable.Creator<DomainVerificationRequest> CREATOR;
     static Parcelling<Set<String>> sParcellingForPackageNames;

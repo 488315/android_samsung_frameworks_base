@@ -2,7 +2,6 @@ package android.app.servertransaction;
 
 import android.app.ClientTransactionHandler;
 
-/* loaded from: classes.dex */
 public interface BaseClientRequest extends ObjectPoolItem {
     void execute(
             ClientTransactionHandler clientTransactionHandler,

@@ -1,6 +1,5 @@
 package com.samsung.android.lock;
 
-/* loaded from: classes6.dex */
 public enum LsLogType {
     SUMMARY("Summary", 515, 100),
     ENROLL("Enroll", 259, 0),

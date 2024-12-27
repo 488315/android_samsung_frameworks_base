@@ -3,7 +3,6 @@ package android.hardware;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes.dex */
 public class CameraInfo implements Parcelable {
     public static final Parcelable.Creator<CameraInfo> CREATOR =
             new Parcelable.Creator<CameraInfo>() { // from class: android.hardware.CameraInfo.1

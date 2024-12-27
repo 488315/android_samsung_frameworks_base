@@ -18,7 +18,6 @@ import com.android.internal.widget.floatingtoolbar.FloatingToolbar;
 import java.util.Arrays;
 import java.util.Objects;
 
-/* loaded from: classes5.dex */
 public final class FloatingActionMode extends ActionMode {
     private static final int MAX_HIDE_DURATION = 3000;
     private static final int MOVING_HIDE_DELAY = 50;

@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 import libcore.util.NativeAllocationRegistry;
 
-/* loaded from: classes.dex */
 public final class Gainmap implements Parcelable {
     public static final Parcelable.Creator<Gainmap> CREATOR =
             new Parcelable.Creator<Gainmap>() { // from class: android.graphics.Gainmap.1

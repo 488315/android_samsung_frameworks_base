@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public class IccIoResult implements Parcelable {
     public static final Parcelable.Creator<IccIoResult> CREATOR =
             new Parcelable.Creator<

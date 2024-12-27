@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Enumeration;
 
-/* loaded from: classes5.dex */
 public class ASN1OutputStream {
     private OutputStream os;
 

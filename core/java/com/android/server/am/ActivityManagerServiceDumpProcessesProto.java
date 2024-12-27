@@ -1,6 +1,5 @@
 package com.android.server.am;
 
-/* loaded from: classes5.dex */
 public final class ActivityManagerServiceDumpProcessesProto {
     public static final long ACTIVE_INSTRUMENTATIONS = 2246267895811L;
     public static final long ACTIVE_UIDS = 2246267895812L;

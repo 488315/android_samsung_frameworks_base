@@ -20,7 +20,6 @@ import java.util.function.BiConsumer;
 import java.util.function.BiPredicate;
 import java.util.function.Consumer;
 
-/* loaded from: classes5.dex */
 public interface PooledLambda {
     void recycle();
 

@@ -21,7 +21,6 @@ import java.util.Objects;
 import java.util.concurrent.Executor;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public class SipTransportImplBase {
     private static final String LOG_TAG = "SipTransportIB";
     private Executor mBinderExecutor;

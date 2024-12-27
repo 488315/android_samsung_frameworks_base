@@ -1,6 +1,5 @@
 package com.android.internal.org.bouncycastle.crypto.params;
 
-/* loaded from: classes5.dex */
 public class DESedeParameters extends DESParameters {
     public static final int DES_EDE_KEY_LENGTH = 24;
 

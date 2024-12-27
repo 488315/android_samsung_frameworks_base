@@ -1,6 +1,5 @@
 package android.media.codec;
 
-/* loaded from: classes2.dex */
 public final class FeatureFlagsImpl implements FeatureFlags {
     @Override // android.media.codec.FeatureFlags
     public boolean aidlHalInputSurface() {

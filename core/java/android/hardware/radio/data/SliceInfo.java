@@ -6,7 +6,6 @@ import android.os.Parcelable;
 
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public class SliceInfo implements Parcelable {
     public static final Parcelable.Creator<SliceInfo> CREATOR =
             new Parcelable.Creator<

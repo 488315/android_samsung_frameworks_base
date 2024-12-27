@@ -1,6 +1,5 @@
 package android.util;
 
-/* loaded from: classes4.dex */
 public final class EmptyArray {
     public static final boolean[] BOOLEAN = new boolean[0];
     public static final byte[] BYTE = new byte[0];

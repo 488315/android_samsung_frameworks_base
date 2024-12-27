@@ -1,6 +1,5 @@
 package com.samsung.android.allshare.media;
 
-/* loaded from: classes3.dex */
 public class Const {
     public static final long ALLSHARE_FRAMEWORK_VERSION = 1;
     public static final String CP_NAME = "com.samsung.android.allshare.CpName";

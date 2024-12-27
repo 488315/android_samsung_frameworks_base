@@ -9,7 +9,6 @@ import android.os.Looper;
 import android.os.RemoteException;
 import android.util.Log;
 
-/* loaded from: classes3.dex */
 public abstract class QuickAccessWalletService extends Service {
     public static final String ACTION_VIEW_WALLET =
             "android.service.quickaccesswallet.action.VIEW_WALLET";

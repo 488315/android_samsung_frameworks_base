@@ -31,7 +31,6 @@ import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.Set;
 
-/* loaded from: classes3.dex */
 public abstract class TextToSpeechService extends Service {
     private static final boolean DBG = false;
     private static final String SYNTH_THREAD_NAME = "SynthThread";

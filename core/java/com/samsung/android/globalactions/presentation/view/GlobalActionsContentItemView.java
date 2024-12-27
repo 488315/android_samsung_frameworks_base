@@ -12,7 +12,6 @@ import com.samsung.android.globalactions.presentation.viewmodel.ActionViewModel;
 import com.samsung.android.globalactions.presentation.viewmodel.DefaultActionNames;
 import com.samsung.android.globalactions.presentation.viewmodel.ViewType;
 
-/* loaded from: classes6.dex */
 public class GlobalActionsContentItemView {
     private final Context mContext;
     private final ViewGroup mParent;

@@ -5,7 +5,6 @@ import android.annotation.SystemApi;
 import java.util.Objects;
 
 @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
-/* loaded from: classes3.dex */
 public class DeviceConfigInitializer {
     private static DeviceConfigServiceManager sDeviceConfigServiceManager;
     private static final Object sLock = new Object();

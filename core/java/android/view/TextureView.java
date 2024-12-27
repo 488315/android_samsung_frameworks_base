@@ -15,7 +15,6 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.flags.Flags;
 
-/* loaded from: classes4.dex */
 public class TextureView extends View {
     private static final String LOG_TAG = "TextureView";
     private Canvas mCanvas;

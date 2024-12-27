@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
 
-/* loaded from: classes2.dex */
 public class AudioRoutesInfo implements Parcelable {
     public static final Parcelable.Creator<AudioRoutesInfo> CREATOR =
             new Parcelable.Creator<

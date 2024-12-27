@@ -1,6 +1,5 @@
 package android.media;
 
-/* loaded from: classes2.dex */
 public class AudioPortConfig {
     static final int CHANNEL_MASK = 2;
     static final int FORMAT = 4;

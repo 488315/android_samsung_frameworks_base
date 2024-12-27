@@ -14,7 +14,6 @@ import android.util.Log;
 
 import java.util.Objects;
 
-/* loaded from: classes5.dex */
 public class ScreenshotRequest implements Parcelable {
     public static final Parcelable.Creator<ScreenshotRequest> CREATOR =
             new Parcelable.Creator<

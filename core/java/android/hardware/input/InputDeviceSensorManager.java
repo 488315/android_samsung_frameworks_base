@@ -24,7 +24,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/* loaded from: classes2.dex */
 public class InputDeviceSensorManager {
     private static final boolean DEBUG = false;
     private static final int MSG_SENSOR_ACCURACY_CHANGED = 1;

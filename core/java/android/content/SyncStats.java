@@ -4,7 +4,6 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes.dex */
 public class SyncStats implements Parcelable {
     public static final Parcelable.Creator<SyncStats> CREATOR =
             new Parcelable.Creator<SyncStats>() { // from class: android.content.SyncStats.1

@@ -9,7 +9,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public final class CallAttributes implements Parcelable {
     public static final int AUDIO_CALL = 1;
     public static final String CALLER_PID_KEY = "CallerPid";

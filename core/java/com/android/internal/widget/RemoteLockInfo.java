@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes5.dex */
 public class RemoteLockInfo implements Parcelable {
     public static final Parcelable.Creator<RemoteLockInfo> CREATOR =
             new Parcelable.Creator<

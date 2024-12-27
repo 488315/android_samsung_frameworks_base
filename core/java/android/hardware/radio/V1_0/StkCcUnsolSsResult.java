@@ -7,7 +7,6 @@ import android.os.HwParcel;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public final class StkCcUnsolSsResult {
     public int serviceClass;
     public int serviceType = 0;

@@ -6,7 +6,6 @@ import android.os.Parcelable;
 
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public class SlotPortMapping implements Parcelable {
     public static final Parcelable.Creator<SlotPortMapping> CREATOR =
             new Parcelable.Creator<SlotPortMapping>() { // from class:

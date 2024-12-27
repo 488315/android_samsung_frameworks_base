@@ -1,6 +1,5 @@
 package android.sec.enterprise.auditlog;
 
-/* loaded from: classes3.dex */
 public class AuditEvents {
     public static final String AUDIT_ACCOUNT_REMOVING_FAILED = "Removing account %s failed";
     public static final String AUDIT_ACCOUNT_REMOVING_SUCCEEDED = "Removing account %s succeeded";

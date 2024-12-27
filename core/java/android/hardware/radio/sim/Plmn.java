@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public class Plmn implements Parcelable {
     public static final Parcelable.Creator<Plmn> CREATOR =
             new Parcelable.Creator<Plmn>() { // from class: android.hardware.radio.sim.Plmn.1

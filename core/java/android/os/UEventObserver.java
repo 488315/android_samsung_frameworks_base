@@ -3,7 +3,6 @@ package android.os;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/* loaded from: classes3.dex */
 public abstract class UEventObserver {
     private static final boolean DEBUG = false;
     private static final String TAG = "UEventObserver";

@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 import java.util.BitSet;
 
-/* loaded from: classes3.dex */
 public final class ConnectivityMetricsEvent implements Parcelable {
     public static final Parcelable.Creator<ConnectivityMetricsEvent> CREATOR =
             new Parcelable.Creator<

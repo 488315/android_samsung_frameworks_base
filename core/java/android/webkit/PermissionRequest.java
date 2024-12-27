@@ -2,7 +2,6 @@ package android.webkit;
 
 import android.net.Uri;
 
-/* loaded from: classes4.dex */
 public abstract class PermissionRequest {
     public static final String RESOURCE_AUDIO_CAPTURE = "android.webkit.resource.AUDIO_CAPTURE";
     public static final String RESOURCE_MIDI_SYSEX = "android.webkit.resource.MIDI_SYSEX";

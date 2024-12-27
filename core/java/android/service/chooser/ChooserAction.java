@@ -8,7 +8,6 @@ import android.text.TextUtils;
 
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public final class ChooserAction implements Parcelable {
     public static final Parcelable.Creator<ChooserAction> CREATOR =
             new Parcelable.Creator<

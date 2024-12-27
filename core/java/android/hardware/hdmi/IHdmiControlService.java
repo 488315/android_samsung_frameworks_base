@@ -8,7 +8,6 @@ import android.os.RemoteException;
 
 import java.util.List;
 
-/* loaded from: classes2.dex */
 public interface IHdmiControlService extends IInterface {
     void addCecSettingChangeListener(
             String str, IHdmiCecSettingChangeListener iHdmiCecSettingChangeListener)

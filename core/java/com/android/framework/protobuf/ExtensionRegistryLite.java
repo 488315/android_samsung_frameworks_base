@@ -4,7 +4,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-/* loaded from: classes3.dex */
 public class ExtensionRegistryLite {
     static final String EXTENSION_CLASS_NAME = "com.android.framework.protobuf.Extension";
     private static volatile ExtensionRegistryLite emptyRegistry;

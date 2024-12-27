@@ -2,7 +2,6 @@ package android.animation;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
 public interface Keyframes extends Cloneable {
 
     public interface FloatKeyframes extends Keyframes {

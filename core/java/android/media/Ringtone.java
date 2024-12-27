@@ -22,7 +22,6 @@ import com.samsung.android.media.AudioTag;
 import java.io.IOException;
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public class Ringtone {
     private static final boolean LOGD = true;
     private static final String MEDIA_SELECTION =

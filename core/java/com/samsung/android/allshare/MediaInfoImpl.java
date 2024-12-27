@@ -5,7 +5,6 @@ import android.os.Bundle;
 import com.samsung.android.allshare.media.MediaInfo;
 import com.sec.android.allshare.iface.message.AllShareKey;
 
-/* loaded from: classes3.dex */
 final class MediaInfoImpl extends MediaInfo {
     private Bundle mBundle;
     private long mMediaDuration = -1;

@@ -17,7 +17,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.function.Consumer;
 
-/* loaded from: classes3.dex */
 public abstract class KeyStore2ParameterUtils {
     static KeyParameter makeBool(int tag) {
         int type = KeymasterDefs.getTagType(tag);

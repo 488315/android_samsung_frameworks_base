@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
-/* loaded from: classes.dex */
 public class SliceQuery {
     private static final String TAG = "SliceQuery";
 

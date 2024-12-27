@@ -3,7 +3,6 @@ package android.net;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes3.dex */
 public class ProxyInfoWrapper implements Parcelable {
     public static final Parcelable.Creator<ProxyInfoWrapper> CREATOR =
             new Parcelable.Creator<

@@ -15,7 +15,6 @@ import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.CopyOnWriteArraySet;
 
-/* loaded from: classes3.dex */
 public abstract class Conference extends Conferenceable {
     public static final long CONNECT_TIME_NOT_SPECIFIED = 0;
     private Uri mAddress;

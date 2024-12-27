@@ -17,7 +17,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.function.BiFunction;
 
-/* loaded from: classes3.dex */
 public class BaseBundle {
     static final int BUNDLE_MAGIC = 1279544898;
     private static final int BUNDLE_MAGIC_NATIVE = 1279544900;

@@ -10,7 +10,6 @@ import android.telephony.ims.ImsReasonInfo;
 import android.telephony.ims.ImsRegistrationAttributes;
 import android.telephony.ims.SipDetails;
 
-/* loaded from: classes4.dex */
 public interface IImsRegistrationCallback extends IInterface {
     public static final String DESCRIPTOR = "android.telephony.ims.aidl.IImsRegistrationCallback";
 

@@ -12,7 +12,6 @@ import com.android.internal.widget.LinearLayoutManager;
 import com.android.internal.widget.RecyclerView;
 import java.util.Arrays;
 
-/* loaded from: classes5.dex */
 public class GridLayoutManager extends LinearLayoutManager {
     private static final boolean DEBUG = false;
     public static final int DEFAULT_SPAN_COUNT = -1;

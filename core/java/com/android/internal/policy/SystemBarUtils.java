@@ -9,7 +9,6 @@ import android.view.DisplayInfo;
 
 import com.android.internal.R;
 
-/* loaded from: classes5.dex */
 public final class SystemBarUtils {
     private static boolean STATUS_LAYOUT_HEIGHT = true;
 

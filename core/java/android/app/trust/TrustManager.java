@@ -12,7 +12,6 @@ import android.util.ArrayMap;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes.dex */
 public class TrustManager {
     public static final String ACTION_BIND_SIGNIFICANT_PLACE_PROVIDER =
             "com.android.trust.provider.SignificantPlaceProvider.BIND";

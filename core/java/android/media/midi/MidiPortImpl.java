@@ -1,6 +1,5 @@
 package android.media.midi;
 
-/* loaded from: classes2.dex */
 class MidiPortImpl {
     private static final int DATA_PACKET_OVERHEAD = 9;
     public static final int MAX_PACKET_DATA_SIZE = 1015;

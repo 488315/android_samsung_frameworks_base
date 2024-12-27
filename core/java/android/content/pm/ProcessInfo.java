@@ -10,7 +10,6 @@ import com.android.internal.util.Parcelling;
 
 import java.lang.annotation.Annotation;
 
-/* loaded from: classes.dex */
 public class ProcessInfo implements Parcelable {
     public static final Parcelable.Creator<ProcessInfo> CREATOR;
     static Parcelling<ArraySet<String>> sParcellingForDeniedPermissions;

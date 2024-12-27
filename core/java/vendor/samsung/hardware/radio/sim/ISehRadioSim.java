@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes6.dex */
 public interface ISehRadioSim extends IInterface {
     public static final String DESCRIPTOR =
             "vendor$samsung$hardware$radio$sim$ISehRadioSim".replace('$', '.');

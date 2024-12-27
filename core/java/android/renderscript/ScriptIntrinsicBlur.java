@@ -3,7 +3,6 @@ package android.renderscript;
 import com.samsung.epic.Request;
 
 @Deprecated
-/* loaded from: classes3.dex */
 public final class ScriptIntrinsicBlur extends ScriptIntrinsic {
     private Allocation mInput;
     private Request mScenario;

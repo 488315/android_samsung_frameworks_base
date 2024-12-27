@@ -1,6 +1,5 @@
 package android.providers.settings;
 
-/* loaded from: classes3.dex */
 public final class ConfigSettingsProto {
     public static final long ACTIVITY_MANAGER_NATIVE_BOOT_SETTINGS = 2246267895811L;
     public static final long ACTIVITY_MANAGER_SETTINGS = 2246267895812L;

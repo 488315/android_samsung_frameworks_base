@@ -6,7 +6,6 @@ import android.os.IBinder;
 import java.util.Objects;
 import java.util.Set;
 
-/* loaded from: classes5.dex */
 public final class InlinePresentationStyleUtils {
     public static boolean bundleEquals(Bundle bundle1, Bundle bundle2) {
         boolean equal;

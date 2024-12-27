@@ -49,7 +49,6 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
-/* loaded from: classes5.dex */
 final class PooledLambdaImpl<R>
         extends OmniFunction<
                 Object,

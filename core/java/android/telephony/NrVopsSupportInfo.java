@@ -9,7 +9,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public final class NrVopsSupportInfo extends VopsSupportInfo {
     public static final Parcelable.Creator<NrVopsSupportInfo> CREATOR =
             new Parcelable.Creator<

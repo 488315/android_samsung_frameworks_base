@@ -4,7 +4,6 @@ import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes4.dex */
 public class NtnSignalStrength implements Parcelable {
     public static final Parcelable.Creator<NtnSignalStrength> CREATOR =
             new Parcelable.Creator<

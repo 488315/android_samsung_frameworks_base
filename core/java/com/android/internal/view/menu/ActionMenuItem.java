@@ -12,7 +12,6 @@ import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
 
-/* loaded from: classes5.dex */
 public class ActionMenuItem implements MenuItem {
     private static final int CHECKABLE = 1;
     private static final int CHECKED = 2;

@@ -3,7 +3,6 @@ package com.samsung.android.vibrator;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes6.dex */
 public class VibrationDebugInfo implements Parcelable {
     public static final int CHANGE_SEP_INDEX_DURATION = 2;
     public static final Parcelable.Creator<VibrationDebugInfo> CREATOR =

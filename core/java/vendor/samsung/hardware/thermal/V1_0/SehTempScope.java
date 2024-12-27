@@ -2,7 +2,6 @@ package vendor.samsung.hardware.thermal.V1_0;
 
 import java.util.ArrayList;
 
-/* loaded from: classes6.dex */
 public final class SehTempScope {
     public static final int VALID_MAX = 900;
     public static final int VALID_MIN = -300;

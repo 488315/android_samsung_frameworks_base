@@ -5,7 +5,6 @@ import android.annotation.SystemApi;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes3.dex */
 public interface Parcelable {
     public static final int CONTENTS_FILE_DESCRIPTOR = 1;
     public static final int PARCELABLE_ELIDE_DUPLICATES = 2;

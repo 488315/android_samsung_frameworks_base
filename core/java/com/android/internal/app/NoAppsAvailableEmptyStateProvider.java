@@ -12,7 +12,6 @@ import com.android.internal.R;
 import java.util.List;
 import java.util.function.Supplier;
 
-/* loaded from: classes5.dex */
 public class NoAppsAvailableEmptyStateProvider
         implements AbstractMultiProfilePagerAdapter.EmptyStateProvider {
     private final Context mContext;

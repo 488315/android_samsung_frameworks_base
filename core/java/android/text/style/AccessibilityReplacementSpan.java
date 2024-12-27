@@ -6,7 +6,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.ParcelableSpan;
 
-/* loaded from: classes4.dex */
 public class AccessibilityReplacementSpan extends ReplacementSpan implements ParcelableSpan {
     public static final Parcelable.Creator<AccessibilityReplacementSpan> CREATOR =
             new Parcelable.Creator<

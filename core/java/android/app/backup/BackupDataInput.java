@@ -5,7 +5,6 @@ import android.annotation.SystemApi;
 import java.io.FileDescriptor;
 import java.io.IOException;
 
-/* loaded from: classes.dex */
 public class BackupDataInput {
     long mBackupReader;
     private EntityHeader mHeader = new EntityHeader();

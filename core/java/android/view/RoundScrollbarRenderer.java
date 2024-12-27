@@ -8,7 +8,6 @@ import android.graphics.RectF;
 
 import com.android.internal.R;
 
-/* loaded from: classes4.dex */
 class RoundScrollbarRenderer {
     private static final int DEFAULT_THUMB_COLOR = -1;
     private static final int DEFAULT_TRACK_COLOR = 1291845631;

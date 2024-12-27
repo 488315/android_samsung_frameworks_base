@@ -30,7 +30,6 @@ import java.util.Enumeration;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.PBEParameterSpec;
 
-/* loaded from: classes5.dex */
 public class PBES2AlgorithmParameters {
     private PBES2AlgorithmParameters() {}
 

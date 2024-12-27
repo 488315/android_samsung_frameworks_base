@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes3.dex */
 public interface INetdEventCallback extends IInterface {
     public static final int CALLBACK_CALLER_CONNECTIVITY_SERVICE = 0;
     public static final int CALLBACK_CALLER_DEVICE_POLICY = 1;

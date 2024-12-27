@@ -4,7 +4,6 @@ import com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier;
 
 import com.samsung.android.media.AudioParameter;
 
-/* loaded from: classes5.dex */
 public interface PKCSObjectIdentifiers {
     public static final String id_spq = "1.2.840.113549.1.9.16.5";
     public static final ASN1ObjectIdentifier pkcs_1 =

@@ -1,6 +1,5 @@
 package com.samsung.android.photoremasterservice;
 
-/* loaded from: classes6.dex */
 public class ServiceParameterKey {
     public static final String ARRAY_LIST_INT = "arrayListInt_enhanceMode";
     public static final String BITMAP_VAL = "bitmap_val";

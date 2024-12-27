@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes4.dex */
 public interface INetworkService extends IInterface {
     void createNetworkServiceProvider(int i) throws RemoteException;
 

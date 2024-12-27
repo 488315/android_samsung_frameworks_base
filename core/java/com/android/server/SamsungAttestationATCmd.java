@@ -2,7 +2,6 @@ package com.android.server;
 
 import android.content.Context;
 
-/* loaded from: classes5.dex */
 public class SamsungAttestationATCmd extends DevRootKeyATCmd implements IWorkOnAt {
     private static final String TAG = "DEVROOT#ATCmd(2.0.0)";
     private static final String VERSION = "2.0.0";

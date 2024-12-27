@@ -32,7 +32,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/* loaded from: classes5.dex */
 public class SemDualAppManager {
     public static final String DA_PROFILE_ID_PROPERTY_NAME = "sys.dualapp.profile_id";
     public static final String DUAL_CALLER_PACKAGE_NAME = "callerPackage";

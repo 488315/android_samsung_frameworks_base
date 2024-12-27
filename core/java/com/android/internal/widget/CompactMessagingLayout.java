@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RemoteViews.RemoteView
-/* loaded from: classes5.dex */
 public class CompactMessagingLayout extends FrameLayout {
     private ViewStub mConversationFacePileViewStub;
     private int mFacePileAvatarSize;

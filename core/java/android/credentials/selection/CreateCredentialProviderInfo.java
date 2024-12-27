@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class CreateCredentialProviderInfo {
     private final String mProviderName;
     private final Entry mRemoteEntry;

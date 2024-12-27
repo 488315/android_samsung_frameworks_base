@@ -2,7 +2,6 @@ package android.os;
 
 import java.util.function.Supplier;
 
-/* loaded from: classes3.dex */
 public final class ThreadLocalWorkSource {
     public static final int UID_NONE = -1;
     private static final ThreadLocal<int[]> sWorkSourceUid =

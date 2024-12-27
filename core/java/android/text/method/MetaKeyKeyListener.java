@@ -7,7 +7,6 @@ import android.text.Spanned;
 import android.view.KeyEvent;
 import android.view.View;
 
-/* loaded from: classes4.dex */
 public abstract class MetaKeyKeyListener {
     private static final int LOCKED = 67108881;
     private static final int LOCKED_RETURN_VALUE = 2;

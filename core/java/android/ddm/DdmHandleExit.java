@@ -6,7 +6,6 @@ import org.apache.harmony.dalvik.ddmc.DdmServer;
 
 import java.nio.ByteBuffer;
 
-/* loaded from: classes.dex */
 public class DdmHandleExit extends DdmHandle {
     public static final int CHUNK_EXIT = ChunkHandler.type("EXIT");
     private static DdmHandleExit mInstance = new DdmHandleExit();

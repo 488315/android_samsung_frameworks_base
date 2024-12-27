@@ -8,7 +8,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Map;
 
-/* loaded from: classes4.dex */
 public final class VelocityTracker {
     private static final int ACTIVE_POINTER_ID = -1;
     public static final int VELOCITY_TRACKER_STRATEGY_DEFAULT = -1;

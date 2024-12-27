@@ -8,7 +8,6 @@ import java.util.Locale;
 
 @SystemApi
 @Deprecated
-/* loaded from: classes3.dex */
 public class AudioState implements Parcelable {
     public static final Parcelable.Creator<AudioState> CREATOR =
             new Parcelable.Creator<AudioState>() { // from class: android.telecom.AudioState.1

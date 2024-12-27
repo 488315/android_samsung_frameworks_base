@@ -10,7 +10,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class ContextualSearchManager {
     public static final String ACTION_LAUNCH_CONTEXTUAL_SEARCH =
             "android.app.contextualsearch.action.LAUNCH_CONTEXTUAL_SEARCH";

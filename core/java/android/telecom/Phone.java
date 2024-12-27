@@ -14,7 +14,6 @@ import java.util.concurrent.Executor;
 
 @SystemApi
 @Deprecated
-/* loaded from: classes3.dex */
 public final class Phone {
     public static final int SDK_VERSION_R = 30;
     private CallAudioState mCallAudioState;

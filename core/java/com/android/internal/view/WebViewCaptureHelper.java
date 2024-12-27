@@ -7,7 +7,6 @@ import android.webkit.WebView;
 
 import java.util.function.Consumer;
 
-/* loaded from: classes5.dex */
 public class WebViewCaptureHelper implements ScrollCaptureViewHelper<WebView> {
     private static final String TAG = "WebViewScrollCapture";
     private int mOriginScrollX;

@@ -4,7 +4,6 @@ import android.graphics.Rect;
 
 import java.util.function.Supplier;
 
-/* loaded from: classes4.dex */
 public final class WindowMetrics {
     private final Rect mBounds;
     private final float mDensity;

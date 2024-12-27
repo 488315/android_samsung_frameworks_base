@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
-/* loaded from: classes3.dex */
 final class DeviceFinderImpl extends DeviceFinder {
     private static final String TAG_CLASS = "DeviceFinderImpl(v1)";
     private static HashMap<String, Device.DeviceType> mDeviceEventToDeviceTypeMap;

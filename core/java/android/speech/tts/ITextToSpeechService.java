@@ -12,7 +12,6 @@ import android.text.TextUtils;
 
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public interface ITextToSpeechService extends IInterface {
     String[] getClientDefaultLanguage() throws RemoteException;
 

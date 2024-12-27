@@ -20,7 +20,6 @@ import com.samsung.android.os.SemDvfsManager;
 
 import java.math.BigInteger;
 
-/* loaded from: classes5.dex */
 class LongArray implements Cloneable {
     private static final String ZEROES =
             "0000000000000000000000000000000000000000000000000000000000000000";

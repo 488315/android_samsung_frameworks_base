@@ -20,7 +20,6 @@ import com.samsung.android.core.CompatSandbox;
 import java.util.ArrayList;
 import java.util.Locale;
 
-/* loaded from: classes.dex */
 class ConfigurationController {
     private static final String TAG = "ConfigurationController";
     private final ActivityThreadInternal mActivityThread;

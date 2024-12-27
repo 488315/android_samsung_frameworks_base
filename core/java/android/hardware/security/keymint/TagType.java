@@ -1,6 +1,5 @@
 package android.hardware.security.keymint;
 
-/* loaded from: classes2.dex */
 public @interface TagType {
     public static final int BIGNUM = Integer.MIN_VALUE;
     public static final int BOOL = 1879048192;

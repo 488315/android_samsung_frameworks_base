@@ -3,7 +3,6 @@ package org.tensorflow.lite;
 import java.io.File;
 import java.nio.ByteBuffer;
 
-/* loaded from: classes.dex */
 public class InterpreterFactory {
     public InterpreterApi create(File modelFile, InterpreterApi.Options options) {
         return new InterpreterImpl(

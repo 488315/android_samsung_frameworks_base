@@ -7,7 +7,6 @@ import com.samsung.android.sume.core.message.MessageSubscriber;
 
 import java.util.function.Function;
 
-/* loaded from: classes6.dex */
 public interface GraphNode<T> extends MessageSubscriber {
     GraphNode<T> addInputEdge(GraphEdge graphEdge);
 

@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-/* loaded from: classes4.dex */
 public class TracingConfig {
     public static final int CATEGORIES_ALL = 1;
     public static final int CATEGORIES_ANDROID_WEBVIEW = 2;

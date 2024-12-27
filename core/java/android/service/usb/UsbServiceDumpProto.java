@@ -1,6 +1,5 @@
 package android.service.usb;
 
-/* loaded from: classes3.dex */
 public final class UsbServiceDumpProto {
     public static final long ALSA_MANAGER = 1146756268036L;
     public static final long DEVICE_MANAGER = 1146756268033L;

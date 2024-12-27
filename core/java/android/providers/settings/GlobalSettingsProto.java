@@ -1,6 +1,5 @@
 package android.providers.settings;
 
-/* loaded from: classes3.dex */
 public final class GlobalSettingsProto {
     public static final long ACTIVITY_MANAGER_CONSTANTS = 1146756268034L;
     public static final long ADB_ENABLED = 1146756268035L;

@@ -9,7 +9,6 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
-/* loaded from: classes6.dex */
 public abstract class MediaFilterGroupBase implements MediaFilterGroup {
     protected Supplier<BufferChannel> channelSupplier;
     protected List<MediaFilter> filters = new ArrayList();

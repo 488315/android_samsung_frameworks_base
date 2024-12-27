@@ -1,6 +1,5 @@
 package com.samsung.android;
 
-/* loaded from: classes.dex */
 public final class ProductPackagesRune {
     public static final boolean COM_SAMSUNG_ANDROID_MATEAGENT = false;
     public static final boolean COM_SAMSUNG_ANDROID_SHELL = true;

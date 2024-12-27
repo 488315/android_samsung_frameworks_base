@@ -19,7 +19,6 @@ import android.view.ViewRootImpl;
 import com.android.internal.util.ArrayUtils;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public final class WebViewDelegate {
 
     public interface OnTraceEnabledChangeListener {

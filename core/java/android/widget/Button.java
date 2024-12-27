@@ -10,7 +10,6 @@ import android.view.flags.Flags;
 import com.android.internal.R;
 
 @RemoteViews.RemoteView
-/* loaded from: classes4.dex */
 public class Button extends TextView {
     private boolean mIsThemeDeviceDefault;
 

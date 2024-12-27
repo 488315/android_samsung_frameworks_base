@@ -28,7 +28,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Calendar;
 
-/* loaded from: classes4.dex */
 class TimePickerClockDelegate extends TimePicker.AbstractTimePickerDelegate {
     private static final int AM = 0;
     private static final long DELAY_COMMIT_MILLIS = 2000;

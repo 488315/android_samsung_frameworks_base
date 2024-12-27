@@ -1,6 +1,5 @@
 package android.security.metrics;
 
-/* loaded from: classes3.dex */
 public @interface AtomID {
     public static final int CRASH_STATS = 10125;
     public static final int KEYSTORE2_ATOM_WITH_OVERFLOW = 10121;

@@ -3,7 +3,6 @@ package android.flags;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.media.MediaMetrics;
 
-/* loaded from: classes.dex */
 abstract class BooleanFlagBase implements Flag<Boolean> {
     private String mCategoryName;
     private String mDescription;

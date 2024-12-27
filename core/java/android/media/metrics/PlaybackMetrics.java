@@ -14,7 +14,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public final class PlaybackMetrics implements Parcelable {
     public static final int CONTENT_TYPE_AD = 2;
     public static final int CONTENT_TYPE_MAIN = 1;

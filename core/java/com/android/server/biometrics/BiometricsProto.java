@@ -1,6 +1,5 @@
 package com.android.server.biometrics;
 
-/* loaded from: classes5.dex */
 public final class BiometricsProto {
     public static final int CM_AUTHENTICATE = 3;
     public static final int CM_DETECT_INTERACTION = 13;

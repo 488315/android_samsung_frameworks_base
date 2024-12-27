@@ -11,7 +11,6 @@ import android.view.inputmethod.InputMethodManager;
 
 import java.util.List;
 
-/* loaded from: classes4.dex */
 public class ViewRootInsetsControllerHost implements InsetsController.Host {
     private final String TAG = "VRInsetsControllerHost";
     private SyncRtSurfaceTransactionApplier mApplier;

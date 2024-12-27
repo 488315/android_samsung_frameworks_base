@@ -1,6 +1,5 @@
 package android.service.usb;
 
-/* loaded from: classes3.dex */
 public final class UsbConnectionRecordProto {
     public static final long DEVICE_ADDRESS = 1138166333441L;
     public static final long IS_HEADSET = 1146756268038L;

@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 @Deprecated
-/* loaded from: classes.dex */
 public class DrmInfo {
     private final HashMap<String, Object> mAttributes = new HashMap<>();
     private byte[] mData;

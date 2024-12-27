@@ -21,7 +21,6 @@ import com.android.internal.R;
 
 import java.util.Comparator;
 
-/* loaded from: classes5.dex */
 public class MediaRouteChooserDialog extends AlertDialog {
     private RouteAdapter mAdapter;
     private boolean mAttachedToWindow;

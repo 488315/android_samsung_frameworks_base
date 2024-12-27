@@ -3,7 +3,6 @@ package android.os;
 import android.Manifest;
 import android.app.ActivityThread;
 
-/* loaded from: classes3.dex */
 public interface ISystemUpdateManager extends IInterface {
     Bundle retrieveSystemUpdateInfo() throws RemoteException;
 

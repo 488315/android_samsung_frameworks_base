@@ -15,7 +15,6 @@ import dalvik.system.VMRuntime;
 
 import java.util.Arrays;
 
-/* loaded from: classes4.dex */
 public class WebViewLibraryLoader {
     private static final String CHROMIUM_WEBVIEW_NATIVE_RELRO_32 =
             "/data/misc/shared_relro/libwebviewchromium32.relro";

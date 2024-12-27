@@ -1,6 +1,5 @@
 package android.net.wifi.flags;
 
-/* loaded from: classes3.dex */
 public final class FeatureFlagsImpl implements FeatureFlags {
     @Override // android.net.wifi.flags.FeatureFlags
     public boolean getDeviceCrossAkmRoamingSupport() {

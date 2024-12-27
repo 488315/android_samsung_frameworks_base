@@ -10,7 +10,6 @@ import com.samsung.vekit.Common.Object.Vector2;
 import com.samsung.vekit.Common.Object.Vector3;
 import com.samsung.vekit.Common.Type.AxisType;
 
-/* loaded from: classes6.dex */
 public class Panel {
     private float height;
     private Matrix4 matrix;

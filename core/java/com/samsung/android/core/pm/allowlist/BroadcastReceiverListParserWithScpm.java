@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/* loaded from: classes6.dex */
 public class BroadcastReceiverListParserWithScpm extends BroadcastReceiverListParser {
     private static final long DEFAULT_VERSION = 2022010101;
     private static final String PACKAGE_NAME_TAG = "package name";

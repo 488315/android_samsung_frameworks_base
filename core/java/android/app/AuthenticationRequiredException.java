@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public final class AuthenticationRequiredException extends SecurityException implements Parcelable {
     public static final Parcelable.Creator<AuthenticationRequiredException> CREATOR =
             new Parcelable.Creator<AuthenticationRequiredException>() { // from class:

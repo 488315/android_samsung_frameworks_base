@@ -13,7 +13,6 @@ import com.android.internal.util.Preconditions;
 import java.util.Objects;
 import java.util.Set;
 
-/* loaded from: classes.dex */
 public final class CredentialOption implements Parcelable {
     public static final Parcelable.Creator<CredentialOption> CREATOR =
             new Parcelable.Creator<

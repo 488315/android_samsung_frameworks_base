@@ -7,7 +7,6 @@ import java.nio.ShortBuffer;
 
 import javax.microedition.khronos.opengles.GL;
 
-/* loaded from: classes3.dex */
 class GLErrorWrapper extends GLWrapperBase {
     boolean mCheckError;
     boolean mCheckThread;

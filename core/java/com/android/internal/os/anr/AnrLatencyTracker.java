@@ -9,7 +9,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/* loaded from: classes5.dex */
 public class AnrLatencyTracker implements AutoCloseable {
     private static final AtomicInteger sNextAnrRecordPlacedOnQueueCookieGenerator =
             new AtomicInteger();

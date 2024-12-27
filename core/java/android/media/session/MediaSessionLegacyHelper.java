@@ -20,7 +20,6 @@ import android.util.ArrayMap;
 import android.util.Log;
 import android.view.KeyEvent;
 
-/* loaded from: classes2.dex */
 public class MediaSessionLegacyHelper {
     private static MediaSessionLegacyHelper sInstance;
     private MediaCommunicationManager mCommunicationManager;

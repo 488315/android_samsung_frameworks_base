@@ -17,7 +17,6 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-/* loaded from: classes6.dex */
 public class ContentsInfo implements Parcelable {
     private final Map<String, Object> data;
     private static final String TAG = Def.tagOf((Class<?>) ContentsInfo.class);

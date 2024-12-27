@@ -9,7 +9,6 @@ import java.util.Arrays;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
-/* loaded from: classes6.dex */
 public enum MediaType implements NumericEnum {
     NONE(0),
     IMAGE(1),

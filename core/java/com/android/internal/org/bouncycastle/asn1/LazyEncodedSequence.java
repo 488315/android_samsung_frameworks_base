@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.Enumeration;
 import java.util.Iterator;
 
-/* loaded from: classes5.dex */
 class LazyEncodedSequence extends ASN1Sequence {
     private byte[] encoded;
 

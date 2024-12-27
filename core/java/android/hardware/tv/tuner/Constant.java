@@ -1,6 +1,5 @@
 package android.hardware.tv.tuner;
 
-/* loaded from: classes2.dex */
 public @interface Constant {
     public static final int INVALID_AV_SYNC_ID = -1;
     public static final int INVALID_FILTER_ID = -1;

@@ -26,7 +26,6 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-/* loaded from: classes.dex */
 public class SysinputHAL_AIDL implements SysinputHALInterface {
     private static final String SEPARATOR_AT_SIGN = "@";
     private static final String SERVICE_NAME =

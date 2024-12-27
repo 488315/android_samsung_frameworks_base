@@ -44,7 +44,6 @@ import java.util.Iterator;
 import java.util.List;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes3.dex */
 public class DesktopManagerImpl implements DesktopManager {
     private static final int DESKTOP_DUALVIEW = 712;
     private static final int DESKTOP_NONE = 710;

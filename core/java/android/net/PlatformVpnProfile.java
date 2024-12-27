@@ -7,7 +7,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.security.GeneralSecurityException;
 
-/* loaded from: classes3.dex */
 public abstract class PlatformVpnProfile {
     public static final int MAX_MTU_DEFAULT = 1360;
     public static final int TYPE_IKEV2_IPSEC_PSK = 7;

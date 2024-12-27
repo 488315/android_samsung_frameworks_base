@@ -15,7 +15,6 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
-/* loaded from: classes6.dex */
 class StaplePluginStore extends PluginStore {
     public StaplePluginStore(Context context) {
         super(context);

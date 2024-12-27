@@ -5,7 +5,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 
-/* loaded from: classes6.dex */
 public class SemContextEvent implements Parcelable {
     static final Parcelable.Creator<SemContextEvent> CREATOR =
             new Parcelable.Creator<

@@ -9,7 +9,6 @@ import java.util.Map;
 import java.util.Set;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public class CharacteristicsMap {
     private final HashMap<String, CameraCharacteristics> mCharMap = new HashMap<>();
 

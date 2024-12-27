@@ -6,7 +6,6 @@ import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.util.Map;
 
-/* loaded from: classes3.dex */
 public final class TrustedRootCertificates {
     public static final String GOOGLE_CLOUD_KEY_VAULT_SERVICE_V1_ALIAS =
             "GoogleCloudKeyVaultServiceV1";

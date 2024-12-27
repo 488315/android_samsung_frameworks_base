@@ -11,7 +11,6 @@ import javax.microedition.khronos.egl.EGLContext;
 import javax.microedition.khronos.egl.EGLDisplay;
 import javax.microedition.khronos.egl.EGLSurface;
 
-/* loaded from: classes5.dex */
 public class EGLImpl implements EGL10 {
     private EGLContextImpl mContext = new EGLContextImpl(-1);
     private EGLDisplayImpl mDisplay = new EGLDisplayImpl(-1);

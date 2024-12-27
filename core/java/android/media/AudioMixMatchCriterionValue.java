@@ -7,7 +7,6 @@ import android.provider.UserDictionary;
 
 import com.sec.android.iaft.SmLib_IafdConstant;
 
-/* loaded from: classes2.dex */
 public final class AudioMixMatchCriterionValue implements Parcelable {
     public static final Parcelable.Creator<AudioMixMatchCriterionValue> CREATOR =
             new Parcelable.Creator<AudioMixMatchCriterionValue>() { // from class:

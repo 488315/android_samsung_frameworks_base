@@ -1,6 +1,5 @@
 package com.samsung.android.media;
 
-/* loaded from: classes6.dex */
 public class AudioTag {
     public static final String AUDIO_NO_FADE = "NOFADE";
     public static final String AUDIO_STREAM_RING = "AUDIO_STREAM_RING";

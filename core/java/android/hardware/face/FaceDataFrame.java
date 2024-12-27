@@ -3,7 +3,6 @@ package android.hardware.face;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public final class FaceDataFrame implements Parcelable {
     public static final Parcelable.Creator<FaceDataFrame> CREATOR =
             new Parcelable.Creator<

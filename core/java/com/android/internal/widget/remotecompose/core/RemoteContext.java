@@ -4,7 +4,6 @@ import com.android.internal.widget.remotecompose.core.operations.FloatExpression
 import com.android.internal.widget.remotecompose.core.operations.ShaderData;
 import com.android.internal.widget.remotecompose.core.operations.Utils;
 
-/* loaded from: classes5.dex */
 public abstract class RemoteContext {
     public static final int ID_CALENDAR_MONTH = 9;
     public static final int ID_COMPONENT_HEIGHT = 8;

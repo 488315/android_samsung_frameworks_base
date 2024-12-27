@@ -3,7 +3,6 @@ package android.view;
 import android.graphics.Outline;
 import android.graphics.drawable.Drawable;
 
-/* loaded from: classes4.dex */
 public abstract class ViewOutlineProvider {
     public static final ViewOutlineProvider BACKGROUND =
             new ViewOutlineProvider() { // from class: android.view.ViewOutlineProvider.1

@@ -13,7 +13,6 @@ import java.security.SecureRandom;
 import java.util.Hashtable;
 import java.util.Random;
 
-/* loaded from: classes5.dex */
 public abstract class ECCurve {
     public static final int COORD_AFFINE = 0;
     public static final int COORD_HOMOGENEOUS = 1;

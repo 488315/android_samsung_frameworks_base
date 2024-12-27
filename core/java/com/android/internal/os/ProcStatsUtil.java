@@ -6,7 +6,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-/* loaded from: classes5.dex */
 public final class ProcStatsUtil {
     private static final boolean DEBUG = false;
     private static final int READ_SIZE = 1024;

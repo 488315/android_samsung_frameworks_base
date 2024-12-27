@@ -10,7 +10,6 @@ import javax.crypto.Cipher;
 import javax.crypto.KeyAgreement;
 import javax.crypto.Mac;
 
-/* loaded from: classes2.dex */
 public class CryptoObject {
     private final Object mCrypto;
 

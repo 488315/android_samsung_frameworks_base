@@ -1,6 +1,5 @@
 package com.android.internal.foldables.flags;
 
-/* loaded from: classes5.dex */
 public final class Flags {
     private static FeatureFlags FEATURE_FLAGS = new FeatureFlagsImpl();
     public static final String FLAG_FOLD_GRACE_PERIOD_ENABLED =

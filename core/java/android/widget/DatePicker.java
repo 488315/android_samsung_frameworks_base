@@ -28,7 +28,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Locale;
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public class DatePicker extends FrameLayout {
     private static final String LOG_TAG = DatePicker.class.getSimpleName();
     public static final int MODE_CALENDAR = 2;

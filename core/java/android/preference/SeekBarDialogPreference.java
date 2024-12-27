@@ -10,7 +10,6 @@ import android.widget.SeekBar;
 import com.android.internal.R;
 
 @Deprecated
-/* loaded from: classes3.dex */
 public class SeekBarDialogPreference extends DialogPreference {
     private final Drawable mMyIcon;
 

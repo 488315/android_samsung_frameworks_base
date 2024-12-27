@@ -2,7 +2,6 @@ package android.content.pm;
 
 import android.content.ComponentName;
 
-/* loaded from: classes.dex */
 public final class ActivityPresentationInfo {
     public final ComponentName componentName;
     public final int displayId;

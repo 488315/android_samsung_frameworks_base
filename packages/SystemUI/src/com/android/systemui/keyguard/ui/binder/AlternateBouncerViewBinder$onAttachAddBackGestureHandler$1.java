@@ -6,7 +6,6 @@ import android.window.OnBackInvokedDispatcher;
 import com.android.systemui.keyguard.ui.viewmodel.AlternateBouncerDependencies;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public final class AlternateBouncerViewBinder$onAttachAddBackGestureHandler$1 implements View.OnAttachStateChangeListener {
     public final AlternateBouncerViewBinder$onAttachAddBackGestureHandler$1$onBackInvokedCallback$1 onBackInvokedCallback = new OnBackInvokedCallback() { // from class: com.android.systemui.keyguard.ui.binder.AlternateBouncerViewBinder$onAttachAddBackGestureHandler$1$onBackInvokedCallback$1
         @Override // android.window.OnBackInvokedCallback

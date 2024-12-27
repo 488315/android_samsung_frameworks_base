@@ -4,7 +4,6 @@ import android.annotation.SystemApi;
 
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public final class DevicePolicyIdentifiers {
     public static final String ACCOUNT_MANAGEMENT_DISABLED_POLICY = "accountManagementDisabled";
     public static final String APPLICATION_HIDDEN_POLICY = "applicationHidden";

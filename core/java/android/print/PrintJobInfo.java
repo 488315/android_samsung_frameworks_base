@@ -12,7 +12,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Arrays;
 
-/* loaded from: classes3.dex */
 public final class PrintJobInfo implements Parcelable {
     public static final Parcelable.Creator<PrintJobInfo> CREATOR =
             new Parcelable.Creator<PrintJobInfo>() { // from class: android.print.PrintJobInfo.1

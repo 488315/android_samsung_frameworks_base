@@ -2,7 +2,6 @@ package com.samsung.android.media;
 
 import android.os.ParcelFileDescriptor;
 
-/* loaded from: classes6.dex */
 class SEFJNI {
     static native int addFastSEFData(
             String str,

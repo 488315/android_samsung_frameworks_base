@@ -6,7 +6,6 @@ import com.samsung.android.graphics.spr.document.attribute.SprAttributeBase;
 import java.io.IOException;
 import java.io.OutputStream;
 
-/* loaded from: classes5.dex */
 public class Base64Encoder implements Encoder {
     protected final byte[] encodingTable = {
         65,

@@ -31,7 +31,6 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.zip.ZipEntry;
 
-/* loaded from: classes4.dex */
 public class ApkSignatureVerifier {
     private static final String LOG_TAG = "ApkSignatureVerifier";
     private static final AtomicReference<byte[]> sBuffer = new AtomicReference<>();

@@ -8,7 +8,6 @@ import android.util.TypedValue;
 
 import com.android.internal.R;
 
-/* loaded from: classes4.dex */
 public class ScaleAnimation extends Animation {
     private float mFromX;
     private int mFromXData;

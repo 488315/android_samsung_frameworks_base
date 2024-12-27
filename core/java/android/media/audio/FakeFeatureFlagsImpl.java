@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Predicate;
 
-/* loaded from: classes2.dex */
 public class FakeFeatureFlagsImpl extends CustomFeatureFlags {
     private final FeatureFlags mDefaults;
     private final Map<String, Boolean> mFlagMap;

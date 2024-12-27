@@ -12,7 +12,6 @@ import android.telephony.ims.SipDelegateImsConfiguration;
 
 import java.util.List;
 
-/* loaded from: classes4.dex */
 public interface ISipDelegateStateCallback extends IInterface {
     public static final String DESCRIPTOR = "android.telephony.ims.aidl.ISipDelegateStateCallback";
 

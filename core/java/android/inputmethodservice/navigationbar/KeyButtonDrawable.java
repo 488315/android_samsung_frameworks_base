@@ -16,7 +16,6 @@ import android.graphics.drawable.AnimatedVectorDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.FloatProperty;
 
-/* loaded from: classes2.dex */
 final class KeyButtonDrawable extends Drawable {
     public static final FloatProperty<KeyButtonDrawable> KEY_DRAWABLE_ROTATE =
             new FloatProperty<KeyButtonDrawable>("KeyButtonRotation") { // from class:

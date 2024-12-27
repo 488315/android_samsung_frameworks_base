@@ -9,7 +9,6 @@ import android.os.Parcel;
 import android.os.PermissionEnforcer;
 import android.os.RemoteException;
 
-/* loaded from: classes2.dex */
 public interface IDeviceStateManager extends IInterface {
     public static final String DESCRIPTOR = "android.hardware.devicestate.IDeviceStateManager";
 

@@ -1,6 +1,5 @@
 package com.samsung.android.ims.im;
 
-/* loaded from: classes6.dex */
 public interface SemImConstants {
 
     public interface ChatState {

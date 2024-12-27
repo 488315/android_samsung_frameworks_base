@@ -13,7 +13,6 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 @Deprecated
-/* loaded from: classes4.dex */
 public class Time {
     public static final int EPOCH_JULIAN_DAY = 2440588;
     public static final int FRIDAY = 5;

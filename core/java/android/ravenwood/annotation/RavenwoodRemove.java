@@ -7,5 +7,4 @@ import java.lang.annotation.Target;
 
 @Target({ElementType.TYPE, ElementType.FIELD, ElementType.METHOD, ElementType.CONSTRUCTOR})
 @Retention(RetentionPolicy.CLASS)
-/* loaded from: classes3.dex */
 public @interface RavenwoodRemove {}

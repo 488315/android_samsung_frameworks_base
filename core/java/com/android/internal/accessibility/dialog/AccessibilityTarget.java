@@ -15,7 +15,6 @@ import com.android.internal.accessibility.util.ShortcutUtils;
 
 import java.util.Set;
 
-/* loaded from: classes5.dex */
 public abstract class AccessibilityTarget
         implements TargetOperations, OnTargetSelectedListener, OnTargetCheckedChangeListener {
     private ComponentName mComponentName;

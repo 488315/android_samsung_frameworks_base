@@ -4,7 +4,6 @@ import android.hardware.camera2.utils.HashCodeHelpers;
 
 import com.android.internal.util.Preconditions;
 
-/* loaded from: classes2.dex */
 public final class OisSample {
     private final long mTimestampNs;
     private final float mXShift;

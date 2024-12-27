@@ -8,7 +8,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Arrays;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public final class AudioFormat implements Parcelable {
     public static final int AUDIO_FORMAT_HAS_PROPERTY_CHANNEL_INDEX_MASK = 8;
     public static final int AUDIO_FORMAT_HAS_PROPERTY_CHANNEL_MASK = 4;

@@ -30,7 +30,6 @@ import java.util.Objects;
 import java.util.Set;
 
 @Deprecated
-/* loaded from: classes.dex */
 public class SliceManager {
     public static final String ACTION_REQUEST_SLICE_PERMISSION =
             "com.android.intent.action.REQUEST_SLICE_PERMISSION";

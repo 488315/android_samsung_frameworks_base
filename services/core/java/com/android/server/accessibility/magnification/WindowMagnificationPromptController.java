@@ -20,7 +20,6 @@ import com.android.internal.notification.SystemNotificationChannels;
 import com.android.server.DirEncryptServiceHelper$$ExternalSyntheticOutline0;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes.dex */
 public final class WindowMagnificationPromptController {
     static final String ACTION_DISMISS = "com.android.server.accessibility.magnification.action.DISMISS";
     static final String ACTION_TURN_ON_IN_SETTINGS = "com.android.server.accessibility.magnification.action.TURN_ON_IN_SETTINGS";

@@ -1,6 +1,5 @@
 package com.android.nfc;
 
-/* loaded from: classes5.dex */
 public final class NfcServiceDumpProto {
     public static final long BEAM_CAPABLE = 1133871366156L;
     public static final long CARD_EMULATION_MANAGER = 1146756268049L;

@@ -8,7 +8,6 @@ import android.os.Parcelable;
 import java.util.Arrays;
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public class ActivityStatsTechSpecificInfo implements Parcelable {
     public static final Parcelable.Creator<ActivityStatsTechSpecificInfo> CREATOR =
             new Parcelable.Creator<ActivityStatsTechSpecificInfo>() { // from class:

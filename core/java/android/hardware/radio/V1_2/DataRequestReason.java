@@ -6,7 +6,6 @@ import com.samsung.android.globalactions.presentation.strategies.WindowManagerFu
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class DataRequestReason {
     public static final int HANDOVER = 3;
     public static final int NORMAL = 1;

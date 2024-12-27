@@ -15,7 +15,6 @@ import com.android.internal.org.bouncycastle.asn1.x509.X509Name;
 
 import java.util.Enumeration;
 
-/* loaded from: classes5.dex */
 public class CertificationRequestInfo extends ASN1Object {
     ASN1Set attributes;
     X500Name subject;

@@ -1,7 +1,6 @@
 package android.os;
 
 
-/* loaded from: classes3.dex */
 public class FabricatedOverlayInternalEntry implements Parcelable {
     public static final Parcelable.Creator<FabricatedOverlayInternalEntry> CREATOR =
             new Parcelable.Creator<

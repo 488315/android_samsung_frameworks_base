@@ -12,7 +12,6 @@ import android.filterfw.format.ImageFormat;
 import java.util.Date;
 import java.util.Random;
 
-/* loaded from: classes.dex */
 public class BlackWhiteFilter extends Filter {
 
     @GenerateFieldPort(hasDefault = true, name = "black")

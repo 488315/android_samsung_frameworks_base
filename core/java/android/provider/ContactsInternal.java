@@ -15,7 +15,6 @@ import com.android.internal.R;
 
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public class ContactsInternal {
     private static final int CONTACTS_URI_LOOKUP = 1001;
     private static final int CONTACTS_URI_LOOKUP_ID = 1000;

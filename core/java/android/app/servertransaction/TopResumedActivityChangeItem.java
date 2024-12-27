@@ -8,7 +8,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.Trace;
 
-/* loaded from: classes.dex */
 public class TopResumedActivityChangeItem extends ActivityTransactionItem {
     public static final Parcelable.Creator<TopResumedActivityChangeItem> CREATOR =
             new Parcelable.Creator<TopResumedActivityChangeItem>() { // from class:

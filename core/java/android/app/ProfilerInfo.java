@@ -9,7 +9,6 @@ import android.util.proto.ProtoOutputStream;
 import java.io.IOException;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public class ProfilerInfo implements Parcelable {
     public static final int CLOCK_TYPE_DEFAULT = 0;
     public static final int CLOCK_TYPE_DUAL = 272;

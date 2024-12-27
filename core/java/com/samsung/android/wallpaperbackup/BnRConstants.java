@@ -1,6 +1,5 @@
 package com.samsung.android.wallpaperbackup;
 
-/* loaded from: classes6.dex */
 public class BnRConstants {
     public static final String BNR_SOURCE_SCLOUD = "Scloud";
     public static final String COVER_TYPE_LARGE_SCREEN = "large_screen";

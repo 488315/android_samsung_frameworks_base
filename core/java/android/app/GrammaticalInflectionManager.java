@@ -8,7 +8,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-/* loaded from: classes.dex */
 public class GrammaticalInflectionManager {
     public static final Set<Integer> VALID_GRAMMATICAL_GENDER_VALUES =
             Collections.unmodifiableSet(new HashSet(Arrays.asList(0, 1, 2, 3)));

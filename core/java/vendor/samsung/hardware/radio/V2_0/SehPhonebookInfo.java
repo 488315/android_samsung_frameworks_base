@@ -7,7 +7,6 @@ import android.os.HwParcel;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/* loaded from: classes6.dex */
 public final class SehPhonebookInfo {
     public int totalCount = 0;
     public int usedCount = 0;

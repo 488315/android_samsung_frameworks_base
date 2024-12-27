@@ -4,7 +4,6 @@ import android.os.Handler;
 
 import com.android.internal.util.GrowingArrayUtils;
 
-/* loaded from: classes4.dex */
 public class HandlerActionQueue {
     private HandlerAction[] mActions;
     private int mCount;

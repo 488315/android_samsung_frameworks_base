@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.util.Arrays;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public final class AudioIoFlags implements Parcelable {
     public static final Parcelable.Creator<AudioIoFlags> CREATOR =
             new Parcelable.Creator<

@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RemoteViews.RemoteView
-/* loaded from: classes5.dex */
 public class ConversationHeaderLinearLayout extends LinearLayout {
     public ConversationHeaderLinearLayout(Context context) {
         super(context);

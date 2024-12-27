@@ -9,7 +9,6 @@ import android.os.HwParcel;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public final class QosFilter {
     public ArrayList<String> localAddresses = new ArrayList<>();
     public ArrayList<String> remoteAddresses = new ArrayList<>();

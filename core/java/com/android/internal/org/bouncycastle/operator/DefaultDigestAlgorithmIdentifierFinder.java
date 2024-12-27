@@ -15,7 +15,6 @@ import com.android.internal.org.bouncycastle.asn1.x9.X9ObjectIdentifiers;
 import java.util.HashMap;
 import java.util.Map;
 
-/* loaded from: classes5.dex */
 public class DefaultDigestAlgorithmIdentifierFinder implements DigestAlgorithmIdentifierFinder {
     private static Map digestOids = new HashMap();
     private static Map digestNameToOids = new HashMap();

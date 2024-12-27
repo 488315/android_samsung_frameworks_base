@@ -6,7 +6,6 @@ import android.view.Surface;
 import android.view.SurfaceHolder;
 
 @Deprecated
-/* loaded from: classes3.dex */
 public class RenderScriptGL extends RenderScript {
     int mHeight;
     SurfaceConfig mSurfaceConfig;

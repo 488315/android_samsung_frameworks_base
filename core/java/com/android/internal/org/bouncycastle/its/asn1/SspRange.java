@@ -8,7 +8,6 @@ import com.android.internal.org.bouncycastle.asn1.DERNull;
 
 import java.io.IOException;
 
-/* loaded from: classes5.dex */
 public class SspRange extends ASN1Object {
     private final BitmapSspRange bitmapSspRange;
     private final boolean isAll;

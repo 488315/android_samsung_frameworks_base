@@ -17,7 +17,6 @@ import com.android.systemui.R;
 import com.android.systemui.res.R$styleable;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes.dex */
 public class NumPadKey extends ViewGroup implements NumPadAnimationListener {
     public static String[] sKlondike;
     public final int mDigit;

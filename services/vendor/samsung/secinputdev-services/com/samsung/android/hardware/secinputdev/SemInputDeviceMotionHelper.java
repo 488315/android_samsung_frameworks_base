@@ -12,7 +12,6 @@ import com.samsung.android.hardware.secinputdev.hal.SysinputHALInterface;
 import java.io.PrintWriter;
 import java.util.HashMap;
 
-/* loaded from: classes.dex */
 public class SemInputDeviceMotionHelper {
     private static final String TAG = "SemInputMotionHelper";
     private SemInputCommandInterface commandOperator;

@@ -6,7 +6,6 @@ import android.os.Bundle;
 
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public class ISmsImplBase extends ISms.Stub {
     @Override // com.android.internal.telephony.ISms
     public List<SmsRawData> getAllMessagesFromIccEfForSubscriber(int subId, String callingPkg) {

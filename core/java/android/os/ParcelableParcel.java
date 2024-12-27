@@ -2,7 +2,6 @@ package android.os;
 
 import android.util.MathUtils;
 
-/* loaded from: classes3.dex */
 public class ParcelableParcel implements Parcelable {
     public static final Parcelable.ClassLoaderCreator<ParcelableParcel> CREATOR =
             new Parcelable.ClassLoaderCreator<

@@ -9,7 +9,6 @@ import com.android.internal.telephony.SmsAddress;
 
 import java.text.ParseException;
 
-/* loaded from: classes5.dex */
 public class GsmSmsAddress extends SmsAddress {
     static final String DOCOMO = "DOCOMO";
     static final String DOCOMO_SMS = "DOCOMO SMS";

@@ -4,7 +4,6 @@ import android.text.TextUtils;
 import org.xmlpull.v1.XmlPullParser;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes3.dex */
 public final class ScreenParser extends BaseParser {
     @Override // com.android.systemui.wallpaper.theme.xmlparser.BaseParser
     public final void parseAttribute(ParserData parserData) {

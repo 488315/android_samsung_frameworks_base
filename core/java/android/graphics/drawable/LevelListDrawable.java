@@ -12,7 +12,6 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 
-/* loaded from: classes.dex */
 public class LevelListDrawable extends DrawableContainer {
     private LevelListState mLevelListState;
     private boolean mMutated;

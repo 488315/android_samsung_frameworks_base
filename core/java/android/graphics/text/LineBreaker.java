@@ -8,7 +8,6 @@ import libcore.util.NativeAllocationRegistry;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes.dex */
 public class LineBreaker {
     public static final int BREAK_STRATEGY_BALANCED = 2;
     public static final int BREAK_STRATEGY_HIGH_QUALITY = 1;

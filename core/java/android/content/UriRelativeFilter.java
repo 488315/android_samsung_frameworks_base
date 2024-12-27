@@ -19,7 +19,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public final class UriRelativeFilter {
     private static final String FILTER_STR = "filter";
     public static final int FRAGMENT = 2;

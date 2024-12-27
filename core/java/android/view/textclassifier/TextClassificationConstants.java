@@ -4,7 +4,6 @@ import android.provider.DeviceConfig;
 
 import com.android.internal.util.IndentingPrintWriter;
 
-/* loaded from: classes4.dex */
 public final class TextClassificationConstants {
     static final String GENERATE_LINKS_MAX_TEXT_LENGTH = "generate_links_max_text_length";
     private static final int GENERATE_LINKS_MAX_TEXT_LENGTH_DEFAULT = 100000;

@@ -15,7 +15,6 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-/* loaded from: classes.dex */
 public class LoggingContentInterface implements ContentInterface {
     private final ContentInterface delegate;
     private final String tag;

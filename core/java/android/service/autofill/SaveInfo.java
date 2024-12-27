@@ -18,7 +18,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Arrays;
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public final class SaveInfo implements Parcelable {
     public static final Parcelable.Creator<SaveInfo> CREATOR =
             new Parcelable.Creator<SaveInfo>() { // from class: android.service.autofill.SaveInfo.1

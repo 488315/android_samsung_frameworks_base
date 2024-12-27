@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-/* loaded from: classes.dex */
 class ObjectPool {
     private static final int MAX_POOL_SIZE = 50;
     private static final Object sPoolSync = new Object();

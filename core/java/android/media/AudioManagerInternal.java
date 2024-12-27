@@ -2,7 +2,6 @@ package android.media;
 
 import android.util.IntArray;
 
-/* loaded from: classes2.dex */
 public abstract class AudioManagerInternal {
 
     public interface RingerModeDelegate {

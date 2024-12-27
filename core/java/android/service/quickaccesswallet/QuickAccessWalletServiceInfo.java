@@ -27,7 +27,6 @@ import org.xmlpull.v1.XmlPullParserException;
 import java.io.IOException;
 import java.util.List;
 
-/* loaded from: classes3.dex */
 class QuickAccessWalletServiceInfo {
     private static final String TAG = "QAWalletSInfo";
     private static final String TAG_WALLET_SERVICE = "quickaccesswallet-service";

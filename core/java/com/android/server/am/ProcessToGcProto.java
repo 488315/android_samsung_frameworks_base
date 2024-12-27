@@ -1,6 +1,5 @@
 package com.android.server.am;
 
-/* loaded from: classes5.dex */
 public final class ProcessToGcProto {
     public static final long LAST_GCED_MS = 1112396529668L;
     public static final long LAST_LOW_MEMORY_MS = 1112396529669L;

@@ -15,7 +15,6 @@ import kotlinx.coroutines.flow.FlowKt__TransformKt$onEach$$inlined$unsafeTransfo
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes.dex */
 public final class PackageChangeRepositoryImpl implements PackageChangeRepository {
     public final Lazy monitor$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.common.data.repository.PackageChangeRepositoryImpl$monitor$2
         {

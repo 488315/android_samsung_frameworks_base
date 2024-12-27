@@ -5,7 +5,6 @@ import android.hardware.usb.UsbDeviceConnection;
 import android.hardware.usb.UsbEndpoint;
 import android.hardware.usb.UsbManager;
 
-/* loaded from: classes5.dex */
 public abstract class PlayerExternalChipsetBase {
     protected boolean mIsSeeking;
     protected boolean mIsTuning;

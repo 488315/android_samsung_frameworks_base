@@ -5,7 +5,6 @@ import android.app.backup.BlobBackupHelper;
 import android.content.pm.IPackageManager;
 import android.util.Slog;
 
-/* loaded from: classes5.dex */
 public class PreferredActivityBackupHelper extends BlobBackupHelper {
     private static final boolean DEBUG = false;
     private static final int STATE_VERSION = 4;

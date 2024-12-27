@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 
 @Deprecated
-/* loaded from: classes4.dex */
 public class Plugin {
     private String mDescription;
     private String mFileName;

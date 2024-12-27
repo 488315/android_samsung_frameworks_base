@@ -12,7 +12,6 @@ import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public class ContextHubClient implements Closeable {
     private static final String TAG = "ContextHubClient";
     private final ContextHubInfo mAttachedHub;

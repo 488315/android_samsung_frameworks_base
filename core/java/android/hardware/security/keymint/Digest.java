@@ -1,6 +1,5 @@
 package android.hardware.security.keymint;
 
-/* loaded from: classes2.dex */
 public @interface Digest {
     public static final int MD5 = 1;
     public static final int NONE = 0;

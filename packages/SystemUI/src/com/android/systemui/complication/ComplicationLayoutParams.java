@@ -7,7 +7,6 @@ import java.util.Map;
 import java.util.function.Consumer;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes.dex */
 public final class ComplicationLayoutParams extends ViewGroup.LayoutParams {
     public static final Map INVALID_DIRECTIONS;
     public static final int[] INVALID_POSITIONS = {3, 12};

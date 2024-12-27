@@ -40,7 +40,6 @@ import java.io.PrintWriter;
 import java.util.List;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes.dex */
 public final class DirEncryptService extends IDirEncryptService.Stub {
     public static final File RECOVERY_DIR = new File("/cache/recovery");
     public final Context mContext;

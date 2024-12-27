@@ -5,7 +5,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @Deprecated
-/* loaded from: classes2.dex */
 public class SContextExercise extends SContextEventContext {
     public static final Parcelable.Creator<SContextExercise> CREATOR =
             new Parcelable.Creator<SContextExercise>() { // from class:

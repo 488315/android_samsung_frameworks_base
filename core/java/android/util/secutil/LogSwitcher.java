@@ -2,7 +2,6 @@ package android.util.secutil;
 
 import android.os.SystemProperties;
 
-/* loaded from: classes4.dex */
 public final class LogSwitcher {
     public static boolean isShowingGlobalLog;
     public static boolean isShowingSecDLog;

@@ -6,7 +6,6 @@ import android.graphics.Path;
 
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public class PathShape extends Shape {
     private Path mPath;
     private float mScaleX;

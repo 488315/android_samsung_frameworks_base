@@ -13,7 +13,6 @@ import com.samsung.android.provider.SemKnoxPolicyContract;
 
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public interface IEDMProxy extends IInterface {
     public static final String DESCRIPTOR = "android.sec.enterprise.IEDMProxy";
 

@@ -5,7 +5,6 @@ import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.Map;
 
-/* loaded from: classes.dex */
 public final class Interpreter extends InterpreterImpl implements InterpreterApi {
     String[] signatureKeyList;
     NativeInterpreterWrapperExperimental wrapperExperimental;

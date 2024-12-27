@@ -16,7 +16,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-/* loaded from: classes5.dex */
 public class AODManager {
     public static final int AOD_MANAGER_VERSION = 4;
     public static final String AOD_PACKAGE_NAME = "com.samsung.android.app.aodservice";

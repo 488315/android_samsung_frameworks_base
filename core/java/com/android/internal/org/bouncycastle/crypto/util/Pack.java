@@ -1,6 +1,5 @@
 package com.android.internal.org.bouncycastle.crypto.util;
 
-/* loaded from: classes5.dex */
 public abstract class Pack {
     public static int bigEndianToInt(byte[] bs, int off) {
         int n = bs[off] << 24;

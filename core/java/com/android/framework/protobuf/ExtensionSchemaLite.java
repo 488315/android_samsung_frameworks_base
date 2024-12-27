@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 @CheckReturnValue
-/* loaded from: classes3.dex */
 final class ExtensionSchemaLite extends ExtensionSchema<GeneratedMessageLite.ExtensionDescriptor> {
     ExtensionSchemaLite() {}
 

@@ -1,6 +1,5 @@
 package android.media.audio.common;
 
-/* loaded from: classes2.dex */
 public @interface AudioMMapPolicy {
     public static final int ALWAYS = 3;
     public static final int AUTO = 2;

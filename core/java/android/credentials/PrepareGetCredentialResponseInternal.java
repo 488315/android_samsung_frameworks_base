@@ -7,7 +7,6 @@ import android.util.ArraySet;
 
 import java.util.Set;
 
-/* loaded from: classes.dex */
 public final class PrepareGetCredentialResponseInternal implements Parcelable {
     public static final Parcelable.Creator<PrepareGetCredentialResponseInternal> CREATOR =
             new Parcelable.Creator<PrepareGetCredentialResponseInternal>() { // from class:

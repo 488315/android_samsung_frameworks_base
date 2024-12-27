@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.function.Function;
 
-/* loaded from: classes6.dex */
 public class SemMdContextManager {
     public static final String CONTEXT_TYPE_ALL = "all-context type";
     public static final String CONTEXT_TYPE_CAR_CRASH = "ccd";

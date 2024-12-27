@@ -5,7 +5,6 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.FrameLayout;
 
-/* loaded from: classes2.dex */
 public final class NavigationBarFrame extends FrameLayout {
     private DeadZone mDeadZone;
 

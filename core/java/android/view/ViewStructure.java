@@ -16,7 +16,6 @@ import com.android.internal.util.Preconditions;
 
 import java.util.List;
 
-/* loaded from: classes4.dex */
 public abstract class ViewStructure {
     public static final String EXTRA_ACTIVE_CHILDREN_IDS =
             "android.view.ViewStructure.extra.ACTIVE_CHILDREN_IDS";

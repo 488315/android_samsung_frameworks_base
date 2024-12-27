@@ -1,6 +1,5 @@
 package android.os;
 
-/* loaded from: classes3.dex */
 public final class WorkSourceProto {
     public static final long WORK_CHAINS = 2246267895810L;
     public static final long WORK_SOURCE_CONTENTS = 2246267895809L;

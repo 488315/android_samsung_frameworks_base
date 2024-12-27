@@ -7,7 +7,6 @@ import com.android.internal.org.bouncycastle.asn1.ASN1Primitive;
 import com.android.internal.org.bouncycastle.asn1.ASN1Sequence;
 import com.android.internal.org.bouncycastle.asn1.DERSequence;
 
-/* loaded from: classes5.dex */
 public class Ieee1609Dot2Content extends ASN1Object implements ASN1Choice {
     public static Ieee1609Dot2Content getInstance(Object src) {
         if (src instanceof Ieee1609Dot2Content) {

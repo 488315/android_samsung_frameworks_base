@@ -1,6 +1,5 @@
 package android.stats.connectivity;
 
-/* loaded from: classes3.dex */
 public final class TetheringProto {
     public static final int DS_TETHERING_BLUETOOTH = 3;
     public static final int DS_TETHERING_ETHERNET = 6;

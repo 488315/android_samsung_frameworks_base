@@ -6,7 +6,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Locale;
 
-/* loaded from: classes5.dex */
 public final class XmlConstants {
     public static final String ATTRIBUTE_AMPLITUDE = "amplitude";
     public static final String ATTRIBUTE_DELAY_MS = "delayMs";

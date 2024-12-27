@@ -13,7 +13,6 @@ import java.security.spec.AlgorithmParameterSpec;
 import java.security.spec.NamedParameterSpec;
 import java.util.Arrays;
 
-/* loaded from: classes3.dex */
 public class AndroidKeyStoreXDHPublicKey extends AndroidKeyStorePublicKey implements XECPublicKey {
     private static final int X25519_KEY_SIZE_BYTES = 32;
     private static final byte[] X509_PREAMBLE = {

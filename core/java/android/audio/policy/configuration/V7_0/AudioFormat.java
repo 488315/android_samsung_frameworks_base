@@ -1,6 +1,5 @@
 package android.audio.policy.configuration.V7_0;
 
-/* loaded from: classes.dex */
 public enum AudioFormat {
     AUDIO_FORMAT_DEFAULT("AUDIO_FORMAT_DEFAULT"),
     AUDIO_FORMAT_PCM_16_BIT("AUDIO_FORMAT_PCM_16_BIT"),

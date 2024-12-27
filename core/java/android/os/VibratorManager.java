@@ -6,7 +6,6 @@ import android.util.Log;
 
 import com.samsung.android.vibrator.VibrationDebugInfo;
 
-/* loaded from: classes3.dex */
 public abstract class VibratorManager {
     private static final String TAG = "VibratorManager";
     protected final String mPackageName;

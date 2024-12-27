@@ -1,6 +1,5 @@
 package android.graphics;
 
-/* loaded from: classes.dex */
 public class PathMeasure {
     public static final int POSITION_MATRIX_FLAG = 1;
     public static final int TANGENT_MATRIX_FLAG = 2;

@@ -3,7 +3,6 @@ package android.net.metrics;
 import java.util.Arrays;
 import java.util.BitSet;
 
-/* loaded from: classes3.dex */
 public final class DnsEvent {
     private static final int SIZE_LIMIT = 20000;
     public int eventCount;

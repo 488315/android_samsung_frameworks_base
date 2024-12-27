@@ -8,7 +8,6 @@ import android.util.Log;
 import com.samsung.android.sepunion.SemUnionManager;
 import com.samsung.android.sepunion.UnionConstants;
 
-/* loaded from: classes6.dex */
 public final class HermesServiceManager {
     public static final int ERR_SERVICE_ERROR = -10000;
     public static final int NO_ERROR = 0;

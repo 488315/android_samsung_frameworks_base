@@ -11,7 +11,6 @@ import android.os.RemoteException;
 
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public interface IVcnManagementService extends IInterface {
     public static final String DESCRIPTOR = "android.net.vcn.IVcnManagementService";
 

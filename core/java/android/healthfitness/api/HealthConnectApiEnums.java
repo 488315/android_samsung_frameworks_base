@@ -1,6 +1,5 @@
 package android.healthfitness.api;
 
-/* loaded from: classes2.dex */
 public final class HealthConnectApiEnums {
     public static final int ACTIVE_CALORIES_BURNED = 2;
     public static final int API_METHOD_UNKNOWN = 0;

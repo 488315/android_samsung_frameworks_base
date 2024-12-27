@@ -1,6 +1,5 @@
 package android.media;
 
-/* loaded from: classes2.dex */
 public @interface AudioUniqueIdUse {
     public static final int CLIENT = 7;
     public static final int EFFECT = 3;

@@ -7,7 +7,6 @@ import android.os.Parcel;
 import android.os.ParcelableException;
 import android.os.RemoteException;
 
-/* loaded from: classes.dex */
 public interface IAppFunctionEnabledCallback extends IInterface {
     public static final String DESCRIPTOR = "android.app.appfunctions.IAppFunctionEnabledCallback";
 

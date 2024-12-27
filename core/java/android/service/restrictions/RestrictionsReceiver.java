@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.RestrictionsManager;
 import android.os.PersistableBundle;
 
-/* loaded from: classes3.dex */
 public abstract class RestrictionsReceiver extends BroadcastReceiver {
     private static final String TAG = "RestrictionsReceiver";
 

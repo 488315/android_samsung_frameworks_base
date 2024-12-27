@@ -3,7 +3,6 @@ package com.android.framework.protobuf;
 import java.lang.reflect.Field;
 
 @CheckReturnValue
-/* loaded from: classes3.dex */
 final class FieldInfo implements Comparable<FieldInfo> {
     private final Field cachedSizeField;
     private final boolean enforceUtf8;

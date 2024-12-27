@@ -2,7 +2,6 @@ package android.os;
 
 import java.util.Arrays;
 
-/* loaded from: classes3.dex */
 public final class SpeakerOutEnergyInfo implements Parcelable {
     public static final int MAX_VOLUME_LEVELS = 15;
     public static final int NUM_VOLUME_LEVELS = 16;

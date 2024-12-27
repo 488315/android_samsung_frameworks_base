@@ -9,7 +9,6 @@ import dalvik.system.CloseGuard;
 
 import java.lang.ref.WeakReference;
 
-/* loaded from: classes4.dex */
 public final class InputQueue {
     private final LongSparseArray<ActiveInputEvent> mActiveEventArray = new LongSparseArray<>(20);
     private final Pools.Pool<ActiveInputEvent> mActiveInputEventPool = new Pools.SimplePool(20);

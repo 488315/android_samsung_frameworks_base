@@ -4,7 +4,6 @@ import com.samsung.android.globalactions.presentation.SamsungGlobalActions;
 import com.samsung.android.globalactions.util.LockPatternUtilsWrapper;
 import com.samsung.android.globalactions.util.SamsungGlobalActionsAnalytics;
 
-/* loaded from: classes6.dex */
 public class LockdownModeActionViewModel implements ActionViewModel {
     private final SamsungGlobalActions mGlobalActions;
     private ActionInfo mInfo;

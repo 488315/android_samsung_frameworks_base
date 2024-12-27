@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-/* loaded from: classes2.dex */
 public class MarshalRegistry {
     private static final Object sMarshalLock = new Object();
     private static final List<MarshalQueryable<?>> sRegisteredMarshalQueryables = new ArrayList();

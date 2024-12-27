@@ -4,7 +4,6 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 
 import com.samsung.android.globalactions.presentation.features.Features;
 
-/* loaded from: classes6.dex */
 public class SystemConditionChecker implements ConditionChecker {
     private static final String TAG = "SystemConditionChecker";
     private final Features mFeatures;

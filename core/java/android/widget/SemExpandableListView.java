@@ -40,7 +40,6 @@ import com.samsung.android.rune.ViewRune;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* loaded from: classes4.dex */
 public class SemExpandableListView extends ListView {
     private static final int ANIMATION_STATE_COLLAPSING = 3;
     private static final int ANIMATION_STATE_COLLAPSING_ALL = 5;

@@ -17,7 +17,6 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-/* loaded from: classes2.dex */
 class InlineSuggestionSessionController {
     private static final String TAG = "InlineSuggestionSessionController";
     private final Supplier<IBinder> mHostInputTokenSupplier;

@@ -2,7 +2,6 @@ package android.content;
 
 import android.view.KeyEvent;
 
-/* loaded from: classes.dex */
 public interface DialogInterface {
 
     @Deprecated public static final int BUTTON1 = -1;

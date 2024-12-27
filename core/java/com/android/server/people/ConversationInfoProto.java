@@ -1,6 +1,5 @@
 package com.android.server.people;
 
-/* loaded from: classes5.dex */
 public final class ConversationInfoProto {
     public static final long CONTACT_PHONE_NUMBER = 1138166333447L;
     public static final long CONTACT_URI = 1138166333443L;

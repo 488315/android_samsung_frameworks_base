@@ -22,7 +22,6 @@ import android.widget.TextView;
 
 import com.android.internal.R;
 
-/* loaded from: classes6.dex */
 public class MaintenanceModeOutroActivity extends Activity {
     private static final long EXIT_PROGRESS_TIMEOUT = 120000;
     private static final String TAG = "MaintenanceMode";

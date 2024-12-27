@@ -28,7 +28,6 @@ import com.samsung.android.graphics.spr.SemPathRenderingDrawable;
 import java.util.Arrays;
 import java.util.WeakHashMap;
 
-/* loaded from: classes5.dex */
 public class ContrastColorUtil {
     private static final boolean DEBUG = false;
     private static final String TAG = "ContrastColorUtil";

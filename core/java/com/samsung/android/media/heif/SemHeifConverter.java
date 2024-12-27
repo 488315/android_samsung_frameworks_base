@@ -4,7 +4,6 @@ import java.io.FileDescriptor;
 import java.nio.ByteBuffer;
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public interface SemHeifConverter extends AutoCloseable {
     int convert(SemHeifConfig semHeifConfig, FileDescriptor fileDescriptor);
 

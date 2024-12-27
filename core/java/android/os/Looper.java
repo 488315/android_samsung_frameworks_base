@@ -8,7 +8,6 @@ import android.util.proto.ProtoOutputStream;
 
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public final class Looper {
     private static final String TAG = "Looper";
     private static Looper sMainLooper;

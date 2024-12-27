@@ -1,6 +1,5 @@
 package android.attention;
 
-/* loaded from: classes.dex */
 public abstract class AttentionManagerInternal {
 
     public abstract static class AttentionCallbackInternal {

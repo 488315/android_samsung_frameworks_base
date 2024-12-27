@@ -1,6 +1,5 @@
 package com.samsung.android.lock;
 
-/* loaded from: classes6.dex */
 public class LsRune {
     public static final boolean SECURITY_ADDITIONAL_LOG = true;
     public static final boolean SECURITY_AOSP_BUG_FIX = true;

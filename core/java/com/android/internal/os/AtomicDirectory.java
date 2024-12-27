@@ -15,7 +15,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
 
-/* loaded from: classes5.dex */
 public final class AtomicDirectory {
     private static final String LOG_TAG = AtomicDirectory.class.getSimpleName();
     private final File mBackupDirectory;

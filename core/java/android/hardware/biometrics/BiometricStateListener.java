@@ -3,7 +3,6 @@ package android.hardware.biometrics;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes2.dex */
 public abstract class BiometricStateListener extends IBiometricStateListener.Stub {
     public static final int ACTION_SENSOR_TOUCH = 0;
     public static final int STATE_AUTH_OTHER = 4;

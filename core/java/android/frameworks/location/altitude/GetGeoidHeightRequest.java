@@ -5,7 +5,6 @@ import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes.dex */
 public class GetGeoidHeightRequest implements Parcelable {
     public static final Parcelable.Creator<GetGeoidHeightRequest> CREATOR =
             new Parcelable.Creator<GetGeoidHeightRequest>() { // from class:

@@ -42,7 +42,6 @@ import com.samsung.vekit.Task.CaptureFrameThread;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/* loaded from: classes6.dex */
 public class VEController extends Element {
     public static final int UI_ANIMATION_MANAGER = -1;
     public static final String VERSION = "2.0.16";

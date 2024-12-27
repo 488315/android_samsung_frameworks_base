@@ -5,7 +5,6 @@ import android.telecom.PhoneAccountHandle;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-/* loaded from: classes5.dex */
 public class ClientTransactionalServiceRepository {
     private static final Map<PhoneAccountHandle, ClientTransactionalServiceWrapper> LOOKUP_TABLE =
             new ConcurrentHashMap();

@@ -4,7 +4,6 @@ import android.graphics.Bitmap;
 
 import java.nio.ByteBuffer;
 
-/* loaded from: classes.dex */
 public class NativeFrame extends Frame {
     private int nativeFrameId;
 

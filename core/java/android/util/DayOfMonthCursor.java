@@ -1,6 +1,5 @@
 package android.util;
 
-/* loaded from: classes4.dex */
 public class DayOfMonthCursor extends MonthDisplayHelper {
     private int mColumn;
     private int mRow;

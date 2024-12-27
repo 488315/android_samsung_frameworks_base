@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public final class TaskFragmentAnimationParams implements Parcelable {
     public static final int DEFAULT_ANIMATION_BACKGROUND_COLOR = 0;
     private final int mAnimationBackgroundColor;

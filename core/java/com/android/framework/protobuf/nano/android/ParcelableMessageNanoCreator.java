@@ -10,7 +10,6 @@ import com.android.framework.protobuf.nano.MessageNano;
 import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
 
-/* loaded from: classes3.dex */
 public final class ParcelableMessageNanoCreator<T extends MessageNano>
         implements Parcelable.Creator<T> {
     private static final String TAG = "PMNCreator";

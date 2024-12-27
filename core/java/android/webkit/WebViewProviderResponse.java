@@ -9,7 +9,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
-/* loaded from: classes4.dex */
 public final class WebViewProviderResponse implements Parcelable {
     public static final Parcelable.Creator<WebViewProviderResponse> CREATOR =
             new Parcelable.Creator<

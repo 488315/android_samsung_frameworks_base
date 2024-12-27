@@ -23,7 +23,6 @@ import com.samsung.android.util.InterpolatorUtils;
 
 import java.util.ArrayList;
 
-/* loaded from: classes6.dex */
 public class FreeformResizeGuideView extends FrameLayout {
     private ValueAnimator mAlphaAnimator;
     private final ArrayList<Animator> mAnimList;

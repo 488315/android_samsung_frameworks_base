@@ -86,7 +86,6 @@ import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-/* loaded from: classes.dex */
 public class AppOpsManager {
     public static final int ATTRIBUTION_CHAIN_ID_NONE = -1;
     public static final int ATTRIBUTION_FLAGS_NONE = 0;

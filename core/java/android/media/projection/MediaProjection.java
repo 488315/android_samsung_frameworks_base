@@ -16,7 +16,6 @@ import android.view.Surface;
 import java.util.Map;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public final class MediaProjection {
     static final long MEDIA_PROJECTION_REQUIRES_CALLBACK = 269849258;
     private static final String TAG = "MediaProjection";

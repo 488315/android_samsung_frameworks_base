@@ -40,7 +40,6 @@ import com.samsung.android.rune.CoreRune;
 import java.io.IOException;
 
 @RemoteViews.RemoteView
-/* loaded from: classes4.dex */
 public class ImageView extends View {
     private static final String LOG_TAG = "ImageView";
     private static boolean sCompatAdjustViewBounds;

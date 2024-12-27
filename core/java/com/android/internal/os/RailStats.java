@@ -5,7 +5,6 @@ import android.util.Slog;
 
 import java.util.Map;
 
-/* loaded from: classes5.dex */
 public final class RailStats {
     private static final String CELLULAR_SUBSYSTEM = "cellular";
     private static final String TAG = "RailStats";

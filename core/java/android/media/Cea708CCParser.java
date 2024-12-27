@@ -13,7 +13,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
 /* compiled from: Cea708CaptionRenderer.java */
-/* loaded from: classes2.dex */
 class Cea708CCParser {
     public static final int CAPTION_EMIT_TYPE_BUFFER = 1;
     public static final int CAPTION_EMIT_TYPE_COMMAND_CLW = 4;

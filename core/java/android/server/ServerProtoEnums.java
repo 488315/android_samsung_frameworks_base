@@ -1,6 +1,5 @@
 package android.server;
 
-/* loaded from: classes3.dex */
 public final class ServerProtoEnums {
     public static final int DATA_APP = 1;
     public static final int DEVICE_IDLE_MODE_DEEP = 2;

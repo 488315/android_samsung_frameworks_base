@@ -1,6 +1,5 @@
 package android.hardware.tv.tuner;
 
-/* loaded from: classes2.dex */
 public @interface DemuxScHevcIndex {
     public static final int AUD = 2;
     public static final int SLICE_BLA_N_LP = 16;

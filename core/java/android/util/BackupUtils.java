@@ -4,7 +4,6 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-/* loaded from: classes4.dex */
 public class BackupUtils {
     public static final int NOT_NULL = 1;
     public static final int NULL = 0;

@@ -9,7 +9,6 @@ import com.android.internal.accessibility.util.ShortcutUtils;
 
 import java.util.Set;
 
-/* loaded from: classes5.dex */
 public class InvisibleToggleAccessibilityServiceTarget extends AccessibilityServiceTarget {
     @Override // com.android.internal.accessibility.dialog.AccessibilityServiceTarget
     public /* bridge */ /* synthetic */ AccessibilityServiceInfo getAccessibilityServiceInfo() {

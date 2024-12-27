@@ -10,7 +10,6 @@ import java.security.cert.Certificate;
 import java.security.cert.X509CertSelector;
 import java.util.Collection;
 
-/* loaded from: classes5.dex */
 public class PKIXCertStoreSelector<T extends Certificate> implements Selector<T> {
     private final CertSelector baseSelector;
 

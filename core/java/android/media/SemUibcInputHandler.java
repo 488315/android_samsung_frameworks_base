@@ -3,7 +3,6 @@ package android.media;
 import android.content.Context;
 import android.util.Log;
 
-/* loaded from: classes2.dex */
 public class SemUibcInputHandler {
     private static final String TAG = "SemUibcInputHandler.java";
 

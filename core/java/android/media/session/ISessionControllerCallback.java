@@ -10,7 +10,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.text.TextUtils;
 
-/* loaded from: classes2.dex */
 public interface ISessionControllerCallback extends IInterface {
     void onEvent(String str, Bundle bundle) throws RemoteException;
 

@@ -7,7 +7,6 @@ import com.android.internal.org.bouncycastle.asn1.ASN1Sequence;
 import com.android.internal.org.bouncycastle.asn1.DERBitString;
 import com.android.internal.org.bouncycastle.asn1.DERSequence;
 
-/* loaded from: classes5.dex */
 public class AttributeCertificate extends ASN1Object {
     AttributeCertificateInfo acinfo;
     AlgorithmIdentifier signatureAlgorithm;

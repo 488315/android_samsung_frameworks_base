@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import com.android.internal.content.NativeLibraryHelper;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public class MemoryRegion implements Parcelable {
     public static final Parcelable.Creator<MemoryRegion> CREATOR =
             new Parcelable.Creator<

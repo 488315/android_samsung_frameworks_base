@@ -7,7 +7,6 @@ import android.os.HwParcel;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public final class WcdmaSignalStrength {
     public android.hardware.radio.V1_0.WcdmaSignalStrength base =
             new android.hardware.radio.V1_0.WcdmaSignalStrength();

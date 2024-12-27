@@ -32,7 +32,6 @@ import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 import java.util.function.IntConsumer;
 
-/* loaded from: classes5.dex */
 public final class EditableInputConnection extends BaseInputConnection
         implements DumpableInputConnection {
     private static final boolean DEBUG = false;

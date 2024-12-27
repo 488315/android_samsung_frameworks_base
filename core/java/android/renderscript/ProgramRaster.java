@@ -1,7 +1,6 @@
 package android.renderscript;
 
 @Deprecated
-/* loaded from: classes3.dex */
 public class ProgramRaster extends BaseObj {
     CullMode mCullMode;
     boolean mPointSprite;

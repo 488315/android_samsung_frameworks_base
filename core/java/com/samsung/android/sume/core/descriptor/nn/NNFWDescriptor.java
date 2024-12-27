@@ -18,7 +18,6 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-/* loaded from: classes6.dex */
 public class NNFWDescriptor extends MFDescriptorBase implements Cloneable {
     private static final String TAG = Def.tagOf((Class<?>) NNFWDescriptor.class);
     private final NNFW fw;

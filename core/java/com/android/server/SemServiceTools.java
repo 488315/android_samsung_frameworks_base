@@ -28,7 +28,6 @@ import java.security.spec.ECPoint;
 import java.security.spec.ECPublicKeySpec;
 import java.security.spec.InvalidKeySpecException;
 
-/* loaded from: classes5.dex */
 public class SemServiceTools {
     private static final String TAG = "SEC_ESE_ServiceTools";
     public static final char[] HEX_CHARS = {

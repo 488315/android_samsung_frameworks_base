@@ -10,7 +10,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Locale;
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public final class SelectionEvent implements Parcelable {
     public static final int ACTION_ABANDON = 107;
     public static final int ACTION_COPY = 101;

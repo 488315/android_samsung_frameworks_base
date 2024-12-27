@@ -9,7 +9,6 @@ import android.text.format.DateFormat;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class SmartspaceSessionId implements Parcelable {
     public static final Parcelable.Creator<SmartspaceSessionId> CREATOR =
             new Parcelable.Creator<SmartspaceSessionId>() { // from class:

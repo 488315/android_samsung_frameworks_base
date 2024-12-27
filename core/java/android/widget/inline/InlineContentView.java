@@ -15,7 +15,6 @@ import android.view.ViewTreeObserver;
 import java.lang.ref.WeakReference;
 import java.util.function.Consumer;
 
-/* loaded from: classes4.dex */
 public class InlineContentView extends ViewGroup {
     private static final boolean DEBUG = false;
     private static final String TAG = "InlineContentView";

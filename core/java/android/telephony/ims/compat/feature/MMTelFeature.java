@@ -20,7 +20,6 @@ import com.android.ims.internal.IImsUt;
 import com.android.ims.internal.ISecImsMmTelEventListener;
 import com.android.internal.telephony.PublishDialog;
 
-/* loaded from: classes4.dex */
 public class MMTelFeature extends ImsFeature {
     private final Object mLock = new Object();
     private final IImsMMTelFeature mImsMMTelBinder =

@@ -28,7 +28,6 @@ import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.IntUnaryOperator;
 
-/* loaded from: classes2.dex */
 public final class OutputConfiguration implements Parcelable {
     private static final int MAX_SURFACES_COUNT = 4;
     public static final int MIRROR_MODE_AUTO = 0;

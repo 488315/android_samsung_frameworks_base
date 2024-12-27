@@ -6,7 +6,6 @@ import android.os.RemoteException;
 import java.util.concurrent.Executor;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class WallpaperEffectsGenerationManager {
     private final IWallpaperEffectsGenerationManager mService;
 

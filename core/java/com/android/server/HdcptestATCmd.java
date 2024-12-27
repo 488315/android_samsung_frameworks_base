@@ -7,7 +7,6 @@ import java.io.File;
 import java.security.MessageDigest;
 import java.util.Arrays;
 
-/* loaded from: classes5.dex */
 public class HdcptestATCmd implements IWorkOnAt {
     private static final String AT_COMMAND_HDCPTEST = "HDCPTEST";
     private static final String AT_COMMAND_HEADER = "AT";

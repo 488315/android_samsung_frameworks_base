@@ -10,7 +10,6 @@ import com.android.systemui.statusbar.phone.SystemUIDialog;
 import kotlin.jvm.internal.Intrinsics;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public final class SensorUseDialog extends SystemUIDialog {
     public SensorUseDialog(Context context, int i, DialogInterface.OnClickListener onClickListener, DialogInterface.OnDismissListener onDismissListener) {
         super(context, R.style.Theme_SystemUI_Dialog_Alert);

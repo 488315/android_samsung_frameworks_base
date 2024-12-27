@@ -1,6 +1,5 @@
 package com.google.android.wearable.modes.telemetry;
 
-/* loaded from: classes5.dex */
 public final class Enums {
     public static final int AIRPLANE_MODE = 1;
     public static final int BATTERY_SAVER_MODE = 3;

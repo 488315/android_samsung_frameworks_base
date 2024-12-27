@@ -1,7 +1,6 @@
 package android.os;
 
 
-/* loaded from: classes3.dex */
 public class CpuStatsInfo implements Parcelable {
     public static final Parcelable.Creator<CpuStatsInfo> CREATOR =
             new Parcelable.Creator<CpuStatsInfo>() { // from class: android.os.CpuStatsInfo.1

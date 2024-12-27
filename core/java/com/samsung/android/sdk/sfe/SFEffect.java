@@ -5,7 +5,6 @@ import android.util.Log;
 
 import com.samsung.android.sdk.sfe.font.FontManager;
 
-/* loaded from: classes6.dex */
 public class SFEffect {
     private static final String LOG_TAG = "SFEffect";
     private static FontManager mFontManager;

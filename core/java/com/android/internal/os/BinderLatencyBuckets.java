@@ -4,7 +4,6 @@ import android.util.Slog;
 
 import java.util.Arrays;
 
-/* loaded from: classes5.dex */
 public class BinderLatencyBuckets {
     private static final String TAG = "BinderLatencyBuckets";
     private final int[] mBuckets;

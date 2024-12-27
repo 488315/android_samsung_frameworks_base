@@ -2,7 +2,6 @@ package com.samsung.vekit.Common.Object;
 
 import com.samsung.vekit.Common.Type.ToneType;
 
-/* loaded from: classes6.dex */
 public class Tone {
     private int intensity;
     ToneType toneType;

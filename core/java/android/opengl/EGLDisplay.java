@@ -1,6 +1,5 @@
 package android.opengl;
 
-/* loaded from: classes3.dex */
 public class EGLDisplay extends EGLObjectHandle {
     private EGLDisplay(long handle) {
         super(handle);

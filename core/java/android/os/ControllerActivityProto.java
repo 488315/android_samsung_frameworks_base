@@ -1,6 +1,5 @@
 package android.os;
 
-/* loaded from: classes3.dex */
 public final class ControllerActivityProto {
     public static final long IDLE_DURATION_MS = 1112396529665L;
     public static final long MONITORED_RAIL_CHARGE_MAH = 1103806595077L;

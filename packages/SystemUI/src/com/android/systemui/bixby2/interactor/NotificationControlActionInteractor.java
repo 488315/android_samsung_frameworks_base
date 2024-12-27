@@ -29,7 +29,6 @@ import java.util.stream.Collectors;
 import org.json.JSONObject;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes.dex */
 public class NotificationControlActionInteractor implements ActionInteractor {
     static final String CATEGORY_APP_NOTIFICATION_NOT_RECEIVED = "APP_NOTIFICATION_NOT_RECEIVED";
     static final String CATEGORY_NOTIFICATION_NOT_RECEIVED = "NOTIFICATION_NOT_RECEIVED";

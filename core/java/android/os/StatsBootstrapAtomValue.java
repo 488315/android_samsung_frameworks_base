@@ -1,7 +1,6 @@
 package android.os;
 
 
-/* loaded from: classes3.dex */
 public final class StatsBootstrapAtomValue implements Parcelable {
     public static final Parcelable.Creator<StatsBootstrapAtomValue> CREATOR =
             new Parcelable.Creator<

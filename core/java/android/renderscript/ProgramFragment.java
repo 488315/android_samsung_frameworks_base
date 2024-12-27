@@ -2,7 +2,6 @@ package android.renderscript;
 
 
 @Deprecated
-/* loaded from: classes3.dex */
 public class ProgramFragment extends Program {
     ProgramFragment(long id, RenderScript rs) {
         super(id, rs);

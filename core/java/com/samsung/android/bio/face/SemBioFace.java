@@ -4,7 +4,6 @@ import android.hardware.face.Face;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes5.dex */
 public class SemBioFace implements Parcelable {
     public static final Parcelable.Creator<SemBioFace> CREATOR =
             new Parcelable.Creator<

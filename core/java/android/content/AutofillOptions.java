@@ -12,7 +12,6 @@ import android.view.autofill.AutofillManager;
 
 import java.io.PrintWriter;
 
-/* loaded from: classes.dex */
 public final class AutofillOptions implements Parcelable {
     public long appDisabledExpiration;
     public boolean augmentedAutofillEnabled;

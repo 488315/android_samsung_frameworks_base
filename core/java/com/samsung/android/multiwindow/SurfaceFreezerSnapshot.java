@@ -7,7 +7,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 
-/* loaded from: classes6.dex */
 public class SurfaceFreezerSnapshot implements Parcelable {
     public static final Parcelable.Creator<SurfaceFreezerSnapshot> CREATOR =
             new Parcelable.Creator<

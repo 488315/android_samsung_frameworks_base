@@ -8,7 +8,6 @@ import android.os.RemoteException;
 
 import java.io.FileDescriptor;
 
-/* loaded from: classes2.dex */
 public interface IMidiDeviceServer extends IInterface {
     void closeDevice() throws RemoteException;
 

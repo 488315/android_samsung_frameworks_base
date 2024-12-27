@@ -13,7 +13,6 @@ import javax.microedition.khronos.egl.EGLContext;
 import javax.microedition.khronos.egl.EGLDisplay;
 import javax.microedition.khronos.egl.EGLSurface;
 
-/* loaded from: classes6.dex */
 public class OutputSurface implements SurfaceTexture.OnFrameAvailableListener {
     private static final int EGL_OPENGL_ES2_BIT = 4;
     public static final String EXCEPTION_FRAME_NOT_AVAILABLE = "Surface frame wait timed out";

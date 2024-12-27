@@ -6,7 +6,6 @@ import android.filterfw.core.FilterFunction;
 import android.filterfw.core.FrameManager;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 
-/* loaded from: classes.dex */
 public class FilterFunctionEnvironment extends MffEnvironment {
     public FilterFunctionEnvironment() {
         super(null);

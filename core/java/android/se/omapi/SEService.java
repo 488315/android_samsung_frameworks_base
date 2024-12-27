@@ -11,7 +11,6 @@ import android.util.Log;
 import java.util.HashMap;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes3.dex */
 public final class SEService {
     public static final String ACTION_SECURE_ELEMENT_STATE_CHANGED =
             "android.se.omapi.action.SECURE_ELEMENT_STATE_CHANGED";

@@ -6,7 +6,6 @@ import android.os.VibratorInfo;
 
 import com.samsung.android.vibrator.SemHapticFeedbackConstants;
 
-/* loaded from: classes3.dex */
 public final class SemHapticSegment extends VibrationEffectSegment {
     public static final Parcelable.Creator<SemHapticSegment> CREATOR =
             new Parcelable.Creator<

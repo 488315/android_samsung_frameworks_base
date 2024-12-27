@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.os.RemoteException;
 import android.util.Log;
 
-/* loaded from: classes.dex */
 public final class BulkCursorToCursorAdaptor extends AbstractWindowedCursor {
     private static final String TAG = "BulkCursor";
     private IBulkCursor mBulkCursor;

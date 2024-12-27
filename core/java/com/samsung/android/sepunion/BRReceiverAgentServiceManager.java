@@ -3,7 +3,6 @@ package com.samsung.android.sepunion;
 import android.content.Context;
 import android.os.IBinder;
 
-/* loaded from: classes6.dex */
 public class BRReceiverAgentServiceManager {
     private static final String TAG = BRReceiverAgentServiceManager.class.getSimpleName();
     private Context mContext;

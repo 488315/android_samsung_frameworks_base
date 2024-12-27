@@ -25,7 +25,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
-/* loaded from: classes5.dex */
 public class VpnConfig implements Parcelable {
     public static final String DIALOGS_PACKAGE = "com.android.vpndialogs";
     public static final String LEGACY_VPN = "[Legacy VPN]";

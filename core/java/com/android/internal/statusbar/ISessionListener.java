@@ -8,7 +8,6 @@ import android.os.RemoteException;
 
 import com.android.internal.logging.InstanceId;
 
-/* loaded from: classes5.dex */
 public interface ISessionListener extends IInterface {
     public static final String DESCRIPTOR = "com.android.internal.statusbar.ISessionListener";
 

@@ -5,7 +5,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class CameraAttributes implements Parcelable {
     public static final Parcelable.Creator<CameraAttributes> CREATOR =
             new Parcelable.Creator<CameraAttributes>() { // from class:

@@ -47,7 +47,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/* loaded from: classes2.dex */
 public class RingtoneManager {
     public static final String ACTION_RINGTONE_PICKER = "android.intent.action.RINGTONE_PICKER";
     public static final String EXTRA_RINGTONE_AUDIO_ATTRIBUTES_FLAGS =

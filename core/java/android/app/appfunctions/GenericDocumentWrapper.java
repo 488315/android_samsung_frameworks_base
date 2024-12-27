@@ -7,7 +7,6 @@ import android.util.MathUtils;
 
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public final class GenericDocumentWrapper implements Parcelable {
     public static final Parcelable.Creator<GenericDocumentWrapper> CREATOR =
             new Parcelable.Creator<GenericDocumentWrapper>() { // from class:

@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class AccountTypePolicyKey extends PolicyKey {
     private static final String ATTR_ACCOUNT_TYPE = "account-type";
     public static final Parcelable.Creator<AccountTypePolicyKey> CREATOR =

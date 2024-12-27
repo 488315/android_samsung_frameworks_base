@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.util.Arrays;
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public class SsInfoData implements Parcelable {
     public static final Parcelable.Creator<SsInfoData> CREATOR =
             new Parcelable.Creator<

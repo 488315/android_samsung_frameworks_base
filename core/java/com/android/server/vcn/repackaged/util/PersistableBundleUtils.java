@@ -22,7 +22,6 @@ import java.util.TreeSet;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-/* loaded from: classes5.dex */
 public class PersistableBundleUtils {
     private static final String BYTE_ARRAY_KEY = "BYTE_ARRAY_KEY";
     private static final String COLLECTION_SIZE_KEY = "COLLECTION_LENGTH";

@@ -3,7 +3,6 @@ package com.samsung.android.knox.mtd;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes6.dex */
 public class PackageInfo implements Parcelable {
     public static final Parcelable.Creator<PackageInfo> CREATOR =
             new Parcelable.Creator<

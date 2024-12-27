@@ -4,7 +4,6 @@ import android.annotation.SystemApi;
 import android.os.IBinder;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class RequestToken {
     private final IBinder mToken;
 

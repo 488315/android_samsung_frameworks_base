@@ -5,7 +5,6 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 
-/* loaded from: classes5.dex */
 public class PhoneLayoutInflater extends LayoutInflater {
     private static final String[] sClassPrefixList = {
         "android.widget.", "android.webkit.", "android.app."

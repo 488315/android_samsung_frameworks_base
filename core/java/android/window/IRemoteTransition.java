@@ -7,7 +7,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.view.SurfaceControl;
 
-/* loaded from: classes4.dex */
 public interface IRemoteTransition extends IInterface {
     public static final String DESCRIPTOR = "android.window.IRemoteTransition";
 

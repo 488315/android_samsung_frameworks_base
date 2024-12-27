@@ -2,7 +2,6 @@ package android.hardware.radio.V1_6;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class QosFilterDirection {
     public static final byte BIDIRECTIONAL = 2;
     public static final byte DOWNLINK = 0;

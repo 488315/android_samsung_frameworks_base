@@ -26,7 +26,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-/* loaded from: classes.dex */
 public class GraphicsRendererPolicy {
     private static final String ACTION_SCPM_UPDATE_RENDER_ENGINE_POLICY =
             "com.samsung.android.scpm.policy.UPDATE.hwui-skiagl-blocklist";

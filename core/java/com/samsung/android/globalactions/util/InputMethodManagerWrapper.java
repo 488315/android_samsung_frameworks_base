@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.IBinder;
 import android.view.inputmethod.InputMethodManager;
 
-/* loaded from: classes6.dex */
 public class InputMethodManagerWrapper {
     private final InputMethodManager mInputMethodManager;
 

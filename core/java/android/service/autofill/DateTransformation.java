@@ -13,7 +13,6 @@ import android.widget.RemoteViews;
 import java.util.Date;
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public final class DateTransformation extends InternalTransformation
         implements Transformation, Parcelable {
     public static final Parcelable.Creator<DateTransformation> CREATOR =

@@ -1,6 +1,5 @@
 package com.android.server.wm;
 
-/* loaded from: classes5.dex */
 public final class InsetsSourceProviderProto {
     public static final long CAPTURED_LEASH = 1146756268040L;
     public static final long CLIENT_VISIBLE = 1133871366155L;

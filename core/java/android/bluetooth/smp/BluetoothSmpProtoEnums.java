@@ -1,6 +1,5 @@
 package android.bluetooth.smp;
 
-/* loaded from: classes.dex */
 public final class BluetoothSmpProtoEnums {
     public static final int CMD_BR_ENCRYPTION_INFON = 262;
     public static final int CMD_BR_IDENTITY_ADDR_INFO = 265;

@@ -20,7 +20,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public final class VibrationXmlParser {
     public static final String APPLICATION_VIBRATION_XML_MIME_TYPE =
             "application/vnd.android.haptics.vibration+xml";

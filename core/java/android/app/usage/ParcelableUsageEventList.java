@@ -11,7 +11,6 @@ import android.os.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes.dex */
 public final class ParcelableUsageEventList implements Parcelable {
     private static final boolean DEBUG = false;
     private static final boolean DEBUG_ALL = false;

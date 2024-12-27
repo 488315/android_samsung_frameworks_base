@@ -60,7 +60,6 @@ import java.util.function.Consumer;
 
 import javax.crypto.SecretKey;
 
-/* loaded from: classes3.dex */
 public class AndroidKeyStoreSpi extends KeyStoreSpi {
     public static final String NAME = "AndroidKeyStore";
     public static final String TAG = "AndroidKeyStoreSpi";

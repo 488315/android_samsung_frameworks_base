@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-/* loaded from: classes3.dex */
 public final class FillResponse implements Parcelable {
     public static final Parcelable.Creator<FillResponse> CREATOR =
             new Parcelable.Creator<

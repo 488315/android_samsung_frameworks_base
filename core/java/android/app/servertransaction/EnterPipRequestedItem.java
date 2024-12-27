@@ -6,7 +6,6 @@ import android.os.IBinder;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes.dex */
 public final class EnterPipRequestedItem extends ActivityTransactionItem {
     public static final Parcelable.Creator<EnterPipRequestedItem> CREATOR =
             new Parcelable.Creator<EnterPipRequestedItem>() { // from class:

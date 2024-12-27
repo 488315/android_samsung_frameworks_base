@@ -2,7 +2,6 @@ package android.service.autofill;
 
 import android.os.RemoteException;
 
-/* loaded from: classes3.dex */
 public final class ConvertCredentialCallback {
     private static final String TAG = "ConvertCredentialCallback";
     private final IConvertCredentialCallback mCallback;

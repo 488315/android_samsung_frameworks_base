@@ -1,6 +1,5 @@
 package android.hardware.tv.tuner;
 
-/* loaded from: classes2.dex */
 public @interface AudioStreamType {
     public static final int AAC = 6;
     public static final int AAC_ADTS = 16;

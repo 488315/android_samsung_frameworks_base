@@ -13,7 +13,6 @@ import android.view.View;
 
 import com.android.internal.R;
 
-/* loaded from: classes4.dex */
 public class ShareActionProvider extends ActionProvider {
     private static final int DEFAULT_INITIAL_ACTIVITY_COUNT = 4;
     public static final String DEFAULT_SHARE_HISTORY_FILE_NAME = "share_history.xml";

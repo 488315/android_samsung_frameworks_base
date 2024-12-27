@@ -5,7 +5,6 @@ import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public class GnssData implements Parcelable {
     public static final Parcelable.Creator<GnssData> CREATOR =
             new Parcelable.Creator<GnssData>() { // from class: android.hardware.gnss.GnssData.1

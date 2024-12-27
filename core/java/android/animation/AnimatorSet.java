@@ -16,7 +16,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.function.Consumer;
 
-/* loaded from: classes.dex */
 public final class AnimatorSet extends Animator implements AnimationHandler.AnimationFrameCallback {
     private static final String TAG = "AnimatorSet";
     private long[] mChildStartAndStopTimes;

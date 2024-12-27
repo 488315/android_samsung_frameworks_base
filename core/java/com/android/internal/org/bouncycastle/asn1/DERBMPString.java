@@ -4,7 +4,6 @@ import com.android.internal.org.bouncycastle.util.Arrays;
 
 import java.io.IOException;
 
-/* loaded from: classes5.dex */
 public class DERBMPString extends ASN1Primitive implements ASN1String {
     private final char[] string;
 

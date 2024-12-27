@@ -24,7 +24,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-/* loaded from: classes4.dex */
 public class EditorInfo implements InputType, Parcelable {
     public static final Parcelable.Creator<EditorInfo> CREATOR =
             new Parcelable.Creator<

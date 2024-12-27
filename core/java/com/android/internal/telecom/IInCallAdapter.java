@@ -14,7 +14,6 @@ import android.telephony.ims.ImsCallProfile;
 
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public interface IInCallAdapter extends IInterface {
     void addConferenceParticipants(String str, List<Uri> list) throws RemoteException;
 

@@ -7,7 +7,6 @@ import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
 
-/* loaded from: classes.dex */
 public interface ITAController extends IInterface {
     public static final String DESCRIPTOR = "android.blockchain.ITAController";
 

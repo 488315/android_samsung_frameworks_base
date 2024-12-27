@@ -7,7 +7,6 @@ import java.security.PublicKey;
 import java.security.interfaces.ECPublicKey;
 import java.security.spec.ECPoint;
 
-/* loaded from: classes3.dex */
 public class Util {
     private static final String TAG = "Util";
 

@@ -14,7 +14,6 @@ import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.util.Slog;
 
-/* loaded from: classes5.dex */
 public class AASAServiceManagerImpl implements AASAServiceManager {
     private static final String CLASS_NAME_AASA_SERVICE = "com.samsung.aasaservice.AASAService";
     private static final int MAX_COUNT_TO_RETRY_BINDING = 5;

@@ -6,7 +6,6 @@ import android.os.Parcel;
 import android.text.ParcelableSpan;
 import android.text.TextPaint;
 
-/* loaded from: classes4.dex */
 public class StyleSpan extends MetricAffectingSpan implements ParcelableSpan {
     private final int mFontWeightAdjustment;
     private final int mStyle;

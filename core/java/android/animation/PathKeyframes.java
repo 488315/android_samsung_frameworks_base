@@ -5,7 +5,6 @@ import android.graphics.PointF;
 
 import java.util.ArrayList;
 
-/* loaded from: classes.dex */
 public class PathKeyframes implements Keyframes {
     private static final ArrayList<Keyframe> EMPTY_KEYFRAMES = new ArrayList<>();
     private static final int FRACTION_OFFSET = 0;

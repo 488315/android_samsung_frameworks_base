@@ -11,7 +11,6 @@ import com.android.framework.protobuf.nano.WireFormatNano;
 import java.io.IOException;
 import java.util.Map;
 
-/* loaded from: classes3.dex */
 public interface OtaPackageMetadata {
 
     public static final class PartitionState extends MessageNano {

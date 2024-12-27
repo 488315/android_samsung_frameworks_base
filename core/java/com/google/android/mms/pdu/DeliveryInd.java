@@ -2,7 +2,6 @@ package com.google.android.mms.pdu;
 
 import com.google.android.mms.InvalidHeaderValueException;
 
-/* loaded from: classes5.dex */
 public class DeliveryInd extends GenericPdu {
     public DeliveryInd() throws InvalidHeaderValueException {
         setMessageType(134);

@@ -14,7 +14,6 @@ import com.samsung.android.media.codec.client.SemVideoTranscoderClient;
 import java.util.HashMap;
 import java.util.Map;
 
-/* loaded from: classes6.dex */
 public class SemVideoTranscodingService {
     public static final String KEY_INPUT_PATH = "input-path";
     public static final String KEY_OUTPUT_PATH = "output-path";

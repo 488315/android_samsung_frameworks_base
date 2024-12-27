@@ -12,7 +12,6 @@ import java.lang.annotation.Annotation;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class AmbientContextDetectionServiceStatus implements Parcelable {
     public static final Parcelable.Creator<AmbientContextDetectionServiceStatus> CREATOR =
             new Parcelable.Creator<

@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.ArrayMap;
 
-/* loaded from: classes3.dex */
 public class HealthStatsWriter {
     private final HealthKeys.Constants mConstants;
     private final boolean[] mMeasurementFields;

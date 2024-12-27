@@ -4,7 +4,6 @@ import android.app.WallpaperColors;
 
 import com.android.internal.colorextraction.ColorExtractor;
 
-/* loaded from: classes5.dex */
 public interface ExtractionType {
     void extractInto(
             WallpaperColors wallpaperColors,

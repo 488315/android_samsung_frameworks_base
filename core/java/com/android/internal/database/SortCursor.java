@@ -7,7 +7,6 @@ import android.util.Log;
 
 import java.lang.reflect.Array;
 
-/* loaded from: classes5.dex */
 public class SortCursor extends AbstractCursor {
     private static final String TAG = "SortCursor";
     private int[][] mCurRowNumCache;

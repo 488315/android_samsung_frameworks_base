@@ -10,7 +10,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes5.dex */
 public class ObservableServiceConnection<T> implements ServiceConnection {
     public static final int DISCONNECT_REASON_BINDING_DIED = 3;
     public static final int DISCONNECT_REASON_DISCONNECTED = 2;

@@ -14,7 +14,6 @@ import android.view.InflateException;
 import com.android.internal.R;
 
 @HasNativeInterpolator
-/* loaded from: classes4.dex */
 public class PathInterpolator extends BaseInterpolator implements NativeInterpolator {
     private static final float PRECISION = 0.002f;
     private float[] mX;

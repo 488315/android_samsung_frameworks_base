@@ -36,7 +36,6 @@ import com.android.internal.view.FloatingActionMode;
 
 import java.util.List;
 
-/* loaded from: classes4.dex */
 public class MultiSelectPopupWindow {
     private static final String TAG = "MultiSelectPopupWindow";
     private static final float[] TEMP_POSITION = new float[2];

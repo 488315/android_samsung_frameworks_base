@@ -11,7 +11,6 @@ import com.android.internal.util.AnnotationValidations;
 import java.lang.annotation.Annotation;
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public final class AttestationProfile implements Parcelable {
     public static final Parcelable.Creator<AttestationProfile> CREATOR =
             new Parcelable.Creator<

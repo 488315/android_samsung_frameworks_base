@@ -2,7 +2,6 @@ package android.view;
 
 import android.graphics.Insets;
 
-/* loaded from: classes4.dex */
 public interface WindowInsetsAnimationController {
     void finish(boolean z);
 

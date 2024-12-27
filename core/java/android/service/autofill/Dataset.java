@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
-/* loaded from: classes3.dex */
 public final class Dataset implements Parcelable {
     public static final Parcelable.Creator<Dataset> CREATOR =
             new Parcelable.Creator<Dataset>() { // from class: android.service.autofill.Dataset.1

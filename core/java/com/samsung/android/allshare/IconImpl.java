@@ -3,7 +3,6 @@ package com.samsung.android.allshare;
 import android.net.Uri;
 import android.os.Bundle;
 
-/* loaded from: classes3.dex */
 class IconImpl extends Icon {
     private Bundle mIconBundle;
 

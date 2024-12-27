@@ -1,6 +1,5 @@
 package android.hardware.tv.tuner;
 
-/* loaded from: classes2.dex */
 public @interface FrontendScanMessageType {
     public static final int ANALOG_TYPE = 6;
     public static final int ATSC3_PLP_INFO = 11;

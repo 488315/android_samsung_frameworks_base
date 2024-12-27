@@ -7,7 +7,6 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public class SemP2pInformationElement {
     private static final int DISCOVERY_ATTR_ICON = 0;
     private static final int DISCOVERY_ATTR_SERVICE_DATA = 3;

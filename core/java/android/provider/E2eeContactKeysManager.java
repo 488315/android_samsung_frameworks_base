@@ -17,7 +17,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public final class E2eeContactKeysManager {
     private static final int ARRAY_IS_NULL = -1;
     public static final String AUTHORITY = "com.android.contactkeys.contactkeysprovider";

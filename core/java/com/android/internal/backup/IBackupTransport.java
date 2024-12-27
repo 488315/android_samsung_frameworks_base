@@ -16,7 +16,6 @@ import com.android.internal.infra.AndroidFuture;
 
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public interface IBackupTransport extends IInterface {
     void abortFullRestore(ITransportStatusCallback iTransportStatusCallback) throws RemoteException;
 

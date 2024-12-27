@@ -1,6 +1,5 @@
 package android.os;
 
-/* loaded from: classes3.dex */
 public final class BackTraceProto {
     public static final long TRACES = 2246267895809L;
 

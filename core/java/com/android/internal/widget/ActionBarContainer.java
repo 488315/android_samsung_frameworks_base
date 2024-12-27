@@ -18,7 +18,6 @@ import android.widget.FrameLayout;
 
 import com.android.internal.R;
 
-/* loaded from: classes5.dex */
 public class ActionBarContainer extends FrameLayout {
     private View mActionBarView;
     private View mActionContextView;

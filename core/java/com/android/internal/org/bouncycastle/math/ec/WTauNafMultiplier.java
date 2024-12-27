@@ -2,7 +2,6 @@ package com.android.internal.org.bouncycastle.math.ec;
 
 import java.math.BigInteger;
 
-/* loaded from: classes5.dex */
 public class WTauNafMultiplier extends AbstractECMultiplier {
     static final String PRECOMP_NAME = "bc_wtnaf";
 

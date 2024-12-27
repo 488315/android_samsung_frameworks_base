@@ -9,7 +9,6 @@ import java.util.Set;
 
 import javax.net.ssl.X509TrustManager;
 
-/* loaded from: classes3.dex */
 public final class ApplicationConfig {
     private static ApplicationConfig sInstance;
     private static Object sLock = new Object();

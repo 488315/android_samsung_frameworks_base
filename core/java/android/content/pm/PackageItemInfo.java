@@ -18,7 +18,6 @@ import java.text.Collator;
 import java.util.Comparator;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public class PackageItemInfo {
     public static final float DEFAULT_MAX_LABEL_SIZE_PX = 1000.0f;
     public static final int DUMP_FLAG_ALL = 3;

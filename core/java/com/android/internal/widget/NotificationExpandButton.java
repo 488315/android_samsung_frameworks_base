@@ -18,7 +18,6 @@ import android.widget.TextView;
 import com.android.internal.R;
 
 @RemoteViews.RemoteView
-/* loaded from: classes5.dex */
 public class NotificationExpandButton extends FrameLayout {
     private int mDefaultPillColor;
     private int mDefaultTextColor;

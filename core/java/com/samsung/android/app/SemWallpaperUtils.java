@@ -16,7 +16,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Method;
 
-/* loaded from: classes5.dex */
 public class SemWallpaperUtils {
     private static final String TAG = "SemWallpaperUtils";
 

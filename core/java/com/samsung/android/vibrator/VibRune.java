@@ -5,7 +5,6 @@ import android.os.Build;
 import com.samsung.android.feature.SemCscFeature;
 import com.samsung.android.feature.SemFloatingFeature;
 
-/* loaded from: classes6.dex */
 public class VibRune {
     public static final boolean SUPPORT_4D_VIBRATION = true;
     public static final boolean SUPPORT_AMPLITUDE_LIST_FROM_HAL = true;

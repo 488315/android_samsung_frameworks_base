@@ -3,7 +3,6 @@ package com.android.internal.os;
 import android.media.MediaMetrics;
 import android.os.SystemProperties;
 
-/* loaded from: classes5.dex */
 public class ZygoteConfig {
     public static final String PROPERTY_PREFIX_DEVICE_CONFIG = "persist.device_config";
     public static final String PROPERTY_PREFIX_SYSTEM = "dalvik.vm.";

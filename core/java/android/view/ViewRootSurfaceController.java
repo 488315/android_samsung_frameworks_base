@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-/* loaded from: classes4.dex */
 public class ViewRootSurfaceController {
     private static String TAG = "ViewRootSurfaceController";
     private String mInstanceTag;

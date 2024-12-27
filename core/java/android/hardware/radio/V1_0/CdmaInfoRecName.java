@@ -2,7 +2,6 @@ package android.hardware.radio.V1_0;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class CdmaInfoRecName {
     public static final int CALLED_PARTY_NUMBER = 1;
     public static final int CALLING_PARTY_NUMBER = 2;

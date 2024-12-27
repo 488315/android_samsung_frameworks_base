@@ -5,7 +5,6 @@ import android.util.Log;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes.dex */
 public class SensorAdditionalInfo {
     public static final int BITMASK_LIGHT_VERSION_HYSTERESIS_INFO = 2;
     private static final int SENSORHUB_INFO_CALL_PKG = 346049;

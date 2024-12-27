@@ -7,7 +7,6 @@ import java.io.FileInputStream;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 
-/* loaded from: classes.dex */
 public class SemInputMLModel {
     private static final String TAG = "SemInputMLModel";
     private FileChannel channel;

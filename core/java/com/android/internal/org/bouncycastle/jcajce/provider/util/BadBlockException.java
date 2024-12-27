@@ -2,7 +2,6 @@ package com.android.internal.org.bouncycastle.jcajce.provider.util;
 
 import javax.crypto.BadPaddingException;
 
-/* loaded from: classes5.dex */
 public class BadBlockException extends BadPaddingException {
     private final Throwable cause;
 

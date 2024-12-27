@@ -9,7 +9,6 @@ import android.util.TimeUtils;
 import java.io.PrintWriter;
 import java.util.function.Predicate;
 
-/* loaded from: classes5.dex */
 public final class UidState {
     private static final String TAG = "ProcessStats";
     private final DurationsTable mDurations;

@@ -11,7 +11,6 @@ import android.util.SparseArray;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes4.dex */
 public class AccessibilityCache {
     public static final int CACHE_CRITICAL_EVENTS_MASK = 4307005;
     private static final boolean CHECK_INTEGRITY;

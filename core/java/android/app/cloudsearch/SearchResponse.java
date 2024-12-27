@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class SearchResponse implements Parcelable {
     public static final Parcelable.Creator<SearchResponse> CREATOR =
             new Parcelable.Creator<

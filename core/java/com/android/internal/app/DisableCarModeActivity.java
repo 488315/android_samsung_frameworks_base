@@ -8,7 +8,6 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.util.Log;
 
-/* loaded from: classes5.dex */
 public class DisableCarModeActivity extends Activity {
     private static final String TAG = "DisableCarModeActivity";
 

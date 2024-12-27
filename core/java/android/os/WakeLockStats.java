@@ -6,7 +6,6 @@ import android.text.format.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public final class WakeLockStats implements Parcelable {
     public static final Parcelable.Creator<WakeLockStats> CREATOR =
             new Parcelable.Creator<WakeLockStats>() { // from class: android.os.WakeLockStats.1

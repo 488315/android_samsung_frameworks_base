@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class TimeZoneProviderSuggestion implements Parcelable {
     public static final Parcelable.Creator<TimeZoneProviderSuggestion> CREATOR =
             new Parcelable.Creator<

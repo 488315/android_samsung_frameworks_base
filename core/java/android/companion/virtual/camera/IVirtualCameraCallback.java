@@ -7,7 +7,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.view.Surface;
 
-/* loaded from: classes.dex */
 public interface IVirtualCameraCallback extends IInterface {
     public static final String DESCRIPTOR =
             "android.companion.virtual.camera.IVirtualCameraCallback";

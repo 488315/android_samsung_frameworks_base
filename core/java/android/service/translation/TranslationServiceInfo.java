@@ -23,7 +23,6 @@ import org.xmlpull.v1.XmlPullParserException;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-/* loaded from: classes3.dex */
 public final class TranslationServiceInfo {
     private static final String TAG = "TranslationServiceInfo";
     private static final String XML_TAG_SERVICE = "translation-service";

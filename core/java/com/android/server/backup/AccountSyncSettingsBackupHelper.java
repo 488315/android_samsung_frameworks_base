@@ -36,7 +36,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/* loaded from: classes5.dex */
 public class AccountSyncSettingsBackupHelper extends BackupHelperWithLogger {
     private static final boolean DEBUG = false;
     private static final String JSON_FORMAT_ENCODING = "UTF-8";

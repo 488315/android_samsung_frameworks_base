@@ -7,7 +7,6 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.Writer;
 
-/* loaded from: classes5.dex */
 public class PemWriter extends BufferedWriter {
     private static final int LINE_LENGTH = 64;
     private char[] buf;

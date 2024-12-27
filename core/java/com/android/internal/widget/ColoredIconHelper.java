@@ -7,7 +7,6 @@ import android.graphics.drawable.Drawable;
 
 import com.android.internal.util.ContrastColorUtil;
 
-/* loaded from: classes5.dex */
 final class ColoredIconHelper {
     static final int COLOR_INVALID = 1;
 

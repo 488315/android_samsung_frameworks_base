@@ -1,6 +1,5 @@
 package com.android.internal.widget.remotecompose.core.operations.paint;
 
-/* loaded from: classes5.dex */
 public interface TextPaint {
     void setARGB(int i, int i2, int i3, int i4);
 

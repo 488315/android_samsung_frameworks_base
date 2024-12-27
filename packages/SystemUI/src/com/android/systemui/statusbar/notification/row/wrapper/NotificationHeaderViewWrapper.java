@@ -35,7 +35,6 @@ import com.android.systemui.statusbar.notification.stack.NotificationChildrenCon
 import java.util.Stack;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public class NotificationHeaderViewWrapper extends NotificationViewWrapper implements Roundable {
     public static final Interpolator LOW_PRIORITY_HEADER_CLOSE = new PathInterpolator(0.4f, 0.0f, 0.7f, 1.0f);
     public View mAltExpandTarget;

@@ -12,7 +12,6 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
-/* loaded from: classes4.dex */
 public class FocusFinder {
     private static final ThreadLocal<FocusFinder> tlFocusFinder =
             new ThreadLocal<FocusFinder>() { // from class: android.view.FocusFinder.1

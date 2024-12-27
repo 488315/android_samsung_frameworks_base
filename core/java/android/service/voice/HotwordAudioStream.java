@@ -15,7 +15,6 @@ import java.util.Arrays;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class HotwordAudioStream implements Parcelable {
     public static final String KEY_AUDIO_STREAM_COPY_BUFFER_LENGTH_BYTES =
             "android.service.voice.key.AUDIO_STREAM_COPY_BUFFER_LENGTH_BYTES";

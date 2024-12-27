@@ -18,7 +18,6 @@ import kotlinx.coroutines.flow.StartedEagerly;
 import kotlinx.coroutines.flow.internal.ChannelLimitedFlowMerge;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public final class KeyguardOcclusionInteractor {
     public final KeyguardOcclusionInteractor$special$$inlined$map$1 isShowWhenLockedActivityOnTop;
     public final ReadonlyStateFlow occludingActivityWillDismissKeyguard;

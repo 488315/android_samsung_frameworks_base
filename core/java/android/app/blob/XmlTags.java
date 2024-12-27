@@ -1,6 +1,5 @@
 package android.app.blob;
 
-/* loaded from: classes.dex */
 public final class XmlTags {
     public static final String ATTR_ALGO = "al";
     public static final String ATTR_CERTIFICATE = "ct";

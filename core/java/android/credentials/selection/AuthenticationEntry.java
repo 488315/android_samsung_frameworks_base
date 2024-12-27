@@ -13,7 +13,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class AuthenticationEntry implements Parcelable {
     public static final Parcelable.Creator<AuthenticationEntry> CREATOR =
             new Parcelable.Creator<AuthenticationEntry>() { // from class:

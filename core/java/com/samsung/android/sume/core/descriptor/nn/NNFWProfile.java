@@ -7,7 +7,6 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public class NNFWProfile implements Serializable {
     private final NNFW fw;
     private final HwUnit hw;

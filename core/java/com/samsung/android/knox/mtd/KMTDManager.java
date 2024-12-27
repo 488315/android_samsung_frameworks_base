@@ -9,7 +9,6 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public class KMTDManager {
     public static final String MTD_FEATURES = "knoxmtd.analysis.features";
     public static final String SERVICE_LABEL = "knox.mtd";

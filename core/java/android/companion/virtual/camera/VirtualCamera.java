@@ -8,7 +8,6 @@ import java.io.Closeable;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class VirtualCamera implements Closeable {
     private final String mCameraId;
     private final VirtualCameraConfig mConfig;

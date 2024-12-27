@@ -15,7 +15,6 @@ import com.android.internal.org.bouncycastle.util.Properties;
 
 import java.math.BigInteger;
 
-/* loaded from: classes5.dex */
 public class TBSCertificate extends ASN1Object {
     Time endDate;
     Extensions extensions;

@@ -2,7 +2,6 @@ package android.view.animation;
 
 import android.graphics.Matrix;
 
-/* loaded from: classes4.dex */
 public class TranslateXAnimation extends TranslateAnimation {
     float[] mTmpValues;
 

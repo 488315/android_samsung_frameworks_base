@@ -4,7 +4,6 @@ import android.util.ArrayMap;
 
 import libcore.util.NativeAllocationRegistry;
 
-/* loaded from: classes.dex */
 public class RuntimeShader extends Shader {
     private long mNativeInstanceRuntimeShaderBuilder;
     private ArrayMap<String, Shader> mShaderUniforms;

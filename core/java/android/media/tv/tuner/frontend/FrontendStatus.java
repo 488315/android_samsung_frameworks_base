@@ -10,7 +10,6 @@ import java.util.Collections;
 import java.util.List;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public class FrontendStatus {
     public static final int FRONTEND_STATUS_TYPE_AGC = 14;
     public static final int FRONTEND_STATUS_TYPE_ATSC3_ALL_PLP_INFO = 41;

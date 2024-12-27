@@ -19,7 +19,6 @@ import com.samsung.android.sume.core.types.nn.Model;
 import com.samsung.android.sume.core.types.nn.NNFW;
 import com.samsung.android.sume.solution.Option;
 
-/* loaded from: classes6.dex */
 public class NNDirector {
     private static final String TAG = Def.tagOf((Class<?>) NNDirector.class);
     private final MFDescriptorGraph.Builder graphBuilder;

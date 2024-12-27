@@ -1,7 +1,6 @@
 package android.os;
 
 
-/* loaded from: classes3.dex */
 public final class ForegroundAppEnergyInfo implements Parcelable {
     private int mBatteryDischargeUah;
     private int mDisplayPowerUah;

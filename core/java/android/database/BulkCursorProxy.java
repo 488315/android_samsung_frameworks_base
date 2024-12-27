@@ -6,7 +6,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 
 /* compiled from: BulkCursorNative.java */
-/* loaded from: classes.dex */
 final class BulkCursorProxy implements IBulkCursor {
     private Bundle mExtras = null;
     private IBinder mRemote;

@@ -105,7 +105,6 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
-/* loaded from: classes2.dex */
 public class InputMethodService extends AbstractInputMethodService {
     public static final int BACK_DISPOSITION_ADJUST_NOTHING = 3;
     public static final int BACK_DISPOSITION_DEFAULT = 0;

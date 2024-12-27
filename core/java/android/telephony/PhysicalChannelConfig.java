@@ -11,7 +11,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Arrays;
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public final class PhysicalChannelConfig implements Parcelable {
     public static final int BAND_UNKNOWN = 0;
     public static final int CELL_BANDWIDTH_UNKNOWN = 0;

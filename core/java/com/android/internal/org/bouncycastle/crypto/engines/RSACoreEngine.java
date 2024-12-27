@@ -9,7 +9,6 @@ import com.android.internal.org.bouncycastle.util.Arrays;
 
 import java.math.BigInteger;
 
-/* loaded from: classes5.dex */
 class RSACoreEngine {
     private boolean forEncryption;
     private RSAKeyParameters key;

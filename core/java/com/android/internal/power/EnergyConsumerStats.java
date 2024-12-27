@@ -14,7 +14,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Arrays;
 
-/* loaded from: classes5.dex */
 public class EnergyConsumerStats {
     private static final int INVALID_STATE = -1;
     public static final int NUMBER_STANDARD_POWER_BUCKETS = 10;

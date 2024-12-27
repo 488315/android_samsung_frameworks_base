@@ -7,7 +7,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.telecom.VideoProfile;
 
-/* loaded from: classes5.dex */
 public interface IImsVideoCallCallback extends IInterface {
     void changeCallDataUsage(long j) throws RemoteException;
 

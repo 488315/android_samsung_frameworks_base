@@ -17,7 +17,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* loaded from: classes6.dex */
 public class SprAttributeAnimatorSet extends SprAttributeBase {
     public int duration;
     private ArrayList<Animator> mAnimators;

@@ -7,7 +7,6 @@ import java.security.Key;
 
 import javax.crypto.IllegalBlockSizeException;
 
-/* loaded from: classes6.dex */
 public class UcmKeyStoreAESCipherSpi extends UcmKeyStoreGenericCipher {
     private ByteArrayOutputStream mStream;
 

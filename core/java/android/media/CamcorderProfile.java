@@ -6,7 +6,6 @@ import android.hardware.Camera;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes2.dex */
 public class CamcorderProfile {
     public static final int QUALITY_1080P = 6;
     public static final int QUALITY_2160P = 8;

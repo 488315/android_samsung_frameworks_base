@@ -2,7 +2,6 @@ package android.view.textclassifier;
 
 import android.util.NtpTrustedTime;
 
-/* loaded from: classes4.dex */
 public final class SelectionSessionLogger {
     private static final String CLASSIFIER_ID = "androidtc";
 

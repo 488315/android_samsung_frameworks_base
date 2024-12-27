@@ -5,7 +5,6 @@ import com.android.internal.org.bouncycastle.crypto.InvalidCipherTextException;
 
 import java.security.SecureRandom;
 
-/* loaded from: classes5.dex */
 public class ISO10126d2Padding implements BlockCipherPadding {
     SecureRandom random;
 

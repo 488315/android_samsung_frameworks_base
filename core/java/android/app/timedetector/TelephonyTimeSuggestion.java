@@ -12,7 +12,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public final class TelephonyTimeSuggestion implements Parcelable {
     public static final Parcelable.Creator<TelephonyTimeSuggestion> CREATOR =
             new Parcelable.Creator<TelephonyTimeSuggestion>() { // from class:

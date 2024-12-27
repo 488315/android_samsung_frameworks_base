@@ -36,7 +36,6 @@ import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-/* loaded from: classes2.dex */
 class IInputMethodWrapper extends IInputMethod.Stub implements HandlerCaller.Callback {
     private static final int DO_CAN_START_STYLUS_HANDWRITING = 100;
     private static final int DO_CHANGE_INPUTMETHOD_SUBTYPE = 80;

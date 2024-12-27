@@ -9,7 +9,6 @@ import android.telecom.PhoneAccountSuggestion;
 
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public interface IPhoneAccountSuggestionCallback extends IInterface {
     public static final String DESCRIPTOR =
             "com.android.internal.telecom.IPhoneAccountSuggestionCallback";

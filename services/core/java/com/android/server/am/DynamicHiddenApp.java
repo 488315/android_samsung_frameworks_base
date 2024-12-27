@@ -25,7 +25,6 @@ import java.util.Base64;
 import java.util.HashMap;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes.dex */
 public final class DynamicHiddenApp {
     public static boolean DEBUG;
     public static final boolean IS_HIGH_CAPACITY_RAM;

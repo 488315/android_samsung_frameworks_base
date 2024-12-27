@@ -15,7 +15,6 @@ import java.util.Map;
 import java.util.RandomAccess;
 import java.util.Set;
 
-/* loaded from: classes3.dex */
 public final class Internal {
     private static final int DEFAULT_BUFFER_SIZE = 4096;
     static final Charset US_ASCII = Charset.forName("US-ASCII");

@@ -1,6 +1,5 @@
 package com.android.server.vibrator;
 
-/* loaded from: classes5.dex */
 public final class VibrationProto {
     public static final long ATTRIBUTES = 1146756268037L;
     public static final int CANCELLED_ACH_NON_REPEATED = 30;

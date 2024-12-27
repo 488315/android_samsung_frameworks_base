@@ -12,7 +12,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public class WorkSource implements Parcelable {
     static final boolean DEBUG = false;
     static final String TAG = "WorkSource";

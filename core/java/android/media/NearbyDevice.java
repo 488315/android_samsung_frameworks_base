@@ -10,7 +10,6 @@ import java.util.Arrays;
 import java.util.List;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public final class NearbyDevice implements Parcelable {
     public static final int RANGE_CLOSE = 3;
     public static final int RANGE_FAR = 1;

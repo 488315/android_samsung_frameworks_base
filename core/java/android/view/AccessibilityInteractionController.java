@@ -40,7 +40,6 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.function.Predicate;
 
-/* loaded from: classes4.dex */
 public final class AccessibilityInteractionController {
     private static final boolean CONSIDER_REQUEST_PREPARERS = false;
     private static final boolean ENFORCE_NODE_TREE_CONSISTENT = false;

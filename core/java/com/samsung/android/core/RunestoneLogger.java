@@ -9,7 +9,6 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
-/* loaded from: classes6.dex */
 public class RunestoneLogger {
     private static final String ACTION_SCREEN_LOGGING =
             "com.sec.android.diagmonagent.intent.ACTION_SCREEN_LOGGING";

@@ -7,7 +7,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public class UpdateEngine {
     private static final String TAG = "UpdateEngine";
     private static final String UPDATE_ENGINE_SERVICE = "android.os.UpdateEngineService";

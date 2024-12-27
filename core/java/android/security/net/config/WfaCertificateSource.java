@@ -4,7 +4,6 @@ import java.io.File;
 import java.security.cert.X509Certificate;
 import java.util.Set;
 
-/* loaded from: classes3.dex */
 public final class WfaCertificateSource extends DirectoryCertificateSource {
     private static final String CACERTS_WFA_PATH =
             "/apex/com.android.wifi/etc/security/cacerts_wfa";

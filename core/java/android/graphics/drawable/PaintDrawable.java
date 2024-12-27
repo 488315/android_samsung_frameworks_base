@@ -9,7 +9,6 @@ import com.android.internal.R;
 
 import org.xmlpull.v1.XmlPullParser;
 
-/* loaded from: classes.dex */
 public class PaintDrawable extends ShapeDrawable {
     public PaintDrawable() {}
 

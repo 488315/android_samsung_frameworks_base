@@ -10,7 +10,6 @@ import com.android.internal.org.bouncycastle.util.Pack;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 
-/* loaded from: classes5.dex */
 public class SecP256K1Field {
     private static final int P7 = -1;
     private static final int PExt15 = -1;

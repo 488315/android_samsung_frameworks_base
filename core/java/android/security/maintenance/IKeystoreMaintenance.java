@@ -7,7 +7,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.system.keystore2.KeyDescriptor;
 
-/* loaded from: classes3.dex */
 public interface IKeystoreMaintenance extends IInterface {
     public static final String DESCRIPTOR = "android.security.maintenance.IKeystoreMaintenance";
 

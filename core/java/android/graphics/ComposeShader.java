@@ -1,6 +1,5 @@
 package android.graphics;
 
-/* loaded from: classes.dex */
 public class ComposeShader extends Shader {
     private long mNativeInstanceShaderA;
     private long mNativeInstanceShaderB;

@@ -13,7 +13,6 @@ import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactorySpi;
 import javax.crypto.spec.SecretKeySpec;
 
-/* loaded from: classes5.dex */
 public class BaseSecretKeyFactory extends SecretKeyFactorySpi implements PBE {
     protected String algName;
     protected ASN1ObjectIdentifier algOid;

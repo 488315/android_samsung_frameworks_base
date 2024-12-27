@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-/* loaded from: classes2.dex */
 public final class SemWifiDisplayConfig implements Parcelable {
     public static final int CONNECTION_TYPE_AP = 2;
     public static final int CONNECTION_TYPE_P2P = 1;

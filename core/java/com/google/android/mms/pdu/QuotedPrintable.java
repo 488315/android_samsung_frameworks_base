@@ -2,7 +2,6 @@ package com.google.android.mms.pdu;
 
 import java.io.ByteArrayOutputStream;
 
-/* loaded from: classes5.dex */
 public class QuotedPrintable {
     private static byte ESCAPE_CHAR = 61;
 

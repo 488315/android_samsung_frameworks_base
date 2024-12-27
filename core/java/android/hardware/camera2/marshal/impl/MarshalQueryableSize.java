@@ -7,7 +7,6 @@ import android.util.Size;
 
 import java.nio.ByteBuffer;
 
-/* loaded from: classes2.dex */
 public class MarshalQueryableSize implements MarshalQueryable<Size> {
     private static final int SIZE = 8;
 

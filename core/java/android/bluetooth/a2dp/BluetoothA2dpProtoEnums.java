@@ -1,6 +1,5 @@
 package android.bluetooth.a2dp;
 
-/* loaded from: classes.dex */
 public final class BluetoothA2dpProtoEnums {
     public static final int AUDIO_CODING_MODE_HARDWARE = 1;
     public static final int AUDIO_CODING_MODE_SOFTWARE = 2;

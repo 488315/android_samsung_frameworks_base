@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.function.DoubleUnaryOperator;
 
-/* loaded from: classes.dex */
 public class Color {
     public static final int BLACK = -16777216;
     public static final int BLUE = -16776961;

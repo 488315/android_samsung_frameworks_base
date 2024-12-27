@@ -4,7 +4,6 @@ import android.filterfw.core.FilterContext;
 import android.filterfw.core.Program;
 import android.filterfw.core.ShaderProgram;
 
-/* loaded from: classes.dex */
 public class BlendFilter extends ImageCombineFilter {
     private final String mBlendShader;
 

@@ -21,7 +21,6 @@ import android.widget.TextView;
 import com.android.internal.R;
 import com.android.internal.view.menu.MenuBuilder;
 
-/* loaded from: classes5.dex */
 public class ActionBarContextView extends AbsActionBarView {
     private static final String TAG = "ActionBarContextView";
     private View mClose;

@@ -9,7 +9,6 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes5.dex */
 abstract class BaseParceledListSlice<T> implements Parcelable {
     private int mInlineCountLimit = Integer.MAX_VALUE;
     private final List<T> mList;

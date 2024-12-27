@@ -1,6 +1,5 @@
 package android.view.inputmethod;
 
-/* loaded from: classes4.dex */
 public final class InputMethodEditorTraceProto {
 
     public final class InputMethodClientsTraceFileProto {

@@ -6,7 +6,6 @@ import com.android.internal.org.bouncycastle.asn1.x500.style.BCStyle;
 
 import java.util.Vector;
 
-/* loaded from: classes5.dex */
 public class X500NameBuilder {
     private Vector rdns;
     private X500NameStyle template;

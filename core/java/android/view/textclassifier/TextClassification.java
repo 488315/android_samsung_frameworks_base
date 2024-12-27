@@ -28,7 +28,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public final class TextClassification implements Parcelable {
     private static final String LOG_TAG = "TextClassification";
     private static final int MAX_LEGACY_ICON_SIZE = 192;

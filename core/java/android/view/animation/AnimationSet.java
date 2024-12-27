@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/* loaded from: classes4.dex */
 public class AnimationSet extends Animation {
     private static final int PROPERTY_CHANGE_BOUNDS_MASK = 128;
     private static final int PROPERTY_DURATION_MASK = 32;

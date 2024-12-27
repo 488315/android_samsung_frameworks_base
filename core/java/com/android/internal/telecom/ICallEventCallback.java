@@ -13,7 +13,6 @@ import android.telecom.DisconnectCause;
 
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public interface ICallEventCallback extends IInterface {
     public static final String DESCRIPTOR = "com.android.internal.telecom.ICallEventCallback";
 

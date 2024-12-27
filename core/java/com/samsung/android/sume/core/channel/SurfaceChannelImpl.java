@@ -34,7 +34,6 @@ import java.util.function.IntPredicate;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
-/* loaded from: classes6.dex */
 public final class SurfaceChannelImpl implements BufferChannel, SurfaceChannel {
     private static final int HAL_PIXEL_FORMAT_EXYNOS_YCbCr_420_SPN = 291;
     private static final int HAL_PIXEL_FORMAT_EXYNOS_YCbCr_420_SP_M = 261;

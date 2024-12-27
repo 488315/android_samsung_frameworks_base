@@ -4,7 +4,6 @@ import java.io.FilterInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-/* loaded from: classes4.dex */
 public class Base64InputStream extends FilterInputStream {
     private static final int BUFFER_SIZE = 2048;
     private static byte[] EMPTY = new byte[0];

@@ -18,7 +18,6 @@ import com.android.internal.util.function.pooled.PooledLambda;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public abstract class GameSessionService extends Service {
     public static final String ACTION_GAME_SESSION_SERVICE =
             "android.service.games.action.GAME_SESSION_SERVICE";

@@ -21,7 +21,6 @@ import com.google.android.mms.ContentType;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
 
-/* loaded from: classes5.dex */
 public class SemImageClipDataProvider extends ContentProvider {
     static final String AUTHORITY = "com.samsung.android.content.clipboard";
     static final String CREATE_TABLE =

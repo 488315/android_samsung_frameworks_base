@@ -14,7 +14,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public class FaceAuthenticateOptions implements AuthenticateOptions, Parcelable {
     public static final int AUTHENTICATE_REASON_ALTERNATE_BIOMETRIC_BOUNCER_SHOWN = 4;
     public static final int AUTHENTICATE_REASON_ASSISTANT_VISIBLE = 3;

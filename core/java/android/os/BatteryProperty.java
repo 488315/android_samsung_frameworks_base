@@ -1,7 +1,6 @@
 package android.os;
 
 
-/* loaded from: classes3.dex */
 public class BatteryProperty implements Parcelable {
     public static final Parcelable.Creator<BatteryProperty> CREATOR =
             new Parcelable.Creator<BatteryProperty>() { // from class: android.os.BatteryProperty.1

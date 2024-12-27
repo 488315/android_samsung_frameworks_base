@@ -23,7 +23,6 @@ import java.security.PublicKey;
 import java.security.SecureRandom;
 import java.security.spec.AlgorithmParameterSpec;
 
-/* loaded from: classes5.dex */
 public class KeyAgreementSpi extends BaseAgreementSpi {
     private static final X9IntegerConverter converter = new X9IntegerConverter();
     private Object agreement;

@@ -3,7 +3,6 @@ package com.android.internal.pm.pkg.component;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes5.dex */
 public class ParsedPermissionGroupImpl extends ParsedComponentImpl
         implements ParsedPermissionGroup, Parcelable {
     public static final Parcelable.Creator<ParsedPermissionGroupImpl> CREATOR =

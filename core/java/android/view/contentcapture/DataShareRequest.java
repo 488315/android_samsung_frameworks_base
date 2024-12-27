@@ -10,7 +10,6 @@ import com.android.internal.util.AnnotationValidations;
 
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public final class DataShareRequest implements Parcelable {
     public static final Parcelable.Creator<DataShareRequest> CREATOR =
             new Parcelable.Creator<

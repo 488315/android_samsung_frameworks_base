@@ -3,7 +3,6 @@ package com.google.android.collect;
 import java.util.ArrayList;
 import java.util.Collections;
 
-/* loaded from: classes5.dex */
 public class Lists {
     public static <E> ArrayList<E> newArrayList() {
         return new ArrayList<>();

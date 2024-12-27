@@ -11,7 +11,6 @@ import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Set;
 
-/* loaded from: classes3.dex */
 class KeyStoreCertificateSource implements CertificateSource {
     private Set<X509Certificate> mCertificates;
     private TrustedCertificateIndex mIndex;

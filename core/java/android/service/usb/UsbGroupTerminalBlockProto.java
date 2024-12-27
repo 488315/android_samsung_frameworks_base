@@ -1,6 +1,5 @@
 package android.service.usb;
 
-/* loaded from: classes3.dex */
 public final class UsbGroupTerminalBlockProto {
     public static final long BLOCK_ITEM = 1120986464264L;
     public static final long DESCRIPTOR_SUBTYPE = 1120986464259L;

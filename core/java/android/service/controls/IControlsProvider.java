@@ -9,7 +9,6 @@ import android.service.controls.actions.ControlActionWrapper;
 
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public interface IControlsProvider extends IInterface {
     public static final String DESCRIPTOR = "android.service.controls.IControlsProvider";
 

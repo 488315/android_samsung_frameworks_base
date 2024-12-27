@@ -3,7 +3,6 @@ package android.media.metrics;
 import android.os.PersistableBundle;
 import android.os.RemoteException;
 
-/* loaded from: classes2.dex */
 public final class MediaMetricsManager {
     public static final long INVALID_TIMESTAMP = -1;
     private static final String TAG = "MediaMetricsManager";

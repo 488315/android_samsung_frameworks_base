@@ -9,7 +9,6 @@ import com.android.internal.util.AnnotationValidations;
 
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public final class ClearCredentialStateRequest implements Parcelable {
     public static final Parcelable.Creator<ClearCredentialStateRequest> CREATOR =
             new Parcelable.Creator<ClearCredentialStateRequest>() { // from class:

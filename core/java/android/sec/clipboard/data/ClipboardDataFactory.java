@@ -10,7 +10,6 @@ import com.samsung.android.content.clipboard.data.SemTextClipData;
 import com.samsung.android.content.clipboard.data.SemUriClipData;
 import com.samsung.android.content.clipboard.data.SemUriListClipData;
 
-/* loaded from: classes3.dex */
 public class ClipboardDataFactory {
     public static SemClipData createClipBoardData(int format) {
         switch (format) {

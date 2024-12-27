@@ -6,7 +6,6 @@ import com.android.internal.widget.remotecompose.core.RemoteContext;
 
 import java.io.InputStream;
 
-/* loaded from: classes5.dex */
 public class RemoteComposeDocument {
     CoreDocument mDocument = new CoreDocument();
 

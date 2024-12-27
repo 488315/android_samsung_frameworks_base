@@ -6,7 +6,6 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 
-/* loaded from: classes5.dex */
 public class ImsUceManager {
     public static final String ACTION_UCE_SERVICE_DOWN =
             "com.android.ims.internal.uce.UCE_SERVICE_DOWN";

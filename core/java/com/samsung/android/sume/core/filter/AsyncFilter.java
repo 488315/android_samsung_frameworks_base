@@ -5,7 +5,6 @@ import com.samsung.android.sume.core.buffer.MediaBuffer;
 import com.samsung.android.sume.core.buffer.MutableMediaBuffer;
 import com.samsung.android.sume.core.channel.BufferChannel;
 
-/* loaded from: classes6.dex */
 public abstract class AsyncFilter extends DecorateFilter {
     private int id;
     protected BufferChannel inputChannel;

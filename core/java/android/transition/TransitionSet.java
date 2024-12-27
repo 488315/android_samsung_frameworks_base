@@ -13,7 +13,6 @@ import com.android.internal.R;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* loaded from: classes4.dex */
 public class TransitionSet extends Transition {
     static final int FLAG_CHANGE_EPICENTER = 8;
     private static final int FLAG_CHANGE_INTERPOLATOR = 1;

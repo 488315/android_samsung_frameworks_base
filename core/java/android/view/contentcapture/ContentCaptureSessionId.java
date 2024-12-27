@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 import java.io.PrintWriter;
 
-/* loaded from: classes4.dex */
 public final class ContentCaptureSessionId implements Parcelable {
     public static final Parcelable.Creator<ContentCaptureSessionId> CREATOR =
             new Parcelable.Creator<

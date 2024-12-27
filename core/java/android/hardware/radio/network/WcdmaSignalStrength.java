@@ -6,7 +6,6 @@ import android.os.Parcelable;
 
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public class WcdmaSignalStrength implements Parcelable {
     public static final Parcelable.Creator<WcdmaSignalStrength> CREATOR =
             new Parcelable.Creator<WcdmaSignalStrength>() { // from class:

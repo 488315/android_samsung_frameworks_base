@@ -1,6 +1,5 @@
 package android.media;
 
-/* loaded from: classes2.dex */
 public final class Enums {
     public static final int ERROR_ARGUMENT = 2;
     public static final int ERROR_IO = 7;

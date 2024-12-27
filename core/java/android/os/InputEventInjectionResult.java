@@ -1,6 +1,5 @@
 package android.os;
 
-/* loaded from: classes3.dex */
 public @interface InputEventInjectionResult {
     public static final int FAILED = 2;
     public static final int PENDING = -1;

@@ -13,7 +13,6 @@ import com.android.internal.org.bouncycastle.util.Arrays;
 
 import java.math.BigInteger;
 
-/* loaded from: classes5.dex */
 public class MacData extends ASN1Object {
     private static final BigInteger ONE = BigInteger.valueOf(1);
     DigestInfo digInfo;

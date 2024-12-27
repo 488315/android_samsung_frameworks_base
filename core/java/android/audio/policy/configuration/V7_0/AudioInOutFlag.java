@@ -1,6 +1,5 @@
 package android.audio.policy.configuration.V7_0;
 
-/* loaded from: classes.dex */
 public enum AudioInOutFlag {
     AUDIO_OUTPUT_FLAG_DIRECT("AUDIO_OUTPUT_FLAG_DIRECT"),
     AUDIO_OUTPUT_FLAG_PRIMARY("AUDIO_OUTPUT_FLAG_PRIMARY"),

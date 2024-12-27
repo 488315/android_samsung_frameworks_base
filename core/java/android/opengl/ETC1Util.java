@@ -7,7 +7,6 @@ import java.nio.Buffer;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
-/* loaded from: classes3.dex */
 public class ETC1Util {
     public static void loadTexture(
             int target,

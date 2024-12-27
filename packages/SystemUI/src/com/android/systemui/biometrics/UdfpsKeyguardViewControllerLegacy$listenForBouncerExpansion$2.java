@@ -12,7 +12,6 @@ import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$unsafeFlow$1;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes.dex */
 final class UdfpsKeyguardViewControllerLegacy$listenForBouncerExpansion$2 extends SuspendLambda implements Function2 {
     int label;
     final /* synthetic */ UdfpsKeyguardViewControllerLegacy this$0;

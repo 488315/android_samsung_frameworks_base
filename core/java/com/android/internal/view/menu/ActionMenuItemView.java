@@ -26,7 +26,6 @@ import android.widget.Toolbar;
 
 import com.android.internal.R;
 
-/* loaded from: classes5.dex */
 public class ActionMenuItemView extends TextView
         implements MenuView.ItemView,
                 View.OnClickListener,

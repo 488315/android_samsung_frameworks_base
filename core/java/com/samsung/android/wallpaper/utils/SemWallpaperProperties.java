@@ -7,7 +7,6 @@ import android.os.ParcelFileDescriptor;
 import android.text.TextUtils;
 import android.util.Log;
 
-/* loaded from: classes6.dex */
 public class SemWallpaperProperties {
     private static final String KEY_AOD_THUMBNAIL = "aodThumbnail";
     private static final String KEY_AOD_THUMBNAIL_ERASEBG = "bgErasedAodThumbnail";

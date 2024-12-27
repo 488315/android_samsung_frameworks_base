@@ -1,6 +1,5 @@
 package com.android.internal.protolog.common;
 
-/* loaded from: classes5.dex */
 public class ProtoLog {
     public static boolean REQUIRE_PROTOLOGTOOL = true;
 

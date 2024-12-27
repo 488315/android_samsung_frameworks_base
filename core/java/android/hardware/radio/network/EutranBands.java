@@ -1,6 +1,5 @@
 package android.hardware.radio.network;
 
-/* loaded from: classes2.dex */
 public @interface EutranBands {
     public static final int BAND_1 = 1;
     public static final int BAND_10 = 10;

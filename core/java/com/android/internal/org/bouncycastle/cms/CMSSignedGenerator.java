@@ -22,7 +22,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/* loaded from: classes5.dex */
 public class CMSSignedGenerator {
     public static final String DATA = CMSObjectIdentifiers.data.getId();
     public static final String DIGEST_SHA1 = OIWObjectIdentifiers.idSHA1.getId();

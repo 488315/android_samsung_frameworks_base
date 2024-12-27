@@ -6,7 +6,6 @@ import android.os.Bundle;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
 public class CursorWrapper implements Cursor {
     protected final Cursor mCursor;
 

@@ -1,6 +1,5 @@
 package android.content;
 
-/* loaded from: classes.dex */
 public final class ClipDataProto {
     public static final long DESCRIPTION = 1146756268033L;
     public static final long ICON = 1146756268034L;

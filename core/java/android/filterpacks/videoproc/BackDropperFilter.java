@@ -18,7 +18,6 @@ import android.util.Log;
 
 import java.util.Arrays;
 
-/* loaded from: classes.dex */
 public class BackDropperFilter extends Filter {
     private static final float DEFAULT_ACCEPT_STDDEV = 0.85f;
     private static final float DEFAULT_ADAPT_RATE_BG = 0.0f;

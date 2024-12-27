@@ -23,7 +23,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes2.dex */
 public class CameraCaptureSessionImpl extends CameraCaptureSession
         implements CameraCaptureSessionCore {
     private static final boolean DEBUG = false;

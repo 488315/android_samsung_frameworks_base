@@ -7,7 +7,6 @@ import java.io.InputStream;
 import java.net.ProtocolException;
 import java.nio.charset.StandardCharsets;
 
-/* loaded from: classes5.dex */
 public class ProcFileReader implements Closeable {
     private final byte[] mBuffer;
     private boolean mLineFinished;

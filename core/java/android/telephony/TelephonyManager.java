@@ -143,7 +143,6 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-/* loaded from: classes4.dex */
 public class TelephonyManager {
 
     @SystemApi

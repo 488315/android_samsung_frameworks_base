@@ -27,7 +27,6 @@ import com.android.internal.R;
 import java.util.Collections;
 import java.util.List;
 
-/* loaded from: classes4.dex */
 public abstract class Window {
     public static final int DECOR_CAPTION_SHADE_AUTO = 0;
     public static final int DECOR_CAPTION_SHADE_DARK = 2;

@@ -2,7 +2,6 @@ package android.media;
 
 import java.util.Set;
 
-/* loaded from: classes2.dex */
 public interface AudioMetadataReadMap {
     <T> boolean containsKey(AudioMetadata.Key<T> key);
 

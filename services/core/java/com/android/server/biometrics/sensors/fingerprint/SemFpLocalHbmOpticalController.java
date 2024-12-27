@@ -21,7 +21,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.function.IntConsumer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes.dex */
 public final class SemFpLocalHbmOpticalController
         implements SemBiometricDisplayStateMonitor.DisplayStateCallback {
     static final String LOCAL_HBM_PATH_OF_IN_HOUSE = "/sys/class/lcd/panel/local_hbm";

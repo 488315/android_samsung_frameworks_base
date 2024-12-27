@@ -9,7 +9,6 @@ import java.net.CookieStore;
 import java.net.HttpCookie;
 import java.util.List;
 
-/* loaded from: classes2.dex */
 public class MediaHTTPService extends IMediaHTTPService.Stub {
     private static final String TAG = "MediaHTTPService";
     private List<HttpCookie> mCookies;

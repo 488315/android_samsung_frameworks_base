@@ -7,7 +7,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes2.dex */
 public interface IMediaRoute2ProviderService extends IInterface {
     public static final String DESCRIPTOR = "android.media.IMediaRoute2ProviderService";
 

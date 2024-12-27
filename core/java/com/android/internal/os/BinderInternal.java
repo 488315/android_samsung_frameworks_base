@@ -15,7 +15,6 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collection;
 
-/* loaded from: classes5.dex */
 public class BinderInternal {
     private static final String TAG = "BinderInternal";
     static long sLastGcTime;

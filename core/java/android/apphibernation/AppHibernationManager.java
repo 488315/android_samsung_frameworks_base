@@ -11,7 +11,6 @@ import java.util.Map;
 import java.util.Set;
 
 @SystemApi
-/* loaded from: classes.dex */
 public class AppHibernationManager {
     private static final String TAG = "AppHibernationManager";
     private final Context mContext;

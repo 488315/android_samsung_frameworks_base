@@ -2,7 +2,6 @@ package android.os;
 
 import android.media.MediaMetrics;
 
-/* loaded from: classes3.dex */
 public interface IExternalVibrationController extends IInterface {
     public static final String DESCRIPTOR = "android.os.IExternalVibrationController";
 

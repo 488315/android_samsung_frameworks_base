@@ -14,7 +14,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public abstract class AtomicFormula extends IntegrityFormula {
     public static final int APP_CERTIFICATE = 1;
     public static final int APP_CERTIFICATE_LINEAGE = 8;

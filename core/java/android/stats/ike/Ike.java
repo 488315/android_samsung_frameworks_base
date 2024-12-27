@@ -1,6 +1,5 @@
 package android.stats.ike;
 
-/* loaded from: classes3.dex */
 public final class Ike {
     public static final int CALLER_IWLAN = 1;
     public static final int CALLER_UNKNOWN = 0;

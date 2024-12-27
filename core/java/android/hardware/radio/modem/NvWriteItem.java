@@ -8,7 +8,6 @@ import java.util.Objects;
 import java.util.StringJoiner;
 
 @Deprecated
-/* loaded from: classes2.dex */
 public class NvWriteItem implements Parcelable {
     public static final Parcelable.Creator<NvWriteItem> CREATOR =
             new Parcelable.Creator<

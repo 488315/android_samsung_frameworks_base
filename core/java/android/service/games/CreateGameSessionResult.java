@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.view.SurfaceControlViewHost;
 
-/* loaded from: classes3.dex */
 public final class CreateGameSessionResult implements Parcelable {
     public static final Parcelable.Creator<CreateGameSessionResult> CREATOR =
             new Parcelable.Creator<

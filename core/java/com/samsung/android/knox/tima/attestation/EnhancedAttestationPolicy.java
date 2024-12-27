@@ -12,7 +12,6 @@ import android.util.Log;
 import java.util.HashMap;
 import java.util.Map;
 
-/* loaded from: classes6.dex */
 public class EnhancedAttestationPolicy {
     private static final String EA_BIND_ACTION =
             "com.samsung.android.knox.intent.action.BIND_KNOX_EA_SERVICE";

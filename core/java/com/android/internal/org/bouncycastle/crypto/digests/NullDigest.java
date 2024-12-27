@@ -5,7 +5,6 @@ import com.android.internal.org.bouncycastle.util.Arrays;
 
 import java.io.ByteArrayOutputStream;
 
-/* loaded from: classes5.dex */
 public class NullDigest implements Digest {
     private OpenByteArrayOutputStream bOut = new OpenByteArrayOutputStream();
 

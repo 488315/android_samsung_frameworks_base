@@ -17,7 +17,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public final class UsbPort {
     public static final int ENABLE_LIMIT_POWER_TRANSFER_ERROR_INTERNAL = 1;
     public static final int ENABLE_LIMIT_POWER_TRANSFER_ERROR_NOT_SUPPORTED = 2;

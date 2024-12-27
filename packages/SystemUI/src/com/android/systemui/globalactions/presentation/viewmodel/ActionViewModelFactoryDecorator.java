@@ -24,7 +24,6 @@ import com.samsung.android.globalactions.util.SystemController;
 import com.samsung.android.globalactions.util.UtilFactory;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public final class ActionViewModelFactoryDecorator implements ActionViewModelFactory {
     public final ConditionChecker mConditionChecker;
     public final ActionViewModelFactory mDecoratedFactory;

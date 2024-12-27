@@ -7,7 +7,6 @@ import android.os.IBinder;
 
 import com.android.telephony.Rlog;
 
-/* loaded from: classes4.dex */
 public class SatelliteService extends Service {
     public static final String SERVICE_INTERFACE = "android.telephony.satellite.SatelliteService";
     private static final String TAG = "SatelliteService";

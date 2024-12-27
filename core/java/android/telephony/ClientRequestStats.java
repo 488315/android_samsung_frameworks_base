@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/* loaded from: classes4.dex */
 public final class ClientRequestStats implements Parcelable {
     public static final Parcelable.Creator<ClientRequestStats> CREATOR =
             new Parcelable.Creator<

@@ -1,6 +1,5 @@
 package vendor.samsung.hardware.sysinput;
 
-/* loaded from: classes.dex */
 public @interface SehInputDeviceProperty {
     public static final int AOD_ACTIVE_AREA = 6;
     public static final int AOD_ENABLE = 7;

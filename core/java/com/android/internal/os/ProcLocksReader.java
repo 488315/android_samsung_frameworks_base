@@ -7,7 +7,6 @@ import com.android.internal.util.ProcFileReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-/* loaded from: classes5.dex */
 public class ProcLocksReader {
     private final String mPath;
     private IntArray mPids;

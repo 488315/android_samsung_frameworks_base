@@ -8,7 +8,6 @@ import com.android.internal.org.bouncycastle.asn1.ASN1TaggedObject;
 import com.android.internal.org.bouncycastle.asn1.DERBitString;
 import com.android.internal.org.bouncycastle.asn1.x500.X500Name;
 
-/* loaded from: classes5.dex */
 public class Certificate extends ASN1Object {
     ASN1Sequence seq;
     DERBitString sig;

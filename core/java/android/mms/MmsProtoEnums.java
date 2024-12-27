@@ -1,6 +1,5 @@
 package android.mms;
 
-/* loaded from: classes3.dex */
 public final class MmsProtoEnums {
     public static final int MMS_RESULT_ERROR_CONFIGURATION_ERROR = 7;
     public static final int MMS_RESULT_ERROR_DATA_DISABLED = 11;

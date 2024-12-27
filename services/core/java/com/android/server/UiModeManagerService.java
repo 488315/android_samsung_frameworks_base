@@ -104,7 +104,6 @@ import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes.dex */
 public final class UiModeManagerService extends SystemService {
     public static final Set SUPPORTED_NIGHT_MODE_CUSTOM_TYPES = new ArraySet(new Integer[] {0, 1});
     public static final DateTimeFormatter sFormatter =

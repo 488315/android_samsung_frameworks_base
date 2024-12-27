@@ -8,7 +8,6 @@ import com.samsung.android.graphics.spr.document.SprInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-/* loaded from: classes6.dex */
 public class SprObjectShapeCircle extends SprObjectBase {
     public float cr;
     public float cx;

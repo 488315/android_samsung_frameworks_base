@@ -20,7 +20,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
-/* loaded from: classes3.dex */
 public class AttestationVerificationManager {
     private static final Duration MAX_TOKEN_AGE = Duration.ofHours(1);
     public static final String PARAM_CHALLENGE = "localbinding.challenge";

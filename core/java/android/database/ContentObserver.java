@@ -11,7 +11,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes.dex */
 public abstract class ContentObserver {
     private static final long ADD_CONTENT_OBSERVER_FLAGS = 150939131;
     private final Executor mExecutor;

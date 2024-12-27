@@ -56,7 +56,6 @@ import java.util.Set;
 
 import javax.security.auth.x500.X500Principal;
 
-/* loaded from: classes5.dex */
 abstract class X509CRLImpl extends X509CRL {
     protected JcaJceHelper bcHelper;
     protected CertificateList c;

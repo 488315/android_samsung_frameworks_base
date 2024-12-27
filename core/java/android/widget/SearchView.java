@@ -53,7 +53,6 @@ import com.samsung.android.rune.ViewRune;
 
 import java.util.WeakHashMap;
 
-/* loaded from: classes4.dex */
 public class SearchView extends LinearLayout implements CollapsibleActionView {
     private static final boolean DBG = false;
     private static final String IME_OPTION_NO_MICROPHONE = "nm";

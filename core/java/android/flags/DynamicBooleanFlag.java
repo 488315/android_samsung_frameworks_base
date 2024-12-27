@@ -1,6 +1,5 @@
 package android.flags;
 
-/* loaded from: classes.dex */
 public class DynamicBooleanFlag extends BooleanFlagBase implements DynamicFlag<Boolean> {
     private final boolean mDefault;
 

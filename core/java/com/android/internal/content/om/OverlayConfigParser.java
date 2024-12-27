@@ -25,7 +25,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-/* loaded from: classes5.dex */
 public final class OverlayConfigParser {
     private static final String CONFIG_DEFAULT_FILENAME = "config/config.xml";
     private static final String CONFIG_DIRECTORY = "config";

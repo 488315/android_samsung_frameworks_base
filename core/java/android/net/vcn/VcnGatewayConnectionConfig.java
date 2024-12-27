@@ -22,7 +22,6 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.concurrent.TimeUnit;
 
-/* loaded from: classes3.dex */
 public final class VcnGatewayConnectionConfig {
     public static final Set<Integer> ALLOWED_CAPABILITIES;
     private static final Set<Integer> ALLOWED_GATEWAY_OPTIONS;

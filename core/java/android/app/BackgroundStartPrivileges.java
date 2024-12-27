@@ -6,7 +6,6 @@ import com.android.internal.util.Preconditions;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
 public class BackgroundStartPrivileges {
     private final boolean mAllowsBackgroundActivityStarts;
     private final boolean mAllowsBackgroundForegroundServiceStarts;

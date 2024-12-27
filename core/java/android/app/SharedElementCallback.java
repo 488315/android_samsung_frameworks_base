@@ -19,7 +19,6 @@ import android.widget.ImageView;
 import java.util.List;
 import java.util.Map;
 
-/* loaded from: classes.dex */
 public abstract class SharedElementCallback {
     private static final String BUNDLE_SNAPSHOT_BITMAP = "sharedElement:snapshot:bitmap";
     private static final String BUNDLE_SNAPSHOT_COLOR_SPACE = "sharedElement:snapshot:colorSpace";

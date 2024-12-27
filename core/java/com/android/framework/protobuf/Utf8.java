@@ -7,7 +7,6 @@ import com.samsung.android.transcode.constants.EncodeConstants;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 
-/* loaded from: classes3.dex */
 final class Utf8 {
     private static final long ASCII_MASK_LONG = -9187201950435737472L;
     static final int COMPLETE = 0;

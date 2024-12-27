@@ -3,7 +3,6 @@ package android.hardware.tv.tuner;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public final class FrontendInterleaveMode implements Parcelable {
     public static final Parcelable.Creator<FrontendInterleaveMode> CREATOR =
             new Parcelable.Creator<FrontendInterleaveMode>() { // from class:

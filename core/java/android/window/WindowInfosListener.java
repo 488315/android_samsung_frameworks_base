@@ -7,7 +7,6 @@ import android.view.InputWindowHandle;
 
 import libcore.util.NativeAllocationRegistry;
 
-/* loaded from: classes4.dex */
 public abstract class WindowInfosListener {
     private final long mNativeListener;
 

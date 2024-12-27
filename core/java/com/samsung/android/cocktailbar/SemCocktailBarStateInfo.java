@@ -1,6 +1,5 @@
 package com.samsung.android.cocktailbar;
 
-/* loaded from: classes5.dex */
 public class SemCocktailBarStateInfo {
 
     @Deprecated public static final int BACKGROUND_DIM = 2;

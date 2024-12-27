@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-/* loaded from: classes4.dex */
 public class SimpleAdapter extends BaseAdapter implements Filterable, ThemedSpinnerAdapter {
     private List<? extends Map<String, ?>> mData;
     private LayoutInflater mDropDownInflater;

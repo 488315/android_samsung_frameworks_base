@@ -1,6 +1,5 @@
 package android.service.chooser;
 
-/* loaded from: classes3.dex */
 public final class FeatureFlagsImpl implements FeatureFlags {
     @Override // android.service.chooser.FeatureFlags
     public boolean chooserAlbumText() {

@@ -11,7 +11,6 @@ import android.filterfw.format.ImageFormat;
 import android.filterfw.geometry.Point;
 import android.filterfw.geometry.Quad;
 
-/* loaded from: classes.dex */
 public class StraightenFilter extends Filter {
     private static final float DEGREE_TO_RADIAN = 0.017453292f;
 

@@ -4,7 +4,6 @@ import com.android.internal.org.bouncycastle.asn1.cms.AttributeTable;
 
 import java.util.Map;
 
-/* loaded from: classes5.dex */
 public interface CMSAttributeTableGenerator {
     public static final String CONTENT_TYPE = "contentType";
     public static final String DIGEST = "digest";

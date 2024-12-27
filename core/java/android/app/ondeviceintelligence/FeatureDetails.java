@@ -17,7 +17,6 @@ import java.text.MessageFormat;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class FeatureDetails implements Parcelable {
     public static final Parcelable.Creator<FeatureDetails> CREATOR =
             new Parcelable.Creator<FeatureDetails>() { // from class:

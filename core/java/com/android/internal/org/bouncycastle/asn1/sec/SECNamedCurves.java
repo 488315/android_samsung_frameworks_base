@@ -17,7 +17,6 @@ import java.math.BigInteger;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
-/* loaded from: classes5.dex */
 public class SECNamedCurves {
     static X9ECParametersHolder secp112r1 =
             new X9ECParametersHolder() { // from class:

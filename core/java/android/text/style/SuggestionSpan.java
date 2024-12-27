@@ -15,7 +15,6 @@ import com.android.internal.R;
 import java.util.Arrays;
 import java.util.Locale;
 
-/* loaded from: classes4.dex */
 public class SuggestionSpan extends CharacterStyle implements ParcelableSpan {
 
     @Deprecated

@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes3.dex */
 public interface IProtectedConfirmation extends IInterface {
     public static final String DESCRIPTOR = "android.security.apc.IProtectedConfirmation";
     public static final int FLAG_UI_OPTION_INVERTED = 1;

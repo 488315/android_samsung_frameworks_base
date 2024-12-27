@@ -7,7 +7,6 @@ import android.hardware.camera2.utils.TypeReference;
 
 import java.nio.ByteBuffer;
 
-/* loaded from: classes2.dex */
 public class MarshalQueryableStreamConfigurationDuration
         implements MarshalQueryable<StreamConfigurationDuration> {
     private static final long MASK_UNSIGNED_INT = 4294967295L;

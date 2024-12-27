@@ -30,7 +30,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Supplier;
 
-/* loaded from: classes3.dex */
 public class MtpStorageManager {
     private static final int IN_IGNORED = 32768;
     private static final int IN_ISDIR = 1073741824;

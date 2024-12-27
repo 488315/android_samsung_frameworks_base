@@ -2,7 +2,6 @@ package android.text;
 
 import android.icu.lang.UCharacter;
 
-/* loaded from: classes4.dex */
 public class Emoji {
     public static int COMBINING_ENCLOSING_KEYCAP = 8419;
     public static int ZERO_WIDTH_JOINER = 8205;

@@ -2,7 +2,6 @@ package android.service.controls.actions;
 
 import android.os.Bundle;
 
-/* loaded from: classes3.dex */
 public final class FloatAction extends ControlAction {
     private static final String KEY_NEW_VALUE = "key_new_value";
     private static final int TYPE = 2;

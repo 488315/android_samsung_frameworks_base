@@ -2,7 +2,6 @@ package com.android.internal.logging;
 
 import android.util.EventLog;
 
-/* loaded from: classes5.dex */
 public class EventLogTags {
     public static final int COMMIT_SYS_CONFIG_FILE = 525000;
     public static final int SYSUI_ACTION = 524288;

@@ -6,7 +6,6 @@ import com.android.internal.org.bouncycastle.asn1.x509.AlgorithmIdentifier;
 
 import javax.crypto.spec.PBEKeySpec;
 
-/* loaded from: classes5.dex */
 public class PBKDF2KeySpec extends PBEKeySpec {
     private static final AlgorithmIdentifier defaultPRF =
             new AlgorithmIdentifier(PKCSObjectIdentifiers.id_hmacWithSHA1, DERNull.INSTANCE);

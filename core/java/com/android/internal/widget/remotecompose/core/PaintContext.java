@@ -2,7 +2,6 @@ package com.android.internal.widget.remotecompose.core;
 
 import com.android.internal.widget.remotecompose.core.operations.paint.PaintBundle;
 
-/* loaded from: classes5.dex */
 public abstract class PaintContext {
     protected RemoteContext mContext;
 

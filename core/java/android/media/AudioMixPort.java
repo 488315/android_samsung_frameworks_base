@@ -2,7 +2,6 @@ package android.media;
 
 import java.util.List;
 
-/* loaded from: classes2.dex */
 public class AudioMixPort extends AudioPort {
     private final int mIoHandle;
 

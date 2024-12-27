@@ -15,7 +15,6 @@ import com.android.internal.os.BackgroundThread;
 import java.io.IOException;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public abstract class ResumeOnRebootService extends Service {
     public static final String EXCEPTION_KEY = "exception_key";
     public static final String SERVICE_INTERFACE =

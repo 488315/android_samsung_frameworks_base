@@ -8,7 +8,6 @@ import android.text.format.Formatter;
 import java.util.Collections;
 import java.util.List;
 
-/* loaded from: classes.dex */
 public final class BlobInfo implements Parcelable {
     public static final Parcelable.Creator<BlobInfo> CREATOR =
             new Parcelable.Creator<BlobInfo>() { // from class: android.app.blob.BlobInfo.1

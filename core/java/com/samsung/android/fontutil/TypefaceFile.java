@@ -1,6 +1,5 @@
 package com.samsung.android.fontutil;
 
-/* loaded from: classes6.dex */
 public class TypefaceFile {
     private String mFileName = null;
     private String mDroidName = null;

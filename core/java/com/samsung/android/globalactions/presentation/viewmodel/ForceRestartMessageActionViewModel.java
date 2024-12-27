@@ -1,6 +1,5 @@
 package com.samsung.android.globalactions.presentation.viewmodel;
 
-/* loaded from: classes6.dex */
 public class ForceRestartMessageActionViewModel implements ActionViewModel {
     private ActionInfo mInfo;
 

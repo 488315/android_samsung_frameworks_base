@@ -8,7 +8,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
-/* loaded from: classes6.dex */
 public class SemDesktopModeState implements Parcelable {
     public static final Parcelable.Creator<SemDesktopModeState> CREATOR =
             new Parcelable.Creator<

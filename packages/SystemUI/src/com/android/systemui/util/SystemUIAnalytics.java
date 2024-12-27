@@ -32,7 +32,6 @@ import java.util.Map;
 import java.util.Set;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes3.dex */
 public final class SystemUIAnalytics {
     public static final String CONTROL_KEY_ALL_CONTROLS = "AllControls";
     public static final String CONTROL_KEY_APP_NAME = "AppName";

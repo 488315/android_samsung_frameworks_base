@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 
-/* loaded from: classes5.dex */
 public final class PduCache extends AbstractCache<Uri, PduCacheEntry> {
     private static final boolean DEBUG = false;
     private static final boolean LOCAL_LOGV = false;

@@ -12,7 +12,6 @@ import android.view.View;
 import com.samsung.android.knox.analytics.database.Contract;
 import com.samsung.android.widget.SemTipPopup;
 
-/* loaded from: classes6.dex */
 public class SemTipPopupWrapper {
     private final Context mContext;
     private String mKey;

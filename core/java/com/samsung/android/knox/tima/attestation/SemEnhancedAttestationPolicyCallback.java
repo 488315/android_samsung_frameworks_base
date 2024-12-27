@@ -2,7 +2,6 @@ package com.samsung.android.knox.tima.attestation;
 
 import android.util.Log;
 
-/* loaded from: classes6.dex */
 public abstract class SemEnhancedAttestationPolicyCallback {
     private static final String TAG = "SemEAPolicyCb";
     private SemEnhancedAttestationPolicyCallback mEACallback = this;

@@ -1,6 +1,5 @@
 package com.android.server.wm;
 
-/* loaded from: classes5.dex */
 public final class RootWindowContainerProto {
     public static final long DEFAULT_MIN_SIZE_RESIZABLE_TASK = 1120986464264L;
     public static final long DISPLAYS = 2246267895810L;

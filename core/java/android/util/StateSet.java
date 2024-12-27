@@ -2,7 +2,6 @@ package android.util;
 
 import com.android.internal.R;
 
-/* loaded from: classes4.dex */
 public class StateSet {
     public static final int[] NOTHING;
     public static final int VIEW_STATE_ACCELERATED = 64;

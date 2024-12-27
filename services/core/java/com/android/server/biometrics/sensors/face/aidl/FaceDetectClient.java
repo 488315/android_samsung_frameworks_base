@@ -24,7 +24,6 @@ import com.android.server.biometrics.sensors.DetectionConsumer;
 import java.util.function.Supplier;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes.dex */
 public final class FaceDetectClient extends AcquisitionClient implements DetectionConsumer {
     public final AuthenticationStateListeners mAuthenticationStateListeners;
     public ICancellationSignal mCancellationSignal;

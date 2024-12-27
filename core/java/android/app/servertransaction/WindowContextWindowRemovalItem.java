@@ -7,7 +7,6 @@ import android.os.Parcelable;
 
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public class WindowContextWindowRemovalItem extends ClientTransactionItem {
     public static final Parcelable.Creator<WindowContextWindowRemovalItem> CREATOR =
             new Parcelable.Creator<WindowContextWindowRemovalItem>() { // from class:

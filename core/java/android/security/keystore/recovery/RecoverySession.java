@@ -19,7 +19,6 @@ import java.util.Locale;
 import java.util.Map;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public class RecoverySession implements AutoCloseable {
     private static final int SESSION_ID_LENGTH_BYTES = 16;
     private static final String TAG = "RecoverySession";

@@ -6,7 +6,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes2.dex */
 public class TaskDrainer<T> {
     private static final String TAG = "TaskDrainer";
     private final boolean DEBUG;

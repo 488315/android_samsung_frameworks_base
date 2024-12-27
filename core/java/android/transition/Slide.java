@@ -16,7 +16,6 @@ import com.android.internal.R;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes4.dex */
 public class Slide extends Visibility {
     private static final String PROPNAME_SCREEN_POSITION = "android:slide:screenPosition";
     private static final String TAG = "Slide";

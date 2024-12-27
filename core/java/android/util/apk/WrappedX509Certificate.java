@@ -15,7 +15,6 @@ import java.security.cert.X509Certificate;
 import java.util.Date;
 import java.util.Set;
 
-/* loaded from: classes4.dex */
 class WrappedX509Certificate extends X509Certificate {
     private final X509Certificate mWrapped;
 

@@ -7,7 +7,6 @@ import android.filterfw.core.FrameFormat;
 import android.filterfw.core.GenerateFinalPort;
 import android.filterfw.core.MutableFrameFormat;
 
-/* loaded from: classes.dex */
 public class RetargetFilter extends Filter {
     private MutableFrameFormat mOutputFormat;
     private int mTarget;

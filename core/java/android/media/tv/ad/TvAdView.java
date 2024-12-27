@@ -29,7 +29,6 @@ import com.android.internal.util.AnnotationValidations;
 import java.util.List;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes3.dex */
 public class TvAdView extends ViewGroup {
     private static final boolean DEBUG = false;
     public static final String ERROR_KEY_ERROR_CODE = "error_code";

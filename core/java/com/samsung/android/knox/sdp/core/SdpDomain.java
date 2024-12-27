@@ -2,7 +2,6 @@ package com.samsung.android.knox.sdp.core;
 
 import java.io.Serializable;
 
-/* loaded from: classes6.dex */
 public class SdpDomain implements Serializable {
     private final String mAlias;
     private final String mPackageName;

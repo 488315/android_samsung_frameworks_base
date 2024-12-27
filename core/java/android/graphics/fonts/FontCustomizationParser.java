@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-/* loaded from: classes.dex */
 public class FontCustomizationParser {
     private static final String TAG = "FontCustomizationParser";
 

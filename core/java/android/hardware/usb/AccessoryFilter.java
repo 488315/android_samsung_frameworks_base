@@ -11,7 +11,6 @@ import org.xmlpull.v1.XmlSerializer;
 import java.io.IOException;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public class AccessoryFilter {
     public final String mManufacturer;
     public final String mModel;

@@ -6,7 +6,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @Deprecated
-/* loaded from: classes2.dex */
 public class SContextEnvironmentAdaptiveDisplay extends SContextEventContext {
     public static final Parcelable.Creator<SContextEnvironmentAdaptiveDisplay> CREATOR =
             new Parcelable.Creator<SContextEnvironmentAdaptiveDisplay>() { // from class:

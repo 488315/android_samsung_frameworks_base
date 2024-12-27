@@ -21,7 +21,6 @@ import java.util.Objects;
 import java.util.concurrent.Executor;
 import java.util.concurrent.RejectedExecutionException;
 
-/* loaded from: classes4.dex */
 public final class TelephonyScanManager {
     public static final int CALLBACK_RESTRICTED_SCAN_RESULTS = 4;
     public static final int CALLBACK_SCAN_COMPLETE = 3;

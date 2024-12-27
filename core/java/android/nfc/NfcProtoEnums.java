@@ -1,6 +1,5 @@
 package android.nfc;
 
-/* loaded from: classes3.dex */
 public final class NfcProtoEnums {
     public static final int RF_ISO_DEP = 3;
     public static final int RF_MIFARE_CLASSIC = 8;

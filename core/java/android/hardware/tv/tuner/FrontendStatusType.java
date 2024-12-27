@@ -1,6 +1,5 @@
 package android.hardware.tv.tuner;
 
-/* loaded from: classes2.dex */
 public @interface FrontendStatusType {
     public static final int AGC = 14;
     public static final int ATSC3_ALL_PLP_INFO = 41;

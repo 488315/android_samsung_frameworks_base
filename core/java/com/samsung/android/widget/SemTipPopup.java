@@ -42,7 +42,6 @@ import com.android.internal.R;
 
 import com.samsung.android.wallpaperbackup.BnRConstants;
 
-/* loaded from: classes6.dex */
 public class SemTipPopup {
     private static final int ANIMATION_DURATION_BOUNCE_SCALE1 = 167;
     private static final int ANIMATION_DURATION_BOUNCE_SCALE2 = 250;

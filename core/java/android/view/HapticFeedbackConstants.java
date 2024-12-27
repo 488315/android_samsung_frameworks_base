@@ -2,7 +2,6 @@ package android.view;
 
 import com.samsung.android.vibrator.SemHapticFeedbackConstants;
 
-/* loaded from: classes4.dex */
 public class HapticFeedbackConstants {
     public static final int ASSISTANT_BUTTON = 10002;
     public static final int BIOMETRIC_CONFIRM = 10004;

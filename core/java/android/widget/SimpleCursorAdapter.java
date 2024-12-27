@@ -5,7 +5,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.view.View;
 
-/* loaded from: classes4.dex */
 public class SimpleCursorAdapter extends ResourceCursorAdapter {
     private CursorToStringConverter mCursorToStringConverter;
     protected int[] mFrom;

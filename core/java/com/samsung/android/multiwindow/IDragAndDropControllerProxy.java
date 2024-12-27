@@ -7,7 +7,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.view.ThreadedRenderer;
 
-/* loaded from: classes6.dex */
 public interface IDragAndDropControllerProxy extends IInterface {
     public static final String DESCRIPTOR =
             "com.samsung.android.multiwindow.IDragAndDropControllerProxy";

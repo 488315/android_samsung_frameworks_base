@@ -12,7 +12,6 @@ import java.io.StringReader;
 import java.util.ArrayDeque;
 
 /* compiled from: TtmlRenderer.java */
-/* loaded from: classes2.dex */
 class TtmlParser {
     private static final int DEFAULT_FRAMERATE = 30;
     private static final int DEFAULT_SUBFRAMERATE = 1;

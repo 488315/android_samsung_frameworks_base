@@ -7,7 +7,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.telephony.SubscriptionPlan;
 
-/* loaded from: classes3.dex */
 public interface INetworkPolicyListener extends IInterface {
     void onBlockedReasonChanged(int i, int i2, int i3) throws RemoteException;
 

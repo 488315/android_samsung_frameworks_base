@@ -6,7 +6,6 @@ import org.apache.harmony.dalvik.ddmc.DdmServer;
 
 import java.nio.ByteBuffer;
 
-/* loaded from: classes.dex */
 public class DdmHandleAppName extends DdmHandle {
     public static final int CHUNK_APNM = ChunkHandler.type("APNM");
     private static DdmHandleAppName mInstance = new DdmHandleAppName();

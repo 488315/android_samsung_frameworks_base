@@ -7,7 +7,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes2.dex */
 public interface IRadioVoiceResponse extends IInterface {
     public static final String DESCRIPTOR =
             "android$hardware$radio$voice$IRadioVoiceResponse".replace('$', '.');

@@ -2,7 +2,6 @@ package com.android.internal.util.dump;
 
 import android.content.ComponentName;
 
-/* loaded from: classes5.dex */
 public class DumpUtils {
     public static void writeStringIfNotNull(
             DualDumpOutputStream proto, String idName, long id, String string) {

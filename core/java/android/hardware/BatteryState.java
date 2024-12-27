@@ -3,7 +3,6 @@ package android.hardware;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes.dex */
 public abstract class BatteryState {
     public static final int STATUS_CHARGING = 2;
     public static final int STATUS_DISCHARGING = 3;

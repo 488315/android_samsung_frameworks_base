@@ -11,7 +11,6 @@ import com.android.internal.org.bouncycastle.util.Properties;
 
 import java.security.SecureRandom;
 
-/* loaded from: classes5.dex */
 public class PKCS1Encoding implements AsymmetricBlockCipher {
     private static final int HEADER_LENGTH = 10;
     public static final String NOT_STRICT_LENGTH_ENABLED_PROPERTY =

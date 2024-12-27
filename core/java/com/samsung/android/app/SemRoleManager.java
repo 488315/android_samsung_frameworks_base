@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 
-/* loaded from: classes5.dex */
 public final class SemRoleManager {
     public static final int MANAGE_HOLDERS_FLAG_DONT_KILL_APP = 1;
     private final RoleManager mRoleManager;

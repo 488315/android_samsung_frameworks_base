@@ -18,7 +18,6 @@ import com.android.server.biometrics.SemBiometricSysUiManager$$ExternalSynthetic
 import com.android.server.biometrics.SemBiometricSysUiManager$$ExternalSyntheticLambda8;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes.dex */
 public final class SemUdfpsSysUiImpl implements SemBiometricSysUiManager.SysUiListener {
     static final String DB_UDFPS_HIDE_AUTH_GUIDE_LAYER_PACKAGES =
             "config_biometric_udfps_flag_hide_auth_guide_layer_packages";

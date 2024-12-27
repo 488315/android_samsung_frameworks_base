@@ -19,7 +19,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes3.dex */
 public class PrintFileDocumentAdapter extends PrintDocumentAdapter {
     private static final String LOG_TAG = "PrintedFileDocAdapter";
     private final Context mContext;

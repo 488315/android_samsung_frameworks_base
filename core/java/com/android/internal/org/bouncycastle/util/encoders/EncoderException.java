@@ -1,6 +1,5 @@
 package com.android.internal.org.bouncycastle.util.encoders;
 
-/* loaded from: classes5.dex */
 public class EncoderException extends IllegalStateException {
     private Throwable cause;
 

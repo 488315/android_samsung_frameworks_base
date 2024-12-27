@@ -5,7 +5,6 @@ import android.os.Binder;
 import java.util.List;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes4.dex */
 public class InternalGroupCallSessionCallback extends IMbmsGroupCallSessionCallback.Stub {
     private final MbmsGroupCallSessionCallback mAppCallback;
     private final Executor mExecutor;

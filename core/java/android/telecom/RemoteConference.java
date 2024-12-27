@@ -14,7 +14,6 @@ import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.CopyOnWriteArraySet;
 
-/* loaded from: classes3.dex */
 public final class RemoteConference {
     private final Set<CallbackRecord<Callback>> mCallbackRecords;
     private final List<RemoteConnection> mChildConnections;

@@ -6,7 +6,6 @@ import android.util.Slog;
 
 import com.android.server.LocalServices;
 
-/* loaded from: classes5.dex */
 public class PermissionBackupHelper extends BlobBackupHelper {
     private static final boolean DEBUG = false;
     private static final String KEY_PERMISSIONS = "permissions";

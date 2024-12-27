@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes2.dex */
 public abstract class CameraDevice implements AutoCloseable {
     public static final int AUDIO_RESTRICTION_NONE = 0;
     public static final int AUDIO_RESTRICTION_VIBRATION = 1;

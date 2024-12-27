@@ -14,7 +14,6 @@ import com.android.internal.util.function.OctFunction;
 import com.android.internal.util.function.QuadFunction;
 import com.android.internal.util.function.UndecFunction;
 
-/* loaded from: classes.dex */
 public abstract class AppOpsManagerInternal {
 
     public interface CheckOpsDelegate {

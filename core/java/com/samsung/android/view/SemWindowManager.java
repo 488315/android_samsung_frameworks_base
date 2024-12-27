@@ -30,7 +30,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public class SemWindowManager {
     public static final int ACTION_BLOCK_KEY_EVENT = 4;
     public static final int ACTION_NOT_SET = 0;

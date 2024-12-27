@@ -17,7 +17,6 @@ import android.telephony.ims.aidl.ISipTransport;
 
 import com.android.internal.telephony.PublishDialog;
 
-/* loaded from: classes5.dex */
 public interface IImsService extends IInterface {
     void acknowledgeSms(int i, int i2, int i3, int i4) throws RemoteException;
 

@@ -8,7 +8,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.function.Consumer;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public interface WearableSensingDataRequester {
     public static final int STATUS_OBSERVER_CANCELLED = 2;
     public static final int STATUS_SUCCESS = 1;

@@ -21,7 +21,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-/* loaded from: classes6.dex */
 public final class SPBnRManager {
     private static final String PASSWORD_DATA_NAME = "pwd";
     private static final String PASSWORD_METRICS_NAME = "metrics";

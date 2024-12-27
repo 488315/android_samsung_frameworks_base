@@ -6,7 +6,6 @@ import android.os.SemSystemProperties;
 import android.os.ServiceManager;
 import android.util.Log;
 
-/* loaded from: classes6.dex */
 public class KnoxAnalytics {
     public static final String KNOXANALYTICS_PROXY_SERVICE = "knox_analytics_proxy";
     private static IKnoxAnalyticsProxy mService;

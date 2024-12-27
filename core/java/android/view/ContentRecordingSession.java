@@ -9,7 +9,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public final class ContentRecordingSession implements Parcelable {
     public static final Parcelable.Creator<ContentRecordingSession> CREATOR =
             new Parcelable.Creator<

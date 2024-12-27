@@ -2,7 +2,6 @@ package com.samsung.voicebargein;
 
 import android.util.Log;
 
-/* loaded from: classes6.dex */
 public class BargeInEngine {
     private static final String TAG = BargeInEngine.class.getSimpleName();
 

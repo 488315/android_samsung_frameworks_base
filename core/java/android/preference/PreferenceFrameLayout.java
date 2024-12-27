@@ -10,7 +10,6 @@ import android.widget.FrameLayout;
 import com.android.internal.R;
 
 @Deprecated
-/* loaded from: classes3.dex */
 public class PreferenceFrameLayout extends FrameLayout {
     private static final int DEFAULT_BORDER_BOTTOM = 0;
     private static final int DEFAULT_BORDER_LEFT = 0;

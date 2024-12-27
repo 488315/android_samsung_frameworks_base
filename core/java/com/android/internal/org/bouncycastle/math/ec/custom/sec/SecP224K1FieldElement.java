@@ -7,7 +7,6 @@ import com.android.internal.org.bouncycastle.util.encoders.Hex;
 
 import java.math.BigInteger;
 
-/* loaded from: classes5.dex */
 public class SecP224K1FieldElement extends ECFieldElement.AbstractFp {
     protected int[] x;
     public static final BigInteger Q =

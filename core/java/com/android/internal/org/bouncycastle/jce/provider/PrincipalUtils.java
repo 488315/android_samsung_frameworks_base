@@ -10,7 +10,6 @@ import java.security.cert.X509Certificate;
 
 import javax.security.auth.x500.X500Principal;
 
-/* loaded from: classes5.dex */
 class PrincipalUtils {
     PrincipalUtils() {}
 

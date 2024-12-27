@@ -10,7 +10,6 @@ import com.android.internal.R;
 
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public final class RecoverableSecurityException extends SecurityException implements Parcelable {
     public static final Parcelable.Creator<RecoverableSecurityException> CREATOR =
             new Parcelable.Creator<RecoverableSecurityException>() { // from class:

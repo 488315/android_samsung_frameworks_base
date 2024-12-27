@@ -6,7 +6,6 @@ import android.os.Parcelable;
 
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public class CdmaT53ClirInfoRecord implements Parcelable {
     public static final Parcelable.Creator<CdmaT53ClirInfoRecord> CREATOR =
             new Parcelable.Creator<CdmaT53ClirInfoRecord>() { // from class:

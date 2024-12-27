@@ -13,7 +13,6 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 
-/* loaded from: classes5.dex */
 public class ParsedInstrumentationUtils {
     public static ParseResult<ParsedInstrumentation> parseInstrumentation(
             ParsingPackage pkg,

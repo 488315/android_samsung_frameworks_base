@@ -3,7 +3,6 @@ package android.security;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes3.dex */
 public class KeystoreArguments implements Parcelable {
     public static final Parcelable.Creator<KeystoreArguments> CREATOR =
             new Parcelable.Creator<

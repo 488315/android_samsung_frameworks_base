@@ -11,7 +11,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.function.Function;
 
-/* loaded from: classes4.dex */
 class ViewRootRectTracker {
     private final Function<View, List<Rect>> mRectCollector;
     private boolean mViewsChanged = false;

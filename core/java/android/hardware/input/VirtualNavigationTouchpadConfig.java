@@ -6,7 +6,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public final class VirtualNavigationTouchpadConfig extends VirtualInputDeviceConfig
         implements Parcelable {
     public static final Parcelable.Creator<VirtualNavigationTouchpadConfig> CREATOR =

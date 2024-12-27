@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-/* loaded from: classes2.dex */
 public class FrameNumberTracker {
     private static final String TAG = "FrameNumberTracker";
     private long[] mCompletedFrameNumber = new long[3];

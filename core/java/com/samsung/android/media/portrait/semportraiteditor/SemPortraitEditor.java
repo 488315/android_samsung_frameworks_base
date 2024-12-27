@@ -6,7 +6,6 @@ import com.samsung.android.media.portrait.semportraiteditor.controllerinterface.
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes6.dex */
 public class SemPortraitEditor {
     public static final int PORTRAIT_CONTROLLER_ADD_PORTRAIT_PARAM = 3000;
     public static final int PORTRAIT_CONTROLLER_DUALBOKEH = 2;

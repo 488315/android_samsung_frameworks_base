@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.concurrent.Executor;
 
 @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
-/* loaded from: classes.dex */
 public abstract class HomeVisibilityListener {
     private ActivityTaskManager mActivityTaskManager;
     private Executor mExecutor;

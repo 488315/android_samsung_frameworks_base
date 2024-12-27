@@ -8,7 +8,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.concurrent.TimeUnit;
 
-/* loaded from: classes4.dex */
 public class KeyEvent extends InputEvent implements Parcelable {
     public static final int ACTION_DOWN = 0;
 

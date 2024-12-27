@@ -3,7 +3,6 @@ package android.preference;
 import java.util.Set;
 
 @Deprecated
-/* loaded from: classes3.dex */
 public interface PreferenceDataStore {
     default void putString(String key, String value) {
         throw new UnsupportedOperationException("Not implemented on this data store");

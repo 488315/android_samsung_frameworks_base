@@ -12,7 +12,6 @@ import android.os.Parcelable;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public final class ConnectionRequest implements Parcelable {
     public static final Parcelable.Creator<ConnectionRequest> CREATOR =
             new Parcelable.Creator<

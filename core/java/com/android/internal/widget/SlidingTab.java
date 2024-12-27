@@ -22,7 +22,6 @@ import android.widget.TextView;
 
 import com.android.internal.R;
 
-/* loaded from: classes5.dex */
 public class SlidingTab extends ViewGroup {
     private static final int ANIM_DURATION = 250;
     private static final int ANIM_TARGET_TIME = 500;

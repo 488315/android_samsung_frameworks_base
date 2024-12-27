@@ -9,7 +9,6 @@ import android.os.Parcelable;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class AppPredictionContext implements Parcelable {
     public static final Parcelable.Creator<AppPredictionContext> CREATOR =
             new Parcelable.Creator<AppPredictionContext>() { // from class:

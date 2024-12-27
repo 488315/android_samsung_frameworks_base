@@ -12,7 +12,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
 
-/* loaded from: classes5.dex */
 public class Properties {
     private static final ThreadLocal threadProperties = new ThreadLocal();
 

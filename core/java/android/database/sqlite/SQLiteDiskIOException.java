@@ -1,6 +1,5 @@
 package android.database.sqlite;
 
-/* loaded from: classes.dex */
 public class SQLiteDiskIOException extends SQLiteException {
     public SQLiteDiskIOException() {}
 

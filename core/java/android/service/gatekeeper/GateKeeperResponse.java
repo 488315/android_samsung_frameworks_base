@@ -3,7 +3,6 @@ package android.service.gatekeeper;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes3.dex */
 public final class GateKeeperResponse implements Parcelable {
     public static final int RESPONSE_ERROR = -1;
     public static final int RESPONSE_OK = 0;

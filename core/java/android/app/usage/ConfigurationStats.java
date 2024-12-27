@@ -4,7 +4,6 @@ import android.content.res.Configuration;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes.dex */
 public final class ConfigurationStats implements Parcelable {
     public static final Parcelable.Creator<ConfigurationStats> CREATOR =
             new Parcelable.Creator<

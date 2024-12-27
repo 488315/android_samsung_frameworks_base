@@ -2,7 +2,6 @@ package com.android.internal.org.bouncycastle.math.ec.endo;
 
 import java.math.BigInteger;
 
-/* loaded from: classes5.dex */
 public class ScalarSplitParameters {
     protected final int bits;
     protected final BigInteger g1;

@@ -32,7 +32,6 @@ import java.util.Map;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.IvParameterSpec;
 
-/* loaded from: classes5.dex */
 public final class AES {
     private static final Map<String, String> generalAesAttributes = new HashMap();
 

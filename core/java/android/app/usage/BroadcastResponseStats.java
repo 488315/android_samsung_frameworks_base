@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class BroadcastResponseStats implements Parcelable {
     public static final Parcelable.Creator<BroadcastResponseStats> CREATOR =
             new Parcelable.Creator<BroadcastResponseStats>() { // from class:

@@ -3,7 +3,6 @@ package android.sec.enterprise;
 import android.os.Bundle;
 import android.os.RemoteException;
 
-/* loaded from: classes3.dex */
 public class ApplicationRestrictionsManager {
     private static String TAG = "ApplicationRestrictionsManager";
 

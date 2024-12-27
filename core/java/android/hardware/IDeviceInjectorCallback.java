@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes.dex */
 public interface IDeviceInjectorCallback extends IInterface {
     public static final String DESCRIPTOR = "android.hardware.IDeviceInjectorCallback";
     public static final int ERROR_INJECTION_INVALID_ERROR = -1;

@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes2.dex */
 public final class PlaybackParams implements Parcelable {
     public static final int AUDIO_FALLBACK_MODE_DEFAULT = 0;
     public static final int AUDIO_FALLBACK_MODE_FAIL = 2;

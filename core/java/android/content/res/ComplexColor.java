@@ -1,6 +1,5 @@
 package android.content.res;
 
-/* loaded from: classes.dex */
 public abstract class ComplexColor {
     private int mChangingConfigurations;
 

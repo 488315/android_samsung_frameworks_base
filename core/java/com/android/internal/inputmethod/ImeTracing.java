@@ -11,7 +11,6 @@ import android.view.inputmethod.InputMethodManagerGlobal;
 import java.io.PrintWriter;
 import java.util.function.Consumer;
 
-/* loaded from: classes5.dex */
 public abstract class ImeTracing {
     public static final int IME_TRACING_FROM_CLIENT = 0;
     public static final int IME_TRACING_FROM_IMMS = 2;

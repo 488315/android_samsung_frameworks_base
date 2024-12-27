@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
 
-/* loaded from: classes4.dex */
 public class ViewPropertyAnimator {
     static final int ALPHA = 2048;
     static final int NONE = 0;

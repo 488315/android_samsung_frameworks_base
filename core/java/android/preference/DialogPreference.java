@@ -20,7 +20,6 @@ import android.widget.TextView;
 import com.android.internal.R;
 
 @Deprecated
-/* loaded from: classes3.dex */
 public abstract class DialogPreference extends Preference
         implements DialogInterface.OnClickListener,
                 DialogInterface.OnDismissListener,

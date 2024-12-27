@@ -1,6 +1,5 @@
 package com.android.server.biometrics.fingerprint;
 
-/* loaded from: classes5.dex */
 public final class PerformanceStatsProto {
     public static final long ACCEPT = 1120986464257L;
     public static final long ACQUIRE = 1120986464259L;

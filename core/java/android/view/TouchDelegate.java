@@ -5,7 +5,6 @@ import android.graphics.Region;
 import android.util.ArrayMap;
 import android.view.accessibility.AccessibilityNodeInfo;
 
-/* loaded from: classes4.dex */
 public class TouchDelegate {
     public static final int ABOVE = 1;
     public static final int BELOW = 2;

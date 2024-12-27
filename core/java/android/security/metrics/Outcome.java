@@ -1,6 +1,5 @@
 package android.security.metrics;
 
-/* loaded from: classes3.dex */
 public @interface Outcome {
     public static final int ABORT = 3;
     public static final int DROPPED = 1;

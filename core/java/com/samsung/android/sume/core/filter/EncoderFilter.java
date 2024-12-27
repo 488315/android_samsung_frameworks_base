@@ -29,7 +29,6 @@ import java.util.concurrent.CancellationException;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Supplier;
 
-/* loaded from: classes6.dex */
 public class EncoderFilter extends MediaCodecFilter {
     private static final String TAG = Def.tagOf((Class<?>) EncoderFilter.class);
     private int orientation;

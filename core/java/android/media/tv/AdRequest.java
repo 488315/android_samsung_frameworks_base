@@ -9,7 +9,6 @@ import android.os.Parcelable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes3.dex */
 public final class AdRequest implements Parcelable {
     public static final Parcelable.Creator<AdRequest> CREATOR =
             new Parcelable.Creator<AdRequest>() { // from class: android.media.tv.AdRequest.1

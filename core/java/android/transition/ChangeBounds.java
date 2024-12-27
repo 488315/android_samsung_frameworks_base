@@ -25,7 +25,6 @@ import com.android.internal.R;
 
 import java.util.Map;
 
-/* loaded from: classes4.dex */
 public class ChangeBounds extends Transition {
     private static final Property<View, PointF> BOTTOM_RIGHT_ONLY_PROPERTY;
     private static final Property<ViewBounds, PointF> BOTTOM_RIGHT_PROPERTY;

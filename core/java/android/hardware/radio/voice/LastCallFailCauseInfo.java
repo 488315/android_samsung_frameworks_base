@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public class LastCallFailCauseInfo implements Parcelable {
     public static final Parcelable.Creator<LastCallFailCauseInfo> CREATOR =
             new Parcelable.Creator<LastCallFailCauseInfo>() { // from class:

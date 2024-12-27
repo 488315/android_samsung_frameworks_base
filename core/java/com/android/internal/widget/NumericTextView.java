@@ -8,7 +8,6 @@ import android.util.StateSet;
 import android.view.KeyEvent;
 import android.widget.TextView;
 
-/* loaded from: classes5.dex */
 public class NumericTextView extends TextView {
     private static final double LOG_RADIX = Math.log(10.0d);
     private static final int RADIX = 10;

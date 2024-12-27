@@ -2,7 +2,6 @@ package com.google.android.mms.pdu;
 
 import com.google.android.mms.InvalidHeaderValueException;
 
-/* loaded from: classes5.dex */
 public class RetrieveConf extends MultimediaMessagePdu {
     public RetrieveConf() throws InvalidHeaderValueException {
         setMessageType(132);

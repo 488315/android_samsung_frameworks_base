@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.RandomAccess;
 
-/* loaded from: classes3.dex */
 final class BooleanArrayList extends AbstractProtobufList<Boolean>
         implements Internal.BooleanList, RandomAccess, PrimitiveNonBoxingCollection {
     private static final BooleanArrayList EMPTY_LIST = new BooleanArrayList(new boolean[0], 0);

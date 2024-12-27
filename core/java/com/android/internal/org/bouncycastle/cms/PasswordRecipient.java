@@ -4,7 +4,6 @@ import com.android.internal.org.bouncycastle.asn1.DERNull;
 import com.android.internal.org.bouncycastle.asn1.pkcs.PKCSObjectIdentifiers;
 import com.android.internal.org.bouncycastle.asn1.x509.AlgorithmIdentifier;
 
-/* loaded from: classes5.dex */
 public interface PasswordRecipient extends Recipient {
     public static final int PKCS5_SCHEME2 = 0;
     public static final int PKCS5_SCHEME2_UTF8 = 1;

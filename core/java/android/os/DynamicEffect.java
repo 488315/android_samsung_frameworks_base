@@ -1,7 +1,6 @@
 package android.os;
 
 
-/* loaded from: classes3.dex */
 public final class DynamicEffect extends VibrationEffect implements Parcelable {
     public static final Parcelable.Creator<DynamicEffect> CREATOR =
             new Parcelable.Creator<DynamicEffect>() { // from class: android.os.DynamicEffect.1

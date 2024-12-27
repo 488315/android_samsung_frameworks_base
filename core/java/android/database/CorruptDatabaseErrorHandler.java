@@ -7,7 +7,6 @@ import android.util.Pair;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
 public class CorruptDatabaseErrorHandler extends ErrorHandler {
     public CorruptDatabaseErrorHandler() {}
 

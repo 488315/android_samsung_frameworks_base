@@ -22,7 +22,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public interface IServiceManager extends android.internal.hidl.manager.V1_0.IServiceManager {
     public static final String kInterfaceName = "android.hidl.manager@1.1::IServiceManager";
 

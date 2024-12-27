@@ -1,6 +1,5 @@
 package android.media.audio.common;
 
-/* loaded from: classes2.dex */
 public @interface AudioOutputFlags {
     public static final int BIT_PERFECT = 18;
     public static final int COMPRESS_OFFLOAD = 4;

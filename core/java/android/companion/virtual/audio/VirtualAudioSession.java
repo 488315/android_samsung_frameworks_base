@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes.dex */
 public final class VirtualAudioSession extends IAudioRoutingCallback.Stub
         implements UserRestrictionsDetector.UserRestrictionsCallback, Closeable {
     private static final String TAG = "VirtualAudioSession";

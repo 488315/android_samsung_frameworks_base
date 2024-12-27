@@ -2,7 +2,6 @@ package com.android.server;
 
 import com.android.server.deviceidle.IDeviceIdleConstraint;
 
-/* loaded from: classes5.dex */
 public interface DeviceIdleInternal {
 
     public interface StationaryListener {

@@ -3,7 +3,6 @@ package com.android.internal.inputmethod;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes5.dex */
 public final class InputConnectionCommandHeader implements Parcelable {
     public static final Parcelable.Creator<InputConnectionCommandHeader> CREATOR =
             new Parcelable.Creator<

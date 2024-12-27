@@ -4,7 +4,6 @@ import com.android.internal.telephony.DctConstants;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class RadioTechnology {
     public static final int EDGE = 2;
     public static final int EHRPD = 13;

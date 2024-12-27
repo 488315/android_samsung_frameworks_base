@@ -2,7 +2,6 @@ package com.samsung.android.globalactions.presentation.view;
 
 import com.android.internal.R;
 
-/* loaded from: classes6.dex */
 public class DefaultResourceFactory implements ResourceFactory {
     @Override // com.samsung.android.globalactions.presentation.view.ResourceFactory
     public int get(ResourceType type) {

@@ -7,7 +7,6 @@ import android.view.MotionEvent;
 import android.view.View;
 
 @Deprecated
-/* loaded from: classes4.dex */
 public class ZoomButton extends ImageButton implements View.OnLongClickListener {
     private boolean mIsInLongpress;
     private final Runnable mRunnable;

@@ -3,7 +3,6 @@ package android.service.notification;
 import android.app.Flags;
 import android.app.NotificationManager;
 
-/* loaded from: classes3.dex */
 public class ZenAdapters {
     public static ZenPolicy notificationPolicyToZenPolicy(NotificationManager.Policy policy) {
         int i;

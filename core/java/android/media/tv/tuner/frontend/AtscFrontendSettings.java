@@ -6,7 +6,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public class AtscFrontendSettings extends FrontendSettings {
     public static final int MODULATION_AUTO = 1;
     public static final int MODULATION_MOD_16VSB = 8;

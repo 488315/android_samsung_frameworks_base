@@ -12,7 +12,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class Rule implements Parcelable {
     public static final Parcelable.Creator<Rule> CREATOR =
             new Parcelable.Creator<Rule>() { // from class: android.content.integrity.Rule.1

@@ -25,7 +25,6 @@ import java.util.Collections;
 import java.util.List;
 
 @SystemApi
-/* loaded from: classes.dex */
 public abstract class InstantAppResolverService extends Service {
     private static final boolean DEBUG_INSTANT = Build.IS_DEBUGGABLE;
     public static final String EXTRA_RESOLVE_INFO = "android.app.extra.RESOLVE_INFO";

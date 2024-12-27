@@ -1,6 +1,5 @@
 package android.accounts;
 
-/* loaded from: classes.dex */
 public class AccountAndUser {
     public Account account;
     public int userId;

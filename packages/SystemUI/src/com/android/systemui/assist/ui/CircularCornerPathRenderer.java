@@ -7,7 +7,6 @@ import android.view.Display;
 import com.android.systemui.assist.ui.CornerPathRenderer;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes.dex */
 public final class CircularCornerPathRenderer extends CornerPathRenderer {
     public final int mCornerRadiusBottom;
     public final int mCornerRadiusTop;

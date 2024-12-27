@@ -25,7 +25,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 @Deprecated
-/* loaded from: classes5.dex */
 public class SemAddDeleteListAnimator extends SemAbsAddDeleteAnimator {
     private static String TAG = "SemAddDeleteListAnimator";
     private ListView mListView;

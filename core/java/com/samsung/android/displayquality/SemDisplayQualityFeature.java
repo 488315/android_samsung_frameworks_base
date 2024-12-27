@@ -1,6 +1,5 @@
 package com.samsung.android.displayquality;
 
-/* loaded from: classes6.dex */
 public class SemDisplayQualityFeature {
     public static final boolean ADAPTIVE_SYNC_SUPPORT;
     public static final boolean DP_BACKOFF_SUPPORT;

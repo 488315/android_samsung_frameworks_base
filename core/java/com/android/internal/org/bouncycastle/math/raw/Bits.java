@@ -1,6 +1,5 @@
 package com.android.internal.org.bouncycastle.math.raw;
 
-/* loaded from: classes5.dex */
 public abstract class Bits {
     public static int bitPermuteStep(int x, int m, int s) {
         int t = ((x >>> s) ^ x) & m;

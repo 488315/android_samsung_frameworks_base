@@ -3,7 +3,6 @@ package android.media;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public final class AudioPortExtSys implements Parcelable {
     public static final Parcelable.Creator<AudioPortExtSys> CREATOR =
             new Parcelable.Creator<

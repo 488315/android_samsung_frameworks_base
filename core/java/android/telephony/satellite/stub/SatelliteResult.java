@@ -1,6 +1,5 @@
 package android.telephony.satellite.stub;
 
-/* loaded from: classes4.dex */
 public @interface SatelliteResult {
     public static final int SATELLITE_RESULT_ACCESS_BARRED = 15;
     public static final int SATELLITE_RESULT_ERROR = 1;

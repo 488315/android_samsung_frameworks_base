@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public class SemEasySetupWifiScanSettings implements Parcelable {
     public static final Parcelable.Creator<SemEasySetupWifiScanSettings> CREATOR =
             new Parcelable.Creator<

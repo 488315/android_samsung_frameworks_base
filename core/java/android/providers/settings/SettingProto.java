@@ -1,6 +1,5 @@
 package android.providers.settings;
 
-/* loaded from: classes3.dex */
 public final class SettingProto {
     public static final long DEFAULT_FROM_SYSTEM = 1133871366150L;
     public static final long DEFAULT_VALUE = 1138166333445L;

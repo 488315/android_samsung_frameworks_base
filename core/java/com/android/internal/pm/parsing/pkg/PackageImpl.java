@@ -74,7 +74,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
-/* loaded from: classes5.dex */
 public class PackageImpl
         implements ParsedPackage,
                 AndroidPackageInternal,

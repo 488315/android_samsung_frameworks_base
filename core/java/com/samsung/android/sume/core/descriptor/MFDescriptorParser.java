@@ -2,7 +2,6 @@ package com.samsung.android.sume.core.descriptor;
 
 import java.io.InputStream;
 
-/* loaded from: classes6.dex */
 public interface MFDescriptorParser {
 
     public enum Type {

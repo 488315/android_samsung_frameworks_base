@@ -1,6 +1,5 @@
 package android.filterfw.core;
 
-/* loaded from: classes.dex */
 public class ProgramVariable {
     private Program mProgram;
     private String mVarName;

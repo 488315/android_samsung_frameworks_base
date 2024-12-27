@@ -22,7 +22,6 @@ import com.samsung.android.multiwindow.MultiWindowCoreState;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
 public class ActivityTaskManager {
     public static final int APP_CONTINUITY_PACKAGES = 1;
     public static final int COVER_LAUNCHER_PACKAGES = 2048;

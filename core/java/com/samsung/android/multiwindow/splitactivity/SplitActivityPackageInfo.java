@@ -13,7 +13,6 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-/* loaded from: classes6.dex */
 public class SplitActivityPackageInfo implements Parcelable {
     public static final Parcelable.Creator<SplitActivityPackageInfo> CREATOR =
             new Parcelable.Creator<

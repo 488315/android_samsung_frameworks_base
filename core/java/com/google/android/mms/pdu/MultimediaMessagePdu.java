@@ -2,7 +2,6 @@ package com.google.android.mms.pdu;
 
 import com.google.android.mms.InvalidHeaderValueException;
 
-/* loaded from: classes5.dex */
 public class MultimediaMessagePdu extends GenericPdu {
     private PduBody mMessageBody;
 

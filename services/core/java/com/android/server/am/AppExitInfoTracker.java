@@ -54,7 +54,6 @@ import java.util.function.Supplier;
 import java.util.zip.GZIPOutputStream;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes.dex */
 public final class AppExitInfoTracker {
     static final String APP_EXIT_INFO_FILE = "procexitinfo";
     public static final long APP_EXIT_INFO_PERSIST_INTERVAL = TimeUnit.MINUTES.toMillis(30);

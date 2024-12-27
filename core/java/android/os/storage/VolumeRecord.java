@@ -14,7 +14,6 @@ import java.io.File;
 import java.util.Locale;
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public class VolumeRecord implements Parcelable {
     public static final Parcelable.Creator<VolumeRecord> CREATOR =
             new Parcelable.Creator<

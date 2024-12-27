@@ -1,6 +1,5 @@
 package android.view.inputmethod;
 
-/* loaded from: classes4.dex */
 public final class Flags {
     private static FeatureFlags FEATURE_FLAGS = new FeatureFlagsImpl();
     public static final String FLAG_CONCURRENT_INPUT_METHODS =

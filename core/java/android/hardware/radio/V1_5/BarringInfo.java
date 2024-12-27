@@ -10,7 +10,6 @@ import android.security.keystore.KeyProperties;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public final class BarringInfo {
     public int serviceType = 0;
     public int barringType = 0;

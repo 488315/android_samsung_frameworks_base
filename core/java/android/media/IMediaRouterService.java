@@ -10,7 +10,6 @@ import android.os.UserHandle;
 
 import java.util.List;
 
-/* loaded from: classes2.dex */
 public interface IMediaRouterService extends IInterface {
     void deselectRouteWithManager(
             IMediaRouter2Manager iMediaRouter2Manager,

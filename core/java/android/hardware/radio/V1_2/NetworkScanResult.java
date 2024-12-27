@@ -9,7 +9,6 @@ import android.os.HwParcel;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public final class NetworkScanResult {
     public int status = 0;
     public int error = 0;

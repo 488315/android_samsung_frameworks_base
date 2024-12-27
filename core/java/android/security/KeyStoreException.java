@@ -9,7 +9,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.HashMap;
 import java.util.Map;
 
-/* loaded from: classes3.dex */
 public class KeyStoreException extends Exception {
     public static final int ERROR_ATTESTATION_CHALLENGE_TOO_LARGE = 9;
     public static final int ERROR_ATTESTATION_KEYS_UNAVAILABLE = 16;

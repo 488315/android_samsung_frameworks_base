@@ -6,7 +6,6 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
-/* loaded from: classes3.dex */
 class CredstoreResultData extends ResultData {
     int mFeatureVersion = 0;
     byte[] mStaticAuthenticationData = null;

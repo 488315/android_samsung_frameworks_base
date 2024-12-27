@@ -3,7 +3,6 @@ package android.window;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes4.dex */
 public final class BackEvent {
     public static final int EDGE_LEFT = 0;
     public static final int EDGE_RIGHT = 1;

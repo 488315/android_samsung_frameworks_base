@@ -9,7 +9,6 @@ import android.os.UserHandle;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
 public interface IShortcutChangeCallback extends IInterface {
     public static final String DESCRIPTOR = "android.content.pm.IShortcutChangeCallback";
 

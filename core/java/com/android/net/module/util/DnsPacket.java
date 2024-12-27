@@ -17,7 +17,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes5.dex */
 public abstract class DnsPacket {
     public static final int ANSECTION = 1;
     public static final int ARSECTION = 3;

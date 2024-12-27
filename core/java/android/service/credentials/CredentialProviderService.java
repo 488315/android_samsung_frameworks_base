@@ -19,7 +19,6 @@ import com.android.internal.util.function.pooled.PooledLambda;
 
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public abstract class CredentialProviderService extends Service {
     public static final String EXTRA_AUTOFILL_ID = "android.service.credentials.extra.AUTOFILL_ID";
     public static final String EXTRA_BEGIN_GET_CREDENTIAL_REQUEST =

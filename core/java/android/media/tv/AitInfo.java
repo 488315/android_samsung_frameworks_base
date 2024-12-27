@@ -3,7 +3,6 @@ package android.media.tv;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes3.dex */
 public final class AitInfo implements Parcelable {
     public static final Parcelable.Creator<AitInfo> CREATOR =
             new Parcelable.Creator<AitInfo>() { // from class: android.media.tv.AitInfo.1

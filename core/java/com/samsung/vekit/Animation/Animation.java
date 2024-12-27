@@ -17,7 +17,6 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public abstract class Animation<T> extends Element implements AnimationStatusListener {
     protected AnimationType animationType;
     protected long duration;

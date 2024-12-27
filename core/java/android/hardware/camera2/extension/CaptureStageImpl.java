@@ -5,7 +5,6 @@ import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public class CaptureStageImpl implements Parcelable {
     public static final Parcelable.Creator<CaptureStageImpl> CREATOR =
             new Parcelable.Creator<CaptureStageImpl>() { // from class:

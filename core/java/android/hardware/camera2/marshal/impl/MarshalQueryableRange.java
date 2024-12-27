@@ -11,7 +11,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
 import java.nio.ByteBuffer;
 
-/* loaded from: classes2.dex */
 public class MarshalQueryableRange<T extends Comparable<? super T>>
         implements MarshalQueryable<Range<T>> {
     private static final int RANGE_COUNT = 2;

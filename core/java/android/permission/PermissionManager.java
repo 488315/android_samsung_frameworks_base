@@ -50,7 +50,6 @@ import java.util.Objects;
 import java.util.Set;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class PermissionManager {
     public static final String ACTION_REVIEW_PERMISSION_DECISIONS =
             "android.permission.action.REVIEW_PERMISSION_DECISIONS";

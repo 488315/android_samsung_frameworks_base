@@ -3,7 +3,6 @@ package android.drm;
 import java.util.HashMap;
 
 @Deprecated
-/* loaded from: classes.dex */
 public class DrmEvent {
     public static final String DRM_INFO_OBJECT = "drm_info_object";
     public static final String DRM_INFO_STATUS_OBJECT = "drm_info_status_object";

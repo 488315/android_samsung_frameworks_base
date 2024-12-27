@@ -21,7 +21,6 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 @Deprecated
-/* loaded from: classes2.dex */
 public class Keyboard {
     public static final int EDGE_BOTTOM = 8;
     public static final int EDGE_LEFT = 1;

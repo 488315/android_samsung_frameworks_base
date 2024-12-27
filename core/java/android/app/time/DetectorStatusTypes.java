@@ -7,7 +7,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-/* loaded from: classes.dex */
 public final class DetectorStatusTypes {
     public static final int DETECTION_ALGORITHM_STATUS_NOT_RUNNING = 2;
     public static final int DETECTION_ALGORITHM_STATUS_NOT_SUPPORTED = 1;

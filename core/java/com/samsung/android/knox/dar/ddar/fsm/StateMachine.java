@@ -9,7 +9,6 @@ import com.samsung.android.knox.dar.ddar.DualDarConstants;
 import com.samsung.android.knox.dar.ddar.proxy.IProxyService;
 import com.samsung.android.knox.dar.ddar.proxy.KnoxProxyManager;
 
-/* loaded from: classes6.dex */
 public class StateMachine {
     private static final boolean DEBUG = false;
     private static final String GET_CURRENT_STATE = "GET_CURRENT_STATE";

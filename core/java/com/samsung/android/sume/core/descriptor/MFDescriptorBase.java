@@ -4,7 +4,6 @@ import com.samsung.android.sume.core.filter.MediaFilter;
 
 import java.util.Optional;
 
-/* loaded from: classes6.dex */
 public abstract class MFDescriptorBase extends MediaFilter.Option implements MFDescriptor {
     protected static int PLUGIN_CLASS = 1000;
     protected static int PLUGIN_ID = 1001;

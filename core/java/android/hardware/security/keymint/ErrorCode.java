@@ -1,6 +1,5 @@
 package android.hardware.security.keymint;
 
-/* loaded from: classes2.dex */
 public @interface ErrorCode {
     public static final int ATTESTATION_APPLICATION_ID_MISSING = -65;
     public static final int ATTESTATION_CHALLENGE_MISSING = -63;

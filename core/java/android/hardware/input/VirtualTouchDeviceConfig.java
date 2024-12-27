@@ -3,7 +3,6 @@ package android.hardware.input;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 
-/* loaded from: classes2.dex */
 abstract class VirtualTouchDeviceConfig extends VirtualInputDeviceConfig {
     private final int mHeight;
     private final int mWidth;

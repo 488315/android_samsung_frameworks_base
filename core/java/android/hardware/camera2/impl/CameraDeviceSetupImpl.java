@@ -16,7 +16,6 @@ import com.android.internal.camera.flags.Flags;
 
 import java.util.concurrent.Executor;
 
-/* loaded from: classes2.dex */
 public class CameraDeviceSetupImpl extends CameraDevice.CameraDeviceSetup {
     private final String mCameraId;
     private final CameraManager mCameraManager;

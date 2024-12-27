@@ -1,6 +1,5 @@
 package com.android.internal.alsa;
 
-/* loaded from: classes5.dex */
 public class LineTokenizer {
     public static final int kTokenNotFound = -1;
     private final String mDelimiters;

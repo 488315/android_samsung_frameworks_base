@@ -14,7 +14,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes.dex */
 public final class FactoryResetProtectionPolicy implements Parcelable {
     private static final String ATTR_VALUE = "value";
     public static final Parcelable.Creator<FactoryResetProtectionPolicy> CREATOR =

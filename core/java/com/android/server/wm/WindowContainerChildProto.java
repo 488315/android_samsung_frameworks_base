@@ -1,6 +1,5 @@
 package com.android.server.wm;
 
-/* loaded from: classes5.dex */
 public final class WindowContainerChildProto {
     public static final long ACTIVITY = 1146756268038L;
     public static final long DISPLAY_AREA = 1146756268036L;

@@ -36,7 +36,6 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-/* loaded from: classes5.dex */
 public class ChooserTargetActionsDialogFragment extends DialogFragment
         implements DialogInterface.OnClickListener {
     public static final String INTENT_FILTER_KEY = "intent_filter";

@@ -5,7 +5,6 @@ import android.content.pm.IShortcutService;
 import android.os.ServiceManager;
 import android.util.Slog;
 
-/* loaded from: classes5.dex */
 public class ShortcutBackupHelper extends BlobBackupHelper {
     private static final int BLOB_VERSION = 1;
     private static final String KEY_USER_FILE = "shortcutuser.xml";

@@ -7,7 +7,6 @@ import android.os.Parcel;
 import android.os.PersistableBundle;
 import android.os.RemoteException;
 
-/* loaded from: classes5.dex */
 public interface IRequestInjector extends IInterface {
     public static final String BUNDLE_KEY_I32 = "key.i32";
     public static final String BUNDLE_KEY_TAG_NAME = "key.tagName";

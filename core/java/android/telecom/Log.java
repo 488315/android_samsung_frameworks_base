@@ -18,7 +18,6 @@ import java.util.Arrays;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-/* loaded from: classes3.dex */
 public class Log {
     public static boolean DEBUG = false;
     public static boolean ERROR = false;

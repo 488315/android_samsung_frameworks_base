@@ -3,7 +3,6 @@ package android.media.tv;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes3.dex */
 public final class TimelineRequest extends BroadcastInfoRequest implements Parcelable {
     public static final Parcelable.Creator<TimelineRequest> CREATOR =
             new Parcelable.Creator<

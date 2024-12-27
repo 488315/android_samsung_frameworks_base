@@ -168,7 +168,6 @@ import kotlin.sequences.SequencesKt___SequencesKt;
 import kotlin.sequences.TransformingSequence;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes.dex */
 public final class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
     public static SemBioFaceManager sFaceManager;
     public final String[] RemoteLockString;

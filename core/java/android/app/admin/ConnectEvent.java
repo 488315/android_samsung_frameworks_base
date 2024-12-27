@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-/* loaded from: classes.dex */
 public final class ConnectEvent extends NetworkEvent implements Parcelable {
     public static final Parcelable.Creator<ConnectEvent> CREATOR =
             new Parcelable.Creator<ConnectEvent>() { // from class: android.app.admin.ConnectEvent.1

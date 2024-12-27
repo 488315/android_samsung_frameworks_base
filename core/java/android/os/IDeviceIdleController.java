@@ -5,7 +5,6 @@ import android.app.ActivityThread;
 
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public interface IDeviceIdleController extends IInterface {
     void addPowerSaveTempWhitelistApp(String str, long j, int i, int i2, String str2)
             throws RemoteException;

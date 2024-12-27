@@ -7,7 +7,6 @@ import android.filterfw.core.Program;
 import android.filterfw.core.ShaderProgram;
 import android.filterfw.format.ImageFormat;
 
-/* loaded from: classes.dex */
 public class ToGrayFilter extends SimpleImageFilter {
     private static final String mColorToGray4Shader =
             "precision mediump float;\n"

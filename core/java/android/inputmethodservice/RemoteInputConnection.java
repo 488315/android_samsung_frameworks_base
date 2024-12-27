@@ -30,7 +30,6 @@ import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 import java.util.function.IntConsumer;
 
-/* loaded from: classes2.dex */
 final class RemoteInputConnection implements InputConnection {
     private static final int MAX_WAIT_TIME_MILLIS = 2000;
     private static final String TAG = "RemoteInputConnection";

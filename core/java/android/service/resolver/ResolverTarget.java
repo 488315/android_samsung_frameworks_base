@@ -5,7 +5,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class ResolverTarget implements Parcelable {
     public static final Parcelable.Creator<ResolverTarget> CREATOR =
             new Parcelable.Creator<

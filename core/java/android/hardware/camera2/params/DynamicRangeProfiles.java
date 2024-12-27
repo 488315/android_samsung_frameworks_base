@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
-/* loaded from: classes2.dex */
 public final class DynamicRangeProfiles {
     public static final long DOLBY_VISION_10B_HDR_OEM = 64;
     public static final long DOLBY_VISION_10B_HDR_OEM_PO = 128;

@@ -25,7 +25,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-/* loaded from: classes3.dex */
 public final class BinderProxy implements IBinder {
     private static final String GMS_SHORT_LOOKUP = "gms.loc";
     private static final int NATIVE_ALLOCATION_SIZE = 1000;

@@ -7,7 +7,6 @@ import android.os.IRemoteCallback;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes.dex */
 public interface IEphemeralResolver extends IInterface {
     void getEphemeralIntentFilterList(IRemoteCallback iRemoteCallback, String str, int i)
             throws RemoteException;

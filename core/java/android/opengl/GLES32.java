@@ -5,7 +5,6 @@ import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
-/* loaded from: classes3.dex */
 public class GLES32 extends GLES31 {
     public static final int GL_BUFFER = 33504;
     public static final int GL_CLAMP_TO_BORDER = 33069;

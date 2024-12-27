@@ -1,6 +1,5 @@
 package android.opengl;
 
-/* loaded from: classes3.dex */
 public class EGLSurface extends EGLObjectHandle {
     private EGLSurface(long handle) {
         super(handle);

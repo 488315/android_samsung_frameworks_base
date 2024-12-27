@@ -7,7 +7,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes.dex */
 public interface IIntentReceiver extends IInterface {
     void performReceive(
             Intent intent, int i, String str, Bundle bundle, boolean z, boolean z2, int i2)

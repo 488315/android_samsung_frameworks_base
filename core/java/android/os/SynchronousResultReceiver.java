@@ -5,7 +5,6 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-/* loaded from: classes3.dex */
 public class SynchronousResultReceiver extends ResultReceiver {
     private final CompletableFuture<Result> mFuture;
     private final String mName;

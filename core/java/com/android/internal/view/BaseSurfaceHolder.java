@@ -10,7 +10,6 @@ import android.view.SurfaceHolder;
 import java.util.ArrayList;
 import java.util.concurrent.locks.ReentrantLock;
 
-/* loaded from: classes5.dex */
 public abstract class BaseSurfaceHolder implements SurfaceHolder {
     static final boolean DEBUG = false;
     private static final String TAG = "BaseSurfaceHolder";

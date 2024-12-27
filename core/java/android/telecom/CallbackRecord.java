@@ -2,7 +2,6 @@ package android.telecom;
 
 import android.os.Handler;
 
-/* loaded from: classes3.dex */
 class CallbackRecord<T> {
     private final T mCallback;
     private final Handler mHandler;

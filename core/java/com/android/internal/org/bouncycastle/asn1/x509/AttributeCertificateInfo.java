@@ -10,7 +10,6 @@ import com.android.internal.org.bouncycastle.asn1.ASN1TaggedObject;
 import com.android.internal.org.bouncycastle.asn1.DERBitString;
 import com.android.internal.org.bouncycastle.asn1.DERSequence;
 
-/* loaded from: classes5.dex */
 public class AttributeCertificateInfo extends ASN1Object {
     private AttCertValidityPeriod attrCertValidityPeriod;
     private ASN1Sequence attributes;

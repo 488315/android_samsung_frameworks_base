@@ -6,7 +6,6 @@ import android.graphics.Paint;
 
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public class ArcShape extends RectShape {
     private final float mStartAngle;
     private final float mSweepAngle;

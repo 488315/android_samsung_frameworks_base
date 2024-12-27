@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.concurrent.atomic.AtomicReference;
 
-/* loaded from: classes5.dex */
 public class ArtFastDataOutput extends FastDataOutput {
     private static AtomicReference<ArtFastDataOutput> sOutCache = new AtomicReference<>();
     private static VMRuntime sRuntime = VMRuntime.getRuntime();

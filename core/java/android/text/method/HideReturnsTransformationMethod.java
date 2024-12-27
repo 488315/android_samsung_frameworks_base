@@ -1,6 +1,5 @@
 package android.text.method;
 
-/* loaded from: classes4.dex */
 public class HideReturnsTransformationMethod extends ReplacementTransformationMethod {
     private static char[] ORIGINAL = {'\r'};
     private static char[] REPLACEMENT = {65279};

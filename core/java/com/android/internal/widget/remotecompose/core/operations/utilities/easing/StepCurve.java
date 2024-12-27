@@ -2,7 +2,6 @@ package com.android.internal.widget.remotecompose.core.operations.utilities.easi
 
 import java.lang.reflect.Array;
 
-/* loaded from: classes5.dex */
 public class StepCurve extends Easing {
     private static final boolean DEBUG = false;
     MonotonicCurveFit mCurveFit;

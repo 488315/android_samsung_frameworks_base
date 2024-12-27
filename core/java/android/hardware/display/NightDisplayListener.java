@@ -11,7 +11,6 @@ import android.provider.Settings;
 
 import java.time.LocalTime;
 
-/* loaded from: classes2.dex */
 public class NightDisplayListener {
     private Callback mCallback;
     private final ContentObserver mContentObserver;

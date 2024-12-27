@@ -4,7 +4,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-/* loaded from: classes3.dex */
 public abstract class TimedEvent<T> {
     public abstract T getKey();
 

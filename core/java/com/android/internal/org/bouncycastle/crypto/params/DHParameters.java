@@ -5,7 +5,6 @@ import com.android.internal.org.bouncycastle.util.Properties;
 
 import java.math.BigInteger;
 
-/* loaded from: classes5.dex */
 public class DHParameters implements CipherParameters {
     private static final int DEFAULT_MINIMUM_LENGTH = 160;
     private BigInteger g;

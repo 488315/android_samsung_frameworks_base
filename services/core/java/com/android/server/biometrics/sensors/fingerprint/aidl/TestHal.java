@@ -11,7 +11,6 @@ import android.hardware.keymaster.HardwareAuthToken;
 import android.util.Slog;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes.dex */
 public class TestHal extends IFingerprint.Stub {
     public ISession createSession(int i, int i2, final ISessionCallback iSessionCallback) {
         Slog.w("fingerprint.aidl.TestHal", "createSession, sensorId: " + i + " userId: " + i2);

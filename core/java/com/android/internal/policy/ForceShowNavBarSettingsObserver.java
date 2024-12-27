@@ -10,7 +10,6 @@ import android.provider.Settings;
 
 import java.util.Collection;
 
-/* loaded from: classes5.dex */
 public class ForceShowNavBarSettingsObserver extends ContentObserver {
     private Context mContext;
     private Runnable mOnChangeRunnable;

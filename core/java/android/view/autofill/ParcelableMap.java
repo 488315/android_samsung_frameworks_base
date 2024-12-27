@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import java.util.HashMap;
 import java.util.Map;
 
-/* loaded from: classes4.dex */
 class ParcelableMap extends HashMap<AutofillId, AutofillValue> implements Parcelable {
     public static final Parcelable.Creator<ParcelableMap> CREATOR =
             new Parcelable.Creator<

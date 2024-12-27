@@ -10,7 +10,6 @@ import com.android.internal.util.FunctionalUtils;
 import java.util.concurrent.Executor;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public abstract class HdmiClient {
     private static final String TAG = "HdmiClient";
     private static final int UNKNOWN_VENDOR_ID = 16777215;

@@ -2,7 +2,6 @@ package com.samsung.android.authenticator;
 
 import android.os.ParcelFileDescriptor;
 
-/* loaded from: classes5.dex */
 interface XidlHalService {
     byte[] execute(
             SemTrustedApplicationExecutor.TrustedAppAssetType trustedAppAssetType, byte[] bArr);

@@ -5,7 +5,6 @@ import com.android.internal.org.bouncycastle.util.BigIntegers;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 
-/* loaded from: classes5.dex */
 public class RandomDSAKCalculator implements DSAKCalculator {
     private static final BigInteger ZERO = BigInteger.valueOf(0);
     private BigInteger q;

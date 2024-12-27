@@ -21,7 +21,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
-/* loaded from: classes6.dex */
 public class SemWifiApContentProvider extends ContentProvider {
     static final String CREATE_DB_TABLE =
             " CREATE TABLE SemWifiApContentProvider (_id INTEGER PRIMARY KEY AUTOINCREMENT,  name"

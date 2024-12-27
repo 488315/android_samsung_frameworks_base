@@ -60,7 +60,6 @@ import kotlin.jvm.functions.Function2;
 import kotlin.jvm.functions.Function3;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public abstract class SettingHomeKt {
     /* JADX WARN: Type inference failed for: r2v7, types: [com.android.systemui.media.mediaoutput.compose.SettingHomeKt$SettingHome$1, kotlin.jvm.internal.Lambda] */
     public static final void SettingHome(final Function0 function0, final Function1 function1, SettingViewModel settingViewModel, LabsViewModel labsViewModel, Composer composer, final int i, final int i2) {

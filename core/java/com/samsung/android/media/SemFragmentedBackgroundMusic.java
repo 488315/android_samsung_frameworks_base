@@ -6,7 +6,6 @@ import android.os.Parcel;
 import java.io.FileDescriptor;
 import java.util.ArrayList;
 
-/* loaded from: classes6.dex */
 public class SemFragmentedBackgroundMusic extends SemBackgroundMusic {
     private static final int BGM_SECTION_TYPE_BODY = 1;
     private static final int BGM_SECTION_TYPE_INTRO = 0;

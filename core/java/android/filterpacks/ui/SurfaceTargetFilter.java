@@ -13,7 +13,6 @@ import android.filterfw.format.ImageFormat;
 import android.util.Log;
 import android.view.Surface;
 
-/* loaded from: classes.dex */
 public class SurfaceTargetFilter extends Filter {
     private static final String TAG = "SurfaceRenderFilter";
     private final int RENDERMODE_FILL_CROP;

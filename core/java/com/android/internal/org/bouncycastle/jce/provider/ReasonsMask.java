@@ -2,7 +2,6 @@ package com.android.internal.org.bouncycastle.jce.provider;
 
 import com.android.internal.org.bouncycastle.asn1.x509.ReasonFlags;
 
-/* loaded from: classes5.dex */
 class ReasonsMask {
     static final ReasonsMask allReasons = new ReasonsMask(33023);
     private int _reasons;

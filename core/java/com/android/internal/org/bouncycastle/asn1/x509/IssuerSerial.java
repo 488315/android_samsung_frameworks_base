@@ -12,7 +12,6 @@ import com.android.internal.org.bouncycastle.asn1.x500.X500Name;
 
 import java.math.BigInteger;
 
-/* loaded from: classes5.dex */
 public class IssuerSerial extends ASN1Object {
     GeneralNames issuer;
     DERBitString issuerUID;

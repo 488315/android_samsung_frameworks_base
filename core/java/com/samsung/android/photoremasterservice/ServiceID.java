@@ -8,7 +8,6 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-/* loaded from: classes6.dex */
 public class ServiceID {
     public static final int MSG_DEINIT = 3;
     public static final int MSG_EXCEPTION = -1;

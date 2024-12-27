@@ -8,7 +8,6 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public class CdmaSmsMessage implements Parcelable {
     public static final Parcelable.Creator<CdmaSmsMessage> CREATOR =
             new Parcelable.Creator<CdmaSmsMessage>() { // from class:

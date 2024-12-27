@@ -1,6 +1,5 @@
 package android.app.settings;
 
-/* loaded from: classes.dex */
 public final class SettingsEnums {
     public static final int ABOUT_LEGAL_SETTINGS = 225;
     public static final int ACCESSIBILITY = 2;

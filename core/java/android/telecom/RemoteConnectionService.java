@@ -23,7 +23,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
-/* loaded from: classes3.dex */
 final class RemoteConnectionService {
     private final ConnectionService mOurConnectionServiceImpl;
     private final IConnectionService mOutgoingConnectionServiceRpc;

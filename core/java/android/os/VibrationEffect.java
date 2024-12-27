@@ -29,7 +29,6 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-/* loaded from: classes3.dex */
 public abstract class VibrationEffect implements Parcelable {
     public static final int DEFAULT_AMPLITUDE = -1;
     public static final int EFFECT_CLICK = 0;

@@ -4,7 +4,6 @@ import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes.dex */
 public class ApexSessionInfo implements Parcelable {
     public static final Parcelable.Creator<ApexSessionInfo> CREATOR =
             new Parcelable.Creator<

@@ -2,7 +2,6 @@ package com.samsung.android.wallpaper.colortheme.monet;
 
 import com.android.internal.graphics.ColorUtils;
 
-/* loaded from: classes6.dex */
 public class Shades {
     public static final float MIDDLE_LSTAR = 49.6f;
 

@@ -2,7 +2,6 @@ package android.util;
 
 import java.util.function.Consumer;
 
-/* loaded from: classes4.dex */
 public class SparseArrayMap<K, V> {
     private final SparseArray<ArrayMap<K, V>> mData = new SparseArray<>();
 

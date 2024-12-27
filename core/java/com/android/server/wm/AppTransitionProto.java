@@ -1,6 +1,5 @@
 package com.android.server.wm;
 
-/* loaded from: classes5.dex */
 public final class AppTransitionProto {
     public static final int APP_STATE_IDLE = 0;
     public static final int APP_STATE_READY = 1;

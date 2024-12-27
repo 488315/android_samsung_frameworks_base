@@ -40,7 +40,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public interface IRadio extends android.hardware.radio.V1_4.IRadio {
     public static final String kInterfaceName = "android.hardware.radio@1.5::IRadio";
 

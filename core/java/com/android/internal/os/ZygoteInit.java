@@ -56,7 +56,6 @@ import java.security.Security;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public class ZygoteInit {
     private static final String ABI_LIST_ARG = "--abi-list=";
     private static final int LOG_BOOT_PROGRESS_PRELOAD_END = 3030;

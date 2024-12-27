@@ -6,7 +6,6 @@ import android.util.Log;
 import java.util.ArrayList;
 
 @Deprecated
-/* loaded from: classes2.dex */
 public class SContextExerciseAttribute extends SContextAttribute {
     private static final String TAG = "SContextExerciseAttribute";
     private int[] mRequiredDataType;

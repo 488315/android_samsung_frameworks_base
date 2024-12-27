@@ -15,7 +15,6 @@ import com.samsung.vekit.Content.Image;
 import com.samsung.vekit.Content.PortraitVideo;
 import com.samsung.vekit.Content.Video;
 
-/* loaded from: classes6.dex */
 public class ContentManager extends Manager<Content> {
     public ContentManager(VEContext context) {
         super(context, ManagerType.CONTENT);

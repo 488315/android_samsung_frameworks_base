@@ -1,6 +1,5 @@
 package android.sec.clipboard.util;
 
-/* loaded from: classes3.dex */
 public class Log {
     private static final String mTagPrefix = "SEM_CLIP_";
 

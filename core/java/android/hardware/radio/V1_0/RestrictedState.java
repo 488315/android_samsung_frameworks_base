@@ -4,7 +4,6 @@ import android.security.keystore.KeyProperties;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class RestrictedState {
     public static final int CS_ALL = 4;
     public static final int CS_EMERGENCY = 1;

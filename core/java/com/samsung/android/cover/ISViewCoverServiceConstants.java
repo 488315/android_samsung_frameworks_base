@@ -1,6 +1,5 @@
 package com.samsung.android.cover;
 
-/* loaded from: classes6.dex */
 public class ISViewCoverServiceConstants {
     public static final int SVIEW_COVER_SERVICE_SET_APP_COVERED_RESULT_NONE = 0;
     public static final int SVIEW_COVER_SERVICE_SET_APP_COVERED_RESULT_SET_FLAGS = 1;

@@ -2,7 +2,6 @@ package android.os;
 
 import android.net.LocalSocketAddress;
 
-/* loaded from: classes3.dex */
 public class ChildZygoteProcess extends ZygoteProcess {
     private final int mPid;
 

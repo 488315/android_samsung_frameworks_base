@@ -1,6 +1,5 @@
 package com.google.android.wearable.media.sessions;
 
-/* loaded from: classes5.dex */
 public final class Enums {
     public static final int AUTO_LAUNCH = 3;
     public static final int COMPLICATION = 5;

@@ -10,7 +10,6 @@ import android.widget.PopupWindow;
 
 import com.android.internal.R;
 
-/* loaded from: classes5.dex */
 public class MenuPopupHelper implements MenuHelper {
     private static final int TOUCH_EPICENTER_SIZE_DP = 48;
     private View mAnchorView;

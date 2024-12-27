@@ -6,7 +6,6 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.widget.TextView;
 
-/* loaded from: classes4.dex */
 public class BaseMovementMethod implements MovementMethod {
     @Override // android.text.method.MovementMethod
     public boolean canSelectArbitrarily() {

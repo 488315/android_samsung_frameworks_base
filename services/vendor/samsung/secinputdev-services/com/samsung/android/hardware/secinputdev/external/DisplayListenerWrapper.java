@@ -7,7 +7,6 @@ import android.os.Handler;
 import android.view.Display;
 import android.view.DisplayInfo;
 
-/* loaded from: classes.dex */
 public class DisplayListenerWrapper extends ExternalService {
     private int currentRotation;
     private final DisplayInfo displayInfo;

@@ -15,7 +15,6 @@ import android.util.Pair;
 import java.util.List;
 
 @SystemApi
-/* loaded from: classes.dex */
 public abstract class CacheQuotaService extends Service {
     public static final String REQUEST_LIST_KEY = "requests";
     public static final String SERVICE_INTERFACE = "android.app.usage.CacheQuotaService";

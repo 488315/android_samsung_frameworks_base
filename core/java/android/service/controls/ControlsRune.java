@@ -1,6 +1,5 @@
 package android.service.controls;
 
-/* loaded from: classes3.dex */
 public class ControlsRune {
     public static final boolean CONTROLS_ALLOW_BASIC_ACTION_WHEN_LOCKED = true;
     public static final boolean CONTROLS_AUI = true;

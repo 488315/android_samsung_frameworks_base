@@ -1,6 +1,5 @@
 package com.android.internal.config.sysui;
 
-/* loaded from: classes5.dex */
 public final class SystemUiDeviceConfigFlags {
     public static final String APPEND_DIRECT_SHARE_ENABLED = "append_direct_share_enabled";
     public static final String APPLY_SHARING_APP_LIMITS_IN_SYSUI =

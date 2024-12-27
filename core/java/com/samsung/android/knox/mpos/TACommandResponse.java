@@ -3,7 +3,6 @@ package com.samsung.android.knox.mpos;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes6.dex */
 public class TACommandResponse implements Parcelable {
     public static final Parcelable.Creator<TACommandResponse> CREATOR =
             new Parcelable.Creator<

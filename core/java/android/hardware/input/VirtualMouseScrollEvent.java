@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import com.android.internal.util.Preconditions;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public final class VirtualMouseScrollEvent implements Parcelable {
     public static final Parcelable.Creator<VirtualMouseScrollEvent> CREATOR =
             new Parcelable.Creator<VirtualMouseScrollEvent>() { // from class:

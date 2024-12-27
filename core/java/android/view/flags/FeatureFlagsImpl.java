@@ -1,6 +1,5 @@
 package android.view.flags;
 
-/* loaded from: classes4.dex */
 public final class FeatureFlagsImpl implements FeatureFlags {
     @Override // android.view.flags.FeatureFlags
     public boolean addSchandleToVriSurface() {

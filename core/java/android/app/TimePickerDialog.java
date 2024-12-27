@@ -11,7 +11,6 @@ import android.widget.TimePicker;
 
 import com.android.internal.R;
 
-/* loaded from: classes.dex */
 public class TimePickerDialog extends AlertDialog
         implements DialogInterface.OnClickListener, TimePicker.OnTimeChangedListener {
     private static final String HOUR = "hour";

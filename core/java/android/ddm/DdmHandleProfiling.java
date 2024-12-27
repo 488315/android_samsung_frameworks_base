@@ -9,7 +9,6 @@ import org.apache.harmony.dalvik.ddmc.DdmServer;
 
 import java.nio.ByteBuffer;
 
-/* loaded from: classes.dex */
 public class DdmHandleProfiling extends DdmHandle {
     private static final boolean DEBUG = false;
     public static final int CHUNK_MPRS = ChunkHandler.type("MPRS");

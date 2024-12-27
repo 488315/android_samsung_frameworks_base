@@ -6,7 +6,6 @@ import android.util.SparseIntArray;
 
 import java.io.PrintWriter;
 
-/* loaded from: classes6.dex */
 public final class LsLog {
     private static final String TAG = "LsLog";
     private static final boolean DEBUG = LsConstants.DEBUG;

@@ -11,7 +11,6 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public final class TonalPalette {
     public static final List SHADE_KEYS = Arrays.asList(0, 10, 50, 100, 200, 300, 400, 500, Integer.valueOf(VolteConstants.ErrorCode.BUSY_EVERYWHERE), Integer.valueOf(KnoxEnterpriseLicenseManager.ERROR_LICENSE_DEACTIVATED), 800, 900, 1000);
     public final List allShades;

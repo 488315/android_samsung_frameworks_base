@@ -6,7 +6,6 @@ import android.os.Parcelable;
 
 @SystemApi
 @Deprecated
-/* loaded from: classes3.dex */
 public final class RaEvent implements IpConnectivityLog.Event {
     public static final Parcelable.Creator<RaEvent> CREATOR =
             new Parcelable.Creator<RaEvent>() { // from class: android.net.metrics.RaEvent.1

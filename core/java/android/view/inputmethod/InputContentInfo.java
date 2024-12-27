@@ -13,7 +13,6 @@ import com.android.internal.inputmethod.IInputContentUriToken;
 
 import java.security.InvalidParameterException;
 
-/* loaded from: classes4.dex */
 public final class InputContentInfo implements Parcelable {
     public static final Parcelable.Creator<InputContentInfo> CREATOR =
             new Parcelable.Creator<

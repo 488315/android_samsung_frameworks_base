@@ -32,7 +32,6 @@ import java.util.List;
 import java.util.Map;
 
 @Deprecated
-/* loaded from: classes2.dex */
 public class KeyboardView extends View implements View.OnClickListener {
     private static final int DEBOUNCE_TIME = 70;
     private static final boolean DEBUG = false;

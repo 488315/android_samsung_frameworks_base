@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes.dex */
 public class CameraCompatTaskInfo implements Parcelable {
     public static final int CAMERA_COMPAT_FREEFORM_LANDSCAPE = 2;
     public static final int CAMERA_COMPAT_FREEFORM_NONE = 0;

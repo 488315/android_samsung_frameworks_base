@@ -27,7 +27,6 @@ import com.android.internal.appwidget.IAppWidgetService;
 import java.lang.ref.WeakReference;
 import java.util.List;
 
-/* loaded from: classes.dex */
 public class AppWidgetHost {
     static final int HANDLE_APP_WIDGET_REMOVED = 5;
     static final int HANDLE_PROVIDERS_CHANGED = 3;

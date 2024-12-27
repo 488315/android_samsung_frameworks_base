@@ -11,7 +11,6 @@ import android.telephony.ims.ImsReasonInfo;
 import android.telephony.ims.ImsSsData;
 import android.telephony.ims.ImsSsInfo;
 
-/* loaded from: classes5.dex */
 public interface IImsUtListener extends IInterface {
     void lineIdentificationSupplementaryServiceResponse(int i, ImsSsInfo imsSsInfo)
             throws RemoteException;

@@ -1,6 +1,5 @@
 package android.service.procstats;
 
-/* loaded from: classes3.dex */
 public final class PackageServiceOperationStatsProto {
     public static final long COUNT = 1120986464258L;
     public static final long OPERATION = 1159641169921L;

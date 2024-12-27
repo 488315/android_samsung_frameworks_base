@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public class JcaCertStore extends CollectionStore {
     public JcaCertStore(Collection collection) throws CertificateEncodingException {
         super(convertCerts(collection));

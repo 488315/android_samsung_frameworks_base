@@ -1,6 +1,5 @@
 package vendor.samsung.hardware.sysinput;
 
-/* loaded from: classes.dex */
 public @interface SehInputDeviceType {
     public static final int HALL = 10;
     public static final int HALL_DIGITAL = 11;

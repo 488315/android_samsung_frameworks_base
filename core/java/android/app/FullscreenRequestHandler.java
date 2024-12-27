@@ -6,7 +6,6 @@ import android.os.IBinder;
 import android.os.IRemoteCallback;
 import android.os.OutcomeReceiver;
 
-/* loaded from: classes.dex */
 public class FullscreenRequestHandler {
     public static final String REMOTE_CALLBACK_RESULT_KEY = "result";
     public static final int RESULT_APPROVED = 0;

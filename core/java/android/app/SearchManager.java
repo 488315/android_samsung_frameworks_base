@@ -20,7 +20,6 @@ import android.util.Log;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
 public class SearchManager
         implements DialogInterface.OnDismissListener, DialogInterface.OnCancelListener {
     public static final String ACTION_KEY = "action_key";

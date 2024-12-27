@@ -4,7 +4,6 @@ import android.util.SparseArray;
 
 import java.util.Map;
 
-/* loaded from: classes.dex */
 public class RedactingCursor extends CrossProcessCursorWrapper {
     private final SparseArray<Object> mRedactions;
 

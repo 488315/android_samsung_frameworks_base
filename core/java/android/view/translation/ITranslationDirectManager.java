@@ -8,7 +8,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.service.translation.ITranslationCallback;
 
-/* loaded from: classes4.dex */
 public interface ITranslationDirectManager extends IInterface {
     public static final String DESCRIPTOR = "android.view.translation.ITranslationDirectManager";
 

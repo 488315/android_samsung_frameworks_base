@@ -9,7 +9,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class KeyDerivationParams implements Parcelable {
     public static final int ALGORITHM_SCRYPT = 2;
     public static final int ALGORITHM_SHA256 = 1;

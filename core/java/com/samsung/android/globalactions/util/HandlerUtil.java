@@ -4,7 +4,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 
-/* loaded from: classes6.dex */
 public class HandlerUtil {
     Handler mHandler = new Handler(Looper.getMainLooper());
 

@@ -1,6 +1,5 @@
 package android.app;
 
-/* loaded from: classes.dex */
 public final class FeatureFlagsImpl implements FeatureFlags {
     @Override // android.app.FeatureFlags
     public boolean apiRichOngoing() {

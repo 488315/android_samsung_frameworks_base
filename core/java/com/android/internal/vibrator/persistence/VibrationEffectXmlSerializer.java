@@ -8,7 +8,6 @@ import android.os.vibrator.VibrationEffectSegment;
 
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public final class VibrationEffectXmlSerializer {
     public static XmlSerializedVibration<VibrationEffect> serialize(
             VibrationEffect vibration, int flags) throws XmlSerializerException {

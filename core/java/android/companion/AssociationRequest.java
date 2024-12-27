@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public final class AssociationRequest implements Parcelable {
     public static final Parcelable.Creator<AssociationRequest> CREATOR =
             new Parcelable.Creator<

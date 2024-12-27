@@ -8,7 +8,6 @@ import com.android.internal.protolog.common.ILogger;
 import java.io.IOException;
 import java.util.Map;
 
-/* loaded from: classes5.dex */
 public class ProtoLogViewerConfigReader {
     private Map<Long, String> mLogMessageMap = null;
     private final ViewerConfigInputStreamProvider mViewerConfigInputStreamProvider;

@@ -16,7 +16,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes.dex */
 public abstract class MemoryStatUtil {
     public static final int PAGE_SIZE = (int) Os.sysconf(OsConstants._SC_PAGESIZE);
     public static final boolean DEVICE_HAS_PER_APP_MEMCG =

@@ -15,7 +15,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-/* loaded from: classes5.dex */
 public class BcDefaultDigestProvider implements BcDigestProvider {
     private static final Map lookup = createTable();
     public static final BcDigestProvider INSTANCE = new BcDefaultDigestProvider();

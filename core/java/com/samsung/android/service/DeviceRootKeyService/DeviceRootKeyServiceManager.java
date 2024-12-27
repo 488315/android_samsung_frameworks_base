@@ -6,7 +6,6 @@ import android.util.Log;
 
 import java.util.HashMap;
 
-/* loaded from: classes6.dex */
 public final class DeviceRootKeyServiceManager {
     public static final int ERR_SERVICE_ERROR = -10000;
     public static final int KEY_TYPE_EC = 4;

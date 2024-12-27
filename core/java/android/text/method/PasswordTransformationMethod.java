@@ -15,7 +15,6 @@ import android.view.View;
 
 import java.lang.ref.WeakReference;
 
-/* loaded from: classes4.dex */
 public class PasswordTransformationMethod implements TransformationMethod, TextWatcher {
     private static char DOT = 8226;
     private static PasswordTransformationMethod sInstance;

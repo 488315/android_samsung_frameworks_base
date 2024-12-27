@@ -8,7 +8,6 @@ import android.util.Log;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes4.dex */
 public class SemBlurInfo implements Parcelable {
     private static final int BLUR_BASE_OFFSET = 101;
     public static final int BLUR_BG_REGULAR_DARK = 135;

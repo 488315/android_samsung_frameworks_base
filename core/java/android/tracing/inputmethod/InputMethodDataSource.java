@@ -6,7 +6,6 @@ import android.tracing.perfetto.StartCallbackArguments;
 import android.tracing.perfetto.StopCallbackArguments;
 import android.util.proto.ProtoInputStream;
 
-/* loaded from: classes4.dex */
 public final class InputMethodDataSource extends DataSource<DataSourceInstance, Void, Void> {
     public static final String DATA_SOURCE_NAME = "android.inputmethod";
     private final Runnable mOnStartCallback;

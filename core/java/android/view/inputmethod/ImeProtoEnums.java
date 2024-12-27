@@ -1,6 +1,5 @@
 package android.view.inputmethod;
 
-/* loaded from: classes4.dex */
 public final class ImeProtoEnums {
     public static final int ORIGIN_CLIENT = 5;
     public static final int ORIGIN_CLIENT_HIDE_SOFT_INPUT = 2;

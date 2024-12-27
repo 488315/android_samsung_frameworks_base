@@ -15,7 +15,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
-/* loaded from: classes4.dex */
 public final class PackageUtils {
     private static final int HIGH_RAM_BUFFER_SIZE_BYTES = 1000000;
     private static final int LOW_RAM_BUFFER_SIZE_BYTES = 1000;

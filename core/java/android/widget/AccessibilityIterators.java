@@ -5,7 +5,6 @@ import android.text.Layout;
 import android.text.Spannable;
 import android.view.AccessibilityIterators;
 
-/* loaded from: classes4.dex */
 final class AccessibilityIterators {
     AccessibilityIterators() {}
 

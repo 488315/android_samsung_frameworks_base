@@ -21,7 +21,6 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 
-/* loaded from: classes.dex */
 public final class AccessibilityShortcutInfo {
     public static final String META_DATA = "android.accessibilityshortcut.target";
     private static final String TAG_ACCESSIBILITY_SHORTCUT = "accessibility-shortcut-target";

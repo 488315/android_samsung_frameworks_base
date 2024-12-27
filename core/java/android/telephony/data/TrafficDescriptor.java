@@ -12,7 +12,6 @@ import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/* loaded from: classes4.dex */
 public final class TrafficDescriptor implements Parcelable {
     public static final Parcelable.Creator<TrafficDescriptor> CREATOR =
             new Parcelable.Creator<

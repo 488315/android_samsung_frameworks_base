@@ -2,7 +2,6 @@ package org.tensorflow.lite;
 
 import java.nio.ByteBuffer;
 
-/* loaded from: classes.dex */
 public interface Tensor {
     ByteBuffer asReadOnlyBuffer();
 

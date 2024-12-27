@@ -35,7 +35,6 @@ import java.util.function.IntFunction;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
-/* loaded from: classes4.dex */
 public final class Display {
     private static final int CACHED_APP_SIZE_DURATION_MILLIS = 20;
     public static final int CARLIFE_DISPLAY_GROUP = 4;

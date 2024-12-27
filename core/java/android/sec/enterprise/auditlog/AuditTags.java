@@ -1,6 +1,5 @@
 package android.sec.enterprise.auditlog;
 
-/* loaded from: classes3.dex */
 public class AuditTags {
     public static final int TAG_ADD_UNTRUSTED = 0;
     public static final int TAG_ADMIN_HAS_ADDED_SSID_TO_THE_RESTRICTION_ALLOWLIST = 65;

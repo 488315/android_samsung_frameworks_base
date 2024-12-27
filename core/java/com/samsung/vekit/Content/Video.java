@@ -8,7 +8,6 @@ import com.samsung.vekit.Interface.AudioSegmentInterface;
 
 import java.util.HashMap;
 
-/* loaded from: classes6.dex */
 public class Video extends Content implements AudioSegmentInterface<Video> {
     private HashMap<String, AudioSegment> audioSegmentMap;
     private long fileLength;

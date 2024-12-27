@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.SparseArray;
 
-/* loaded from: classes.dex */
 public class InstrumentationInfo extends PackageItemInfo implements Parcelable {
     public static final Parcelable.Creator<InstrumentationInfo> CREATOR =
             new Parcelable.Creator<

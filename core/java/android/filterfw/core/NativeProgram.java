@@ -2,7 +2,6 @@ package android.filterfw.core;
 
 import com.android.internal.content.NativeLibraryHelper;
 
-/* loaded from: classes.dex */
 public class NativeProgram extends Program {
     private boolean mHasGetValueFunction;
     private boolean mHasInitFunction;

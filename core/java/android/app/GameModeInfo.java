@@ -9,7 +9,6 @@ import java.util.Arrays;
 import java.util.Map;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class GameModeInfo implements Parcelable {
     public static final Parcelable.Creator<GameModeInfo> CREATOR =
             new Parcelable.Creator<GameModeInfo>() { // from class: android.app.GameModeInfo.1

@@ -5,7 +5,6 @@ import android.graphics.Paint;
 import android.os.Parcel;
 import android.text.ParcelableSpan;
 
-/* loaded from: classes4.dex */
 public interface LineBackgroundSpan extends ParagraphStyle {
     void drawBackground(
             Canvas canvas,

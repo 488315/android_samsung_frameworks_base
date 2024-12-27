@@ -12,7 +12,6 @@ import android.util.Slog;
 import com.android.internal.R;
 import com.android.internal.pm.pkg.parsing.ParsingPackage;
 
-/* loaded from: classes5.dex */
 public class ParsedProviderUtils {
     private static final String TAG = "PackageParsing";
 

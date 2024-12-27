@@ -39,7 +39,6 @@ import kotlinx.coroutines.flow.StateFlowImpl;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 @CoordinatorScope
-/* loaded from: classes2.dex */
 public final class SensitiveContentCoordinatorImpl extends Invalidator implements SensitiveContentCoordinator, DynamicPrivacyController.Listener, OnBeforeRenderListListener {
     public static final int $stable = 8;
     private final AppLockNotificationController appLockNotificationController;

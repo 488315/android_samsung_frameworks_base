@@ -30,7 +30,6 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.UUID;
 
-/* loaded from: classes3.dex */
 public class VolumeInfo implements Parcelable {
     public static final String ACTION_VOLUME_STATE_CHANGED =
             "android.os.storage.action.VOLUME_STATE_CHANGED";

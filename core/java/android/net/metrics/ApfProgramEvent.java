@@ -18,7 +18,6 @@ import java.util.List;
 
 @SystemApi
 @Deprecated
-/* loaded from: classes3.dex */
 public final class ApfProgramEvent implements IpConnectivityLog.Event {
     public static final Parcelable.Creator<ApfProgramEvent> CREATOR =
             new Parcelable.Creator<

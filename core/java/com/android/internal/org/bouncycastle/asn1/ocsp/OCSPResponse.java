@@ -8,7 +8,6 @@ import com.android.internal.org.bouncycastle.asn1.ASN1TaggedObject;
 import com.android.internal.org.bouncycastle.asn1.DERSequence;
 import com.android.internal.org.bouncycastle.asn1.DERTaggedObject;
 
-/* loaded from: classes5.dex */
 public class OCSPResponse extends ASN1Object {
     ResponseBytes responseBytes;
     OCSPResponseStatus responseStatus;

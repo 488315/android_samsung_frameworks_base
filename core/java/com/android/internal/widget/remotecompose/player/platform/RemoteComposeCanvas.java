@@ -13,7 +13,6 @@ import com.android.internal.widget.remotecompose.player.RemoteComposeDocument;
 
 import java.util.Set;
 
-/* loaded from: classes5.dex */
 public class RemoteComposeCanvas extends FrameLayout implements View.OnAttachStateChangeListener {
     static final boolean USE_VIEW_AREA_CLICK = true;
     private static final float[] sScaleOutput = new float[2];

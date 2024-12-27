@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Set;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public final class RcsContactUceCapability implements Parcelable {
     public static final int CAPABILITY_MECHANISM_OPTIONS = 2;
     public static final int CAPABILITY_MECHANISM_PRESENCE = 1;

@@ -1,6 +1,5 @@
 package android.graphics;
 
-/* loaded from: classes.dex */
 public final class PixelFormatProto {
     public static final int OPAQUE = -1;
     public static final int RGBA_1010102 = 43;

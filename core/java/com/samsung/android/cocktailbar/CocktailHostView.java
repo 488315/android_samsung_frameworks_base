@@ -10,7 +10,6 @@ import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.RemoteViewsAdapter;
 
-/* loaded from: classes5.dex */
 public class CocktailHostView extends FrameLayout {
     static final String TAG = "CocktailHostView";
     private Cocktail mCocktail;

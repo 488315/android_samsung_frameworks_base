@@ -80,7 +80,6 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-/* loaded from: classes4.dex */
 public final class AutofillManager {
     public static final int ACTION_RESPONSE_EXPIRED = 5;
     public static final int ACTION_START_SESSION = 1;

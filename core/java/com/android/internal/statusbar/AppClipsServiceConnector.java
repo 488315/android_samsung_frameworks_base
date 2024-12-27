@@ -14,7 +14,6 @@ import com.android.internal.R;
 
 import java.util.concurrent.CompletableFuture;
 
-/* loaded from: classes5.dex */
 public class AppClipsServiceConnector {
     private static final String TAG = AppClipsServiceConnector.class.getSimpleName();
     private final Context mContext;

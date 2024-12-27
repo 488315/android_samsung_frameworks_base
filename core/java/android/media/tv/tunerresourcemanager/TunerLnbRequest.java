@@ -4,7 +4,6 @@ import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes3.dex */
 public class TunerLnbRequest implements Parcelable {
     public static final Parcelable.Creator<TunerLnbRequest> CREATOR =
             new Parcelable.Creator<

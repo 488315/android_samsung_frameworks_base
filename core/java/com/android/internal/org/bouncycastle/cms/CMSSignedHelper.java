@@ -30,7 +30,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/* loaded from: classes5.dex */
 class CMSSignedHelper {
     static final CMSSignedHelper INSTANCE = new CMSSignedHelper();
     private static final Map encryptionAlgs = new HashMap();

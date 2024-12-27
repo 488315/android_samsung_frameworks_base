@@ -1,6 +1,5 @@
 package android.os;
 
-/* loaded from: classes3.dex */
 public final class ProcrankProto {
     public static final long PROCESSES = 2246267895809L;
     public static final long SUMMARY = 1146756268034L;

@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public final class NrQos extends Qos implements Parcelable {
     public static final Parcelable.Creator<NrQos> CREATOR =
             new Parcelable.Creator<NrQos>() { // from class: android.telephony.data.NrQos.1

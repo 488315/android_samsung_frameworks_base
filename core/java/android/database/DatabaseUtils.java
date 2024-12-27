@@ -33,7 +33,6 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/* loaded from: classes.dex */
 public class DatabaseUtils {
     private static final boolean DEBUG = false;
     private static final int PREFIX_GROUP_NUM = 2;

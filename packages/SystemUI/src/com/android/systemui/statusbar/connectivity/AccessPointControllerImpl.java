@@ -33,7 +33,6 @@ import java.util.concurrent.Executor;
 import java.util.stream.Collectors;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public final class AccessPointControllerImpl implements AccessPointController, WifiPickerTracker.WifiPickerTrackerCallback, LifecycleOwner {
     public static final boolean DEBUG = Log.isLoggable("AccessPointController", 3);
     public static final int[][] ICONS_WIFI;

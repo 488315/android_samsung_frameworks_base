@@ -5,7 +5,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @Deprecated
-/* loaded from: classes2.dex */
 public class SContextSleepMonitor extends SContextEventContext {
     public static final Parcelable.Creator<SContextSleepMonitor> CREATOR =
             new Parcelable.Creator<SContextSleepMonitor>() { // from class:

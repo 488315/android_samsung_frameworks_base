@@ -59,7 +59,6 @@ import java.util.function.Predicate;
 import java.util.function.ToIntFunction;
 import java.util.stream.Collectors;
 
-/* loaded from: classes4.dex */
 public class SubscriptionManager {
     public static final String ACCESS_RULES = "access_rules";
     public static final String ACCESS_RULES_FROM_CARRIER_CONFIGS =

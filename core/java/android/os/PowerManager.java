@@ -34,7 +34,6 @@ import java.util.Set;
 import java.util.concurrent.Executor;
 import java.util.concurrent.atomic.AtomicLong;
 
-/* loaded from: classes3.dex */
 public final class PowerManager {
 
     @Deprecated public static final int ACQUIRE_CAUSES_WAKEUP = 268435456;

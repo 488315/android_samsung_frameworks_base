@@ -2,7 +2,6 @@ package vendor.samsung.hardware.radio.V2_0;
 
 import java.util.ArrayList;
 
-/* loaded from: classes6.dex */
 public final class SehPersonalizationSubState {
     public static final int IN_PROGRESS = 1;
     public static final int READY = 2;

@@ -7,7 +7,6 @@ import java.io.OutputStream;
 import java.io.Writer;
 import java.util.Objects;
 
-/* loaded from: classes5.dex */
 public class XmlSerializerWrapper implements XmlSerializer {
     private final XmlSerializer mWrapped;
 

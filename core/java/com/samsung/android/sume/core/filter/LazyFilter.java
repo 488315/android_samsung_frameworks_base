@@ -3,7 +3,6 @@ package com.samsung.android.sume.core.filter;
 import com.samsung.android.sume.core.buffer.MediaBuffer;
 import com.samsung.android.sume.core.buffer.MutableMediaBuffer;
 
-/* loaded from: classes6.dex */
 public class LazyFilter extends DecorateFilter {
     private boolean prepared;
 

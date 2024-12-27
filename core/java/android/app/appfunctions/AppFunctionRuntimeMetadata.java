@@ -5,7 +5,6 @@ import android.app.appsearch.GenericDocument;
 
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public class AppFunctionRuntimeMetadata extends GenericDocument {
     public static final String APP_FUNCTION_INDEXER_PACKAGE = "android";
     public static final String APP_FUNCTION_RUNTIME_METADATA_DB = "appfunctions-db";

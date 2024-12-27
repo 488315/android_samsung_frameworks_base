@@ -15,7 +15,6 @@ import android.view.Display;
 import android.view.WindowManager;
 import android.view.WindowManagerImpl;
 
-/* loaded from: classes4.dex */
 public abstract class WindowProviderService extends Service implements WindowProvider {
     private static final String TAG = WindowProviderService.class.getSimpleName();
     private boolean mInitialized;

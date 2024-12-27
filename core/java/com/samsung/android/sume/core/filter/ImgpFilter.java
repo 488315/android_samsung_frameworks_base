@@ -25,7 +25,6 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
-/* loaded from: classes6.dex */
 public class ImgpFilter extends PluginFilter<ImgpPlugin> {
     private static final String TAG = Def.tagOf((Class<?>) ImgpFilter.class);
     private final ImgpDescriptor descriptor;

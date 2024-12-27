@@ -3,7 +3,6 @@ package android.hardware.camera2;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes2.dex */
 public abstract class CameraOfflineSession extends CameraCaptureSession {
 
     public abstract static class CameraOfflineSessionCallback {

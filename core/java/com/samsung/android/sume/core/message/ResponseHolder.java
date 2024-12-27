@@ -7,7 +7,6 @@ import com.samsung.android.sume.core.functional.PlaceHolder;
 import java.lang.ref.WeakReference;
 import java.util.concurrent.TimeUnit;
 
-/* loaded from: classes6.dex */
 public class ResponseHolder implements PlaceHolder<Response> {
     private final ConditionVariable cv = new ConditionVariable();
     private final int requestCode;

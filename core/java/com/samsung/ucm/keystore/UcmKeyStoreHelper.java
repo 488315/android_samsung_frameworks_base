@@ -7,7 +7,6 @@ import com.android.internal.org.bouncycastle.jce.provider.BouncyCastleProvider;
 import java.security.Provider;
 import java.security.Security;
 
-/* loaded from: classes6.dex */
 public class UcmKeyStoreHelper {
     private static final String TAG = "UcmKeyStoreHelper";
 

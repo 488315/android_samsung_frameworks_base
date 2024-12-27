@@ -14,7 +14,6 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionException;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes4.dex */
 public class SatelliteImplBase extends SatelliteService {
     private static final String TAG = "SatelliteImplBase";
     private final IBinder mBinder = new AnonymousClass1();

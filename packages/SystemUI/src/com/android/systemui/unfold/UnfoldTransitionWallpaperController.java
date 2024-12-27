@@ -4,7 +4,6 @@ import com.android.systemui.unfold.UnfoldTransitionProgressProvider;
 import com.android.systemui.util.WallpaperController;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes3.dex */
 public final class UnfoldTransitionWallpaperController {
     public final UnfoldTransitionProgressProvider unfoldTransitionProgressProvider;
     public final WallpaperController wallpaperController;

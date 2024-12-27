@@ -15,7 +15,6 @@ import libcore.util.NativeAllocationRegistry;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes.dex */
 public final class HardwareBuffer implements Parcelable, AutoCloseable {
     public static final int BLOB = 33;
     public static final Parcelable.Creator<HardwareBuffer> CREATOR =

@@ -12,7 +12,6 @@ import java.util.Set;
 import java.util.function.IntFunction;
 import java.util.function.Predicate;
 
-/* loaded from: classes4.dex */
 public class AutofillFeatureFlags {
     private static final String DEFAULT_AFAA_ALLOWLIST = "";
     private static final String DEFAULT_AFAA_DENYLIST = "";

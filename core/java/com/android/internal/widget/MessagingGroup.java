@@ -34,7 +34,6 @@ import java.util.Iterator;
 import java.util.List;
 
 @RemoteViews.RemoteView
-/* loaded from: classes5.dex */
 public class MessagingGroup extends NotificationOptimizedLinearLayout
         implements MessagingLinearLayout.MessagingChild {
     public static final int IMAGE_DISPLAY_LOCATION_AT_END = 1;

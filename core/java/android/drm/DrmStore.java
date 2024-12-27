@@ -1,7 +1,6 @@
 package android.drm;
 
 @Deprecated
-/* loaded from: classes.dex */
 public class DrmStore {
 
     public interface ConstraintsColumns {

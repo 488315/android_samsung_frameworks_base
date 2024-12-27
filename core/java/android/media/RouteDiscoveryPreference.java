@@ -16,7 +16,6 @@ import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-/* loaded from: classes2.dex */
 public final class RouteDiscoveryPreference implements Parcelable {
     public static final Parcelable.Creator<RouteDiscoveryPreference> CREATOR =
             new Parcelable.Creator<RouteDiscoveryPreference>() { // from class:

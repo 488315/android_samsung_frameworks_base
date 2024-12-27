@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Deprecated
-/* loaded from: classes5.dex */
 public abstract class AbstractMultiplePendingRequestsRemoteService<
                 S extends AbstractMultiplePendingRequestsRemoteService<S, I>, I extends IInterface>
         extends AbstractRemoteService<S, I> {

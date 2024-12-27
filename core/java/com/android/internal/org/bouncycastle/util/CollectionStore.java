@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public class CollectionStore<T> implements Store<T>, Iterable<T> {
     private Collection<T> _local;
 

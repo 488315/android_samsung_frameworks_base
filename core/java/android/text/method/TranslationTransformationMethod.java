@@ -14,7 +14,6 @@ import android.widget.TextView;
 
 import java.util.regex.Pattern;
 
-/* loaded from: classes4.dex */
 public class TranslationTransformationMethod implements TransformationMethod2 {
     private static final Pattern PATTERN_WHITESPACE = Pattern.compile("\\s+");
     private static final String TAG = "TranslationTransformationMethod";

@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/* loaded from: classes4.dex */
 public final class TextAttribute implements Parcelable {
     public static final Parcelable.Creator<TextAttribute> CREATOR =
             new Parcelable.Creator<

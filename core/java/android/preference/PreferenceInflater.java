@@ -12,7 +12,6 @@ import org.xmlpull.v1.XmlPullParserException;
 import java.io.IOException;
 
 @Deprecated
-/* loaded from: classes3.dex */
 class PreferenceInflater extends GenericInflater<Preference, PreferenceGroup> {
     private static final String EXTRA_TAG_NAME = "extra";
     private static final String INTENT_TAG_NAME = "intent";

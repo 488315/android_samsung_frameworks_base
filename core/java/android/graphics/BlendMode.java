@@ -1,6 +1,5 @@
 package android.graphics;
 
-/* loaded from: classes.dex */
 public enum BlendMode {
     CLEAR(0),
     SRC(1),

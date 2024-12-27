@@ -1,6 +1,5 @@
 package com.android.server.am;
 
-/* loaded from: classes5.dex */
 public final class UidRecordProto {
     public static final int CHANGE_ACTIVE = 2;
     public static final int CHANGE_CACHED = 3;

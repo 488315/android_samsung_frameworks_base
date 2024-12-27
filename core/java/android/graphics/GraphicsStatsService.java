@@ -41,7 +41,6 @@ import java.util.Calendar;
 import java.util.HashSet;
 import java.util.TimeZone;
 
-/* loaded from: classes.dex */
 public class GraphicsStatsService extends IGraphicsStats.Stub {
     private static final int AID_STATSD = 1066;
     private static final int DELETE_OLD = 2;

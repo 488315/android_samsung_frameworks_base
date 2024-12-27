@@ -9,7 +9,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class SmartspaceTargetEvent implements Parcelable {
     public static final Parcelable.Creator<SmartspaceTargetEvent> CREATOR =
             new Parcelable.Creator<SmartspaceTargetEvent>() { // from class:

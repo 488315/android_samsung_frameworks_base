@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import android.os.SystemClock;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class VirtualSensorEvent implements Parcelable {
     public static final Parcelable.Creator<VirtualSensorEvent> CREATOR =
             new Parcelable.Creator<VirtualSensorEvent>() { // from class:

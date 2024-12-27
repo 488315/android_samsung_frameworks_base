@@ -27,7 +27,6 @@ import android.widget.Toolbar;
 import com.android.internal.R;
 import com.android.internal.view.menu.MenuPresenter;
 
-/* loaded from: classes5.dex */
 public class ActionBarOverlayLayout extends ViewGroup implements DecorContentParent {
     private static final String TAG = "ActionBarOverlayLayout";
     private final int ACTION_BAR_ANIMATE_DELAY;

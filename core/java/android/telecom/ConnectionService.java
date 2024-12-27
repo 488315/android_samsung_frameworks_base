@@ -35,7 +35,6 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes3.dex */
 public abstract class ConnectionService extends Service {
     public static final String EXTRA_IS_HANDOVER = "android.telecom.extra.IS_HANDOVER";
     private static final int MSG_ABORT = 3;

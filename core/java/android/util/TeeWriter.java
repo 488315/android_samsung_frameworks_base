@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public class TeeWriter extends Writer {
     private final Writer[] mWriters;
 

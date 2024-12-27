@@ -13,7 +13,6 @@ import com.android.internal.org.bouncycastle.asn1.DERSequence;
 
 import java.math.BigInteger;
 
-/* loaded from: classes5.dex */
 public class BasicConstraints extends ASN1Object {
     ASN1Boolean cA;
     ASN1Integer pathLenConstraint;

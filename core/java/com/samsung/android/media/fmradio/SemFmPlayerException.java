@@ -1,6 +1,5 @@
 package com.samsung.android.media.fmradio;
 
-/* loaded from: classes6.dex */
 public class SemFmPlayerException extends Exception {
     private static final long serialVersionUID = 1;
     private Throwable mThrowable;

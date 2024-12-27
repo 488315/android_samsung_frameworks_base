@@ -6,7 +6,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class ProviderPendingIntentResponse implements Parcelable {
     public static final Parcelable.Creator<ProviderPendingIntentResponse> CREATOR =
             new Parcelable.Creator<ProviderPendingIntentResponse>() { // from class:

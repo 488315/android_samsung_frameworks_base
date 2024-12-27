@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes.dex */
 public class AppCompatTaskInfo implements Parcelable {
     public static final Parcelable.Creator<AppCompatTaskInfo> CREATOR =
             new Parcelable.Creator<

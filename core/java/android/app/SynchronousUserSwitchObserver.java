@@ -3,7 +3,6 @@ package android.app;
 import android.os.IRemoteCallback;
 import android.os.RemoteException;
 
-/* loaded from: classes.dex */
 public abstract class SynchronousUserSwitchObserver extends UserSwitchObserver {
     public abstract void onUserSwitching(int i) throws RemoteException;
 

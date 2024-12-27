@@ -9,7 +9,6 @@ import com.android.internal.org.bouncycastle.util.Strings;
 
 import java.math.BigInteger;
 
-/* loaded from: classes5.dex */
 class DHUtil {
     DHUtil() {}
 

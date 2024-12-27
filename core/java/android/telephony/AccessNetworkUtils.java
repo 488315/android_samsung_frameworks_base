@@ -11,7 +11,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-/* loaded from: classes4.dex */
 public class AccessNetworkUtils {
     private static final int FREQUENCY_KHZ = 1000;
     private static final int FREQUENCY_RANGE_HIGH_KHZ = 6000000;

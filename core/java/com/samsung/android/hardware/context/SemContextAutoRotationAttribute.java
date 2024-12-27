@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import android.util.Log;
 
 @Deprecated(forRemoval = true, since = "13.0")
-/* loaded from: classes6.dex */
 public class SemContextAutoRotationAttribute extends SemContextAttribute {
     public static final Parcelable.Creator<SemContextAutoRotationAttribute> CREATOR =
             new Parcelable.Creator<

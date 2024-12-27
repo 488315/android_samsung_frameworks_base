@@ -4,7 +4,6 @@ import com.android.internal.org.bouncycastle.util.Arrays;
 
 import javax.crypto.spec.IvParameterSpec;
 
-/* loaded from: classes5.dex */
 public class AEADParameterSpec extends IvParameterSpec {
     private final byte[] associatedData;
     private final int macSizeInBits;

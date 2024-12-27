@@ -4,7 +4,6 @@ import android.hardware.camera2.params.SessionConfiguration;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public class CameraIdAndSessionConfiguration implements Parcelable {
     public static final Parcelable.Creator<CameraIdAndSessionConfiguration> CREATOR =
             new Parcelable.Creator<CameraIdAndSessionConfiguration>() { // from class:

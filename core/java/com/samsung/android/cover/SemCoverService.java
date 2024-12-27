@@ -9,7 +9,6 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.RemoteException;
 
-/* loaded from: classes6.dex */
 public class SemCoverService extends Service {
     private static final String TAG = "SemCoverService";
     private Handler mHandler;

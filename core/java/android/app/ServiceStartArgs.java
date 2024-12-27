@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes.dex */
 public class ServiceStartArgs implements Parcelable {
     public static final Parcelable.Creator<ServiceStartArgs> CREATOR =
             new Parcelable.Creator<

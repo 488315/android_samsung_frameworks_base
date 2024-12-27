@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.Collections;
 
-/* loaded from: classes4.dex */
 class SemExpandableListConnector extends BaseAdapter implements Filterable {
     private ExpandableListAdapter mExpandableListAdapter;
     private ItemDecorator mItemDecorator;

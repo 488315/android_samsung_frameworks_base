@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public interface CallEventCallback {
     void onAvailableCallEndpointsChanged(List<CallEndpoint> list);
 

@@ -44,7 +44,6 @@ import java.util.function.BiConsumer;
 import java.util.function.IntConsumer;
 import java.util.stream.IntStream;
 
-/* loaded from: classes.dex */
 public interface IActivityTaskManager extends IInterface {
     public static final String DESCRIPTOR = "android.app.IActivityTaskManager";
 

@@ -6,7 +6,6 @@ import com.android.internal.org.bouncycastle.asn1.ASN1Primitive;
 
 import com.samsung.android.media.AudioParameter;
 
-/* loaded from: classes5.dex */
 public class KeyPurposeId extends ASN1Object {
     private ASN1ObjectIdentifier id;
     private static final ASN1ObjectIdentifier id_kp = new ASN1ObjectIdentifier("1.3.6.1.5.5.7.3");

@@ -51,7 +51,6 @@ import java.util.function.ToIntFunction;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-/* loaded from: classes2.dex */
 public final class MediaRouter2 {
     private static final long MANAGER_REQUEST_ID_NONE = 0;
     public static final int SCANNING_STATE_NOT_SCANNING = 0;

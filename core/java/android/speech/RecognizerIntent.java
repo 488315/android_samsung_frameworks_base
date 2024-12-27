@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
 
-/* loaded from: classes3.dex */
 public class RecognizerIntent {
     public static final String ACTION_GET_LANGUAGE_DETAILS =
             "android.speech.action.GET_LANGUAGE_DETAILS";

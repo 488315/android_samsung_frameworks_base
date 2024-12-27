@@ -10,7 +10,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.ref.WeakReference;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes4.dex */
 public abstract class ImsStateCallback {
     public static final int REASON_IMS_SERVICE_DISCONNECTED = 3;
     public static final int REASON_IMS_SERVICE_NOT_READY = 6;

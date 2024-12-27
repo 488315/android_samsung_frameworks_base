@@ -11,7 +11,6 @@ import android.view.WindowManager;
 
 import java.util.Iterator;
 
-/* loaded from: classes4.dex */
 public final class TransitionFilter implements Parcelable {
     public static final int CONTAINER_ORDER_ANY = 0;
     public static final int CONTAINER_ORDER_TOP = 1;

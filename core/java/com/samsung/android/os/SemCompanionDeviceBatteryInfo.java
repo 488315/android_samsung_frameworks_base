@@ -3,7 +3,6 @@ package com.samsung.android.os;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes6.dex */
 public final class SemCompanionDeviceBatteryInfo implements Parcelable {
     public static final Parcelable.Creator<SemCompanionDeviceBatteryInfo> CREATOR =
             new Parcelable.Creator<

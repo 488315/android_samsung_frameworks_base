@@ -2,7 +2,6 @@ package android.graphics.rendererpolicy;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
 public class Blocklist {
     private final List<BlockItem> items;
 

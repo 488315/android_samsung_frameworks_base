@@ -19,7 +19,6 @@ import java.security.interfaces.DSAParams;
 import java.security.interfaces.DSAPrivateKey;
 import java.security.interfaces.DSAPublicKey;
 
-/* loaded from: classes5.dex */
 public class DSAUtil {
     public static final ASN1ObjectIdentifier[] dsaOids = {
         X9ObjectIdentifiers.id_dsa,

@@ -1,6 +1,5 @@
 package android.service;
 
-/* loaded from: classes3.dex */
 public final class SensorDeviceProto {
     public static final long ACTIVE_SENSORS = 1120986464259L;
     public static final long INITIALIZED = 1133871366145L;

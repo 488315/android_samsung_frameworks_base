@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public class FrameBuffersInfo implements Parcelable {
     public static final Parcelable.Creator<FrameBuffersInfo> CREATOR =
             new Parcelable.Creator<

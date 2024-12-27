@@ -11,7 +11,6 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes.dex */
 public final class TouchInteractionController {
     private static final int MAX_POINTER_COUNT = 32;
     public static final int STATE_CLEAR = 0;

@@ -3,7 +3,6 @@ package com.samsung.android.knox.mtd;
 import java.util.HashMap;
 import java.util.Map;
 
-/* loaded from: classes6.dex */
 public enum KnoxMtdErrorCode {
     NONE(-1),
     ALLOWLIST(0),

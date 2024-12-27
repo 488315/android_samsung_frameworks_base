@@ -7,7 +7,6 @@ import java.lang.annotation.Target;
 
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.CLASS)
-/* loaded from: classes3.dex */
 public @interface RavenwoodReplace {
     Class<?>[] blockedBy() default {};
 

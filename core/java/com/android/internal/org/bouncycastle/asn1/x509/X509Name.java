@@ -27,7 +27,6 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Vector;
 
-/* loaded from: classes5.dex */
 public class X509Name extends ASN1Object {
     private Vector added;
     private X509NameEntryConverter converter;

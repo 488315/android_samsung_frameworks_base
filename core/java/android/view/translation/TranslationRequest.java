@@ -15,7 +15,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.IntFunction;
 
-/* loaded from: classes4.dex */
 public final class TranslationRequest implements Parcelable {
     public static final Parcelable.Creator<TranslationRequest> CREATOR =
             new Parcelable.Creator<

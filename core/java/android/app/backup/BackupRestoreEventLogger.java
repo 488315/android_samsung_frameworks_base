@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.Map;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class BackupRestoreEventLogger {
     public static final int DATA_TYPES_ALLOWED = 150;
     private static final String TAG = "BackupRestoreEventLogger";

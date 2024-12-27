@@ -22,7 +22,6 @@ import com.samsung.android.content.smartclip.SemSmartClipMetaTagType;
 
 import java.io.IOException;
 
-/* loaded from: classes.dex */
 public class MediaSource extends Filter {
     private static final int NEWFRAME_TIMEOUT = 100;
     private static final int NEWFRAME_TIMEOUT_REPEAT = 10;

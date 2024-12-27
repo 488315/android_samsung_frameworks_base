@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import com.android.internal.R;
 
-/* loaded from: classes.dex */
 public class BootProgressDialog extends ProgressDialog {
     public BootProgressDialog(Context context) {
         super(context, 16973834);

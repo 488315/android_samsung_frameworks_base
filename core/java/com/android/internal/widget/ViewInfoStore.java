@@ -4,7 +4,6 @@ import android.util.ArrayMap;
 import android.util.LongSparseArray;
 import android.util.Pools;
 
-/* loaded from: classes5.dex */
 class ViewInfoStore {
     private static final boolean DEBUG = false;
     final ArrayMap<RecyclerView.ViewHolder, InfoRecord> mLayoutHolderMap = new ArrayMap<>();

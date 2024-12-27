@@ -6,7 +6,6 @@ import android.os.UserHandle;
 
 import com.samsung.android.knox.SemPersonaManager;
 
-/* loaded from: classes6.dex */
 public class SemPersonaWrapper {
     Context mContext;
     SemPersonaManager mSemPersonaManager;

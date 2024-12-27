@@ -12,7 +12,6 @@ import android.util.Slog;
 
 import com.android.internal.logging.MetricsLogger;
 
-/* loaded from: classes5.dex */
 public final class EdgeSharpnessController {
     private static final boolean DEBUG = true;
     private static final String TAG = "EdgeSharpnessController";

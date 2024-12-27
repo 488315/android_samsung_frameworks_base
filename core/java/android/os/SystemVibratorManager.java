@@ -10,7 +10,6 @@ import com.samsung.android.vibrator.VibrationDebugInfo;
 import java.util.Objects;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes3.dex */
 public class SystemVibratorManager extends VibratorManager {
     private static final String TAG = "VibratorManager";
     private final Context mContext;

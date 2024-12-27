@@ -20,7 +20,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-/* loaded from: classes.dex */
 public class ShortcutManager {
     public static final int FLAG_MATCH_CACHED = 8;
     public static final int FLAG_MATCH_DYNAMIC = 2;

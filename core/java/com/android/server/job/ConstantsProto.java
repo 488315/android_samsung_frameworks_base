@@ -1,6 +1,5 @@
 package com.android.server.job;
 
-/* loaded from: classes5.dex */
 public final class ConstantsProto {
     public static final long API_QUOTA_SCHEDULE_COUNT = 1120986464288L;
     public static final long API_QUOTA_SCHEDULE_RETURN_FAILURE_RESULT = 1133871366179L;

@@ -9,7 +9,6 @@ import com.samsung.android.media.SemExtendedFormat;
 
 import java.util.Iterator;
 
-/* loaded from: classes5.dex */
 public class BatteryStatsHistoryIterator
         implements Iterator<BatteryStats.HistoryItem>, AutoCloseable {
     private static final boolean DEBUG = false;

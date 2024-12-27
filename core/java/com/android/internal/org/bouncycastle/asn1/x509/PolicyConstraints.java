@@ -11,7 +11,6 @@ import com.android.internal.org.bouncycastle.asn1.DERTaggedObject;
 
 import java.math.BigInteger;
 
-/* loaded from: classes5.dex */
 public class PolicyConstraints extends ASN1Object {
     private BigInteger inhibitPolicyMapping;
     private BigInteger requireExplicitPolicyMapping;

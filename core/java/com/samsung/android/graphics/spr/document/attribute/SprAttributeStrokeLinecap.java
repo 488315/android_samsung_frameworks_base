@@ -5,7 +5,6 @@ import com.samsung.android.graphics.spr.document.SprInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-/* loaded from: classes6.dex */
 public class SprAttributeStrokeLinecap extends SprAttributeBase {
     public byte linecap;
     public static byte STROKE_LINECAP_TYPE_NONE = 0;

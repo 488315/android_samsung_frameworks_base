@@ -1,6 +1,5 @@
 package com.android.internal.telephony;
 
-/* loaded from: classes5.dex */
 public interface SemOemFunctions {
     public static final int OEM_ALLOCATE_PDU_SESSION_ID = 22;
     public static final int OEM_AT_DISTRIBUTOR_START = 14;

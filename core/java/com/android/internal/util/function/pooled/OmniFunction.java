@@ -28,7 +28,6 @@ import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
 import java.util.function.Function;
 
-/* loaded from: classes5.dex */
 abstract class OmniFunction<A, B, C, D, E, F, G, H, I, J, K, R>
         implements BiFunction<A, B, R>,
                 TriFunction<A, B, C, R>,

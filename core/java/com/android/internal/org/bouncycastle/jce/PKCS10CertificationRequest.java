@@ -45,7 +45,6 @@ import java.util.Set;
 
 import javax.security.auth.x500.X500Principal;
 
-/* loaded from: classes5.dex */
 public class PKCS10CertificationRequest extends CertificationRequest {
     private static Hashtable algorithms = new Hashtable();
     private static Hashtable params = new Hashtable();

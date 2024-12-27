@@ -32,7 +32,6 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
-/* loaded from: classes6.dex */
 public class MediaBufferFileWriter {
     private static final String TAG = Def.tagOf((Class<?>) MediaBufferFileWriter.class);
     private BiFunction<MediaBuffer, String, Boolean> compressImageWriter;

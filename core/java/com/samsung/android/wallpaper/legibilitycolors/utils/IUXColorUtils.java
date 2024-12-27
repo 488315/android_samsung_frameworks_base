@@ -14,7 +14,6 @@ import android.hardware.scontext.SContextConstants;
 import android.text.Spanned;
 import android.util.DisplayMetrics;
 
-/* loaded from: classes6.dex */
 public class IUXColorUtils {
     public static final float COLOR8_TO_NORMALIZED = 0.003921569f;
     static final float GRAYSCALE_THRESHOLD_BRIGHTNESS = 0.25f;

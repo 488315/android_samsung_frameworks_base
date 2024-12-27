@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.Button;
 
-/* loaded from: classes2.dex */
 class ExtractButton extends Button {
     public ExtractButton(Context context) {
         super(context, null);

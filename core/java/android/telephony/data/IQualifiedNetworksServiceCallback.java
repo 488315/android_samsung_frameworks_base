@@ -8,7 +8,6 @@ import android.os.RemoteException;
 
 import com.android.internal.telephony.IIntegerConsumer;
 
-/* loaded from: classes4.dex */
 public interface IQualifiedNetworksServiceCallback extends IInterface {
     public static final String DESCRIPTOR =
             "android.telephony.data.IQualifiedNetworksServiceCallback";

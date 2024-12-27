@@ -5,7 +5,6 @@ import android.os.Looper;
 import android.os.RemoteException;
 import android.util.Log;
 
-/* loaded from: classes2.dex */
 public final class HdmiAudioSystemClient extends HdmiClient {
     private static final int REPORT_AUDIO_STATUS_INTERVAL_MS = 500;
     private static final String TAG = "HdmiAudioSystemClient";

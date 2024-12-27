@@ -23,7 +23,6 @@ import com.android.internal.policy.DecorView;
 
 import com.samsung.android.media.SemExtendedFormat;
 
-/* loaded from: classes4.dex */
 public class SnapshotDrawerUtils {
     static final int FLAG_INHERIT_EXCLUDES = 830922810;
     private static final String TAG = "SnapshotDrawerUtils";

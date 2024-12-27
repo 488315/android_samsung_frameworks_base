@@ -1,6 +1,5 @@
 package vendor.samsung.hardware.sysinput;
 
-/* loaded from: classes.dex */
 public @interface SehResult {
     public static final int BAD_STATUS = -4;
     public static final int BAD_VALUE = -8;

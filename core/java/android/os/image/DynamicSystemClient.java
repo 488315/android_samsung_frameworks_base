@@ -22,7 +22,6 @@ import java.lang.ref.WeakReference;
 import java.util.concurrent.Executor;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public class DynamicSystemClient {
     public static final String ACTION_HIDE_NOTIFICATION =
             "android.os.image.action.HIDE_NOTIFICATION";

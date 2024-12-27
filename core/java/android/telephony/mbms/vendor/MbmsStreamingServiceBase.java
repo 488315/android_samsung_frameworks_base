@@ -15,7 +15,6 @@ import android.telephony.mbms.StreamingServiceInfo;
 import java.util.List;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public class MbmsStreamingServiceBase extends IMbmsStreamingService.Stub {
     public int initialize(MbmsStreamingSessionCallback callback, int subscriptionId)
             throws RemoteException {

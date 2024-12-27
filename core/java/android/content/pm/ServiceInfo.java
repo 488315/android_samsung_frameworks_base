@@ -9,7 +9,6 @@ import android.util.Printer;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes.dex */
 public class ServiceInfo extends ComponentInfo implements Parcelable {
     public static final Parcelable.Creator<ServiceInfo> CREATOR =
             new Parcelable.Creator<ServiceInfo>() { // from class: android.content.pm.ServiceInfo.1

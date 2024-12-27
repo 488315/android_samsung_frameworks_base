@@ -5,7 +5,6 @@ import android.hardware.Camera;
 import java.util.Arrays;
 import java.util.HashMap;
 
-/* loaded from: classes2.dex */
 public class CameraProfile {
     public static final int QUALITY_HIGH = 2;
     public static final int QUALITY_LOW = 0;

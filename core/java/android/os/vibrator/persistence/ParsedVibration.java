@@ -7,7 +7,6 @@ import android.os.VibratorInfo;
 import java.util.Collections;
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public class ParsedVibration {
     private final List<VibrationEffect> mEffects;
 

@@ -7,7 +7,6 @@ import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
 
-/* loaded from: classes.dex */
 public class SafeOneTimeExecuteAppFunctionCallback {
     private static final String TAG = "SafeOneTimeExecuteApp";
     private final AppFunctionExecutionRecord mAppFunctionExecutionRecord;

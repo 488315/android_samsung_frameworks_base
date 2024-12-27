@@ -8,7 +8,6 @@ import com.android.internal.R;
 
 import java.util.Iterator;
 
-/* loaded from: classes3.dex */
 public class DreamAccessibility {
     private final View.AccessibilityDelegate mAccessibilityDelegate;
     private final Context mContext;

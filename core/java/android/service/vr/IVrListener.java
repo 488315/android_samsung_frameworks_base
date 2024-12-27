@@ -7,7 +7,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes3.dex */
 public interface IVrListener extends IInterface {
     void focusedActivityChanged(ComponentName componentName, boolean z, int i)
             throws RemoteException;

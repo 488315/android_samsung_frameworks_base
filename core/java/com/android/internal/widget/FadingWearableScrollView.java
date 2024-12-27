@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ScrollView;
 
-/* loaded from: classes5.dex */
 public class FadingWearableScrollView extends ScrollView {
     private ViewGroupFader mFader;
 

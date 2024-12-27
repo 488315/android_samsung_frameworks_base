@@ -10,7 +10,6 @@ import libcore.util.HexEncoding;
 import java.io.FileDescriptor;
 import java.util.Random;
 
-/* loaded from: classes3.dex */
 public class MtpServer implements Runnable {
     private static final int sID_LEN_BYTES = 16;
     private static final int sID_LEN_STR = 32;

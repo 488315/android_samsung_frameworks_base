@@ -8,7 +8,6 @@ import android.os.Parcelable;
 import com.android.internal.util.AnnotationValidations;
 import com.android.internal.util.Preconditions;
 
-/* loaded from: classes3.dex */
 public final class BeginGetCredentialOption implements Parcelable {
     private static final String BUNDLE_ID_KEY =
             "android.service.credentials.BeginGetCredentialOption.BUNDLE_ID_KEY";

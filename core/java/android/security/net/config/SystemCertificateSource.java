@@ -7,7 +7,6 @@ import java.io.File;
 import java.security.cert.X509Certificate;
 import java.util.Set;
 
-/* loaded from: classes3.dex */
 public final class SystemCertificateSource extends DirectoryCertificateSource {
     private final File mUserRemovedCaDir;
 

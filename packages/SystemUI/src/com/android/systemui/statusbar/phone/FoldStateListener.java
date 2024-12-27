@@ -11,7 +11,6 @@ import kotlin.collections.ArraysKt___ArraysKt;
 import kotlin.jvm.internal.Intrinsics;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes3.dex */
 public final class FoldStateListener implements DeviceStateManager.DeviceStateCallback {
     public final int[] foldedDeviceStates;
     public final int[] goToSleepDeviceStates;

@@ -7,7 +7,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public final class AttestedKeyPair {
     private final List<Certificate> mAttestationRecord;
     private final KeyPair mKeyPair;

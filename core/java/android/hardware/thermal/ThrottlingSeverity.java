@@ -1,6 +1,5 @@
 package android.hardware.thermal;
 
-/* loaded from: classes2.dex */
 public @interface ThrottlingSeverity {
     public static final int CRITICAL = 4;
     public static final int EMERGENCY = 5;

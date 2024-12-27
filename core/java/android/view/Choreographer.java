@@ -17,7 +17,6 @@ import android.util.TimeUtils;
 import java.io.PrintWriter;
 import java.util.function.BiConsumer;
 
-/* loaded from: classes4.dex */
 public final class Choreographer {
     public static final int CALLBACK_ANIMATION = 1;
     public static final int CALLBACK_COMMIT = 4;

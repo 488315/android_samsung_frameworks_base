@@ -8,7 +8,6 @@ import com.android.systemui.edgelighting.interfaces.IEdgeLightingStyle;
 import com.android.systemui.edgelighting.utils.DrawableUtils;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public final class EdgeLightingStyle implements IEdgeLightingStyle {
     public final boolean mColorOption;
     public final boolean mIsSupport;

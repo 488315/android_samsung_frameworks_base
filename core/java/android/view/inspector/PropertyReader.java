@@ -2,7 +2,6 @@ package android.view.inspector;
 
 import android.graphics.Color;
 
-/* loaded from: classes4.dex */
 public interface PropertyReader {
     void readBoolean(int i, boolean z);
 

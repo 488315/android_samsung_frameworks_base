@@ -13,7 +13,6 @@ import com.android.internal.R;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes4.dex */
 public abstract class Visibility extends Transition {
     public static final int MODE_IN = 1;
     public static final int MODE_OUT = 2;

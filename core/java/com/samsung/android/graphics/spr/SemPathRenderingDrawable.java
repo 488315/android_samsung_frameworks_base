@@ -46,7 +46,6 @@ import java.lang.reflect.Method;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
-/* loaded from: classes6.dex */
 public class SemPathRenderingDrawable extends Drawable implements Animatable {
     private static final int MAX_CACHED_BITMAP_SIZE = 2048;
     private static final String NA_NAME = "n/a";

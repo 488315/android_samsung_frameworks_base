@@ -8,7 +8,6 @@ import android.os.RemoteException;
 import android.os.ResultReceiver;
 import android.view.KeyEvent;
 
-/* loaded from: classes2.dex */
 public interface IOnMediaKeyListener extends IInterface {
     void onMediaKey(KeyEvent keyEvent, ResultReceiver resultReceiver) throws RemoteException;
 

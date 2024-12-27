@@ -5,7 +5,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @Deprecated
-/* loaded from: classes4.dex */
 public final class VoLteServiceState implements Parcelable {
     public static final Parcelable.Creator<VoLteServiceState> CREATOR =
             new Parcelable.Creator() { // from class: android.telephony.VoLteServiceState.1

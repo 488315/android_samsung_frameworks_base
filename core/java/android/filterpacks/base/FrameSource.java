@@ -8,7 +8,6 @@ import android.filterfw.core.GenerateFieldPort;
 import android.filterfw.core.GenerateFinalPort;
 import android.provider.Telephony;
 
-/* loaded from: classes.dex */
 public class FrameSource extends Filter {
 
     @GenerateFinalPort(name = Telephony.CellBroadcasts.MESSAGE_FORMAT)

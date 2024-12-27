@@ -10,7 +10,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes.dex */
 public class FreezePeriod {
     static final int DAYS_IN_YEAR = 365;
     private static final int SENTINEL_YEAR = 2001;

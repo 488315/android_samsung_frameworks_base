@@ -10,7 +10,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 
-/* loaded from: classes.dex */
 public class PathIterator implements Iterator<Segment> {
     private static final int POINT_ARRAY_SIZE = 8;
     public static final int VERB_CLOSE = 5;

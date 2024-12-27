@@ -9,7 +9,6 @@ import android.util.Slog;
 
 import com.android.internal.R;
 
-/* loaded from: classes5.dex */
 public class BlockedAppActivity extends AlertActivity {
     private static final String EXTRA_BLOCKED_PACKAGE =
             "com.android.internal.app.extra.BLOCKED_PACKAGE";

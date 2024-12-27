@@ -8,7 +8,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes2.dex */
 public class FingerprintSensorProperties extends SensorProperties {
     public static final int TYPE_HOME_BUTTON = 5;
     public static final int TYPE_POWER_BUTTON = 4;

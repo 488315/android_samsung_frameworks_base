@@ -13,7 +13,6 @@ import com.samsung.android.knox.dar.ddar.proxy.KnoxProxyManager;
 import java.util.Optional;
 import java.util.function.Function;
 
-/* loaded from: classes6.dex */
 public final class DualDarManager {
     public static final String AGENT = "KNOXCORE_PROXY_AGENT";
     public static final String AGENT_PKG = "com.samsung.android.knox.containercore";

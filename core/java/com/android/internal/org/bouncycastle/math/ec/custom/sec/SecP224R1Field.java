@@ -8,7 +8,6 @@ import com.android.internal.org.bouncycastle.util.Pack;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 
-/* loaded from: classes5.dex */
 public class SecP224R1Field {
     private static final long M = 4294967295L;
     private static final int P6 = -1;

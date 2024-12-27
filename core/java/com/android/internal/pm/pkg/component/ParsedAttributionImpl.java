@@ -11,7 +11,6 @@ import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public class ParsedAttributionImpl implements ParsedAttribution, Parcelable {
     public static final Parcelable.Creator<ParsedAttributionImpl> CREATOR =
             new Parcelable.Creator<

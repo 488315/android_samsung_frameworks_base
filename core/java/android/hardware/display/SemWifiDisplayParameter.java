@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
 
-/* loaded from: classes2.dex */
 public class SemWifiDisplayParameter implements Parcelable {
     public static final String GET_PARAMETER = "getparams";
     public static final String INIT_PARAMETER = "initparams";

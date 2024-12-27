@@ -3,7 +3,6 @@ package com.samsung.android.hardware.context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes6.dex */
 public class SemContext implements Parcelable {
     public static final Parcelable.Creator<SemContext> CREATOR =
             new Parcelable.Creator<

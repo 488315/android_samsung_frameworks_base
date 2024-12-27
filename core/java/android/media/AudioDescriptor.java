@@ -9,7 +9,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Arrays;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public class AudioDescriptor implements Parcelable {
     public static final Parcelable.Creator<AudioDescriptor> CREATOR =
             new Parcelable.Creator<

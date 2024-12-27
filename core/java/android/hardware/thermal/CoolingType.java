@@ -1,6 +1,5 @@
 package android.hardware.thermal;
 
-/* loaded from: classes2.dex */
 public @interface CoolingType {
     public static final int BATTERY = 1;
     public static final int CAMERA = 12;

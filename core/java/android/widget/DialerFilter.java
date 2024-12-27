@@ -14,7 +14,6 @@ import android.util.AttributeSet;
 import android.view.KeyEvent;
 
 @Deprecated
-/* loaded from: classes4.dex */
 public class DialerFilter extends RelativeLayout {
     public static final int DIGITS_AND_LETTERS = 1;
     public static final int DIGITS_AND_LETTERS_NO_DIGITS = 2;

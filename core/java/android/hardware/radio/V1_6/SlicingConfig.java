@@ -7,7 +7,6 @@ import android.os.HwParcel;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public final class SlicingConfig {
     public ArrayList<UrspRule> urspRules = new ArrayList<>();
     public ArrayList<SliceInfo> sliceInfo = new ArrayList<>();

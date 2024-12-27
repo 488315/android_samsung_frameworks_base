@@ -31,7 +31,6 @@ import java.util.Map;
 import java.util.Set;
 
 @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
-/* loaded from: classes3.dex */
 public class NetworkStatsDataMigrationUtils {
     private static final int BUFFER_SIZE = 8192;
     private static final int FILE_MAGIC = 1095648596;

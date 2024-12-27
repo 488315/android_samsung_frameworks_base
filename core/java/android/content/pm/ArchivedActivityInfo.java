@@ -16,7 +16,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public final class ArchivedActivityInfo {
     private static final String TAG = "ArchivedActivityInfo";
     private ComponentName mComponentName;

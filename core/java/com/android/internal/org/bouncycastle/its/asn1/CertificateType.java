@@ -3,7 +3,6 @@ package com.android.internal.org.bouncycastle.its.asn1;
 import com.android.internal.org.bouncycastle.asn1.ASN1Enumerated;
 import com.android.internal.org.bouncycastle.asn1.ASN1Primitive;
 
-/* loaded from: classes5.dex */
 public class CertificateType {
     public static final CertificateType Explicit = new CertificateType(0);
     public static final CertificateType Implicit = new CertificateType(1);

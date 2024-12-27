@@ -1,6 +1,5 @@
 package android.stats.dnsresolver;
 
-/* loaded from: classes3.dex */
 public final class DnsResolver {
     public static final int CS_FOUND = 2;
     public static final int CS_NOTFOUND = 1;

@@ -4,7 +4,6 @@ import android.app.usage.IUsageStatsManager;
 import android.content.Context;
 import android.os.ServiceManager;
 
-/* loaded from: classes6.dex */
 public class UsageStatsWrapper {
     private static final String TAG = "UsageStatsWrapper";
     private IUsageStatsManager mAppUsageStats =

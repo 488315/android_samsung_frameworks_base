@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 /* compiled from: ContentProviderNative.java */
-/* loaded from: classes.dex */
 final class ContentProviderProxy implements IContentProvider {
     private IBinder mRemote;
 

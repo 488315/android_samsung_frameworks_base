@@ -1,6 +1,5 @@
 package com.android.internal.telephony;
 
-/* loaded from: classes5.dex */
 public class EncodeException extends Exception {
     public static final int ERROR_EXCEED_SIZE = 1;
     public static final int ERROR_UNENCODABLE = 0;

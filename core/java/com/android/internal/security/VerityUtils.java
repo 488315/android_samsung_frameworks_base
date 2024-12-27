@@ -30,7 +30,6 @@ import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 
-/* loaded from: classes5.dex */
 public abstract class VerityUtils {
     public static final String FSVERITY_SIGNATURE_FILE_EXTENSION = ".fsv_sig";
     private static final int HASH_SIZE_BYTES = 32;

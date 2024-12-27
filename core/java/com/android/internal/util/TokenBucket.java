@@ -2,7 +2,6 @@ package com.android.internal.util;
 
 import android.os.SystemClock;
 
-/* loaded from: classes5.dex */
 public class TokenBucket {
     private int mAvailable;
     private final int mCapacity;

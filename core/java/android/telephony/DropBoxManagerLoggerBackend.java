@@ -15,7 +15,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import java.util.function.Function;
 
-/* loaded from: classes4.dex */
 public class DropBoxManagerLoggerBackend implements PersistentLoggerBackend {
     private static final int BUFFER_SIZE_BYTES = 512000;
     private static final String DROPBOX_TAG = "DropBoxManagerLoggerBackend";

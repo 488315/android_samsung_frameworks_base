@@ -15,7 +15,6 @@ import java.util.Set;
 
 import javax.security.auth.x500.X500Principal;
 
-/* loaded from: classes3.dex */
 public final class ParcelableKeyGenParameterSpec implements Parcelable {
     private static final int ALGORITHM_PARAMETER_SPEC_EC = 3;
     private static final int ALGORITHM_PARAMETER_SPEC_NONE = 1;

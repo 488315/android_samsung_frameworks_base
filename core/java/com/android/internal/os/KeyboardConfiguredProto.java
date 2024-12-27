@@ -1,6 +1,5 @@
 package com.android.internal.os;
 
-/* loaded from: classes5.dex */
 public final class KeyboardConfiguredProto {
 
     public final class RepeatedKeyboardLayoutConfig {

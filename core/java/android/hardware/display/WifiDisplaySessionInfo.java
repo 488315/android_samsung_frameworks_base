@@ -3,7 +3,6 @@ package android.hardware.display;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public final class WifiDisplaySessionInfo implements Parcelable {
     public static final Parcelable.Creator<WifiDisplaySessionInfo> CREATOR =
             new Parcelable.Creator<WifiDisplaySessionInfo>() { // from class:

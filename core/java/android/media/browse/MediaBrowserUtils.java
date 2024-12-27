@@ -5,7 +5,6 @@ import android.os.Bundle;
 import java.util.Collections;
 import java.util.List;
 
-/* loaded from: classes2.dex */
 public class MediaBrowserUtils {
     public static boolean areSameOptions(Bundle options1, Bundle options2) {
         if (options1 == options2) {

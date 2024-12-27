@@ -15,7 +15,6 @@ import java.security.SecureRandom;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 
-/* loaded from: classes3.dex */
 public class SystemKeyStore {
     private static final String KEY_FILE_EXTENSION = ".sks";
     private static final String SYSTEM_KEYSTORE_DIRECTORY = "misc/systemkeys";

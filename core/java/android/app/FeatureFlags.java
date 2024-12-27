@@ -1,6 +1,5 @@
 package android.app;
 
-/* loaded from: classes.dex */
 public interface FeatureFlags {
     boolean apiRichOngoing();
 

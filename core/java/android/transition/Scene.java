@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 
 import com.android.internal.R;
 
-/* loaded from: classes4.dex */
 public final class Scene {
     private Context mContext;
     Runnable mEnterAction;

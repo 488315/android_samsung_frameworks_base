@@ -2,7 +2,6 @@ package com.android.internal.org.bouncycastle.jcajce.spec;
 
 import java.security.spec.EncodedKeySpec;
 
-/* loaded from: classes5.dex */
 public class OpenSSHPrivateKeySpec extends EncodedKeySpec {
     private final String format;
 

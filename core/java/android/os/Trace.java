@@ -5,7 +5,6 @@ import android.annotation.SystemApi;
 import dalvik.annotation.optimization.CriticalNative;
 import dalvik.annotation.optimization.FastNative;
 
-/* loaded from: classes3.dex */
 public final class Trace {
     public static final int MAX_SECTION_NAME_LEN = 127;
     private static final String TAG = "Trace";

@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public final class MediaItemInfo implements Parcelable {
     public static final Parcelable.Creator<MediaItemInfo> CREATOR =
             new Parcelable.Creator<

@@ -6,7 +6,6 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-/* loaded from: classes2.dex */
 public class NavigationHandle extends View implements ButtonInterface {
     public NavigationHandle(Context context) {
         this(context, null);

@@ -7,7 +7,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes.dex */
 public interface IWallpaperManagerCallback extends IInterface {
     void onSemWallpaperChanged(int i, int i2, Bundle bundle) throws RemoteException;
 

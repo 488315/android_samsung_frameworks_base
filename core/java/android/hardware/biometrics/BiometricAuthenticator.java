@@ -5,7 +5,6 @@ import android.os.Parcelable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes2.dex */
 public interface BiometricAuthenticator {
     public static final int TYPE_ANY_BIOMETRIC = 270;
     public static final int TYPE_CREDENTIAL = 1;

@@ -13,7 +13,6 @@ import com.android.internal.R;
 import java.util.Locale;
 import java.util.Set;
 
-/* loaded from: classes5.dex */
 public class BilingualSuggestedLocaleAdapter extends SuggestedLocaleAdapter {
     private final Locale mSecondaryLocale;
     private final int mSecondaryLocaleTextDir;

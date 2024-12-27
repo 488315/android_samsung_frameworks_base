@@ -16,7 +16,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Semaphore;
 
-/* loaded from: classes.dex */
 public class SemInputInterpreter {
     public static final int MODE_DISABLE = 0;
     public static final int MODE_ENABLE = 1;

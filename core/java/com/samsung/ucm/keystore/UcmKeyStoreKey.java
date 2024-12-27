@@ -2,7 +2,6 @@ package com.samsung.ucm.keystore;
 
 import java.security.Key;
 
-/* loaded from: classes6.dex */
 public class UcmKeyStoreKey implements Key {
     protected String mAlgorithm;
     private final String mAlias;

@@ -4,7 +4,6 @@ import com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier;
 
 import com.samsung.android.globalactions.util.SamsungGlobalActionsAnalytics;
 
-/* loaded from: classes5.dex */
 public interface GMObjectIdentifiers {
     public static final ASN1ObjectIdentifier sm_scheme =
             new ASN1ObjectIdentifier("1.2.156.10197.1");

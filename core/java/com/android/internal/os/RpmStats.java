@@ -4,7 +4,6 @@ import android.util.ArrayMap;
 
 import java.util.Map;
 
-/* loaded from: classes5.dex */
 public final class RpmStats {
     public Map<String, PowerStatePlatformSleepState> mPlatformLowPowerStats = new ArrayMap();
     public Map<String, PowerStateSubsystem> mSubsystemLowPowerStats = new ArrayMap();

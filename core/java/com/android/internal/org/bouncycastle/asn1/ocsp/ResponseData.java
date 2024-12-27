@@ -12,7 +12,6 @@ import com.android.internal.org.bouncycastle.asn1.DERTaggedObject;
 import com.android.internal.org.bouncycastle.asn1.x509.Extensions;
 import com.android.internal.org.bouncycastle.asn1.x509.X509Extensions;
 
-/* loaded from: classes5.dex */
 public class ResponseData extends ASN1Object {
     private static final ASN1Integer V1 = new ASN1Integer(0);
     private ASN1GeneralizedTime producedAt;

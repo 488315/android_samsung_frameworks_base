@@ -9,7 +9,6 @@ import android.os.RemoteException;
 
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public interface ISemDualAppManager extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.app.ISemDualAppManager";
 

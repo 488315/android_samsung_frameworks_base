@@ -1,6 +1,5 @@
 package android.service.usb;
 
-/* loaded from: classes3.dex */
 public final class UsbConfigurationProto {
     public static final long ATTRIBUTES = 1155346202627L;
     public static final long ID = 1120986464257L;

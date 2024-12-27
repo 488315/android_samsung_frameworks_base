@@ -4,7 +4,6 @@ import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.util.Arrays;
 
-/* loaded from: classes6.dex */
 public class Wiper {
     public static void wipe(byte[] bytes) {
         if (bytes == null) {

@@ -11,7 +11,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.HashMap;
 import java.util.Map;
 
-/* loaded from: classes.dex */
 public class WallpaperColorOverrideAreas {
     public static final int DISPLAY_TYPE_PHONE = 0;
     public static final int DISPLAY_TYPE_SUB = 2;

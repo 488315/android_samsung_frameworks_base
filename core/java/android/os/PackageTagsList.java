@@ -12,7 +12,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.function.Function;
 
-/* loaded from: classes3.dex */
 public final class PackageTagsList implements Parcelable {
     public static final Parcelable.Creator<PackageTagsList> CREATOR =
             new Parcelable.Creator<PackageTagsList>() { // from class: android.os.PackageTagsList.1

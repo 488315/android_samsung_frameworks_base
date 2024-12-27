@@ -6,7 +6,6 @@ import com.android.internal.org.bouncycastle.crypto.DataLengthException;
 import com.android.internal.org.bouncycastle.crypto.params.ParametersWithIV;
 import com.android.internal.org.bouncycastle.util.Arrays;
 
-/* loaded from: classes5.dex */
 public class CBCBlockCipher implements BlockCipher {
     private byte[] IV;
     private int blockSize;

@@ -20,7 +20,6 @@ import java.util.Objects;
 import java.util.Random;
 import java.util.function.Supplier;
 
-/* loaded from: classes3.dex */
 public class SntpClient {
     private static final boolean DBG = true;
     private static final int NTP_LEAP_NOSYNC = 3;

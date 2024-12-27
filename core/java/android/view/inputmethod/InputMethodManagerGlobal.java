@@ -4,7 +4,6 @@ import android.os.RemoteException;
 
 import java.util.function.Consumer;
 
-/* loaded from: classes4.dex */
 public class InputMethodManagerGlobal {
     public static boolean isImeTraceAvailable() {
         return IInputMethodManagerGlobalInvoker.isAvailable();

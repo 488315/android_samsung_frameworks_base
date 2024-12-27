@@ -6,7 +6,6 @@ import java.io.Closeable;
 import java.io.IOException;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public class HidlMemory implements Closeable {
     private NativeHandle mHandle;
     private final String mName;

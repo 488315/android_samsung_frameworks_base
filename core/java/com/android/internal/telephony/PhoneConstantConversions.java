@@ -1,7 +1,6 @@
 package com.android.internal.telephony;
 
 
-/* loaded from: classes5.dex */
 public class PhoneConstantConversions {
     public static int convertCallState(PhoneConstants.State state) {
         switch (state) {

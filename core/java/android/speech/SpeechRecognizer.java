@@ -13,7 +13,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.List;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes3.dex */
 public class SpeechRecognizer {
     public static final String CONFIDENCE_SCORES = "confidence_scores";
     public static final String DETECTED_LANGUAGE = "detected_language";

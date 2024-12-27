@@ -1,6 +1,5 @@
 package android.view;
 
-/* loaded from: classes4.dex */
 public class InputEventAssigner {
     private static final String TAG = "InputEventAssigner";
     private boolean mHasUnprocessedDown = false;

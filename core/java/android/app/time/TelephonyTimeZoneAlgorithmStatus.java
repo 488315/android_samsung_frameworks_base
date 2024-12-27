@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public final class TelephonyTimeZoneAlgorithmStatus implements Parcelable {
     public static final Parcelable.Creator<TelephonyTimeZoneAlgorithmStatus> CREATOR =
             new Parcelable.Creator<TelephonyTimeZoneAlgorithmStatus>() { // from class:

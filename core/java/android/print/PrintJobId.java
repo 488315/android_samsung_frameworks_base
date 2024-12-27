@@ -7,7 +7,6 @@ import com.android.internal.util.Preconditions;
 
 import java.util.UUID;
 
-/* loaded from: classes3.dex */
 public final class PrintJobId implements Parcelable {
     public static final Parcelable.Creator<PrintJobId> CREATOR =
             new Parcelable.Creator<PrintJobId>() { // from class: android.print.PrintJobId.1

@@ -8,7 +8,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class PackageOverride {
     public static final int VALUE_DISABLED = 2;
     public static final int VALUE_ENABLED = 1;

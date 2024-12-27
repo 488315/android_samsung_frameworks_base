@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public final class PictureInPictureUiState implements Parcelable {
     public static final Parcelable.Creator<PictureInPictureUiState> CREATOR =
             new Parcelable.Creator<PictureInPictureUiState>() { // from class:

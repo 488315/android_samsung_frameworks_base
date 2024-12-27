@@ -7,7 +7,6 @@ import com.samsung.android.lock.LsConstants;
 import java.io.File;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-/* loaded from: classes.dex */
 public final class SQLiteWalBackgroundCheckpoint {
     private static final int CHECKPOINT_THRESHOLD = 600000;
     private static final long HUGE_WAL_SIZE_THRESHOLD = 104857600;

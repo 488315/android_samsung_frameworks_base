@@ -1,6 +1,5 @@
 package com.samsung.android.globalactions.presentation.viewmodel;
 
-/* loaded from: classes6.dex */
 public class DefaultActionNames {
     public static final String ACTION_BUG_REPORT = "bug_report";
     public static final String ACTION_DATA_MODE = "data_mode";

@@ -1,6 +1,5 @@
 package android.service.procstats;
 
-/* loaded from: classes3.dex */
 public final class ProcessStatsAssociationProto {
     public static final long ASSOC_PACKAGE_NAME = 1138166333442L;
     public static final long ASSOC_PROCESS_NAME = 1138166333441L;

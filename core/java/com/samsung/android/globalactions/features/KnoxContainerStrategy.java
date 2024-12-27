@@ -5,7 +5,6 @@ import com.samsung.android.globalactions.presentation.strategies.InitializationS
 import com.samsung.android.globalactions.util.ConditionChecker;
 import com.samsung.android.globalactions.util.SystemConditions;
 
-/* loaded from: classes6.dex */
 public class KnoxContainerStrategy implements InitializationStrategy {
     private final ConditionChecker mConditionChecker;
     private final SamsungGlobalActions mGlobalActions;

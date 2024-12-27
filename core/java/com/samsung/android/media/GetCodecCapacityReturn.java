@@ -4,7 +4,6 @@ import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes6.dex */
 public class GetCodecCapacityReturn implements Parcelable {
     public static final Parcelable.Creator<GetCodecCapacityReturn> CREATOR =
             new Parcelable.Creator<

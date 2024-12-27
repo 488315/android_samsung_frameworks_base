@@ -5,7 +5,6 @@ import android.os.RemoteException;
 import android.os.SystemClock;
 import android.util.Singleton;
 
-/* loaded from: classes4.dex */
 public class TransitionMetrics {
     private static final Singleton<TransitionMetrics> sTransitionMetrics =
             new Singleton<TransitionMetrics>() { // from class: android.window.TransitionMetrics.1

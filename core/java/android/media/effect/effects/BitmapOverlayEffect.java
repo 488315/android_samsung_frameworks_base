@@ -4,7 +4,6 @@ import android.filterpacks.imageproc.BitmapOverlayFilter;
 import android.media.effect.EffectContext;
 import android.media.effect.SingleFilterEffect;
 
-/* loaded from: classes2.dex */
 public class BitmapOverlayEffect extends SingleFilterEffect {
     public BitmapOverlayEffect(EffectContext context, String name) {
         super(context, name, BitmapOverlayFilter.class, "image", "image", new Object[0]);

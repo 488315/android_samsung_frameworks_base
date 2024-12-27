@@ -2,7 +2,6 @@ package android.content;
 
 import java.util.ArrayList;
 
-/* loaded from: classes.dex */
 public class UriMatcher {
     private static final int EXACT = 0;
     public static final int NO_MATCH = -1;

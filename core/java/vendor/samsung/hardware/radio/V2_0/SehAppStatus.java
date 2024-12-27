@@ -8,7 +8,6 @@ import android.os.HwParcel;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/* loaded from: classes6.dex */
 public final class SehAppStatus {
     public AppStatus base = new AppStatus();
     public int pin1NumRetries = 0;

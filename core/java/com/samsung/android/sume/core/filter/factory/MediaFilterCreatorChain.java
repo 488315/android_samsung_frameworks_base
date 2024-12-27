@@ -16,7 +16,6 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-/* loaded from: classes6.dex */
 class MediaFilterCreatorChain implements MediaFilterCreator {
     private List<MediaFilterCreator> creators;
     private DescriptorFinder descriptorFinder;

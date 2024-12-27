@@ -19,7 +19,6 @@ jadx.core.utils.exceptions.JadxRuntimeException: Init of enum field 'DISPLAY_COM
  */
 /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes2.dex */
 public final class PackageFeature {
     public static final /* synthetic */ PackageFeature[] $VALUES;
     public static final PackageFeature BROADCAST_RECEIVER_ALLOW_LIST;

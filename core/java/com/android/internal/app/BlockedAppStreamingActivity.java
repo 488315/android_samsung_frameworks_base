@@ -8,7 +8,6 @@ import android.util.Slog;
 
 import com.android.internal.R;
 
-/* loaded from: classes5.dex */
 public class BlockedAppStreamingActivity extends AlertActivity {
     private static final String BLOCKED_COMPONENT_PLAYSTORE = "com.android.vending";
     private static final String BLOCKED_COMPONENT_SETTINGS = "com.android.settings";

@@ -11,7 +11,6 @@ import com.android.internal.R;
 
 import java.util.function.Supplier;
 
-/* loaded from: classes.dex */
 public class CantAddAccountActivity extends Activity {
     public static final String EXTRA_ERROR_CODE = "android.accounts.extra.ERROR_CODE";
 

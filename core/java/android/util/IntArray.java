@@ -7,7 +7,6 @@ import com.samsung.android.knox.analytics.database.Contract;
 
 import java.util.Arrays;
 
-/* loaded from: classes4.dex */
 public class IntArray implements Cloneable {
     private static final int MIN_CAPACITY_INCREMENT = 12;
     private int mSize;

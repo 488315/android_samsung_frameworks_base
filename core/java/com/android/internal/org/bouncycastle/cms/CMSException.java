@@ -1,6 +1,5 @@
 package com.android.internal.org.bouncycastle.cms;
 
-/* loaded from: classes5.dex */
 public class CMSException extends Exception {
     Exception e;
 

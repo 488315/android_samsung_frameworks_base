@@ -1,6 +1,5 @@
 package android.app;
 
-/* loaded from: classes.dex */
 public final class NotificationChannelProto {
     public static final long ALLOW_APP_OVERLAY = 1133871366163L;
     public static final long AUDIO_ATTRIBUTES = 1146756268048L;

@@ -6,7 +6,6 @@ import android.hardware.broadcastradio.V2_0.AmFmBandRange$$ExternalSyntheticOutl
 import java.util.Objects;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes.dex */
 public final class ConfidenceLevel {
     public int userId = 0;
     public int levelPercent = 0;

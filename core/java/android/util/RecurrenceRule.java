@@ -16,7 +16,6 @@ import java.time.temporal.TemporalAmount;
 import java.util.Iterator;
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public class RecurrenceRule implements Parcelable {
     private static final int VERSION_INIT = 0;
     public final ZonedDateTime end;

@@ -8,7 +8,6 @@ import com.android.internal.org.bouncycastle.math.ec.ECFieldElement;
 
 import java.math.BigInteger;
 
-/* loaded from: classes5.dex */
 public class X9FieldElement extends ASN1Object {
     private static X9IntegerConverter converter = new X9IntegerConverter();
     protected ECFieldElement f;

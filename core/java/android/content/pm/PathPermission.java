@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.PatternMatcher;
 
-/* loaded from: classes.dex */
 public class PathPermission extends PatternMatcher {
     public static final Parcelable.Creator<PathPermission> CREATOR =
             new Parcelable.Creator<

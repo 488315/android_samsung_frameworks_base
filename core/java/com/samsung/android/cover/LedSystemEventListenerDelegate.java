@@ -7,7 +7,6 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.RemoteException;
 
-/* loaded from: classes6.dex */
 class LedSystemEventListenerDelegate extends INfcLedCoverTouchListenerCallback.Stub {
     private static final int MSG_SYSTEM_COVER_EVENT = 0;
     private ListenerDelegateHandler mHandler;

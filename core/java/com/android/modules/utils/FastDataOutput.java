@@ -8,7 +8,6 @@ import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Objects;
 
-/* loaded from: classes5.dex */
 public class FastDataOutput implements DataOutput, Flushable, Closeable {
     protected static final int DEFAULT_BUFFER_SIZE = 32768;
     protected static final int MAX_UNSIGNED_SHORT = 65535;

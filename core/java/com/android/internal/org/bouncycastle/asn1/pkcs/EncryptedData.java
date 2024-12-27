@@ -13,7 +13,6 @@ import com.android.internal.org.bouncycastle.asn1.BERSequence;
 import com.android.internal.org.bouncycastle.asn1.BERTaggedObject;
 import com.android.internal.org.bouncycastle.asn1.x509.AlgorithmIdentifier;
 
-/* loaded from: classes5.dex */
 public class EncryptedData extends ASN1Object {
     ASN1Sequence data;
 

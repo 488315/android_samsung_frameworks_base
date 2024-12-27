@@ -2,7 +2,6 @@ package android.text;
 
 import java.util.Locale;
 
-/* loaded from: classes4.dex */
 public final class BidiFormatter {
     private static final int DEFAULT_FLAGS = 2;
     private static final int DIR_LTR = -1;

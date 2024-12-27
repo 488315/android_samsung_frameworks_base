@@ -15,7 +15,6 @@ import java.io.InputStream;
 import java.lang.reflect.Constructor;
 import java.util.HashMap;
 
-/* loaded from: classes.dex */
 public final class DrawableInflater {
     private static final HashMap<String, Constructor<? extends Drawable>> CONSTRUCTOR_MAP =
             new HashMap<>();

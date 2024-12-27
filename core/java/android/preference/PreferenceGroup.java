@@ -13,7 +13,6 @@ import java.util.Collections;
 import java.util.List;
 
 @Deprecated
-/* loaded from: classes3.dex */
 public abstract class PreferenceGroup extends Preference
         implements GenericInflater.Parent<Preference> {
     private boolean mAttachedToActivity;

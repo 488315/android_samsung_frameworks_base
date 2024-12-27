@@ -1,6 +1,5 @@
 package com.android.server.am;
 
-/* loaded from: classes5.dex */
 public final class ActiveServicesProto {
     public static final long SERVICES_BY_USERS = 2246267895809L;
 

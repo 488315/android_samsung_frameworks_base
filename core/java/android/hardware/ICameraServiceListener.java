@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes.dex */
 public interface ICameraServiceListener extends IInterface {
     public static final int STATUS_ENUMERATING = 2;
     public static final int STATUS_NOT_AVAILABLE = -2;

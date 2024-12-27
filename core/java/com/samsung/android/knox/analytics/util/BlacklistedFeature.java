@@ -2,7 +2,6 @@ package com.samsung.android.knox.analytics.util;
 
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public class BlacklistedFeature {
     private List<String> mEvents;
     private String mFeature;

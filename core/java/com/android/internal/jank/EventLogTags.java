@@ -2,7 +2,6 @@ package com.android.internal.jank;
 
 import android.util.EventLog;
 
-/* loaded from: classes5.dex */
 public class EventLogTags {
     public static final int JANK_CUJ_EVENTS_BEGIN_REQUEST = 37001;
     public static final int JANK_CUJ_EVENTS_CANCEL_REQUEST = 37003;

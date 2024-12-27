@@ -13,7 +13,6 @@ import com.android.internal.telecom.IInCallAdapter;
 import java.util.List;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes3.dex */
 public final class InCallAdapter {
     private final IInCallAdapter mAdapter;
 

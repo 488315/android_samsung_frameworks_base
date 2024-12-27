@@ -11,7 +11,6 @@ import com.android.internal.util.AnnotationValidations;
 import java.lang.annotation.Annotation;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public final class AuthenticationAcquiredInfo implements Parcelable {
     public static final Parcelable.Creator<AuthenticationAcquiredInfo> CREATOR =
             new Parcelable.Creator<AuthenticationAcquiredInfo>() { // from class:

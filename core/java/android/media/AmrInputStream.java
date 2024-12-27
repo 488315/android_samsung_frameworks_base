@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 
-/* loaded from: classes2.dex */
 public final class AmrInputStream extends InputStream {
     private static final int SAMPLES_PER_FRAME = 160;
     private static final String TAG = "AmrInputStream";

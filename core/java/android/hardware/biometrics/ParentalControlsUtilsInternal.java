@@ -7,7 +7,6 @@ import android.os.Build;
 import android.os.UserHandle;
 import android.provider.Settings;
 
-/* loaded from: classes2.dex */
 public class ParentalControlsUtilsInternal {
     private static final String TEST_ALWAYS_REQUIRE_CONSENT_CLASS =
             "android.hardware.biometrics.ParentalControlsUtilsInternal.require_consent_class";

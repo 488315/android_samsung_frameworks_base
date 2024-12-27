@@ -3,7 +3,6 @@ package com.android.ims.internal.uce.common;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes5.dex */
 public class StatusCode implements Parcelable {
     public static final Parcelable.Creator<StatusCode> CREATOR =
             new Parcelable.Creator<

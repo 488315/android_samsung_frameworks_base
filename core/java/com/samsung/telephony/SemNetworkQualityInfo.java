@@ -7,7 +7,6 @@ import com.android.telephony.Rlog;
 import java.util.HashMap;
 import java.util.Locale;
 
-/* loaded from: classes6.dex */
 public class SemNetworkQualityInfo {
     private static final String FLOAT_TYPE = "3";
     private static final String INTEGER_TYPE = "1";

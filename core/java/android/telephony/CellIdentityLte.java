@@ -14,7 +14,6 @@ import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
 
-/* loaded from: classes4.dex */
 public final class CellIdentityLte extends CellIdentity {
     private static final boolean DBG = false;
     private static final int MAX_BANDWIDTH = 20000;

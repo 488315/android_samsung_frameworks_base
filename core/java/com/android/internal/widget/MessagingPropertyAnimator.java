@@ -10,7 +10,6 @@ import android.view.animation.PathInterpolator;
 
 import com.samsung.android.wallpaperbackup.GenerateXML;
 
-/* loaded from: classes5.dex */
 public class MessagingPropertyAnimator implements View.OnLayoutChangeListener {
     private static final long APPEAR_ANIMATION_LENGTH = 210;
     private static final int TAG_ALPHA_ANIMATOR = 16909848;

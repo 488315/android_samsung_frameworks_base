@@ -8,7 +8,6 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 
 @Deprecated
-/* loaded from: classes3.dex */
 public class Program extends BaseObj {
     static final int MAX_CONSTANT = 8;
     static final int MAX_INPUT = 8;

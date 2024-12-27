@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteException;
 import android.net.Uri;
 import android.util.Log;
 
-/* loaded from: classes5.dex */
 public final class SqliteWrapper {
     private static final String TAG = "SqliteWrapper";
 

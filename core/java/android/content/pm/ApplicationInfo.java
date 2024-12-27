@@ -35,7 +35,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
-/* loaded from: classes.dex */
 public class ApplicationInfo extends PackageItemInfo implements Parcelable {
     public static final int AUTO_REVOKE_ALLOWED = 0;
     public static final int AUTO_REVOKE_DISALLOWED = 2;

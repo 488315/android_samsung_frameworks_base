@@ -1,6 +1,5 @@
 package android.service.notification;
 
-/* loaded from: classes3.dex */
 public final class NotificationServiceProto {
     public static final int ALARMS = 3;
     public static final int CHANNEL_POLICY_NONE = 2;

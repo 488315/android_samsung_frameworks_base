@@ -3,7 +3,6 @@ package android.tracing.perfetto;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes4.dex */
 public class InitArguments {
     public static final int PERFETTO_BACKEND_IN_PROCESS = 1;
     public static final int PERFETTO_BACKEND_SYSTEM = 2;

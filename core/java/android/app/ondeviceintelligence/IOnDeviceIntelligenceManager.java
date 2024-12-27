@@ -12,7 +12,6 @@ import com.android.internal.infra.AndroidFuture;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
 public interface IOnDeviceIntelligenceManager extends IInterface {
     public static final String DESCRIPTOR =
             "android.app.ondeviceintelligence.IOnDeviceIntelligenceManager";

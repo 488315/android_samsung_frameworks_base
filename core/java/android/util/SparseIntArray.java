@@ -5,7 +5,6 @@ import com.android.internal.util.GrowingArrayUtils;
 
 import java.util.Arrays;
 
-/* loaded from: classes4.dex */
 public class SparseIntArray implements Cloneable {
     private int[] mKeys;
     private int mSize;

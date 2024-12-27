@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public abstract class ContentCaptureSession implements AutoCloseable {
     public static final String EXTRA_BINDER = "binder";
     public static final String EXTRA_ENABLED_STATE = "enabled";

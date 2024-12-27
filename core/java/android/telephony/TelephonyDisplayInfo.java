@@ -8,7 +8,6 @@ import com.android.internal.telephony.DctConstants;
 
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public final class TelephonyDisplayInfo implements Parcelable {
     public static final Parcelable.Creator<TelephonyDisplayInfo> CREATOR =
             new Parcelable.Creator<

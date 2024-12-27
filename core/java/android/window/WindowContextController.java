@@ -7,7 +7,6 @@ import android.util.Log;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes4.dex */
 public class WindowContextController {
     private static final boolean DEBUG_ATTACH = false;
     private static final String TAG = "WindowContextController";

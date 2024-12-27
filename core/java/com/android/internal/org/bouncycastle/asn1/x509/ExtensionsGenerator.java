@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.util.Hashtable;
 import java.util.Vector;
 
-/* loaded from: classes5.dex */
 public class ExtensionsGenerator {
     private Hashtable extensions = new Hashtable();
     private Vector extOrdering = new Vector();

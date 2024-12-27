@@ -11,7 +11,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.FunctionReferenceImpl;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes.dex */
 final /* synthetic */ class CommunalHubKt$CommunalHub$4$7 extends FunctionReferenceImpl implements Function0 {
     public CommunalHubKt$CommunalHub$4$7(Object obj) {
         super(0, obj, CommunalViewModel.class, "onEnableWorkProfileDialogConfirm", "onEnableWorkProfileDialogConfirm()V", 0);

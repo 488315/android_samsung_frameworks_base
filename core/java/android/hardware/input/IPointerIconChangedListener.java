@@ -7,7 +7,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.view.PointerIcon;
 
-/* loaded from: classes2.dex */
 public interface IPointerIconChangedListener extends IInterface {
     public static final String DESCRIPTOR = "android.hardware.input.IPointerIconChangedListener";
 

@@ -4,7 +4,6 @@ import android.os.Build;
 import android.os.SystemProperties;
 import android.util.Log;
 
-/* loaded from: classes5.dex */
 public class SystemUiSystemPropertiesFlags {
     private static final FlagResolver MAIN_RESOLVER;
     public static final Flag TEAMFOOD = devFlag("persist.sysui.teamfood");

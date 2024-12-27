@@ -1,6 +1,5 @@
 package com.samsung.android.location;
 
-/* loaded from: classes6.dex */
 public class SemBluetoothGeofence {
     private final String mBssid;
     private final String mRequestId;

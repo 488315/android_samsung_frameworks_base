@@ -2,7 +2,6 @@ package android.app.admin;
 
 import com.android.internal.os.IResultReceiver;
 
-/* loaded from: classes.dex */
 public interface DevicePolicySafetyChecker {
     int getUnsafeOperationReason(int i);
 

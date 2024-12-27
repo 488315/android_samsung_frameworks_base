@@ -9,7 +9,6 @@ import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes.dex */
 public interface INetd extends IInterface {
     public static final int CLAT_MARK = -559038041;
     public static final int CONF = 1;

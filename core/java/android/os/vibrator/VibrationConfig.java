@@ -8,7 +8,6 @@ import com.android.internal.R;
 
 import java.util.Arrays;
 
-/* loaded from: classes3.dex */
 public class VibrationConfig {
     private final int mDefaultAlarmVibrationIntensity;
     private final int mDefaultHapticFeedbackIntensity;

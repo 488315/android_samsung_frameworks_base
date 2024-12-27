@@ -10,7 +10,6 @@ import android.os.RemoteException;
 
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public class SemEventDelegationManager {
     public static final String BUNDLE_KEY_COMPONENT = "component";
     public static final String BUNDLE_KEY_COMPONENT_LIST = "component_list";

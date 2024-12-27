@@ -3,7 +3,6 @@ package org.tensorflow.lite.nnapi;
 import org.tensorflow.lite.Delegate;
 import org.tensorflow.lite.TensorFlowLite;
 
-/* loaded from: classes.dex */
 public class NnApiDelegate implements Delegate, AutoCloseable {
     private static final long INVALID_DELEGATE_HANDLE = 0;
     private long delegateHandle;

@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.UUID;
 
-/* loaded from: classes2.dex */
 public abstract class DrmInitData {
     @Deprecated
     public abstract SchemeInitData get(UUID uuid);

@@ -2,7 +2,6 @@ package android.service.controls.actions;
 
 import android.os.Bundle;
 
-/* loaded from: classes3.dex */
 public final class CommandAction extends ControlAction {
     private static final int TYPE = 5;
 

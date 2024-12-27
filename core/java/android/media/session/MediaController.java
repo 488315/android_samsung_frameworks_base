@@ -26,7 +26,6 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes2.dex */
 public final class MediaController {
     private static final int MSG_DESTROYED = 8;
     private static final int MSG_EVENT = 1;

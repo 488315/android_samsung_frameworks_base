@@ -9,7 +9,6 @@ import android.os.Parcel;
 import android.os.PersistableBundle;
 import android.os.RemoteException;
 
-/* loaded from: classes3.dex */
 public interface IIncrementalService extends IInterface {
     public static final int BIND_PERMANENT = 1;
     public static final int BIND_TEMPORARY = 0;

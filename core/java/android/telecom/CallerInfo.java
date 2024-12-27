@@ -24,7 +24,6 @@ import com.android.internal.R;
 import java.util.Arrays;
 import java.util.Locale;
 
-/* loaded from: classes3.dex */
 public class CallerInfo {
     private static final String TAG = "CallerInfo";
     public static final long USER_TYPE_CURRENT = 0;

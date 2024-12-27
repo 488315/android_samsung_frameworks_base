@@ -7,7 +7,6 @@ import android.security.apc.IConfirmationCallback;
 import android.security.apc.IProtectedConfirmation;
 import android.util.Log;
 
-/* loaded from: classes3.dex */
 public class AndroidProtectedConfirmation {
     public static final int ERROR_ABORTED = 2;
     public static final int ERROR_CANCELED = 1;

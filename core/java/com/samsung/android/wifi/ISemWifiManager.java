@@ -17,7 +17,6 @@ import java.util.function.BiConsumer;
 import java.util.function.IntConsumer;
 import java.util.stream.IntStream;
 
-/* loaded from: classes6.dex */
 public interface ISemWifiManager extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.wifi.ISemWifiManager";
 

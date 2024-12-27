@@ -11,7 +11,6 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* loaded from: classes.dex */
 public class SemInputSettingObserver {
     private static final int HANDLER_GLOBAL_START = 200;
     private static final int HANDLER_SECURE_START = 100;

@@ -29,7 +29,6 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-/* loaded from: classes4.dex */
 public interface ImeTracker {
     public static final int ORIGIN_CLIENT = 5;
     public static final int ORIGIN_IME = 7;

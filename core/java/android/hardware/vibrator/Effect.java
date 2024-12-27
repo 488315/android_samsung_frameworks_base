@@ -1,6 +1,5 @@
 package android.hardware.vibrator;
 
-/* loaded from: classes2.dex */
 public @interface Effect {
     public static final int CLICK = 0;
     public static final int DOUBLE_CLICK = 1;

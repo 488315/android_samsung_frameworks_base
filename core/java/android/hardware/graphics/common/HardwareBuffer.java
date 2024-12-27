@@ -5,7 +5,6 @@ import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public class HardwareBuffer implements Parcelable {
     public static final Parcelable.Creator<HardwareBuffer> CREATOR =
             new Parcelable.Creator<HardwareBuffer>() { // from class:

@@ -3,7 +3,6 @@ package com.android.internal.pm.parsing;
 import com.android.internal.pm.parsing.pkg.AndroidPackageLegacyUtils;
 import com.android.server.pm.pkg.AndroidPackage;
 
-/* loaded from: classes5.dex */
 public class AppInfoUtils {
     public static int appInfoFlags(AndroidPackage pkg) {
         int pkgWithoutStateFlags =

@@ -10,7 +10,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.accessibility.AccessibilityManager;
 
-/* loaded from: classes5.dex */
 public class SemAnimatorUtils {
     public static final TypeEvaluator<Rect> BOUNDS_EVALUATOR =
             new TypeEvaluator<

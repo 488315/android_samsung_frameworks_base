@@ -8,7 +8,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* loaded from: classes.dex */
 public class SemInputTaas {
     private static final String TAG = "SemInputTaas";
     private final Context context;

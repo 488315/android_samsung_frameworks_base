@@ -8,7 +8,6 @@ import libcore.util.NativeAllocationRegistry;
 import java.util.NoSuchElementException;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public abstract class HwBinder implements IHwBinder {
     private static final String TAG = "HwBinder";
     private static final NativeAllocationRegistry sNativeRegistry;

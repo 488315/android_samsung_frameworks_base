@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 import java.util.Arrays;
 
-/* loaded from: classes3.dex */
 public class HiddenNetwork implements Parcelable {
     public static final Parcelable.Creator<HiddenNetwork> CREATOR =
             new Parcelable.Creator<

@@ -16,7 +16,6 @@ import android.util.Log;
 import java.util.Objects;
 import java.util.Stack;
 
-/* loaded from: classes5.dex */
 public class AsyncChannel {
     private static final int BASE = 69632;
     public static final int CMD_CHANNEL_DISCONNECT = 69635;

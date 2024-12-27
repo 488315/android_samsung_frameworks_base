@@ -9,7 +9,6 @@ import com.android.systemui.R;
 import com.android.systemui.biometrics.shared.model.UdfpsOverlayParams;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes.dex */
 public final class UdfpsUtils {
     public static Point getPortraitTouch(int i, MotionEvent motionEvent, UdfpsOverlayParams udfpsOverlayParams) {
         Point point = new Point((int) motionEvent.getRawX(i), (int) motionEvent.getRawY(i));

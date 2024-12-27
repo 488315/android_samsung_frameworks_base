@@ -11,7 +11,6 @@ import java.security.Principal;
 import java.util.Hashtable;
 import java.util.Vector;
 
-/* loaded from: classes5.dex */
 public class X509Principal extends X509Name implements Principal {
     private static ASN1Sequence readSequence(ASN1InputStream aIn) throws IOException {
         try {

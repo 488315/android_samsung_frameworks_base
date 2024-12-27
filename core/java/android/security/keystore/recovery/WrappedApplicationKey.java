@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class WrappedApplicationKey implements Parcelable {
     public static final Parcelable.Creator<WrappedApplicationKey> CREATOR =
             new Parcelable.Creator<

@@ -12,7 +12,6 @@ import android.os.RemoteException;
 import android.service.notification.StatusBarNotification;
 import android.view.Surface;
 
-/* loaded from: classes6.dex */
 public interface IRemoteAppMode extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.remoteappmode.IRemoteAppMode";
 

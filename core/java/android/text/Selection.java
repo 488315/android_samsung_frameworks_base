@@ -1,6 +1,5 @@
 package android.text;
 
-/* loaded from: classes4.dex */
 public class Selection {
     private static final char PARAGRAPH_SEPARATOR = '\n';
     private static final Object SELECTION_MEMORY = new MEMORY();

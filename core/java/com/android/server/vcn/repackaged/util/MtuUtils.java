@@ -10,7 +10,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-/* loaded from: classes5.dex */
 public class MtuUtils {
     private static final Map<Integer, Integer> AUTHCRYPT_ALGORITHM_OVERHEAD;
     private static final Map<Integer, Integer> AUTH_ALGORITHM_OVERHEAD;

@@ -1,6 +1,5 @@
 package android.view;
 
-/* loaded from: classes4.dex */
 public abstract class FrameStats {
     public static final long UNDEFINED_TIME_NANO = -1;
     protected long[] mFramesPresentedTimeNano;

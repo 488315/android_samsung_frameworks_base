@@ -56,7 +56,6 @@ import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.PBEParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
-/* loaded from: classes5.dex */
 public class BcKeyStoreSpi extends KeyStoreSpi implements BCKeyStore {
     static final int CERTIFICATE = 1;
     static final int KEY = 2;

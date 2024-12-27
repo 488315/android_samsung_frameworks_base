@@ -37,7 +37,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Queue;
 
-/* loaded from: classes3.dex */
 public class TvView extends ViewGroup {
     private static final boolean DEBUG = false;
     private static final String TAG = "TvView";

@@ -3,7 +3,6 @@ package android.gesture;
 import java.io.DataInputStream;
 import java.io.IOException;
 
-/* loaded from: classes.dex */
 public class GesturePoint {
     public final long timestamp;
     public final float x;

@@ -1,6 +1,5 @@
 package android.view.flags;
 
-/* loaded from: classes4.dex */
 public interface FeatureFlags {
     boolean addSchandleToVriSurface();
 

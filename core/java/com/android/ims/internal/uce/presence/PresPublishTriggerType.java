@@ -3,7 +3,6 @@ package com.android.ims.internal.uce.presence;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes5.dex */
 public class PresPublishTriggerType implements Parcelable {
     public static final Parcelable.Creator<PresPublishTriggerType> CREATOR =
             new Parcelable.Creator<

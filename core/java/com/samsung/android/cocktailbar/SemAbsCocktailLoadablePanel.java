@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-/* loaded from: classes5.dex */
 public abstract class SemAbsCocktailLoadablePanel {
     public static final String EXTRA_CONFIGURATION_KEY_POSITION = "cocktail_position";
     public static final int POSITION_ON_BOTTOM = 3;

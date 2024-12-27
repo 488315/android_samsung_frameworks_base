@@ -10,7 +10,6 @@ import libcore.util.NativeAllocationRegistry;
 
 import java.lang.ref.WeakReference;
 
-/* loaded from: classes4.dex */
 public abstract class DisplayEventReceiver {
     public static final int EVENT_REGISTRATION_FRAME_RATE_OVERRIDE_FLAG = 2;
     public static final int EVENT_REGISTRATION_MODE_CHANGED_FLAG = 1;

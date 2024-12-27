@@ -29,7 +29,6 @@ import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/* loaded from: classes4.dex */
 public class Linkify {
 
     @Deprecated public static final int ALL = 15;

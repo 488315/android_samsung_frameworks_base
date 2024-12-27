@@ -10,7 +10,6 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.nio.ByteBuffer;
 
-/* loaded from: classes6.dex */
 public class IAFDHotfix {
     private static final String TAG = "IAFT_IAFDHotfix";
 

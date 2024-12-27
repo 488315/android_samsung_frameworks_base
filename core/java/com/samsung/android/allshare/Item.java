@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.StringTokenizer;
 
-/* loaded from: classes3.dex */
 public abstract class Item implements Parcelable {
     public abstract String getAlbumTitle();
 

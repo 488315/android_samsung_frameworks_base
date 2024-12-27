@@ -8,7 +8,6 @@ import android.os.RemoteException;
 
 import java.util.List;
 
-/* loaded from: classes2.dex */
 public interface IMediaRouter2Manager extends IInterface {
     public static final String DESCRIPTOR = "android.media.IMediaRouter2Manager";
 

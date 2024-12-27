@@ -11,7 +11,6 @@ import android.os.Parcelable;
 import com.android.internal.util.AnnotationValidations;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class Entry implements Parcelable {
     public static final Parcelable.Creator<Entry> CREATOR =
             new Parcelable.Creator<Entry>() { // from class: android.credentials.selection.Entry.1

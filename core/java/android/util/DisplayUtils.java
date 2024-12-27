@@ -5,7 +5,6 @@ import android.view.Display;
 
 import com.android.internal.R;
 
-/* loaded from: classes4.dex */
 public class DisplayUtils {
     public static int getDisplayUniqueIdConfigIndex(Resources res, String displayUniqueId) {
         if (displayUniqueId == null || displayUniqueId.isEmpty()) {

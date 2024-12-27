@@ -21,7 +21,6 @@ import java.util.concurrent.TimeoutException;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
-/* loaded from: classes.dex */
 public class BlobStoreManager {
     public static final int COMMIT_RESULT_ERROR = 1;
     public static final int COMMIT_RESULT_SUCCESS = 0;

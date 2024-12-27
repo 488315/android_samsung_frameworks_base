@@ -1,6 +1,5 @@
 package android.text.method;
 
-/* loaded from: classes4.dex */
 public class SingleLineTransformationMethod extends ReplacementTransformationMethod {
     private static char[] ORIGINAL = {'\n', '\r'};
     private static char[] REPLACEMENT = {' ', 65279};

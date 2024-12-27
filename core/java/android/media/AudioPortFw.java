@@ -4,7 +4,6 @@ import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public class AudioPortFw implements Parcelable {
     public static final Parcelable.Creator<AudioPortFw> CREATOR =
             new Parcelable.Creator<AudioPortFw>() { // from class: android.media.AudioPortFw.1

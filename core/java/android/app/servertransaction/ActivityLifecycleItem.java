@@ -5,7 +5,6 @@ import android.os.Parcel;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes.dex */
 public abstract class ActivityLifecycleItem extends ActivityTransactionItem {
     public static final int ON_CREATE = 1;
     public static final int ON_DESTROY = 6;

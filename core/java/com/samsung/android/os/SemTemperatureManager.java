@@ -11,7 +11,6 @@ import com.sec.android.sdhms.ISamsungDeviceHealthManager;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public class SemTemperatureManager {
     private static String LOG_TAG = SemTemperatureManager.class.getSimpleName();
     private static final int SDHMS_VALUE_SIOP_LEVEL = 1;

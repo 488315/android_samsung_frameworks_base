@@ -7,7 +7,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.List;
 import java.util.Map;
 
-/* loaded from: classes.dex */
 public abstract class JobScheduler {
     public static final int PENDING_JOB_REASON_APP = 1;
     public static final int PENDING_JOB_REASON_APP_STANDBY = 2;

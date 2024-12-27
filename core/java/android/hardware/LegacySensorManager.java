@@ -9,7 +9,6 @@ import android.view.IWindowManager;
 import java.util.HashMap;
 import java.util.List;
 
-/* loaded from: classes.dex */
 final class LegacySensorManager {
     private static boolean sInitialized;
     private static int sRotation = 0;

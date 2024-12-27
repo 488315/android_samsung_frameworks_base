@@ -6,7 +6,6 @@ import com.android.internal.org.bouncycastle.jcajce.provider.config.Configurable
 import com.android.internal.org.bouncycastle.jcajce.provider.symmetric.util.BaseBlockCipher;
 import com.android.internal.org.bouncycastle.jcajce.provider.symmetric.util.PBESecretKeyFactory;
 
-/* loaded from: classes5.dex */
 public final class Twofish {
     private Twofish() {}
 

@@ -6,7 +6,6 @@ import android.filterfw.core.FrameFormat;
 import android.filterfw.core.FrameManager;
 import android.filterfw.format.ImageFormat;
 
-/* loaded from: classes2.dex */
 public abstract class FilterEffect extends Effect {
     protected EffectContext mEffectContext;
     private String mName;

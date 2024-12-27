@@ -6,7 +6,6 @@ import com.samsung.android.allshare.Device;
 import com.samsung.android.allshare.ERROR;
 import com.samsung.android.allshare.Item;
 
-/* loaded from: classes3.dex */
 public abstract class ImageViewer extends Device {
 
     public interface IImageViewerEventListener {

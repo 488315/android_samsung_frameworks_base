@@ -20,7 +20,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public abstract class CallScreeningService extends Service {
     private static final int MSG_SCREEN_CALL = 1;
     public static final String SERVICE_INTERFACE = "android.telecom.CallScreeningService";

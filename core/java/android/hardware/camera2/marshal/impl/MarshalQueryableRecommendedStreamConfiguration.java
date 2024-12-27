@@ -7,7 +7,6 @@ import android.hardware.camera2.utils.TypeReference;
 
 import java.nio.ByteBuffer;
 
-/* loaded from: classes2.dex */
 public class MarshalQueryableRecommendedStreamConfiguration
         implements MarshalQueryable<RecommendedStreamConfiguration> {
     private static final int SIZE = 20;

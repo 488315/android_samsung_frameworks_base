@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import java.util.Arrays;
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public class PcoData implements Parcelable {
     public static final Parcelable.Creator<PcoData> CREATOR =
             new Parcelable.Creator() { // from class: android.telephony.PcoData.1

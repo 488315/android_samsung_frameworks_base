@@ -10,7 +10,6 @@ import android.service.dreams.IDreamManager;
 
 import com.android.internal.R;
 
-/* loaded from: classes.dex */
 public class DreamManager {
     private final Context mContext;
     private final IDreamManager mService =

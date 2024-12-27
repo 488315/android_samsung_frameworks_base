@@ -8,7 +8,6 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public class Dial implements Parcelable {
     public static final int CLIR_DEFAULT = 0;
     public static final int CLIR_INVOCATION = 1;

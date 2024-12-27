@@ -31,7 +31,6 @@ import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public class JcaContentVerifierProviderBuilder {
     private OperatorHelper helper = new OperatorHelper(new DefaultJcaJceHelper());
 

@@ -1,6 +1,5 @@
 package android.sec.clipboard.util;
 
-/* loaded from: classes3.dex */
 public class ClipboardProcText {
     private static final String IMG_BEGIN = "<img";
     private static final String IMG_SRC = "src=\"";

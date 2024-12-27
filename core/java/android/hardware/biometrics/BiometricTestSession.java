@@ -9,7 +9,6 @@ import java.util.Iterator;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-/* loaded from: classes2.dex */
 public class BiometricTestSession implements AutoCloseable {
     private static final String BASE_TAG = "BiometricTestSession";
     private CountDownLatch mCloseLatch;

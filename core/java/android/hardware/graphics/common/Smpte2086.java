@@ -4,7 +4,6 @@ import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public class Smpte2086 implements Parcelable {
     public static final Parcelable.Creator<Smpte2086> CREATOR =
             new Parcelable.Creator<

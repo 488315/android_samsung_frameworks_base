@@ -1,6 +1,5 @@
 package com.android.server.powerstats;
 
-/* loaded from: classes5.dex */
 public final class StateResidencyProto {
     public static final long ID = 1120986464257L;
     public static final long LAST_ENTRY_TIMESTAMP_MS = 1112396529668L;

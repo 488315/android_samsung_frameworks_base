@@ -5,7 +5,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @Deprecated
-/* loaded from: classes2.dex */
 public class SContextWirelessChargingDetection extends SContextEventContext {
     public static final Parcelable.Creator<SContextWirelessChargingDetection> CREATOR =
             new Parcelable.Creator<SContextWirelessChargingDetection>() { // from class:

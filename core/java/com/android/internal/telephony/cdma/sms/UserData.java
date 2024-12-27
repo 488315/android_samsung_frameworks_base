@@ -9,7 +9,6 @@ import com.android.internal.telephony.SmsHeader;
 import com.android.internal.transition.EpicenterTranslateClipReveal;
 import com.android.internal.util.HexDump;
 
-/* loaded from: classes5.dex */
 public class UserData {
     public static final int ASCII_CR_INDEX = 13;
     public static final int ASCII_MAP_BASE_INDEX = 32;

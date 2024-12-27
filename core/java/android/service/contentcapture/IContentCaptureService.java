@@ -11,7 +11,6 @@ import android.view.contentcapture.DataShareRequest;
 
 import com.android.internal.os.IResultReceiver;
 
-/* loaded from: classes3.dex */
 public interface IContentCaptureService extends IInterface {
     public static final String DESCRIPTOR = "android.service.contentcapture.IContentCaptureService";
 

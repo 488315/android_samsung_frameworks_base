@@ -3,7 +3,6 @@ package android.hardware.biometrics;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public enum BiometricSourceType implements Parcelable {
     FINGERPRINT,
     FACE,

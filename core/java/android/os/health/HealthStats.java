@@ -7,7 +7,6 @@ import android.util.ArrayMap;
 import java.util.Arrays;
 import java.util.Map;
 
-/* loaded from: classes3.dex */
 public class HealthStats {
     private String mDataType;
     private int[] mMeasurementKeys;

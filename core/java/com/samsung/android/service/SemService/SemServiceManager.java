@@ -13,7 +13,6 @@ import com.android.internal.midi.MidiConstants;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-/* loaded from: classes6.dex */
 public final class SemServiceManager {
     public static final int ERROR = -1;
     public static final int ERROR_ADD_DEL_LIST = -16;

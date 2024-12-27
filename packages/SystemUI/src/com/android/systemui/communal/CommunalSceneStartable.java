@@ -29,7 +29,6 @@ import kotlinx.coroutines.flow.FlowKt__TransformKt$filterNotNull$$inlined$unsafe
 import kotlinx.coroutines.flow.FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes.dex */
 public final class CommunalSceneStartable implements CoreStartable {
     public static final /* synthetic */ KProperty[] $$delegatedProperties;
     public static final long AWAKE_DEBOUNCE_DELAY;

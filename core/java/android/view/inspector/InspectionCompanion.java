@@ -1,6 +1,5 @@
 package android.view.inspector;
 
-/* loaded from: classes4.dex */
 public interface InspectionCompanion<T> {
     void mapProperties(PropertyMapper propertyMapper);
 

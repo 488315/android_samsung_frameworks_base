@@ -11,7 +11,6 @@ import java.util.Objects;
 import java.util.function.IntFunction;
 import java.util.stream.Collectors;
 
-/* loaded from: classes2.dex */
 public class AudioProfile implements Parcelable {
     public static final int AUDIO_ENCAPSULATION_TYPE_IEC61937 = 1;
     public static final int AUDIO_ENCAPSULATION_TYPE_NONE = 0;

@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* loaded from: classes5.dex */
 public class AlsaCardsParser {
     protected static final boolean DEBUG = true;
     public static final int SCANSTATUS_EMPTY = 2;

@@ -3,7 +3,6 @@ package android.hardware.scontext;
 import android.os.Bundle;
 
 @Deprecated
-/* loaded from: classes2.dex */
 public class SContextApproachAttribute extends SContextAttribute {
     private static final String TAG = "SContextApproachAttribute";
     private int mUserID;

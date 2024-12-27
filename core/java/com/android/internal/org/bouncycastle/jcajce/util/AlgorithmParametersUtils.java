@@ -6,7 +6,6 @@ import com.android.internal.org.bouncycastle.asn1.ASN1Primitive;
 import java.io.IOException;
 import java.security.AlgorithmParameters;
 
-/* loaded from: classes5.dex */
 public class AlgorithmParametersUtils {
     private AlgorithmParametersUtils() {}
 

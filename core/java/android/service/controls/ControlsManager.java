@@ -2,7 +2,6 @@ package android.service.controls;
 
 import com.sec.android.allshare.iface.message.EventMsg;
 
-/* loaded from: classes3.dex */
 public class ControlsManager {
     int mVersion = EventMsg.UEVENT_UNZIP_PROFILE;
 

@@ -5,7 +5,6 @@ import com.samsung.android.graphics.spr.document.SprInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-/* loaded from: classes6.dex */
 public abstract class SprFileAttributeBase implements Cloneable {
     public static final byte TYPE_NINE_PATCH = 1;
     public static final byte TYPE_NONE = 0;

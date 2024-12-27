@@ -6,7 +6,6 @@ import com.android.internal.org.bouncycastle.crypto.DataLengthException;
 import com.android.internal.org.bouncycastle.crypto.OutputLengthException;
 import com.android.internal.org.bouncycastle.crypto.params.KeyParameter;
 
-/* loaded from: classes5.dex */
 public final class BlowfishEngine implements BlockCipher {
     private static final int BLOCK_SIZE = 8;
     private static final int[] KP = {

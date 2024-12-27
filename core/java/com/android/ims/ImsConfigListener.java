@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes4.dex */
 public interface ImsConfigListener extends IInterface {
     void onGetFeatureResponse(int i, int i2, int i3, int i4) throws RemoteException;
 

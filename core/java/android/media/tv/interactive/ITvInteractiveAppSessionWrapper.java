@@ -25,7 +25,6 @@ import com.android.internal.os.SomeArgs;
 
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public class ITvInteractiveAppSessionWrapper extends ITvInteractiveAppSession.Stub
         implements HandlerCaller.Callback {
     private static final int DO_CREATE_BI_INTERACTIVE_APP = 5;

@@ -1,6 +1,5 @@
 package android.graphics;
 
-/* loaded from: classes.dex */
 public class TableMaskFilter extends MaskFilter {
     private static native long nativeNewClip(int i, int i2);
 

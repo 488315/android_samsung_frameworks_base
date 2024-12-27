@@ -20,7 +20,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.WeakHashMap;
 
-/* loaded from: classes4.dex */
 public class SurfaceControlRegistry {
     private static final int DUMP_LIMIT = 256;
     private static final int MAX_LAYERS_REPORTING_THRESHOLD = 1024;

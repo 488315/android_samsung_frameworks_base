@@ -1,6 +1,5 @@
 package android.security.metrics;
 
-/* loaded from: classes3.dex */
 public @interface SecurityLevel {
     public static final int SECURITY_LEVEL_KEYSTORE = 4;
     public static final int SECURITY_LEVEL_SOFTWARE = 1;

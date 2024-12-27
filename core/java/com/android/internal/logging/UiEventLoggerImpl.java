@@ -2,7 +2,6 @@ package com.android.internal.logging;
 
 import com.android.internal.util.FrameworkStatsLog;
 
-/* loaded from: classes5.dex */
 public class UiEventLoggerImpl implements UiEventLogger {
     @Override // com.android.internal.logging.UiEventLogger
     public void log(UiEventLogger.UiEventEnum event) {

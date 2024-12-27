@@ -12,7 +12,6 @@ import com.android.internal.telephony.util.TelephonyUtils;
 import com.android.internal.telephony.util.XmlUtils;
 import com.android.telephony.Rlog;
 
-/* loaded from: classes5.dex */
 public class Sms7BitEncodingTranslator {
     private static final String TAG = "Sms7BitEncodingTranslator";
     private static final String XML_CHARACTOR_TAG = "Character";

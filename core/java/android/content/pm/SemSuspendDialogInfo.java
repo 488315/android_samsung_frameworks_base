@@ -6,7 +6,6 @@ import android.os.Parcelable;
 
 import com.android.internal.util.Preconditions;
 
-/* loaded from: classes.dex */
 public final class SemSuspendDialogInfo implements Parcelable {
     public static final Parcelable.Creator<SemSuspendDialogInfo> CREATOR =
             new Parcelable.Creator<SemSuspendDialogInfo>() { // from class:

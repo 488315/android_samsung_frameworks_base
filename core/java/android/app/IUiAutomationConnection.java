@@ -18,7 +18,6 @@ import android.window.ScreenCapture;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
 public interface IUiAutomationConnection extends IInterface {
     void addOverridePermissionState(int i, String str, int i2) throws RemoteException;
 

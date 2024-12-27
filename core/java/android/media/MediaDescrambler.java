@@ -10,7 +10,6 @@ import android.util.Log;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class MediaDescrambler implements AutoCloseable {
     public static final byte SCRAMBLE_CONTROL_EVEN_KEY = 2;
     public static final byte SCRAMBLE_CONTROL_ODD_KEY = 3;

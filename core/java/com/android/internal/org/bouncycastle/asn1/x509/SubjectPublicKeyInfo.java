@@ -12,7 +12,6 @@ import com.android.internal.org.bouncycastle.asn1.DERSequence;
 import java.io.IOException;
 import java.util.Enumeration;
 
-/* loaded from: classes5.dex */
 public class SubjectPublicKeyInfo extends ASN1Object {
     private AlgorithmIdentifier algId;
     private DERBitString keyData;

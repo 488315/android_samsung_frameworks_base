@@ -12,7 +12,6 @@ import com.android.internal.util.Preconditions;
 import java.util.HashMap;
 import java.util.Map;
 
-/* loaded from: classes.dex */
 public class SQLiteCursor extends AbstractWindowedCursor {
     static final int NO_COUNT = -1;
     static final String TAG = "SQLiteCursor";

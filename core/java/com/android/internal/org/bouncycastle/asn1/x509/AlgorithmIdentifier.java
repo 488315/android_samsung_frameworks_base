@@ -9,7 +9,6 @@ import com.android.internal.org.bouncycastle.asn1.ASN1Sequence;
 import com.android.internal.org.bouncycastle.asn1.ASN1TaggedObject;
 import com.android.internal.org.bouncycastle.asn1.DERSequence;
 
-/* loaded from: classes5.dex */
 public class AlgorithmIdentifier extends ASN1Object {
     private ASN1ObjectIdentifier algorithm;
     private ASN1Encodable parameters;

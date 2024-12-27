@@ -16,7 +16,6 @@ import com.samsung.vekit.Item.Item;
 import com.samsung.vekit.Item.PortraitVideoItem;
 import com.samsung.vekit.Item.VideoItem;
 
-/* loaded from: classes6.dex */
 public class ItemManager extends Manager<Item> {
     public ItemManager(VEContext context) {
         super(context, ManagerType.ITEM);

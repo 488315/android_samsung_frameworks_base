@@ -9,7 +9,6 @@ import android.view.RoundedCorners;
 
 import com.android.internal.R;
 
-/* loaded from: classes5.dex */
 public class ScreenDecorationsUtils {
     public static float getWindowCornerRadius(Context context) {
         Resources resources = context.getResources();

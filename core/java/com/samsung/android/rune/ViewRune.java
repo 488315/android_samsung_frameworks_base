@@ -7,7 +7,6 @@ import android.os.SystemProperties;
 
 import com.samsung.android.feature.SemFloatingFeature;
 
-/* loaded from: classes6.dex */
 public class ViewRune {
     public static final boolean APPWIDGET_COMMONIZATION = true;
     public static final boolean AUTOFILL_SEP = true;

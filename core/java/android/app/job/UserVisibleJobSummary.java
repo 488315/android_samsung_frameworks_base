@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public class UserVisibleJobSummary implements Parcelable {
     public static final Parcelable.Creator<UserVisibleJobSummary> CREATOR =
             new Parcelable.Creator<UserVisibleJobSummary>() { // from class:

@@ -5,7 +5,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @SystemApi
-/* loaded from: classes.dex */
 public class RestoreDescription implements Parcelable {
     public static final int TYPE_FULL_STREAM = 2;
     public static final int TYPE_KEY_VALUE = 1;

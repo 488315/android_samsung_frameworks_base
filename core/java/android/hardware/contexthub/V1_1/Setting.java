@@ -2,7 +2,6 @@ package android.hardware.contexthub.V1_1;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class Setting {
     public static final byte LOCATION = 0;
 

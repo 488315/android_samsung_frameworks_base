@@ -10,7 +10,6 @@ import android.telephony.ims.SipDetails;
 
 import java.util.List;
 
-/* loaded from: classes4.dex */
 public interface ISubscribeResponseCallback extends IInterface {
     public static final String DESCRIPTOR = "android.telephony.ims.aidl.ISubscribeResponseCallback";
 

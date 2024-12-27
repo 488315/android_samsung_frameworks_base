@@ -14,7 +14,6 @@ import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes.dex */
 final class CameraSensorPrivacyRepositoryKt$isEnabled$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ SensorPrivacyManager $this_isEnabled;
     final /* synthetic */ UserHandle $userHandle;

@@ -3,7 +3,6 @@ package android.app;
 import java.util.List;
 
 @Deprecated
-/* loaded from: classes.dex */
 public class FragmentManagerNonConfig {
     private final List<FragmentManagerNonConfig> mChildNonConfigs;
     private final List<Fragment> mFragments;

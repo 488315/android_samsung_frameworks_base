@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Function;
 
-/* loaded from: classes5.dex */
 public final class LinkPropertiesUtils {
 
     public static class CompareResult<T> {

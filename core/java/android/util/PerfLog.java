@@ -1,6 +1,5 @@
 package android.util;
 
-/* loaded from: classes4.dex */
 public class PerfLog {
     public static final int AMPSS_THRESHOLD = 524288;
 

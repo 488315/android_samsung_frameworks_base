@@ -20,7 +20,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-/* loaded from: classes6.dex */
 public class PhotoRemasterServiceClient {
     static final long RESPONSE_TIME_OUT_SECOND_DEFAULT = 180;
     static final long RESPONSE_TIME_OUT_SECOND_FOR_STOP = 19;

@@ -8,7 +8,6 @@ import com.android.internal.org.bouncycastle.asn1.ASN1Sequence;
 import com.android.internal.org.bouncycastle.asn1.DEROctetString;
 import com.android.internal.org.bouncycastle.asn1.DERSequence;
 
-/* loaded from: classes5.dex */
 public class AesCcmCiphertext extends ASN1Object {
     private final byte[] nonce;
     private final SequenceOfOctetString opaque;

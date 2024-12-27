@@ -19,7 +19,6 @@ import android.telecom.StatusHints;
 
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public interface IConnectionServiceAdapter extends IInterface {
     void addConferenceCall(String str, ParcelableConference parcelableConference, Session.Info info)
             throws RemoteException;

@@ -56,7 +56,6 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-/* loaded from: classes6.dex */
 public abstract class SprAnimatorBase extends ValueAnimator implements Cloneable {
     public static final byte INTERPOLATOR_TYPE_ACCELERATE = 2;
     public static final byte INTERPOLATOR_TYPE_ACCELERATE_DECELERATE = 1;

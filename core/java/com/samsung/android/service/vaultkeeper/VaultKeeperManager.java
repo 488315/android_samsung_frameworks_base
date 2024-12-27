@@ -4,7 +4,6 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.ServiceManager;
 import android.util.Log;
 
-/* loaded from: classes6.dex */
 public final class VaultKeeperManager {
     public static final int ERR_DEVICE_NOT_READY = -109;
     public static final int ERR_EXCEPTION = -103;

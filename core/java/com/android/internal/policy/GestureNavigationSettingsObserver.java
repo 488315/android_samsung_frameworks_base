@@ -15,7 +15,6 @@ import com.android.internal.config.sysui.SystemUiDeviceConfigFlags;
 
 import java.util.concurrent.Executor;
 
-/* loaded from: classes5.dex */
 public class GestureNavigationSettingsObserver extends ContentObserver {
     private Handler mBgHandler;
     private Context mContext;

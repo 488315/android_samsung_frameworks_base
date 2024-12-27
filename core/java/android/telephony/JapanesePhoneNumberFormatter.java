@@ -5,7 +5,6 @@ import android.text.Editable;
 
 import com.android.internal.content.NativeLibraryHelper;
 
-/* loaded from: classes4.dex */
 class JapanesePhoneNumberFormatter {
     private static short[] FORMAT_MAP = {
         -100,

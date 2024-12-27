@@ -1,6 +1,5 @@
 package com.android.internal.widget.remotecompose.core.operations.utilities.easing;
 
-/* loaded from: classes5.dex */
 public abstract class Easing {
     public static final int CUBIC_ACCELERATE = 2;
     public static final int CUBIC_ANTICIPATE = 5;

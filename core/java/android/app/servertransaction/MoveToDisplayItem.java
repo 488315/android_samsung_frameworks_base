@@ -12,7 +12,6 @@ import android.window.ActivityWindowInfo;
 
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public class MoveToDisplayItem extends ActivityTransactionItem {
     public static final Parcelable.Creator<MoveToDisplayItem> CREATOR =
             new Parcelable.Creator<MoveToDisplayItem>() { // from class:

@@ -9,7 +9,6 @@ import com.samsung.android.desktopmode.DesktopModeFeature;
 import java.util.Arrays;
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public class PmUtils {
     private static final String TAG = "PmUtils";
     private static final List<String> sLiveIconPackages =

@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes3.dex */
 public interface ITvInputServiceCallback extends IInterface {
     void addHardwareInput(int i, TvInputInfo tvInputInfo) throws RemoteException;
 

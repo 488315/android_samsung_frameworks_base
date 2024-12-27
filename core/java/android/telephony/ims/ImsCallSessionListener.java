@@ -16,7 +16,6 @@ import java.util.Set;
 import java.util.concurrent.Executor;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public class ImsCallSessionListener {
     private static final String TAG = "ImsCallSessionListener";
     private Executor mExecutor = null;

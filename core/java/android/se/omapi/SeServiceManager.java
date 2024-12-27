@@ -6,7 +6,6 @@ import android.os.IBinder;
 import android.os.ServiceManager;
 
 @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
-/* loaded from: classes3.dex */
 public class SeServiceManager {
 
     @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)

@@ -9,7 +9,6 @@ import com.android.internal.org.bouncycastle.jcajce.provider.util.AsymmetricAlgo
 import java.util.HashMap;
 import java.util.Map;
 
-/* loaded from: classes5.dex */
 public class DH {
     private static final String PREFIX =
             "com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.dh.";

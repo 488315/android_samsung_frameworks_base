@@ -10,7 +10,6 @@ import com.android.internal.logging.nano.MetricsProto;
 import java.util.Arrays;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public class LogMaker {
     public static final int MAX_SERIALIZED_SIZE = 4000;
     private static final String TAG = "LogBuilder";

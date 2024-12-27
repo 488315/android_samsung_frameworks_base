@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public class HapticPlayer implements AutoCloseable {
     private static final int DEFAULT_PARAM = -1;
     private static final int DYNAMIC_DEFAULT_INTERVAL = 50;

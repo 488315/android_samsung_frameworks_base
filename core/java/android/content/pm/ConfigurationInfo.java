@@ -4,7 +4,6 @@ import android.media.MediaMetrics;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes.dex */
 public class ConfigurationInfo implements Parcelable {
     public static final Parcelable.Creator<ConfigurationInfo> CREATOR =
             new Parcelable.Creator<

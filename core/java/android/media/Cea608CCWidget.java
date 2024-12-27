@@ -20,7 +20,6 @@ import android.widget.TextView;
 import com.android.internal.R;
 
 /* compiled from: ClosedCaptionRenderer.java */
-/* loaded from: classes2.dex */
 class Cea608CCWidget extends ClosedCaptionWidget implements Cea608CCParser.DisplayListener {
     private static final String mDummyText = "1234567890123456789012345678901234";
     private static final Rect mTextBounds = new Rect();

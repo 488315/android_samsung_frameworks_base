@@ -9,7 +9,6 @@ import android.view.View;
 
 import com.android.internal.R;
 
-/* loaded from: classes4.dex */
 class TranslationAnimationCreator {
     TranslationAnimationCreator() {}
 

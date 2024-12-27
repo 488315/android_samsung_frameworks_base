@@ -12,7 +12,6 @@ import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public class CertUtils {
     private static final String CERT_TYPE_X509 = "X.509";
     private static final String PRIVATE_KEY_TYPE_RSA = "RSA";

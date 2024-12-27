@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* loaded from: classes6.dex */
 public class SdpCreationParam implements Parcelable {
     public static final Parcelable.Creator<SdpCreationParam> CREATOR =
             new Parcelable.Creator<

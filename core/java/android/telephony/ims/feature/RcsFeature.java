@@ -34,7 +34,6 @@ import java.util.concurrent.Executor;
 import java.util.function.Supplier;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public class RcsFeature extends ImsFeature {
     private static final String LOG_TAG = "RcsFeature";
     private CapabilityExchangeEventListener mCapExchangeEventListener;

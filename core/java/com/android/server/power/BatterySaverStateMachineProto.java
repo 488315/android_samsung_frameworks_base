@@ -1,6 +1,5 @@
 package com.android.server.power;
 
-/* loaded from: classes5.dex */
 public final class BatterySaverStateMachineProto {
     public static final long BATTERY_LEVEL = 1120986464263L;
     public static final long BATTERY_STATUS_SET = 1133871366148L;

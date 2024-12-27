@@ -6,7 +6,6 @@ import android.os.Parcelable;
 
 import com.android.internal.util.Preconditions;
 
-/* loaded from: classes2.dex */
 public class UsbInterface implements Parcelable {
     public static final Parcelable.Creator<UsbInterface> CREATOR =
             new Parcelable.Creator<

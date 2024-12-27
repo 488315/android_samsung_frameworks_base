@@ -20,7 +20,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.List;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public abstract class NotificationAssistantService extends NotificationListenerService {
     public static final String ACTION_NOTIFICATION_ASSISTANT_DETAIL_SETTINGS =
             "android.service.notification.action.NOTIFICATION_ASSISTANT_DETAIL_SETTINGS";

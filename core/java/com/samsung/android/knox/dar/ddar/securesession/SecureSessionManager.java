@@ -22,7 +22,6 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 import javax.security.auth.DestroyFailedException;
 
-/* loaded from: classes6.dex */
 class SecureSessionManager {
     private static final String CRYPTO_PROVIDER = "AndroidOpenSSL";
     private static final SecureRandom sSecureRandom = new SecureRandom();

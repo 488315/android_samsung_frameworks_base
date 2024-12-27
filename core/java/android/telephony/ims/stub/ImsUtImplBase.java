@@ -22,7 +22,6 @@ import java.util.concurrent.Executor;
 import java.util.function.Supplier;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public class ImsUtImplBase {
     public static final int CALL_BARRING_ALL = 7;
     public static final int CALL_BARRING_ALL_INCOMING = 1;

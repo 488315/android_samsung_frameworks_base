@@ -6,7 +6,6 @@ import android.util.IntArray;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes3.dex */
 public final class BatteryUsageStatsQuery implements Parcelable {
     private static final long DEFAULT_MAX_STATS_AGE_MS = 300000;
     public static final int FLAG_BATTERY_USAGE_STATS_INCLUDE_HISTORY = 2;

@@ -5,7 +5,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.RemoteException;
 
-/* loaded from: classes.dex */
 public class AccountManagerResponse implements Parcelable {
     public static final Parcelable.Creator<AccountManagerResponse> CREATOR =
             new Parcelable.Creator<AccountManagerResponse>() { // from class:

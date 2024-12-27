@@ -1,6 +1,5 @@
 package com.android.internal.widget.remotecompose.core.operations.utilities.easing;
 
-/* loaded from: classes5.dex */
 public class ElasticOutCurve extends Easing {
     private static final float C4 = 2.0943952f;
     private static final float F_PI = 3.1415927f;

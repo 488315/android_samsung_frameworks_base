@@ -14,7 +14,6 @@ import android.os.RemoteException;
 import android.os.UserHandle;
 import android.util.AndroidException;
 
-/* loaded from: classes.dex */
 public class IntentSender implements Parcelable {
     private ActivityManager.PendingIntentInfo mCachedInfo;
     private final IIntentSender mTarget;

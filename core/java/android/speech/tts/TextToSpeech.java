@@ -41,7 +41,6 @@ import java.util.MissingResourceException;
 import java.util.Set;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes3.dex */
 public class TextToSpeech {
     public static final String ACTION_TTS_QUEUE_PROCESSING_COMPLETED =
             "android.speech.tts.TTS_QUEUE_PROCESSING_COMPLETED";

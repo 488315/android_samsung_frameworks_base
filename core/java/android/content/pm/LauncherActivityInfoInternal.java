@@ -5,7 +5,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.UserHandle;
 
-/* loaded from: classes.dex */
 public class LauncherActivityInfoInternal implements Parcelable {
     public static final Parcelable.Creator<LauncherActivityInfoInternal> CREATOR =
             new Parcelable.Creator<LauncherActivityInfoInternal>() { // from class:

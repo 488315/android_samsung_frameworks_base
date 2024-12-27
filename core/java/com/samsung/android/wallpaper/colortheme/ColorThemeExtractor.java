@@ -6,7 +6,6 @@ import com.samsung.android.wallpaper.legibilitycolors.utils.ColorExtractor;
 import com.samsung.android.wallpaper.legibilitycolors.utils.ColorPaletteExtractor;
 import com.samsung.android.wallpaper.legibilitycolors.utils.image.BitmapHelper;
 
-/* loaded from: classes6.dex */
 public class ColorThemeExtractor {
     private static final int DEST_SCALE_HEIGHT = 150;
     private static final String TAG = "ColorThemeExtractor";

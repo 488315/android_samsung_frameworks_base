@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Stream;
 
-/* loaded from: classes6.dex */
 public abstract class OptionBase implements Parcelable, Serializable {
     private static final String TAG = Def.tagOf((Class<?>) OptionBase.class);
     private final Map<Integer, Object> data = new HashMap();

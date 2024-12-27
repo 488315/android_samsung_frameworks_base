@@ -17,7 +17,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes5.dex */
 public class ParsedPermissionUtils {
     private static final String TAG = "PackageParsing";
 

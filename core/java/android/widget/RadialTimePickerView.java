@@ -36,7 +36,6 @@ import java.lang.reflect.Array;
 import java.util.Calendar;
 import java.util.Locale;
 
-/* loaded from: classes4.dex */
 public class RadialTimePickerView extends View {
     private static final int AM = 0;
     private static final int ANIM_DURATION_NORMAL = 500;

@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public class CdmaNumberInfoRecord implements Parcelable {
     public static final int CDMA_NUMBER_INFO_BUFFER_LENGTH = 81;
     public static final Parcelable.Creator<CdmaNumberInfoRecord> CREATOR =

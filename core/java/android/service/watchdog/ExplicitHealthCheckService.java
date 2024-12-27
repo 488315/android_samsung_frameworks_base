@@ -21,7 +21,6 @@ import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public abstract class ExplicitHealthCheckService extends Service {
     public static final String BIND_PERMISSION =
             "android.permission.BIND_EXPLICIT_HEALTH_CHECK_SERVICE";

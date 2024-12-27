@@ -10,7 +10,6 @@ import com.android.internal.R;
 
 import java.util.Random;
 
-/* loaded from: classes4.dex */
 public class LayoutAnimationController {
     public static final int ORDER_NORMAL = 0;
     public static final int ORDER_RANDOM = 2;

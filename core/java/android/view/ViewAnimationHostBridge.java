@@ -4,7 +4,6 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.graphics.RenderNode;
 
-/* loaded from: classes4.dex */
 public class ViewAnimationHostBridge extends AnimatorListenerAdapter
         implements RenderNode.AnimationHost {
     private final View mView;

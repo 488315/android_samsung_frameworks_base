@@ -18,7 +18,6 @@ import android.telecom.TelecomAnalytics;
 
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public interface ITelecomService extends IInterface {
     void acceptHandover(Uri uri, int i, PhoneAccountHandle phoneAccountHandle, String str)
             throws RemoteException;

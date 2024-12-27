@@ -1,6 +1,5 @@
 package android.os;
 
-/* loaded from: classes3.dex */
 public final class KernelWakeSourcesProto {
     public static final long WAKEUP_SOURCES = 2246267895809L;
 

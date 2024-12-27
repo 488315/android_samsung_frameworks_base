@@ -24,7 +24,6 @@ import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public final class IncrementalManager {
     private static final String ALLOWED_PROPERTY = "incremental.allowed";
     public static final int CREATE_MODE_CREATE = 4;

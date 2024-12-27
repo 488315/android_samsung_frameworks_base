@@ -1,6 +1,5 @@
 package android.internal.perfetto.protos;
 
-/* loaded from: classes2.dex */
 public final class ProtologCommon {
     public static final int PROTOLOG_LEVEL_DEBUG = 1;
     public static final int PROTOLOG_LEVEL_ERROR = 5;

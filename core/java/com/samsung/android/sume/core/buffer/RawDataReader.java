@@ -10,7 +10,6 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-/* loaded from: classes6.dex */
 public class RawDataReader implements MediaBufferReader<Number> {
     private static final String TAG = Def.tagOf((Class<?>) RawDataReader.class);
     private final Supplier<?> pixelRead;

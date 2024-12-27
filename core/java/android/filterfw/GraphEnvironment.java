@@ -14,7 +14,6 @@ import android.filterfw.io.TextGraphReader;
 
 import java.util.ArrayList;
 
-/* loaded from: classes.dex */
 public class GraphEnvironment extends MffEnvironment {
     public static final int MODE_ASYNCHRONOUS = 1;
     public static final int MODE_SYNCHRONOUS = 2;

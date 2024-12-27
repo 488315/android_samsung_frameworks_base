@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import java.util.List;
 import java.util.Map;
 
-/* loaded from: classes4.dex */
 public class SimpleExpandableListAdapter extends BaseExpandableListAdapter {
     private List<? extends List<? extends Map<String, ?>>> mChildData;
     private String[] mChildFrom;

@@ -7,7 +7,6 @@ import org.xml.sax.SAXParseException;
 
 import java.util.ArrayList;
 
-/* loaded from: classes3.dex */
 public class Element {
     Children children;
     final int depth;

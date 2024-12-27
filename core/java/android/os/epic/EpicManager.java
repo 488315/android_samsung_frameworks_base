@@ -2,7 +2,6 @@ package android.os.epic;
 
 import android.os.RemoteException;
 
-/* loaded from: classes3.dex */
 public final class EpicManager {
     private static final String TAG = "EpicManager";
     final IEpicManager mService;

@@ -17,7 +17,6 @@ import android.view.ViewOverlay;
 
 import java.util.Map;
 
-/* loaded from: classes4.dex */
 public class Crossfade extends Transition {
     public static final int FADE_BEHAVIOR_CROSSFADE = 0;
     public static final int FADE_BEHAVIOR_OUT_IN = 2;

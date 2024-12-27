@@ -36,7 +36,6 @@ import java.lang.ref.WeakReference;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public final class MediaSession {
 
     @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)

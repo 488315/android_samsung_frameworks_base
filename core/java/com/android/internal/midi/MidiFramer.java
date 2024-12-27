@@ -4,7 +4,6 @@ import android.media.midi.MidiReceiver;
 
 import java.io.IOException;
 
-/* loaded from: classes5.dex */
 public class MidiFramer extends MidiReceiver {
     public String TAG = "MidiFramer";
     private byte[] mBuffer = new byte[3];

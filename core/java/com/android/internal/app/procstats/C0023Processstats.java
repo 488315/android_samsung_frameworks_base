@@ -1,7 +1,6 @@
 package com.android.internal.app.procstats;
 
 /* renamed from: com.android.internal.app.procstats.Processstats, reason: case insensitive filesystem */
-/* loaded from: classes5.dex */
 public final class C0023Processstats {
 
     /* renamed from: com.android.internal.app.procstats.Processstats$ProcessStatsProto */

@@ -1,7 +1,6 @@
 package com.android.framework.protobuf;
 
 @CheckReturnValue
-/* loaded from: classes3.dex */
 final class ExtensionSchemas {
     private static final ExtensionSchema<?> LITE_SCHEMA = new ExtensionSchemaLite();
     private static final ExtensionSchema<?> FULL_SCHEMA = loadSchemaForFullRuntime();

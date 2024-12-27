@@ -11,7 +11,6 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.StringTokenizer;
 
-/* loaded from: classes2.dex */
 public class Virtualizer extends AudioEffect {
     private static final boolean DEBUG = false;
     public static final int PARAM_FORCE_VIRTUALIZATION_MODE = 3;

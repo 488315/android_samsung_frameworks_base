@@ -18,7 +18,6 @@ import com.android.internal.hidden_from_bootclasspath.android.credentials.flags.
 
 import java.util.ArrayList;
 
-/* loaded from: classes.dex */
 public class IntentFactory {
     private static final String TAG = "CredManIntentHelper";
 

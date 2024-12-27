@@ -1,6 +1,5 @@
 package com.android.internal.midi;
 
-/* loaded from: classes5.dex */
 public final class MidiConstants {
     public static final byte STATUS_ACTIVE_SENSING = -2;
     public static final byte STATUS_CHANNEL_MASK = 15;

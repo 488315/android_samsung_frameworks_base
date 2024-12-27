@@ -17,7 +17,6 @@ import com.android.internal.hidden_from_bootclasspath.android.os.Flags;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes5.dex */
 public class SetScreenLockDialogActivity extends AlertActivity
         implements DialogInterface.OnClickListener, DialogInterface.OnDismissListener {
     public static final String EXTRA_LAUNCH_REASON = "launch_reason";

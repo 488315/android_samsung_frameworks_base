@@ -7,7 +7,6 @@ import android.util.Log;
 import android.util.SparseIntArray;
 
 @Deprecated
-/* loaded from: classes2.dex */
 public abstract class MediaMetadataEditor {
     public static final int BITMAP_KEY_ARTWORK = 100;
     public static final int KEY_EDITABLE_MASK = 536870911;

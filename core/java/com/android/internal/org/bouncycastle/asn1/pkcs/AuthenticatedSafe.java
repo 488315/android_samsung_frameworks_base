@@ -6,7 +6,6 @@ import com.android.internal.org.bouncycastle.asn1.ASN1Sequence;
 import com.android.internal.org.bouncycastle.asn1.BERSequence;
 import com.android.internal.org.bouncycastle.asn1.DLSequence;
 
-/* loaded from: classes5.dex */
 public class AuthenticatedSafe extends ASN1Object {
     private ContentInfo[] info;
     private boolean isBer;

@@ -12,7 +12,6 @@ import android.util.AttributeSet;
 import com.android.internal.R;
 
 @Deprecated
-/* loaded from: classes3.dex */
 public class ListPreference extends DialogPreference {
     private int mClickedDialogEntryIndex;
     private CharSequence[] mEntries;

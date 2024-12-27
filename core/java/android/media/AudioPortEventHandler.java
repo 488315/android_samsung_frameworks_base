@@ -7,7 +7,6 @@ import android.os.Message;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 class AudioPortEventHandler {
     private static final int AUDIOPORT_EVENT_NEW_LISTENER = 4;
     private static final int AUDIOPORT_EVENT_PATCH_LIST_UPDATED = 2;

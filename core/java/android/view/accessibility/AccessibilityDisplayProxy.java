@@ -24,7 +24,6 @@ import java.util.List;
 import java.util.concurrent.Executor;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public abstract class AccessibilityDisplayProxy {
     private static final int INVALID_CONNECTION_ID = -1;
     private static final String LOG_TAG = "AccessibilityDisplayProxy";

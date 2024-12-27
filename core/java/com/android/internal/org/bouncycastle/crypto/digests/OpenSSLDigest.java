@@ -7,7 +7,6 @@ import com.android.internal.org.bouncycastle.crypto.ExtendedDigest;
 import java.security.DigestException;
 import java.security.MessageDigest;
 
-/* loaded from: classes5.dex */
 public class OpenSSLDigest implements ExtendedDigest {
     private final int byteSize;
     private final MessageDigest delegate;

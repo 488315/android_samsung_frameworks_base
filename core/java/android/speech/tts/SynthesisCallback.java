@@ -3,7 +3,6 @@ package android.speech.tts;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes3.dex */
 public interface SynthesisCallback {
 
     @Retention(RetentionPolicy.SOURCE)

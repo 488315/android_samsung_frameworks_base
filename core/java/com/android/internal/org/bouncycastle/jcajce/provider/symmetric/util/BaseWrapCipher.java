@@ -37,7 +37,6 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.PBEParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
-/* loaded from: classes5.dex */
 public abstract class BaseWrapCipher extends CipherSpi implements PBE {
     private Class[] availableSpecs;
     protected AlgorithmParameters engineParams;

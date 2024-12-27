@@ -2,7 +2,6 @@ package com.android.internal.org.bouncycastle.math.field;
 
 import java.math.BigInteger;
 
-/* loaded from: classes5.dex */
 class PrimeField implements FiniteField {
     protected final BigInteger characteristic;
 

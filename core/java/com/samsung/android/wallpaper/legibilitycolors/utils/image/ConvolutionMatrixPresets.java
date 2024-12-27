@@ -3,7 +3,6 @@ package com.samsung.android.wallpaper.legibilitycolors.utils.image;
 import android.hardware.scontext.SContextConstants;
 import android.util.SparseArray;
 
-/* loaded from: classes6.dex */
 public class ConvolutionMatrixPresets {
     public static double[][] HIGHPASS_3_FILTER = {
         new double[] {-0.125d, -0.125d, -0.125d},

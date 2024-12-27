@@ -1,6 +1,5 @@
 package android.service.batterystats;
 
-/* loaded from: classes3.dex */
 public final class BatteryStatsServiceDumpHistoryProto {
     public static final long CSV_LINES = 2237677961222L;
     public static final long END_PLATFORM_VERSION = 1138166333444L;

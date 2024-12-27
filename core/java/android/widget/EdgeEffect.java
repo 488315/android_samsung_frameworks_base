@@ -29,7 +29,6 @@ import com.android.internal.R;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes4.dex */
 public class EdgeEffect {
     private static final double DAMPING_RATIO = 0.98d;
     private static final boolean DEBUG = false;

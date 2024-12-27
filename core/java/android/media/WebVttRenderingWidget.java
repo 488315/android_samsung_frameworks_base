@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 /* compiled from: WebVttRenderer.java */
-/* loaded from: classes2.dex */
 class WebVttRenderingWidget extends ViewGroup implements SubtitleTrack.RenderingWidget {
     private static final boolean DEBUG = false;
     private static final int DEBUG_CUE_BACKGROUND = -2130771968;

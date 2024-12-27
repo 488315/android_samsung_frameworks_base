@@ -22,7 +22,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes3.dex */
 public abstract class InCallService extends Service {
     private static final int MSG_ADD_CALL = 2;
     private static final int MSG_BRING_TO_FOREGROUND = 6;

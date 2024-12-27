@@ -3,7 +3,6 @@ package com.samsung.android.globalactions.util;
 import android.app.ActivityManager;
 import android.content.Context;
 
-/* loaded from: classes6.dex */
 public class ActivityManagerWrapper {
     private final ActivityManager mActivityManager;
 

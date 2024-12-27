@@ -43,7 +43,6 @@ import com.android.internal.widget.ScrollingTabContainerView;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
-/* loaded from: classes5.dex */
 public class WindowDecorActionBar extends ActionBar
         implements ActionBarOverlayLayout.ActionBarVisibilityCallback {
     static final /* synthetic */ boolean $assertionsDisabled = false;

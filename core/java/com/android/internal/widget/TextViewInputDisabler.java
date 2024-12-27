@@ -4,7 +4,6 @@ import android.text.InputFilter;
 import android.text.Spanned;
 import android.widget.TextView;
 
-/* loaded from: classes5.dex */
 public class TextViewInputDisabler {
     private InputFilter[] mDefaultFilters;
     private InputFilter[] mNoInputFilters = {

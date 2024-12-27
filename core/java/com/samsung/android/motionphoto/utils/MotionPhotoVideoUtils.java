@@ -18,7 +18,6 @@ import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.Arrays;
 
-/* loaded from: classes6.dex */
 public final class MotionPhotoVideoUtils {
     private static final int JPEG_LENGTH_SIZE = 2;
     private static final int JPEG_MARKER_SIZE = 2;

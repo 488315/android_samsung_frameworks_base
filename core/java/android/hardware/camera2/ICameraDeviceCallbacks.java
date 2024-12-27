@@ -9,7 +9,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes2.dex */
 public interface ICameraDeviceCallbacks extends IInterface {
     public static final int ERROR_CAMERA_BUFFER = 5;
     public static final int ERROR_CAMERA_DEVICE = 1;

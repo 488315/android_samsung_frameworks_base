@@ -1,7 +1,6 @@
 package com.android.systemui.globalactions.util;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public enum SystemUIConditions {
     IS_CLEAR_COVER_CLOSED,
     /* JADX INFO: Fake field, exist only in values array */

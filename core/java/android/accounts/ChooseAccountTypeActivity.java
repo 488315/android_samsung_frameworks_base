@@ -27,7 +27,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-/* loaded from: classes.dex */
 public class ChooseAccountTypeActivity extends Activity {
     private static final String TAG = "AccountChooser";
     private ArrayList<AuthInfo> mAuthenticatorInfosToDisplay;

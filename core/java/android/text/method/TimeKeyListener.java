@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.Locale;
 
-/* loaded from: classes4.dex */
 public class TimeKeyListener extends NumberKeyListener {
     private static final String SKELETON_12HOUR = "hms";
     private static final String SKELETON_24HOUR = "Hms";

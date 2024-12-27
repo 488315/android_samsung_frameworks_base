@@ -3,7 +3,6 @@ package com.android.systemui;
 import com.samsung.android.feature.SemCscFeature;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes.dex */
 public final class CscRune extends Rune {
     public static String VALUE_CONFIG_CARRIER_TEXT_POLICY = SemCscFeature.getInstance().getString("CscFeature_LockScreen_ConfigCarrierTextPolicy");
     public static String VALUE_CONFIG_CARRIER_SECURITY_POLICY = SemCscFeature.getInstance().getString("CscFeature_LockScreen_ConfigCarrierSecurityPolicy");

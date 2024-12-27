@@ -5,7 +5,6 @@ import android.content.Context;
 
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public class SemAppLockManager {
     private static final String TAG = "SemAppLockManager";
     private ActivityManager mActivityManager;

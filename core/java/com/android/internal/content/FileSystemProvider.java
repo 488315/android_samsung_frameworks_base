@@ -52,7 +52,6 @@ import java.util.Queue;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-/* loaded from: classes5.dex */
 public abstract class FileSystemProvider extends DocumentsProvider {
     private static final boolean LOG_INOTIFY = false;
     private static final int MAX_RESULTS_NUMBER = 23;

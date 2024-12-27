@@ -20,7 +20,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Objects;
 
-/* loaded from: classes6.dex */
 public interface ISehRadioIndication extends IBase {
     public static final String kInterfaceName =
             "vendor.samsung.hardware.radio@2.0::ISehRadioIndication";

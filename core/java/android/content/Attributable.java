@@ -2,7 +2,6 @@ package android.content;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
 public interface Attributable {
     void setAttributionSource(AttributionSource attributionSource);
 

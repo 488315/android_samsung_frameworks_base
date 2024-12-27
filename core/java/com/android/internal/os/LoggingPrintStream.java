@@ -14,7 +14,6 @@ import java.nio.charset.CodingErrorAction;
 import java.util.Formatter;
 import java.util.Locale;
 
-/* loaded from: classes5.dex */
 public abstract class LoggingPrintStream extends PrintStream {
     private final StringBuilder builder;
     private CharBuffer decodedChars;

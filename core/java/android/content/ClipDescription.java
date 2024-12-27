@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
 
-/* loaded from: classes.dex */
 public class ClipDescription implements Parcelable {
     public static final int CLASSIFICATION_COMPLETE = 3;
     public static final int CLASSIFICATION_NOT_COMPLETE = 1;

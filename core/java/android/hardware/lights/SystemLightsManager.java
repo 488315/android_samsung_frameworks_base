@@ -10,7 +10,6 @@ import com.android.internal.util.Preconditions;
 import java.lang.ref.Reference;
 import java.util.List;
 
-/* loaded from: classes2.dex */
 public final class SystemLightsManager extends LightsManager {
     private static final String TAG = "LightsManager";
     private final ILightsManager mService;

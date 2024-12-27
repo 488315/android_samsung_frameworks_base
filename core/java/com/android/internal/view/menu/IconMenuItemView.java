@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import com.android.internal.R;
 
-/* loaded from: classes5.dex */
 public final class IconMenuItemView extends TextView implements MenuView.ItemView {
     private static final int NO_ALPHA = 255;
     private static String sPrependShortcutLabel;

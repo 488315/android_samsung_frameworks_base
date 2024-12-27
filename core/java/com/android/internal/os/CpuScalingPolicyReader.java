@@ -13,7 +13,6 @@ import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/* loaded from: classes5.dex */
 public class CpuScalingPolicyReader {
     private static final String CPUFREQ_DIR = "/sys/devices/system/cpu/cpufreq";
     private static final String FILE_NAME_CPUINFO_CUR_FREQ = "cpuinfo_cur_freq";

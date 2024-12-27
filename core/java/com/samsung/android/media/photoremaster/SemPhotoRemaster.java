@@ -22,7 +22,6 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-/* loaded from: classes6.dex */
 public class SemPhotoRemaster {
     private static final int END_TO_END = 0;
     private static final int ENHANCE_AND_SAVE = 2;

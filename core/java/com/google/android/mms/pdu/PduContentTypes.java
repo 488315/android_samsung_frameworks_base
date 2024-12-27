@@ -2,7 +2,6 @@ package com.google.android.mms.pdu;
 
 import com.google.android.mms.ContentType;
 
-/* loaded from: classes5.dex */
 public class PduContentTypes {
     static final String[] contentTypes = {
         "*/*",

@@ -23,7 +23,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.function.Predicate;
 
-/* loaded from: classes4.dex */
 public class SurfaceControlViewHost {
     private static final String TAG = "SurfaceControlViewHost";
     private IAccessibilityEmbeddedConnection mAccessibilityEmbeddedConnection;

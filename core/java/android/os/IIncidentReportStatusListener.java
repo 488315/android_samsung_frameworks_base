@@ -1,6 +1,5 @@
 package android.os;
 
-/* loaded from: classes3.dex */
 public interface IIncidentReportStatusListener extends IInterface {
     public static final int STATUS_FINISHED = 2;
     public static final int STATUS_STARTING = 1;

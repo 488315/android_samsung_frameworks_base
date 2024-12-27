@@ -5,7 +5,6 @@ import android.graphics.Typeface;
 
 import java.util.Hashtable;
 
-/* loaded from: classes6.dex */
 public class FontCache {
     private static final Hashtable<String, Typeface> fontCache = new Hashtable<>();
 

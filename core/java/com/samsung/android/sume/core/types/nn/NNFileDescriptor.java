@@ -7,7 +7,6 @@ import android.os.Parcelable;
 
 import java.io.IOException;
 
-/* loaded from: classes6.dex */
 public class NNFileDescriptor implements Parcelable, Cloneable {
     public static final Parcelable.Creator<NNFileDescriptor> CREATOR =
             new Parcelable.Creator<

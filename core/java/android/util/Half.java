@@ -2,7 +2,6 @@ package android.util;
 
 import libcore.util.FP16;
 
-/* loaded from: classes4.dex */
 public final class Half extends Number implements Comparable<Half> {
     public static final short EPSILON = 5120;
     public static final short LOWEST_VALUE = -1025;

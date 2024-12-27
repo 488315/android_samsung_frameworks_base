@@ -11,7 +11,6 @@ import com.android.internal.R;
 import java.lang.ref.WeakReference;
 
 @RemoteViews.RemoteView
-/* loaded from: classes4.dex */
 public final class ViewStub extends View {
     private OnInflateListener mInflateListener;
     private int mInflatedId;

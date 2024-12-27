@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-/* loaded from: classes3.dex */
 public class RemoteConnectionManager {
     private final ConnectionService mOurConnectionServiceImpl;
     private final Map<ComponentName, RemoteConnectionService> mRemoteConnectionServices =

@@ -5,7 +5,6 @@ import java.nio.ByteBuffer;
 import java.util.HashMap;
 import java.util.Map;
 
-/* loaded from: classes.dex */
 class InterpreterImpl implements InterpreterApi {
     NativeInterpreterWrapper wrapper;
 

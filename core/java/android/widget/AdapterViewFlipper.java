@@ -8,7 +8,6 @@ import android.view.RemotableViewMethod;
 import com.android.internal.R;
 
 @RemoteViews.RemoteView
-/* loaded from: classes4.dex */
 public class AdapterViewFlipper extends AdapterViewAnimator {
     private static final int DEFAULT_INTERVAL = 10000;
     private static final boolean LOGD = false;

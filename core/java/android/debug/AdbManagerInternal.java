@@ -2,7 +2,6 @@ package android.debug;
 
 import java.io.File;
 
-/* loaded from: classes.dex */
 public abstract class AdbManagerInternal {
     public abstract File getAdbKeysFile();
 

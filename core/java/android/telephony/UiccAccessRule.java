@@ -24,7 +24,6 @@ import java.util.List;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public final class UiccAccessRule implements Parcelable {
     public static final Parcelable.Creator<UiccAccessRule> CREATOR =
             new Parcelable.Creator<

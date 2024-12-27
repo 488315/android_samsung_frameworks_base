@@ -6,7 +6,6 @@ import android.os.Parcelable;
 
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public final class DeleteRangeGesture extends PreviewableHandwritingGesture implements Parcelable {
     public static final Parcelable.Creator<DeleteRangeGesture> CREATOR =
             new Parcelable.Creator<

@@ -5,7 +5,6 @@ import android.graphics.Rect;
 import java.util.Iterator;
 import java.util.Vector;
 
-/* loaded from: classes4.dex */
 public class SurfaceEffects {
     public static final Effect EMPTY_EFFECT = newBuilder().build();
     private static final long FRAME_LENGTH_NANOS = 16666666;

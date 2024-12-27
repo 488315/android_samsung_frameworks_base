@@ -3,7 +3,6 @@ package android.hardware.camera2.params;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public final class VendorTagDescriptorCache implements Parcelable {
     public static final Parcelable.Creator<VendorTagDescriptorCache> CREATOR =
             new Parcelable.Creator<VendorTagDescriptorCache>() { // from class:

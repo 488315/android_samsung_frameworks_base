@@ -8,7 +8,6 @@ import com.android.internal.graphics.ColorUtils;
 import java.lang.reflect.Array;
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public class ColorPaletteCreator5 extends ColorPaletteCreator {
     private static final int GRAY_HUE_PRESET1 = 0;
     private static final int GRAY_HUE_PRESET2 = 120;

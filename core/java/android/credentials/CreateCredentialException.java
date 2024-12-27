@@ -2,7 +2,6 @@ package android.credentials;
 
 import com.android.internal.util.Preconditions;
 
-/* loaded from: classes.dex */
 public class CreateCredentialException extends Exception {
     public static final String TYPE_INTERRUPTED =
             "android.credentials.CreateCredentialException.TYPE_INTERRUPTED";

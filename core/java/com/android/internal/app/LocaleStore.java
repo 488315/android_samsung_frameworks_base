@@ -40,7 +40,6 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-/* loaded from: classes5.dex */
 public class LocaleStore {
     private static final String COUNTRY_NAME_CHINESE = "CN";
     private static final int DEFAULT_SUPPORTED_LOCALE = 0;

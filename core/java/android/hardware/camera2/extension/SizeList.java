@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.util.Collection;
 import java.util.List;
 
-/* loaded from: classes2.dex */
 public class SizeList implements Parcelable {
     public static final Parcelable.Creator<SizeList> CREATOR =
             new Parcelable.Creator<

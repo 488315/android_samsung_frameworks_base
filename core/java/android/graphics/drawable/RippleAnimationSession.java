@@ -15,7 +15,6 @@ import android.view.animation.PathInterpolator;
 
 import java.util.function.Consumer;
 
-/* loaded from: classes.dex */
 public final class RippleAnimationSession {
     private static final int ENTER_ANIM_DURATION = 450;
     private static final int EXIT_ANIM_DURATION = 375;

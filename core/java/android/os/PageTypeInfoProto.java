@@ -1,6 +1,5 @@
 package android.os;
 
-/* loaded from: classes3.dex */
 public final class PageTypeInfoProto {
     public static final long BLOCKS = 2246267895812L;
     public static final long MIGRATE_TYPES = 2246267895811L;

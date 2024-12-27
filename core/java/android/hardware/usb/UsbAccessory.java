@@ -10,7 +10,6 @@ import com.android.internal.util.Preconditions;
 
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public class UsbAccessory implements Parcelable {
     public static final Parcelable.Creator<UsbAccessory> CREATOR =
             new Parcelable.Creator<

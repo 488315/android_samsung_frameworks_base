@@ -8,7 +8,6 @@ import android.os.StrictMode;
 import android.system.keystore2.IKeystoreOperation;
 import android.util.Log;
 
-/* loaded from: classes3.dex */
 public class KeyStoreOperation {
     static final String TAG = "KeyStoreOperation";
     private final Long mChallenge;

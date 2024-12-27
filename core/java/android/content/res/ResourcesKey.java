@@ -10,7 +10,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public final class ResourcesKey {
     public final CompatibilityInfo mCompatInfo;
     public int mDisplayId;

@@ -12,7 +12,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Predicate;
 
-/* loaded from: classes4.dex */
 public final class RemoteAnimationRunnerHelper {
     private static final String TAG = RemoteAnimationRunnerHelper.class.getSimpleName();
     public static final int TYPE_MERGE_ANIM_CALLBACK = 1;

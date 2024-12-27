@@ -14,7 +14,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Locale;
 
-/* loaded from: classes6.dex */
 public final class SemWifiSsid implements Parcelable {
     public static final Parcelable.Creator<SemWifiSsid> CREATOR =
             new Parcelable.Creator<

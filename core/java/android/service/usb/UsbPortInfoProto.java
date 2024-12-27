@@ -1,6 +1,5 @@
 package android.service.usb;
 
-/* loaded from: classes3.dex */
 public final class UsbPortInfoProto {
     public static final long CAN_CHANGE_DATA_ROLE = 1133871366149L;
     public static final long CAN_CHANGE_MODE = 1133871366147L;

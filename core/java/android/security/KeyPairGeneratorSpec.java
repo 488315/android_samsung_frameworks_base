@@ -12,7 +12,6 @@ import java.util.Date;
 import javax.security.auth.x500.X500Principal;
 
 @Deprecated
-/* loaded from: classes3.dex */
 public final class KeyPairGeneratorSpec implements AlgorithmParameterSpec {
     private final Context mContext;
     private final Date mEndDate;

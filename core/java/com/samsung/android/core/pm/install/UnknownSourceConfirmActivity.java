@@ -14,7 +14,6 @@ import com.android.internal.app.AlertActivity;
 import com.samsung.android.feature.SemCscFeature;
 import com.samsung.android.wallpaperbackup.BnRConstants;
 
-/* loaded from: classes6.dex */
 public class UnknownSourceConfirmActivity extends AlertActivity
         implements DialogInterface.OnClickListener {
     public static final String EXTRA_INSTALL_TYPE = "android.content.pm.extra.unknown.installtype";

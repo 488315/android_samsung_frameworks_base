@@ -7,7 +7,6 @@ import android.os.ServiceManager;
 import android.util.Log;
 import android.util.Slog;
 
-/* loaded from: classes5.dex */
 public class SliceBackupHelper extends BlobBackupHelper {
     static final int BLOB_VERSION = 1;
     static final String KEY_SLICES = "slices";

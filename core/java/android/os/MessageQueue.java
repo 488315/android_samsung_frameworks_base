@@ -12,7 +12,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 
-/* loaded from: classes3.dex */
 public final class MessageQueue {
     private static final boolean DEBUG = false;
     private static final String TAG = "MessageQueue";

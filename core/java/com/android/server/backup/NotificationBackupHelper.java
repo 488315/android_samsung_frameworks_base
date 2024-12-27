@@ -6,7 +6,6 @@ import android.os.ServiceManager;
 import android.util.Log;
 import android.util.Slog;
 
-/* loaded from: classes5.dex */
 public class NotificationBackupHelper extends BlobBackupHelper {
     static final int BLOB_VERSION = 1;
     static final String KEY_NOTIFICATIONS = "notifications";

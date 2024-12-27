@@ -32,7 +32,6 @@ import java.util.Set;
 import java.util.Vector;
 import java.util.function.Supplier;
 
-/* loaded from: classes2.dex */
 public final class MediaCodecInfo {
     private static final int DEFAULT_MAX_SUPPORTED_INSTANCES = 32;
     private static final int ERROR_NONE_SUPPORTED = 4;

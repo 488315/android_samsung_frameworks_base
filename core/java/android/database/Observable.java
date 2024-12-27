@@ -2,7 +2,6 @@ package android.database;
 
 import java.util.ArrayList;
 
-/* loaded from: classes.dex */
 public abstract class Observable<T> {
     protected final ArrayList<T> mObservers = new ArrayList<>();
 

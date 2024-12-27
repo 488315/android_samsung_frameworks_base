@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes3.dex */
 public interface IOtaStatusChangedCallback extends IInterface {
     void onOtaStatusChanged(int i) throws RemoteException;
 

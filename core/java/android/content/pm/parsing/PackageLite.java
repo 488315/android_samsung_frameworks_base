@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 
-/* loaded from: classes.dex */
 public class PackageLite {
     private final ArchivedPackageParcel mArchivedPackage;
     private final String mBaseApkPath;

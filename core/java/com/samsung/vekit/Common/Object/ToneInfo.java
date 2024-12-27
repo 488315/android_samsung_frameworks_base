@@ -2,7 +2,6 @@ package com.samsung.vekit.Common.Object;
 
 import com.samsung.vekit.Common.Type.ToneType;
 
-/* loaded from: classes6.dex */
 public class ToneInfo {
     private Integer maxToneType = Integer.valueOf(ToneType.values().length);
     private float[] toneArray = new float[this.maxToneType.intValue()];

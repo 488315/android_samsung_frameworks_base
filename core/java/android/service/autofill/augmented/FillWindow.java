@@ -22,7 +22,6 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class FillWindow implements AutoCloseable {
     private static final String TAG = FillWindow.class.getSimpleName();
     private Rect mBounds;

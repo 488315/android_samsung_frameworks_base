@@ -12,7 +12,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.nio.ByteBuffer;
 import java.util.Map;
 
-/* loaded from: classes2.dex */
 public final class MediaMuxer {
     private static final int MUXER_STATE_INITIALIZED = 0;
     private static final int MUXER_STATE_STARTED = 1;

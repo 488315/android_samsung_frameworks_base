@@ -9,7 +9,6 @@ import android.filterfw.core.GenerateFinalPort;
 import android.filterfw.format.ObjectFormat;
 import android.provider.Telephony;
 
-/* loaded from: classes.dex */
 public class ObjectSource extends Filter {
     private Frame mFrame;
 

@@ -16,7 +16,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public final class SubscriptionPlan implements Parcelable {
     public static final long BYTES_UNKNOWN = -1;
     public static final long BYTES_UNLIMITED = Long.MAX_VALUE;

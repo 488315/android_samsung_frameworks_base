@@ -1,6 +1,5 @@
 package android.hardware.power;
 
-/* loaded from: classes2.dex */
 public @interface Boost {
     public static final int AUDIO_LAUNCH = 3;
     public static final int CAMERA_LAUNCH = 4;

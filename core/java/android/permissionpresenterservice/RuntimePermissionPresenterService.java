@@ -19,7 +19,6 @@ import java.util.List;
 
 @SystemApi
 @Deprecated
-/* loaded from: classes3.dex */
 public abstract class RuntimePermissionPresenterService extends Service {
     private static final String KEY_RESULT =
             "android.content.pm.permission.RuntimePermissionPresenter.key.result";

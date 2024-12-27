@@ -39,7 +39,6 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.GCMParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
-/* loaded from: classes3.dex */
 class CredstoreIdentityCredential extends IdentityCredential {
     private static final String TAG = "CredstoreIdentityCredential";
     private ICredential mBinder;

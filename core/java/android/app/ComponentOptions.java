@@ -2,7 +2,6 @@ package android.app;
 
 import android.os.Bundle;
 
-/* loaded from: classes.dex */
 public class ComponentOptions {
     public static final String KEY_PENDING_INTENT_BACKGROUND_ACTIVITY_ALLOWED =
             "android.pendingIntent.backgroundActivityAllowed";

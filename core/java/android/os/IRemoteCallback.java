@@ -1,6 +1,5 @@
 package android.os;
 
-/* loaded from: classes3.dex */
 public interface IRemoteCallback extends IInterface {
     void sendResult(Bundle bundle) throws RemoteException;
 

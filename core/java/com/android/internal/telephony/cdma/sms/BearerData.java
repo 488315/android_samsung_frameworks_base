@@ -29,7 +29,6 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* loaded from: classes5.dex */
 public final class BearerData {
     public static final int ALERT_DEFAULT = 0;
     public static final int ALERT_HIGH_PRIO = 3;

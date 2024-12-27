@@ -7,7 +7,6 @@ import android.os.ServiceManager;
 import android.util.Log;
 import android.util.Singleton;
 
-/* loaded from: classes6.dex */
 public class IsrbManager {
     private static final Singleton<IIsrbManager> IIsrbManagerSingleton =
             new Singleton<IIsrbManager>() { // from class: com.samsung.android.isrb.IsrbManager.1

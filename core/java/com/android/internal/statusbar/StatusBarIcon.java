@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import android.os.UserHandle;
 import android.text.TextUtils;
 
-/* loaded from: classes5.dex */
 public class StatusBarIcon implements Parcelable {
     public static final Parcelable.Creator<StatusBarIcon> CREATOR =
             new Parcelable.Creator<

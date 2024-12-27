@@ -24,7 +24,6 @@ import java.util.function.Function;
 import java.util.function.IntFunction;
 import java.util.stream.Collectors;
 
-/* loaded from: classes2.dex */
 public final class MediaExtractor {
     public static final int SAMPLE_FLAG_ENCRYPTED = 2;
     public static final int SAMPLE_FLAG_PARTIAL_FRAME = 4;

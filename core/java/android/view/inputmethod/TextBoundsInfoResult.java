@@ -3,7 +3,6 @@ package android.view.inputmethod;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes4.dex */
 public final class TextBoundsInfoResult {
     public static final int CODE_CANCELLED = 3;
     public static final int CODE_FAILED = 2;

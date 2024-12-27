@@ -9,7 +9,6 @@ import java.util.Objects;
 
 @SystemApi
 @Deprecated
-/* loaded from: classes2.dex */
 public class NanoApp implements Parcelable {
     public static final Parcelable.Creator<NanoApp> CREATOR =
             new Parcelable.Creator<NanoApp>() { // from class: android.hardware.location.NanoApp.1

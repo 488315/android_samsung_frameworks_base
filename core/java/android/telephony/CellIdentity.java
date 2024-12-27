@@ -8,7 +8,6 @@ import android.text.TextUtils;
 import java.util.Objects;
 import java.util.UUID;
 
-/* loaded from: classes4.dex */
 public abstract class CellIdentity implements Parcelable {
     public static final Parcelable.Creator<CellIdentity> CREATOR =
             new Parcelable.Creator<CellIdentity>() { // from class: android.telephony.CellIdentity.1

@@ -3,7 +3,6 @@ package android.media;
 import android.util.Log;
 
 /* compiled from: WebVttRenderer.java */
-/* loaded from: classes2.dex */
 class Tokenizer {
     private static final String TAG = "Tokenizer";
     private int mHandledLen;

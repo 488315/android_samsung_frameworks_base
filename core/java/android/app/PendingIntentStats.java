@@ -1,6 +1,5 @@
 package android.app;
 
-/* loaded from: classes.dex */
 public class PendingIntentStats {
     public final int count;
     public final int sizeKb;

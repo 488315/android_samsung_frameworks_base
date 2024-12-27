@@ -19,7 +19,6 @@ import com.android.ims.internal.IImsVideoCallProvider;
 
 import java.util.List;
 
-/* loaded from: classes4.dex */
 public class ImsCallSessionImplBase extends IImsCallSession.Stub {
     @Override // com.android.ims.internal.IImsCallSession
     public final void setListener(IImsCallSessionListener listener) throws RemoteException {

@@ -12,7 +12,6 @@ import java.io.FileDescriptor;
 import java.io.PrintWriter;
 
 @Deprecated
-/* loaded from: classes.dex */
 public class DialogFragment extends Fragment
         implements DialogInterface.OnCancelListener, DialogInterface.OnDismissListener {
     private static final String SAVED_BACK_STACK_ID = "android:backStackId";

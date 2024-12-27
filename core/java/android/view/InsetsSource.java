@@ -18,7 +18,6 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-/* loaded from: classes4.dex */
 public class InsetsSource implements Parcelable {
     public static final int FLAG_ANIMATE_RESIZING = 8;
     public static final int FLAG_FORCE_CONSUMING = 4;

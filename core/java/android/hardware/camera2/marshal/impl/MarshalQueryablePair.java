@@ -11,7 +11,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
 import java.nio.ByteBuffer;
 
-/* loaded from: classes2.dex */
 public class MarshalQueryablePair<T1, T2> implements MarshalQueryable<Pair<T1, T2>> {
 
     private class MarshalerPair extends Marshaler<Pair<T1, T2>> {

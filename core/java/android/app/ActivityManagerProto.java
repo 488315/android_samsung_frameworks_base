@@ -1,6 +1,5 @@
 package android.app;
 
-/* loaded from: classes.dex */
 public final class ActivityManagerProto {
     public static final int UID_OBSERVER_FLAG_ACTIVE = 4;
     public static final int UID_OBSERVER_FLAG_CACHED = 5;

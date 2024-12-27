@@ -1,6 +1,5 @@
 package android.os;
 
-/* loaded from: classes3.dex */
 public final class PatternMatcherProto {
     public static final long PATTERN = 1138166333441L;
     public static final long TYPE = 1159641169922L;

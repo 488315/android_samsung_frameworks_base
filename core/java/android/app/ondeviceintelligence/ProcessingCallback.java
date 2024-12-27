@@ -6,7 +6,6 @@ import android.os.Bundle;
 import java.util.function.Consumer;
 
 @SystemApi
-/* loaded from: classes.dex */
 public interface ProcessingCallback {
     void onError(OnDeviceIntelligenceException onDeviceIntelligenceException);
 

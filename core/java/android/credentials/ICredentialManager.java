@@ -10,7 +10,6 @@ import android.os.RemoteException;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
 public interface ICredentialManager extends IInterface {
     public static final String DESCRIPTOR = "android.credentials.ICredentialManager";
 

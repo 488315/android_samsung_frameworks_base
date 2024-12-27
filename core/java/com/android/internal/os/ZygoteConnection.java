@@ -16,7 +16,6 @@ import java.io.FileDescriptor;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
-/* loaded from: classes5.dex */
 class ZygoteConnection {
     private static final String TAG = "Zygote";
     private final String abiList;

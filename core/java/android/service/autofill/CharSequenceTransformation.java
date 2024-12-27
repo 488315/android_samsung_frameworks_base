@@ -16,7 +16,6 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/* loaded from: classes3.dex */
 public final class CharSequenceTransformation extends InternalTransformation implements Transformation, Parcelable {
     public static final Parcelable.Creator<CharSequenceTransformation> CREATOR = new Parcelable.Creator<CharSequenceTransformation>() { // from class: android.service.autofill.CharSequenceTransformation.1
         /* JADX WARN: Can't rename method to resolve collision */

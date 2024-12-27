@@ -7,7 +7,6 @@ import android.graphics.RectF;
 import android.graphics.text.LineBreakConfig;
 import android.text.style.ParagraphStyle;
 
-/* loaded from: classes4.dex */
 public class BoringLayout extends Layout implements TextUtils.EllipsizeCallback {
     int mBottom;
     private int mBottomPadding;

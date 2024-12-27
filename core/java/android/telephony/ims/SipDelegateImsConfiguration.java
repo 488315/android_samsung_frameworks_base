@@ -14,7 +14,6 @@ import java.net.InetSocketAddress;
 
 @SystemApi
 @Deprecated
-/* loaded from: classes4.dex */
 public final class SipDelegateImsConfiguration implements Parcelable {
     public static final Parcelable.Creator<SipDelegateImsConfiguration> CREATOR =
             new Parcelable.Creator<

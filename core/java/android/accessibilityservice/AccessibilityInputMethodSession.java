@@ -4,7 +4,6 @@ import android.view.inputmethod.EditorInfo;
 
 import com.android.internal.inputmethod.IRemoteAccessibilityInputConnection;
 
-/* loaded from: classes.dex */
 interface AccessibilityInputMethodSession {
     void finishInput();
 

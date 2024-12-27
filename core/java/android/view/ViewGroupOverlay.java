@@ -2,7 +2,6 @@ package android.view;
 
 import android.content.Context;
 
-/* loaded from: classes4.dex */
 public class ViewGroupOverlay extends ViewOverlay {
     ViewGroupOverlay(Context context, View hostView) {
         super(context, hostView);

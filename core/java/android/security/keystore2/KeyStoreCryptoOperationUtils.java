@@ -21,7 +21,6 @@ import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes3.dex */
 abstract class KeyStoreCryptoOperationUtils {
     private static volatile SecureRandom sRng;
 

@@ -1,6 +1,5 @@
 package com.sec.android.allshare.iface.message;
 
-/* loaded from: classes6.dex */
 public class AllShareKey {
     public static final String BUNDLE_BOOLEAN_AUTO_SLIDE_SHOW = "BUNDLE_BOOLEAN_AUTO_SLIDE_SHOW";
     public static final String BUNDLE_BOOLEAN_ENDOFITEM = "BUNDLE_BOOLEAN_ENDOFITEM";

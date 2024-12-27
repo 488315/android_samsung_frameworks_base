@@ -8,7 +8,6 @@ import java.util.Collections;
 import java.util.List;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public class MediaEvent extends FilterEvent {
     private final List<AudioPresentation> mAudioPresentations;
     private final long mDataId;

@@ -4,7 +4,6 @@ import android.media.MediaMetrics;
 
 import java.util.Arrays;
 
-/* loaded from: classes5.dex */
 public class StringUtils {
     public static String floatToString(
             float value, int beforeDecimalPoint, int afterDecimalPoint, char pre, char post) {

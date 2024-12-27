@@ -6,7 +6,6 @@ import android.util.SparseIntArray;
 
 import java.text.Collator;
 
-/* loaded from: classes4.dex */
 public class AlphabetIndexer extends DataSetObserver implements SectionIndexer {
     private SparseIntArray mAlphaMap;
     protected CharSequence mAlphabet;

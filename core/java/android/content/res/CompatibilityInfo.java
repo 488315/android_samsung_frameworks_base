@@ -15,7 +15,6 @@ import android.view.InsetsState;
 import android.view.MotionEvent;
 import android.view.WindowManager;
 
-/* loaded from: classes.dex */
 public class CompatibilityInfo implements Parcelable {
     private static final int ALWAYS_NEEDS_COMPAT = 2;
     public static final int DEFAULT_NORMAL_SHORT_DIMENSION = 320;

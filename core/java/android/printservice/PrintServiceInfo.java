@@ -7,7 +7,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class PrintServiceInfo implements Parcelable {
     private static final String TAG_PRINT_SERVICE = "print-service";
     private final String mAddPrintersActivityName;

@@ -11,7 +11,6 @@ import android.view.InputMonitor;
 import com.samsung.android.desktopmode.SemDesktopModeManager;
 import com.samsung.android.desktopmode.SemDesktopModeState;
 
-/* loaded from: classes6.dex */
 public class MCTriggerManager {
     Context mContext;
     InputChannel mDexInputChannel;

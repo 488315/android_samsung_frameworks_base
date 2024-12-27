@@ -1,6 +1,5 @@
 package android.media.codec;
 
-/* loaded from: classes2.dex */
 public final class Enums {
     public static final int BITRATE_HIGH = 3;
     public static final int BITRATE_LOW = 1;

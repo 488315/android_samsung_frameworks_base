@@ -19,7 +19,6 @@ import java.util.Locale;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public final class FontConfig implements Parcelable {
     public static final Parcelable.Creator<FontConfig> CREATOR =
             new Parcelable.Creator<FontConfig>() { // from class: android.text.FontConfig.1

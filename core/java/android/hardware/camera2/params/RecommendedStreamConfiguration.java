@@ -2,7 +2,6 @@ package android.hardware.camera2.params;
 
 import android.hardware.camera2.utils.HashCodeHelpers;
 
-/* loaded from: classes2.dex */
 public final class RecommendedStreamConfiguration extends StreamConfiguration {
     private final int mUsecaseBitmap;
 

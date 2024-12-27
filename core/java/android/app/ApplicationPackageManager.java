@@ -136,7 +136,6 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-/* loaded from: classes.dex */
 public class ApplicationPackageManager extends PackageManager {
     public static final String APP_PERMISSION_BUTTON_ALLOW_ALWAYS =
             "app_permission_button_allow_always";

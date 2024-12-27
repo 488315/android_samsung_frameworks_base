@@ -5,7 +5,6 @@ import android.text.Spannable;
 import android.view.MotionEvent;
 import android.widget.TextView;
 
-/* loaded from: classes4.dex */
 public class ScrollingMovementMethod extends BaseMovementMethod implements MovementMethod {
     private static ScrollingMovementMethod sInstance;
 

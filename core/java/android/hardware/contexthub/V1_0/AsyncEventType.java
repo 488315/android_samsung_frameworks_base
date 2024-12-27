@@ -2,7 +2,6 @@ package android.hardware.contexthub.V1_0;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class AsyncEventType {
     public static final int RESTARTED = 1;
 

@@ -1,6 +1,5 @@
 package android.service.notification;
 
-/* loaded from: classes3.dex */
 public final class DNDModeProto {
     public static final long CHANNELS_BYPASSING = 1133871366147L;
     public static final long ENABLED = 1133871366146L;

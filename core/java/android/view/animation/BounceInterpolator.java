@@ -7,7 +7,6 @@ import android.graphics.animation.NativeInterpolatorFactory;
 import android.util.AttributeSet;
 
 @HasNativeInterpolator
-/* loaded from: classes4.dex */
 public class BounceInterpolator extends BaseInterpolator implements NativeInterpolator {
     public BounceInterpolator() {}
 

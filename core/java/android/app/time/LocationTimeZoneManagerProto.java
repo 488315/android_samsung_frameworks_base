@@ -1,6 +1,5 @@
 package android.app.time;
 
-/* loaded from: classes.dex */
 public final class LocationTimeZoneManagerProto {
     public static final int CONTROLLER_STATE_CERTAIN = 5;
     public static final int CONTROLLER_STATE_DESTROYED = 7;

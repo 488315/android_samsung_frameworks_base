@@ -15,7 +15,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public class ContextHubTransaction<T> {
     public static final int RESULT_FAILED_AT_HUB = 5;
     public static final int RESULT_FAILED_BAD_PARAMS = 2;

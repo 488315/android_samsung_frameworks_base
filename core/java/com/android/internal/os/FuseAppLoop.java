@@ -17,7 +17,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ThreadFactory;
 
-/* loaded from: classes5.dex */
 public class FuseAppLoop implements Handler.Callback {
     private static final int ARGS_POOL_SIZE = 50;
     private static final int FUSE_FSYNC = 20;

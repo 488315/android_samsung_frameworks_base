@@ -2,7 +2,6 @@ package com.android.net.module.util;
 
 import android.util.SparseIntArray;
 
-/* loaded from: classes5.dex */
 public class PerUidCounter {
     private final int mMaxCountPerUid;
     final SparseIntArray mUidToCount = new SparseIntArray();

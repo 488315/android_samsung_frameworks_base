@@ -5,7 +5,6 @@ import android.net.Uri;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* loaded from: classes.dex */
 public final class Entity {
     private final ArrayList<NamedContentValues> mSubValues = new ArrayList<>();
     private final ContentValues mValues;

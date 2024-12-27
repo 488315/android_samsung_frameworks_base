@@ -18,7 +18,6 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.Set;
 
-/* loaded from: classes2.dex */
 public final class MediaRoute2Info implements Parcelable {
     public static final int CONNECTION_STATE_CONNECTED = 2;
     public static final int CONNECTION_STATE_CONNECTING = 1;

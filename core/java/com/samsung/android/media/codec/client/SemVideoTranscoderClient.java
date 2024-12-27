@@ -15,7 +15,6 @@ import com.samsung.android.media.codec.SemVideoTranscodingService;
 import java.io.IOException;
 import java.util.Map;
 
-/* loaded from: classes6.dex */
 public class SemVideoTranscoderClient extends ClientImpl {
     private static final int RECORDING_MODE_SLOW_MOTION = 1;
     private static final int RECORDING_MODE_SLOW_MOTION_V2 = 12;

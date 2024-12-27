@@ -18,7 +18,6 @@ import android.view.animation.PathInterpolator;
 
 import java.util.ArrayList;
 
-/* loaded from: classes.dex */
 class RippleForeground extends RippleComponent {
     private static final int OPACITY_ENTER_DURATION = 75;
     private static final int OPACITY_EXIT_DURATION = 150;

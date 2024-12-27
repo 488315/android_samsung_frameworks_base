@@ -7,7 +7,6 @@ import java.math.BigInteger;
 
 import javax.crypto.spec.DHParameterSpec;
 
-/* loaded from: classes5.dex */
 public class DHDomainParameterSpec extends DHParameterSpec {
     private final BigInteger j;
     private final int m;

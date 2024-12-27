@@ -18,7 +18,6 @@ import java.util.concurrent.CompletionException;
 import java.util.concurrent.Executor;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public class ImsMultiEndpointImplBase {
     private static final String TAG = "MultiEndpointImplBase";
     private IImsExternalCallStateListener mListener;

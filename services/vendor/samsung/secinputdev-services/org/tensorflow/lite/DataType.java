@@ -1,6 +1,5 @@
 package org.tensorflow.lite;
 
-/* loaded from: classes.dex */
 public enum DataType {
     FLOAT32(1),
     INT32(2),

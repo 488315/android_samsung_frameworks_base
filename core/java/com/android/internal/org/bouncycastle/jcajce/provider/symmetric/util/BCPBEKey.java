@@ -13,7 +13,6 @@ import javax.crypto.interfaces.PBEKey;
 import javax.crypto.spec.PBEKeySpec;
 import javax.security.auth.Destroyable;
 
-/* loaded from: classes5.dex */
 public class BCPBEKey implements PBEKey, Destroyable {
     String algorithm;
     int digest;

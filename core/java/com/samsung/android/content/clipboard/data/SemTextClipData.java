@@ -10,7 +10,6 @@ import android.text.Html;
 import android.text.Spanned;
 import android.text.TextUtils;
 
-/* loaded from: classes5.dex */
 public class SemTextClipData extends SemClipData {
     private static final String TAG = "SemTextClipData";
     private static final long serialVersionUID = 1;

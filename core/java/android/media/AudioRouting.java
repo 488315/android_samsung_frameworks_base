@@ -2,7 +2,6 @@ package android.media;
 
 import android.os.Handler;
 
-/* loaded from: classes2.dex */
 public interface AudioRouting {
 
     public interface OnRoutingChangedListener {

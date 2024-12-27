@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public final class FontUpdateRequest implements Parcelable {
     public static final Parcelable.Creator<FontUpdateRequest> CREATOR =
             new Parcelable.Creator<

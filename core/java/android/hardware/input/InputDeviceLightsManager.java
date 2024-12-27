@@ -12,7 +12,6 @@ import com.android.internal.util.Preconditions;
 import java.lang.ref.Reference;
 import java.util.List;
 
-/* loaded from: classes2.dex */
 class InputDeviceLightsManager extends LightsManager {
     private static final boolean DEBUG = false;
     private static final String TAG = "InputDeviceLightsManager";

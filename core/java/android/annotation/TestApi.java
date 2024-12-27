@@ -14,5 +14,4 @@ import java.lang.annotation.Target;
     ElementType.PACKAGE
 })
 @Retention(RetentionPolicy.SOURCE)
-/* loaded from: classes.dex */
 public @interface TestApi {}

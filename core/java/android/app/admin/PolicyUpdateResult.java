@@ -3,7 +3,6 @@ package android.app.admin;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes.dex */
 public final class PolicyUpdateResult {
     public static final int RESULT_FAILURE_CONFLICTING_ADMIN_POLICY = 1;
     public static final int RESULT_FAILURE_HARDWARE_LIMITATION = 4;

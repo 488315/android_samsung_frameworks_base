@@ -19,7 +19,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 
-/* loaded from: classes6.dex */
 public abstract class ServiceStub extends Service
         implements ServiceController, MediaController.OnEventListener {
     private static final String TAG = Def.tagOf((Class<?>) ServiceStub.class);

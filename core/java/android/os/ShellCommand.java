@@ -4,7 +4,6 @@ import com.android.modules.utils.BasicShellCommandHandler;
 
 import java.io.FileDescriptor;
 
-/* loaded from: classes3.dex */
 public abstract class ShellCommand extends BasicShellCommandHandler {
     private ResultReceiver mResultReceiver;
     private ShellCallback mShellCallback;

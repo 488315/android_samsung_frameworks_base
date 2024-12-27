@@ -25,7 +25,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public abstract class EuiccService extends Service {
     public static final String ACTION_BIND_CARRIER_PROVISIONING_SERVICE =
             "android.service.euicc.action.BIND_CARRIER_PROVISIONING_SERVICE";

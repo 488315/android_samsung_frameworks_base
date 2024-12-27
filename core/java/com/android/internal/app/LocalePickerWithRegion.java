@@ -25,7 +25,6 @@ import java.util.Iterator;
 import java.util.Locale;
 import java.util.Set;
 
-/* loaded from: classes5.dex */
 public class LocalePickerWithRegion extends ListFragment implements SearchView.OnQueryTextListener {
     private static final String PARENT_FRAGMENT_NAME = "localeListEditor";
     private static final String TAG = LocalePickerWithRegion.class.getSimpleName();

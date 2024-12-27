@@ -19,7 +19,6 @@ import java.io.StringWriter;
 import java.util.Objects;
 import java.util.function.Predicate;
 
-/* loaded from: classes5.dex */
 public final class DumpUtils {
     public static final ComponentName[] CRITICAL_SECTION_COMPONENTS = {
         new ComponentName(AsPackageName.SYSTEMUI, "com.android.systemui.SystemUIService")

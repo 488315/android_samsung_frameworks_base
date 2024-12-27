@@ -27,7 +27,6 @@ import java.util.StringJoiner;
 import java.util.concurrent.Executor;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/* loaded from: classes2.dex */
 public class UsbManager {
     public static final String ACTION_USB_ACCESSORY_ATTACHED =
             "android.hardware.usb.action.USB_ACCESSORY_ATTACHED";

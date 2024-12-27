@@ -1,6 +1,5 @@
 package android.contexthub;
 
-/* loaded from: classes.dex */
 public final class ContextHubProtoEnums {
     public static final int SIGNIFICANT_MOTION_HIGH_MOBILITY = 3;
     public static final int SIGNIFICANT_MOTION_LOW_MOBILITY = 2;

@@ -8,7 +8,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes2.dex */
 public class FaceSensorProperties extends SensorProperties {
     public static final int TYPE_IR = 2;
     public static final int TYPE_RGB = 1;

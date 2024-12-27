@@ -6,7 +6,6 @@ import android.os.Parcelable;
 
 import com.android.internal.util.AnnotationValidations;
 
-/* loaded from: classes5.dex */
 public final class MessageSamplingConfig implements Parcelable {
     public static final Parcelable.Creator<MessageSamplingConfig> CREATOR =
             new Parcelable.Creator<

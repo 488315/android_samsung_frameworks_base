@@ -19,7 +19,6 @@ import com.samsung.android.feature.SemFloatingFeature;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public class SemInfoExtractionManager {
     private static final String EXTRACTED_INFO_DATA = "SemExtractedInfo";
     private static final String EXTRACTION_DATA_TYPE = "data_type";

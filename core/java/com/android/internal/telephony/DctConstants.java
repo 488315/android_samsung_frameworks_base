@@ -1,6 +1,5 @@
 package com.android.internal.telephony;
 
-/* loaded from: classes5.dex */
 public class DctConstants {
     public static final String APN_TYPE_KEY = "apnType";
     public static final String BANDWIDTH_SOURCE_BANDWIDTH_ESTIMATOR_KEY = "bandwidth_estimator";

@@ -10,7 +10,6 @@ import android.filterfw.core.Program;
 import android.filterfw.core.ShaderProgram;
 import android.filterfw.format.ImageFormat;
 
-/* loaded from: classes.dex */
 public class FlipFilter extends Filter {
 
     @GenerateFieldPort(hasDefault = true, name = Slice.HINT_HORIZONTAL)

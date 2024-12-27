@@ -1,6 +1,5 @@
 package android.media.audio.common;
 
-/* loaded from: classes2.dex */
 public @interface AudioSource {
     public static final int CAMCORDER = 5;
     public static final int DEFAULT = 0;

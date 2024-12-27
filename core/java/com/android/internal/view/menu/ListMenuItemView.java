@@ -27,7 +27,6 @@ import com.android.internal.R;
 import java.text.NumberFormat;
 import java.util.Locale;
 
-/* loaded from: classes5.dex */
 public class ListMenuItemView extends LinearLayout
         implements MenuView.ItemView, AbsListView.SelectionBoundsAdjuster {
     private static final int BADGE_LIMIT_NUMBER = 99;

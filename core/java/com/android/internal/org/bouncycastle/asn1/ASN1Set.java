@@ -8,7 +8,6 @@ import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-/* loaded from: classes5.dex */
 public abstract class ASN1Set extends ASN1Primitive implements Iterable<ASN1Encodable> {
     protected final ASN1Encodable[] elements;
     protected final boolean isSorted;

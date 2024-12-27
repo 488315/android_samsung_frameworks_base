@@ -1,6 +1,5 @@
 package android.healthfitness.ui;
 
-/* loaded from: classes2.dex */
 public final class HealthConnectUiEnums {
     public static final int ACTION_CLICK = 1;
     public static final int ACTION_TOGGLE_OFF = 3;

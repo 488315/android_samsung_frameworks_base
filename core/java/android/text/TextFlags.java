@@ -4,7 +4,6 @@ import android.app.AppGlobals;
 
 import com.android.text.flags.Flags;
 
-/* loaded from: classes4.dex */
 public final class TextFlags {
     public static final String ENABLE_NEW_CONTEXT_MENU = "TextEditing__enable_new_context_menu";
     public static final boolean ENABLE_NEW_CONTEXT_MENU_DEFAULT = false;

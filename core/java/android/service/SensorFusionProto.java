@@ -1,6 +1,5 @@
 package android.service;
 
-/* loaded from: classes3.dex */
 public final class SensorFusionProto {
     public static final long FUSION_9AXIS = 1146756268033L;
     public static final long FUSION_NOGYRO = 1146756268035L;

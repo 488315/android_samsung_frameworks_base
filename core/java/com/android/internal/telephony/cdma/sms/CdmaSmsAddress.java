@@ -5,7 +5,6 @@ import android.util.SparseBooleanArray;
 import com.android.internal.telephony.SmsAddress;
 import com.android.internal.util.HexDump;
 
-/* loaded from: classes5.dex */
 public class CdmaSmsAddress extends SmsAddress {
     public static final int DIGIT_MODE_4BIT_DTMF = 0;
     public static final int DIGIT_MODE_8BIT_CHAR = 1;

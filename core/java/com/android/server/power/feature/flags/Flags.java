@@ -1,6 +1,5 @@
 package com.android.server.power.feature.flags;
 
-/* loaded from: classes5.dex */
 public final class Flags {
     private static FeatureFlags FEATURE_FLAGS = new FeatureFlagsImpl();
     public static final String FLAG_ENABLE_EARLY_SCREEN_TIMEOUT_DETECTOR =

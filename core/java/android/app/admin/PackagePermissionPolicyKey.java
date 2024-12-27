@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class PackagePermissionPolicyKey extends PolicyKey {
     private static final String ATTR_PACKAGE_NAME = "package-name";
     private static final String ATTR_PERMISSION_NAME = "permission-name";

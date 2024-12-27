@@ -7,7 +7,6 @@ import android.os.IBinder;
 import android.os.ParcelFileDescriptor;
 import android.os.PersistableBundle;
 
-/* loaded from: classes3.dex */
 public abstract class VoiceInteractionManagerInternal {
 
     public interface WearableHotwordDetectionCallback {

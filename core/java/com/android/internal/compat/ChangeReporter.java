@@ -16,7 +16,6 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 
-/* loaded from: classes5.dex */
 public final class ChangeReporter {
     private static final Function<Integer, Set<ChangeReport>> NEW_CHANGE_REPORT_SET =
             new Function() { // from class:

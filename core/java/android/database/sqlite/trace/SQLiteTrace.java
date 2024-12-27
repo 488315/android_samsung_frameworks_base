@@ -12,7 +12,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-/* loaded from: classes.dex */
 public class SQLiteTrace {
     private static HashMap<String, SQLiteTraceSession> mCurrentSessions = new HashMap<>();
     private static final int mUid = Process.myUid();

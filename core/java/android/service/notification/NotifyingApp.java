@@ -6,7 +6,6 @@ import android.text.format.DateFormat;
 
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public final class NotifyingApp implements Parcelable, Comparable<NotifyingApp> {
     public static final Parcelable.Creator<NotifyingApp> CREATOR =
             new Parcelable.Creator<

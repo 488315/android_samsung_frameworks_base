@@ -3,7 +3,6 @@ package android.app.timedetector;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 
-/* loaded from: classes.dex */
 public final class TimeDetectorImpl implements TimeDetector {
     private static final boolean DEBUG = false;
     private static final String TAG = "timedetector.TimeDetector";

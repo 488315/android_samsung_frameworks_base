@@ -6,7 +6,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class FailureSuggestedAction {
     public static final int DISABLE_DETECTION = 2;
     public static final int NONE = 1;

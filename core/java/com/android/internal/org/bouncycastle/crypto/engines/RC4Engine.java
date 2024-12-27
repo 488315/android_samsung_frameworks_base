@@ -6,7 +6,6 @@ import com.android.internal.org.bouncycastle.crypto.OutputLengthException;
 import com.android.internal.org.bouncycastle.crypto.StreamCipher;
 import com.android.internal.org.bouncycastle.crypto.params.KeyParameter;
 
-/* loaded from: classes5.dex */
 public class RC4Engine implements StreamCipher {
     private static final int STATE_LENGTH = 256;
     private byte[] engineState = null;

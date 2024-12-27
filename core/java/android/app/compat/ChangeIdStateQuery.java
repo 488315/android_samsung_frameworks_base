@@ -4,7 +4,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 final class ChangeIdStateQuery {
     static final int QUERY_BY_PACKAGE_NAME = 0;
     static final int QUERY_BY_UID = 1;

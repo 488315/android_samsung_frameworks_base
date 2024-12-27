@@ -5,7 +5,6 @@ import com.android.internal.org.bouncycastle.asn1.ASN1Object;
 import com.android.internal.org.bouncycastle.asn1.ASN1Primitive;
 import com.android.internal.org.bouncycastle.asn1.DERBitString;
 
-/* loaded from: classes5.dex */
 public class EndEntityType extends ASN1Object {
     public static final int app = 128;
     public static final int enrol = 64;

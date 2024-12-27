@@ -1,6 +1,5 @@
 package android.hardware.display;
 
-/* loaded from: classes2.dex */
 public interface SemDeviceStatusListener {
     void onConnectionStatusChanged(int i);
 

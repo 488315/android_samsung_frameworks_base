@@ -18,7 +18,6 @@ import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-/* loaded from: classes4.dex */
 public class TwoFingerSwipeGestureDetector
         implements WindowManagerPolicyConstants.PointerEventListener {
     private static final int CANCELED = 4;

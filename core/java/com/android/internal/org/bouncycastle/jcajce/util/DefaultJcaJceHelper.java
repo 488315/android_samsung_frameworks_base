@@ -26,7 +26,6 @@ import javax.crypto.Mac;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKeyFactory;
 
-/* loaded from: classes5.dex */
 public class DefaultJcaJceHelper implements JcaJceHelper {
     @Override // com.android.internal.org.bouncycastle.jcajce.util.JcaJceHelper
     public Cipher createCipher(String algorithm)

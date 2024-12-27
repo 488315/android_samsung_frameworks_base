@@ -36,7 +36,6 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.zip.ZipEntry;
 
-/* loaded from: classes4.dex */
 public abstract class SourceStampVerifier {
     private static final int APK_SIGNATURE_SCHEME_V2_BLOCK_ID = 1896449818;
     private static final int APK_SIGNATURE_SCHEME_V3_BLOCK_ID = -262969152;

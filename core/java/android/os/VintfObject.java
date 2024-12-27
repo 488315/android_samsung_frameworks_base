@@ -7,7 +7,6 @@ import android.app.UiAutomation;
 import java.io.IOException;
 import java.util.Map;
 
-/* loaded from: classes3.dex */
 public class VintfObject {
     private static final String LOG_TAG = "VintfObject";
 

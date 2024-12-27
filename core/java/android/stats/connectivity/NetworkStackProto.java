@@ -1,6 +1,5 @@
 package android.stats.connectivity;
 
-/* loaded from: classes3.dex */
 public final class NetworkStackProto {
     public static final int CN_DROPPED_802_3_FRAME = 25;
     public static final int CN_DROPPED_ARP_NON_IPV4 = 32;

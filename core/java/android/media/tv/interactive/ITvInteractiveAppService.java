@@ -8,7 +8,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.view.InputChannel;
 
-/* loaded from: classes3.dex */
 public interface ITvInteractiveAppService extends IInterface {
     public static final String DESCRIPTOR = "android.media.tv.interactive.ITvInteractiveAppService";
 

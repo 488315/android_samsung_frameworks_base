@@ -4,7 +4,6 @@ import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public class DemuxFilterPesDataSettings implements Parcelable {
     public static final Parcelable.Creator<DemuxFilterPesDataSettings> CREATOR =
             new Parcelable.Creator<DemuxFilterPesDataSettings>() { // from class:

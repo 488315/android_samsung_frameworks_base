@@ -15,7 +15,6 @@ import android.util.ArrayMap;
 import android.util.LruCache;
 import android.util.SparseArray;
 
-/* loaded from: classes5.dex */
 public final class AttributeCache {
     private static final int CACHE_SIZE = 4;
     private static AttributeCache sInstance = null;

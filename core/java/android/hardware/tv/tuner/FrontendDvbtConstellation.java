@@ -1,6 +1,5 @@
 package android.hardware.tv.tuner;
 
-/* loaded from: classes2.dex */
 public @interface FrontendDvbtConstellation {
     public static final int AUTO = 1;
     public static final int CONSTELLATION_16QAM = 4;

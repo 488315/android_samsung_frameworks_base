@@ -17,7 +17,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/* loaded from: classes.dex */
 public class Gesture implements Parcelable {
     private static final boolean BITMAP_RENDERING_ANTIALIAS = true;
     private static final boolean BITMAP_RENDERING_DITHER = true;

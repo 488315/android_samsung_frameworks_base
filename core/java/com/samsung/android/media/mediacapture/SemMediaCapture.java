@@ -32,7 +32,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-/* loaded from: classes6.dex */
 public final class SemMediaCapture {
     public static final int AUDIO_CAPTURE_OFF = 0;
     public static final int AUDIO_CAPTURE_ON = 1;

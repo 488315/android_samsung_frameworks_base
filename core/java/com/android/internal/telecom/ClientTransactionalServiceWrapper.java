@@ -23,7 +23,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 
-/* loaded from: classes5.dex */
 public class ClientTransactionalServiceWrapper {
     private static final String EXECUTOR_FAIL_MSG =
             "Telecom hit an exception while handling a CallEventCallback on an executor: ";

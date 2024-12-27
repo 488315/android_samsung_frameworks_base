@@ -1,6 +1,5 @@
 package com.android.internal.hidden_from_bootclasspath.android.credentials.flags;
 
-/* loaded from: classes5.dex */
 public final class Flags {
     private static FeatureFlags FEATURE_FLAGS = new FeatureFlagsImpl();
     public static final String FLAG_CLEAR_CREDENTIALS_FIX_ENABLED =

@@ -3,7 +3,6 @@ package com.android.internal.org.bouncycastle.asn1;
 import java.io.IOException;
 import java.util.Enumeration;
 
-/* loaded from: classes5.dex */
 public class BERTaggedObject extends ASN1TaggedObject {
     public BERTaggedObject(int tagNo, ASN1Encodable obj) {
         super(true, tagNo, obj);

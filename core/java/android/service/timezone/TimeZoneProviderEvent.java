@@ -10,7 +10,6 @@ import java.lang.annotation.Target;
 import java.time.Duration;
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public final class TimeZoneProviderEvent implements Parcelable {
     public static final Parcelable.Creator<TimeZoneProviderEvent> CREATOR =
             new Parcelable.Creator<

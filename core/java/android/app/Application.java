@@ -14,7 +14,6 @@ import android.view.autofill.Helper;
 
 import java.util.ArrayList;
 
-/* loaded from: classes.dex */
 public class Application extends ContextWrapper implements ComponentCallbacks2 {
     private static final String TAG = "Application";
     private ArrayList<ActivityLifecycleCallbacks> mActivityLifecycleCallbacks;

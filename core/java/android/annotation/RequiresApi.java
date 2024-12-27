@@ -15,7 +15,6 @@ import java.lang.annotation.Target;
 })
 @Documented
 @Retention(RetentionPolicy.CLASS)
-/* loaded from: classes.dex */
 public @interface RequiresApi {
     int api() default 1;
 

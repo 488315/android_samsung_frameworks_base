@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Queue;
 
-/* loaded from: classes5.dex */
 public final class IpRange {
     private static final int SIGNUM_POSITIVE = 1;
     private final byte[] mEndAddr;

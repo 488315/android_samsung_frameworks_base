@@ -5,7 +5,6 @@ import android.util.Log;
 
 import java.io.File;
 
-/* loaded from: classes.dex */
 public final class SQLiteUserDataRecovery {
     private static final String RECOVERY_POSTFIX = "-recover";
     private static final int SQLITE_UDR_DUPLICATE = 768;

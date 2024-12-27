@@ -1,6 +1,5 @@
 package com.samsung.android.desktopmode;
 
-/* loaded from: classes6.dex */
 public class DexTaskInfo {
     public static final int FLAG_FIXED_ORIENTATION = 4;
     public static final int FLAG_IN_MULTI_WINDOW_MODE = 1;

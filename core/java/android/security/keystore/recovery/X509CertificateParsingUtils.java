@@ -7,7 +7,6 @@ import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.util.Base64;
 
-/* loaded from: classes3.dex */
 public class X509CertificateParsingUtils {
     private static final String CERT_FORMAT = "X.509";
 

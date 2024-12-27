@@ -1,6 +1,5 @@
 package android.animation;
 
-/* loaded from: classes.dex */
 public class IntEvaluator implements TypeEvaluator<Integer> {
     @Override // android.animation.TypeEvaluator
     public Integer evaluate(float fraction, Integer startValue, Integer endValue) {

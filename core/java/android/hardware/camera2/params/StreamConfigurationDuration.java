@@ -5,7 +5,6 @@ import android.util.Size;
 
 import com.android.internal.util.Preconditions;
 
-/* loaded from: classes2.dex */
 public final class StreamConfigurationDuration {
     private final long mDurationNs;
     private final int mFormat;

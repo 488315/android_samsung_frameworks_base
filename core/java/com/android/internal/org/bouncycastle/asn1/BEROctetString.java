@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.Enumeration;
 import java.util.NoSuchElementException;
 
-/* loaded from: classes5.dex */
 public class BEROctetString extends ASN1OctetString {
     private static final int DEFAULT_CHUNK_SIZE = 1000;
     private final int chunkSize;

@@ -2,7 +2,6 @@ package android.hardware.cas.V1_2;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class StatusEvent {
     public static final byte PLUGIN_PHYSICAL_MODULE_CHANGED = 0;
     public static final byte PLUGIN_SESSION_NUMBER_CHANGED = 1;

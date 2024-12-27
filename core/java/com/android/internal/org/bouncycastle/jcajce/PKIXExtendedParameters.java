@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/* loaded from: classes5.dex */
 public class PKIXExtendedParameters implements CertPathParameters {
     public static final int CHAIN_VALIDITY_MODEL = 1;
     public static final int PKIX_VALIDITY_MODEL = 0;

@@ -5,7 +5,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.view.View;
 
-/* loaded from: classes4.dex */
 public abstract class SimpleCursorTreeAdapter extends ResourceCursorTreeAdapter {
     private int[] mChildFrom;
     private String[] mChildFromNames;

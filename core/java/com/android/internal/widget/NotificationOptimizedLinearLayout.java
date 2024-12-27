@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RemoteViews.RemoteView
-/* loaded from: classes5.dex */
 public class NotificationOptimizedLinearLayout extends LinearLayout {
     private static final boolean DEBUG_LAYOUT = false;
     private static final String TAG = "NotifOptimizedLinearLayout";

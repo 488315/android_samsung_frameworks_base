@@ -8,7 +8,6 @@ import android.util.Log;
 import com.samsung.android.knox.dar.ddar.DualDarConstants;
 import com.samsung.android.knox.dar.ddar.securesession.SecureClient;
 
-/* loaded from: classes6.dex */
 public class KnoxProxyManager {
     public static final String DDAR_CACHE_SERVICE = "DDAR_CACHE_SERVICE";
     private static final String INITIALIZE_SECURE_SESSION = "INITIALIZE_SECURE_SESSION";

@@ -42,7 +42,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.HashMap;
 
-/* loaded from: classes5.dex */
 public class PhoneFallbackEventHandler implements FallbackEventHandler {
     private static final String AFTER_KEYGUARD_GONE = "afterKeyguardGone";
     private static final String CLASS_NAME_MESSAGING = "com.android.mms.ui.ConversationComposer";

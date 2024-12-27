@@ -8,7 +8,6 @@ import java.util.Calendar;
 import java.util.Objects;
 import java.util.TimeZone;
 
-/* loaded from: classes3.dex */
 public class ScheduleCalendar {
     public static final boolean DEBUG = Log.isLoggable("ConditionProviders", 3);
     public static final String TAG = "ScheduleCalendar";

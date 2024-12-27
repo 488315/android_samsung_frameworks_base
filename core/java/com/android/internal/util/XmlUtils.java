@@ -34,7 +34,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/* loaded from: classes5.dex */
 public class XmlUtils {
     private static final String STRING_ARRAY_SEPARATOR = ":";
 

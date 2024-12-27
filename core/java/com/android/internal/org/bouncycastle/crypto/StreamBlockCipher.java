@@ -1,6 +1,5 @@
 package com.android.internal.org.bouncycastle.crypto;
 
-/* loaded from: classes5.dex */
 public abstract class StreamBlockCipher implements BlockCipher, StreamCipher {
     private final BlockCipher cipher;
 

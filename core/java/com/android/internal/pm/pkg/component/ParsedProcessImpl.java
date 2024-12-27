@@ -15,7 +15,6 @@ import java.lang.annotation.Annotation;
 import java.util.Collections;
 import java.util.Set;
 
-/* loaded from: classes5.dex */
 public class ParsedProcessImpl implements ParsedProcess, Parcelable {
     public static final Parcelable.Creator<ParsedProcessImpl> CREATOR;
     static Parcelling<Set<String>> sParcellingForDeniedPermissions;

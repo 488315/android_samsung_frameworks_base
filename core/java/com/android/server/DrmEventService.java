@@ -10,7 +10,6 @@ import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 
-/* loaded from: classes5.dex */
 public class DrmEventService extends Service {
     public static final String ACTION_BOOT_COMPLETED = "android.intent.action.BOOT_COMPLETED";
     private static final String TAG = "DrmEventService";

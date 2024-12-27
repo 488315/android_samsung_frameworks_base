@@ -17,7 +17,6 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 
-/* loaded from: classes.dex */
 public class GraphicsRendererPolicyCipher {
     private static final String AES_CBC_PKCS_7_PADDING = "AES/CBC/PKCS7Padding";
     private static final String ANDROID_KEY_STORE = "AndroidKeyStore";

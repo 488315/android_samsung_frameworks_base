@@ -10,7 +10,6 @@ import com.samsung.vekit.Common.VEContext;
 
 import java.util.ArrayList;
 
-/* loaded from: classes6.dex */
 public class ClipAnimation extends Animation<Integer> {
     protected float clipIntensity;
     protected ClipType clipType;

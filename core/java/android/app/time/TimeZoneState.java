@@ -9,7 +9,6 @@ import java.io.PrintWriter;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class TimeZoneState implements Parcelable {
     public static final Parcelable.Creator<TimeZoneState> CREATOR =
             new Parcelable.Creator<

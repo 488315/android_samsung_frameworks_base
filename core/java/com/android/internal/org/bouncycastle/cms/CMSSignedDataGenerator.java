@@ -17,7 +17,6 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public class CMSSignedDataGenerator extends CMSSignedGenerator {
     private List signerInfs = new ArrayList();
 

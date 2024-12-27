@@ -9,7 +9,6 @@ import android.widget.TextView;
 import com.android.internal.R;
 
 @Deprecated
-/* loaded from: classes.dex */
 public class TabActivity extends ActivityGroup {
     private String mDefaultTab = null;
     private int mDefaultTabIndex = -1;

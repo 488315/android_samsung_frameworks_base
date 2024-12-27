@@ -99,7 +99,6 @@ import java.util.Map;
 import libcore.io.IoUtils;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes.dex */
 public final class CocktailBarManagerServiceContainer extends ICocktailBarService.Stub implements CocktailBarManagerServiceListener, CocktailPolicyManager.OnCocktailBarPolicyListener, CocktailBarUsageStateWatcher.OnCocktailBarWatcherListener, DevicePolicyManagerInternal.OnCrossProfileWidgetProvidersChangeListener {
     public static final boolean SUPPORT_EDGE_MUM;
     public final AppOpsManager mAppOpsManager;

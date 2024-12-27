@@ -11,7 +11,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.function.Function;
 
-/* loaded from: classes3.dex */
 public class SettingsStringUtil {
     public static final String DELIMITER = ":";
 

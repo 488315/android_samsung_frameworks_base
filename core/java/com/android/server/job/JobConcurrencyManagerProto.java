@@ -1,6 +1,5 @@
 package com.android.server.job;
 
-/* loaded from: classes5.dex */
 public final class JobConcurrencyManagerProto {
     public static final long CURRENT_INTERACTIVE_STATE = 1133871366145L;
     public static final long EFFECTIVE_INTERACTIVE_STATE = 1133871366146L;

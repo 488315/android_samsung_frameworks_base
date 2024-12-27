@@ -22,7 +22,6 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
 
-/* loaded from: classes3.dex */
 abstract class AbstractDetector implements HotwordDetector {
     private static final boolean DEBUG = false;
     static final boolean IS_IDENTITY_WITH_ATTRIBUTION_TAG = false;

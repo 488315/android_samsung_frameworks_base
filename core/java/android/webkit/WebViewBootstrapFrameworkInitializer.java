@@ -6,7 +6,6 @@ import android.content.Context;
 import android.os.IBinder;
 
 @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
-/* loaded from: classes4.dex */
 public class WebViewBootstrapFrameworkInitializer {
     private WebViewBootstrapFrameworkInitializer() {}
 

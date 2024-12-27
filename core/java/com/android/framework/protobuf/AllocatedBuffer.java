@@ -3,7 +3,6 @@ package com.android.framework.protobuf;
 import java.nio.ByteBuffer;
 
 @CheckReturnValue
-/* loaded from: classes3.dex */
 abstract class AllocatedBuffer {
     public abstract byte[] array();
 

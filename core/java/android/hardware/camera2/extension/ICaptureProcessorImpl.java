@@ -9,7 +9,6 @@ import android.view.Surface;
 
 import java.util.List;
 
-/* loaded from: classes2.dex */
 public interface ICaptureProcessorImpl extends IInterface {
     public static final String DESCRIPTOR =
             "android.hardware.camera2.extension.ICaptureProcessorImpl";

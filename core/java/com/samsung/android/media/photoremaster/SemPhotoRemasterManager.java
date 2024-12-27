@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Map;
 
 @Deprecated
-/* loaded from: classes6.dex */
 public class SemPhotoRemasterManager {
     public static final int PARAMETER_AMOUNT_REMASTER_IMAGES = 1006;
     private static final int PARAMETER_DISABLE_POSTPROCESSING = 1017;

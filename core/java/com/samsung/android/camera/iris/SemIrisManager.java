@@ -35,7 +35,6 @@ import java.util.List;
 import javax.crypto.Cipher;
 import javax.crypto.Mac;
 
-/* loaded from: classes5.dex */
 public class SemIrisManager {
     public static final String CLIENTSPEC_KEY_ALLOW_INDEXES = "request_template_index_list";
     public static final String CLIENTSPEC_KEY_USE_MANUAL_TIMEOUT = "useManualTimeout";

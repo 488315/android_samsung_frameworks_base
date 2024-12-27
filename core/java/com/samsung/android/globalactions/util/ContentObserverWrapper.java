@@ -8,7 +8,6 @@ import android.os.Handler;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* loaded from: classes6.dex */
 public class ContentObserverWrapper {
     private final Context mContext;
     private ArrayList<ContentObserver> mObserverList = new ArrayList<>();

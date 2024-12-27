@@ -24,7 +24,6 @@ import java.security.spec.InvalidKeySpecException;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.Arrays;
 
-/* loaded from: classes.dex */
 public class FrameworkParsingPackageUtils {
     private static final int MAX_FILE_NAME_SIZE = 223;
     public static final int PARSE_APK_IN_APEX = 512;

@@ -12,7 +12,6 @@ import android.telecom.ParcelableCall;
 
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public interface IInCallService extends IInterface {
     void addCall(ParcelableCall parcelableCall) throws RemoteException;
 

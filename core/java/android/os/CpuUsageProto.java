@@ -1,6 +1,5 @@
 package android.os;
 
-/* loaded from: classes3.dex */
 public final class CpuUsageProto {
     public static final long CURRENT_LOAD = 1146756268033L;
     public static final long CURRENT_SAMPLE_REAL_TIME = 1112396529670L;

@@ -1,6 +1,5 @@
 package android.media;
 
-/* loaded from: classes2.dex */
 public interface MediaTimeProvider {
     public static final long NO_TIME = -1;
 

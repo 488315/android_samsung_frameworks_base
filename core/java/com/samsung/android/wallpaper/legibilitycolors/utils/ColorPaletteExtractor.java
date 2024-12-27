@@ -13,7 +13,6 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Iterator;
 
-/* loaded from: classes6.dex */
 public class ColorPaletteExtractor extends ColorExtractor {
     public static final float DEFAULT_GRAYSCALE_THRESHOLD_BRIGHTNESS = 0.18f;
     public static final float DEFAULT_GRAYSCALE_THRESHOLD_SATURATION = 0.12f;

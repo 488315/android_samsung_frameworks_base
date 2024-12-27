@@ -6,7 +6,6 @@ import android.hardware.security.secureclock.Timestamp;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
-/* loaded from: classes3.dex */
 public class AuthTokenUtils {
     private AuthTokenUtils() {}
 

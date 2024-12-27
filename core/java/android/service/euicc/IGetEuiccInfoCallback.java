@@ -7,7 +7,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.telephony.euicc.EuiccInfo;
 
-/* loaded from: classes3.dex */
 public interface IGetEuiccInfoCallback extends IInterface {
     void onSuccess(EuiccInfo euiccInfo) throws RemoteException;
 

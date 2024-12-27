@@ -29,7 +29,6 @@ import android.view.inspector.PropertyReader;
 import com.android.internal.R;
 import com.android.internal.view.menu.ShowableListMenu;
 
-/* loaded from: classes4.dex */
 public class Spinner extends AbsSpinner implements DialogInterface.OnClickListener {
     private static final int MAX_ITEMS_MEASURED = 15;
     public static final int MODE_DIALOG = 0;

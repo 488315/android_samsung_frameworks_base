@@ -1,6 +1,5 @@
 package android.media;
 
-/* loaded from: classes2.dex */
 public @interface VolumeShaperOperationFlag {
     public static final int CREATE_IF_NECESSARY = 4;
     public static final int DELAY = 3;

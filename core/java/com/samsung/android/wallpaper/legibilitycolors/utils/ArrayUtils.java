@@ -1,6 +1,5 @@
 package com.samsung.android.wallpaper.legibilitycolors.utils;
 
-/* loaded from: classes6.dex */
 public class ArrayUtils {
     public static void arrayChangePos(Object[] array, int src, int dst) {
         Object buf = array[src];

@@ -1,7 +1,6 @@
 package org.apache.http.params;
 
 @Deprecated
-/* loaded from: classes6.dex */
 public final class HttpConnectionParams implements CoreConnectionPNames {
     private HttpConnectionParams() {}
 

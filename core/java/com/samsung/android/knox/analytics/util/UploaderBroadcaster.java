@@ -7,7 +7,6 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.UserHandle;
 import android.sec.enterprise.proxy.EnterpriseProxyConstants;
 
-/* loaded from: classes6.dex */
 public class UploaderBroadcaster {
     private static final String ACTIVATE_KNOX_ANALYTICS_DEVICE_STATUS =
             "com.samsung.android.knox.intent.action.ACTIVATE_KNOX_ANALYTICS_DEVICE_STATUS";

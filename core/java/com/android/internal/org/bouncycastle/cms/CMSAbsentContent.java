@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-/* loaded from: classes5.dex */
 public class CMSAbsentContent implements CMSTypedData, CMSReadable {
     private final ASN1ObjectIdentifier type;
 

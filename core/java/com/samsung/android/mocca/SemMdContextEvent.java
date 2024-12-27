@@ -2,7 +2,6 @@ package com.samsung.android.mocca;
 
 import java.util.Arrays;
 
-/* loaded from: classes6.dex */
 public class SemMdContextEvent {
     public final byte[] data;
     public final long timestamp;

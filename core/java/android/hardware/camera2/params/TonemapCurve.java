@@ -8,7 +8,6 @@ import com.android.internal.util.Preconditions;
 
 import java.util.Arrays;
 
-/* loaded from: classes2.dex */
 public final class TonemapCurve {
     public static final int CHANNEL_BLUE = 2;
     public static final int CHANNEL_GREEN = 1;

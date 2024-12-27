@@ -14,7 +14,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-/* loaded from: classes.dex */
 public class BitmapFactory {
     private static final int DECODE_BUFFER_SIZE = 16384;
     private static final String TAG = "BitmapFactory";

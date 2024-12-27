@@ -38,7 +38,6 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.function.IntPredicate;
 
-/* loaded from: classes6.dex */
 public class SemSoundAssistantManager {
     public static final String ACTION_SOUND_EVENT_CHANGED =
             "com.samsung.android.intent.action.SOUND_EVENT";

@@ -10,7 +10,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.util.ArrayList;
 
-/* loaded from: classes5.dex */
 final class HidlHalService implements XidlHalService, IHwBinder.DeathRecipient {
     private static final String TAG = "HHS";
     private ISehAuthenticationFramework mService = null;

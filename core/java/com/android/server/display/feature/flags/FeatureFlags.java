@@ -1,6 +1,5 @@
 package com.android.server.display.feature.flags;
 
-/* loaded from: classes5.dex */
 public interface FeatureFlags {
     boolean alwaysRotateDisplayDevice();
 

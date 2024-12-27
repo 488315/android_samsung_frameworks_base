@@ -20,7 +20,6 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.PBEParameterSpec;
 
-/* loaded from: classes5.dex */
 public interface PBE {
     public static final int MD5 = 0;
     public static final int OPENSSL = 3;

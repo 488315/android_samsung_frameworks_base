@@ -1,6 +1,5 @@
 package android.util;
 
-/* loaded from: classes4.dex */
 public abstract class Singleton<T> {
     private T mInstance;
 

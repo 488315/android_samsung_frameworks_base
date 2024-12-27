@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class KeyChainSnapshot implements Parcelable {
     public static final Parcelable.Creator<KeyChainSnapshot> CREATOR =
             new Parcelable.Creator<

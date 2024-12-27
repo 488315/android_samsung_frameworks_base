@@ -1,6 +1,5 @@
 package android.adaptiveauth;
 
-/* loaded from: classes.dex */
 public final class Flags {
     private static FeatureFlags FEATURE_FLAGS = new FeatureFlagsImpl();
     public static final String FLAG_ENABLE_ADAPTIVE_AUTH =

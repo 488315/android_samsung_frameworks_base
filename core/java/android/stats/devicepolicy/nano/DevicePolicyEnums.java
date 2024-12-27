@@ -1,6 +1,5 @@
 package android.stats.devicepolicy.nano;
 
-/* loaded from: classes3.dex */
 public interface DevicePolicyEnums {
     public static final int ADD_ACCOUNT = 202;
     public static final int ADD_ACCOUNT_EXPLICITLY = 203;

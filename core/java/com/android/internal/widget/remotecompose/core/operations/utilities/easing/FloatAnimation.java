@@ -1,6 +1,5 @@
 package com.android.internal.widget.remotecompose.core.operations.utilities.easing;
 
-/* loaded from: classes5.dex */
 public class FloatAnimation extends Easing {
     Easing mEasingCurve;
     float[] mSpec;

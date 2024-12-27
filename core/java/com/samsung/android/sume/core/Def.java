@@ -11,7 +11,6 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-/* loaded from: classes6.dex */
 public class Def {
     public static final int INVALID = -1;
     private static final String TAG = tagOf((Class<?>) Def.class);

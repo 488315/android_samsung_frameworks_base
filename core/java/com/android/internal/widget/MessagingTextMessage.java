@@ -13,7 +13,6 @@ import android.widget.RemoteViews;
 import com.android.internal.R;
 
 @RemoteViews.RemoteView
-/* loaded from: classes5.dex */
 public class MessagingTextMessage extends ImageFloatingTextView implements MessagingMessage {
     private static final String TAG = "MessagingTextMessage";
     private static final MessagingPool<MessagingTextMessage> sInstancePool =

@@ -8,7 +8,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-/* loaded from: classes.dex */
 public class CertInfo implements Parcelable {
     public static final Parcelable.Creator<CertInfo> CREATOR =
             new Parcelable.Creator<CertInfo>() { // from class: android.blockchain.CertInfo.1

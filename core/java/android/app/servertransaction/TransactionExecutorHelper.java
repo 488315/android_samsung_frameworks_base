@@ -12,7 +12,6 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.List;
 
-/* loaded from: classes.dex */
 public class TransactionExecutorHelper {
     private static final int DESTRUCTION_PENALTY = 10;
     private IntArray mLifecycleSequence = new IntArray(6);

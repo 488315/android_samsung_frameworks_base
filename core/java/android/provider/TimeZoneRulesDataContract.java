@@ -4,7 +4,6 @@ import android.annotation.SystemApi;
 import android.net.Uri;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class TimeZoneRulesDataContract {
     public static final String AUTHORITY = "com.android.timezone";
     private static final Uri AUTHORITY_URI = Uri.parse("content://com.android.timezone");

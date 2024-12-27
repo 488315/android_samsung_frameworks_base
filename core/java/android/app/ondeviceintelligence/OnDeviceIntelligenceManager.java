@@ -27,7 +27,6 @@ import java.util.function.Consumer;
 import java.util.function.LongConsumer;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class OnDeviceIntelligenceManager {
     public static final String API_VERSION_BUNDLE_KEY = "ApiVersionBundleKey";
     public static final String AUGMENT_REQUEST_CONTENT_BUNDLE_KEY =

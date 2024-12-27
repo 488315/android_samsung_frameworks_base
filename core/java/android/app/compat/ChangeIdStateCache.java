@@ -8,7 +8,6 @@ import android.os.ServiceManager;
 
 import com.android.internal.compat.IPlatformCompat;
 
-/* loaded from: classes.dex */
 public final class ChangeIdStateCache
         extends PropertyInvalidatedCache<ChangeIdStateQuery, Boolean> {
     private static final String CACHE_KEY = "cache_key.is_compat_change_enabled";

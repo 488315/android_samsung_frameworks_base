@@ -18,7 +18,6 @@ import java.util.logging.Level;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
-/* loaded from: classes.dex */
 public class ThemeUtil {
     public static Integer adjustAlpha(float factor, int color) {
         int alpha = Math.round(Color.alpha(color) * factor);

@@ -9,7 +9,6 @@ import android.telephony.ims.ImsExternalCallState;
 
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public interface IImsExternalCallStateListener extends IInterface {
     void onImsExternalCallStateUpdate(List<ImsExternalCallState> list) throws RemoteException;
 

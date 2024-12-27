@@ -2,7 +2,6 @@ package android.os;
 
 import com.android.internal.os.IResultReceiver;
 
-/* loaded from: classes3.dex */
 public class ResultReceiver implements Parcelable {
     public static final Parcelable.Creator<ResultReceiver> CREATOR =
             new Parcelable.Creator<ResultReceiver>() { // from class: android.os.ResultReceiver.1

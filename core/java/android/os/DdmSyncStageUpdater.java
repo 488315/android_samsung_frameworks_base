@@ -8,7 +8,6 @@ import org.apache.harmony.dalvik.ddmc.DdmServer;
 
 import java.nio.ByteBuffer;
 
-/* loaded from: classes3.dex */
 public class DdmSyncStageUpdater {
     private static final int CHUNK_STAGE = ChunkHandler.type("STAG");
     private static final String TAG = "DdmSyncStageUpdater";

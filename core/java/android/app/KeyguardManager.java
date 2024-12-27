@@ -46,7 +46,6 @@ import java.util.Objects;
 import java.util.concurrent.Executor;
 import java.util.function.BiConsumer;
 
-/* loaded from: classes.dex */
 public class KeyguardManager {
     public static final String ACTION_CONFIRM_DEVICE_CREDENTIAL =
             "android.app.action.CONFIRM_DEVICE_CREDENTIAL";

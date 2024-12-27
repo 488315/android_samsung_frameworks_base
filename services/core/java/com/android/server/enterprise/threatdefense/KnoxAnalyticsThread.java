@@ -12,7 +12,6 @@ import com.samsung.android.knox.analytics.util.KnoxAnalyticsDataConverter;
 import java.util.Hashtable;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes.dex */
 public final class KnoxAnalyticsThread {
     public static final String[] EVENT = {"PROC_USAGE", "PROC_PID_USAGE", "GET_PID_USAGE"};
     public static final Hashtable sApiCalledCount = new Hashtable();

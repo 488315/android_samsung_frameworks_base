@@ -11,7 +11,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.os.ResultReceiver;
 
-/* loaded from: classes2.dex */
 public interface ISessionCallback extends IInterface {
     void onAdjustVolume(String str, int i, int i2, int i3) throws RemoteException;
 

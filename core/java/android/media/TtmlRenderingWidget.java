@@ -15,7 +15,6 @@ import java.util.LinkedList;
 import java.util.Vector;
 
 /* compiled from: TtmlRenderer.java */
-/* loaded from: classes2.dex */
 class TtmlRenderingWidget extends LinearLayout implements SubtitleTrack.RenderingWidget {
     private static final float LINE_HEIGHT_RATIO = 0.0533f;
     private CaptioningManager mCaptionManager;

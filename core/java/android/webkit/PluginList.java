@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Deprecated
-/* loaded from: classes4.dex */
 public class PluginList {
     private ArrayList<Plugin> mPlugins = new ArrayList<>();
 

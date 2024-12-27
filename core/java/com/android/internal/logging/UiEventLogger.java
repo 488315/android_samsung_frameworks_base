@@ -1,6 +1,5 @@
 package com.android.internal.logging;
 
-/* loaded from: classes5.dex */
 public interface UiEventLogger {
 
     public interface UiEventEnum {

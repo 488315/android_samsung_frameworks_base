@@ -23,7 +23,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public final class UriRelativeFilterGroup {
     public static final int ACTION_ALLOW = 0;
     public static final int ACTION_BLOCK = 1;

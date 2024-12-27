@@ -4,7 +4,6 @@ import com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier;
 import com.android.internal.org.bouncycastle.jcajce.provider.config.ConfigurableProvider;
 import com.android.internal.org.bouncycastle.jcajce.provider.util.AlgorithmProvider;
 
-/* loaded from: classes5.dex */
 abstract class DigestAlgorithmProvider extends AlgorithmProvider {
     DigestAlgorithmProvider() {}
 

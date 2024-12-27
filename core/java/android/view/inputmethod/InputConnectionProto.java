@@ -1,6 +1,5 @@
 package android.view.inputmethod;
 
-/* loaded from: classes4.dex */
 public final class InputConnectionProto {
     public static final long CURSOR_CAPS_MODE = 1120986464261L;
     public static final long SELECTED_TEXT_END = 1120986464260L;

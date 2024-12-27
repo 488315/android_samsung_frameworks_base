@@ -13,7 +13,6 @@ import java.util.Arrays;
 import java.util.List;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public final class ImsSsData implements Parcelable {
     public static final int RESULT_SUCCESS = 0;
     public static final int SERVICE_CLASS_DATA = 2;

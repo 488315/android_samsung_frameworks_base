@@ -14,7 +14,6 @@ import com.android.internal.R;
 
 import java.util.Calendar;
 
-/* loaded from: classes.dex */
 public class DatePickerDialog extends AlertDialog
         implements DialogInterface.OnClickListener, DatePicker.OnDateChangedListener {
     private static final String DAY = "day";

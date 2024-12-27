@@ -1,7 +1,6 @@
 package com.samsung.android.wallpaper.legibilitycolors;
 
 
-/* loaded from: classes6.dex */
 public class LegibilityAutoDim {
     static float mMinimumComplexityForAutoDim = 0.8f;
     static float mMaximumComplexityForAutoDim = 1.0f;

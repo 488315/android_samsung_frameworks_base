@@ -10,7 +10,6 @@ import java.util.Iterator;
 import java.util.List;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class PackageRollbackInfo implements Parcelable {
     public static final Parcelable.Creator<PackageRollbackInfo> CREATOR =
             new Parcelable.Creator<PackageRollbackInfo>() { // from class:

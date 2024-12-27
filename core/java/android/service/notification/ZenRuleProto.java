@@ -1,6 +1,5 @@
 package android.service.notification;
 
-/* loaded from: classes3.dex */
 public final class ZenRuleProto {
     public static final long COMPONENT = 1146756268042L;
     public static final long CONDITION = 1146756268041L;

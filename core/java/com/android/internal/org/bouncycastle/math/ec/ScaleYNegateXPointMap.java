@@ -1,6 +1,5 @@
 package com.android.internal.org.bouncycastle.math.ec;
 
-/* loaded from: classes5.dex */
 public class ScaleYNegateXPointMap implements ECPointMap {
     protected final ECFieldElement scale;
 

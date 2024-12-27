@@ -14,7 +14,6 @@ import java.net.UnknownHostException;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public final class SipDelegateConfiguration implements Parcelable {
     public static final Parcelable.Creator<SipDelegateConfiguration> CREATOR =
             new Parcelable.Creator<

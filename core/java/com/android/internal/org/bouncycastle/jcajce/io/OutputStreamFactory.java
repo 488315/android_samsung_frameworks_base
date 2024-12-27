@@ -6,7 +6,6 @@ import java.security.Signature;
 
 import javax.crypto.Mac;
 
-/* loaded from: classes5.dex */
 public class OutputStreamFactory {
     public static OutputStream createStream(Signature signature) {
         return new SignatureUpdatingOutputStream(signature);

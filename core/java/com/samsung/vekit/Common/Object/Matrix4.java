@@ -7,7 +7,6 @@ import com.samsung.vekit.Common.Type.AxisType;
 
 import java.lang.reflect.Array;
 
-/* loaded from: classes6.dex */
 public class Matrix4 {
     private final String TAG = "Matrix4";
     private double[][] matrix = (double[][]) Array.newInstance((Class<?>) Double.TYPE, 4, 4);

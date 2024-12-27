@@ -8,7 +8,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-/* loaded from: classes2.dex */
 public class SizeAreaComparator implements Comparator<Size> {
     @Override // java.util.Comparator
     public int compare(Size size, Size size2) {

@@ -10,7 +10,6 @@ import android.util.Log;
 import java.util.List;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public abstract class ApnService extends Service {
     private static final String LOG_TAG = "ApnService";
     private final IApnSourceService.Stub mBinder =

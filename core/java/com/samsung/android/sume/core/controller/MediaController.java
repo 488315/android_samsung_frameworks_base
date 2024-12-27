@@ -7,7 +7,6 @@ import com.samsung.android.sume.core.message.Request;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public interface MediaController<T> {
 
     public interface OnEventListener {

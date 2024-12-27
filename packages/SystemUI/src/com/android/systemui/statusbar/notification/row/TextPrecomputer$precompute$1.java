@@ -5,7 +5,6 @@ import android.util.Log;
 import android.widget.TextView;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public final class TextPrecomputer$precompute$1 implements Runnable {
     public final /* synthetic */ boolean $logException;
     public final /* synthetic */ Spannable $precomputedText;

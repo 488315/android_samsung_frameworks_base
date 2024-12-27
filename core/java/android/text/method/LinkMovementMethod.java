@@ -10,7 +10,6 @@ import android.view.MotionEvent;
 import android.view.textclassifier.TextLinks;
 import android.widget.TextView;
 
-/* loaded from: classes4.dex */
 public class LinkMovementMethod extends ScrollingMovementMethod {
     private static final int CLICK = 1;
     private static final int DOWN = 3;

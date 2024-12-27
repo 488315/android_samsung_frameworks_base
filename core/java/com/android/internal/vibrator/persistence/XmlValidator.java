@@ -9,7 +9,6 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.util.Objects;
 
-/* loaded from: classes5.dex */
 public final class XmlValidator {
     public static void checkStartTag(TypedXmlPullParser parser, String expectedTag)
             throws XmlParserException {

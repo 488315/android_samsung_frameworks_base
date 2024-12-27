@@ -19,7 +19,6 @@ import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.internal.ChannelFlowTransformLatest;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes3.dex */
 final class DisplaySwitchLatencyTracker$start$1 extends SuspendLambda implements Function2 {
     int label;
     final /* synthetic */ DisplaySwitchLatencyTracker this$0;

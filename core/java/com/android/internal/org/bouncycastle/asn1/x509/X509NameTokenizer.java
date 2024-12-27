@@ -1,6 +1,5 @@
 package com.android.internal.org.bouncycastle.asn1.x509;
 
-/* loaded from: classes5.dex */
 public class X509NameTokenizer {
     private StringBuffer buf;
     private int index;

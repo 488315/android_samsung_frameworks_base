@@ -10,7 +10,6 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes.dex */
 class BlocklistParser {
     private static final String TAG = "BlocklistParser";
     public static final String UTF_8 = "UTF-8";

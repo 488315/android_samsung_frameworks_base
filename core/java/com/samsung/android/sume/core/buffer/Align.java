@@ -12,7 +12,6 @@ import com.samsung.android.sume.core.format.MediaFormat;
 
 import java.io.Serializable;
 
-/* loaded from: classes6.dex */
 public class Align implements Serializable, Parcelable, Copyable<Align>, Comparable<Align> {
     private int alignOfHeight;
     private int alignOfWidth;

@@ -3,7 +3,6 @@ package com.samsung.android.media.heif;
 import java.io.FileDescriptor;
 import java.nio.ByteBuffer;
 
-/* loaded from: classes6.dex */
 public class SemInputImage {
     private ByteBuffer mBuffer;
     private final int mColorFormat;

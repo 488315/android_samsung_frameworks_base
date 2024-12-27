@@ -11,7 +11,6 @@ import com.sec.android.allshare.iface.message.AllShareKey;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* loaded from: classes3.dex */
 final class VideoItemImpl extends Item implements IBundleHolder {
     public static final Parcelable.Creator<VideoItemImpl> CREATOR =
             new Parcelable.Creator<

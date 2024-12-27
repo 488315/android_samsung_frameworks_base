@@ -1,6 +1,5 @@
 package android.os;
 
-/* loaded from: classes3.dex */
 class BadTypeParcelableException extends BadParcelableException {
     BadTypeParcelableException(String msg) {
         super(msg);

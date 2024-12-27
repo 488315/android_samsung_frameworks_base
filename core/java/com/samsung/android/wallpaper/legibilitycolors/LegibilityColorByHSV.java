@@ -7,7 +7,6 @@ import com.android.internal.graphics.ColorUtils;
 import com.samsung.android.wallpaper.legibilitycolors.utils.ColorExtractor;
 import com.samsung.android.wallpaper.legibilitycolors.utils.IUXColorUtils;
 
-/* loaded from: classes6.dex */
 public class LegibilityColorByHSV {
     private static final float BASE_LUMINANCE = 67.0f;
     static final int BLACK_COLOR = -16777216;

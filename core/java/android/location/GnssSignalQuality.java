@@ -1,6 +1,5 @@
 package android.location;
 
-/* loaded from: classes2.dex */
 public interface GnssSignalQuality {
     public static final int GNSS_SIGNAL_QUALITY_GOOD = 1;
     public static final int GNSS_SIGNAL_QUALITY_POOR = 0;

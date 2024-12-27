@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class PnoSettings implements Parcelable {
     public static final Parcelable.Creator<PnoSettings> CREATOR =
             new Parcelable.Creator<

@@ -9,7 +9,6 @@ import com.android.internal.telephony.uicc.IccUtils;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-/* loaded from: classes4.dex */
 public final class GbaAuthRequest implements Parcelable {
     private int mAppType;
     private IBootstrapAuthenticationCallback mCallback;

@@ -1,6 +1,5 @@
 package android.database;
 
-/* loaded from: classes.dex */
 public class CrossProcessCursorWrapper extends CursorWrapper implements CrossProcessCursor {
     public CrossProcessCursorWrapper(Cursor cursor) {
         super(cursor);

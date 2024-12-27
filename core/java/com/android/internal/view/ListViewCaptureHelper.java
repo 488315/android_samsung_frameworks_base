@@ -9,7 +9,6 @@ import android.widget.ListView;
 
 import java.util.function.Consumer;
 
-/* loaded from: classes5.dex */
 public class ListViewCaptureHelper implements ScrollCaptureViewHelper<ListView> {
     private static final String TAG = "LVCaptureHelper";
     private int mOverScrollMode;

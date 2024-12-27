@@ -15,7 +15,6 @@ import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.util.Locale;
 
-/* loaded from: classes5.dex */
 public class Utils {
     protected static final String TAG = "VZWAVSLibrary";
 

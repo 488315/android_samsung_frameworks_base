@@ -33,7 +33,6 @@ import java.util.function.Supplier;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/* loaded from: classes5.dex */
 public final class TelephonyUtils {
     public static final Executor DIRECT_EXECUTOR;
     public static boolean IS_DEBUGGABLE = false;

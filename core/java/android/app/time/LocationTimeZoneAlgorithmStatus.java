@@ -13,7 +13,6 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/* loaded from: classes.dex */
 public final class LocationTimeZoneAlgorithmStatus implements Parcelable {
     public static final int PROVIDER_STATUS_IS_CERTAIN = 3;
     public static final int PROVIDER_STATUS_IS_UNCERTAIN = 4;

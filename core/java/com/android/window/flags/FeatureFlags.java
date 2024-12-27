@@ -1,6 +1,5 @@
 package com.android.window.flags;
 
-/* loaded from: classes5.dex */
 public interface FeatureFlags {
     boolean activityEmbeddingAnimationCustomizationFlag();
 

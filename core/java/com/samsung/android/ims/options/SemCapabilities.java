@@ -15,7 +15,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/* loaded from: classes6.dex */
 public class SemCapabilities implements Parcelable, Cloneable {
     public static final Parcelable.Creator<SemCapabilities> CREATOR;
     public static final long FEATURE_ALL = 1152921504606846975L;

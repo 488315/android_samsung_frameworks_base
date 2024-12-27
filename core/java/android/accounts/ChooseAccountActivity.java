@@ -24,7 +24,6 @@ import com.android.internal.R;
 
 import java.util.HashMap;
 
-/* loaded from: classes.dex */
 public class ChooseAccountActivity extends Activity {
     private static final String TAG = "AccountManager";
     private String mCallingPackage;

@@ -11,7 +11,6 @@ import android.security.keystore.ParcelableKeyGenParameterSpec;
 
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public interface IKeyChainService extends IInterface {
     List<String> allSystemAliases() throws RemoteException;
 

@@ -8,7 +8,6 @@ import libcore.util.NativeAllocationRegistry;
 
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public final class InputTransferToken implements Parcelable {
     public final long mNativeObject;
     private static final NativeAllocationRegistry sRegistry =

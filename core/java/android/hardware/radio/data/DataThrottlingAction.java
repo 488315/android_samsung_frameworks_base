@@ -1,6 +1,5 @@
 package android.hardware.radio.data;
 
-/* loaded from: classes2.dex */
 public @interface DataThrottlingAction {
     public static final byte HOLD = 3;
     public static final byte NO_DATA_THROTTLING = 0;

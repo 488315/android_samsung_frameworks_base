@@ -4,7 +4,6 @@ import android.util.Log;
 
 import com.samsung.android.provider.SemKnoxPolicyContract;
 
-/* loaded from: classes3.dex */
 public class RestrictionPolicy {
     public static final String ACTION_RESTRICTION_DISABLE_WFD_INTERNAL =
             "com.samsung.android.knox.intent.action.RESTRICTION_DISABLE_WFD_INTERNAL";

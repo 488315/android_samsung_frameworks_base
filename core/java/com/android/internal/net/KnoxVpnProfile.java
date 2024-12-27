@@ -38,7 +38,6 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.IvParameterSpec;
 
-/* loaded from: classes5.dex */
 public final class KnoxVpnProfile implements Parcelable {
     private static final String ANDROID_BC_PROVIDER = "AndroidKeyStoreBCWorkaroundProvider";
     public static final Parcelable.Creator<KnoxVpnProfile> CREATOR =

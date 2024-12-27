@@ -12,7 +12,6 @@ import android.view.animation.AnimationSet;
 
 import com.android.internal.R;
 
-/* loaded from: classes6.dex */
 public class SemTabDotLineView extends View {
     private static final float CIRCLE_INTERVAL = 2.5f;
     private static final float DIAMETER_SIZE = 2.5f;

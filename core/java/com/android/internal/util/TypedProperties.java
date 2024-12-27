@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-/* loaded from: classes5.dex */
 public class TypedProperties extends HashMap<String, Object> {
     static final String NULL_STRING = new String("<TypedProperties:NULL_STRING>");
     public static final int STRING_NOT_SET = -1;

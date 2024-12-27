@@ -1,6 +1,5 @@
 package com.android.server.wm;
 
-/* loaded from: classes5.dex */
 public final class TaskProto {
     public static final long ACTIVITIES = 2246267895819L;
     public static final long ACTIVITY_TYPE = 1120986464273L;

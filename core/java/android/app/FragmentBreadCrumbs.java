@@ -14,7 +14,6 @@ import android.widget.TextView;
 import com.android.internal.R;
 
 @Deprecated
-/* loaded from: classes.dex */
 public class FragmentBreadCrumbs extends ViewGroup
         implements FragmentManager.OnBackStackChangedListener {
     private static final int DEFAULT_GRAVITY = 8388627;

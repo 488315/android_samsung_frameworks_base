@@ -11,7 +11,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class NetworkProviderInfo implements Parcelable {
     public static final Parcelable.Creator<NetworkProviderInfo> CREATOR =
             new Parcelable.Creator<

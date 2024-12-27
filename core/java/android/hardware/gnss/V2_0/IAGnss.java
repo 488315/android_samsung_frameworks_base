@@ -22,7 +22,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public interface IAGnss extends IBase {
     public static final String kInterfaceName = "android.hardware.gnss@2.0::IAGnss";
 

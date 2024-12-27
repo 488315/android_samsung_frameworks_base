@@ -7,7 +7,6 @@ import com.android.internal.org.bouncycastle.asn1.ASN1Set;
 import com.android.internal.org.bouncycastle.asn1.ASN1TaggedObject;
 import com.android.internal.org.bouncycastle.asn1.DLSet;
 
-/* loaded from: classes5.dex */
 public class Attributes extends ASN1Object {
     private ASN1Set attributes;
 

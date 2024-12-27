@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
 
-/* loaded from: classes6.dex */
 public class IAFTManagerService extends Service {
     private static final String TAG = "IAFTManager";
     private CallBack mCallBack;

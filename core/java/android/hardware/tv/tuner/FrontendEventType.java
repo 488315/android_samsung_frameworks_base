@@ -1,6 +1,5 @@
 package android.hardware.tv.tuner;
 
-/* loaded from: classes2.dex */
 public @interface FrontendEventType {
     public static final int LOCKED = 0;
     public static final int LOST_LOCK = 2;

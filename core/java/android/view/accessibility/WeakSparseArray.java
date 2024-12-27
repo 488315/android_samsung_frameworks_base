@@ -6,7 +6,6 @@ import java.lang.ref.Reference;
 import java.lang.ref.ReferenceQueue;
 import java.lang.ref.WeakReference;
 
-/* loaded from: classes4.dex */
 final class WeakSparseArray<E> {
     private final ReferenceQueue<E> mRefQueue = new ReferenceQueue<>();
     private final SparseArray<WeakReferenceWithId<E>> mSparseArray = new SparseArray<>();

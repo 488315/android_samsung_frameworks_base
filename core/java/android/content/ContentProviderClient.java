@@ -27,7 +27,6 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-/* loaded from: classes.dex */
 public class ContentProviderClient implements ContentInterface, AutoCloseable {
     private static final String TAG = "ContentProviderClient";
     private static Handler sAnrHandler;

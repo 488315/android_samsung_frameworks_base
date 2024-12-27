@@ -5,7 +5,6 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-/* loaded from: classes5.dex */
 public interface RILConstants {
     public static final int ABORTED = 65;
     public static final int ACCESS_BARRED = 68;

@@ -2,7 +2,6 @@ package android.speech.tts;
 
 import android.util.EventLog;
 
-/* loaded from: classes3.dex */
 public class EventLogTags {
     public static final int TTS_SPEAK_FAILURE = 76002;
     public static final int TTS_SPEAK_SUCCESS = 76001;

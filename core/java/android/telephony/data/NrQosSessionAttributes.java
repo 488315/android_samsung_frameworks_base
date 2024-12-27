@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public final class NrQosSessionAttributes implements Parcelable, QosSessionAttributes {
     private final int m5Qi;
     private final long mAveragingWindow;

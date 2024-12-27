@@ -3,7 +3,6 @@ package com.android.internal.org.bouncycastle.asn1;
 import java.io.IOException;
 import java.io.OutputStream;
 
-/* loaded from: classes5.dex */
 public class BERGenerator extends ASN1Generator {
     private boolean _isExplicit;
     private int _tagNo;

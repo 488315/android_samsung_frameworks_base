@@ -5,7 +5,6 @@ import com.android.internal.org.bouncycastle.util.Strings;
 import java.io.IOException;
 import java.util.Date;
 
-/* loaded from: classes5.dex */
 public class DERGeneralizedTime extends ASN1GeneralizedTime {
     public DERGeneralizedTime(byte[] time) {
         super(time);

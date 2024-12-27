@@ -22,7 +22,6 @@ import kotlinx.coroutines.flow.FlowKt;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 /* renamed from: com.android.systemui.keyguard.ui.viewmodel.BouncerToGoneFlows$createScrimAlphaFlow-KLykuaI$$inlined$flatMapLatest$1, reason: invalid class name */
-/* loaded from: classes2.dex */
 public final class BouncerToGoneFlows$createScrimAlphaFlowKLykuaI$$inlined$flatMapLatest$1 extends SuspendLambda implements Function3 {
     final /* synthetic */ long $duration$inlined;
     final /* synthetic */ Ref$BooleanRef $isShadeExpanded$inlined;

@@ -1,6 +1,5 @@
 package android.nfc;
 
-/* loaded from: classes3.dex */
 public final class Flags {
     private static FeatureFlags FEATURE_FLAGS = new FeatureFlagsImpl();
     public static final String FLAG_ENABLE_NFC_CHARGING = "android.nfc.enable_nfc_charging";

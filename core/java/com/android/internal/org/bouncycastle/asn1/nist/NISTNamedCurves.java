@@ -9,7 +9,6 @@ import com.android.internal.org.bouncycastle.util.Strings;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
-/* loaded from: classes5.dex */
 public class NISTNamedCurves {
     static final Hashtable objIds = new Hashtable();
     static final Hashtable names = new Hashtable();

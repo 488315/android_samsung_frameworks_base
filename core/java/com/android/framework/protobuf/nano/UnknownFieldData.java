@@ -3,7 +3,6 @@ package com.android.framework.protobuf.nano;
 import java.io.IOException;
 import java.util.Arrays;
 
-/* loaded from: classes3.dex */
 final class UnknownFieldData {
     final byte[] bytes;
     final int tag;

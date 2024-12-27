@@ -5,7 +5,6 @@ import android.util.Log;
 
 import java.util.UUID;
 
-/* loaded from: classes2.dex */
 public class SourceDefaultEffect extends DefaultEffect {
     private static final String TAG = "SourceDefaultEffect-JAVA";
 

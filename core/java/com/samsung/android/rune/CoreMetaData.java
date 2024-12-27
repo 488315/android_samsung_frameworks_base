@@ -1,6 +1,5 @@
 package com.samsung.android.rune;
 
-/* loaded from: classes6.dex */
 public class CoreMetaData {
     public static final String COVER_LAUNCHER_INNER_APP =
             "com.samsung.android.foldable.cover_launcher_inner_app";

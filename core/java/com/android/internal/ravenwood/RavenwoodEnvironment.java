@@ -1,6 +1,5 @@
 package com.android.internal.ravenwood;
 
-/* loaded from: classes5.dex */
 public final class RavenwoodEnvironment {
     public static final String TAG = "RavenwoodEnvironment";
     private static RavenwoodEnvironment sInstance = new RavenwoodEnvironment();

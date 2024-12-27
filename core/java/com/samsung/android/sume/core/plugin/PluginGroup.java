@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 
-/* loaded from: classes6.dex */
 public abstract class PluginGroup implements Plugin<PluginFixture<?>> {
     protected List<Plugin<?>> plugins = new ArrayList();
 

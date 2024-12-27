@@ -1,6 +1,5 @@
 package com.android.remoteprovisioner;
 
-/* loaded from: classes5.dex */
 public final class RemoteprovisionerEnums {
     public static final int FETCH_GEEK_HTTP_ERROR = 22;
     public static final int FETCH_GEEK_IO_EXCEPTION = 21;

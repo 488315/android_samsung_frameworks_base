@@ -14,7 +14,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public class SemFilterManager {
     private static final String AUTHORITY = "com.samsung.android.provider.filterprovider/filters";
     private static final String FILTER_AUTHORITY =

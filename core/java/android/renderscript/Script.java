@@ -6,7 +6,6 @@ import android.util.SparseArray;
 import java.io.UnsupportedEncodingException;
 
 @Deprecated
-/* loaded from: classes3.dex */
 public class Script extends BaseObj {
     private final SparseArray<FieldID> mFIDs;
     private final SparseArray<InvokeID> mIIDs;

@@ -33,7 +33,6 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import org.apache.http.conn.ssl.SSLSocketFactory;
 
-/* loaded from: classes5.dex */
 public class SmsMessage extends SmsMessageBase {
     private static final int INVALID_VALIDITY_PERIOD = -1;
     static final String LOG_TAG = "SmsMessage";

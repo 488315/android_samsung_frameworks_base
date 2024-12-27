@@ -14,7 +14,6 @@ import android.os.RemoteException;
 import android.util.Log;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public abstract class FieldClassificationService extends Service {
     public static final String SERVICE_INTERFACE =
             "android.service.assist.classification.FieldClassificationService";

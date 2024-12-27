@@ -2,7 +2,6 @@ package com.samsung.android.authenticator;
 
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public class SemAuthenticatorDataManager {
     private static final String PERMISSION_REQUEST_AUTHNR_SERVICE =
             "com.samsung.android.permission.REQUEST_AUTHNR_SERVICE";

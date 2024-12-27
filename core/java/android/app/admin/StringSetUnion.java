@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 import java.util.Set;
 
-/* loaded from: classes.dex */
 public final class StringSetUnion extends ResolutionMechanism<Set<String>> {
     public static final StringSetUnion STRING_SET_UNION = new StringSetUnion();
     public static final Parcelable.Creator<StringSetUnion> CREATOR =

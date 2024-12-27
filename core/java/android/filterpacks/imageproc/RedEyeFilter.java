@@ -12,7 +12,6 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
-/* loaded from: classes.dex */
 public class RedEyeFilter extends Filter {
     private static final float DEFAULT_RED_INTENSITY = 1.3f;
     private static final float MIN_RADIUS = 10.0f;

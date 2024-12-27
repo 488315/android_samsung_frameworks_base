@@ -13,7 +13,6 @@ import com.android.internal.colorextraction.types.Tonal;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
-/* loaded from: classes5.dex */
 public class ColorExtractor implements WallpaperManager.OnColorsChangedListener {
     private static final boolean DEBUG = false;
     private static final String TAG = "ColorExtractor";

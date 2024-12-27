@@ -14,7 +14,6 @@ import com.android.internal.org.bouncycastle.operator.OperatorCreationException;
 import java.security.cert.CertificateEncodingException;
 import java.security.cert.X509Certificate;
 
-/* loaded from: classes5.dex */
 public class JcaSignerInfoGeneratorBuilder {
     private SignerInfoGeneratorBuilder builder;
 

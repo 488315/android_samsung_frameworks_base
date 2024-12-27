@@ -4,7 +4,6 @@ import android.app.Person;
 
 import java.util.List;
 
-/* loaded from: classes5.dex */
 final class MessagingData {
     private ConversationHeaderData mConversationHeaderData;
     private final List<List<MessagingMessage>> mGroups;

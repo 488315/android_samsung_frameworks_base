@@ -17,7 +17,6 @@ import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
 
-/* loaded from: classes4.dex */
 public class SemRemoteViewsValueAnimation extends SemRemoteViewsAnimation {
     private static final String ANIMATION_TYPE_LAYOUT_PARAMS_HEIGHT = "height";
     private static final String ANIMATION_TYPE_LAYOUT_PARAMS_WIDTH = "width";

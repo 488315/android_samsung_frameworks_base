@@ -8,7 +8,6 @@ import android.text.TextUtils;
 import com.samsung.android.feature.SemCscFeature;
 import com.samsung.android.feature.SemFloatingFeature;
 
-/* loaded from: classes5.dex */
 public class Rune {
     public static final boolean SEC_AUDIO_ABS_VOLUME_CONTROL_BT = true;
     public static final boolean SEC_AUDIO_ACPARAM_CMD = true;

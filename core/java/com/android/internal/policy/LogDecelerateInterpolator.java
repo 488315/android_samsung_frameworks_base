@@ -2,7 +2,6 @@ package com.android.internal.policy;
 
 import android.view.animation.Interpolator;
 
-/* loaded from: classes5.dex */
 public class LogDecelerateInterpolator implements Interpolator {
     private int mBase;
     private int mDrift;

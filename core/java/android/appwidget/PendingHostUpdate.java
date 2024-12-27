@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.widget.RemoteViews;
 
-/* loaded from: classes.dex */
 public class PendingHostUpdate implements Parcelable {
     public static final Parcelable.Creator<PendingHostUpdate> CREATOR =
             new Parcelable.Creator<

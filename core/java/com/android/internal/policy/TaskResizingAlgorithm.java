@@ -6,7 +6,6 @@ import android.graphics.Rect;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes5.dex */
 public class TaskResizingAlgorithm {
     public static final int CTRL_BOTTOM = 8;
     public static final int CTRL_LEFT = 1;

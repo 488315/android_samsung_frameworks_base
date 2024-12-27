@@ -23,7 +23,6 @@ import javax.crypto.SecretKey;
 import javax.crypto.ShortBufferException;
 import javax.crypto.spec.SecretKeySpec;
 
-/* loaded from: classes3.dex */
 public class AndroidKeyStoreKeyAgreementSpi extends KeyAgreementSpi
         implements KeyStoreCryptoOperation {
     private static final String TAG = "AndroidKeyStoreKeyAgreementSpi";

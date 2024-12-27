@@ -2,7 +2,6 @@ package android.security.keystore;
 
 import java.security.ProviderException;
 
-/* loaded from: classes3.dex */
 public class BackendBusyException extends ProviderException {
     private final long mBackOffHintMillis;
 

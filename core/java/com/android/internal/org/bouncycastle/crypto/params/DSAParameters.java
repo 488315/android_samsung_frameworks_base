@@ -4,7 +4,6 @@ import com.android.internal.org.bouncycastle.crypto.CipherParameters;
 
 import java.math.BigInteger;
 
-/* loaded from: classes5.dex */
 public class DSAParameters implements CipherParameters {
     private BigInteger g;
     private BigInteger p;

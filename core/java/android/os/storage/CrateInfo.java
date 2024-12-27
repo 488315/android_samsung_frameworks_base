@@ -7,7 +7,6 @@ import android.text.TextUtils;
 
 import com.android.internal.util.Preconditions;
 
-/* loaded from: classes3.dex */
 public final class CrateInfo implements Parcelable {
     public static final Parcelable.Creator<CrateInfo> CREATOR =
             new Parcelable.Creator<CrateInfo>() { // from class: android.os.storage.CrateInfo.1

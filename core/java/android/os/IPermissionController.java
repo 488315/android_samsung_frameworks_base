@@ -1,6 +1,5 @@
 package android.os;
 
-/* loaded from: classes3.dex */
 public interface IPermissionController extends IInterface {
     boolean checkPermission(String str, int i, int i2) throws RemoteException;
 

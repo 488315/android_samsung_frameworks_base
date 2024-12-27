@@ -10,7 +10,6 @@ import android.os.Parcelable;
 import java.util.Arrays;
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public class InsetsFrameProvider implements Parcelable {
     public static final Parcelable.Creator<InsetsFrameProvider> CREATOR =
             new Parcelable.Creator<

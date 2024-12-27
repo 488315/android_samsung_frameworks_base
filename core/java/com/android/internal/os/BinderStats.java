@@ -12,7 +12,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* loaded from: classes5.dex */
 public class BinderStats implements Parcelable {
     public static final Parcelable.Creator<BinderStats> CREATOR =
             new Parcelable.Creator<

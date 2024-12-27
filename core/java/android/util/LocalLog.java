@@ -10,7 +10,6 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Iterator;
 
-/* loaded from: classes4.dex */
 public final class LocalLog {
     private final Deque<String> mLog;
     private final int mMaxLines;

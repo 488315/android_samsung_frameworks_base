@@ -5,7 +5,6 @@ import android.graphics.Rect;
 
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public class ScrollCaptureSession {
     private final Point mPositionInWindow;
     private final Rect mScrollBounds;

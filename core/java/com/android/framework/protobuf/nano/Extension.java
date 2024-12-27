@@ -5,7 +5,6 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public class Extension<M extends ExtendableMessageNano<M>, T> {
     public static final int TYPE_BOOL = 8;
     public static final int TYPE_BYTES = 12;

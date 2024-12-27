@@ -7,7 +7,6 @@ import com.samsung.android.sume.core.Def;
 
 import java.util.stream.Stream;
 
-/* loaded from: classes6.dex */
 public class LessThan<T extends Comparable<T>> extends GenericEvaluator<T> {
     private static final String TAG = Def.tagOf((Class<?>) LessThan.class);
     public static final Parcelable.Creator<LessThan<?>> CREATOR =

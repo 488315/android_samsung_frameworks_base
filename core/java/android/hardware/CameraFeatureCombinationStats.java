@@ -4,7 +4,6 @@ import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes.dex */
 public class CameraFeatureCombinationStats implements Parcelable {
     public static final long CAMERA_FEATURE_4K = 32;
     public static final long CAMERA_FEATURE_60_FPS = 1;

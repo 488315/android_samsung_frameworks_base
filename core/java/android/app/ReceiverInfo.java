@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes.dex */
 public class ReceiverInfo implements Parcelable {
     public static final Parcelable.Creator<ReceiverInfo> CREATOR =
             new Parcelable.Creator<ReceiverInfo>() { // from class: android.app.ReceiverInfo.1

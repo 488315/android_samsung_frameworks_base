@@ -4,7 +4,6 @@ import android.net.Uri;
 
 import java.util.Iterator;
 
-/* loaded from: classes.dex */
 public class ContentObservable extends Observable<ContentObserver> {
     @Override // android.database.Observable
     public void registerObserver(ContentObserver observer) {

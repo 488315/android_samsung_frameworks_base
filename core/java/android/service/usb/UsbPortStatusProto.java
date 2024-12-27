@@ -1,6 +1,5 @@
 package android.service.usb;
 
-/* loaded from: classes3.dex */
 public final class UsbPortStatusProto {
     public static final long COMPLIANCE_WARNINGS_STRING = 1138166333450L;
     public static final long CONNECTED = 1133871366145L;

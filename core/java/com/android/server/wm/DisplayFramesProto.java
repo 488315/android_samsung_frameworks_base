@@ -1,6 +1,5 @@
 package com.android.server.wm;
 
-/* loaded from: classes5.dex */
 public final class DisplayFramesProto {
     public static final long CURRENT = 1146756268035L;
     public static final long DOCK = 1146756268034L;

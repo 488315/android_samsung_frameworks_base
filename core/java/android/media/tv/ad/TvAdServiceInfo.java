@@ -22,7 +22,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public final class TvAdServiceInfo implements Parcelable {
     public static final Parcelable.Creator<TvAdServiceInfo> CREATOR =
             new Parcelable.Creator<

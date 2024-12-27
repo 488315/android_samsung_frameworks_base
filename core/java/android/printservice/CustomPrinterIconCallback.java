@@ -5,7 +5,6 @@ import android.os.RemoteException;
 import android.print.PrinterId;
 import android.util.Log;
 
-/* loaded from: classes3.dex */
 public final class CustomPrinterIconCallback {
     private static final String LOG_TAG = "CustomPrinterIconCB";
     private final IPrintServiceClient mObserver;

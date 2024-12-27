@@ -9,7 +9,6 @@ import java.security.spec.InvalidParameterSpecException;
 
 import javax.crypto.spec.DHParameterSpec;
 
-/* loaded from: classes5.dex */
 public class AlgorithmParametersSpi extends java.security.AlgorithmParametersSpi {
     DHParameterSpec currentSpec;
 

@@ -2,7 +2,6 @@ package com.android.internal.org.bouncycastle.its.asn1;
 
 import com.android.internal.org.bouncycastle.util.Arrays;
 
-/* loaded from: classes5.dex */
 class Utils {
     Utils() {}
 

@@ -10,7 +10,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
 
-/* loaded from: classes.dex */
 public class BackupHelperDispatcher {
     private static final String TAG = "BackupHelperDispatcher";
     TreeMap<String, BackupHelper> mHelpers = new TreeMap<>();

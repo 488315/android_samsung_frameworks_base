@@ -4,7 +4,6 @@ import com.samsung.vekit.Common.Type.PcmSampleType;
 
 import java.util.Arrays;
 
-/* loaded from: classes6.dex */
 public class PcmInfo {
     private float[] data;
     private long endTimeMs;

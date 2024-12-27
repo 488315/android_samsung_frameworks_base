@@ -5,7 +5,6 @@ import kotlin.jvm.functions.Function3;
 import kotlin.jvm.internal.AdaptedFunctionReference;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 final /* synthetic */ class QuickSettingsSceneViewModel$destinationScenes$1 extends AdaptedFunctionReference implements Function3 {
     public QuickSettingsSceneViewModel$destinationScenes$1(Object obj) {
         super(3, obj, QuickSettingsSceneViewModel.class, "destinationScenes", "destinationScenes(ZLcom/android/compose/animation/scene/SceneKey;)Ljava/util/Map;", 4);

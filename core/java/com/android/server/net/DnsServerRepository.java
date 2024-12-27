@@ -11,7 +11,6 @@ import java.util.Iterator;
 import java.util.Set;
 
 /* compiled from: NetlinkTracker.java */
-/* loaded from: classes5.dex */
 class DnsServerRepository {
     public static final int NUM_CURRENT_SERVERS = 3;
     public static final int NUM_SERVERS = 12;

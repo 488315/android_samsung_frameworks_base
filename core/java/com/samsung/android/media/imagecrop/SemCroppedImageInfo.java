@@ -5,7 +5,6 @@ import android.util.Log;
 import java.nio.Buffer;
 import java.nio.ByteBuffer;
 
-/* loaded from: classes6.dex */
 public class SemCroppedImageInfo {
     private static final String TAG = "imagecrop";
     private ByteBuffer buffer;

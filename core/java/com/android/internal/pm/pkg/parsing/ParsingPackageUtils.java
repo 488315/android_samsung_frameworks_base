@@ -88,7 +88,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/* loaded from: classes5.dex */
 public class ParsingPackageUtils {
     public static final String ANDROID_MANIFEST_FILENAME = "AndroidManifest.xml";
     public static final float ASPECT_RATIO_NOT_SET = -1.0f;

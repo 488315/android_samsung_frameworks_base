@@ -1,6 +1,5 @@
 package android.media.audio;
 
-/* loaded from: classes2.dex */
 public interface FeatureFlags {
     boolean autoPublicVolumeApiHardening();
 

@@ -5,7 +5,6 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.util.Log;
 
-/* loaded from: classes.dex */
 public final class ConsumerIrManager {
     private static final String TAG = "ConsumerIr";
     private final String mPackageName;

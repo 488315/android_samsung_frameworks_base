@@ -1,6 +1,5 @@
 package com.android.internal.org.bouncycastle.asn1;
 
-/* loaded from: classes5.dex */
 class DLFactory {
     static final ASN1Sequence EMPTY_SEQUENCE = new DLSequence();
     static final ASN1Set EMPTY_SET = new DLSet();

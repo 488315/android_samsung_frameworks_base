@@ -10,7 +10,6 @@ import libcore.util.EmptyArray;
 import java.lang.reflect.Array;
 
 /* JADX INFO: Access modifiers changed from: package-private */
-/* loaded from: classes4.dex */
 public abstract class SpannableStringInternal {
     private static final int COLUMNS = 3;
     static final Object[] EMPTY = new Object[0];

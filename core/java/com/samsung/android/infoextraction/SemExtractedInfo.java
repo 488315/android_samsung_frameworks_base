@@ -3,7 +3,6 @@ package com.samsung.android.infoextraction;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes6.dex */
 public class SemExtractedInfo implements Parcelable {
     public static final Parcelable.Creator<SemExtractedInfo> CREATOR =
             new Parcelable.Creator<

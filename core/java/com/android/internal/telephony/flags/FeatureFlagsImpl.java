@@ -1,6 +1,5 @@
 package com.android.internal.telephony.flags;
 
-/* loaded from: classes5.dex */
 public final class FeatureFlagsImpl implements FeatureFlags {
     @Override // com.android.internal.telephony.flags.FeatureFlags
     public boolean addAnomalyWhenNotifyConfigChangedWithInvalidPhone() {

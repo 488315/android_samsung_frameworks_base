@@ -5,7 +5,6 @@ import android.graphics.ColorFilter;
 import android.graphics.Picture;
 import android.graphics.Rect;
 
-/* loaded from: classes.dex */
 public class PictureDrawable extends Drawable {
     private Picture mPicture;
 

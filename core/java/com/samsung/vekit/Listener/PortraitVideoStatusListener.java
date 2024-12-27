@@ -5,7 +5,6 @@ import com.samsung.vekit.Common.Object.PVKeyFrame;
 
 import java.util.ArrayList;
 
-/* loaded from: classes6.dex */
 public interface PortraitVideoStatusListener extends NativeInterfaceListener {
     void onPortraitVideoError(int i);
 

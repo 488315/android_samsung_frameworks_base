@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-/* loaded from: classes5.dex */
 public class SmartClipUtils {
     private static final String TAG = "SmartClipUtils";
 

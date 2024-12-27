@@ -4,7 +4,6 @@ import android.telephony.CarrierConfigManager;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class PdpProtocolType {
     public static final int IP = 0;
     public static final int IPV4V6 = 2;

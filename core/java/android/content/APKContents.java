@@ -11,7 +11,6 @@ import android.view.DisplayAdjustments;
 
 import java.io.IOException;
 
-/* loaded from: classes.dex */
 public class APKContents {
     public static final String MAIN_PACKAGE_DIR = "/data/overlays/main_packages/";
     private AssetManager mAssetManager;

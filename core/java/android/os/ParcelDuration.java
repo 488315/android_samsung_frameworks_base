@@ -2,7 +2,6 @@ package android.os;
 
 import java.time.Duration;
 
-/* loaded from: classes3.dex */
 public final class ParcelDuration implements Parcelable {
     public static final Parcelable.Creator<ParcelDuration> CREATOR =
             new Parcelable.Creator<ParcelDuration>() { // from class: android.os.ParcelDuration.1

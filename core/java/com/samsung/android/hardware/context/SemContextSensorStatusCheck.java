@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes6.dex */
 public class SemContextSensorStatusCheck extends SemContextEventContext {
     public static final int ACC_DATA_DEFAULT = 40000;
     public static final int ACC_DATA_OFFSET = 2;

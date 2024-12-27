@@ -12,7 +12,6 @@ import com.android.internal.org.bouncycastle.asn1.pkcs.PKCSObjectIdentifiers;
 import java.io.IOException;
 import java.security.AlgorithmParameters;
 
-/* loaded from: classes5.dex */
 public class JcaJceUtils {
     private JcaJceUtils() {}
 

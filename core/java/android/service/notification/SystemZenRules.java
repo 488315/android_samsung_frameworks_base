@@ -12,7 +12,6 @@ import java.util.Calendar;
 import java.util.Locale;
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public final class SystemZenRules {
     public static final String PACKAGE_ANDROID = "android";
     private static final String TAG = "SystemZenRules";

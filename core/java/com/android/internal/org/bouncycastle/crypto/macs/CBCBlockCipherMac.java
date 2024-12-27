@@ -6,7 +6,6 @@ import com.android.internal.org.bouncycastle.crypto.Mac;
 import com.android.internal.org.bouncycastle.crypto.modes.CBCBlockCipher;
 import com.android.internal.org.bouncycastle.crypto.paddings.BlockCipherPadding;
 
-/* loaded from: classes5.dex */
 public class CBCBlockCipherMac implements Mac {
     private byte[] buf;
     private int bufOff;

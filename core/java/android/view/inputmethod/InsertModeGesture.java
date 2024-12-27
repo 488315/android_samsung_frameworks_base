@@ -8,7 +8,6 @@ import android.os.Parcelable;
 
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public final class InsertModeGesture extends CancellableHandwritingGesture implements Parcelable {
     public static final Parcelable.Creator<InsertModeGesture> CREATOR =
             new Parcelable.Creator<

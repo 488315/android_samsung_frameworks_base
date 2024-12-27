@@ -6,7 +6,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @Deprecated
-/* loaded from: classes.dex */
 public abstract class FragmentTransaction {
     public static final int TRANSIT_ENTER_MASK = 4096;
     public static final int TRANSIT_EXIT_MASK = 8192;

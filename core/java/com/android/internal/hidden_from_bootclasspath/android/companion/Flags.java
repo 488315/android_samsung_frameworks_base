@@ -1,6 +1,5 @@
 package com.android.internal.hidden_from_bootclasspath.android.companion;
 
-/* loaded from: classes5.dex */
 public final class Flags {
     private static FeatureFlags FEATURE_FLAGS = new FeatureFlagsImpl();
     public static final String FLAG_ASSOCIATION_TAG = "android.companion.association_tag";

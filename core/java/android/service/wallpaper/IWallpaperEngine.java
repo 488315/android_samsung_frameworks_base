@@ -13,7 +13,6 @@ import android.view.SurfaceControl;
 
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public interface IWallpaperEngine extends IInterface {
     void addLocalColorsAreas(List<RectF> list) throws RemoteException;
 

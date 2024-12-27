@@ -8,7 +8,6 @@ import android.os.Parcelable;
 
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public class ConfigurationChangeItem extends ClientTransactionItem {
     public static final Parcelable.Creator<ConfigurationChangeItem> CREATOR =
             new Parcelable.Creator<ConfigurationChangeItem>() { // from class:

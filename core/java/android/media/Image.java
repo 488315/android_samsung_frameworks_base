@@ -7,7 +7,6 @@ import android.hardware.SyncFence;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-/* loaded from: classes2.dex */
 public abstract class Image implements AutoCloseable {
     private Rect mCropRect;
     protected boolean mIsImageValid = false;

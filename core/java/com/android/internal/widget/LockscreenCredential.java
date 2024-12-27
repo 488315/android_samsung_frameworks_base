@@ -16,7 +16,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes5.dex */
 public class LockscreenCredential implements Parcelable, AutoCloseable {
     public static final Parcelable.Creator<LockscreenCredential> CREATOR =
             new Parcelable.Creator<

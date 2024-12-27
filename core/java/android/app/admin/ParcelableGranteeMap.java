@@ -8,7 +8,6 @@ import android.util.ArraySet;
 import java.util.Map;
 import java.util.Set;
 
-/* loaded from: classes.dex */
 public class ParcelableGranteeMap implements Parcelable {
     public static final Parcelable.Creator<ParcelableGranteeMap> CREATOR =
             new Parcelable.Creator<ParcelableGranteeMap>() { // from class:

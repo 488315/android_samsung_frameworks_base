@@ -3,7 +3,6 @@ package android.content.om;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* loaded from: classes.dex */
 public class SamsungThemeUtils {
     private static final String TAG = "SamsungThemeUtils";
 

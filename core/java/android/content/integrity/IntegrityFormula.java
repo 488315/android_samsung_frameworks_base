@@ -9,7 +9,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Arrays;
 
 @SystemApi
-/* loaded from: classes.dex */
 public abstract class IntegrityFormula {
     public static final int BOOLEAN_ATOMIC_FORMULA_TAG = 3;
     public static final int COMPOUND_FORMULA_TAG = 0;

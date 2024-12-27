@@ -10,7 +10,6 @@ import com.samsung.android.sume.core.types.SplitType;
 import java.util.List;
 import java.util.function.Consumer;
 
-/* loaded from: classes6.dex */
 public class ParallelDescriptor extends MFDescriptorBase {
     private final List<MFDescriptor> descriptors;
     private final ParallelFilter.Type parallelType;

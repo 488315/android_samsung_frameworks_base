@@ -1,6 +1,5 @@
 package com.samsung.android.hardware.secinputdev.external;
 
-/* loaded from: classes.dex */
 public interface SemInputExternal {
 
     public interface IExternalEventRegister {

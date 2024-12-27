@@ -51,7 +51,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes.dex */
 public class AppWidgetHostView extends FrameLayout implements AppWidgetHost.AppWidgetHostListener {
     private static final String APPWIDGET_HOST_OPTIONS_HOST_TYPE = "semHostType";
     public static final int APPWIDGET_HOST_TYPE_COVER = 4;

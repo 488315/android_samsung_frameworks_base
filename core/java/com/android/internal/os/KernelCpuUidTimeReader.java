@@ -16,7 +16,6 @@ import java.nio.CharBuffer;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-/* loaded from: classes5.dex */
 public abstract class KernelCpuUidTimeReader<T> {
     protected static final boolean DEBUG = false;
     private static final long DEFAULT_MIN_TIME_BETWEEN_READ = 1000;

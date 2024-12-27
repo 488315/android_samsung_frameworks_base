@@ -11,7 +11,6 @@ import android.os.WorkSource;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
 public interface IAlarmManager extends IInterface {
     boolean canScheduleExactAlarms(String str) throws RemoteException;
 

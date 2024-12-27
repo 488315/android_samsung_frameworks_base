@@ -10,7 +10,6 @@ import android.view.autofill.Helper;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
-/* loaded from: classes3.dex */
 public final class RegexValidator extends InternalValidator implements Validator, Parcelable {
     public static final Parcelable.Creator<RegexValidator> CREATOR =
             new Parcelable.Creator<

@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 import com.android.ims.internal.uce.common.CapInfo;
 
-/* loaded from: classes5.dex */
 public class OptionsCapInfo implements Parcelable {
     public static final Parcelable.Creator<OptionsCapInfo> CREATOR =
             new Parcelable.Creator<

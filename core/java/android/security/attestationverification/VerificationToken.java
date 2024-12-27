@@ -11,7 +11,6 @@ import com.android.internal.util.Parcelling;
 import java.lang.annotation.Annotation;
 import java.time.Instant;
 
-/* loaded from: classes3.dex */
 public final class VerificationToken implements Parcelable {
     public static final Parcelable.Creator<VerificationToken> CREATOR;
     static Parcelling<Instant> sParcellingForVerificationTime;

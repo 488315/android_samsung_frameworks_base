@@ -20,7 +20,6 @@ import java.util.Objects;
 import java.util.Set;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public final class DataCallResponse implements Parcelable {
     public static final Parcelable.Creator<DataCallResponse> CREATOR =
             new Parcelable.Creator<

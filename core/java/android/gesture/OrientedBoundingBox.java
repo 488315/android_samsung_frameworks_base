@@ -3,7 +3,6 @@ package android.gesture;
 import android.graphics.Matrix;
 import android.graphics.Path;
 
-/* loaded from: classes.dex */
 public class OrientedBoundingBox {
     public final float centerX;
     public final float centerY;

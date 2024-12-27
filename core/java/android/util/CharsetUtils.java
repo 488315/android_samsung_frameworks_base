@@ -2,7 +2,6 @@ package android.util;
 
 import dalvik.annotation.optimization.FastNative;
 
-/* loaded from: classes4.dex */
 public class CharsetUtils {
     @FastNative
     public static native String fromModifiedUtf8Bytes(long j, int i, int i2);

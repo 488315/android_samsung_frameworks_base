@@ -4,7 +4,6 @@ import com.android.internal.org.bouncycastle.asn1.cms.AttributeTable;
 
 import java.util.Map;
 
-/* loaded from: classes5.dex */
 public class SimpleAttributeTableGenerator implements CMSAttributeTableGenerator {
     private final AttributeTable attributes;
 

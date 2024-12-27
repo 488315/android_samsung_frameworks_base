@@ -25,7 +25,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public class GraphicsEnvironment {
     private static final String ACTION_ANGLE_FOR_ANDROID = "android.app.action.ANGLE_FOR_ANDROID";
     private static final String ACTION_ANGLE_FOR_ANDROID_TOAST_MESSAGE =

@@ -8,7 +8,6 @@ import com.android.internal.util.Preconditions;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes3.dex */
 public abstract class ControlAction {
     public static final ControlAction ERROR_ACTION =
             new ControlAction() { // from class: android.service.controls.actions.ControlAction.1

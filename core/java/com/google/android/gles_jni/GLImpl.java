@@ -18,7 +18,6 @@ import javax.microedition.khronos.opengles.GL11;
 import javax.microedition.khronos.opengles.GL11Ext;
 import javax.microedition.khronos.opengles.GL11ExtensionPack;
 
-/* loaded from: classes5.dex */
 public class GLImpl implements GL10, GL10Ext, GL11, GL11Ext, GL11ExtensionPack {
     private boolean haveCheckedExtensions;
     private boolean have_OES_blend_equation_separate;

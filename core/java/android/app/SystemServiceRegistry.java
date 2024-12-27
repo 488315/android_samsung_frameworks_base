@@ -337,7 +337,6 @@ import java.util.Objects;
 import java.util.function.Supplier;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class SystemServiceRegistry {
     static final long ENABLE_CHECKING_TELEPHONY_FEATURES_FOR_VCN = 330902016;
     private static final String TAG = "SystemServiceRegistry";

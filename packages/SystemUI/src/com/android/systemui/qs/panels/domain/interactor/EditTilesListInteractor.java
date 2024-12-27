@@ -5,7 +5,6 @@ import com.android.systemui.qs.panels.data.repository.StockTilesRepository;
 import com.android.systemui.qs.tiles.viewmodel.QSTileConfigProvider;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public final class EditTilesListInteractor {
     public final IconAndNameCustomRepository iconAndNameCustomRepository;
     public final QSTileConfigProvider qsTileConfigProvider;

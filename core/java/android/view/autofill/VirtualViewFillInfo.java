@@ -6,7 +6,6 @@ import com.android.internal.util.AnnotationValidations;
 
 import java.lang.annotation.Annotation;
 
-/* loaded from: classes4.dex */
 public final class VirtualViewFillInfo {
     private String[] mAutofillHints;
 

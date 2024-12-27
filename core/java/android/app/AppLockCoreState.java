@@ -3,7 +3,6 @@ package android.app;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-/* loaded from: classes.dex */
 public class AppLockCoreState {
     private static final String APPLOCK_ENABLED = "applock_enabled";
     private static final String APPLOCK_LOCKED_APPS_CLASSS = "applock_locked_classes";

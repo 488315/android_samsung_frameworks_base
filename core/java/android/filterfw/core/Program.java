@@ -1,6 +1,5 @@
 package android.filterfw.core;
 
-/* loaded from: classes.dex */
 public abstract class Program {
     public abstract Object getHostValue(String str);
 

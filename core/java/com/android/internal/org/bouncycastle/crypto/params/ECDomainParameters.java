@@ -10,7 +10,6 @@ import com.android.internal.org.bouncycastle.util.BigIntegers;
 
 import java.math.BigInteger;
 
-/* loaded from: classes5.dex */
 public class ECDomainParameters implements ECConstants {
     private final ECPoint G;
     private final ECCurve curve;

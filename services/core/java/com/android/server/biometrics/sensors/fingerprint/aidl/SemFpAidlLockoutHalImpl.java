@@ -17,7 +17,6 @@ import com.android.server.biometrics.SemBiometricLockoutTracker;
 import com.android.server.biometrics.sensors.LockoutTracker;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes.dex */
 public final class SemFpAidlLockoutHalImpl implements LockoutTracker {
     static final String ACTION_LOCKOUT_RESET =
             "com.android.server.biometrics.sensors.fingerprint.ACTION_LOCKOUT_RESET";

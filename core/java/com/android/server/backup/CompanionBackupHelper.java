@@ -6,7 +6,6 @@ import android.content.Context;
 import android.os.ServiceManager;
 import android.util.Slog;
 
-/* loaded from: classes5.dex */
 public class CompanionBackupHelper extends BlobBackupHelper {
     private static final int BLOB_VERSION = 1;
     private static final String KEY_COMPANION = "companion";

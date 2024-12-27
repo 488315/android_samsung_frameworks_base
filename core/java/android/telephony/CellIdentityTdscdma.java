@@ -13,7 +13,6 @@ import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
 
-/* loaded from: classes4.dex */
 public final class CellIdentityTdscdma extends CellIdentity {
     private static final boolean DBG = false;
     private static final int MAX_CID = 268435455;

@@ -33,7 +33,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.function.Function;
 
-/* loaded from: classes.dex */
 public class TemplateManager {
     private MetaDataManager mMetaDataManager;
     private ThemePalette mThemePalette;

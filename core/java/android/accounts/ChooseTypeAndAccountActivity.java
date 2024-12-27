@@ -32,7 +32,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Supplier;
 
-/* loaded from: classes.dex */
 public class ChooseTypeAndAccountActivity extends Activity
         implements AccountManagerCallback<Bundle> {
     public static final String EXTRA_ADD_ACCOUNT_AUTH_TOKEN_TYPE_STRING = "authTokenType";

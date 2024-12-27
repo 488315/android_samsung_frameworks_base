@@ -10,7 +10,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.Map;
 
-/* loaded from: classes6.dex */
 public abstract class ClientImpl {
     protected static final String TAG = "SemVideoTranscodingService";
     protected Map mArgs;

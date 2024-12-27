@@ -13,7 +13,6 @@ import android.media.midi.MidiDeviceInfo;
 
 import com.android.internal.util.dump.DualDumpOutputStream;
 
-/* loaded from: classes5.dex */
 public class DumpUtils {
     public static void writeAccessory(
             DualDumpOutputStream dump, String idName, long id, UsbAccessory accessory) {

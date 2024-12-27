@@ -18,7 +18,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
-/* loaded from: classes4.dex */
 public class TimeUtils {
     public static final int HUNDRED_DAY_FIELD_LEN = 19;
     public static final long NANOS_PER_MS = 1000000;

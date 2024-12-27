@@ -4,7 +4,6 @@ import android.text.Editable;
 import android.view.KeyEvent;
 import android.view.View;
 
-/* loaded from: classes4.dex */
 public interface KeyListener {
     void clearMetaKeyState(View view, Editable editable, int i);
 

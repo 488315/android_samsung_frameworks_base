@@ -1,7 +1,6 @@
 package android.tracing.perfetto;
 
 
-/* loaded from: classes4.dex */
 public class CreateIncrementalStateArgs<DataSourceInstanceType extends DataSourceInstance> {
     private final DataSource<DataSourceInstanceType, Object, Object> mDataSource;
     private final int mInstanceIndex;

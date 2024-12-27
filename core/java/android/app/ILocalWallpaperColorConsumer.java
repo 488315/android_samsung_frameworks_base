@@ -7,7 +7,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes.dex */
 public interface ILocalWallpaperColorConsumer extends IInterface {
     public static final String DESCRIPTOR = "android.app.ILocalWallpaperColorConsumer";
 

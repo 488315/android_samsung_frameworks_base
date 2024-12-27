@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-/* loaded from: classes6.dex */
 public class SprInputStream {
     private DataInputStream in;
     public ArrayList<SprObjectBase> mAnimationObject;

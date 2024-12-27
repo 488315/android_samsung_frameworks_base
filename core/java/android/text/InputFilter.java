@@ -4,7 +4,6 @@ import com.android.internal.util.Preconditions;
 
 import java.util.Locale;
 
-/* loaded from: classes4.dex */
 public interface InputFilter {
     CharSequence filter(CharSequence charSequence, int i, int i2, Spanned spanned, int i3, int i4);
 

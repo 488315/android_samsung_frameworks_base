@@ -9,7 +9,6 @@ import com.samsung.android.sume.core.types.ShapeType;
 
 import java.util.Arrays;
 
-/* loaded from: classes6.dex */
 class StapleMutableShape implements MutableShape {
     public static final Parcelable.Creator<StapleMutableShape> CREATOR =
             new Parcelable.Creator<

@@ -46,7 +46,6 @@ import java.util.function.Consumer;
 import java.util.function.LongConsumer;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public abstract class OnDeviceIntelligenceService extends Service {
     public static final String SERVICE_INTERFACE =
             "android.service.ondeviceintelligence.OnDeviceIntelligenceService";

@@ -1,6 +1,5 @@
 package android.mtp;
 
-/* loaded from: classes3.dex */
 public final class MtpConstants {
     public static final int ASSOCIATION_TYPE_GENERIC_FOLDER = 1;
     public static final int DEVICE_PROPERTY_ARTIST = 20510;

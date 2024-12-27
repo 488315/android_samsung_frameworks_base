@@ -1,6 +1,5 @@
 package android.view;
 
-/* loaded from: classes4.dex */
 public final class InsetsSourceConsumerProto {
     public static final long ANIMATION_STATE = 1120986464263L;
     public static final long HAS_WINDOW_FOCUS = 1133871366146L;

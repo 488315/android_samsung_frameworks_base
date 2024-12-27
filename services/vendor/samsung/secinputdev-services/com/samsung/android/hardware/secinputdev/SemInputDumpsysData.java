@@ -9,7 +9,6 @@ import java.util.LinkedList;
 import java.util.Locale;
 import java.util.Queue;
 
-/* loaded from: classes.dex */
 public class SemInputDumpsysData {
     private static final String TAG = "SemInputDumpsysData";
     private final int MAX_QUEUE_SIZE;

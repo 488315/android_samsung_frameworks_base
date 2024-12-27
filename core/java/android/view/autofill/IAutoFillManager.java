@@ -14,7 +14,6 @@ import com.android.internal.os.IResultReceiver;
 
 import java.util.List;
 
-/* loaded from: classes4.dex */
 public interface IAutoFillManager extends IInterface {
     void addClient(
             IAutoFillManagerClient iAutoFillManagerClient,

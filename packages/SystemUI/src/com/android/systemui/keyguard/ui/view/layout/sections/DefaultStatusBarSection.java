@@ -11,7 +11,6 @@ import com.android.systemui.shade.NotificationPanelView;
 import com.android.systemui.util.Utils;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public final class DefaultStatusBarSection extends KeyguardSection {
     public final Context context;
     public final int statusBarViewId = R.id.keyguard_header;

@@ -3,7 +3,6 @@ package android.text.method;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes4.dex */
 public interface OffsetMapping {
     public static final int MAP_STRATEGY_CHARACTER = 0;
     public static final int MAP_STRATEGY_CURSOR = 1;

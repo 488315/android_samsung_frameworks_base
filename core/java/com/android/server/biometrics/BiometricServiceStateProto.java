@@ -1,6 +1,5 @@
 package com.android.server.biometrics;
 
-/* loaded from: classes5.dex */
 public final class BiometricServiceStateProto {
     public static final long AUTH_SESSION_STATE = 1159641169922L;
     public static final long SENSOR_SERVICE_STATES = 2246267895809L;

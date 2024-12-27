@@ -3,7 +3,6 @@ package com.samsung.android.infoextraction.regex;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public class SemEntityInfo {
     private ArrayList<String> dateInfo = new ArrayList<>();
     private ArrayList<String> timeInfo = new ArrayList<>();

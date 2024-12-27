@@ -3,7 +3,6 @@ package android.security.keystore;
 import java.security.KeyStore;
 import java.security.spec.AlgorithmParameterSpec;
 
-/* loaded from: classes3.dex */
 public class WrappedKeyEntry implements KeyStore.Entry {
     private final AlgorithmParameterSpec mAlgorithmParameterSpec;
     private final String mTransformation;

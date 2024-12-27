@@ -6,7 +6,6 @@ import com.android.internal.org.bouncycastle.math.ec.ECPoint;
 import java.math.BigInteger;
 import java.security.spec.AlgorithmParameterSpec;
 
-/* loaded from: classes5.dex */
 public class ECParameterSpec implements AlgorithmParameterSpec {
     private ECPoint G;
     private ECCurve curve;

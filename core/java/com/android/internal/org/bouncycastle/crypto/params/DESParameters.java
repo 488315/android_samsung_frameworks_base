@@ -4,7 +4,6 @@ import com.android.internal.midi.MidiConstants;
 
 import com.samsung.android.graphics.spr.document.animator.SprAnimatorBase;
 
-/* loaded from: classes5.dex */
 public class DESParameters extends KeyParameter {
     public static final int DES_KEY_LENGTH = 8;
     private static byte[] DES_weak_keys = {

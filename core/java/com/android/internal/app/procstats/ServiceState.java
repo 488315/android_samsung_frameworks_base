@@ -8,7 +8,6 @@ import android.util.proto.ProtoOutputStream;
 
 import java.io.PrintWriter;
 
-/* loaded from: classes5.dex */
 public final class ServiceState {
     private static final boolean DEBUG = false;
     public static final int SERVICE_BOUND = 2;

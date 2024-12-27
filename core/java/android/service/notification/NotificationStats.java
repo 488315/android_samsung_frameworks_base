@@ -9,7 +9,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class NotificationStats implements Parcelable {
     public static final Parcelable.Creator<NotificationStats> CREATOR =
             new Parcelable.Creator<

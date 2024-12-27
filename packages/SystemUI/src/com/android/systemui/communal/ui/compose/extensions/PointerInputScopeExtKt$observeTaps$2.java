@@ -16,7 +16,6 @@ import kotlinx.coroutines.CoroutineScope;
 
 /* JADX INFO: Access modifiers changed from: package-private */
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes.dex */
 public final class PointerInputScopeExtKt$observeTaps$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ Function1 $onTap;
     final /* synthetic */ PointerEventPass $pass;

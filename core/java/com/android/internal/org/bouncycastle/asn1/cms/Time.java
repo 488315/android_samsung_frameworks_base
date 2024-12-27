@@ -18,7 +18,6 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.SimpleTimeZone;
 
-/* loaded from: classes5.dex */
 public class Time extends ASN1Object implements ASN1Choice {
     ASN1Primitive time;
 

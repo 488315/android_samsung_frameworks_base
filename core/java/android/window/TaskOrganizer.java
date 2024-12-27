@@ -12,7 +12,6 @@ import android.view.SurfaceControl;
 import java.util.List;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes4.dex */
 public class TaskOrganizer extends WindowOrganizer {
     private final Executor mExecutor;
     private final ITaskOrganizer mInterface;

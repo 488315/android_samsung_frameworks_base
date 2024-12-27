@@ -17,7 +17,6 @@ import android.widget.ListAdapter;
 
 import com.android.internal.R;
 
-/* loaded from: classes4.dex */
 public class CharacterPickerDialog extends Dialog
         implements AdapterView.OnItemClickListener, View.OnClickListener {
     private Button mCancelButton;

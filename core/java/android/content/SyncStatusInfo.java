@@ -12,7 +12,6 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
 
-/* loaded from: classes.dex */
 public class SyncStatusInfo implements Parcelable {
     public static final Parcelable.Creator<SyncStatusInfo> CREATOR =
             new Parcelable.Creator<

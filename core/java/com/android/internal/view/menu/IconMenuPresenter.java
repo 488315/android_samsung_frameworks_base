@@ -13,7 +13,6 @@ import com.android.internal.R;
 
 import java.util.ArrayList;
 
-/* loaded from: classes5.dex */
 public class IconMenuPresenter extends BaseMenuPresenter {
     private static final String OPEN_SUBMENU_KEY = "android:menu:icon:submenu";
     private static final String VIEWS_TAG = "android:menu:icon";

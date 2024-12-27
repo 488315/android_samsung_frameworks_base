@@ -9,7 +9,6 @@ import java.io.PrintWriter;
 import java.util.List;
 
 @Deprecated
-/* loaded from: classes.dex */
 public abstract class FragmentManager {
     public static final int POP_BACK_STACK_INCLUSIVE = 1;
 

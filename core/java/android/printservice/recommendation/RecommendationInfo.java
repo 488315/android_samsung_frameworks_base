@@ -13,7 +13,6 @@ import java.util.Iterator;
 import java.util.List;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class RecommendationInfo implements Parcelable {
     public static final Parcelable.Creator<RecommendationInfo> CREATOR =
             new Parcelable.Creator<

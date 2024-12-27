@@ -6,7 +6,6 @@ import android.os.Parcelable;
 
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public class MediaSyncEvent implements Parcelable {
     public static final Parcelable.Creator<MediaSyncEvent> CREATOR =
             new Parcelable.Creator<MediaSyncEvent>() { // from class: android.media.MediaSyncEvent.1

@@ -1,6 +1,5 @@
 package com.android.server.am;
 
-/* loaded from: classes5.dex */
 public final class BroadcastFilterProto {
     public static final long HEX_HASH = 1138166333443L;
     public static final long INTENT_FILTER = 1146756268033L;

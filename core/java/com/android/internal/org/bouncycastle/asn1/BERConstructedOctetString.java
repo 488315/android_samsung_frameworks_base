@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.Enumeration;
 import java.util.Vector;
 
-/* loaded from: classes5.dex */
 public class BERConstructedOctetString extends BEROctetString {
     private static final int MAX_LENGTH = 1000;
     private Vector octs;

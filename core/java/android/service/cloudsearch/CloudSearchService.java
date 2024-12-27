@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.os.IBinder;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public abstract class CloudSearchService extends Service {
     public static final String SERVICE_INTERFACE = "android.service.cloudsearch.CloudSearchService";
 

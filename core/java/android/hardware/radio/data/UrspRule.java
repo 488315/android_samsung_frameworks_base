@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.util.Arrays;
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public class UrspRule implements Parcelable {
     public static final Parcelable.Creator<UrspRule> CREATOR =
             new Parcelable.Creator<

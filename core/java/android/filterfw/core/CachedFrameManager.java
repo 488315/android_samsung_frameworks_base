@@ -4,7 +4,6 @@ import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-/* loaded from: classes.dex */
 public class CachedFrameManager extends SimpleFrameManager {
     private int mStorageCapacity = 25165824;
     private int mStorageSize = 0;

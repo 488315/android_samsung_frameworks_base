@@ -1,6 +1,5 @@
 package android.telephony;
 
-/* loaded from: classes4.dex */
 public final class SatelliteProtoEnums {
     public static final int ACCESS_CONTROL_TYPE_CACHED_COUNTRY_CODE = 4;
     public static final int ACCESS_CONTROL_TYPE_CURRENT_LOCATION = 2;

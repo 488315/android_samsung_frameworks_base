@@ -17,7 +17,6 @@ import java.util.Objects;
 import java.util.function.BiConsumer;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public class GameService extends Service {
     public static final String ACTION_GAME_SERVICE = "android.service.games.action.GAME_SERVICE";
     public static final String SERVICE_META_DATA = "android.game_service";

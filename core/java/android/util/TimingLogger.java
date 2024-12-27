@@ -5,7 +5,6 @@ import android.os.SystemClock;
 import java.util.ArrayList;
 
 @Deprecated
-/* loaded from: classes4.dex */
 public class TimingLogger {
     private boolean mDisabled;
     private String mLabel;

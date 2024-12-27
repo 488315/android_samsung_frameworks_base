@@ -2,7 +2,6 @@ package com.samsung.android.rune;
 
 import android.os.SystemProperties;
 
-/* loaded from: classes6.dex */
 public class ResRune {
     public static final boolean ALARM_MANAGER_AUTO_POWER_UP = true;
     public static final boolean ALARM_MANAGER_DUMP = true;

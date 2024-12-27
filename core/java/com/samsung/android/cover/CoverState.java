@@ -9,7 +9,6 @@ import android.util.Log;
 
 import com.android.internal.R;
 
-/* loaded from: classes6.dex */
 public class CoverState implements Parcelable {
     public static final int COLOR_BLACK = 1;
     public static final int COLOR_BLUE = 5;

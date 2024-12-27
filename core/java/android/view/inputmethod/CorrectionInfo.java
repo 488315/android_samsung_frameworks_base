@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
 
-/* loaded from: classes4.dex */
 public final class CorrectionInfo implements Parcelable {
     public static final Parcelable.Creator<CorrectionInfo> CREATOR =
             new Parcelable.Creator<

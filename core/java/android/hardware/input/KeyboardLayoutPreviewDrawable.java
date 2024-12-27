@@ -18,7 +18,6 @@ import java.lang.runtime.ObjectMethods;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes2.dex */
 final class KeyboardLayoutPreviewDrawable extends Drawable {
     private static final int GRAVITY_BOTTOM = 8;
     private static final int GRAVITY_LEFT = 1;

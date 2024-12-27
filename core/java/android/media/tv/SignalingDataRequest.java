@@ -11,7 +11,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public final class SignalingDataRequest extends BroadcastInfoRequest implements Parcelable {
     public static final Parcelable.Creator<SignalingDataRequest> CREATOR =
             new Parcelable.Creator<

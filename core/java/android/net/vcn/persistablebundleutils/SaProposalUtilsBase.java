@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.ToIntFunction;
 
-/* loaded from: classes3.dex */
 abstract class SaProposalUtilsBase {
     static final String DH_GROUP_KEY = "DH_GROUP_KEY";
     static final String ENCRYPT_ALGO_KEY = "ENCRYPT_ALGO_KEY";

@@ -4,7 +4,6 @@ import android.security.keystore.KeyProperties;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class DataCallFailCause {
     public static final int ACCESS_ATTEMPT_ALREADY_IN_PROGRESS = 2219;
     public static final int ACCESS_BLOCK = 2087;

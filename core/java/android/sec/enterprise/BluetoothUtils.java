@@ -14,7 +14,6 @@ import android.util.Log;
 
 import com.samsung.android.media.AudioParameter;
 
-/* loaded from: classes3.dex */
 public class BluetoothUtils {
     public static final int NO_PROFILE = -1;
     private static final String TAG = "BluetoothUtils";

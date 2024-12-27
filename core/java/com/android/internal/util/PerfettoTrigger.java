@@ -6,7 +6,6 @@ import android.util.SparseLongArray;
 
 import java.io.IOException;
 
-/* loaded from: classes5.dex */
 public class PerfettoTrigger {
     private static final String TAG = "PerfettoTrigger";
     private static final long THROTTLE_MILLIS = 300000;

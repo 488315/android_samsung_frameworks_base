@@ -8,7 +8,6 @@ import android.os.RemoteException;
 import android.util.Log;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public class VirtualMouse extends VirtualInputDevice {
     @Override // android.hardware.input.VirtualInputDevice, java.io.Closeable,
     // java.lang.AutoCloseable

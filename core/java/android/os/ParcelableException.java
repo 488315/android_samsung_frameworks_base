@@ -1,7 +1,6 @@
 package android.os;
 
 
-/* loaded from: classes3.dex */
 public final class ParcelableException extends RuntimeException implements Parcelable {
     public static final Parcelable.Creator<ParcelableException> CREATOR =
             new Parcelable.Creator<

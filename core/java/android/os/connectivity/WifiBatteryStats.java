@@ -8,7 +8,6 @@ import java.util.Arrays;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class WifiBatteryStats implements Parcelable {
     public static final Parcelable.Creator<WifiBatteryStats> CREATOR =
             new Parcelable.Creator<

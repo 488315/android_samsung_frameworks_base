@@ -5,7 +5,6 @@ import android.text.Spannable;
 import android.view.KeyCharacterMap;
 import android.view.KeyEvent;
 
-/* loaded from: classes4.dex */
 public class DialerKeyListener extends NumberKeyListener {
     public static final char[] CHARACTERS = {
         '0',

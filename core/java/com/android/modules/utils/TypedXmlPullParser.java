@@ -3,7 +3,6 @@ package com.android.modules.utils;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
-/* loaded from: classes5.dex */
 public interface TypedXmlPullParser extends XmlPullParser {
     boolean getAttributeBoolean(int i) throws XmlPullParserException;
 

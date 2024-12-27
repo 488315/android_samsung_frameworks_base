@@ -5,7 +5,6 @@ import android.provider.DeviceConfig;
 
 import java.util.Iterator;
 
-/* loaded from: classes5.dex */
 public class AppCloningDeviceConfigHelper {
     public static final String ENABLE_APP_CLONING_BUILDING_BLOCKS =
             "enable_app_cloning_building_blocks";

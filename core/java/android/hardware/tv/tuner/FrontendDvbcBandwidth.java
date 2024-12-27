@@ -1,6 +1,5 @@
 package android.hardware.tv.tuner;
 
-/* loaded from: classes2.dex */
 public @interface FrontendDvbcBandwidth {
     public static final int BANDWIDTH_5MHZ = 1;
     public static final int BANDWIDTH_6MHZ = 2;

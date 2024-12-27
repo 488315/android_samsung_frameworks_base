@@ -4,7 +4,6 @@ import android.annotation.SystemApi;
 import android.util.Log;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public final class HdmiRecordSources {
     public static final int ANALOGUE_BROADCAST_TYPE_CABLE = 0;
     public static final int ANALOGUE_BROADCAST_TYPE_SATELLITE = 1;

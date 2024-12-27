@@ -1,6 +1,5 @@
 package android.providers.settings;
 
-/* loaded from: classes3.dex */
 public final class BackingStoreProto {
     public static final long BACKING_STORE_SIZE = 1120986464258L;
     public static final long CACHE_ENTRIES = 2246267895812L;

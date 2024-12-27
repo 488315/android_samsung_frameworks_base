@@ -2,7 +2,6 @@ package vendor.samsung.hardware.radio.V2_0;
 
 import java.util.ArrayList;
 
-/* loaded from: classes6.dex */
 public final class SehCallType {
     public static final int VOICE = 0;
     public static final int VS_RX = 2;

@@ -7,7 +7,6 @@ import java.lang.annotation.Target;
 
 @Target({ElementType.TYPE, ElementType.METHOD, ElementType.CONSTRUCTOR, ElementType.PACKAGE})
 @Retention(RetentionPolicy.SOURCE)
-/* loaded from: classes.dex */
 public @interface UserHandleAware {
     int enabledSinceTargetSdkVersion() default 0;
 

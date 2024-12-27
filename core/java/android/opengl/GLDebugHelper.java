@@ -5,7 +5,6 @@ import java.io.Writer;
 import javax.microedition.khronos.egl.EGL;
 import javax.microedition.khronos.opengles.GL;
 
-/* loaded from: classes3.dex */
 public class GLDebugHelper {
     public static final int CONFIG_CHECK_GL_ERROR = 1;
     public static final int CONFIG_CHECK_THREAD = 2;

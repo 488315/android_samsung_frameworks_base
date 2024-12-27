@@ -21,7 +21,6 @@ import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 
-/* loaded from: classes4.dex */
 public class MenuInflater {
     private static final String LOG_TAG = "MenuInflater";
     private static final int NO_ID = 0;

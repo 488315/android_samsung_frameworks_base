@@ -17,7 +17,6 @@ import java.security.PublicKey;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 
-/* loaded from: classes5.dex */
 public class JcaSignerInfoVerifierBuilder {
     private DigestCalculatorProvider digestProvider;
     private Helper helper = new Helper();

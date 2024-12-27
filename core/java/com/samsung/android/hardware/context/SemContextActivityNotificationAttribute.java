@@ -7,7 +7,6 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
-/* loaded from: classes6.dex */
 public class SemContextActivityNotificationAttribute extends SemContextAttribute {
     public static final Parcelable.Creator<SemContextActivityNotificationAttribute> CREATOR =
             new Parcelable.Creator<

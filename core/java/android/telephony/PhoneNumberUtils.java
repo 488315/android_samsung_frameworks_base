@@ -38,7 +38,6 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/* loaded from: classes4.dex */
 public class PhoneNumberUtils {
     private static final String BCD_CALLED_PARTY_EXTENDED = "*#abc";
     private static final String BCD_EF_ADN_EXTENDED = "*#,N;";

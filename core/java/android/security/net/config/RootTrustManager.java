@@ -10,7 +10,6 @@ import javax.net.ssl.SSLSession;
 import javax.net.ssl.SSLSocket;
 import javax.net.ssl.X509ExtendedTrustManager;
 
-/* loaded from: classes3.dex */
 public class RootTrustManager extends X509ExtendedTrustManager {
     private final ApplicationConfig mConfig;
 

@@ -3,7 +3,6 @@ package com.android.internal.widget.remotecompose.core.operations.utilities;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-/* loaded from: classes5.dex */
 public class IntMap<T> {
     private static final int DEFAULT_CAPACITY = 16;
     private static final float LOAD_FACTOR = 0.75f;

@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.List;
 
 @CheckReturnValue
-/* loaded from: classes3.dex */
 abstract class ListFieldSchema {
     private static final ListFieldSchema FULL_INSTANCE;
     private static final ListFieldSchema LITE_INSTANCE;

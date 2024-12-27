@@ -46,7 +46,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes.dex */
 public final class BriefViewController {
     private static final long FOUR_STAR_ANIMATION_DURATION = 150;
     private static final String PARAM_KEY_EXPIRY_TIME_MILLIS = "expiryTimeMillis";

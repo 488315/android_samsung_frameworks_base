@@ -11,7 +11,6 @@ import com.android.internal.util.AnnotationValidations;
 
 import com.samsung.android.rune.CoreRune;
 
-/* loaded from: classes4.dex */
 public final class RemoteTransition implements Parcelable {
     public static final Parcelable.Creator<RemoteTransition> CREATOR =
             new Parcelable.Creator<

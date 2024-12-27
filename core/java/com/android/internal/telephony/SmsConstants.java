@@ -1,6 +1,5 @@
 package com.android.internal.telephony;
 
-/* loaded from: classes5.dex */
 public class SmsConstants {
     public static final byte DCN_STATUS_CS_ONLY = 0;
     public static final byte DCN_STATUS_EMERGENCY_CALL_START = 16;

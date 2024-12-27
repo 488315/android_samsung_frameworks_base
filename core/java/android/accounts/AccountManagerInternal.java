@@ -2,7 +2,6 @@ package android.accounts;
 
 import android.os.RemoteCallback;
 
-/* loaded from: classes.dex */
 public abstract class AccountManagerInternal {
 
     public interface OnAppPermissionChangeListener {

@@ -6,7 +6,6 @@ import android.net.RouteInfo;
 
 import java.util.Arrays;
 
-/* loaded from: classes5.dex */
 public class NetlinkTracker extends BaseNetworkObserver {
     private static final boolean DBG = false;
     private final String TAG;

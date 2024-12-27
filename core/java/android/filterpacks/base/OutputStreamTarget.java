@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.ByteBuffer;
 
-/* loaded from: classes.dex */
 public class OutputStreamTarget extends Filter {
 
     @GenerateFieldPort(name = "stream")

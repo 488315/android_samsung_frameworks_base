@@ -7,7 +7,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public abstract class Qos implements Parcelable {
     static final int QOS_TYPE_EPS = 1;
     static final int QOS_TYPE_NR = 2;

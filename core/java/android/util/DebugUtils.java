@@ -13,7 +13,6 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-/* loaded from: classes4.dex */
 public class DebugUtils {
     public static boolean isObjectSelected(Object object) {
         Method declaredMethod;

@@ -40,7 +40,6 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-/* loaded from: classes.dex */
 public final class CompanionDeviceManager {
     private static final int ASSOCIATION_TAG_LENGTH_LIMIT = 1024;
     public static final String EXTRA_ASSOCIATION = "android.companion.extra.ASSOCIATION";

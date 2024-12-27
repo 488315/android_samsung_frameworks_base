@@ -1,6 +1,5 @@
 package com.android.internal.telephony;
 
-/* loaded from: classes5.dex */
 public class TelephonyIntents {
     public static final String ACTION_ANY_DATA_CONNECTION_STATE_CHANGED =
             "android.intent.action.ANY_DATA_STATE";

@@ -2,7 +2,6 @@ package android.filterfw.core;
 
 import java.lang.reflect.Field;
 
-/* loaded from: classes.dex */
 public class ProgramPort extends FieldPort {
     protected String mVarName;
 

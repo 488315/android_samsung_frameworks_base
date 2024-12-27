@@ -6,7 +6,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class ActivityId implements Parcelable {
     public static final Parcelable.Creator<ActivityId> CREATOR =
             new Parcelable.Creator<ActivityId>() { // from class: android.app.assist.ActivityId.1

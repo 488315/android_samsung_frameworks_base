@@ -1,6 +1,5 @@
 package com.samsung.android.knox.analytics.util;
 
-/* loaded from: classes6.dex */
 public class WhitelistedFeature {
     private EnableApi mEnableApi;
     private String mFeature;

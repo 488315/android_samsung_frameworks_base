@@ -9,7 +9,6 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes4.dex */
 public final class JsonWriter implements Closeable {
     private String indent;
     private boolean lenient;

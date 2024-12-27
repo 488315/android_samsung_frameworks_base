@@ -8,7 +8,6 @@ import android.os.RemoteException;
 
 import com.android.internal.os.IResultReceiver;
 
-/* loaded from: classes3.dex */
 public interface IAutoFillService extends IInterface {
     void onConnectedStateChanged(boolean z) throws RemoteException;
 

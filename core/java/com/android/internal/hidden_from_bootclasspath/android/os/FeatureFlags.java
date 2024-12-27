@@ -1,6 +1,5 @@
 package com.android.internal.hidden_from_bootclasspath.android.os;
 
-/* loaded from: classes5.dex */
 public interface FeatureFlags {
     boolean adpfFmqEagerSend();
 

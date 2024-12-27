@@ -8,7 +8,6 @@ import android.os.Parcelable;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class SubCardTemplateData extends BaseTemplateData {
     public static final Parcelable.Creator<SubCardTemplateData> CREATOR =
             new Parcelable.Creator<SubCardTemplateData>() { // from class:

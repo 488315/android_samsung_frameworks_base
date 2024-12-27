@@ -3,7 +3,6 @@ package android.hardware.location;
 import android.annotation.SystemApi;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public final class GeofenceHardwareRequest {
     static final int GEOFENCE_TYPE_CIRCLE = 0;
     private double mLatitude;

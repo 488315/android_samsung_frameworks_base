@@ -5,7 +5,6 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.view.View;
 
-/* loaded from: classes5.dex */
 abstract class SemAbsSweepAnimationFilter {
     protected boolean mIsAnimationBack = false;
 

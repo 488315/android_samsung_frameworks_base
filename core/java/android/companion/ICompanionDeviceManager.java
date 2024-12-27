@@ -15,7 +15,6 @@ import android.os.RemoteException;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
 public interface ICompanionDeviceManager extends IInterface {
     void addOnAssociationsChangedListener(
             IOnAssociationsChangedListener iOnAssociationsChangedListener, int i)

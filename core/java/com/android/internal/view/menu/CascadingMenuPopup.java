@@ -34,7 +34,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes5.dex */
 final class CascadingMenuPopup extends MenuPopup
         implements MenuPresenter, View.OnKeyListener, PopupWindow.OnDismissListener {
     private static final int HORIZ_POSITION_LEFT = 0;

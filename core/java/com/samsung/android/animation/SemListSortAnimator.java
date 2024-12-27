@@ -10,7 +10,6 @@ import android.view.animation.Interpolator;
 import android.widget.ListView;
 
 @Deprecated
-/* loaded from: classes5.dex */
 public class SemListSortAnimator {
     Animator.AnimatorListener mAnimatorListener;
     final ListView mListView;

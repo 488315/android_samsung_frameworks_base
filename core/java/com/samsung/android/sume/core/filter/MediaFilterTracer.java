@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
-/* loaded from: classes6.dex */
 public class MediaFilterTracer extends DecorateFilter {
     private static final String TAG = Def.tagOf((Class<?>) MediaFilterTracer.class);
     private int contentId;

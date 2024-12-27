@@ -10,7 +10,6 @@ import com.android.internal.org.bouncycastle.asn1.ASN1TaggedObject;
 import com.android.internal.org.bouncycastle.asn1.DERSequence;
 import com.android.internal.org.bouncycastle.asn1.x509.AlgorithmIdentifier;
 
-/* loaded from: classes5.dex */
 public class CertID extends ASN1Object {
     AlgorithmIdentifier hashAlgorithm;
     ASN1OctetString issuerKeyHash;

@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class CinematicEffectResponse implements Parcelable {
     public static final int CINEMATIC_EFFECT_STATUS_ANIMATION_FAILURE = 10;
     public static final int CINEMATIC_EFFECT_STATUS_CONTENT_TARGET_ERROR = 8;

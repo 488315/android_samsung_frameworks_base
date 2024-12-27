@@ -22,7 +22,6 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
-/* loaded from: classes4.dex */
 public class ContentProtectionEventProcessor {
     private static final int RESET_LOGIN_TOTAL_EVENTS_TO_PROCESS = 150;
     private static final String TAG = "ContentProtectionEventProcessor";

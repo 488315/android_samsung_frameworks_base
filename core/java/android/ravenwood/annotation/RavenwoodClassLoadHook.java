@@ -7,7 +7,6 @@ import java.lang.annotation.Target;
 
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.CLASS)
-/* loaded from: classes3.dex */
 public @interface RavenwoodClassLoadHook {
     public static final String LIBANDROID_LOADING_HOOK =
             "com.android.platform.test.ravenwood.runtimehelper.ClassLoadHook.onClassLoaded";

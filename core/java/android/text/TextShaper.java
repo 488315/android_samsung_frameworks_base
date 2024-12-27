@@ -2,7 +2,6 @@ package android.text;
 
 import android.graphics.text.PositionedGlyphs;
 
-/* loaded from: classes4.dex */
 public class TextShaper {
 
     public interface GlyphsConsumer {

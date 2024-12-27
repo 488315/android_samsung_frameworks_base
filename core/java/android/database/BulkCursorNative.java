@@ -6,7 +6,6 @@ import android.os.IBinder;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes.dex */
 public abstract class BulkCursorNative extends Binder implements IBulkCursor {
     public BulkCursorNative() {
         attachInterface(this, IBulkCursor.descriptor);

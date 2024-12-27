@@ -18,7 +18,6 @@ import com.samsung.android.media.AudioParameter;
 import java.util.Collections;
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public class DirEncryptionWrapper {
     private static final String TAG = "DirEncryptWrapper";
     private Context mContext;

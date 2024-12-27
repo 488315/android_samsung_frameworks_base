@@ -5,7 +5,6 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import java.io.IOException;
 import java.util.Arrays;
 
-/* loaded from: classes4.dex */
 public class ProtoUtils {
     public static void toAggStatsProto(
             ProtoOutputStream proto,

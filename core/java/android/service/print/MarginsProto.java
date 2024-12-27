@@ -1,6 +1,5 @@
 package android.service.print;
 
-/* loaded from: classes3.dex */
 public final class MarginsProto {
     public static final long BOTTOM_MILS = 1120986464260L;
     public static final long LEFT_MILS = 1120986464258L;

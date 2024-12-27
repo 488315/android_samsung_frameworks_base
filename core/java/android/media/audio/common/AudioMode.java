@@ -1,6 +1,5 @@
 package android.media.audio.common;
 
-/* loaded from: classes2.dex */
 public @interface AudioMode {
     public static final int CALL_SCREEN = 4;
     public static final int IN_CALL = 2;

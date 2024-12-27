@@ -2,7 +2,6 @@ package android.animation;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
 class FloatKeyframeSet extends KeyframeSet implements Keyframes.FloatKeyframes {
     public FloatKeyframeSet(Keyframe.FloatKeyframe... keyframes) {
         super(keyframes);

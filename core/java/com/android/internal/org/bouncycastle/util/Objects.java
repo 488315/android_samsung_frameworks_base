@@ -1,6 +1,5 @@
 package com.android.internal.org.bouncycastle.util;
 
-/* loaded from: classes5.dex */
 public class Objects {
     public static boolean areEqual(Object a, Object b) {
         return a == b || !(a == null || b == null || !a.equals(b));

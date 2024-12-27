@@ -65,7 +65,6 @@ import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-/* loaded from: classes4.dex */
 public abstract class ViewGroup extends View implements ViewParent, ViewManager {
     private static final int ARRAY_CAPACITY_INCREMENT = 12;
     private static final int ARRAY_INITIAL_CAPACITY = 12;

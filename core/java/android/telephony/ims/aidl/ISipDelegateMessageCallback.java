@@ -7,7 +7,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.telephony.ims.SipMessage;
 
-/* loaded from: classes4.dex */
 public interface ISipDelegateMessageCallback extends IInterface {
     public static final String DESCRIPTOR =
             "android.telephony.ims.aidl.ISipDelegateMessageCallback";

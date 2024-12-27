@@ -36,7 +36,6 @@ import java.util.List;
 import java.util.Objects;
 
 @Deprecated
-/* loaded from: classes.dex */
 public class Camera {
     public static final String ACTION_NEW_PICTURE = "android.hardware.action.NEW_PICTURE";
     public static final String ACTION_NEW_VIDEO = "android.hardware.action.NEW_VIDEO";

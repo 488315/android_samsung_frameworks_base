@@ -3,7 +3,6 @@ package android.drm;
 import java.util.HashMap;
 
 @Deprecated
-/* loaded from: classes.dex */
 public class DrmErrorEvent extends DrmEvent {
     public static final int SEM_TYPE_DRM_E_BUFFER_TOO_SMALL = 3518;
     public static final int SEM_TYPE_DRM_E_CLK_INVALID_DATE = 3523;

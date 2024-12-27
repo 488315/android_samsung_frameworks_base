@@ -2,7 +2,6 @@ package android.media;
 
 import android.os.Parcel;
 
-/* loaded from: classes2.dex */
 public final class TimedMetaData {
     private static final String TAG = "TimedMetaData";
     private byte[] mMetaData;

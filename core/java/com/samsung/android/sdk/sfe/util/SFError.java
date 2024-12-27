@@ -2,7 +2,6 @@ package com.samsung.android.sdk.sfe.util;
 
 import android.os.Build;
 
-/* loaded from: classes6.dex */
 public class SFError {
     public static final int E_ALREADY_INIT = 4;
     public static final int E_ALREADY_SET = 5;

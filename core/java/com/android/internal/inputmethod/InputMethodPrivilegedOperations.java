@@ -11,7 +11,6 @@ import com.android.internal.infra.AndroidFuture;
 
 import java.util.Objects;
 
-/* loaded from: classes5.dex */
 public final class InputMethodPrivilegedOperations {
     private static final String TAG = "InputMethodPrivilegedOperations";
     private final OpsHolder mOps = new OpsHolder();

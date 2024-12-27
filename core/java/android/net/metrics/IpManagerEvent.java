@@ -12,7 +12,6 @@ import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
 @Deprecated
-/* loaded from: classes3.dex */
 public final class IpManagerEvent implements IpConnectivityLog.Event {
     public static final int COMPLETE_LIFECYCLE = 3;
     public static final Parcelable.Creator<IpManagerEvent> CREATOR =

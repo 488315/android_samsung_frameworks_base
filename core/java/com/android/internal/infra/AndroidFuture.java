@@ -24,7 +24,6 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-/* loaded from: classes5.dex */
 public class AndroidFuture<T> extends CompletableFuture<T> implements Parcelable {
     private static final boolean DEBUG = false;
     private static Handler sMainHandler;

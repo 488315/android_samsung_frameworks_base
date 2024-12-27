@@ -1,6 +1,5 @@
 package android.app.timezonedetector;
 
-/* loaded from: classes.dex */
 public interface TimeZoneDetector {
     public static final String SHELL_COMMAND_CONFIRM_TIME_ZONE = "confirm_time_zone";
     public static final String SHELL_COMMAND_DUMP_METRICS = "dump_metrics";

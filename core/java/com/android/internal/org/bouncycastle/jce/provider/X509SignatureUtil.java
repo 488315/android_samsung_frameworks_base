@@ -23,7 +23,6 @@ import java.security.Signature;
 import java.security.SignatureException;
 import java.security.spec.PSSParameterSpec;
 
-/* loaded from: classes5.dex */
 class X509SignatureUtil {
     private static final ASN1Null derNull = DERNull.INSTANCE;
 

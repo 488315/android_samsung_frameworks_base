@@ -16,7 +16,6 @@ import com.samsung.android.knox.SemPersonaManager;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
 public class ComponentInfo extends PackageItemInfo {
     public ApplicationInfo applicationInfo;
     public String[] attributionTags;

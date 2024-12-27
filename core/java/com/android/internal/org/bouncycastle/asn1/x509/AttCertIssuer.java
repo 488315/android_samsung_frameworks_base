@@ -8,7 +8,6 @@ import com.android.internal.org.bouncycastle.asn1.ASN1Sequence;
 import com.android.internal.org.bouncycastle.asn1.ASN1TaggedObject;
 import com.android.internal.org.bouncycastle.asn1.DERTaggedObject;
 
-/* loaded from: classes5.dex */
 public class AttCertIssuer extends ASN1Object implements ASN1Choice {
     ASN1Primitive choiceObj;
     ASN1Encodable obj;

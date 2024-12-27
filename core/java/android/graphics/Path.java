@@ -5,7 +5,6 @@ import dalvik.annotation.optimization.FastNative;
 
 import libcore.util.NativeAllocationRegistry;
 
-/* loaded from: classes.dex */
 public class Path {
     static final FillType[] sFillTypeArray = {
         FillType.WINDING, FillType.EVEN_ODD, FillType.INVERSE_WINDING, FillType.INVERSE_EVEN_ODD

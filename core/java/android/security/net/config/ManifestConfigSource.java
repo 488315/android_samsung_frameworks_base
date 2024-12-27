@@ -6,7 +6,6 @@ import android.util.Pair;
 
 import java.util.Set;
 
-/* loaded from: classes3.dex */
 public class ManifestConfigSource implements ConfigSource {
     private static final boolean DBG = false;
     private static final String LOG_TAG = "NetworkSecurityConfig";

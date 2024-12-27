@@ -18,7 +18,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Arrays;
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public final class TextBoundsInfo implements Parcelable {
     private static final int BIDI_LEVEL_MASK = 66584576;
     private static final int BIDI_LEVEL_SHIFT = 19;

@@ -2,7 +2,6 @@ package android.credentials.selection;
 
 import android.content.Intent;
 
-/* loaded from: classes.dex */
 public final class IntentCreationResult {
     private final String mFallbackUiPackageName;
     private final Intent mIntent;

@@ -7,7 +7,6 @@ import com.android.framework.protobuf.nano.MessageNano;
 
 import java.io.IOException;
 
-/* loaded from: classes5.dex */
 public interface MetricsProto {
 
     public static final class MetricsEvent extends MessageNano {

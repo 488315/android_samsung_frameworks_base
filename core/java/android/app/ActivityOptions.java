@@ -38,7 +38,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 
-/* loaded from: classes.dex */
 public class ActivityOptions extends ComponentOptions {
     public static final int ANIM_CLIP_REVEAL = 11;
     public static final int ANIM_CUSTOM = 1;

@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class RemoteLockscreenValidationSession implements Parcelable {
     public static final Parcelable.Creator<RemoteLockscreenValidationSession> CREATOR =
             new Parcelable.Creator<RemoteLockscreenValidationSession>() { // from class:

@@ -12,7 +12,6 @@ import com.android.internal.org.bouncycastle.asn1.DERT61String;
 import com.android.internal.org.bouncycastle.asn1.DERUTF8String;
 import com.android.internal.org.bouncycastle.asn1.DERUniversalString;
 
-/* loaded from: classes5.dex */
 public class DirectoryString extends ASN1Object implements ASN1Choice, ASN1String {
     private ASN1String string;
 

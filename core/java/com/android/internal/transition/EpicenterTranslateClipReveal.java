@@ -19,7 +19,6 @@ import android.view.animation.AnimationUtils;
 
 import com.android.internal.R;
 
-/* loaded from: classes5.dex */
 public class EpicenterTranslateClipReveal extends Visibility {
     private static final String PROPNAME_BOUNDS = "android:epicenterReveal:bounds";
     private static final String PROPNAME_CLIP = "android:epicenterReveal:clip";

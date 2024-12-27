@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.util.Arrays;
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public class OsAppId implements Parcelable {
     public static final Parcelable.Creator<OsAppId> CREATOR =
             new Parcelable.Creator<OsAppId>() { // from class: android.hardware.radio.data.OsAppId.1

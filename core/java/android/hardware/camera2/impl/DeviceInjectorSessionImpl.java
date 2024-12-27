@@ -40,7 +40,6 @@ import java.util.concurrent.Executors;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
-/* loaded from: classes2.dex */
 public class DeviceInjectorSessionImpl extends DeviceInjectorSession
         implements IBinder.DeathRecipient {
     private static final boolean DEBUG = false;

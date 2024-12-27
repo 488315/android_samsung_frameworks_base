@@ -5,7 +5,6 @@ import com.android.internal.org.bouncycastle.math.ec.ECFieldElement;
 
 import java.math.BigInteger;
 
-/* loaded from: classes5.dex */
 public class X9IntegerConverter {
     public int getByteLength(ECCurve c) {
         return (c.getFieldSize() + 7) / 8;

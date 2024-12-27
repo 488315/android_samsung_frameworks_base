@@ -20,7 +20,6 @@ import java.util.Set;
 
 import javax.crypto.spec.DHParameterSpec;
 
-/* loaded from: classes5.dex */
 class BouncyCastleProviderConfiguration implements ProviderConfiguration {
     private volatile Object dhDefaultParams;
     private volatile ECParameterSpec ecImplicitCaParams;

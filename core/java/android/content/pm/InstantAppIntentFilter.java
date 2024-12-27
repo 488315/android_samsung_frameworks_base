@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class InstantAppIntentFilter implements Parcelable {
     public static final Parcelable.Creator<InstantAppIntentFilter> CREATOR =
             new Parcelable.Creator<InstantAppIntentFilter>() { // from class:

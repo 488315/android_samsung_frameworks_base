@@ -3,7 +3,6 @@ package android.os;
 import android.annotation.SystemApi;
 
 @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
-/* loaded from: classes3.dex */
 public class BluetoothServiceManager {
     public static final String BLUETOOTH_MANAGER_SERVICE = "bluetooth_manager";
 

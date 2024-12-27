@@ -13,7 +13,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public final class AudioPlaybackConfiguration implements Parcelable {
     private static final boolean DEBUG = false;
     public static final String EXTRA_PLAYER_EVENT_CHANNEL_MASK =

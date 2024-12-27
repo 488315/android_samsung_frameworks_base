@@ -6,7 +6,6 @@ import android.text.TextUtils;
 
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public final class InputDeviceIdentifier implements Parcelable {
     public static final Parcelable.Creator<InputDeviceIdentifier> CREATOR =
             new Parcelable.Creator<InputDeviceIdentifier>() { // from class:

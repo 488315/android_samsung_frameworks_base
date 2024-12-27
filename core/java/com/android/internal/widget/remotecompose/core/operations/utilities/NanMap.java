@@ -3,7 +3,6 @@ package com.android.internal.widget.remotecompose.core.operations.utilities;
 import com.android.internal.telephony.gsm.SmsCbConstants;
 import com.android.internal.widget.remotecompose.core.operations.Utils;
 
-/* loaded from: classes5.dex */
 public class NanMap {
     public static final int CLOSE = 4101;
     public static final int CONIC = 4099;

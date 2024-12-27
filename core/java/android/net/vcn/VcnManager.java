@@ -21,7 +21,6 @@ import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes3.dex */
 public class VcnManager {
     public static final int VCN_ERROR_CODE_CONFIG_ERROR = 1;
     public static final int VCN_ERROR_CODE_INTERNAL_ERROR = 0;

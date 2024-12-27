@@ -5,7 +5,6 @@ import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public class GnssSignalType implements Parcelable {
     public static final String CODE_TYPE_A = "A";
     public static final String CODE_TYPE_B = "B";

@@ -4,7 +4,6 @@ import com.android.internal.telephony.IIntegerConsumer;
 import com.android.internal.util.FunctionalUtils;
 
 /* compiled from: D8$$SyntheticClass */
-/* loaded from: classes4.dex */
 public final /* synthetic */ class DataService$DataServiceHandler$$ExternalSyntheticLambda0
         implements FunctionalUtils.RemoteExceptionIgnoringConsumer {
     public final /* synthetic */ IIntegerConsumer f$0;

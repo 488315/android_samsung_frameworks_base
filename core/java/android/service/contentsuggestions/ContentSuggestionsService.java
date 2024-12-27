@@ -26,7 +26,6 @@ import com.android.internal.util.function.pooled.PooledLambda;
 import java.util.List;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public abstract class ContentSuggestionsService extends Service {
     public static final String SERVICE_INTERFACE =
             "android.service.contentsuggestions.ContentSuggestionsService";

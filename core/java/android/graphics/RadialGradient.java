@@ -1,6 +1,5 @@
 package android.graphics;
 
-/* loaded from: classes.dex */
 public class RadialGradient extends Shader {
     private int mCenterColor;
     private final long[] mColorLongs;

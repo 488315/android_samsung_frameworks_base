@@ -8,7 +8,6 @@ import com.android.internal.content.NativeLibraryHelper;
 import com.android.internal.telephony.SemTelephonyUtils;
 
 @Deprecated
-/* loaded from: classes4.dex */
 public class NeighboringCellInfo implements Parcelable {
     public static final Parcelable.Creator<NeighboringCellInfo> CREATOR =
             new Parcelable.Creator<

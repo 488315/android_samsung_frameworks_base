@@ -1,6 +1,5 @@
 package android.util.quota;
 
-/* loaded from: classes4.dex */
 public final class CountQuotaTrackerProto {
     public static final long BASE_QUOTA_DATA = 1146756268033L;
     public static final long COUNT_LIMIT = 2246267895810L;

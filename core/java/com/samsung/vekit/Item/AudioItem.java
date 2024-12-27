@@ -18,7 +18,6 @@ import com.samsung.vekit.Listener.PcmInfoListener;
 import java.util.HashMap;
 import java.util.function.BiConsumer;
 
-/* loaded from: classes6.dex */
 public class AudioItem extends Item
         implements AudioSegmentInterface<AudioItem>, SpeakerIDInfoInterface<AudioItem> {
     private HashMap<String, AudioSegment> audioSegmentMap;

@@ -24,7 +24,6 @@ import java.nio.ByteBuffer;
 import java.util.concurrent.CancellationException;
 import java.util.function.Supplier;
 
-/* loaded from: classes6.dex */
 public class DecoderFilter extends MediaCodecFilter implements BufferSupplier {
     private static final String TAG = Def.tagOf((Class<?>) DecoderFilter.class);
 

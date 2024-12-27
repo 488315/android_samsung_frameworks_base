@@ -27,7 +27,6 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public abstract class SearchUiService extends Service {
     private static final boolean DEBUG = false;
     public static final String SERVICE_INTERFACE = "android.service.search.SearchUiService";

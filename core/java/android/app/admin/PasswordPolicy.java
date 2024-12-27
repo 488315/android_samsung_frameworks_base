@@ -1,6 +1,5 @@
 package android.app.admin;
 
-/* loaded from: classes.dex */
 public class PasswordPolicy {
     public static final int DEF_MINIMUM_LENGTH = 0;
     public static final int DEF_MINIMUM_LETTERS = 1;

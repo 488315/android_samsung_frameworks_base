@@ -8,7 +8,6 @@ import android.text.TextUtils;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes3.dex */
 public final class QueryLocationException extends RuntimeException implements Parcelable {
     public static final Parcelable.Creator<QueryLocationException> CREATOR =
             new Parcelable.Creator<

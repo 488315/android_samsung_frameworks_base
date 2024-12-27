@@ -8,7 +8,6 @@ import com.android.server.permission.jarjar.kotlin.UninitializedPropertyAccessEx
 import java.util.Arrays;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes2.dex */
 public abstract class Intrinsics {
     public static boolean areEqual(Object obj, Object obj2) {
         return obj == null ? obj2 == null : obj.equals(obj2);

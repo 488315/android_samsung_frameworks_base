@@ -5,7 +5,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.ParcelableHolder;
 
-/* loaded from: classes2.dex */
 public final class AuthenticateReason implements Parcelable {
     public static final Parcelable.Creator<AuthenticateReason> CREATOR =
             new Parcelable.Creator<AuthenticateReason>() { // from class:

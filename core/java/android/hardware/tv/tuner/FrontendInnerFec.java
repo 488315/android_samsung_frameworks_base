@@ -1,6 +1,5 @@
 package android.hardware.tv.tuner;
 
-/* loaded from: classes2.dex */
 public @interface FrontendInnerFec {
     public static final long AUTO = 1;
     public static final long FEC_104_180 = 281474976710656L;

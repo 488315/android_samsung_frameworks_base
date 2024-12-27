@@ -4,7 +4,6 @@ import android.util.Slog;
 
 import com.samsung.android.service.ProtectedATCommand.list.ATCommands;
 
-/* loaded from: classes6.dex */
 public class ATCommandCheckerWithInHouse extends ATCommandChecker {
     @Override // com.samsung.android.service.ProtectedATCommand.ATCommandChecker
     protected int checkAdditionalCondition(String string) {

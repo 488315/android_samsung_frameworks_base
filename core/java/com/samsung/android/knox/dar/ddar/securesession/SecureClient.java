@@ -3,7 +3,6 @@ package com.samsung.android.knox.dar.ddar.securesession;
 import java.util.HashMap;
 import java.util.Map;
 
-/* loaded from: classes6.dex */
 public class SecureClient {
     private String clientId;
     private Map<String, SecureSessionManager.SecureSession> sessionHandles = new HashMap();

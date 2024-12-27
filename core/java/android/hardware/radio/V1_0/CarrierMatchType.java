@@ -4,7 +4,6 @@ import com.samsung.android.hardware.secinputdev.SemInputDeviceManager;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class CarrierMatchType {
     public static final int ALL = 0;
     public static final int GID1 = 3;

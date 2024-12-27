@@ -10,7 +10,6 @@ import android.view.View;
 
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public class SemGfxImageFilter {
     private static final String LOG_TAG = "SemGfxImageFilter";
     private static final int PARAM_INDEX_BLUR_QUALITY = 0;

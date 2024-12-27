@@ -1,6 +1,5 @@
 package android.text.util;
 
-/* loaded from: classes4.dex */
 public class Rfc822Token {
     private String mAddress;
     private String mComment;

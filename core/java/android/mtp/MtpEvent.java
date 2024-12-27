@@ -2,7 +2,6 @@ package android.mtp;
 
 import android.media.MediaMetrics;
 
-/* loaded from: classes3.dex */
 public class MtpEvent {
     public static final int EVENT_CANCEL_TRANSACTION = 16385;
     public static final int EVENT_CAPTURE_COMPLETE = 16397;

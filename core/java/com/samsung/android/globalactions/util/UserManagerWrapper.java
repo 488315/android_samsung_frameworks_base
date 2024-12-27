@@ -6,7 +6,6 @@ import android.os.UserManager;
 
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public class UserManagerWrapper {
     private final UserManager mUserManager;
 

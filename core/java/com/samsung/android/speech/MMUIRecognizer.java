@@ -2,7 +2,6 @@ package com.samsung.android.speech;
 
 import android.util.Log;
 
-/* loaded from: classes6.dex */
 public class MMUIRecognizer {
     private static final String TAG = MMUIRecognizer.class.getSimpleName();
 

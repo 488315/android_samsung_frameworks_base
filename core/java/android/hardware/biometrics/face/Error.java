@@ -1,6 +1,5 @@
 package android.hardware.biometrics.face;
 
-/* loaded from: classes2.dex */
 public @interface Error {
     public static final byte CANCELED = 5;
     public static final byte HW_UNAVAILABLE = 1;

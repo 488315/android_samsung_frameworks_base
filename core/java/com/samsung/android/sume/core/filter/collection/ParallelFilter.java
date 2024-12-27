@@ -7,7 +7,6 @@ import com.samsung.android.sume.core.filter.MediaFilterGroupBase;
 
 import java.util.function.Supplier;
 
-/* loaded from: classes6.dex */
 public abstract class ParallelFilter extends MediaFilterGroupBase {
     private final ParallelDescriptor descriptor;
 

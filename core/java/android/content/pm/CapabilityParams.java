@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-/* loaded from: classes.dex */
 public final class CapabilityParams implements Parcelable {
     public static final Parcelable.Creator<CapabilityParams> CREATOR =
             new Parcelable.Creator<

@@ -3,7 +3,6 @@ package android.os;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes3.dex */
 public final class PowerMonitor implements Parcelable {
     public static final Parcelable.Creator<PowerMonitor> CREATOR =
             new Parcelable.Creator<PowerMonitor>() { // from class: android.os.PowerMonitor.1

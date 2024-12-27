@@ -6,7 +6,6 @@ import java.util.Arrays;
 import javax.crypto.SecretKey;
 import javax.security.auth.DestroyFailedException;
 
-/* loaded from: classes6.dex */
 class SessionSecretKeySpec implements KeySpec, SecretKey {
     private static final long serialVersionUID = 6560385466025255248L;
     private String algorithm;

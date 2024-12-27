@@ -8,7 +8,6 @@ import com.android.internal.pm.parsing.pkg.PackageImpl;
 
 import libcore.util.EmptyArray;
 
-/* loaded from: classes5.dex */
 public class ParsedMainComponentImpl extends ParsedComponentImpl
         implements ParsedMainComponent, Parcelable {
     public static final Parcelable.Creator<ParsedMainComponentImpl> CREATOR =

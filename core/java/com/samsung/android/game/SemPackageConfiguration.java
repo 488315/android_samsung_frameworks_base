@@ -3,7 +3,6 @@ package com.samsung.android.game;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes6.dex */
 public class SemPackageConfiguration implements Parcelable {
     public static final int CATEGORY_GAME_NORMAL = 1;
     public static final int CATEGORY_NON_GAME_INTERNAL = 3;

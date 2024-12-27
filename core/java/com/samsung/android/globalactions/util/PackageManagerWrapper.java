@@ -7,7 +7,6 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 
-/* loaded from: classes6.dex */
 public class PackageManagerWrapper {
     private final PackageManager mPackageManager;
     private final String KIDS_MODE_PACKAGE_NAME = "com.sec.android.app.kidshome";

@@ -21,7 +21,6 @@ import android.widget.TextView;
 import com.android.internal.R;
 
 @Deprecated
-/* loaded from: classes3.dex */
 public final class PreferenceScreen extends PreferenceGroup
         implements AdapterView.OnItemClickListener, DialogInterface.OnDismissListener {
     private Dialog mDialog;

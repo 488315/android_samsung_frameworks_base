@@ -22,7 +22,6 @@ import java.security.spec.DSAParameterSpec;
 import java.security.spec.DSAPrivateKeySpec;
 import java.util.Enumeration;
 
-/* loaded from: classes5.dex */
 public class JDKDSAPrivateKey implements DSAPrivateKey, PKCS12BagAttributeCarrier {
     private static final long serialVersionUID = -4677259546958385734L;
     private PKCS12BagAttributeCarrierImpl attrCarrier = new PKCS12BagAttributeCarrierImpl();

@@ -37,7 +37,6 @@ import java.util.Arrays;
 
 import javax.xml.parsers.SAXParserFactory;
 
-/* loaded from: classes4.dex */
 public class Xml {
     public static String FEATURE_RELAXED = "http://xmlpull.org/v1/doc/features.html#relaxed";
     public static final boolean ENABLE_BINARY_DEFAULT = shouldEnableBinaryDefault();

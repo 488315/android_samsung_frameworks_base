@@ -17,7 +17,6 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public class AudioDeviceVolumeManager {
     public static final int ADJUST_MODE_END = 2;
     public static final int ADJUST_MODE_NORMAL = 0;

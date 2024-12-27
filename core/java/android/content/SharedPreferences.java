@@ -3,7 +3,6 @@ package android.content;
 import java.util.Map;
 import java.util.Set;
 
-/* loaded from: classes.dex */
 public interface SharedPreferences {
 
     public interface Editor {

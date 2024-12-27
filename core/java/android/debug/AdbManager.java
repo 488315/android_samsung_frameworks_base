@@ -5,7 +5,6 @@ import android.content.Context;
 import android.os.RemoteException;
 
 @SystemApi
-/* loaded from: classes.dex */
 public class AdbManager {
     private static final String TAG = "AdbManager";
     public static final String WIRELESS_DEBUG_PAIRED_DEVICES_ACTION =

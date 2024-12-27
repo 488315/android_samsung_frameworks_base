@@ -1,6 +1,5 @@
 package vendor.samsung.hardware.radio.sim;
 
-/* loaded from: classes6.dex */
 public @interface SehLockType {
     public static final int ACL = 11;
     public static final int FD = 4;

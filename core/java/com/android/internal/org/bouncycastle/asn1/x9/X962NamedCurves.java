@@ -10,7 +10,6 @@ import java.math.BigInteger;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
-/* loaded from: classes5.dex */
 public class X962NamedCurves {
     static X9ECParametersHolder prime192v1 = new X9ECParametersHolder() { // from class:
                 // com.android.internal.org.bouncycastle.asn1.x9.X962NamedCurves.1

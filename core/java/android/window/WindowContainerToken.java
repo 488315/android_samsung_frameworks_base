@@ -4,7 +4,6 @@ import android.os.IBinder;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes4.dex */
 public final class WindowContainerToken implements Parcelable {
     public static final Parcelable.Creator<WindowContainerToken> CREATOR =
             new Parcelable.Creator<

@@ -9,7 +9,6 @@ import com.samsung.android.hardware.secinputdev.SemInputDumpsysData;
 import java.util.HashMap;
 import java.util.Map;
 
-/* loaded from: classes.dex */
 public class Spen extends SemInputDevice {
     private static final String SET_CLEAR_COVER_MODE = "clear_cover_mode";
     private static final String SET_FOLD_STATE = "set_fold_state";

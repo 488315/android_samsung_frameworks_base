@@ -3,7 +3,6 @@ package com.android.internal.accessibility.dialog;
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.content.Context;
 
-/* loaded from: classes5.dex */
 class VolumeShortcutToggleAccessibilityServiceTarget extends AccessibilityServiceTarget {
     VolumeShortcutToggleAccessibilityServiceTarget(
             Context context, int shortcutType, AccessibilityServiceInfo serviceInfo) {

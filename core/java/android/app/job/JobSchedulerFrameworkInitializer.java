@@ -11,7 +11,6 @@ import android.os.PowerExemptionManager;
 import android.os.PowerWhitelistManager;
 
 @SystemApi
-/* loaded from: classes.dex */
 public class JobSchedulerFrameworkInitializer {
     private JobSchedulerFrameworkInitializer() {}
 

@@ -1,6 +1,5 @@
 package android.audio.policy.configuration.V7_0;
 
-/* loaded from: classes.dex */
 public enum HalVersion {
     _2_0("2.0"),
     _3_0("3.0");

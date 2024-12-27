@@ -8,7 +8,6 @@ import android.os.RemoteException;
 
 import com.samsung.android.content.clipboard.data.SemClipData;
 
-/* loaded from: classes5.dex */
 public interface IOnClipboardEventListener extends IInterface {
     public static final String DESCRIPTOR =
             "com.samsung.android.content.clipboard.IOnClipboardEventListener";

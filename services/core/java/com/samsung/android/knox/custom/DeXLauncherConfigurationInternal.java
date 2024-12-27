@@ -9,7 +9,6 @@ import android.os.Bundle;
 import com.android.server.accounts.AccountManagerService$$ExternalSyntheticOutline0;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes2.dex */
 public final class DeXLauncherConfigurationInternal {
     public static final String ALPHABETIC_GRID = "alphabetical_order";
     public static final Uri CONTENT_URI =

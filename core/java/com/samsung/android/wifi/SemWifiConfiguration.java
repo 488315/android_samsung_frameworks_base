@@ -7,7 +7,6 @@ import android.text.TextUtils;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes6.dex */
 public class SemWifiConfiguration implements Parcelable {
     public static final int DISABLED_ASSOCIATION_REJECTED = 3;
     public static final int DISABLED_AUTHENTICATION_CA_CERTIFICATION_ERROR = 11;

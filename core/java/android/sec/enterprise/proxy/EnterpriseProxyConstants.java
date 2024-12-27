@@ -3,7 +3,6 @@ package android.sec.enterprise.proxy;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public class EnterpriseProxyConstants {
     public static final int ANDROID_PROXY_CONFIG = 0;
     public static final String BUNDLE_CREDENTIALS = "credentials";

@@ -13,7 +13,6 @@ import libcore.util.EmptyArray;
 import java.lang.reflect.Array;
 import java.util.IdentityHashMap;
 
-/* loaded from: classes4.dex */
 public class SpannableStringBuilder
         implements CharSequence, GetChars, Spannable, Editable, Appendable, GraphicsOperations {
     private static final int END_MASK = 15;

@@ -29,7 +29,6 @@ import java.util.concurrent.Executor;
 import java.util.function.Predicate;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public final class SoundTriggerManager {
     private static final boolean DBG = false;
     public static final String EXTRA_MESSAGE_TYPE = "android.media.soundtrigger.MESSAGE_TYPE";

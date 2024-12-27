@@ -11,7 +11,6 @@ import android.os.Trace;
 import android.os.UserHandle;
 import android.util.Log;
 
-/* loaded from: classes.dex */
 public abstract class BroadcastReceiver {
     private boolean mDebugUnregister;
     private PendingResult mPendingResult;

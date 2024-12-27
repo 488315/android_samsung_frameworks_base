@@ -6,7 +6,6 @@ import com.android.internal.org.bouncycastle.util.Properties;
 import java.io.IOException;
 import java.math.BigInteger;
 
-/* loaded from: classes5.dex */
 public class ASN1Integer extends ASN1Primitive {
     static final int SIGN_EXT_SIGNED = -1;
     static final int SIGN_EXT_UNSIGNED = 255;

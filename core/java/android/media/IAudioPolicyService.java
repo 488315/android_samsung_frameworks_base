@@ -19,7 +19,6 @@ import com.android.media.permission.INativePermissionController;
 
 import java.util.List;
 
-/* loaded from: classes2.dex */
 public interface IAudioPolicyService extends IInterface {
     public static final String DESCRIPTOR = "android.media.IAudioPolicyService";
 

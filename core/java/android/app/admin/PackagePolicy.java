@@ -10,7 +10,6 @@ import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
 
-/* loaded from: classes.dex */
 public final class PackagePolicy implements Parcelable {
     public static final Parcelable.Creator<PackagePolicy> CREATOR =
             new Parcelable.Creator<

@@ -6,7 +6,6 @@ import com.android.internal.org.bouncycastle.math.raw.Nat;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 
-/* loaded from: classes5.dex */
 public final class BigIntegers {
     private static final int MAX_ITERATIONS = 1000;
     public static final BigInteger ZERO = BigInteger.valueOf(0);

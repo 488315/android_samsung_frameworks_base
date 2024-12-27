@@ -2,7 +2,6 @@ package com.android.internal.org.bouncycastle.crypto.params;
 
 import java.security.SecureRandom;
 
-/* loaded from: classes5.dex */
 public class DSAParameterGenerationParameters {
     public static final int DIGITAL_SIGNATURE_USAGE = 1;
     public static final int KEY_ESTABLISHMENT_USAGE = 2;

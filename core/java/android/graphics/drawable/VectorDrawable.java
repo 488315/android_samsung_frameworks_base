@@ -43,7 +43,6 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Stack;
 
-/* loaded from: classes.dex */
 public class VectorDrawable extends Drawable {
     private static final String LOGTAG = VectorDrawable.class.getSimpleName();
     private static final int PATH_COLOR_UPDATE_MODE_FILL = 1;

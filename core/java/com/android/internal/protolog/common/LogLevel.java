@@ -2,7 +2,6 @@ package com.android.internal.protolog.common;
 
 import android.app.blob.XmlTags;
 
-/* loaded from: classes5.dex */
 public enum LogLevel {
     DEBUG(XmlTags.ATTR_DESCRIPTION),
     VERBOSE("v"),

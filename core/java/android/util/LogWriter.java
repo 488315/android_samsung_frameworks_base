@@ -2,7 +2,6 @@ package android.util;
 
 import java.io.Writer;
 
-/* loaded from: classes4.dex */
 public class LogWriter extends Writer {
     private final int mBuffer;
     private StringBuilder mBuilder;

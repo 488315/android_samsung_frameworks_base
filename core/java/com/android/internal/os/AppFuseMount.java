@@ -6,7 +6,6 @@ import android.os.Parcelable;
 
 import com.android.internal.util.Preconditions;
 
-/* loaded from: classes5.dex */
 public class AppFuseMount implements Parcelable {
     public static final Parcelable.Creator<AppFuseMount> CREATOR =
             new Parcelable.Creator<

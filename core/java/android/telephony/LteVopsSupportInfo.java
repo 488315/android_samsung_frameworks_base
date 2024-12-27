@@ -9,7 +9,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public final class LteVopsSupportInfo extends VopsSupportInfo {
     public static final Parcelable.Creator<LteVopsSupportInfo> CREATOR =
             new Parcelable.Creator<

@@ -1,6 +1,5 @@
 package vendor.samsung.hardware.radio;
 
-/* loaded from: classes6.dex */
 public @interface SehRadioError {
     public static final int ABORTED = 65;
     public static final int ACCESS_BARRED = 68;

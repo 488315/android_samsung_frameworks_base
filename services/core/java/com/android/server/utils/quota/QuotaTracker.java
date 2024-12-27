@@ -21,7 +21,6 @@ import com.android.server.FgThread;
 import com.android.server.utils.AlarmQueue;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes2.dex */
 public abstract class QuotaTracker {
     public static final String ALARM_TAG_QUOTA_CHECK =
             XmlUtils$$ExternalSyntheticOutline0.m("*", "QuotaTracker", ".quota_check*");

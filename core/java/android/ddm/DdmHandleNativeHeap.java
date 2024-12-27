@@ -6,7 +6,6 @@ import org.apache.harmony.dalvik.ddmc.Chunk;
 import org.apache.harmony.dalvik.ddmc.ChunkHandler;
 import org.apache.harmony.dalvik.ddmc.DdmServer;
 
-/* loaded from: classes.dex */
 public class DdmHandleNativeHeap extends DdmHandle {
     public static final int CHUNK_NHGT = ChunkHandler.type("NHGT");
     private static DdmHandleNativeHeap mInstance = new DdmHandleNativeHeap();

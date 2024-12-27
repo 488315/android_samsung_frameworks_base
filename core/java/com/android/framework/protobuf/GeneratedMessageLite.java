@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-/* loaded from: classes3.dex */
 public abstract class GeneratedMessageLite<
                 MessageType extends GeneratedMessageLite<MessageType, BuilderType>,
                 BuilderType extends Builder<MessageType, BuilderType>>

@@ -1,6 +1,5 @@
 package com.android.internal.graphics.palette;
 
-/* loaded from: classes5.dex */
 public final class Target {
     private static final float DEFAULT_CHROMA_MAX = 130.0f;
     private static final float DEFAULT_CHROMA_MIN = 0.0f;

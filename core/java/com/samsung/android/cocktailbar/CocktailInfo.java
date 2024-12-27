@@ -7,7 +7,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.widget.RemoteViews;
 
-/* loaded from: classes5.dex */
 public class CocktailInfo implements Parcelable {
     public static final Parcelable.Creator<CocktailInfo> CREATOR =
             new Parcelable.Creator<

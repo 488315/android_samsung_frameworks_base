@@ -1,6 +1,5 @@
 package android.tracing;
 
-/* loaded from: classes4.dex */
 public interface FeatureFlags {
     boolean perfettoIme();
 

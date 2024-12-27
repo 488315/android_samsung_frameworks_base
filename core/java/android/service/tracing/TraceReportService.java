@@ -16,7 +16,6 @@ import java.io.IOException;
 import java.util.UUID;
 
 @SystemApi(client = SystemApi.Client.PRIVILEGED_APPS)
-/* loaded from: classes3.dex */
 public class TraceReportService extends Service {
     public static final int MSG_REPORT_TRACE = 1;
     private static final String TAG = "TraceReportService";

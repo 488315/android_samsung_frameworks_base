@@ -2,7 +2,6 @@ package com.android.internal.org.bouncycastle.asn1.misc;
 
 import com.android.internal.org.bouncycastle.asn1.DERBitString;
 
-/* loaded from: classes5.dex */
 public class NetscapeCertType extends DERBitString {
     public static final int objectSigning = 16;
     public static final int objectSigningCA = 1;

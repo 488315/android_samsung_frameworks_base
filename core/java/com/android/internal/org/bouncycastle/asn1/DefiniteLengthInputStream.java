@@ -6,7 +6,6 @@ import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
 
-/* loaded from: classes5.dex */
 class DefiniteLengthInputStream extends LimitedInputStream {
     private static final byte[] EMPTY_BYTES = new byte[0];
     private final int _originalLength;

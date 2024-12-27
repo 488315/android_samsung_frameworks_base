@@ -15,7 +15,6 @@ import com.android.internal.org.bouncycastle.util.BigIntegers;
 
 import java.math.BigInteger;
 
-/* loaded from: classes5.dex */
 public class RSAKeyPairGenerator implements AsymmetricCipherKeyPairGenerator {
     private static final BigInteger ONE = BigInteger.valueOf(1);
     private RSAKeyGenerationParameters param;

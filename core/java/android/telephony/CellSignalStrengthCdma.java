@@ -6,7 +6,6 @@ import android.os.PersistableBundle;
 
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public final class CellSignalStrengthCdma extends CellSignalStrength implements Parcelable {
     private static final boolean DBG = false;
     private static final String LOG_TAG = "CellSignalStrengthCdma";

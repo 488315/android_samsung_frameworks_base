@@ -13,7 +13,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.function.DoubleUnaryOperator;
 
-/* loaded from: classes.dex */
 public abstract class ColorSpace {
     public static final int MAX_ID = 63;
     public static final int MIN_ID = -1;

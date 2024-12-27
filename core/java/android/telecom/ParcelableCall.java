@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public final class ParcelableCall implements Parcelable {
     public static final Parcelable.Creator<ParcelableCall> CREATOR =
             new Parcelable.Creator<

@@ -5,7 +5,6 @@ import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowKt;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes3.dex */
 public final class FoldStateRepositoryImpl implements FoldStateRepository {
     public final FoldStateProvider foldStateProvider;
 

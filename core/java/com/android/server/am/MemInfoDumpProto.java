@@ -1,6 +1,5 @@
 package com.android.server.am;
 
-/* loaded from: classes5.dex */
 public final class MemInfoDumpProto {
     public static final long APP_PROCESSES = 2246267895812L;
     public static final long CACHED_KERNEL_KB = 1112396529675L;

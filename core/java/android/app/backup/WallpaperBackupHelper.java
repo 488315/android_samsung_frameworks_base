@@ -10,7 +10,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-/* loaded from: classes.dex */
 public class WallpaperBackupHelper extends FileBackupHelperBase implements BackupHelper {
     private static final boolean DEBUG = false;
     private static final String STAGE_FILE =

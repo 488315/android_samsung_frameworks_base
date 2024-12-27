@@ -8,7 +8,6 @@ import android.util.proto.ProtoOutputStream;
 
 import java.io.PrintWriter;
 
-/* loaded from: classes5.dex */
 public class StatLogger {
     private static final String TAG = "StatLogger";
     private final int SIZE;

@@ -1,6 +1,5 @@
 package android.stats.mobiledatadownload;
 
-/* loaded from: classes3.dex */
 public final class Enums {
     public static final int ANDROID_DOWNLOADER2_ERROR = 200;
     public static final int ANDROID_DOWNLOADER_CANCELED = 101;

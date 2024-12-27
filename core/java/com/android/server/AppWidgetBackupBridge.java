@@ -2,7 +2,6 @@ package com.android.server;
 
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public class AppWidgetBackupBridge {
     private static WidgetBackupProvider sAppWidgetService;
 

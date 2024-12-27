@@ -1,6 +1,5 @@
 package android.security.metrics;
 
-/* loaded from: classes3.dex */
 public @interface Algorithm {
     public static final int AES = 32;
     public static final int ALGORITHM_UNSPECIFIED = 0;

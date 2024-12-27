@@ -45,7 +45,6 @@ import com.android.systemui.widget.SystemUIWidgetCallback;
 import com.samsung.android.widget.SemTipPopup;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes.dex */
 public abstract class KeyguardInputViewController extends ViewController implements KeyguardSecurityView, SystemUIWidgetCallback {
     public final EmergencyButtonController mEmergencyButtonController;
     public final SystemUITextView mForgotPasswordText;

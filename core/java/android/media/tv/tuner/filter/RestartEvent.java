@@ -3,7 +3,6 @@ package android.media.tv.tuner.filter;
 import android.annotation.SystemApi;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class RestartEvent extends FilterEvent {
     public static final int NEW_FILTER_FIRST_START_ID = 0;
     private final int mStartId;

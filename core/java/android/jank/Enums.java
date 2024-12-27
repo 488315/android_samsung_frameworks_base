@@ -1,6 +1,5 @@
 package android.jank;
 
-/* loaded from: classes2.dex */
 public final class Enums {
     public static final int ACTION_BACK_SYSTEM_ANIMATION = 29;
     public static final int ACTION_CHECK_CREDENTIAL = 4;

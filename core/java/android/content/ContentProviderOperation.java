@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public class ContentProviderOperation implements Parcelable {
     public static final Parcelable.Creator<ContentProviderOperation> CREATOR =
             new Parcelable.Creator<ContentProviderOperation>() { // from class:

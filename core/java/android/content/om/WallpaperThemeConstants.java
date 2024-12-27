@@ -5,7 +5,6 @@ import com.android.internal.R;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-/* loaded from: classes.dex */
 public final class WallpaperThemeConstants {
     public static final int INDEX_ACCENT1 = 0;
     public static final int INDEX_ACCENT2 = 1;

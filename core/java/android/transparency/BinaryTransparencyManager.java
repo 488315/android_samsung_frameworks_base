@@ -9,7 +9,6 @@ import com.android.internal.os.IBinaryTransparencyService;
 
 import java.util.List;
 
-/* loaded from: classes4.dex */
 public class BinaryTransparencyManager {
     private static final String TAG = "TransparencyManager";
     private final Context mContext;

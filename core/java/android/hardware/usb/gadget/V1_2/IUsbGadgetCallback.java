@@ -20,7 +20,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public interface IUsbGadgetCallback extends android.hardware.usb.gadget.V1_0.IUsbGadgetCallback {
     public static final String kInterfaceName =
             "android.hardware.usb.gadget@1.2::IUsbGadgetCallback";

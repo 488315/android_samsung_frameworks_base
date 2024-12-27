@@ -3,7 +3,6 @@ package com.sec.android.sdhms;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes6.dex */
 public class OverheatReasonInternal implements Parcelable {
     public static final int CHARGER_TYPE_AC = 1;
     public static final int CHARGER_TYPE_AFC = 8;

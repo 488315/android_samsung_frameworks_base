@@ -9,7 +9,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.window.ISurfaceSyncGroup;
 
-/* loaded from: classes4.dex */
 public interface ISurfaceControlViewHost extends IInterface {
     public static final String DESCRIPTOR = "android.view.ISurfaceControlViewHost";
 

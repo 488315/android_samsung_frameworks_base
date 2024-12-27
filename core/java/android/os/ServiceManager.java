@@ -13,7 +13,6 @@ import com.android.internal.util.StatLogger;
 import java.util.Map;
 
 @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
-/* loaded from: classes3.dex */
 public final class ServiceManager {
     public static final String LAZY_SERVICE_NAME = "lazy_service";
     private static final int SLOW_LOG_INTERVAL_MS = 5000;

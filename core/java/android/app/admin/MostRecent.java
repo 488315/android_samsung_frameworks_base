@@ -3,7 +3,6 @@ package android.app.admin;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes.dex */
 public final class MostRecent<V> extends ResolutionMechanism<V> {
     public static final MostRecent<?> MOST_RECENT = new MostRecent<>();
     public static final Parcelable.Creator<MostRecent<?>> CREATOR =

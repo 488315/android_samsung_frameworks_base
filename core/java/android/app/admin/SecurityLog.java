@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public class SecurityLog {
     public static final int LEVEL_ERROR = 3;
     public static final int LEVEL_INFO = 1;

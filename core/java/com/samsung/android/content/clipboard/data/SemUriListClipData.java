@@ -11,7 +11,6 @@ import android.sec.clipboard.util.Log;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* loaded from: classes5.dex */
 public class SemUriListClipData extends SemClipData {
     private static final String TAG = "SemUriListClipData";
     private static final long serialVersionUID = 1;

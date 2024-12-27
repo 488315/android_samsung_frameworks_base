@@ -3,7 +3,6 @@ package com.android.internal.util;
 import java.io.IOException;
 import java.io.InputStream;
 
-/* loaded from: classes5.dex */
 public class SizedInputStream extends InputStream {
     private long mLength;
     private final InputStream mWrapped;

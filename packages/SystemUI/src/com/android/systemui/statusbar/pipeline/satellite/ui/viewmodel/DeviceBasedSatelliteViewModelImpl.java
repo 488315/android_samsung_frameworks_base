@@ -19,7 +19,6 @@ import kotlinx.coroutines.flow.SharingStarted;
 import kotlinx.coroutines.flow.StartedWhileSubscribed;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes3.dex */
 public final class DeviceBasedSatelliteViewModelImpl implements DeviceBasedSatelliteViewModel {
     public static final long DELAY_DURATION;
     public final FlowKt__ZipKt$combine$$inlined$unsafeFlow$1 canShowIcon;

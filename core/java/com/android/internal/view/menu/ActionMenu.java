@@ -13,7 +13,6 @@ import android.view.SubMenu;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public class ActionMenu implements Menu {
     private Context mContext;
     private boolean mIsQwerty;

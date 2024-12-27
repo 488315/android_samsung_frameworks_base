@@ -37,7 +37,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.concurrent.Executor;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public class EuiccCardManager {
     public static final int CANCEL_REASON_END_USER_REJECTED = 0;
     public static final int CANCEL_REASON_POSTPONED = 1;

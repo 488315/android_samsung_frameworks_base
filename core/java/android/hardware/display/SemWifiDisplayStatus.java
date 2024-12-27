@@ -2,7 +2,6 @@ package android.hardware.display;
 
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public class SemWifiDisplayStatus {
     public static final int DISPLAY_STATE_CONNECTED = 2;
     public static final int DISPLAY_STATE_CONNECTING = 1;

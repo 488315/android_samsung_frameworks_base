@@ -6,7 +6,6 @@ import android.view.View;
 import com.android.internal.R;
 import com.android.internal.widget.RecyclerView;
 
-/* loaded from: classes5.dex */
 class ItemTouchUIUtilImpl implements ItemTouchUIUtil {
     ItemTouchUIUtilImpl() {}
 

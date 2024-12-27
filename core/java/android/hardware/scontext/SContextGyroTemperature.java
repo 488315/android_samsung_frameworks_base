@@ -5,7 +5,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @Deprecated
-/* loaded from: classes2.dex */
 public class SContextGyroTemperature extends SContextEventContext {
     public static final Parcelable.Creator<SContextGyroTemperature> CREATOR =
             new Parcelable.Creator<SContextGyroTemperature>() { // from class:

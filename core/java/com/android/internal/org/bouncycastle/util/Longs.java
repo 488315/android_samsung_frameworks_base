@@ -1,6 +1,5 @@
 package com.android.internal.org.bouncycastle.util;
 
-/* loaded from: classes5.dex */
 public class Longs {
     public static long reverse(long i) {
         return Long.reverse(i);

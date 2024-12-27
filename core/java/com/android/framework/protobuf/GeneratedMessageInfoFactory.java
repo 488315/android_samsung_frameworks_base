@@ -1,6 +1,5 @@
 package com.android.framework.protobuf;
 
-/* loaded from: classes3.dex */
 class GeneratedMessageInfoFactory implements MessageInfoFactory {
     private static final GeneratedMessageInfoFactory instance = new GeneratedMessageInfoFactory();
 

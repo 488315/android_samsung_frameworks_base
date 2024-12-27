@@ -7,7 +7,6 @@ import android.widget.TextView;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes.dex */
 public class BriefNowBarTextView extends TextView {
     public static final float FONT_MAX_SCALE = 1.2f;
     public static final float FONT_MIN_SCALE = 1.0f;

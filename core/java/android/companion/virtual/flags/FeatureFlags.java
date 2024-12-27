@@ -1,6 +1,5 @@
 package android.companion.virtual.flags;
 
-/* loaded from: classes.dex */
 public interface FeatureFlags {
     boolean consistentDisplayFlags();
 

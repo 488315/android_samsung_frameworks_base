@@ -9,7 +9,6 @@ import android.os.RemoteException;
 import android.util.Log;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public abstract class CameraExtensionService extends Service {
     private static final String TAG = "CameraExtensionService";
     private CameraUsageTracker mCameraUsageTracker;

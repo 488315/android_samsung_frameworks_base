@@ -6,7 +6,6 @@ import java.io.FilterInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-/* loaded from: classes.dex */
 public class LimitedLengthInputStream extends FilterInputStream {
     private final long mEnd;
     private long mOffset;

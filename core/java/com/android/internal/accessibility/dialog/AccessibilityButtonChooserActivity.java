@@ -24,7 +24,6 @@ import com.android.internal.widget.ResolverDrawerLayout;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public class AccessibilityButtonChooserActivity extends Activity {
     private final List<AccessibilityTarget> mTargets = new ArrayList();
 

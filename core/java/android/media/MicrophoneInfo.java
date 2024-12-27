@@ -6,7 +6,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.List;
 
-/* loaded from: classes2.dex */
 public final class MicrophoneInfo {
     public static final int CHANNEL_MAPPING_DIRECT = 1;
     public static final int CHANNEL_MAPPING_PROCESSED = 2;

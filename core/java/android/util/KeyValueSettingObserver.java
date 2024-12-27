@@ -5,7 +5,6 @@ import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Handler;
 
-/* loaded from: classes4.dex */
 public abstract class KeyValueSettingObserver {
     private static final String TAG = "KeyValueSettingObserver";
     private final ContentObserver mObserver;

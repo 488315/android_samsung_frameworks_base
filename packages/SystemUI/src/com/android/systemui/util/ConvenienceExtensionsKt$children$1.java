@@ -8,7 +8,6 @@ import kotlin.jvm.functions.Function2;
 import kotlin.sequences.SequenceScope;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes3.dex */
 final class ConvenienceExtensionsKt$children$1 extends RestrictedSuspendLambda implements Function2 {
     final /* synthetic */ ViewGroup $this_children;
     int I$0;

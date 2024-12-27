@@ -12,7 +12,6 @@ import com.samsung.android.globalactions.util.SystemConditions;
 import com.samsung.android.globalactions.util.ToastController;
 import com.samsung.android.globalactions.util.WindowManagerUtils;
 
-/* loaded from: classes6.dex */
 public class ContentViewFactory implements ContentViewFactoryBase {
     private final ConditionChecker mConditionChecker;
     private final Context mContext;

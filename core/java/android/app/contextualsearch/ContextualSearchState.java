@@ -8,7 +8,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class ContextualSearchState implements Parcelable {
     public static final Parcelable.Creator<ContextualSearchState> CREATOR =
             new Parcelable.Creator<ContextualSearchState>() { // from class:

@@ -4,7 +4,6 @@ import com.samsung.android.sume.core.format.Shape;
 import com.samsung.android.sume.core.types.ColorFormat;
 import com.samsung.android.sume.core.types.DataType;
 
-/* loaded from: classes6.dex */
 public class OpPriorityByDataSize implements OpPriorityCompute {
     @Override // com.samsung.android.sume.core.functional.OpPriorityCompute
     public float compute(Shape from, Shape to) {

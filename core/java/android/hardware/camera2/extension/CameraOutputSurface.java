@@ -5,7 +5,6 @@ import android.hardware.camera2.utils.SurfaceUtils;
 import android.view.Surface;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public final class CameraOutputSurface {
     private final OutputSurface mOutputSurface;
 

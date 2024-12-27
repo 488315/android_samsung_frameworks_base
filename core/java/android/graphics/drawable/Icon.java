@@ -41,7 +41,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Arrays;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public final class Icon implements Parcelable {
     private static final boolean DEBUG = false;
     public static final int MIN_ASHMEM_ICON_SIZE = 131072;

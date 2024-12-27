@@ -25,7 +25,6 @@ import com.android.internal.org.bouncycastle.util.Arrays;
 import java.io.IOException;
 import java.util.Hashtable;
 
-/* loaded from: classes5.dex */
 public class RSADigestSigner implements Signer {
     private static final Hashtable oidMap = new Hashtable();
     private final AlgorithmIdentifier algId;

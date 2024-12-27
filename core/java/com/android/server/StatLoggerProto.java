@@ -1,6 +1,5 @@
 package com.android.server;
 
-/* loaded from: classes5.dex */
 public final class StatLoggerProto {
     public static final long EVENTS = 2246267895809L;
 

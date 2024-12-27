@@ -2,7 +2,6 @@ package com.android.server.net;
 
 import android.net.INetdEventCallback;
 
-/* loaded from: classes5.dex */
 public class BaseNetdEventCallback extends INetdEventCallback.Stub {
     @Override // android.net.INetdEventCallback
     public void onDnsEvent(

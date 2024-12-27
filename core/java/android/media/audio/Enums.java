@@ -1,6 +1,5 @@
 package android.media.audio;
 
-/* loaded from: classes2.dex */
 public final class Enums {
     public static final int AUDIO_DEVICE_INFO_TYPE_AUX_LINE = 19;
     public static final int AUDIO_DEVICE_INFO_TYPE_BLE_BROADCAST = 30;

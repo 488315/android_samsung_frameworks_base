@@ -44,7 +44,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public abstract class ContentProvider implements ContentInterface, ComponentCallbacks2 {
     private static final String TAG = "ContentProvider";
     private String[] mAuthorities;

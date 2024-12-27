@@ -1,6 +1,5 @@
 package com.samsung.android.content.smartclip;
 
-/* loaded from: classes5.dex */
 public class SemSmartClipConstants {
     public static final int EXTRACTION_MODE_DRAG_AND_DROP = 2;
     public static final int EXTRACTION_MODE_NORMAL = 0;

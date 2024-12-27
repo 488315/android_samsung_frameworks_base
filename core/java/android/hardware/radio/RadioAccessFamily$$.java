@@ -7,7 +7,6 @@ import com.android.internal.telephony.DctConstants;
 import java.lang.reflect.Array;
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public interface RadioAccessFamily$$ {
     static String toString(int _aidl_v) {
         return _aidl_v == 1

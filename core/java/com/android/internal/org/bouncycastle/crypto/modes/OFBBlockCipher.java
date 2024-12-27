@@ -6,7 +6,6 @@ import com.android.internal.org.bouncycastle.crypto.DataLengthException;
 import com.android.internal.org.bouncycastle.crypto.StreamBlockCipher;
 import com.android.internal.org.bouncycastle.crypto.params.ParametersWithIV;
 
-/* loaded from: classes5.dex */
 public class OFBBlockCipher extends StreamBlockCipher {
     private byte[] IV;
     private final int blockSize;

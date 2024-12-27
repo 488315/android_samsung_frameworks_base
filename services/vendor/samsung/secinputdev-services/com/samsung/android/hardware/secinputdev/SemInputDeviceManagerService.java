@@ -26,7 +26,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-/* loaded from: classes.dex */
 public class SemInputDeviceManagerService extends ISemInputDeviceManager.Stub
         implements SemInputExternal.IExternalEventRegister {
     private static final int CONNECTED = 1;

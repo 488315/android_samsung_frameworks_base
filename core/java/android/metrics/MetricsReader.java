@@ -15,7 +15,6 @@ import java.util.Queue;
 import java.util.concurrent.TimeUnit;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public class MetricsReader {
     private Queue<LogMaker> mPendingQueue = new LinkedList();
     private Queue<LogMaker> mSeenQueue = new LinkedList();

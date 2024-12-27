@@ -8,7 +8,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.widget.RemoteViews;
 
-/* loaded from: classes5.dex */
 public interface IAppWidgetHost extends IInterface {
     void appWidgetRemoved(int i) throws RemoteException;
 

@@ -8,7 +8,6 @@ import android.net.Uri;
 import java.util.List;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public interface WebViewFactoryProvider {
 
     public interface Statics {

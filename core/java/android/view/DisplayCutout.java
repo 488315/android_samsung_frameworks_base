@@ -25,7 +25,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-/* loaded from: classes4.dex */
 public final class DisplayCutout {
     public static final int BOUNDS_POSITION_BOTTOM = 3;
     public static final int BOUNDS_POSITION_LEFT = 0;

@@ -20,7 +20,6 @@ import com.android.internal.os.AppFuseMount;
 
 import com.samsung.android.media.AudioParameter;
 
-/* loaded from: classes3.dex */
 public interface IStorageManager extends IInterface {
     void abortChanges(String str, boolean z) throws RemoteException;
 

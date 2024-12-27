@@ -7,7 +7,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes.dex */
 public interface IStorageStatsManager extends IInterface {
     long getCacheBytes(String str, String str2) throws RemoteException;
 

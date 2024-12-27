@@ -7,7 +7,6 @@ import java.util.List;
 import javax.security.auth.x500.X500Principal;
 
 @Deprecated
-/* loaded from: classes6.dex */
 final class AndroidDistinguishedNameParser {
     private int beg;
     private char[] chars;

@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes2.dex */
 public interface IMediaProjectionCallback extends IInterface {
     void onCapturedContentResize(int i, int i2) throws RemoteException;
 

@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public class SemBatteryStats implements Parcelable {
     public static final Parcelable.Creator<SemBatteryStats> CREATOR =
             new Parcelable.Creator<

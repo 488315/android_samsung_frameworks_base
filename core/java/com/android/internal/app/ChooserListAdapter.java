@@ -37,7 +37,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
 
-/* loaded from: classes5.dex */
 public class ChooserListAdapter extends ResolverListAdapter {
     public static final float CALLER_TARGET_SCORE_BOOST = 900.0f;
     private static final boolean DEBUG = false;

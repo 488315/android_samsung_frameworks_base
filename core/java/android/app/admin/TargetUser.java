@@ -2,7 +2,6 @@ package android.app.admin;
 
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public final class TargetUser {
     public static final int GLOBAL_USER_ID = -3;
     public static final int LOCAL_USER_ID = -1;

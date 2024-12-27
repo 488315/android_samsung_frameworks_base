@@ -2,7 +2,6 @@ package android.app.admin;
 
 import android.util.EventLog;
 
-/* loaded from: classes.dex */
 public class SecurityLogTags {
     public static final int SECURITY_ADB_SHELL_COMMAND = 210002;
     public static final int SECURITY_ADB_SHELL_INTERACTIVE = 210001;

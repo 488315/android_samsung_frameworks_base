@@ -8,7 +8,6 @@ import java.nio.BufferOverflowException;
 import java.nio.ByteBuffer;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public class UsbRequest {
     static final int MAX_USBFS_BUFFER_SIZE = 16384;
     private static final String TAG = "UsbRequest";

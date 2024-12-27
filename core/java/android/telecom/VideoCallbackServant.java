@@ -7,7 +7,6 @@ import android.os.RemoteException;
 import com.android.internal.os.SomeArgs;
 import com.android.internal.telecom.IVideoCallback;
 
-/* loaded from: classes3.dex */
 final class VideoCallbackServant {
     private static final int MSG_CHANGE_CALL_DATA_USAGE = 4;
     private static final int MSG_CHANGE_CAMERA_CAPABILITIES = 5;

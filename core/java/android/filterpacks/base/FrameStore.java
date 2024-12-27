@@ -5,7 +5,6 @@ import android.filterfw.core.FilterContext;
 import android.filterfw.core.Frame;
 import android.filterfw.core.GenerateFieldPort;
 
-/* loaded from: classes.dex */
 public class FrameStore extends Filter {
 
     @GenerateFieldPort(name = "key")

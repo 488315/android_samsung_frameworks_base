@@ -7,7 +7,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 
-/* loaded from: classes6.dex */
 public class IAFDContentProvider extends ContentProvider {
     private Context mContext;
     private SQLiteDatabase mDatabase;

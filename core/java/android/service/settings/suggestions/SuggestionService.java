@@ -8,7 +8,6 @@ import android.os.IBinder;
 import java.util.List;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public abstract class SuggestionService extends Service {
     private static final boolean DEBUG = false;
     private static final String TAG = "SuggestionService";

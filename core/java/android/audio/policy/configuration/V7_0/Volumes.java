@@ -9,7 +9,6 @@ import java.util.List;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 
-/* loaded from: classes.dex */
 public class Volumes {
     private List<Reference> reference;
     private List<Volume> volume;

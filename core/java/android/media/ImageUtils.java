@@ -8,7 +8,6 @@ import libcore.io.Memory;
 
 import java.nio.ByteBuffer;
 
-/* loaded from: classes2.dex */
 class ImageUtils {
     private static final String IMAGEUTILS_LOG_TAG = "ImageUtils";
 

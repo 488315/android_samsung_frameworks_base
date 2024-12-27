@@ -9,7 +9,6 @@ import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
-/* loaded from: classes6.dex */
 public final class MediaFilterRetriever {
     private static final String TAG = Def.tagOf((Class<?>) MediaFilterRetriever.class);
     private final Map<Predictor, PredicateHandler> predictorMap = new HashMap();

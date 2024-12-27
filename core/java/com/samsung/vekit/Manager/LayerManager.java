@@ -12,7 +12,6 @@ import com.samsung.vekit.Layer.ImageLayer;
 import com.samsung.vekit.Layer.Layer;
 import com.samsung.vekit.Layer.MediaLayer;
 
-/* loaded from: classes6.dex */
 public class LayerManager extends Manager<Layer> {
     public LayerManager(VEContext context) {
         super(context, ManagerType.LAYER);

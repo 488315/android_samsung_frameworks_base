@@ -1,6 +1,5 @@
 package android.hardware.radio.data;
 
-/* loaded from: classes2.dex */
 public @interface ApnTypes {
     public static final int BIP = 8192;
     public static final int CBS = 128;

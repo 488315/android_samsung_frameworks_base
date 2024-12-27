@@ -8,7 +8,6 @@ import android.util.Log;
 
 import java.util.LinkedList;
 
-/* loaded from: classes2.dex */
 public class AsyncPlayer {
     private static final int PLAY = 1;
     private static final int STOP = 2;

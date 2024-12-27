@@ -8,7 +8,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public final class ImsSsInfo implements Parcelable {
     public static final int CLIR_OUTGOING_DEFAULT = 0;
     public static final int CLIR_OUTGOING_INVOCATION = 1;

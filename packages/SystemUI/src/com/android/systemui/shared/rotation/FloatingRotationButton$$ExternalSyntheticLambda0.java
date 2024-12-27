@@ -4,7 +4,6 @@ import com.android.systemui.navigationbar.NavigationBarView;
 import com.android.systemui.statusbar.phone.AutoHideController;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public final /* synthetic */ class FloatingRotationButton$$ExternalSyntheticLambda0 implements Runnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ FloatingRotationButton f$0;

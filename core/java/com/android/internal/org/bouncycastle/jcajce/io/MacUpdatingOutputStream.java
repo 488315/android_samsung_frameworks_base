@@ -5,7 +5,6 @@ import java.io.OutputStream;
 
 import javax.crypto.Mac;
 
-/* loaded from: classes5.dex */
 class MacUpdatingOutputStream extends OutputStream {
     private Mac mac;
 

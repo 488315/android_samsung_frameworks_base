@@ -8,7 +8,6 @@ import android.os.RemoteException;
 
 import java.util.List;
 
-/* loaded from: classes4.dex */
 public interface IDataServiceCallback extends IInterface {
     void onApnUnthrottled(String str) throws RemoteException;
 

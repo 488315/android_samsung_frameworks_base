@@ -5,7 +5,6 @@ import android.hardware.gnss.GnssSignalType;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes.dex */
 public final class SyncResult implements Parcelable {
     public static final SyncResult ALREADY_IN_PROGRESS = new SyncResult(true);
     public static final Parcelable.Creator<SyncResult> CREATOR =

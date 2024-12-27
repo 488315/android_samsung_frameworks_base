@@ -20,7 +20,6 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
-/* loaded from: classes.dex */
 public final class BluetoothLeDeviceFilter implements DeviceFilter<ScanResult> {
     public static final Parcelable.Creator<BluetoothLeDeviceFilter> CREATOR =
             new Parcelable.Creator<BluetoothLeDeviceFilter>() { // from class:

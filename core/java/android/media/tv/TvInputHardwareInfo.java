@@ -9,7 +9,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class TvInputHardwareInfo implements Parcelable {
     public static final int CABLE_CONNECTION_STATUS_CONNECTED = 1;
     public static final int CABLE_CONNECTION_STATUS_DISCONNECTED = 2;

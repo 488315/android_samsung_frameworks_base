@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public class CarrierInfo implements Parcelable {
     public static final Parcelable.Creator<CarrierInfo> CREATOR =
             new Parcelable.Creator<

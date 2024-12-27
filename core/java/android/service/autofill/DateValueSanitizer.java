@@ -11,7 +11,6 @@ import android.view.autofill.Helper;
 import java.util.Date;
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public final class DateValueSanitizer extends InternalSanitizer implements Sanitizer, Parcelable {
     public static final Parcelable.Creator<DateValueSanitizer> CREATOR =
             new Parcelable.Creator<

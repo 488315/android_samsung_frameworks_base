@@ -2,7 +2,6 @@ package vendor.samsung.hardware.radio.V2_0;
 
 import java.util.ArrayList;
 
-/* loaded from: classes6.dex */
 public final class SehHandoverState {
     public static final int INTER_HANDOVER_FAILED = 1;
     public static final int INTER_HANDOVER_STARTED = 0;

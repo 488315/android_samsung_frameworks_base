@@ -14,7 +14,6 @@ import android.window.WindowMetricsHelper;
 
 import com.android.internal.R;
 
-/* loaded from: classes4.dex */
 public class AutofillPopupWindow extends PopupWindow {
     private static final String TAG = "AutofillPopupWindow";
     private boolean mFullScreen;

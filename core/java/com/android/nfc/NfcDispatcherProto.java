@@ -1,6 +1,5 @@
 package com.android.nfc;
 
-/* loaded from: classes5.dex */
 public final class NfcDispatcherProto {
     public static final long BLUETOOTH_ENABLED_BY_NFC = 1133871366146L;
     public static final long DEVICE_SUPPORTS_BLUETOOTH = 1133871366145L;

@@ -8,7 +8,6 @@ import android.os.RemoteException;
 
 import java.util.List;
 
-/* loaded from: classes4.dex */
 public interface ISatelliteProvisionStateCallback extends IInterface {
     public static final String DESCRIPTOR =
             "android.telephony.satellite.ISatelliteProvisionStateCallback";

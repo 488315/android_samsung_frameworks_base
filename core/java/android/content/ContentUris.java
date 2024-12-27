@@ -4,7 +4,6 @@ import android.net.Uri;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
 public class ContentUris {
     public static long parseId(Uri contentUri) {
         String last = contentUri.getLastPathSegment();

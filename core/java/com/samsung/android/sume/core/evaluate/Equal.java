@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 import java.util.stream.Stream;
 
-/* loaded from: classes6.dex */
 public class Equal<T extends Comparable<T>> extends GenericEvaluator<T> {
     public static final Parcelable.Creator<Equal<?>> CREATOR =
             new Parcelable.Creator<

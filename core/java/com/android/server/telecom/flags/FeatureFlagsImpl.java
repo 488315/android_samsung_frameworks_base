@@ -1,6 +1,5 @@
 package com.android.server.telecom.flags;
 
-/* loaded from: classes5.dex */
 public final class FeatureFlagsImpl implements FeatureFlags {
     @Override // com.android.server.telecom.flags.FeatureFlags
     public boolean addCallUriForMissedCalls() {

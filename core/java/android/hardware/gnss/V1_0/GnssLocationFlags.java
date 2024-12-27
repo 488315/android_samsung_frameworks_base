@@ -2,7 +2,6 @@ package android.hardware.gnss.V1_0;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class GnssLocationFlags {
     public static final short HAS_ALTITUDE = 2;
     public static final short HAS_BEARING = 8;

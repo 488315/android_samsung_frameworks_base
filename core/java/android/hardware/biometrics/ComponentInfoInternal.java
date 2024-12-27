@@ -3,7 +3,6 @@ package android.hardware.biometrics;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public class ComponentInfoInternal implements Parcelable {
     public static final Parcelable.Creator<ComponentInfoInternal> CREATOR =
             new Parcelable.Creator<ComponentInfoInternal>() { // from class:

@@ -32,7 +32,6 @@ import javax.crypto.spec.DESKeySpec;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 
-/* loaded from: classes5.dex */
 public final class DES {
     private DES() {}
 

@@ -7,7 +7,6 @@ import android.util.SparseArray;
 import java.io.PrintWriter;
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public class GlobalWhitelistState {
     protected final Object mGlobalWhitelistStateLock = new Object();
     protected SparseArray<WhitelistHelper> mWhitelisterHelpers;

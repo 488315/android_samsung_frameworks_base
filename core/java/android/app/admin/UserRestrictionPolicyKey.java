@@ -9,7 +9,6 @@ import android.os.Parcelable;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class UserRestrictionPolicyKey extends PolicyKey {
     public static final Parcelable.Creator<UserRestrictionPolicyKey> CREATOR =
             new Parcelable.Creator<UserRestrictionPolicyKey>() { // from class:

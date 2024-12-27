@@ -4,7 +4,6 @@ import com.android.internal.org.bouncycastle.asn1.x500.RDN;
 import com.android.internal.org.bouncycastle.asn1.x500.X500Name;
 import com.android.internal.org.bouncycastle.asn1.x500.X500NameStyle;
 
-/* loaded from: classes5.dex */
 public class BCStrictStyle extends BCStyle {
     public static final X500NameStyle INSTANCE = new BCStrictStyle();
 

@@ -16,7 +16,6 @@ import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public abstract class InputEventReceiver {
     private static final String TAG = "InputEventReceiver";
     private static final String TAG_DOT = "InputEventReceiver_DOT";

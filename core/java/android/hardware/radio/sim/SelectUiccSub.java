@@ -6,7 +6,6 @@ import android.os.Parcelable;
 
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public class SelectUiccSub implements Parcelable {
     public static final int ACT_STATUS_ACTIVATE = 1;
     public static final int ACT_STATUS_DEACTIVATE = 0;

@@ -9,7 +9,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes3.dex */
 public interface IMediaBrowserServiceCallbacks extends IInterface {
     void onConnect(String str, MediaSession.Token token, Bundle bundle) throws RemoteException;
 

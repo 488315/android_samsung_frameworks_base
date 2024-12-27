@@ -1,6 +1,5 @@
 package com.android.server.wm;
 
-/* loaded from: classes5.dex */
 public final class KeyguardServiceDelegateProto {
     public static final long INTERACTIVE_STATE = 1159641169925L;
     public static final int INTERACTIVE_STATE_AWAKE = 2;

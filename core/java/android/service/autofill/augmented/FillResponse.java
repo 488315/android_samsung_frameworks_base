@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class FillResponse {
     private Bundle mClientState;
     private FillWindow mFillWindow;

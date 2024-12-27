@@ -8,7 +8,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-/* loaded from: classes3.dex */
 public class CompatabilityHelper {
     private static final int MAX_SECOND_USER_ID = 200;
     private static final int MIN_SECOND_USER_ID = 10;

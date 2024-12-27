@@ -8,7 +8,6 @@ import android.os.Parcelable;
 
 import com.android.internal.util.AnnotationValidations;
 
-/* loaded from: classes3.dex */
 public final class AppLinkInfo implements Parcelable {
     public static final Parcelable.Creator<AppLinkInfo> CREATOR =
             new Parcelable.Creator<

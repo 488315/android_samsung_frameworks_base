@@ -4,7 +4,6 @@ import com.samsung.android.graphics.spr.document.animator.SprAnimatorBase;
 
 import java.io.IOException;
 
-/* loaded from: classes2.dex */
 public final class CodedInputByteBufferNano {
     private static final int DEFAULT_RECURSION_LIMIT = 64;
     private static final int DEFAULT_SIZE_LIMIT = 67108864;

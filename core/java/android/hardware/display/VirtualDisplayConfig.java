@@ -13,7 +13,6 @@ import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
 
-/* loaded from: classes2.dex */
 public final class VirtualDisplayConfig implements Parcelable {
     public static final Parcelable.Creator<VirtualDisplayConfig> CREATOR =
             new Parcelable.Creator<VirtualDisplayConfig>() { // from class:

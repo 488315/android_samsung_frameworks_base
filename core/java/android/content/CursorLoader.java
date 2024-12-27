@@ -10,7 +10,6 @@ import java.io.PrintWriter;
 import java.util.Arrays;
 
 @Deprecated
-/* loaded from: classes.dex */
 public class CursorLoader extends AsyncTaskLoader<Cursor> {
     CancellationSignal mCancellationSignal;
     Cursor mCursor;

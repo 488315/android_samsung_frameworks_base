@@ -10,7 +10,6 @@ import android.os.RemoteException;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
 public interface IUiModeManager extends IInterface {
     void addCallback(IUiModeManagerCallback iUiModeManagerCallback) throws RemoteException;
 

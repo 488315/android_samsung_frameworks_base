@@ -15,7 +15,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
 
-/* loaded from: classes2.dex */
 public class LoudnessCodecController implements SafeCloseable {
     private static final String TAG = "LoudnessCodecController";
     private final LoudnessCodecDispatcher mLcDispatcher;

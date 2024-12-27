@@ -5,7 +5,6 @@ import com.android.systemui.communal.shared.model.CommunalScenes;
 import kotlin.jvm.internal.Intrinsics;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes.dex */
 public abstract class CommunalLoggerStartableKt {
     public static final boolean access$isNotOnCommunal(ObservableTransitionState observableTransitionState) {
         return (observableTransitionState instanceof ObservableTransitionState.Idle) && !Intrinsics.areEqual(((ObservableTransitionState.Idle) observableTransitionState).currentScene, CommunalScenes.Communal);

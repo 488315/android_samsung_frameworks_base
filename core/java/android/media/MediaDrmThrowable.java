@@ -1,6 +1,5 @@
 package android.media;
 
-/* loaded from: classes2.dex */
 public interface MediaDrmThrowable {
     default int getVendorError() {
         return 0;

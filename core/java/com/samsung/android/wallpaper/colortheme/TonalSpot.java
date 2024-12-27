@@ -1,7 +1,6 @@
 package com.samsung.android.wallpaper.colortheme;
 
 /* compiled from: ColorPaletteCreator5.java */
-/* loaded from: classes6.dex */
 final class TonalSpot {
     static final float ACCENT1_SAT_DELTA = 0.3f;
     static final float ACCENT1_SAT_MAX = 0.7f;

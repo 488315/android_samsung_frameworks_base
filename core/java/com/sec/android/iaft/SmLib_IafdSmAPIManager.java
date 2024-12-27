@@ -12,7 +12,6 @@ import android.util.Log;
 
 import java.util.concurrent.ConcurrentHashMap;
 
-/* loaded from: classes6.dex */
 public class SmLib_IafdSmAPIManager {
     private static final String TAG = "Dc.IafdSmAPIManager";
     private ContentObserver mContentObserver;

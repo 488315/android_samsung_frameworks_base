@@ -3,7 +3,6 @@ package com.android.internal.org.bouncycastle.asn1.sec;
 import com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier;
 import com.android.internal.org.bouncycastle.asn1.x9.X9ObjectIdentifiers;
 
-/* loaded from: classes5.dex */
 public interface SECObjectIdentifiers {
     public static final ASN1ObjectIdentifier ellipticCurve = new ASN1ObjectIdentifier("1.3.132.0");
     public static final ASN1ObjectIdentifier sect163k1 = ellipticCurve.branch("1");

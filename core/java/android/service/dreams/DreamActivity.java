@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 
-/* loaded from: classes3.dex */
 public class DreamActivity extends Activity {
     static final String EXTRA_CALLBACK = "binder";
     static final String EXTRA_DREAM_TITLE = "title";

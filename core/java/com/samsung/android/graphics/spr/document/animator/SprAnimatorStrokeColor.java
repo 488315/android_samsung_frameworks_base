@@ -7,7 +7,6 @@ import com.samsung.android.graphics.spr.document.SprInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-/* loaded from: classes6.dex */
 public class SprAnimatorStrokeColor extends SprAnimatorBase {
     private int from;
     private int to;

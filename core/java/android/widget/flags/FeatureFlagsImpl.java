@@ -1,6 +1,5 @@
 package android.widget.flags;
 
-/* loaded from: classes4.dex */
 public final class FeatureFlagsImpl implements FeatureFlags {
     @Override // android.widget.flags.FeatureFlags
     public boolean bigPictureStyleDiscardEmptyIconBitmapDrawables() {

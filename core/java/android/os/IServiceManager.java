@@ -1,7 +1,6 @@
 package android.os;
 
 
-/* loaded from: classes3.dex */
 public interface IServiceManager extends IInterface {
     public static final String DESCRIPTOR = "android.os.IServiceManager";
     public static final int DUMP_FLAG_PRIORITY_ALL = 15;

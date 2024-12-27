@@ -4,7 +4,6 @@ import libcore.util.EmptyArray;
 
 import java.util.function.Consumer;
 
-/* loaded from: classes3.dex */
 public abstract class ArrayUtils {
     private ArrayUtils() {}
 

@@ -16,7 +16,6 @@ import java.util.Map;
 import java.util.function.Consumer;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public abstract class ImsFeature {
 
     @SystemApi public static final int CAPABILITY_ERROR_GENERIC = -1;

@@ -1,6 +1,5 @@
 package android.stats.storage;
 
-/* loaded from: classes3.dex */
 public final class StorageEnums {
     public static final int OTHER = 3;
     public static final int SD_CARD = 1;

@@ -5,7 +5,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class UnknownAuthority extends Authority {
     public static final UnknownAuthority UNKNOWN_AUTHORITY = new UnknownAuthority();
     public static final Parcelable.Creator<UnknownAuthority> CREATOR =

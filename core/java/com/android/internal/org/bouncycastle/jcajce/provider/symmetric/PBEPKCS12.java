@@ -13,7 +13,6 @@ import java.security.spec.InvalidParameterSpecException;
 
 import javax.crypto.spec.PBEParameterSpec;
 
-/* loaded from: classes5.dex */
 public class PBEPKCS12 {
     private PBEPKCS12() {}
 

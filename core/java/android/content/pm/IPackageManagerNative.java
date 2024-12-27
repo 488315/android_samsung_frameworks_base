@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes.dex */
 public interface IPackageManagerNative extends IInterface {
     public static final int LOCATION_PRODUCT = 4;
     public static final int LOCATION_SYSTEM = 1;

@@ -4,7 +4,6 @@ import android.database.SQLException;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.util.Log;
 
-/* loaded from: classes.dex */
 public class SQLiteException extends SQLException {
     public SQLiteException() {}
 

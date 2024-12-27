@@ -1,6 +1,5 @@
 package android.os;
 
-/* loaded from: classes3.dex */
 public interface IDeviceIdentifiersPolicyService extends IInterface {
     String getSerial() throws RemoteException;
 

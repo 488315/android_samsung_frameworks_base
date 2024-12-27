@@ -18,7 +18,6 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes2.dex */
 public final class MidiManager {
     public static final String BLUETOOTH_MIDI_SERVICE_CLASS =
             "com.android.bluetoothmidiservice.BluetoothMidiService";

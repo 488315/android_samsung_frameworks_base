@@ -11,7 +11,6 @@ import libcore.util.EmptyArray;
 
 import java.util.ArrayList;
 
-/* loaded from: classes5.dex */
 public class SparseMappingTable {
     private static final int ARRAY_MASK = 255;
     private static final int ARRAY_SHIFT = 8;

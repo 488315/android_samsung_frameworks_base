@@ -5,7 +5,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public final class VirtualTouchscreenConfig extends VirtualTouchDeviceConfig implements Parcelable {
     public static final Parcelable.Creator<VirtualTouchscreenConfig> CREATOR =
             new Parcelable.Creator<VirtualTouchscreenConfig>() { // from class:

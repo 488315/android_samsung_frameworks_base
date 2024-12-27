@@ -7,7 +7,6 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.util.Log;
 
-/* loaded from: classes4.dex */
 public abstract class OrientationEventListener {
     private static final boolean DEBUG = false;
     private static final int DEVICEINFO_COVER_DISPLAY_ON = 1;

@@ -9,7 +9,6 @@ import java.io.InputStream;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 
-/* loaded from: classes.dex */
 public class XmlParser {
     public static AudioPolicyConfiguration read(InputStream in)
             throws XmlPullParserException, IOException, DatatypeConfigurationException {

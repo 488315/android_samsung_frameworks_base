@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Supplier;
 
-/* loaded from: classes4.dex */
 public final class WindowMetricsController {
     private final Context mContext;
 

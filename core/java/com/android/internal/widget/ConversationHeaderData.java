@@ -1,6 +1,5 @@
 package com.android.internal.widget;
 
-/* loaded from: classes5.dex */
 public final class ConversationHeaderData {
     private final ConversationAvatarData mConversationAvatarData;
     private final CharSequence mConversationText;

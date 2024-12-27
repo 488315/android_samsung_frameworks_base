@@ -7,7 +7,6 @@ import android.view.autofill.Helper;
 
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 final class NegationValidator extends InternalValidator {
     public static final Parcelable.Creator<NegationValidator> CREATOR =
             new Parcelable.Creator<

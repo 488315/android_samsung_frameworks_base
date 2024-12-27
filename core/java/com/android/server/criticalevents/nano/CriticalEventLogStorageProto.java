@@ -9,7 +9,6 @@ import com.android.framework.protobuf.nano.WireFormatNano;
 
 import java.io.IOException;
 
-/* loaded from: classes5.dex */
 public final class CriticalEventLogStorageProto extends MessageNano {
     private static volatile CriticalEventLogStorageProto[] _emptyArray;
     public CriticalEventProto[] events;

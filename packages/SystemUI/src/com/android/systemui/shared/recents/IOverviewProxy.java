@@ -9,7 +9,6 @@ import android.os.Parcel;
 import com.android.systemui.shared.navigationbar.NavBarEvents;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public interface IOverviewProxy extends IInterface {
     void disable(int i, int i2, int i3, boolean z);
 

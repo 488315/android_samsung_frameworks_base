@@ -6,7 +6,6 @@ import android.view.inputmethod.ExtractedText;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
-/* loaded from: classes2.dex */
 public class ExtractEditText extends EditText {
     private InputMethodService mIME;
     private int mSettingExtractedText;

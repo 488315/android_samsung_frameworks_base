@@ -7,7 +7,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.view.MotionEvent;
 
-/* loaded from: classes6.dex */
 public interface IAuthTouchEventListener extends IInterface {
     public static final String DESCRIPTOR =
             "com.samsung.android.knox.zt.usertrust.IAuthTouchEventListener";

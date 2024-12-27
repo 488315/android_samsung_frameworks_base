@@ -9,7 +9,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-/* loaded from: classes6.dex */
 public class SemExtendedFormat {
     private static final boolean DEBUG = false;
     private static final String SEF_VERSION = "1.19";

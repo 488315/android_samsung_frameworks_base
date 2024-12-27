@@ -20,7 +20,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public class KnoxAnalyticsQueryResolver {
     private static final String TAG =
             "[KnoxAnalytics] " + KnoxAnalyticsQueryResolver.class.getSimpleName();

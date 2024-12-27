@@ -8,7 +8,6 @@ import android.os.RemoteException;
 
 import java.util.List;
 
-/* loaded from: classes2.dex */
 public interface IRadioService extends IInterface {
     ICloseHandle addAnnouncementListener(int[] iArr, IAnnouncementListener iAnnouncementListener)
             throws RemoteException;

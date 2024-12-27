@@ -3,7 +3,6 @@ package android.provider;
 import android.annotation.SystemApi;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public class SearchIndexablesContract {
     public static final int COLUMN_INDEX_NON_INDEXABLE_KEYS_KEY_VALUE = 0;
     public static final int COLUMN_INDEX_RAW_CLASS_NAME = 7;

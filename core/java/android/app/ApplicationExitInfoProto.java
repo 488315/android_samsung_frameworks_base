@@ -1,6 +1,5 @@
 package android.app;
 
-/* loaded from: classes.dex */
 public final class ApplicationExitInfoProto {
     public static final long CONNECTION_GROUP = 1120986464262L;
     public static final long DEFINING_UID = 1120986464260L;

@@ -10,7 +10,6 @@ import java.math.BigInteger;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-/* loaded from: classes5.dex */
 public class ASN1ObjectIdentifier extends ASN1Primitive {
     private static final long LONG_LIMIT = 72057594037927808L;
     private static final ConcurrentMap<OidHandle, ASN1ObjectIdentifier> pool =

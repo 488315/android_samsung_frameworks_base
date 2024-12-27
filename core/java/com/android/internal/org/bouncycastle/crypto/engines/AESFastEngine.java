@@ -13,7 +13,6 @@ import com.samsung.android.graphics.spr.document.attribute.SprAttributeBase;
 
 import java.lang.reflect.Array;
 
-/* loaded from: classes5.dex */
 public class AESFastEngine implements BlockCipher {
     private static final int BLOCK_SIZE = 16;
     private static final int m1 = -2139062144;

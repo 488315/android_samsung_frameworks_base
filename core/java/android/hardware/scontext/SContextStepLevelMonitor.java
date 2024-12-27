@@ -5,7 +5,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @Deprecated
-/* loaded from: classes2.dex */
 public class SContextStepLevelMonitor extends SContextEventContext {
     private Bundle mContext;
     private Bundle mInfo;

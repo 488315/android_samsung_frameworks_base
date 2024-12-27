@@ -9,7 +9,6 @@ import com.samsung.android.globalactions.util.ResourcesWrapper;
 import com.samsung.android.globalactions.util.SystemConditions;
 import com.samsung.android.globalactions.util.ToastController;
 
-/* loaded from: classes6.dex */
 public class SktStrategy implements ActionInteractionStrategy {
     private static final String TAG = "SktStrategy";
     private final ConditionChecker mConditionChecker;

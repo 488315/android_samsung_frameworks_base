@@ -12,7 +12,6 @@ import com.android.internal.util.Parcelling;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
-/* loaded from: classes.dex */
 public final class WifiDeviceFilter implements DeviceFilter<ScanResult> {
     public static final Parcelable.Creator<WifiDeviceFilter> CREATOR;
     static Parcelling<Pattern> sParcellingForNamePattern;

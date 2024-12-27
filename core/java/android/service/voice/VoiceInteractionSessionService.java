@@ -20,7 +20,6 @@ import com.android.internal.os.SomeArgs;
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 
-/* loaded from: classes3.dex */
 public abstract class VoiceInteractionSessionService extends Service {
     static final int MSG_NEW_SESSION = 1;
     private static final String TAG = "VoiceInteractionSession";

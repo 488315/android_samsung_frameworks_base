@@ -1,6 +1,5 @@
 package android.media;
 
-/* loaded from: classes2.dex */
 public class AudioGain {
     public static final int MODE_CHANNELS = 2;
     public static final int MODE_JOINT = 1;

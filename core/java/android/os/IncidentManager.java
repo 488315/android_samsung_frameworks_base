@@ -18,7 +18,6 @@ import java.util.Objects;
 import java.util.concurrent.Executor;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public class IncidentManager {
     public static final int FLAG_ALLOW_CONSENTLESS_BUGREPORT = 2;
     public static final int FLAG_CONFIRMATION_DIALOG = 1;

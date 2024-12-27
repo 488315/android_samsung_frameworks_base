@@ -5,7 +5,6 @@ import android.security.keystore.KeyProperties;
 import com.android.internal.org.bouncycastle.util.Memoable;
 import com.android.internal.org.bouncycastle.util.Pack;
 
-/* loaded from: classes5.dex */
 public class MD5Digest extends GeneralDigest implements EncodableDigest {
     private static final int DIGEST_LENGTH = 16;
     private static final int S11 = 7;

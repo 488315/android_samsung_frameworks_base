@@ -4,7 +4,6 @@ import android.os.SystemClock;
 import android.util.Log;
 
 /* compiled from: StopWatchMap.java */
-/* loaded from: classes.dex */
 class StopWatch {
     private String mName;
     private int STOP_WATCH_LOGGING_PERIOD = 200;

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.animation.Interpolator;
 
-/* loaded from: classes6.dex */
 public class QuintOut50 implements Interpolator {
     private static final float[][] segments = {
         new float[] {0.0f, 0.502f, 0.742f}, new float[] {0.742f, 1.082f, 1.0f}

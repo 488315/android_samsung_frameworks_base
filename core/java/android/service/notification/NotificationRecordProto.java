@@ -1,6 +1,5 @@
 package android.service.notification;
 
-/* loaded from: classes3.dex */
 public final class NotificationRecordProto {
     public static final long AUDIO_ATTRIBUTES = 1146756268038L;
     public static final long CAN_SHOW_LIGHT = 1133871366152L;

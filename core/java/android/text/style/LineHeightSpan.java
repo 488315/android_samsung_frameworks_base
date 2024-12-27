@@ -7,7 +7,6 @@ import android.text.TextPaint;
 
 import com.android.internal.util.Preconditions;
 
-/* loaded from: classes4.dex */
 public interface LineHeightSpan extends ParagraphStyle, WrapTogetherSpan {
 
     public interface WithDensity extends LineHeightSpan {

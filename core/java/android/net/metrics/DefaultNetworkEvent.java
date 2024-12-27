@@ -6,7 +6,6 @@ import android.security.keystore.KeyProperties;
 import java.util.BitSet;
 import java.util.StringJoiner;
 
-/* loaded from: classes3.dex */
 public class DefaultNetworkEvent {
     public final long creationTimeMs;
     public long durationMs;

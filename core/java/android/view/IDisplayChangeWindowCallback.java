@@ -7,7 +7,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.window.WindowContainerTransaction;
 
-/* loaded from: classes4.dex */
 public interface IDisplayChangeWindowCallback extends IInterface {
     public static final String DESCRIPTOR = "android.view.IDisplayChangeWindowCallback";
 

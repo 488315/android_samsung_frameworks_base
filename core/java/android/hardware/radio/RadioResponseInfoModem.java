@@ -6,7 +6,6 @@ import android.os.Parcelable;
 
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public class RadioResponseInfoModem implements Parcelable {
     public static final Parcelable.Creator<RadioResponseInfoModem> CREATOR =
             new Parcelable.Creator<RadioResponseInfoModem>() { // from class:

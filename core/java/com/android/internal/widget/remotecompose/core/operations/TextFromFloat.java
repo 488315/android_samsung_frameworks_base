@@ -11,7 +11,6 @@ import com.android.internal.widget.remotecompose.core.operations.utilities.Strin
 
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public class TextFromFloat implements Operation, VariableSupport {
     public static final Companion COMPANION = new Companion();
     public static final int MAX_STRING_SIZE = 4000;

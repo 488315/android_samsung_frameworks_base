@@ -8,7 +8,6 @@ import android.util.Log;
 import java.util.List;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class FillCallback {
     private static final String TAG = FillCallback.class.getSimpleName();
     private final AugmentedAutofillService.AutofillProxy mProxy;

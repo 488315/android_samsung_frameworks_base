@@ -11,7 +11,6 @@ import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes.dex */
 public final class ShortcutQueryWrapper extends LauncherApps.ShortcutQuery implements Parcelable {
     public static final Parcelable.Creator<ShortcutQueryWrapper> CREATOR =
             new Parcelable.Creator<ShortcutQueryWrapper>() { // from class:

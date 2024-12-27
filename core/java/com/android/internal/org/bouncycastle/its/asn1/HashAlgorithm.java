@@ -3,7 +3,6 @@ package com.android.internal.org.bouncycastle.its.asn1;
 import com.android.internal.org.bouncycastle.asn1.ASN1Enumerated;
 import com.android.internal.org.bouncycastle.asn1.ASN1Primitive;
 
-/* loaded from: classes5.dex */
 public class HashAlgorithm {
     public static final HashAlgorithm sha256 = new HashAlgorithm(0);
     public static final HashAlgorithm sha384 = new HashAlgorithm(1);

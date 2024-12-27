@@ -31,7 +31,6 @@ import com.samsung.android.os.SemCompanionDeviceBatteryInfo;
 
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public interface IBatteryStats extends IInterface {
     public static final String KEY_UID_SNAPSHOTS = "uid_snapshots";
 

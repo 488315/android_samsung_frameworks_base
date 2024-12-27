@@ -1,6 +1,5 @@
 package android.content;
 
-/* loaded from: classes.dex */
 public final class ClipDescriptionProto {
     public static final long EXTRAS = 1146756268035L;
     public static final long LABEL = 1138166333442L;

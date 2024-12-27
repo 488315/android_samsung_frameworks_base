@@ -1,6 +1,5 @@
 package android.service.usb;
 
-/* loaded from: classes3.dex */
 public final class UsbUserSettingsManagerProto {
     public static final long ACCESSORY_ATTACHED_ACTIVITIES = 2246267895813L;
     public static final long DEVICE_ATTACHED_ACTIVITIES = 2246267895812L;

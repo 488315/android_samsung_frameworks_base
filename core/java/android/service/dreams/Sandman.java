@@ -12,7 +12,6 @@ import android.util.Slog;
 
 import com.android.internal.R;
 
-/* loaded from: classes3.dex */
 public final class Sandman {
     private static final String TAG = "Sandman";
 

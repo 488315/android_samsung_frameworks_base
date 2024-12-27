@@ -18,7 +18,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-/* loaded from: classes4.dex */
 public final class EmergencyNumber implements Parcelable, Comparable<EmergencyNumber> {
     public static final Parcelable.Creator<EmergencyNumber> CREATOR;
     public static final int EMERGENCY_CALL_ROUTING_EMERGENCY = 1;

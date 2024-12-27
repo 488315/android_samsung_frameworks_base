@@ -14,7 +14,6 @@ import libcore.io.IoUtils;
 
 import java.io.IOException;
 
-/* loaded from: classes.dex */
 public final class PdfEditor {
     private static final Object sPdfiumLock = new Object();
     private final CloseGuard mCloseGuard = CloseGuard.get();

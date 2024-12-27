@@ -67,7 +67,6 @@ import java.util.Set;
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 
-/* loaded from: classes3.dex */
 public final class Settings {
     public static final String ACTION_ACCESSIBILITY_COLOR_CONTRAST_SETTINGS =
             "android.settings.ACCESSIBILITY_COLOR_CONTRAST_SETTINGS";

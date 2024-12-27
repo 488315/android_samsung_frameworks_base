@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public class SContextMainScreenDetection extends SContextEventContext {
     public static final Parcelable.Creator<SContextMainScreenDetection> CREATOR =
             new Parcelable.Creator<SContextMainScreenDetection>() { // from class:

@@ -9,7 +9,6 @@ import android.os.RemoteException;
 import android.view.textservice.SpellCheckerInfo;
 import android.view.textservice.SpellCheckerSubtype;
 
-/* loaded from: classes5.dex */
 public interface ITextServicesManager extends IInterface {
     void finishSpellCheckerService(int i, ISpellCheckerSessionListener iSpellCheckerSessionListener)
             throws RemoteException;

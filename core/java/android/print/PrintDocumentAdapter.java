@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.os.CancellationSignal;
 import android.os.ParcelFileDescriptor;
 
-/* loaded from: classes3.dex */
 public abstract class PrintDocumentAdapter {
     public static final String EXTRA_PRINT_PREVIEW = "EXTRA_PRINT_PREVIEW";
 

@@ -3,7 +3,6 @@ package android.os;
 import android.system.ErrnoException;
 import android.system.OsConstants;
 
-/* loaded from: classes3.dex */
 public abstract class ProxyFileDescriptorCallback {
     public abstract void onRelease();
 

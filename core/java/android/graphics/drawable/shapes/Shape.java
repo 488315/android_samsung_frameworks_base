@@ -6,7 +6,6 @@ import android.graphics.Paint;
 
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public abstract class Shape implements Cloneable {
     private float mHeight;
     private float mWidth;

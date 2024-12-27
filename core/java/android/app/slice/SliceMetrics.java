@@ -7,7 +7,6 @@ import android.net.Uri;
 import com.android.internal.logging.MetricsLogger;
 
 @Deprecated
-/* loaded from: classes.dex */
 public class SliceMetrics {
     private static final String TAG = "SliceMetrics";
     private MetricsLogger mMetricsLogger = new MetricsLogger();

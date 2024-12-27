@@ -11,7 +11,6 @@ import com.samsung.android.feature.SemFloatingFeature;
 
 import java.util.Arrays;
 
-/* loaded from: classes6.dex */
 public class PMRune {
     public static final boolean AM_AUTHENTICATOR_NPE = true;
     public static final boolean AM_LOG = true;

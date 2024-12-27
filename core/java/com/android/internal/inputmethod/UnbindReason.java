@@ -4,7 +4,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @Retention(RetentionPolicy.SOURCE)
-/* loaded from: classes5.dex */
 public @interface UnbindReason {
     public static final int DISCONNECT_IME = 3;
     public static final int EXIT_DEX_DESKTOP_MODE = 30;

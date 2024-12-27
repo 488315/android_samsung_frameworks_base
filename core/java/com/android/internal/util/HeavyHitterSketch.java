@@ -8,7 +8,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public interface HeavyHitterSketch<T> {
     void add(T t);
 

@@ -5,7 +5,6 @@ import com.samsung.android.hardware.secinputdev.SemInputDeviceManagerService;
 import java.util.HashMap;
 import java.util.Map;
 
-/* loaded from: classes.dex */
 public class SemInputDeviceFactory {
     private static final Map<Integer, SemInputDevice> devices = new HashMap();
 

@@ -8,7 +8,6 @@ import android.os.Parcelable;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class SearchContext implements Parcelable {
     public static final Parcelable.Creator<SearchContext> CREATOR =
             new Parcelable.Creator<

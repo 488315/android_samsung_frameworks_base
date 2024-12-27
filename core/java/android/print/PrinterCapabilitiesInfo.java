@@ -11,7 +11,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.IntConsumer;
 
-/* loaded from: classes3.dex */
 public final class PrinterCapabilitiesInfo implements Parcelable {
     public static final int DEFAULT_UNDEFINED = -1;
     private static final int PROPERTY_COLOR_MODE = 2;

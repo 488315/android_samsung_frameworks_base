@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public abstract class PrinterDiscoverySession {
     private static final String LOG_TAG = "PrinterDiscoverySession";
     private static int sIdCounter = 0;

@@ -15,7 +15,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.time.Instant;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class AmbientContextEvent implements Parcelable {
     public static final Parcelable.Creator<AmbientContextEvent> CREATOR;
     public static final int EVENT_BACK_DOUBLE_TAP = 3;

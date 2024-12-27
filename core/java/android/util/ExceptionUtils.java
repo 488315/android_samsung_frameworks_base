@@ -6,7 +6,6 @@ import com.android.internal.util.Preconditions;
 
 import java.io.IOException;
 
-/* loaded from: classes4.dex */
 public class ExceptionUtils {
     public static RuntimeException wrap(IOException e) {
         throw new ParcelableException(e);

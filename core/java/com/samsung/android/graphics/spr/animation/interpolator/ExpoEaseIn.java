@@ -5,7 +5,6 @@ import android.hardware.scontext.SContextConstants;
 import android.util.AttributeSet;
 import android.view.animation.Interpolator;
 
-/* loaded from: classes6.dex */
 public class ExpoEaseIn implements Interpolator {
     public ExpoEaseIn() {}
 

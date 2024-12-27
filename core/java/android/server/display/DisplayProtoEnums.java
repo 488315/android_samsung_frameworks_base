@@ -1,6 +1,5 @@
 package android.server.display;
 
-/* loaded from: classes3.dex */
 public final class DisplayProtoEnums {
     public static final int AUDIO_SINK_CHANGED = 10;
     public static final int CONNECTED = 2;

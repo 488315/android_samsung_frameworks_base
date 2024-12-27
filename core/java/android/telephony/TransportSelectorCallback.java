@@ -5,7 +5,6 @@ import android.annotation.SystemApi;
 import java.util.function.Consumer;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public interface TransportSelectorCallback {
     void onCreated(DomainSelector domainSelector);
 

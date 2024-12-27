@@ -4,7 +4,6 @@ import com.android.internal.org.bouncycastle.util.Arrays;
 
 import java.security.spec.AlgorithmParameterSpec;
 
-/* loaded from: classes5.dex */
 public class UserKeyingMaterialSpec implements AlgorithmParameterSpec {
     private final byte[] userKeyingMaterial;
 

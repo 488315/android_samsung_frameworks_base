@@ -3,7 +3,6 @@ package com.samsung.android.knox;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes6.dex */
 public enum SemPersonaState implements Parcelable {
     INVALID(-1),
     CREATING(1),

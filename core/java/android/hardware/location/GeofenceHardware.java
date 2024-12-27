@@ -8,7 +8,6 @@ import java.lang.ref.WeakReference;
 import java.util.HashMap;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public final class GeofenceHardware {
     public static final int GEOFENCE_ENTERED = 1;
     public static final int GEOFENCE_ERROR_ID_EXISTS = 2;

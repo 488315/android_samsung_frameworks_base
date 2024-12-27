@@ -3,7 +3,6 @@ package com.android.framework.protobuf.nano;
 import java.util.HashMap;
 import java.util.Map;
 
-/* loaded from: classes3.dex */
 public final class MapFactories {
     private static volatile MapFactory mapFactory = new DefaultMapFactory();
 

@@ -9,7 +9,6 @@ import com.android.internal.util.Preconditions;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes3.dex */
 public final class PrintDocumentInfo implements Parcelable {
     public static final int CONTENT_TYPE_DOCUMENT = 0;
     public static final int CONTENT_TYPE_PHOTO = 1;

@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* loaded from: classes5.dex */
 public class AlsaDevicesParser {
     protected static final boolean DEBUG = false;
     public static final int SCANSTATUS_EMPTY = 2;

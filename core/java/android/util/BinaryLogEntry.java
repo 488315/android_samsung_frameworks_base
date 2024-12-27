@@ -1,6 +1,5 @@
 package android.util;
 
-/* loaded from: classes4.dex */
 public final class BinaryLogEntry {
     public static final long ELEMS = 2246267895815L;
     public static final long NANOSEC = 1116691496962L;

@@ -11,7 +11,6 @@ import android.util.Log;
 
 import java.io.InputStream;
 
-/* loaded from: classes4.dex */
 public class ImageSpan extends DynamicDrawableSpan {
     private Uri mContentUri;
     private Context mContext;

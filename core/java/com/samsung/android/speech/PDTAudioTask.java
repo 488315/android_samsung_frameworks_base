@@ -15,7 +15,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.concurrent.LinkedBlockingQueue;
 
-/* loaded from: classes6.dex */
 class PDTAudioTask extends AudioTask implements Runnable {
     static final int DEFAULT_BLOCK_SIZE = 320;
     private int AUDIO_START;

@@ -27,7 +27,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-/* loaded from: classes6.dex */
 public class FontManager {
     private static final String DROIDSANS = "DroidSans.ttf";
     private static final String FONT_DIRECTORY = "fonts/";

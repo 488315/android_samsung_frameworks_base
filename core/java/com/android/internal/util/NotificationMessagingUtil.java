@@ -13,7 +13,6 @@ import android.util.SparseArray;
 import java.util.Collection;
 import java.util.Objects;
 
-/* loaded from: classes5.dex */
 public class NotificationMessagingUtil {
     private static final String DEFAULT_SMS_APP_SETTING = "sms_default_application";
     private final Context mContext;

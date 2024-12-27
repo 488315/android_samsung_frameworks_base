@@ -7,7 +7,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Arrays;
 
-/* loaded from: classes3.dex */
 public class PatternMatcher implements Parcelable {
     private static final int MAX_PATTERN_STORAGE = 2048;
     private static final int NO_MATCH = -1;

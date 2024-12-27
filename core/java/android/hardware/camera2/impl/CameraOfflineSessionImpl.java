@@ -33,7 +33,6 @@ import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-/* loaded from: classes2.dex */
 public class CameraOfflineSessionImpl extends CameraOfflineSession
         implements IBinder.DeathRecipient {
     private static final long NANO_PER_SECOND = 1000000000;

@@ -8,7 +8,6 @@ import android.os.HwParcel;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public final class CarrierRestrictionsWithPriority {
     public ArrayList<Carrier> allowedCarriers = new ArrayList<>();
     public ArrayList<Carrier> excludedCarriers = new ArrayList<>();

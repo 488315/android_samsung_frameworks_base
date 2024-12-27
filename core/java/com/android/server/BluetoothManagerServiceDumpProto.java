@@ -1,6 +1,5 @@
 package com.android.server;
 
-/* loaded from: classes5.dex */
 public final class BluetoothManagerServiceDumpProto {
     public static final long ACTIVE_LOGS = 2246267895816L;
     public static final long ADDRESS = 1138166333444L;

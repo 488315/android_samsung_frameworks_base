@@ -1,6 +1,5 @@
 package com.android.internal.hidden_from_bootclasspath.android.app.ondeviceintelligence.flags;
 
-/* loaded from: classes5.dex */
 public final class Flags {
     private static FeatureFlags FEATURE_FLAGS = new FeatureFlagsImpl();
     public static final String FLAG_ENABLE_ON_DEVICE_INTELLIGENCE =

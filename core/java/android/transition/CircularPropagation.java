@@ -3,7 +3,6 @@ package android.transition;
 import android.graphics.Rect;
 import android.view.ViewGroup;
 
-/* loaded from: classes4.dex */
 public class CircularPropagation extends VisibilityPropagation {
     private static final String TAG = "CircularPropagation";
     private float mPropagationSpeed = 3.0f;

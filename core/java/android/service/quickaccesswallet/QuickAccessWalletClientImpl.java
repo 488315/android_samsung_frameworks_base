@@ -30,7 +30,6 @@ import java.util.Queue;
 import java.util.UUID;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes3.dex */
 public class QuickAccessWalletClientImpl implements QuickAccessWalletClient, ServiceConnection {
     private static final int MSG_TIMEOUT_SERVICE = 5;
     private static final long SERVICE_CONNECTION_TIMEOUT_MS = 60000;

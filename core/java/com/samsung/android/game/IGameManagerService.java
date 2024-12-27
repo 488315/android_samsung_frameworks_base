@@ -9,7 +9,6 @@ import android.os.RemoteException;
 import java.util.List;
 import java.util.Map;
 
-/* loaded from: classes6.dex */
 public interface IGameManagerService extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.game.IGameManagerService";
 

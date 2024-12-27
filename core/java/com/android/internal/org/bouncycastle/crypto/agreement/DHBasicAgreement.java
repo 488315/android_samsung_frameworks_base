@@ -10,7 +10,6 @@ import com.android.internal.org.bouncycastle.crypto.params.ParametersWithRandom;
 
 import java.math.BigInteger;
 
-/* loaded from: classes5.dex */
 public class DHBasicAgreement implements BasicAgreement {
     private static final BigInteger ONE = BigInteger.valueOf(1);
     private DHParameters dhParams;

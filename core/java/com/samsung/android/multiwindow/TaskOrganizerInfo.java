@@ -6,7 +6,6 @@ import android.os.Bundle;
 
 import com.samsung.android.rune.CoreRune;
 
-/* loaded from: classes6.dex */
 public class TaskOrganizerInfo {
     private static final String KEY_ASSISTANT_ACTIVITY_INTENT = "assistant_activity_intent";
     private static final String KEY_CHANGE_SPLIT_LAYOUT_FOR_LAUNCH_ADJACENT =

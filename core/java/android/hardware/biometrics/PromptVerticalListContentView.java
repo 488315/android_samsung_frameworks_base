@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes2.dex */
 public final class PromptVerticalListContentView implements PromptContentViewParcelable {
     public static final Parcelable.Creator<PromptVerticalListContentView> CREATOR =
             new Parcelable.Creator<PromptVerticalListContentView>() { // from class:

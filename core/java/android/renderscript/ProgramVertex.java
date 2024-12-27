@@ -2,7 +2,6 @@ package android.renderscript;
 
 
 @Deprecated
-/* loaded from: classes3.dex */
 public class ProgramVertex extends Program {
     ProgramVertex(long id, RenderScript rs) {
         super(id, rs);

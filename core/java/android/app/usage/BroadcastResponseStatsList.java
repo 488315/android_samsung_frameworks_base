@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/* loaded from: classes.dex */
 public final class BroadcastResponseStatsList implements Parcelable {
     public static final Parcelable.Creator<BroadcastResponseStatsList> CREATOR =
             new Parcelable.Creator<BroadcastResponseStatsList>() { // from class:

@@ -2,7 +2,6 @@ package com.android.internal.view;
 
 import android.os.Looper;
 
-/* loaded from: classes5.dex */
 public class WindowManagerPolicyThread {
     static Looper mLooper;
     static Thread mThread;

@@ -1,6 +1,5 @@
 package com.android.server.wm;
 
-/* loaded from: classes5.dex */
 public final class WindowStateAnimatorProto {
     public static final int COMMIT_DRAW_PENDING = 2;
     public static final int DRAW_PENDING = 1;

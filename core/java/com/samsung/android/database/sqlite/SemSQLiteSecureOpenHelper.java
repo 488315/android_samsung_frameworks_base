@@ -12,7 +12,6 @@ import android.util.Log;
 import java.io.File;
 import java.util.Objects;
 
-/* loaded from: classes6.dex */
 public abstract class SemSQLiteSecureOpenHelper implements AutoCloseable {
     private static final String TAG = SemSQLiteSecureOpenHelper.class.getSimpleName();
     private final Context mContext;

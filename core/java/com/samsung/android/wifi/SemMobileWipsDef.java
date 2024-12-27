@@ -4,7 +4,6 @@ import android.security.keystore.KeyProperties;
 
 import com.samsung.android.core.AppJumpBlockTool;
 
-/* loaded from: classes6.dex */
 public class SemMobileWipsDef {
     public static final boolean A_DBG = false;
     public static final boolean BEACON_DRIVER = true;

@@ -9,7 +9,6 @@ import android.os.RemoteException;
 import com.android.ims.internal.uce.common.StatusCode;
 import com.android.ims.internal.uce.common.UceLong;
 
-/* loaded from: classes5.dex */
 public interface IPresenceService extends IInterface {
     StatusCode addListener(int i, IPresenceListener iPresenceListener, UceLong uceLong)
             throws RemoteException;

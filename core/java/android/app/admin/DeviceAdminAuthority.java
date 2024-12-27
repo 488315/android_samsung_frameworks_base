@@ -5,7 +5,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class DeviceAdminAuthority extends Authority {
     public static final DeviceAdminAuthority DEVICE_ADMIN_AUTHORITY = new DeviceAdminAuthority();
     public static final Parcelable.Creator<DeviceAdminAuthority> CREATOR =

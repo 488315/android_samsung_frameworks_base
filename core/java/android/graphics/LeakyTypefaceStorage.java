@@ -6,7 +6,6 @@ import android.util.ArrayMap;
 
 import java.util.ArrayList;
 
-/* loaded from: classes.dex */
 public class LeakyTypefaceStorage {
     private static final Object sLock = new Object();
     private static final ArrayList<Typeface> sStorage = new ArrayList<>();

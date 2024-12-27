@@ -2,7 +2,6 @@ package android.os;
 
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public final class WorkDuration {
     long mActualCpuDurationNanos;
     long mActualGpuDurationNanos;

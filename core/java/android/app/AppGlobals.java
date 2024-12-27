@@ -3,7 +3,6 @@ package android.app;
 import android.content.pm.IPackageManager;
 import android.permission.IPermissionManager;
 
-/* loaded from: classes.dex */
 public class AppGlobals {
     public static Application getInitialApplication() {
         return ActivityThread.currentApplication();

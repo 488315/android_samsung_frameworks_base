@@ -1,6 +1,5 @@
 package android.service;
 
-/* loaded from: classes3.dex */
 public final class SensorPrivacySensorProto {
     public static final int CAMERA = 2;
     public static final int MICROPHONE = 1;

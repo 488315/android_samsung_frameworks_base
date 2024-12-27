@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.zip.GZIPOutputStream;
 
-/* loaded from: classes4.dex */
 public final class Slog {
     private static final boolean DEBUG = false;
     private static final String LOG0_PATH = "/data/log/sfslog.0.gz";

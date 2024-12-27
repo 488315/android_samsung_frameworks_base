@@ -1,6 +1,5 @@
 package android.app;
 
-/* loaded from: classes.dex */
 public final class StatusBarManagerProto {
     public static final int TRANSIENT_BAR_HIDING = 3;
     public static final int TRANSIENT_BAR_NONE = 0;

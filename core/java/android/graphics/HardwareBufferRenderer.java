@@ -10,7 +10,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 
-/* loaded from: classes.dex */
 public class HardwareBufferRenderer implements AutoCloseable {
     private static final ColorSpace DEFAULT_COLORSPACE = ColorSpace.get(ColorSpace.Named.SRGB);
     private final Runnable mCleaner;

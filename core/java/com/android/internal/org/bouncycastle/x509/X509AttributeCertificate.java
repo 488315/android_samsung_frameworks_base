@@ -13,7 +13,6 @@ import java.security.cert.CertificateNotYetValidException;
 import java.security.cert.X509Extension;
 import java.util.Date;
 
-/* loaded from: classes5.dex */
 public interface X509AttributeCertificate extends X509Extension {
     void checkValidity() throws CertificateExpiredException, CertificateNotYetValidException;
 

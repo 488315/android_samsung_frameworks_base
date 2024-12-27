@@ -7,7 +7,6 @@ import android.graphics.RectF;
 
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public class RectShape extends Shape {
     private RectF mRect = new RectF();
 

@@ -9,7 +9,6 @@ import android.os.Parcel;
 import android.os.PermissionEnforcer;
 import android.os.RemoteException;
 
-/* loaded from: classes2.dex */
 public interface IActivityRecognitionHardware extends IInterface {
     boolean disableActivityEvent(String str, int i) throws RemoteException;
 

@@ -10,7 +10,6 @@ import com.android.internal.widget.VerifyCredentialResponse;
 
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public class SemLockPatternUtils {
     private static final String TAG = "SemLockPatternUtils";
     private LockPatternUtils mLockPatternUtils;

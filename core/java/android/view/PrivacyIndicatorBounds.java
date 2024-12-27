@@ -10,7 +10,6 @@ import com.android.internal.util.ArrayUtils;
 
 import java.util.Arrays;
 
-/* loaded from: classes4.dex */
 public class PrivacyIndicatorBounds implements Parcelable {
     public static final Parcelable.Creator<PrivacyIndicatorBounds> CREATOR =
             new Parcelable.Creator<

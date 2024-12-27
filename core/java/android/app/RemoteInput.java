@@ -15,7 +15,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-/* loaded from: classes.dex */
 public final class RemoteInput implements Parcelable {
     public static final Parcelable.Creator<RemoteInput> CREATOR =
             new Parcelable.Creator<RemoteInput>() { // from class: android.app.RemoteInput.1

@@ -18,7 +18,6 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.accessibility.CaptioningManager;
 
-/* loaded from: classes5.dex */
 public class SubtitleView extends View {
     private static final int COLOR_BEVEL_DARK = Integer.MIN_VALUE;
     private static final int COLOR_BEVEL_LIGHT = -2130706433;

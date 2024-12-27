@@ -1,6 +1,5 @@
 package android.graphics.rendererpolicy;
 
-/* loaded from: classes.dex */
 public class QueryInfo {
     private final String chipsetName;
     private final String modelName;

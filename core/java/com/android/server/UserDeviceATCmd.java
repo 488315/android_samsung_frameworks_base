@@ -7,7 +7,6 @@ import android.util.Slog;
 
 import com.samsung.android.service.EngineeringMode.EngineeringModeManager;
 
-/* loaded from: classes5.dex */
 public class UserDeviceATCmd implements IWorkOnAt {
     private static final String ANDROID_RB_PROPERTY = "sys.powerctl";
     private static final String AT_COMMAND_HEADER = "AT";

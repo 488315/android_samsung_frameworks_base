@@ -5,7 +5,6 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.widget.TextView;
 
-/* loaded from: classes4.dex */
 public interface MovementMethod {
     boolean canSelectArbitrarily();
 

@@ -1,6 +1,5 @@
 package android.stats.otaupdate;
 
-/* loaded from: classes3.dex */
 public final class UpdateengineEnums {
     public static final int ABNORMAL_TERMINATION = 10010;
     public static final int DELTA = 10001;

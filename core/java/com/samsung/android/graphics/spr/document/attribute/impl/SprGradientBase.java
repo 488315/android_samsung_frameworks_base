@@ -8,7 +8,6 @@ import com.samsung.android.graphics.spr.document.SprInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-/* loaded from: classes6.dex */
 public abstract class SprGradientBase implements Cloneable {
     public static final byte SPREAD_TYPE_NONE = 0;
     public static final byte SPREAD_TYPE_PAD = 1;

@@ -11,7 +11,6 @@ import java.io.OutputStreamWriter;
 import java.util.Iterator;
 import java.util.List;
 
-/* loaded from: classes.dex */
 public class SQLiteTraceJsonExporter extends SQLiteTraceExporter {
     private FileOutputStream mFileOutputStream;
     private JsonWriter mWriter;

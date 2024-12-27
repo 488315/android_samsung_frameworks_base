@@ -62,7 +62,6 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 import java.util.function.Function;
 
-/* loaded from: classes.dex */
 public class LauncherApps {
     public static final String ACTION_CONFIRM_PIN_APPWIDGET =
             "android.content.pm.action.CONFIRM_PIN_APPWIDGET";

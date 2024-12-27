@@ -1,6 +1,5 @@
 package android.graphics;
 
-/* loaded from: classes.dex */
 public class ColorMatrixColorFilter extends ColorFilter {
     private final ColorMatrix mMatrix = new ColorMatrix();
 

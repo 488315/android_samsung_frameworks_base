@@ -9,7 +9,6 @@ import java.io.UnsupportedEncodingException;
 import java.security.SecureRandom;
 import java.util.Random;
 
-/* loaded from: classes.dex */
 public class VerifierDeviceIdentity implements Parcelable {
     private static final int GROUP_SIZE = 4;
     private static final int LONG_SIZE = 13;

@@ -14,7 +14,6 @@ import kotlin.collections.SetsKt__SetsKt;
 import kotlin.jvm.internal.Intrinsics;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public final class AvalancheProvider {
     public final String TAG = "AvalancheProvider";
     public final Set avalancheTriggerIntents = SetsKt__SetsKt.mutableSetOf("android.intent.action.AIRPLANE_MODE", PopupUIUtil.ACTION_BOOT_COMPLETED, "android.intent.action.MANAGED_PROFILE_AVAILABLE", "android.intent.action.USER_SWITCHED");

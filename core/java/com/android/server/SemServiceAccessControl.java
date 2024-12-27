@@ -33,7 +33,6 @@ import javax.crypto.Mac;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
-/* loaded from: classes5.dex */
 public class SemServiceAccessControl {
     private static final boolean DEBUG;
     private static final int SECURE_CONTAINNER_UID_PREFIX = 100000;

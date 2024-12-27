@@ -7,7 +7,6 @@ import android.view.ViewConfiguration;
 import android.widget.flags.FeatureFlags;
 import android.widget.flags.FeatureFlagsImpl;
 
-/* loaded from: classes4.dex */
 public class DifferentialMotionFlingHelper {
     private final Context mContext;
     private final int[] mFlingVelocityThresholds;

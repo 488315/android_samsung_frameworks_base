@@ -8,7 +8,6 @@ import android.util.Log;
 
 import com.samsung.android.hardware.secinputdev.SemInputDeviceManagerService;
 
-/* loaded from: classes.dex */
 public class SemUEventObserverWrapper extends ExternalService {
     private static final int GESTURE_DONE = 1;
     private static final int GESTURE_ERROR = 2;

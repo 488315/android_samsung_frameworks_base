@@ -7,7 +7,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public class RecordSettings extends Settings {
     public static final int INDEX_TYPE_NONE = 0;
     public static final int INDEX_TYPE_SC = 1;

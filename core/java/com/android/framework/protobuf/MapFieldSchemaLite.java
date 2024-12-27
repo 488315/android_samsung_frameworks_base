@@ -3,7 +3,6 @@ package com.android.framework.protobuf;
 import java.util.Map;
 
 @CheckReturnValue
-/* loaded from: classes3.dex */
 class MapFieldSchemaLite implements MapFieldSchema {
     MapFieldSchemaLite() {}
 

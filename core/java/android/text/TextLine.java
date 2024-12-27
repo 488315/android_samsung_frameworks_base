@@ -15,7 +15,6 @@ import com.android.internal.util.ArrayUtils;
 
 import java.util.ArrayList;
 
-/* loaded from: classes4.dex */
 public class TextLine {
     private static final boolean DEBUG = false;
     private static final char TAB_CHAR = '\t';

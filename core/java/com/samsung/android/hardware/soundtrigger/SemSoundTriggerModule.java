@@ -4,7 +4,6 @@ import android.hardware.soundtrigger.SoundTrigger;
 import android.hardware.soundtrigger.SoundTriggerModuleWrapper;
 import android.os.Handler;
 
-/* loaded from: classes6.dex */
 public class SemSoundTriggerModule {
     private static final int EVENT_RECOGNITION = 1;
     private static final int EVENT_SERVICE_DIED = 2;

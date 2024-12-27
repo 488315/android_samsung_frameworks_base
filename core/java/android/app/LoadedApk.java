@@ -67,7 +67,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes.dex */
 public final class LoadedApk {
     static final /* synthetic */ boolean $assertionsDisabled = false;
     static final boolean DEBUG = false;

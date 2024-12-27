@@ -8,7 +8,6 @@ import java.net.Inet6Address;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-/* loaded from: classes5.dex */
 public class InetAddressUtils {
     private static final int INET4_ADDR_LENGTH = 4;
     private static final int INET6_ADDR_LENGTH = 16;

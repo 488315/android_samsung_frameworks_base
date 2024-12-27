@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.pm.IPackageInstallObserver2;
 import android.os.Bundle;
 
-/* loaded from: classes.dex */
 public class PackageInstallObserver {
     private final IPackageInstallObserver2.Stub mBinder =
             new IPackageInstallObserver2

@@ -3,7 +3,6 @@ package android.filterfw.core;
 import android.filterfw.geometry.Quad;
 import android.opengl.GLES20;
 
-/* loaded from: classes.dex */
 public class ShaderProgram extends Program {
     private GLEnvironment mGLEnvironment;
     private int mMaxTileSize = 0;

@@ -15,7 +15,6 @@ import com.android.internal.util.function.TriConsumer;
 import com.android.internal.util.function.pooled.PooledLambda;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public abstract class RemoteLockscreenValidationService extends Service {
     public static final String SERVICE_INTERFACE =
             "android.service.remotelockscreenvalidation.RemoteLockscreenValidationService";

@@ -18,7 +18,6 @@ import android.view.Surface;
 
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public interface ITvInteractiveAppSession extends IInterface {
     public static final String DESCRIPTOR = "android.media.tv.interactive.ITvInteractiveAppSession";
 

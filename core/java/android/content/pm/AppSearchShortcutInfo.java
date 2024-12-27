@@ -31,7 +31,6 @@ import java.util.function.Function;
 import java.util.function.IntFunction;
 import java.util.stream.Stream;
 
-/* loaded from: classes.dex */
 public class AppSearchShortcutInfo extends GenericDocument {
     public static final String IS_DISABLED = "Dis";
     public static final String IS_DYNAMIC = "Dyn";

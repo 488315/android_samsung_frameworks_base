@@ -12,7 +12,6 @@ import com.android.internal.org.bouncycastle.asn1.DERTaggedObject;
 
 import java.util.Enumeration;
 
-/* loaded from: classes5.dex */
 public class SignedData extends ASN1Object implements PKCSObjectIdentifiers {
     private ASN1Set certificates;
     private ContentInfo contentInfo;

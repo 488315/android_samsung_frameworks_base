@@ -27,7 +27,6 @@ import java.util.function.Consumer;
 import javax.crypto.KeyGeneratorSpi;
 import javax.crypto.SecretKey;
 
-/* loaded from: classes3.dex */
 public abstract class AndroidKeyStoreKeyGeneratorSpi extends KeyGeneratorSpi {
     private static final String TAG = "AndroidKeyStoreKeyGeneratorSpi";
     private final int mDefaultKeySizeBits;

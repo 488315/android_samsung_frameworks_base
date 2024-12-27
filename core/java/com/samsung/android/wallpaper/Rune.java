@@ -8,7 +8,6 @@ import com.samsung.android.feature.SemCscFeature;
 import com.samsung.android.feature.SemFloatingFeature;
 import com.samsung.android.wallpaperbackup.BnRConstants;
 
-/* loaded from: classes6.dex */
 public class Rune {
     public static final boolean ADJUST_CROPHINT_BY_DEVICE_RATIO_AUTO = false;
     public static final boolean AOD_FULLSCREEN;

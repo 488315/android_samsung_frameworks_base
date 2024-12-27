@@ -17,7 +17,6 @@ import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.internal.CombineKt;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes3.dex */
 public final class FlowKt$combine$$inlined$combine$3 implements Flow {
     final /* synthetic */ Flow[] $flows$inlined;
     final /* synthetic */ Function8 $transform$inlined$1;

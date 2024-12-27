@@ -20,7 +20,6 @@ import android.widget.ListView;
 import com.android.internal.R;
 import com.android.internal.app.AlertController;
 
-/* loaded from: classes.dex */
 public class AlertDialog extends Dialog implements DialogInterface {
     public static final int LAYOUT_HINT_NONE = 0;
     public static final int LAYOUT_HINT_SIDE = 1;

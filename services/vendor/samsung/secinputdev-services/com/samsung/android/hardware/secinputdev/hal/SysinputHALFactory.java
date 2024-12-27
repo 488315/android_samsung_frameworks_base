@@ -6,7 +6,6 @@ import com.samsung.android.hardware.secinputdev.SemInputDeviceManagerService;
 
 import java.lang.reflect.Constructor;
 
-/* loaded from: classes.dex */
 public class SysinputHALFactory {
     private static final String TAG = "SysinputHALFactory";
     private static volatile SysinputHALInterface hal = null;

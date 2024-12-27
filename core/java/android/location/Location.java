@@ -22,7 +22,6 @@ import java.util.StringTokenizer;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
 
-/* loaded from: classes2.dex */
 public class Location implements Parcelable {
 
     @SystemApi @Deprecated public static final String EXTRA_NO_GPS_LOCATION = "noGPSLocation";

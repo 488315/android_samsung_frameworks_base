@@ -22,7 +22,6 @@ import java.util.Objects;
 import java.util.Vector;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes2.dex */
 public class Utils {
     private static final String TAG = "Utils";
 

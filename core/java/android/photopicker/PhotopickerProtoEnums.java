@@ -1,6 +1,5 @@
 package android.photopicker;
 
-/* loaded from: classes3.dex */
 public final class PhotopickerProtoEnums {
     public static final int ACCOUNT_UPDATED = 1;
     public static final int ACTION_BAR_HOME_BUTTON_CLICK = 12;

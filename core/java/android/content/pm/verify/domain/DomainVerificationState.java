@@ -2,7 +2,6 @@ package android.content.pm.verify.domain;
 
 import android.provider.VoicemailContract;
 
-/* loaded from: classes.dex */
 public interface DomainVerificationState {
     public static final int STATE_APPROVED = 2;
     public static final int STATE_DENIED = 3;

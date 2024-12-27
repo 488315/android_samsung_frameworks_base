@@ -4,7 +4,6 @@ import android.hardware.scontext.SContextConstants;
 
 import java.util.Arrays;
 
-/* loaded from: classes3.dex */
 public class SemUidPowerInfo implements Parcelable {
     public static final Parcelable.Creator<SemUidPowerInfo> CREATOR =
             new Parcelable.Creator<SemUidPowerInfo>() { // from class: android.os.SemUidPowerInfo.1

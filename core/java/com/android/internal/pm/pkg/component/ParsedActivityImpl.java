@@ -15,7 +15,6 @@ import java.util.Collections;
 import java.util.Locale;
 import java.util.Set;
 
-/* loaded from: classes5.dex */
 public class ParsedActivityImpl extends ParsedMainComponentImpl
         implements ParsedActivity, Parcelable {
     public static final Parcelable.Creator<ParsedActivityImpl> CREATOR =

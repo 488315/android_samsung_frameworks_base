@@ -1,7 +1,6 @@
 package android.graphics;
 
 @Deprecated
-/* loaded from: classes.dex */
 public class AvoidXfermode extends Xfermode {
 
     public enum Mode {

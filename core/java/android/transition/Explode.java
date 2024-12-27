@@ -13,7 +13,6 @@ import android.view.animation.DecelerateInterpolator;
 
 import com.android.internal.R;
 
-/* loaded from: classes4.dex */
 public class Explode extends Visibility {
     private static final String PROPNAME_SCREEN_BOUNDS = "android:explode:screenBounds";
     private static final String TAG = "Explode";

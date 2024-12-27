@@ -12,7 +12,6 @@ import com.android.internal.org.bouncycastle.asn1.x500.style.BCStyle;
 
 import java.util.Enumeration;
 
-/* loaded from: classes5.dex */
 public class X500Name extends ASN1Object implements ASN1Choice {
     private static X500NameStyle defaultStyle = BCStyle.INSTANCE;
     private int hashCodeValue;

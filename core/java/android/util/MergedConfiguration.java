@@ -6,7 +6,6 @@ import android.os.Parcelable;
 
 import java.io.PrintWriter;
 
-/* loaded from: classes4.dex */
 public class MergedConfiguration implements Parcelable {
     public static final Parcelable.Creator<MergedConfiguration> CREATOR =
             new Parcelable.Creator<

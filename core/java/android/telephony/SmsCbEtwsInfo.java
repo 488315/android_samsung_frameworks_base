@@ -14,7 +14,6 @@ import java.time.ZoneOffset;
 import java.util.Arrays;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public final class SmsCbEtwsInfo implements Parcelable {
     public static final Parcelable.Creator<SmsCbEtwsInfo> CREATOR =
             new Parcelable.Creator<

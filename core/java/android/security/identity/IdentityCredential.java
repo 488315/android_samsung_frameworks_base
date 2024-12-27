@@ -9,7 +9,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-/* loaded from: classes3.dex */
 public abstract class IdentityCredential {
     @Deprecated
     public abstract KeyPair createEphemeralKeyPair();

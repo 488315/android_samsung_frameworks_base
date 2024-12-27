@@ -16,7 +16,6 @@ import java.nio.ByteBuffer;
 import java.util.Collections;
 import java.util.List;
 
-/* loaded from: classes4.dex */
 public final class UpdatableDriverProto {
 
     public interface DenylistOrBuilder extends MessageLiteOrBuilder {

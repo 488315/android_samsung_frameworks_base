@@ -9,7 +9,6 @@ import com.android.internal.util.AnnotationValidations;
 
 import java.lang.annotation.Annotation;
 
-/* loaded from: classes.dex */
 public final class Attribution implements Parcelable {
     public static final Parcelable.Creator<Attribution> CREATOR =
             new Parcelable.Creator<Attribution>() { // from class: android.content.pm.Attribution.1

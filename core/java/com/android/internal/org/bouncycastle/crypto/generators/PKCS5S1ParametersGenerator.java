@@ -6,7 +6,6 @@ import com.android.internal.org.bouncycastle.crypto.PBEParametersGenerator;
 import com.android.internal.org.bouncycastle.crypto.params.KeyParameter;
 import com.android.internal.org.bouncycastle.crypto.params.ParametersWithIV;
 
-/* loaded from: classes5.dex */
 public class PKCS5S1ParametersGenerator extends PBEParametersGenerator {
     private Digest digest;
 

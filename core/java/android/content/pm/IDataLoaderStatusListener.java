@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes.dex */
 public interface IDataLoaderStatusListener extends IInterface {
     public static final int DATA_LOADER_BINDING = 1;
     public static final int DATA_LOADER_BOUND = 2;

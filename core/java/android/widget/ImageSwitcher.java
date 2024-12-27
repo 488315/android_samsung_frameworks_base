@@ -5,7 +5,6 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.util.AttributeSet;
 
-/* loaded from: classes4.dex */
 public class ImageSwitcher extends ViewSwitcher {
     public ImageSwitcher(Context context) {
         super(context);

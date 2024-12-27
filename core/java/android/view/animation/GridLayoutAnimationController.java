@@ -10,7 +10,6 @@ import com.android.internal.R;
 
 import java.util.Random;
 
-/* loaded from: classes4.dex */
 public class GridLayoutAnimationController extends LayoutAnimationController {
     public static final int DIRECTION_BOTTOM_TO_TOP = 2;
     public static final int DIRECTION_HORIZONTAL_MASK = 1;

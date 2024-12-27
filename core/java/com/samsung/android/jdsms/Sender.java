@@ -10,7 +10,6 @@ import android.os.UserHandle;
 
 import java.util.HashMap;
 
-/* loaded from: classes6.dex */
 public final class Sender {
     private static final String ACTION_USE_APP_FEATURE_SURVEY =
             "com.sec.android.diagmonagent.intent.USE_APP_FEATURE_SURVEY";

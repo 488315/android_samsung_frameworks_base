@@ -6,7 +6,6 @@ import android.os.RemoteException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes3.dex */
 public class PersistentDataBlockManager {
 
     @SystemApi public static final int FLASH_LOCK_LOCKED = 1;

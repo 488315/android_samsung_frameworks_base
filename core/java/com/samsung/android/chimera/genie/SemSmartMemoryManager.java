@@ -2,7 +2,6 @@ package com.samsung.android.chimera.genie;
 
 import android.content.Context;
 
-/* loaded from: classes5.dex */
 public class SemSmartMemoryManager {
     private static final String TAG = "SemSmartMemoryManager";
     private static SemSmartMemoryManager sSmartMemMgr = null;

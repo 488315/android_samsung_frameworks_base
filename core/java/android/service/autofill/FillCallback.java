@@ -3,7 +3,6 @@ package android.service.autofill;
 import android.os.RemoteException;
 import android.util.Log;
 
-/* loaded from: classes3.dex */
 public final class FillCallback {
     private static final String TAG = "FillCallback";
     private final IFillCallback mCallback;

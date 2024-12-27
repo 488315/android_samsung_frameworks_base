@@ -11,7 +11,6 @@ import android.util.Slog;
 
 import java.io.File;
 
-/* loaded from: classes6.dex */
 public class IAFDDBManager {
     static final int CONTROLINFOTB_code = 1;
     static final String DB_IAFD_TB = "IAFD_TB";

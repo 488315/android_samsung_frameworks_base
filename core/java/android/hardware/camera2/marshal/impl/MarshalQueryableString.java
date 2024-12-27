@@ -7,7 +7,6 @@ import android.hardware.camera2.utils.TypeReference;
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 
-/* loaded from: classes2.dex */
 public class MarshalQueryableString implements MarshalQueryable<String> {
     private static final boolean DEBUG = false;
     private static final byte NUL = 0;

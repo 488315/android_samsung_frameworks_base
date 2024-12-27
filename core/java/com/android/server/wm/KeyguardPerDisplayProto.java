@@ -1,6 +1,5 @@
 package com.android.server.wm;
 
-/* loaded from: classes5.dex */
 public final class KeyguardPerDisplayProto {
     public static final long AOD_SHOWING = 1133871366147L;
     public static final long DISPLAY_ID = 1120986464257L;

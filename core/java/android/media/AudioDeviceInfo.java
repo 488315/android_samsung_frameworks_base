@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.TreeSet;
 
-/* loaded from: classes2.dex */
 public final class AudioDeviceInfo {
     private static final SparseIntArray EXT_TO_INT_DEVICE_MAPPING;
     private static final SparseIntArray EXT_TO_INT_INPUT_DEVICE_MAPPING;

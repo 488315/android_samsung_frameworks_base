@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
 
-/* loaded from: classes5.dex */
 public final class HbpcdUtils {
     private static final boolean DBG = false;
     private static final String LOG_TAG = "HbpcdUtils";

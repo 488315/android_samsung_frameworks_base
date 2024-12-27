@@ -7,7 +7,6 @@ import android.util.AttributeSet;
 
 import com.android.internal.R;
 
-/* loaded from: classes4.dex */
 public class ArcMotion extends PathMotion {
     private static final float DEFAULT_MAX_ANGLE_DEGREES = 70.0f;
     private static final float DEFAULT_MAX_TANGENT = (float) Math.tan(Math.toRadians(35.0d));

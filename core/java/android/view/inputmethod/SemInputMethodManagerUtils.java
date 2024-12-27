@@ -8,7 +8,6 @@ import android.widget.EditText;
 
 import java.lang.reflect.Method;
 
-/* loaded from: classes4.dex */
 public class SemInputMethodManagerUtils {
     public static final String ACTION_DEACTIVATE = "actionDeactivate";
     public static final String ACTION_SHOW_TOOLKIT_HBD = "actionShowToolKitHbd";

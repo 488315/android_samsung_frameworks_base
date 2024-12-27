@@ -5,7 +5,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 
-/* loaded from: classes5.dex */
 public class ViewClippingUtil {
     private static final int CLIP_CHILDREN_TAG = 16908906;
     private static final int CLIP_CLIPPING_SET = 16908905;

@@ -36,7 +36,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.IntConsumer;
 import java.util.function.ObjIntConsumer;
 
-/* loaded from: classes4.dex */
 public final class AccessibilityInteractionClient
         extends IAccessibilityInteractionConnectionCallback.Stub {
     public static final String CALL_STACK = "call_stack";

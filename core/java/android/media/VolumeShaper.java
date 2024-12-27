@@ -11,7 +11,6 @@ import java.lang.ref.WeakReference;
 import java.util.Arrays;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public final class VolumeShaper implements AutoCloseable {
     private int mId;
     private final WeakReference<PlayerBase> mWeakPlayerBase;

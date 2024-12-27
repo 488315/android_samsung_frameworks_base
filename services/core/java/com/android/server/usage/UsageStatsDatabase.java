@@ -50,7 +50,6 @@ import java.util.concurrent.TimeUnit;
 import libcore.io.IoUtils;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes2.dex */
 public final class UsageStatsDatabase {
     public static final int BACKUP_VERSION = 4;
     static final int[] MAX_FILES_PER_INTERVAL_TYPE = {100, 50, 12, 10};

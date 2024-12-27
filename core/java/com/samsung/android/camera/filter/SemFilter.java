@@ -1,6 +1,5 @@
 package com.samsung.android.camera.filter;
 
-/* loaded from: classes5.dex */
 public abstract class SemFilter {
     public static final int FILTER_CATEGORY_REAR = 0;
     public static final int FILTER_CATEGORY_REAR_AND_SELFIE = 2;

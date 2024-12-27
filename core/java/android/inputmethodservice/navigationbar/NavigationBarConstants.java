@@ -1,6 +1,5 @@
 package android.inputmethodservice.navigationbar;
 
-/* loaded from: classes2.dex */
 final class NavigationBarConstants {
     static final int DARK_MODE_ICON_COLOR_SINGLE_TONE = -1728053248;
     static final int LIGHT_MODE_ICON_COLOR_SINGLE_TONE = -1;

@@ -1,6 +1,5 @@
 package com.android.internal.hidden_from_bootclasspath.android.app.wearable;
 
-/* loaded from: classes5.dex */
 public final class Flags {
     private static FeatureFlags FEATURE_FLAGS = new FeatureFlagsImpl();
     public static final String FLAG_ENABLE_DATA_REQUEST_OBSERVER_API =

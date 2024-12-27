@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-/* loaded from: classes5.dex */
 public abstract class AbsCocktailLoadablePanel {
     public static final String LOADABLE_CONTENT_CLASS = "content";
     public static final String PACKAGE_NAME = "package";

@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Iterator;
 
-/* loaded from: classes5.dex */
 public class PKCS7ProcessableObject implements CMSTypedData {
     private final ASN1Encodable structure;
     private final ASN1ObjectIdentifier type;

@@ -1,6 +1,5 @@
 package android.service.usb;
 
-/* loaded from: classes3.dex */
 public final class UsbInterfaceProto {
     public static final long ALTERNATE_SETTINGS = 1120986464258L;
     public static final long CLASS = 1120986464260L;

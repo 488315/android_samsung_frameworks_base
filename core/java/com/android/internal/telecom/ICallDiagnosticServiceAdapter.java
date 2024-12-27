@@ -7,7 +7,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.text.TextUtils;
 
-/* loaded from: classes5.dex */
 public interface ICallDiagnosticServiceAdapter extends IInterface {
     public static final String DESCRIPTOR =
             "com.android.internal.telecom.ICallDiagnosticServiceAdapter";

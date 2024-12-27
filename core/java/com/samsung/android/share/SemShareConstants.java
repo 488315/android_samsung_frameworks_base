@@ -4,7 +4,6 @@ import android.net.Uri;
 
 import com.samsung.android.feature.SemFloatingFeature;
 
-/* loaded from: classes6.dex */
 public class SemShareConstants {
     public static final String ACTION_REQ_AUTH =
             "com.samsung.android.coreapps.easysignup.ACTION_REQ_AUTH";

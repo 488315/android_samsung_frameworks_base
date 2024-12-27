@@ -32,7 +32,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-/* loaded from: classes3.dex */
 public final class CredentialProviderInfoFactory {
     private static final String ATTR_NAME = "name";
     private static final String TAG = "CredentialManager";

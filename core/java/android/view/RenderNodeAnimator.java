@@ -4,7 +4,6 @@ import android.graphics.CanvasProperty;
 import android.graphics.Paint;
 import android.graphics.animation.RenderNodeAnimator;
 
-/* loaded from: classes4.dex */
 public class RenderNodeAnimator extends android.graphics.animation.RenderNodeAnimator
         implements RenderNodeAnimator.ViewListener {
     private View mViewTarget;

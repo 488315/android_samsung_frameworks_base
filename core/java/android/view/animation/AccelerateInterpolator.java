@@ -11,7 +11,6 @@ import android.util.AttributeSet;
 import com.android.internal.R;
 
 @HasNativeInterpolator
-/* loaded from: classes4.dex */
 public class AccelerateInterpolator extends BaseInterpolator implements NativeInterpolator {
     private final double mDoubleFactor;
     private final float mFactor;

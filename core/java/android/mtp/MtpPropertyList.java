@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.ToLongFunction;
 
-/* loaded from: classes3.dex */
 class MtpPropertyList {
     private int mCode;
     private List<Integer> mObjectHandles = new ArrayList();

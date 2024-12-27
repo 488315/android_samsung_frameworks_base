@@ -14,7 +14,6 @@ import android.telephony.mbms.MbmsGroupCallSessionCallback;
 import java.util.List;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public class MbmsGroupCallServiceBase extends Service {
     private final IBinder mInterface = new IMbmsGroupCallService.Stub() { // from class:
                 // android.telephony.mbms.vendor.MbmsGroupCallServiceBase.1

@@ -1,6 +1,5 @@
 package com.sec.android.allshare.iface;
 
-/* loaded from: classes6.dex */
 public class Const {
     public static final long ALLSHARE_FRAMEWORK_VERSION = 1;
     public static final String CP_NAME = "com.sec.android.allshare.CpName";

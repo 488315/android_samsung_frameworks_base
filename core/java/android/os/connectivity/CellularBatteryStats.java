@@ -11,7 +11,6 @@ import java.util.Arrays;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class CellularBatteryStats implements Parcelable {
     public static final Parcelable.Creator<CellularBatteryStats> CREATOR =
             new Parcelable.Creator<

@@ -8,7 +8,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.os.UserHandle;
 
-/* loaded from: classes.dex */
 public interface IAppFunctionManager extends IInterface {
     public static final String DESCRIPTOR = "android.app.appfunctions.IAppFunctionManager";
 

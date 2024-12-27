@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes5.dex */
 public interface IAppOpsActiveCallback extends IInterface {
     void opActiveChanged(int i, int i2, String str, String str2, int i3, boolean z, int i4, int i5)
             throws RemoteException;

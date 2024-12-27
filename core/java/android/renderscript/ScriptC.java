@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.InputStream;
 
 @Deprecated
-/* loaded from: classes3.dex */
 public class ScriptC extends Script {
     private static final long RENDERSCRIPT_SCRIPTC_DEPRECATION_CHANGE_ID = 297019750;
     private static final String TAG = "ScriptC";

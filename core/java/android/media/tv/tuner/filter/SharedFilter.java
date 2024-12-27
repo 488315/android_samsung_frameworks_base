@@ -8,7 +8,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.concurrent.Executor;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class SharedFilter implements AutoCloseable {
     public static final int STATUS_INACCESSIBLE = 128;
     private static final String TAG = "SharedFilter";

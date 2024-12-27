@@ -2,7 +2,6 @@ package android.filterfw.format;
 
 import android.filterfw.core.MutableFrameFormat;
 
-/* loaded from: classes.dex */
 public class PrimitiveFormat {
     public static MutableFrameFormat createByteFormat(int count, int target) {
         return createFormat(2, count, target);

@@ -8,7 +8,6 @@ import com.samsung.android.graphics.spr.document.attribute.impl.SprMatrix;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-/* loaded from: classes6.dex */
 public class SprAttributeMatrix extends SprAttributeBase {
     private final SprAttributeMatrix mIntrinsic;
     public Matrix matrix;

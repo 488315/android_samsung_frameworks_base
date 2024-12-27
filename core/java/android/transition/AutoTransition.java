@@ -3,7 +3,6 @@ package android.transition;
 import android.content.Context;
 import android.util.AttributeSet;
 
-/* loaded from: classes4.dex */
 public class AutoTransition extends TransitionSet {
     public AutoTransition() {
         init();

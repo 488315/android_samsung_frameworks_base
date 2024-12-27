@@ -41,7 +41,6 @@ import android.view.inspector.PropertyReader;
 import java.lang.ref.WeakReference;
 import java.util.List;
 
-/* loaded from: classes4.dex */
 public class HorizontalScrollView extends FrameLayout {
     private static final int ANIMATED_SCROLL_GAP = 250;
     private static final float FLING_DESTRETCH_FACTOR = 4.0f;

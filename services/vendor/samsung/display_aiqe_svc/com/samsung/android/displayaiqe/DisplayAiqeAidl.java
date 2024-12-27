@@ -13,7 +13,6 @@ import vendor.qti.hardware.display.aiqe.IDisplayAiqe;
 
 import java.util.NoSuchElementException;
 
-/* loaded from: classes.dex */
 public final class DisplayAiqeAidl implements DisplayAiqeHal {
     private static final String ANDROID_UI_ISURFACE_COMPOSER = "android.ui.ISurfaceComposer";
     private static final String DISPLAY_AIQE_AIDL_SERVICE =

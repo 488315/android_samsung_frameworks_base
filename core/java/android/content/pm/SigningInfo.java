@@ -7,7 +7,6 @@ import android.util.ArraySet;
 import java.security.PublicKey;
 import java.util.Collection;
 
-/* loaded from: classes.dex */
 public final class SigningInfo implements Parcelable {
     public static final Parcelable.Creator<SigningInfo> CREATOR =
             new Parcelable.Creator<SigningInfo>() { // from class: android.content.pm.SigningInfo.1

@@ -4,7 +4,6 @@ import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public class MessageDeliveryStatus implements Parcelable {
     public static final Parcelable.Creator<MessageDeliveryStatus> CREATOR =
             new Parcelable.Creator<MessageDeliveryStatus>() { // from class:

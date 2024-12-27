@@ -1,6 +1,5 @@
 package android.stats.privacysignals;
 
-/* loaded from: classes3.dex */
 public final class Enums {
     public static final int A11Y_SERVICE = 2;
     public static final int BG_LOCATION = 3;

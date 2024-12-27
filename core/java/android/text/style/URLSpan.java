@@ -12,7 +12,6 @@ import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 
-/* loaded from: classes4.dex */
 public class URLSpan extends ClickableSpan implements ParcelableSpan {
     private final String mURL;
 

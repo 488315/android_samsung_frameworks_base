@@ -12,7 +12,6 @@ import java.io.IOException;
 
 import javax.net.ssl.SSLContext;
 
-/* loaded from: classes3.dex */
 public final class SSLSessionCache {
     private static final String TAG = "SSLSessionCache";
     final SSLClientSessionCache mSessionCache;

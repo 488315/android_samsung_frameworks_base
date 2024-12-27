@@ -7,7 +7,6 @@ import android.util.Log;
 import java.io.IOException;
 import java.util.NoSuchElementException;
 
-/* loaded from: classes3.dex */
 public final class Session {
     private static final String TAG = "OMAPI.Session";
     private final Object mLock = new Object();

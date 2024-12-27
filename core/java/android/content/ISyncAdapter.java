@@ -8,7 +8,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes.dex */
 public interface ISyncAdapter extends IInterface {
     void cancelSync(ISyncContext iSyncContext) throws RemoteException;
 

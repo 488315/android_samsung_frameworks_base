@@ -19,7 +19,6 @@ import com.android.internal.R;
 
 import java.io.IOException;
 
-/* loaded from: classes.dex */
 public class GrantCredentialsPermissionActivity extends Activity implements View.OnClickListener {
     public static final String EXTRAS_ACCOUNT = "account";
     public static final String EXTRAS_AUTH_TOKEN_TYPE = "authTokenType";

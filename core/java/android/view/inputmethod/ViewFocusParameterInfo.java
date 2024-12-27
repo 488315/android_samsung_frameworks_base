@@ -1,6 +1,5 @@
 package android.view.inputmethod;
 
-/* loaded from: classes4.dex */
 final class ViewFocusParameterInfo {
     final EditorInfo mPreviousEditorInfo;
     final int mPreviousSoftInputMode;

@@ -4,7 +4,6 @@ import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes4.dex */
 public class SatelliteSubscriberInfo implements Parcelable {
     public static final Parcelable.Creator<SatelliteSubscriberInfo> CREATOR =
             new Parcelable.Creator<

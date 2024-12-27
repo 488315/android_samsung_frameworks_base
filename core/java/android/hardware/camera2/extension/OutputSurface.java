@@ -5,7 +5,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.view.Surface;
 
-/* loaded from: classes2.dex */
 public class OutputSurface implements Parcelable {
     public static final Parcelable.Creator<OutputSurface> CREATOR =
             new Parcelable.Creator<OutputSurface>() { // from class:

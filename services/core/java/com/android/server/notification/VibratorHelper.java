@@ -14,7 +14,6 @@ import java.time.Duration;
 import java.util.Arrays;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes2.dex */
 public final class VibratorHelper {
     public static final long[] DEFAULT_VIBRATE_PATTERN = {0, 250, 250, 250};
     public final int mDefaultVibrationAmplitude;

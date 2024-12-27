@@ -1,6 +1,5 @@
 package com.android.server.backup;
 
-/* loaded from: classes5.dex */
 public final class FeatureFlagsImpl implements FeatureFlags {
     @Override // com.android.server.backup.FeatureFlags
     public boolean enableClearPipeAfterRestoreFile() {

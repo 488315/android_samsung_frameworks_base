@@ -11,7 +11,6 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/* loaded from: classes3.dex */
 public final class TextValueSanitizer extends InternalSanitizer implements Sanitizer, Parcelable {
     public static final Parcelable.Creator<TextValueSanitizer> CREATOR =
             new Parcelable.Creator<

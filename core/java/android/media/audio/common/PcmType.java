@@ -1,6 +1,5 @@
 package android.media.audio.common;
 
-/* loaded from: classes2.dex */
 public @interface PcmType {
     public static final byte DEFAULT = 0;
     public static final byte FIXED_Q_8_24 = 3;

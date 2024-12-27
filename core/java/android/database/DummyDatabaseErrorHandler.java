@@ -3,7 +3,6 @@ package android.database;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDump;
 
-/* loaded from: classes.dex */
 public class DummyDatabaseErrorHandler extends ErrorHandler {
     public DummyDatabaseErrorHandler() {}
 

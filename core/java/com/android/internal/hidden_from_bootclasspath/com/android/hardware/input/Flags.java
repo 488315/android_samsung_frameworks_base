@@ -1,6 +1,5 @@
 package com.android.internal.hidden_from_bootclasspath.com.android.hardware.input;
 
-/* loaded from: classes5.dex */
 public final class Flags {
     private static FeatureFlags FEATURE_FLAGS = new FeatureFlagsImpl();
     public static final String FLAG_EMOJI_AND_SCREENSHOT_KEYCODES_AVAILABLE =

@@ -24,7 +24,6 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public class Item extends Element implements ItemStatusListener {
     protected ArrayList<Animation<?>> animationList;
     protected Content content;

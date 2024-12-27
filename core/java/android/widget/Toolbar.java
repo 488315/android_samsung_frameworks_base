@@ -48,7 +48,6 @@ import com.android.internal.widget.ToolbarWidgetWrapper;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes4.dex */
 public class Toolbar extends ViewGroup {
     private static final int[] ATTRS = {16843499};
     private static final String TAG = "Toolbar";

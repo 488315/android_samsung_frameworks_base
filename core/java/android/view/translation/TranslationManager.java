@@ -31,7 +31,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-/* loaded from: classes4.dex */
 public final class TranslationManager {
     public static final String EXTRA_CAPABILITIES = "translation_capabilities";
     public static final int STATUS_SYNC_CALL_FAIL = 2;

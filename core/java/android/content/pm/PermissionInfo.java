@@ -15,7 +15,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Collections;
 import java.util.Set;
 
-/* loaded from: classes.dex */
 public class PermissionInfo extends PackageItemInfo implements Parcelable {
     public static final int FLAG_COSTS_MONEY = 1;
     public static final int FLAG_HARD_RESTRICTED = 4;

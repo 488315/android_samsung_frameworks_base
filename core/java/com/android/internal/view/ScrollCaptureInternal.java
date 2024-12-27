@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.ListView;
 
-/* loaded from: classes5.dex */
 public class ScrollCaptureInternal {
     private static final boolean DEBUG = false;
     private static final boolean DEBUG_VERBOSE = false;

@@ -71,7 +71,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-/* loaded from: classes3.dex */
 public abstract class BatteryStats {
     private static final String AGGREGATED_WAKELOCK_DATA = "awl";
     public static final int AGGREGATED_WAKE_TYPE_PARTIAL = 20;

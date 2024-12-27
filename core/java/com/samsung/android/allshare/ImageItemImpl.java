@@ -11,7 +11,6 @@ import com.sec.android.allshare.iface.message.AllShareKey;
 
 import java.util.ArrayList;
 
-/* loaded from: classes3.dex */
 final class ImageItemImpl extends Item implements IBundleHolder {
     public static final Parcelable.Creator<ImageItemImpl> CREATOR =
             new Parcelable.Creator<

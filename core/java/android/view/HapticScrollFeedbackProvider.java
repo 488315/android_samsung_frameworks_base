@@ -1,6 +1,5 @@
 package android.view;
 
-/* loaded from: classes4.dex */
 public class HapticScrollFeedbackProvider implements ScrollFeedbackProvider {
     private static final boolean INITIAL_END_OF_LIST_HAPTICS_ENABLED = false;
     private static final String TAG = "HapticScrollFeedbackProvider";

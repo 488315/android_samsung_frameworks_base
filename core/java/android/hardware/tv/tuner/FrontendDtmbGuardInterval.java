@@ -1,6 +1,5 @@
 package android.hardware.tv.tuner;
 
-/* loaded from: classes2.dex */
 public @interface FrontendDtmbGuardInterval {
     public static final int AUTO = 1;
     public static final int PN_420_CONST = 16;

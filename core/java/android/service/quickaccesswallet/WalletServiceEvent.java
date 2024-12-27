@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes3.dex */
 public final class WalletServiceEvent implements Parcelable {
     public static final Parcelable.Creator<WalletServiceEvent> CREATOR =
             new Parcelable.Creator<

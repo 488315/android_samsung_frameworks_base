@@ -15,7 +15,6 @@ import com.android.internal.org.bouncycastle.asn1.x9.X9ObjectIdentifiers;
 import java.util.HashMap;
 import java.util.Map;
 
-/* loaded from: classes5.dex */
 public class DefaultCMSSignatureAlgorithmNameGenerator
         implements CMSSignatureAlgorithmNameGenerator {
     private final Map encryptionAlgs = new HashMap();

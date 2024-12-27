@@ -4,7 +4,6 @@ import android.content.ComponentName;
 import android.os.Bundle;
 import android.service.notification.StatusBarNotification;
 
-/* loaded from: classes6.dex */
 public abstract class EdgeManagerInternal {
     public static final String NOTIFICATION_KEY_BUBBLE = "bubble";
     public static final String NOTIFICATION_KEY_CAN_BYPASSDND = "canBypassDnd";

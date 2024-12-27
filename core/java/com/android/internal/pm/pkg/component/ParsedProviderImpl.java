@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public class ParsedProviderImpl extends ParsedMainComponentImpl
         implements ParsedProvider, Parcelable {
     public static final Parcelable.Creator<ParsedProviderImpl> CREATOR =

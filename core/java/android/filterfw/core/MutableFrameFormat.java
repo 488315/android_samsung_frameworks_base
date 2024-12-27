@@ -2,7 +2,6 @@ package android.filterfw.core;
 
 import java.util.Arrays;
 
-/* loaded from: classes.dex */
 public class MutableFrameFormat extends FrameFormat {
     public MutableFrameFormat() {}
 

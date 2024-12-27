@@ -1,6 +1,5 @@
 package com.android.server.wm;
 
-/* loaded from: classes5.dex */
 public final class DisplayAreaProto {
     public static final long CHILDREN = 2246267895811L;
     public static final long FEATURE_ID = 1120986464262L;

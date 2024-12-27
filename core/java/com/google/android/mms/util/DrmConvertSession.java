@@ -10,7 +10,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 
-/* loaded from: classes5.dex */
 public class DrmConvertSession {
     public static final int STATUS_FILE_ERROR = 492;
     public static final int STATUS_NOT_ACCEPTABLE = 406;

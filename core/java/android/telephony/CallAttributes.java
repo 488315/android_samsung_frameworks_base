@@ -8,7 +8,6 @@ import java.util.Objects;
 
 @SystemApi
 @Deprecated
-/* loaded from: classes4.dex */
 public final class CallAttributes implements Parcelable {
     public static final Parcelable.Creator<CallAttributes> CREATOR =
             new Parcelable.Creator() { // from class: android.telephony.CallAttributes.1

@@ -2,7 +2,6 @@ package android.os;
 
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public final class TimestampedValue<T> implements Parcelable {
     public static final Parcelable.Creator<TimestampedValue<?>> CREATOR =
             new Parcelable.ClassLoaderCreator<

@@ -12,7 +12,6 @@ import java.util.Set;
 import java.util.TimeZone;
 
 @Deprecated
-/* loaded from: classes2.dex */
 public class Metadata {
     public static final int ALBUM = 8;
     public static final int ALBUM_ART = 18;

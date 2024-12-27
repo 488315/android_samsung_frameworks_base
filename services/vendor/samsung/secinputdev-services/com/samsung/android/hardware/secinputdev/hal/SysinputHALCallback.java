@@ -5,7 +5,6 @@ import com.samsung.android.hardware.secinputdev.SemInputDeviceRawdataService;
 
 import java.util.ArrayList;
 
-/* loaded from: classes.dex */
 public class SysinputHALCallback {
     private static final String TAG = "SysinputHALCallback";
     private static volatile SysinputHALCallback uniqueInstance = null;

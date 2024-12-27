@@ -17,7 +17,6 @@ import com.samsung.android.app.usage.IUsageStatsWatcher;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
 public interface IUsageStatsManager extends IInterface {
     void clearBroadcastEvents(String str, int i) throws RemoteException;
 

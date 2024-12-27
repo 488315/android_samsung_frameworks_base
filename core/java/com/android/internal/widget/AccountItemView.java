@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import com.android.internal.R;
 
-/* loaded from: classes5.dex */
 public class AccountItemView extends LinearLayout {
     private ImageView mAccountIcon;
     private TextView mAccountName;

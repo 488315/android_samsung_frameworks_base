@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.util.Arrays;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public final class TelephonyHistogram implements Parcelable {
     private static final int ABSENT = 0;
     public static final Parcelable.Creator<TelephonyHistogram> CREATOR =

@@ -1,6 +1,5 @@
 package android.filterfw.core;
 
-/* loaded from: classes.dex */
 public class SimpleFrameManager extends FrameManager {
     @Override // android.filterfw.core.FrameManager
     public Frame newFrame(FrameFormat format) {

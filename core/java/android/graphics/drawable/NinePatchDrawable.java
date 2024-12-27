@@ -27,7 +27,6 @@ import org.xmlpull.v1.XmlPullParserException;
 import java.io.IOException;
 import java.io.InputStream;
 
-/* loaded from: classes.dex */
 public class NinePatchDrawable extends Drawable {
     private static final boolean DEFAULT_DITHER = false;
     private int mBitmapHeight;

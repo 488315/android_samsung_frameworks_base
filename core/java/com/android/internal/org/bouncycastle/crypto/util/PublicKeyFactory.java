@@ -43,7 +43,6 @@ import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Map;
 
-/* loaded from: classes5.dex */
 public class PublicKeyFactory {
     private static Map converters = new HashMap();
 

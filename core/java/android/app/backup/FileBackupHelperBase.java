@@ -7,7 +7,6 @@ import android.util.Log;
 import java.io.File;
 import java.io.FileDescriptor;
 
-/* loaded from: classes.dex */
 class FileBackupHelperBase {
     private static final String TAG = "FileBackupHelperBase";
     Context mContext;

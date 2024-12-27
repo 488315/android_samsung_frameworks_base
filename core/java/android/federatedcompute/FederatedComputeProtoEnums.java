@@ -1,6 +1,5 @@
 package android.federatedcompute;
 
-/* loaded from: classes.dex */
 public final class FederatedComputeProtoEnums {
     public static final int TRAIN_COMPUTATION_CLIENT_INTERRUPTED = 31;
     public static final int TRAIN_COMPUTATION_COMPLETED = 32;

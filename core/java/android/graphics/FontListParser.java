@@ -21,7 +21,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-/* loaded from: classes.dex */
 public class FontListParser {
     public static final String ATTR_FALLBACK_FOR = "fallbackFor";
     public static final String ATTR_INDEX = "index";

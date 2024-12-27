@@ -4,7 +4,6 @@ import android.media.AudioManager;
 
 import java.util.UUID;
 
-/* loaded from: classes2.dex */
 public class SemHapticGenerator extends AudioEffect {
     public static final UUID EFFECT_TYPE_SEC_HAPTIC_GENERATOR =
             UUID.fromString("2d43d8b6-1861-43d9-8eda-11f63bef2233");

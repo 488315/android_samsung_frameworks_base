@@ -12,7 +12,6 @@ import android.view.InputChannel;
 
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public interface ITvInputClient extends IInterface {
     void onAdBufferConsumed(AdBuffer adBuffer, int i) throws RemoteException;
 

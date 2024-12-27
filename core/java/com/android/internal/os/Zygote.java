@@ -35,7 +35,6 @@ import java.io.FileDescriptor;
 import java.io.IOException;
 import java.lang.reflect.Array;
 
-/* loaded from: classes5.dex */
 public final class Zygote {
     public static final String ALLOWLISTED_DATA_INFO_MAP = "--allowlisted-data-info-map";
     private static final String ANDROID_SOCKET_PREFIX = "ANDROID_SOCKET_";

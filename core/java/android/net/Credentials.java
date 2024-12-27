@@ -1,6 +1,5 @@
 package android.net;
 
-/* loaded from: classes3.dex */
 public class Credentials {
     private final int gid;
     private final int pid;

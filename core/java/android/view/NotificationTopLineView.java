@@ -14,7 +14,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 @RemoteViews.RemoteView
-/* loaded from: classes4.dex */
 public class NotificationTopLineView extends ViewGroup {
     private View mAppName;
     private final int mChildHideWidth;

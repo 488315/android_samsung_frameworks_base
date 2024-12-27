@@ -2,7 +2,6 @@ package android.text;
 
 import android.graphics.Paint;
 
-/* loaded from: classes4.dex */
 public class TextPaint extends Paint {
     public int baselineShift;
     public int bgColor;

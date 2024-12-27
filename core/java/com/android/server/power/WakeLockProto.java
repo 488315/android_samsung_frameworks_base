@@ -1,6 +1,5 @@
 package com.android.server.power;
 
-/* loaded from: classes5.dex */
 public final class WakeLockProto {
     public static final long ACQ_MS = 1112396529669L;
     public static final long FLAGS = 1146756268035L;

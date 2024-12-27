@@ -1,6 +1,5 @@
 package android.media;
 
-/* loaded from: classes2.dex */
 public class AudioDevicePortConfig extends AudioPortConfig {
     AudioDevicePortConfig(
             AudioDevicePort devicePort,

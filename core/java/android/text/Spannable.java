@@ -1,6 +1,5 @@
 package android.text;
 
-/* loaded from: classes4.dex */
 public interface Spannable extends Spanned {
     void removeSpan(Object obj);
 

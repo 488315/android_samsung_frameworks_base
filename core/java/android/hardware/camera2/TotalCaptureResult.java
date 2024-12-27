@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/* loaded from: classes2.dex */
 public final class TotalCaptureResult extends CaptureResult {
     private final List<CaptureResult> mPartialResults;
     private final HashMap<String, TotalCaptureResult> mPhysicalCaptureResults;

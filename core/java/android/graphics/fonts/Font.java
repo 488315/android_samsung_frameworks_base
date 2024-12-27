@@ -34,7 +34,6 @@ import java.util.IdentityHashMap;
 import java.util.Objects;
 import java.util.Set;
 
-/* loaded from: classes.dex */
 public final class Font {
     private static final int NOT_SPECIFIED = -1;
     private static final int STYLE_ITALIC = 1;

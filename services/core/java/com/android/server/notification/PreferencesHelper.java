@@ -59,7 +59,6 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes2.dex */
 public final class PreferencesHelper implements RankingConfig {
     static final int DEFAULT_BUBBLE_PREFERENCE = 0;
     static final boolean DEFAULT_HIDE_SILENT_STATUS_BAR_ICONS = false;

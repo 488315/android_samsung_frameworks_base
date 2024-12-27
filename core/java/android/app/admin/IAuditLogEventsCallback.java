@@ -8,7 +8,6 @@ import android.os.RemoteException;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
 public interface IAuditLogEventsCallback extends IInterface {
     public static final String DESCRIPTOR = "android.app.admin.IAuditLogEventsCallback";
 

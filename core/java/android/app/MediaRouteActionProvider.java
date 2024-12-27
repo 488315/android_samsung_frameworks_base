@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 
 import java.lang.ref.WeakReference;
 
-/* loaded from: classes.dex */
 public class MediaRouteActionProvider extends ActionProvider {
     private static final String TAG = "MediaRouteActionProvider";
     private MediaRouteButton mButton;

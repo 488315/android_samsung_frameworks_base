@@ -20,7 +20,6 @@ import com.android.internal.org.bouncycastle.util.BigIntegers;
 import java.io.IOException;
 import java.util.Enumeration;
 
-/* loaded from: classes5.dex */
 public class PrivateKeyInfo extends ASN1Object {
     private ASN1Set attributes;
     private ASN1OctetString privateKey;

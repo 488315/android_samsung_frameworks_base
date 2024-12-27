@@ -35,7 +35,6 @@ import java.util.NoSuchElementException;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/* loaded from: classes4.dex */
 public final class MainContentCaptureSession extends ContentCaptureSession {
     private static final String CONTENT_CAPTURE_WRONG_THREAD_METRIC_ID =
             "content_capture.value_content_capture_wrong_thread_count";

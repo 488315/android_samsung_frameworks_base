@@ -2,7 +2,6 @@ package android.media.effect;
 
 import android.filterfw.core.Frame;
 
-/* loaded from: classes2.dex */
 public class SizeChangeEffect extends SingleFilterEffect {
     public SizeChangeEffect(
             EffectContext context,

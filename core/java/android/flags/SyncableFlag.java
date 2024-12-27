@@ -5,7 +5,6 @@ import android.media.MediaMetrics;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes.dex */
 public final class SyncableFlag implements Parcelable {
     public static final Parcelable.Creator<SyncableFlag> CREATOR =
             new Parcelable.Creator<SyncableFlag>() { // from class: android.flags.SyncableFlag.1

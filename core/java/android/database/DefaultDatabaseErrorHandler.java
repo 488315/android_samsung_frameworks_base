@@ -5,7 +5,6 @@ import android.database.sqlite.SQLiteDatabaseConfiguration;
 import android.database.sqlite.SQLiteDump;
 import android.util.Log;
 
-/* loaded from: classes.dex */
 public final class DefaultDatabaseErrorHandler implements DatabaseErrorHandler {
     private static final String CORRUPT_SUFFIX = ".corrupt";
     private static final String[] DATABASE_SUFFIX = {"", "-journal", "-shm", "-wal", "-se"};

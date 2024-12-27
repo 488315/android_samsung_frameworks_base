@@ -1,6 +1,5 @@
 package android.companion;
 
-/* loaded from: classes.dex */
 public final class Telecom {
     public static final int ACCEPT = 1;
     public static final long CALLS = 2246267895809L;

@@ -6,7 +6,6 @@ import android.os.Parcelable;
 
 import java.util.concurrent.Executor;
 
-/* loaded from: classes2.dex */
 public final class PromptContentViewWithMoreOptionsButton implements PromptContentViewParcelable {
     public static final Parcelable.Creator<PromptContentViewWithMoreOptionsButton> CREATOR =
             new Parcelable.Creator<PromptContentViewWithMoreOptionsButton>() { // from class:

@@ -1,6 +1,5 @@
 package com.samsung.android.vibrator;
 
-/* loaded from: classes6.dex */
 public class SemHapticFeedbackConstants {
     public static final int ALERT_BASIC_CALL = 50035;
     public static final int ALERT_BOUNCE = 50125;

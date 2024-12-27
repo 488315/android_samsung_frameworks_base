@@ -3,7 +3,6 @@ package android.text;
 import android.graphics.TemporaryBuffer;
 import android.graphics.text.GraphemeBreak;
 
-/* loaded from: classes4.dex */
 public class GraphemeClusterSegmentFinder extends SegmentFinder {
     private static AutoGrowArray.FloatArray sTempAdvances = null;
     private final boolean[] mIsGraphemeBreak;

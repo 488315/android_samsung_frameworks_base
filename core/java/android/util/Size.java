@@ -2,7 +2,6 @@ package android.util;
 
 import com.android.internal.util.Preconditions;
 
-/* loaded from: classes4.dex */
 public final class Size {
     private final int mHeight;
     private final int mWidth;

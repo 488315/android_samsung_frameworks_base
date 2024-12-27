@@ -48,7 +48,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-/* loaded from: classes4.dex */
 public class ActionMenuPresenter extends BaseMenuPresenter
         implements ActionProvider.SubUiVisibilityListener {
     private static final boolean ACTIONBAR_ANIMATIONS_ENABLED = false;

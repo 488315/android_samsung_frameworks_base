@@ -10,7 +10,6 @@ import java.io.File;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 
-/* loaded from: classes4.dex */
 public class BoostFramework {
     public static final int MPCTLV3_GPU_IS_APP_BG = 1115832320;
     public static final int MPCTLV3_GPU_IS_APP_FG = 1115815936;

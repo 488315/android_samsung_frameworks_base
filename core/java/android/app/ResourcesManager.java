@@ -49,7 +49,6 @@ import java.util.WeakHashMap;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-/* loaded from: classes.dex */
 public class ResourcesManager {
     private static final int ALL_RESOURCE_REFERENCES_LIMIT = 1000;
     private static final boolean DEBUG = false;

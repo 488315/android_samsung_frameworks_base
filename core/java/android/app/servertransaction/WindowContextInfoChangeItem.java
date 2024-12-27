@@ -9,7 +9,6 @@ import android.window.WindowContextInfo;
 
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public class WindowContextInfoChangeItem extends ClientTransactionItem {
     public static final Parcelable.Creator<WindowContextInfoChangeItem> CREATOR =
             new Parcelable.Creator<WindowContextInfoChangeItem>() { // from class:

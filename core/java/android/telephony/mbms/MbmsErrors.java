@@ -3,7 +3,6 @@ package android.telephony.mbms;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes4.dex */
 public class MbmsErrors {
     public static final int ERROR_MIDDLEWARE_LOST = 3;
     public static final int ERROR_MIDDLEWARE_NOT_BOUND = 2;

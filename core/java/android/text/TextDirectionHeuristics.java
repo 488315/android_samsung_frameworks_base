@@ -5,7 +5,6 @@ import android.content.res.Configuration;
 import java.nio.CharBuffer;
 import java.util.Locale;
 
-/* loaded from: classes4.dex */
 public class TextDirectionHeuristics {
     public static final TextDirectionHeuristic ANYRTL_LTR;
     public static final TextDirectionHeuristic FIRSTSTRONG_LTR;

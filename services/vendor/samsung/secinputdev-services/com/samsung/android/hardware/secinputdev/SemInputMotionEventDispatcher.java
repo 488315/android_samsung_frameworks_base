@@ -20,7 +20,6 @@ import java.util.Queue;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-/* loaded from: classes.dex */
 public class SemInputMotionEventDispatcher {
     private static final String TAG = "SemInputMotionEventDispatcher";
     private static volatile SemInputMotionEventDispatcher uniqueInstance = null;

@@ -10,7 +10,6 @@ import android.util.Log;
 
 import com.samsung.android.share.SemShareConstants;
 
-/* loaded from: classes6.dex */
 public class LsLogUploader {
     private static final String AUTHORITY = "com.sec.android.log.sp4xkeu9ef";
     private static final String REPORT_ERROR_INTENT =

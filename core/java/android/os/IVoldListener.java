@@ -1,6 +1,5 @@
 package android.os;
 
-/* loaded from: classes3.dex */
 public interface IVoldListener extends IInterface {
     void onDiskCreated(String str, int i) throws RemoteException;
 

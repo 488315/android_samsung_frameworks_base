@@ -2,7 +2,6 @@ package android.graphics.rendererpolicy;
 
 import android.net.Uri;
 
-/* loaded from: classes.dex */
 interface ScpmApiContract {
     public static final String ACTION_CLEAR_DATA = "com.samsung.android.scpm.policy.CLEAR_DATA";
     public static final String ACTION_PREFIX = "com.samsung.android.scpm.policy.UPDATE.";

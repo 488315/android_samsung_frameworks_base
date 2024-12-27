@@ -22,7 +22,6 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.TimeZone;
 
-/* loaded from: classes4.dex */
 public class DateUtils {
 
     @Deprecated public static final String ABBREV_MONTH_FORMAT = "%b";

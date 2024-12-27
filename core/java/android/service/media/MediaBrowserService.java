@@ -32,7 +32,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
-/* loaded from: classes3.dex */
 public abstract class MediaBrowserService extends Service {
     private static final boolean DBG = false;
     public static final String KEY_MEDIA_ITEM = "media_item";

@@ -2,7 +2,6 @@ package com.android.internal.org.bouncycastle.operator;
 
 import java.io.IOException;
 
-/* loaded from: classes5.dex */
 public class OperatorStreamException extends IOException {
     private Throwable cause;
 

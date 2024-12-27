@@ -4,7 +4,6 @@ import android.util.ArrayMap;
 
 import java.util.InputMismatchException;
 
-/* loaded from: classes5.dex */
 public final class MetricIds {
     public static final int METRIC_TYPE_COUNTER = 1;
     public static final int METRIC_TYPE_COUNTER_WITH_UID = 3;

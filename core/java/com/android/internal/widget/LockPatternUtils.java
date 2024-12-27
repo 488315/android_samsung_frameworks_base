@@ -63,7 +63,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-/* loaded from: classes5.dex */
 public class LockPatternUtils implements LsConstants {
     private static final String APP_LOCK_FINGERPRINT_LOCKSCREEN_KEY =
             "lockscreen.applock_fingerprint";

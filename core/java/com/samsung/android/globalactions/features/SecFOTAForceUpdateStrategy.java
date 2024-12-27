@@ -5,7 +5,6 @@ import com.samsung.android.globalactions.util.ConditionChecker;
 import com.samsung.android.globalactions.util.SystemConditions;
 import com.samsung.android.globalactions.util.SystemController;
 
-/* loaded from: classes6.dex */
 public class SecFOTAForceUpdateStrategy implements SoftwareUpdateStrategy {
     private final ConditionChecker mConditionChecker;
     private final SystemController mSystemController;

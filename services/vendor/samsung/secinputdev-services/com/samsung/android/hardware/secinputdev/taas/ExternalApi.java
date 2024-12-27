@@ -26,7 +26,6 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
-/* loaded from: classes.dex */
 public class ExternalApi {
     static final String ACTION_ISSUE_TRACKER_ON_OFF = "com.sec.android.ISSUE_TRACKER_ONOFF";
     private static final String EXTRA_ERROR_CODE = "ERRCODE";

@@ -7,7 +7,6 @@ import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.Lambda;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 final class AnimatableClockView$textAnimatorFactory$1 extends Lambda implements Function2 {
     public static final AnimatableClockView$textAnimatorFactory$1 INSTANCE = new AnimatableClockView$textAnimatorFactory$1();
 

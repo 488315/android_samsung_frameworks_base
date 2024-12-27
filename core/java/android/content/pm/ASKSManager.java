@@ -19,7 +19,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-/* loaded from: classes.dex */
 public class ASKSManager {
     public static final int ASKS_UNKNOWN_BLOCKBYLIST = 1;
     public static final int ASKS_UNKNOWN_BLOCKED_BYRAMPART = 127;

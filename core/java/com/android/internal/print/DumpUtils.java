@@ -14,7 +14,6 @@ import android.service.print.PrinterCapabilitiesProto;
 
 import com.android.internal.util.dump.DualDumpOutputStream;
 
-/* loaded from: classes5.dex */
 public class DumpUtils {
     public static void writePrinterId(
             DualDumpOutputStream proto, String idName, long id, PrinterId printerId) {

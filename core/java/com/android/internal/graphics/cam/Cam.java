@@ -4,7 +4,6 @@ import android.hardware.scontext.SContextConstants;
 
 import com.android.internal.graphics.ColorUtils;
 
-/* loaded from: classes5.dex */
 public class Cam {
     private static final float CHROMA_SEARCH_ENDPOINT = 0.4f;
     private static final float DE_MAX = 1.0f;

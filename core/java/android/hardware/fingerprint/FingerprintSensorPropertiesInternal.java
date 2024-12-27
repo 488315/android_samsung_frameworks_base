@@ -10,7 +10,6 @@ import com.android.internal.logging.nano.MetricsProto;
 
 import java.util.List;
 
-/* loaded from: classes2.dex */
 public class FingerprintSensorPropertiesInternal extends SensorPropertiesInternal {
     public static final Parcelable.Creator<FingerprintSensorPropertiesInternal> CREATOR =
             new Parcelable.Creator<FingerprintSensorPropertiesInternal>() { // from class:

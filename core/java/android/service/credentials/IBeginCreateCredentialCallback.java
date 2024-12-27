@@ -8,7 +8,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.text.TextUtils;
 
-/* loaded from: classes3.dex */
 public interface IBeginCreateCredentialCallback extends IInterface {
     public static final String DESCRIPTOR =
             "android.service.credentials.IBeginCreateCredentialCallback";

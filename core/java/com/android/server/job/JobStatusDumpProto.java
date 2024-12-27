@@ -1,6 +1,5 @@
 package com.android.server.job;
 
-/* loaded from: classes5.dex */
 public final class JobStatusDumpProto {
     public static final int ACTIVE = 0;
     public static final long CALLING_UID = 1120986464257L;

@@ -12,7 +12,6 @@ import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
 
-/* loaded from: classes3.dex */
 public class Voice implements Parcelable {
     public static final Parcelable.Creator<Voice> CREATOR =
             new Parcelable.Creator<Voice>() { // from class: android.speech.tts.Voice.1

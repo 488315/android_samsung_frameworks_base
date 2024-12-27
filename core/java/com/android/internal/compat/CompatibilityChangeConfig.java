@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.util.HashSet;
 import java.util.Set;
 
-/* loaded from: classes5.dex */
 public final class CompatibilityChangeConfig implements Parcelable {
     public static final Parcelable.Creator<CompatibilityChangeConfig> CREATOR =
             new Parcelable.Creator<

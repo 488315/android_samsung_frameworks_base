@@ -26,7 +26,6 @@ import java.net.DatagramSocket;
 import java.net.Socket;
 import java.nio.ByteOrder;
 
-/* loaded from: classes3.dex */
 public class ParcelFileDescriptor implements Parcelable, Closeable {
     public static final Parcelable.Creator<ParcelFileDescriptor> CREATOR =
             new Parcelable.Creator<

@@ -10,7 +10,6 @@ import com.android.framework.protobuf.nano.WireFormatNano;
 import java.io.IOException;
 import java.util.Arrays;
 
-/* loaded from: classes5.dex */
 public final class S2TileProto extends MessageNano {
     private static volatile S2TileProto[] _emptyArray;
     public byte[] byteBuffer;

@@ -1,6 +1,5 @@
 package android.service;
 
-/* loaded from: classes3.dex */
 public final class SensorPrivacyToggleSourceProto {
     public static final int DIALOG = 3;
     public static final int OTHER = 5;

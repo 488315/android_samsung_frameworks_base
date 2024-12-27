@@ -14,7 +14,6 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-/* loaded from: classes5.dex */
 public class SipMessageParsingUtils {
     private static final String ACCEPT_CONTACT_HEADER_KEY = "accept-contact";
     private static final String ACCEPT_CONTACT_HEADER_KEY_COMPACT = "a";

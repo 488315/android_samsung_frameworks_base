@@ -2,7 +2,6 @@ package android.widget;
 
 import java.util.ArrayList;
 
-/* loaded from: classes4.dex */
 class SemExpandableListPosition {
     public static final int CHILD = 1;
     public static final int GROUP = 2;

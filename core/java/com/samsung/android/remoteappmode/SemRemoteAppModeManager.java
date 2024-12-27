@@ -14,7 +14,6 @@ import android.view.Surface;
 
 import java.util.Map;
 
-/* loaded from: classes6.dex */
 public final class SemRemoteAppModeManager {
     private static final String TAG = SemRemoteAppModeManager.class.getSimpleName();
     private static final Object sLock = new Object();

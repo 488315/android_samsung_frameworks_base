@@ -12,7 +12,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 
-/* loaded from: classes5.dex */
 public abstract class BasicShellCommandHandler {
     protected static final boolean DEBUG = false;
     protected static final String TAG = "ShellCommand";

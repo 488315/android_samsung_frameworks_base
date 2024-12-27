@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 import java.util.Arrays;
 
-/* loaded from: classes3.dex */
 public final class GpsBatteryStats implements Parcelable {
     public static final Parcelable.Creator<GpsBatteryStats> CREATOR =
             new Parcelable.Creator<

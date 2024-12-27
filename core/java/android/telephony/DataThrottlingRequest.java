@@ -9,7 +9,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public final class DataThrottlingRequest implements Parcelable {
     public static final Parcelable.Creator<DataThrottlingRequest> CREATOR =
             new Parcelable.Creator<

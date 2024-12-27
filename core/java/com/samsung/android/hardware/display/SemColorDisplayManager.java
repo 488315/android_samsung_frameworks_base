@@ -6,7 +6,6 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.util.Log;
 
-/* loaded from: classes6.dex */
 public class SemColorDisplayManager {
     private static final String TAG = SemColorDisplayManager.class.getSimpleName();
     private static SemColorDisplayManager sInstance;

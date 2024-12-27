@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import android.telephony.euicc.DownloadableSubscription;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class GetDownloadableSubscriptionMetadataResult implements Parcelable {
     public static final Parcelable.Creator<GetDownloadableSubscriptionMetadataResult> CREATOR =
             new Parcelable.Creator<

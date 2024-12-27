@@ -11,7 +11,6 @@ import com.android.internal.telephony.IIntegerConsumer;
 
 import java.util.List;
 
-/* loaded from: classes4.dex */
 public interface IDataService extends IInterface {
     void cancelHandover(int i, int i2, IDataServiceCallback iDataServiceCallback)
             throws RemoteException;

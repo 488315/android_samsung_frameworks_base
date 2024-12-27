@@ -24,7 +24,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/* loaded from: classes6.dex */
 public class LegacyRuntimeManifestParseUtils {
     private static final String TAG = "LegacyRuntimeManifestParseUtils";
 

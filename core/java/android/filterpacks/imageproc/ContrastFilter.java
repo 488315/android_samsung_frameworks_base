@@ -5,7 +5,6 @@ import android.filterfw.core.NativeProgram;
 import android.filterfw.core.Program;
 import android.filterfw.core.ShaderProgram;
 
-/* loaded from: classes.dex */
 public class ContrastFilter extends SimpleImageFilter {
     private static final String mContrastShader =
             "precision mediump float;\n"

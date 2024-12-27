@@ -9,7 +9,6 @@ import android.os.RemoteException;
 
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public interface RemoteServiceCallback extends IInterface {
     void onError() throws RemoteException;
 

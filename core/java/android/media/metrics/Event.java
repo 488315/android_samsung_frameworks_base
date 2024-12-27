@@ -2,7 +2,6 @@ package android.media.metrics;
 
 import android.os.Bundle;
 
-/* loaded from: classes2.dex */
 public abstract class Event {
     Bundle mMetricsBundle;
     final long mTimeSinceCreatedMillis;

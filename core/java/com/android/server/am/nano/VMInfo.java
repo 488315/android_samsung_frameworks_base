@@ -9,7 +9,6 @@ import com.android.framework.protobuf.nano.WireFormatNano;
 
 import java.io.IOException;
 
-/* loaded from: classes5.dex */
 public final class VMInfo extends MessageNano {
     private static volatile VMInfo[] _emptyArray;
     public String name;

@@ -5,7 +5,6 @@ import android.os.IBinder;
 import android.os.ServiceManager;
 
 @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
-/* loaded from: classes3.dex */
 public class NfcServiceManager {
 
     public static final class ServiceRegisterer {

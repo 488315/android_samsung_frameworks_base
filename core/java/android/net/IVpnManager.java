@@ -13,7 +13,6 @@ import com.android.internal.net.VpnProfile;
 
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public interface IVpnManager extends IInterface {
     public static final String DESCRIPTOR = "android.net.IVpnManager";
 

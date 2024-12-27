@@ -8,7 +8,6 @@ import com.android.internal.util.FastMath;
 
 import java.io.PrintWriter;
 
-/* loaded from: classes.dex */
 public class RectF implements Parcelable {
     public static final Parcelable.Creator<RectF> CREATOR =
             new Parcelable.Creator<RectF>() { // from class: android.graphics.RectF.1

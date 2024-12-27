@@ -6,7 +6,6 @@ import android.telephony.ims.stub.SipDelegate;
 import java.util.Set;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public interface DelegateStateCallback {
     void onConfigurationChanged(SipDelegateConfiguration sipDelegateConfiguration);
 

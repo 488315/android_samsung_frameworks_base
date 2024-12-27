@@ -32,7 +32,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-/* loaded from: classes6.dex */
 class StapleMutableMediaFormat implements MutableMediaFormat {
     private static final String TAG = Def.tagOf((Class<?>) StapleMutableMediaFormat.class);
     protected DataType dataType;

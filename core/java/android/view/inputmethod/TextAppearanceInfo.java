@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public final class TextAppearanceInfo implements Parcelable {
     public static final Parcelable.Creator<TextAppearanceInfo> CREATOR =
             new Parcelable.Creator<

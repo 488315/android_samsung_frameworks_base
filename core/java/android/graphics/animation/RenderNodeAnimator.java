@@ -16,7 +16,6 @@ import com.android.internal.util.VirtualRefBasePtr;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public class RenderNodeAnimator extends Animator {
     public static final int ALPHA = 11;
     public static final int LAST_VALUE = 11;

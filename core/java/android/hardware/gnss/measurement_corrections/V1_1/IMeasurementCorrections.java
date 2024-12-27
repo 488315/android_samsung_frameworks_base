@@ -22,7 +22,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public interface IMeasurementCorrections
         extends android.hardware.gnss.measurement_corrections.V1_0.IMeasurementCorrections {
     public static final String kInterfaceName =

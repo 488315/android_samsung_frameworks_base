@@ -15,7 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-/* loaded from: classes4.dex */
 public class TransitionUtils {
     private static int MAX_IMAGE_SIZE = 1048576;
 

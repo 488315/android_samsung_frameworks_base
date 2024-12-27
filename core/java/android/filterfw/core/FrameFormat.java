@@ -5,7 +5,6 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import java.util.Arrays;
 import java.util.Map;
 
-/* loaded from: classes.dex */
 public class FrameFormat {
     public static final int BYTES_PER_SAMPLE_UNSPECIFIED = 1;
     protected static final int SIZE_UNKNOWN = -1;

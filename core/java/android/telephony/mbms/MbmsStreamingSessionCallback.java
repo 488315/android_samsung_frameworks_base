@@ -4,7 +4,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.List;
 
-/* loaded from: classes4.dex */
 public class MbmsStreamingSessionCallback {
 
     @Retention(RetentionPolicy.SOURCE)

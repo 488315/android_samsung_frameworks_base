@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/* loaded from: classes4.dex */
 public final class InputMethodInfo implements Parcelable {
     public static final String ACTION_IME_LANGUAGE_SETTINGS =
             "android.view.inputmethod.action.IME_LANGUAGE_SETTINGS";

@@ -24,7 +24,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/* loaded from: classes.dex */
 public final class DeviceAdminInfo implements Parcelable {
     public static final Parcelable.Creator<DeviceAdminInfo> CREATOR;
     public static final int HEADLESS_DEVICE_OWNER_MODE_AFFILIATED = 1;

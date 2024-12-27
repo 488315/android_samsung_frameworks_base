@@ -13,7 +13,6 @@ import java.util.Calendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/* loaded from: classes6.dex */
 public class SemEntityParser {
     private static final boolean DEBUG = true;
     private static final String DELIMITER = "＃";

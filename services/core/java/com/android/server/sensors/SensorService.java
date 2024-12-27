@@ -15,7 +15,6 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Future;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes2.dex */
 public class SensorService extends SystemService {
     public static final String START_NATIVE_SENSOR_SERVICE = "StartNativeSensorService";
     public final Object mLock;

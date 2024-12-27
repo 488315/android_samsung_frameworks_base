@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import android.util.Range;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public final class AudioCodecAttributes implements Parcelable {
     public static final Parcelable.Creator<AudioCodecAttributes> CREATOR =
             new Parcelable.Creator<

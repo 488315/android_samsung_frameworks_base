@@ -22,7 +22,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public interface ISehSysInputDev extends vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev {
     public static final String kInterfaceName =
             "vendor.samsung.hardware.sysinput@1.3::ISehSysInputDev";

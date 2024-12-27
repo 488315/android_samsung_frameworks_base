@@ -8,7 +8,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-/* loaded from: classes4.dex */
 public abstract class WebSettings {
 
     @SystemApi public static final long ENABLE_SIMPLIFIED_DARK_MODE = 214741472;

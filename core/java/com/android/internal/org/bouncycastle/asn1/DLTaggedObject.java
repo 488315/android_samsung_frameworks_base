@@ -2,7 +2,6 @@ package com.android.internal.org.bouncycastle.asn1;
 
 import java.io.IOException;
 
-/* loaded from: classes5.dex */
 public class DLTaggedObject extends ASN1TaggedObject {
     public DLTaggedObject(boolean explicit, int tagNo, ASN1Encodable obj) {
         super(explicit, tagNo, obj);

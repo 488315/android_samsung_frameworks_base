@@ -8,7 +8,6 @@ import libcore.util.EmptyArray;
 
 @SystemApi
 @Deprecated
-/* loaded from: classes2.dex */
 public class NanoAppInstanceInfo implements Parcelable {
     public static final Parcelable.Creator<NanoAppInstanceInfo> CREATOR =
             new Parcelable.Creator<NanoAppInstanceInfo>() { // from class:

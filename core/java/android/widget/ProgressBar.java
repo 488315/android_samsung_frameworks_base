@@ -62,7 +62,6 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 @RemoteViews.RemoteView
-/* loaded from: classes4.dex */
 public class ProgressBar extends View {
     private static final int MAX_LEVEL = 10000;
     public static final int MODE_STANDARD = 0;

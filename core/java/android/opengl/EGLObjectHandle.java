@@ -1,6 +1,5 @@
 package android.opengl;
 
-/* loaded from: classes3.dex */
 public abstract class EGLObjectHandle {
     private final long mHandle;
 

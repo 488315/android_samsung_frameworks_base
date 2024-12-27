@@ -11,7 +11,6 @@ import com.android.internal.org.bouncycastle.asn1.DERTaggedObject;
 
 import java.math.BigInteger;
 
-/* loaded from: classes5.dex */
 public class GeneralSubtree extends ASN1Object {
     private static final BigInteger ZERO = BigInteger.valueOf(0);
     private GeneralName base;

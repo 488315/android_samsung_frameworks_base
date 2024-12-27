@@ -40,7 +40,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public class AccessibilityNodeInfo implements Parcelable {
     public static final int ACTION_ACCESSIBILITY_FOCUS = 64;
     public static final String ACTION_ARGUMENT_ACCESSIBLE_CLICKABLE_SPAN =

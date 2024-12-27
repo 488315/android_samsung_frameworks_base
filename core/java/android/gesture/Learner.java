@@ -2,7 +2,6 @@ package android.gesture;
 
 import java.util.ArrayList;
 
-/* loaded from: classes.dex */
 abstract class Learner {
     private final ArrayList<Instance> mInstances = new ArrayList<>();
 

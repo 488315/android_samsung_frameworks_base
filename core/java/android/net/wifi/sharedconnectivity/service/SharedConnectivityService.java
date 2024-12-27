@@ -25,7 +25,6 @@ import java.util.Objects;
 import java.util.concurrent.CountDownLatch;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public abstract class SharedConnectivityService extends Service {
     private static final boolean DEBUG = true;
     private static final String TAG = SharedConnectivityService.class.getSimpleName();

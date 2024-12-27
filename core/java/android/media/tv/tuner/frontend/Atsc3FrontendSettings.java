@@ -6,7 +6,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public class Atsc3FrontendSettings extends FrontendSettings {
     public static final int BANDWIDTH_AUTO = 1;
     public static final int BANDWIDTH_BANDWIDTH_6MHZ = 2;

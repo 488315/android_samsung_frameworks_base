@@ -14,7 +14,6 @@ import android.telephony.SubscriptionInfo;
 
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public interface ISub extends IInterface {
     int addSubInfo(String str, String str2, int i, int i2) throws RemoteException;
 

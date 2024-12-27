@@ -5,7 +5,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 
-/* loaded from: classes.dex */
 public class AppDetailsActivity extends Activity {
     @Override // android.app.Activity
     protected void onCreate(Bundle savedInstanceState) {

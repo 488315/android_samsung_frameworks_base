@@ -1,6 +1,5 @@
 package com.android.internal.pm.pkg.component;
 
-/* loaded from: classes5.dex */
 public class ComponentMutateUtils {
     public static void setMaxAspectRatio(
             ParsedActivity activity, int resizeMode, float maxAspectRatio) {

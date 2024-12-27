@@ -11,7 +11,6 @@ import dalvik.annotation.optimization.FastNative;
 
 import libcore.util.NativeAllocationRegistry;
 
-/* loaded from: classes5.dex */
 public final class LongMultiStateCounter implements Parcelable {
     public static final Parcelable.Creator<LongMultiStateCounter> CREATOR =
             new Parcelable.Creator<

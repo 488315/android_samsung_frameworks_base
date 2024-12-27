@@ -4,7 +4,6 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public final class QosFilterTypeOfService implements Parcelable {
     public static final Parcelable.Creator<QosFilterTypeOfService> CREATOR =
             new Parcelable.Creator<QosFilterTypeOfService>() { // from class:

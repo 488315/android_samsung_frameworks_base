@@ -7,7 +7,6 @@ import android.hardware.camera2.utils.TypeReference;
 
 import java.nio.ByteBuffer;
 
-/* loaded from: classes2.dex */
 public class MarshalQueryableColorSpaceTransform implements MarshalQueryable<ColorSpaceTransform> {
     private static final int ELEMENTS_INT32 = 18;
     private static final int SIZE = 72;

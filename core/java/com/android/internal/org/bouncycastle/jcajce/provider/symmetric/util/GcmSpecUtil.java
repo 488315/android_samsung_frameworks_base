@@ -15,7 +15,6 @@ import java.security.PrivilegedExceptionAction;
 import java.security.spec.AlgorithmParameterSpec;
 import java.security.spec.InvalidParameterSpecException;
 
-/* loaded from: classes5.dex */
 public class GcmSpecUtil {
     static final Class gcmSpecClass =
             ClassUtil.loadClass(GcmSpecUtil.class, "javax.crypto.spec.GCMParameterSpec");

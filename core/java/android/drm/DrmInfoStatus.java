@@ -1,7 +1,6 @@
 package android.drm;
 
 @Deprecated
-/* loaded from: classes.dex */
 public class DrmInfoStatus {
     public static final int SEM_STATUS_ERROR_DRM_E_BUFFER_TOO_SMALL = 3518;
     public static final int SEM_STATUS_ERROR_DRM_E_CLK_INVALID_DATE = 3523;

@@ -6,7 +6,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.PersistableBundle;
 
-/* loaded from: classes.dex */
 public final class JobWorkItem implements Parcelable {
     public static final Parcelable.Creator<JobWorkItem> CREATOR =
             new Parcelable.Creator<JobWorkItem>() { // from class: android.app.job.JobWorkItem.1

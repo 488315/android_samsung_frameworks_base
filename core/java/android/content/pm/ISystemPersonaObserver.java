@@ -8,7 +8,6 @@ import android.os.RemoteException;
 
 import com.samsung.android.knox.SemPersonaState;
 
-/* loaded from: classes.dex */
 public interface ISystemPersonaObserver extends IInterface {
     public static final String DESCRIPTOR = "android.content.pm.ISystemPersonaObserver";
 

@@ -24,7 +24,6 @@ import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.Arrays;
 
-/* loaded from: classes.dex */
 public class ColorStateList extends ComplexColor implements Parcelable {
     private static final int DEFAULT_COLOR = -65536;
     private static final String TAG = "ColorStateList";

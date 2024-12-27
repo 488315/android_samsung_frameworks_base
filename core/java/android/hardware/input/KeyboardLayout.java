@@ -10,7 +10,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public final class KeyboardLayout implements Parcelable, Comparable<KeyboardLayout> {
     public static final Parcelable.Creator<KeyboardLayout> CREATOR =
             new Parcelable.Creator<

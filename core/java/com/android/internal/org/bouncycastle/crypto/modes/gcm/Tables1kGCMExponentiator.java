@@ -4,7 +4,6 @@ import com.android.internal.org.bouncycastle.util.Arrays;
 
 import java.util.Vector;
 
-/* loaded from: classes5.dex */
 public class Tables1kGCMExponentiator implements GCMExponentiator {
     private Vector lookupPowX2;
 

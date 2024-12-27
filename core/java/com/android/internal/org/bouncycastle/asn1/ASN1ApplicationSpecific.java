@@ -7,7 +7,6 @@ import com.android.internal.org.bouncycastle.util.encoders.Hex;
 
 import java.io.IOException;
 
-/* loaded from: classes5.dex */
 public abstract class ASN1ApplicationSpecific extends ASN1Primitive {
     protected final boolean isConstructed;
     protected final byte[] octets;

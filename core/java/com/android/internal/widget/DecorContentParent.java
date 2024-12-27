@@ -8,7 +8,6 @@ import android.view.Window;
 
 import com.android.internal.view.menu.MenuPresenter;
 
-/* loaded from: classes5.dex */
 public interface DecorContentParent {
     boolean canShowOverflowMenu();
 

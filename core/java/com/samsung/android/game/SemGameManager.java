@@ -9,7 +9,6 @@ import android.os.ServiceManager;
 import java.util.List;
 import java.util.Map;
 
-/* loaded from: classes6.dex */
 public class SemGameManager {
     private static final int FPS_PARAM_MAX = 60;
     private static final int FPS_PARAM_MIN = 1;

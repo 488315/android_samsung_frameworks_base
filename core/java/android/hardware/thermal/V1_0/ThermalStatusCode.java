@@ -4,7 +4,6 @@ import android.service.timezone.TimeZoneProviderService;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class ThermalStatusCode {
     public static final int FAILURE = 1;
     public static final int SUCCESS = 0;

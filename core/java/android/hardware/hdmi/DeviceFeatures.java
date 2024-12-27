@@ -4,7 +4,6 @@ import android.hardware.gnss.GnssSignalType;
 
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public class DeviceFeatures {
     public static final DeviceFeatures ALL_FEATURES_SUPPORT_UNKNOWN;
     public static final int FEATURE_NOT_SUPPORTED = 0;

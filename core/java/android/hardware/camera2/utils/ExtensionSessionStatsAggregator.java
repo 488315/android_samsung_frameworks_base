@@ -6,7 +6,6 @@ import android.hardware.camera2.CameraManager;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-/* loaded from: classes2.dex */
 public class ExtensionSessionStatsAggregator {
     private static final boolean DEBUG = false;
     private static final String TAG = ExtensionSessionStatsAggregator.class.getSimpleName();

@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public final class FadeManagerConfiguration implements Parcelable {
     public static final Parcelable.Creator<FadeManagerConfiguration> CREATOR =
             new Parcelable.Creator<FadeManagerConfiguration>() { // from class:

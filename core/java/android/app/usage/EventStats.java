@@ -3,7 +3,6 @@ package android.app.usage;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes.dex */
 public final class EventStats implements Parcelable {
     public static final Parcelable.Creator<EventStats> CREATOR =
             new Parcelable.Creator<EventStats>() { // from class: android.app.usage.EventStats.1

@@ -10,7 +10,6 @@ import java.util.Arrays;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class KeyChainProtectionParams implements Parcelable {
     public static final Parcelable.Creator<KeyChainProtectionParams> CREATOR =
             new Parcelable.Creator<

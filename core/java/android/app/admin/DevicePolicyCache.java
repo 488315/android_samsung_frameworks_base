@@ -5,7 +5,6 @@ import com.android.server.LocalServices;
 import java.util.Collections;
 import java.util.Map;
 
-/* loaded from: classes.dex */
 public abstract class DevicePolicyCache {
     public abstract boolean canAdminGrantSensorsPermissions();
 

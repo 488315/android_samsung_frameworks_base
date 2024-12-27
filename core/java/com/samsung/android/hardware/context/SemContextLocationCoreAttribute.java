@@ -7,7 +7,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 
-/* loaded from: classes6.dex */
 public class SemContextLocationCoreAttribute extends SemContextAttribute {
     public static final Parcelable.Creator<SemContextLocationCoreAttribute> CREATOR =
             new Parcelable.Creator<

@@ -6,7 +6,6 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.RemoteException;
 
-/* loaded from: classes6.dex */
 class CoverStateListenerDelegate extends ICoverStateListenerCallback.Stub {
     private static final int MSG_LISTEN_COVER_ATTACH_STATE_CHANGE = 1;
     private static final int MSG_LISTEN_COVER_SWITCH_STATE_CHANGE = 0;

@@ -18,7 +18,6 @@ import android.widget.SemHorizontalListView;
 
 import com.android.internal.R;
 
-/* loaded from: classes5.dex */
 public class SemDragAndDropHorizontalListAnimator extends SemAbsDragAndDropAnimator {
     private static final String TAG = "SemDragAndDropHListAnimator";
     private SemDragAndDropAnimationCore.ItemAnimationListener mItemAnimationListener;

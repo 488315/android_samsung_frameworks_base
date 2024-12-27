@@ -13,7 +13,6 @@ import com.android.internal.util.Protocol;
 
 import com.samsung.android.graphics.spr.document.animator.SprAnimatorBase;
 
-/* loaded from: classes5.dex */
 public class DESEngine implements BlockCipher {
     protected static final int BLOCK_SIZE = 8;
     private int[] workingKey = null;

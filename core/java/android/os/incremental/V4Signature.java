@@ -12,7 +12,6 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.ArrayList;
 
-/* loaded from: classes3.dex */
 public class V4Signature {
     public static final String EXT = ".idsig";
     public static final int HASHING_ALGORITHM_SHA256 = 1;

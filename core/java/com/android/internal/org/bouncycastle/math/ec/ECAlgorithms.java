@@ -9,7 +9,6 @@ import com.android.internal.org.bouncycastle.math.field.PolynomialExtensionField
 import com.android.internal.org.bouncycastle.math.raw.Nat;
 import java.math.BigInteger;
 
-/* loaded from: classes5.dex */
 public class ECAlgorithms {
     public static boolean isF2mCurve(ECCurve c) {
         return isF2mField(c.getField());

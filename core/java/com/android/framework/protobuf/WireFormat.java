@@ -4,7 +4,6 @@ import android.hardware.scontext.SContextConstants;
 
 import java.io.IOException;
 
-/* loaded from: classes3.dex */
 public final class WireFormat {
     static final int FIXED32_SIZE = 4;
     static final int FIXED64_SIZE = 8;

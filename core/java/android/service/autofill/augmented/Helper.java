@@ -6,7 +6,6 @@ import android.metrics.LogMaker;
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.nano.MetricsProto;
 
-/* loaded from: classes3.dex */
 public final class Helper {
     private static final MetricsLogger sMetricsLogger = new MetricsLogger();
 

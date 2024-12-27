@@ -1,6 +1,5 @@
 package android.hardware.security.keymint;
 
-/* loaded from: classes2.dex */
 public @interface KeyOrigin {
     public static final int DERIVED = 1;
     public static final int GENERATED = 0;

@@ -16,7 +16,6 @@ import android.widget.EditText;
 import com.android.internal.R;
 
 @Deprecated
-/* loaded from: classes3.dex */
 public class EditTextPreference extends DialogPreference {
     private EditText mEditText;
     private String mText;

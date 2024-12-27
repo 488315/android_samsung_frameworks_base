@@ -8,7 +8,6 @@ import android.system.keystore2.KeyDescriptor;
 import java.security.interfaces.ECKey;
 import java.security.spec.ECParameterSpec;
 
-/* loaded from: classes3.dex */
 public class AndroidKeyStoreECPrivateKey extends AndroidKeyStorePrivateKey implements ECKey {
     private final ECParameterSpec mParams;
 

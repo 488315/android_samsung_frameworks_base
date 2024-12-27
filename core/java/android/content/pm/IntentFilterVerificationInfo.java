@@ -20,7 +20,6 @@ import java.util.Iterator;
 import java.util.Set;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class IntentFilterVerificationInfo implements Parcelable {
     private static final String ATTR_DOMAIN_NAME = "name";
     private static final String ATTR_PACKAGE_NAME = "packageName";

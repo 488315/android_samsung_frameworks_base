@@ -1,6 +1,5 @@
 package com.android.server.vibrator;
 
-/* loaded from: classes5.dex */
 public final class RampSegmentProto {
     public static final long DURATION = 1120986464257L;
     public static final long END_AMPLITUDE = 1108101562371L;

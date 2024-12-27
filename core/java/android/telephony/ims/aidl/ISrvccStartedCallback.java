@@ -9,7 +9,6 @@ import android.telephony.ims.SrvccCall;
 
 import java.util.List;
 
-/* loaded from: classes4.dex */
 public interface ISrvccStartedCallback extends IInterface {
     public static final String DESCRIPTOR = "android.telephony.ims.aidl.ISrvccStartedCallback";
 

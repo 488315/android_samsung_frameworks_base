@@ -5,7 +5,6 @@ import android.content.Context;
 
 import com.android.internal.accessibility.util.ShortcutUtils;
 
-/* loaded from: classes5.dex */
 class AccessibilityActivityTarget extends AccessibilityTarget {
     AccessibilityActivityTarget(
             Context context, int shortcutType, AccessibilityShortcutInfo shortcutInfo) {

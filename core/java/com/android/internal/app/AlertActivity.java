@@ -8,7 +8,6 @@ import android.view.KeyEvent;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityEvent;
 
-/* loaded from: classes5.dex */
 public abstract class AlertActivity extends Activity implements DialogInterface {
     protected AlertController mAlert;
     protected AlertController.AlertParams mAlertParams;

@@ -30,7 +30,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 
-/* loaded from: classes2.dex */
 public class AudioSystem {
     public static final int AUDIO_FORMAT_AAC = 67108864;
     public static final int AUDIO_FORMAT_APTX = 536870912;

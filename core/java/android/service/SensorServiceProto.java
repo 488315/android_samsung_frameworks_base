@@ -1,6 +1,5 @@
 package android.service;
 
-/* loaded from: classes3.dex */
 public final class SensorServiceProto {
     public static final long ACTIVE_CONNECTIONS = 2246267895821L;
     public static final long ACTIVE_SENSORS = 2246267895814L;

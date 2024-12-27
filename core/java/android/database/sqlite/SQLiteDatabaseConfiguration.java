@@ -10,7 +10,6 @@ import java.util.function.BinaryOperator;
 import java.util.function.UnaryOperator;
 import java.util.regex.Pattern;
 
-/* loaded from: classes.dex */
 public final class SQLiteDatabaseConfiguration {
     private static final long DEFAULT_BUSY_TIMEOUT = 2500;
     private static final Pattern EMAIL_IN_DB_PATTERN = Pattern.compile("[\\w\\.\\-]+@[\\w\\.\\-]+");

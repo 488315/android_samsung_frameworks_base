@@ -16,7 +16,6 @@ import com.samsung.android.sdk.sfe.util.SFError;
 
 import java.io.File;
 
-/* loaded from: classes6.dex */
 public class SFText {
     private static final String TAG = "SFText";
     private final Context mContext;

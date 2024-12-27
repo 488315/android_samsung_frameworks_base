@@ -5,7 +5,6 @@ import android.util.Pools;
 
 import dalvik.annotation.optimization.CriticalNative;
 
-/* loaded from: classes.dex */
 public final class RecordingCanvas extends BaseRecordingCanvas {
     private static final int POOL_LIMIT = 25;
     private int mHeight;

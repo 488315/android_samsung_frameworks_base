@@ -8,7 +8,6 @@ import java.io.InputStream;
 import java.io.Reader;
 import java.util.Objects;
 
-/* loaded from: classes5.dex */
 public class XmlPullParserWrapper implements XmlPullParser {
     private final XmlPullParser mWrapped;
 

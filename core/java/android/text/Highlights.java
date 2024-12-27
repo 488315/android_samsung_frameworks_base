@@ -8,7 +8,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public class Highlights {
     private final List<Pair<Paint, int[]>> mHighlights;
 

@@ -41,7 +41,6 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-/* loaded from: classes3.dex */
 public class VoiceInteractionService extends Service {
     static final long MULTIPLE_ACTIVE_HOTWORD_DETECTORS = 193232191;
     public static final String SERVICE_INTERFACE = "android.service.voice.VoiceInteractionService";

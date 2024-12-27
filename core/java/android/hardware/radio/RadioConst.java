@@ -6,7 +6,6 @@ import android.os.Parcelable;
 
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public class RadioConst implements Parcelable {
     public static final int CARD_MAX_APPS = 8;
     public static final Parcelable.Creator<RadioConst> CREATOR =

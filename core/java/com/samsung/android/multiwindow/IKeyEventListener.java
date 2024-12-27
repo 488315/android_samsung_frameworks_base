@@ -7,7 +7,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.view.KeyEvent;
 
-/* loaded from: classes6.dex */
 public interface IKeyEventListener extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.multiwindow.IKeyEventListener";
 

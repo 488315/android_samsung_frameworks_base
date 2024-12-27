@@ -29,7 +29,6 @@ import java.util.function.BiConsumer;
 import java.util.function.IntConsumer;
 import java.util.stream.IntStream;
 
-/* loaded from: classes.dex */
 public interface IPackageManager extends IInterface {
     boolean activitySupportsIntentAsUser(
             ComponentName componentName, Intent intent, String str, int i) throws RemoteException;

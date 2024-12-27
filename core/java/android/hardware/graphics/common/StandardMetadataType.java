@@ -1,6 +1,5 @@
 package android.hardware.graphics.common;
 
-/* loaded from: classes2.dex */
 public @interface StandardMetadataType {
     public static final long ALLOCATION_SIZE = 10;
     public static final long BLEND_MODE = 18;

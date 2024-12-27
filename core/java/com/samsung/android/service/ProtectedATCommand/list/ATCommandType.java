@@ -1,6 +1,5 @@
 package com.samsung.android.service.ProtectedATCommand.list;
 
-/* loaded from: classes6.dex */
 public final class ATCommandType {
     public static final int PAC_ALLOWED_PROTECTED_COMMAND = 176;
     public static final int PAC_NOT_ALLOWED_AUTOBLOCKER_COMMAND = 208;

@@ -5,7 +5,6 @@ import android.os.IBinder;
 import android.os.ServiceManager;
 
 @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
-/* loaded from: classes2.dex */
 public class MediaServiceManager {
     private static final String MEDIA_COMMUNICATION_SERVICE = "media_communication";
     private static final String MEDIA_SESSION_SERVICE = "media_session";

@@ -8,7 +8,6 @@ import java.net.InetAddress;
 import java.nio.ByteBuffer;
 import java.nio.ShortBuffer;
 
-/* loaded from: classes5.dex */
 public class IpUtils {
     private static int intAbs(short v) {
         return 65535 & v;

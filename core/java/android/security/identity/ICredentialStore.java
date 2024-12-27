@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes3.dex */
 public interface ICredentialStore extends IInterface {
     public static final String DESCRIPTOR = "android.security.identity.ICredentialStore";
     public static final int ERROR_ALREADY_PERSONALIZED = 2;

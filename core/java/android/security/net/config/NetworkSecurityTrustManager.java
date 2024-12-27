@@ -19,7 +19,6 @@ import java.util.Set;
 import javax.net.ssl.SSLEngine;
 import javax.net.ssl.X509ExtendedTrustManager;
 
-/* loaded from: classes3.dex */
 public class NetworkSecurityTrustManager extends X509ExtendedTrustManager {
     private final TrustManagerImpl mDelegate;
     private X509Certificate[] mIssuers;

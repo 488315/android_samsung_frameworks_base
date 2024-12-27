@@ -46,7 +46,6 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.IvParameterSpec;
 
-/* loaded from: classes5.dex */
 public final class VpnProfile implements Cloneable, Parcelable {
     private static final String ANDROID_BC_PROVIDER = "AndroidKeyStoreBCWorkaroundProvider";
     private static final String ENCODED_NULL_PROXY_INFO = "\u0000\u0000\u0000\u0000";

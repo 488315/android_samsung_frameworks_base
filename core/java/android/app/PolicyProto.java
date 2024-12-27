@@ -1,6 +1,5 @@
 package android.app;
 
-/* loaded from: classes.dex */
 public final class PolicyProto {
     public static final int ALARMS = 6;
     public static final int AMBIENT = 8;

@@ -7,7 +7,6 @@ import android.os.HwParcel;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public final class AppStatus {
     public android.hardware.radio.V1_0.AppStatus base = new android.hardware.radio.V1_0.AppStatus();
     public int persoSubstate = 0;

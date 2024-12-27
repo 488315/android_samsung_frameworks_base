@@ -6,7 +6,6 @@ import com.samsung.android.graphics.spr.document.attribute.SprAttributeBase;
 import java.io.IOException;
 import java.io.OutputStream;
 
-/* loaded from: classes5.dex */
 public class HexEncoder implements Encoder {
     protected final byte[] encodingTable = {
         SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT90,

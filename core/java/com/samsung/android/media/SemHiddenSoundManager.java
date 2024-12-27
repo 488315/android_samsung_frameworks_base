@@ -8,7 +8,6 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.util.Log;
 
-/* loaded from: classes6.dex */
 public class SemHiddenSoundManager {
     public static final int ERROR = -1;
     public static final int PACKAGE_ALL = 0;

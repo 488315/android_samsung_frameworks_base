@@ -8,7 +8,6 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-/* loaded from: classes.dex */
 public final class PackageSetPolicyValue extends PolicyValue<Set<String>> {
     public static final Parcelable.Creator<PackageSetPolicyValue> CREATOR =
             new Parcelable.Creator<PackageSetPolicyValue>() { // from class:

@@ -5,7 +5,6 @@ import android.os.storage.CrateMetadata;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public interface IInstalld extends IInterface {
     public static final int FLAG_CLEAR_APP_DATA_KEEP_ART_PROFILES = 131072;
     public static final int FLAG_CLEAR_CACHE_ONLY = 16;

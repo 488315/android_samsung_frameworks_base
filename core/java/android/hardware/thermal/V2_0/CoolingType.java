@@ -2,7 +2,6 @@ package android.hardware.thermal.V2_0;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class CoolingType {
     public static final int BATTERY = 1;
     public static final int COMPONENT = 6;

@@ -9,7 +9,6 @@ import android.view.animation.LinearInterpolator;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 final class ButtonDispatcher {
     private static final int FADE_DURATION_IN = 150;
     private static final int FADE_DURATION_OUT = 250;

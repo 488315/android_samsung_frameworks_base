@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public class SplitPermissionInfoParcelable implements Parcelable {
     public static final Parcelable.Creator<SplitPermissionInfoParcelable> CREATOR =
             new Parcelable.Creator<SplitPermissionInfoParcelable>() { // from class:

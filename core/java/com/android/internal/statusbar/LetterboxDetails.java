@@ -11,7 +11,6 @@ import com.android.internal.util.AnnotationValidations;
 
 import java.util.Objects;
 
-/* loaded from: classes5.dex */
 public class LetterboxDetails implements Parcelable {
     public static final Parcelable.Creator<LetterboxDetails> CREATOR =
             new Parcelable.Creator<

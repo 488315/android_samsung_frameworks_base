@@ -1,6 +1,5 @@
 package android.content.pm;
 
-/* loaded from: classes.dex */
 public final class FeatureInfoProto {
     public static final long FLAGS = 1120986464260L;
     public static final long GLES_VERSION = 1138166333443L;

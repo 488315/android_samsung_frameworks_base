@@ -11,7 +11,6 @@ import com.android.internal.widget.remotecompose.core.operations.ShaderData;
 
 import java.util.HashMap;
 
-/* loaded from: classes5.dex */
 class AndroidRemoteContext extends RemoteContext {
     HashMap<String, VarName> mVarNameHashMap = new HashMap<>();
 

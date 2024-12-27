@@ -11,7 +11,6 @@ import com.samsung.android.wallpaperbackup.BnRConstants;
 
 import java.io.File;
 
-/* loaded from: classes6.dex */
 public class SemWifiApCust {
     public static boolean DBG = false;
     public static final String TAG = "SemWifiApCust";

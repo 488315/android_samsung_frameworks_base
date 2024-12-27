@@ -2,7 +2,6 @@ package vendor.samsung.hardware.thermal.V1_0;
 
 import java.util.ArrayList;
 
-/* loaded from: classes6.dex */
 public final class SehTempStatus {
     public static final int DISABLED = -777;
     public static final int NOT_EXIST = -999;

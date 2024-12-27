@@ -1,6 +1,5 @@
 package android.system.keystore2;
 
-/* loaded from: classes3.dex */
 public @interface KeyPermission {
     public static final int CONVERT_STORAGE_KEY_TO_EPHEMERAL = 2048;
     public static final int DELETE = 1;

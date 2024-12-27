@@ -1,6 +1,5 @@
 package android.hardware.tv.tuner;
 
-/* loaded from: classes2.dex */
 public @interface DataFormat {
     public static final int ES = 2;
     public static final int PES = 1;

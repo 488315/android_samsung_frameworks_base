@@ -5,7 +5,6 @@ import android.hardware.scontext.SContextConstants;
 
 import com.android.internal.graphics.cam.Cam;
 
-/* loaded from: classes5.dex */
 public final class ColorUtils {
     private static final int MIN_ALPHA_SEARCH_MAX_ITERATIONS = 10;
     private static final int MIN_ALPHA_SEARCH_PRECISION = 1;

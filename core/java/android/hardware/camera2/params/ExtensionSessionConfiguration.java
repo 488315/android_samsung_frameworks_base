@@ -6,7 +6,6 @@ import android.hardware.camera2.CameraExtensionSession;
 import java.util.List;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes2.dex */
 public final class ExtensionSessionConfiguration {
     private static final String TAG = "ExtensionSessionConfiguration";
     private CameraExtensionSession.StateCallback mCallback;

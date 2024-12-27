@@ -1,6 +1,5 @@
 package android.os;
 
-/* loaded from: classes3.dex */
 public interface IBatteryPropertiesRegistrar extends IInterface {
     int getProperty(int i, BatteryProperty batteryProperty) throws RemoteException;
 

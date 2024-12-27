@@ -9,7 +9,6 @@ import com.android.internal.os.anr.AnrLatencyTracker;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes5.dex */
 public class TimeoutRecord {
     public final boolean mEndTakenBeforeLocks;
     public final long mEndUptimeMillis;

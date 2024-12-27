@@ -2,7 +2,6 @@ package com.android.internal.dynamicanimation.animation;
 
 import android.hardware.scontext.SContextConstants;
 
-/* loaded from: classes5.dex */
 public final class SpringForce implements Force {
     public static final float DAMPING_RATIO_HIGH_BOUNCY = 0.2f;
     public static final float DAMPING_RATIO_LOW_BOUNCY = 0.75f;

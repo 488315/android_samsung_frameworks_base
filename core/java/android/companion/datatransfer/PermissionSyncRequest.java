@@ -4,7 +4,6 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes.dex */
 public class PermissionSyncRequest extends SystemDataTransferRequest implements Parcelable {
     public static final Parcelable.Creator<PermissionSyncRequest> CREATOR =
             new Parcelable.Creator<PermissionSyncRequest>() { // from class:

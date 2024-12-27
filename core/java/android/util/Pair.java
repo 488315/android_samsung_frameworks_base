@@ -2,7 +2,6 @@ package android.util;
 
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public class Pair<F, S> {
     public final F first;
     public final S second;

@@ -23,7 +23,6 @@ import java.lang.reflect.Array;
 import java.util.function.IntFunction;
 import java.util.function.Predicate;
 
-/* loaded from: classes4.dex */
 public class InsertModeTransformationMethod implements TransformationMethod, TextWatcher {
     private int mEnd;
     private final TransformationMethod mOldTransformationMethod;

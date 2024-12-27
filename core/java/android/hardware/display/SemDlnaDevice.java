@@ -10,7 +10,6 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public final class SemDlnaDevice implements Parcelable {
     public static final int STATE_CONNECTED = 1;
     public static final int STATE_CONNECTING = 3;

@@ -5,7 +5,6 @@ import android.os.Parcelable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes.dex */
 public interface DeviceFilter<D extends Parcelable> extends Parcelable {
     public static final int MEDIUM_TYPE_BLUETOOTH = 0;
     public static final int MEDIUM_TYPE_BLUETOOTH_LE = 1;

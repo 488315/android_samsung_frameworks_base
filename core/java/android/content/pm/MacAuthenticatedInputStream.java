@@ -6,7 +6,6 @@ import java.io.InputStream;
 
 import javax.crypto.Mac;
 
-/* loaded from: classes.dex */
 public class MacAuthenticatedInputStream extends FilterInputStream {
     private final Mac mMac;
 

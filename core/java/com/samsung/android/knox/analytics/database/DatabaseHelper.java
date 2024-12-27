@@ -15,7 +15,6 @@ import com.samsung.android.knox.analytics.util.Log;
 
 import java.io.File;
 
-/* loaded from: classes6.dex */
 class DatabaseHelper extends SQLiteOpenHelper {
     private static final String B2C_FEATURE_CREATE_TABLE =
             "CREATE TABLE package_feature_b2c ( packageName TEXT PRIMARY KEY, feature_name TEXT)";

@@ -8,7 +8,6 @@ import android.text.TextUtils;
 import java.util.Objects;
 
 @Deprecated
-/* loaded from: classes.dex */
 public class PackageStats implements Parcelable {
     public static final Parcelable.Creator<PackageStats> CREATOR =
             new Parcelable.Creator<

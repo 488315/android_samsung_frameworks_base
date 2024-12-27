@@ -11,7 +11,6 @@ import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
 import android.os.UserHandle;
 
-/* loaded from: classes2.dex */
 public interface IRingtonePlayer extends IInterface {
     void fadeinRingtone(IBinder iBinder) throws RemoteException;
 

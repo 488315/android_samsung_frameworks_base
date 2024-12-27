@@ -5,7 +5,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
-/* loaded from: classes5.dex */
 public class PSIAvailableMem implements Parcelable {
     public static final Parcelable.Creator CREATOR =
             new Parcelable.Creator() { // from class: com.samsung.android.chimera.PSIAvailableMem.1

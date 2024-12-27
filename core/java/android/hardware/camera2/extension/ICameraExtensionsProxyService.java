@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes2.dex */
 public interface ICameraExtensionsProxyService extends IInterface {
     public static final String DESCRIPTOR =
             "android.hardware.camera2.extension.ICameraExtensionsProxyService";

@@ -8,7 +8,6 @@ import android.os.RemoteException;
 
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public interface IContentProtectionAllowlistCallback extends IInterface {
     public static final String DESCRIPTOR =
             "android.service.contentcapture.IContentProtectionAllowlistCallback";

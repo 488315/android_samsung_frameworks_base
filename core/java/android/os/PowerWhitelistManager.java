@@ -9,7 +9,6 @@ import java.util.List;
 
 @SystemApi
 @Deprecated
-/* loaded from: classes3.dex */
 public class PowerWhitelistManager {
     public static final int EVENT_MMS = 2;
     public static final int EVENT_SMS = 1;

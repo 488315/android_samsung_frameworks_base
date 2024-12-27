@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 
 import java.util.function.Consumer;
 
-/* loaded from: classes5.dex */
 public class ScrollViewCaptureHelper implements ScrollCaptureViewHelper<ViewGroup> {
     private int mOverScrollMode;
     private boolean mScrollBarEnabled;

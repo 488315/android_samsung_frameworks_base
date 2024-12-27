@@ -5,7 +5,6 @@ import com.android.internal.org.bouncycastle.math.ec.ECFieldElement;
 import com.android.internal.org.bouncycastle.math.ec.ECPoint;
 import com.android.internal.org.bouncycastle.math.raw.Nat;
 
-/* loaded from: classes5.dex */
 public class SecP521R1Point extends ECPoint.AbstractFp {
     SecP521R1Point(ECCurve curve, ECFieldElement x, ECFieldElement y) {
         super(curve, x, y);

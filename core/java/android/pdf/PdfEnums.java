@@ -1,6 +1,5 @@
 package android.pdf;
 
-/* loaded from: classes3.dex */
 public final class PdfEnums {
     public static final int API_TYPE_SELECT_CONTENT = 1;
     public static final int API_TYPE_UNKNOWN = 0;

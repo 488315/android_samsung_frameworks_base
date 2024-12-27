@@ -9,7 +9,6 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-/* loaded from: classes5.dex */
 public class IccLogicalChannelRequest implements Parcelable {
     public static final Parcelable.Creator<IccLogicalChannelRequest> CREATOR =
             new Parcelable.Creator<

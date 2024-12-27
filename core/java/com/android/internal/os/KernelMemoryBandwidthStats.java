@@ -11,7 +11,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-/* loaded from: classes5.dex */
 public class KernelMemoryBandwidthStats {
     private static final boolean DEBUG = false;
     private static final String TAG = "KernelMemoryBandwidthStats";

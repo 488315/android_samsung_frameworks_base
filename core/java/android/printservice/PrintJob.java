@@ -6,7 +6,6 @@ import android.print.PrintJobId;
 import android.print.PrintJobInfo;
 import android.util.Log;
 
-/* loaded from: classes3.dex */
 public final class PrintJob {
     private static final String LOG_TAG = "PrintJob";
     private PrintJobInfo mCachedInfo;

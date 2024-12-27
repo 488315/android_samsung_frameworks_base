@@ -1,6 +1,5 @@
 package com.android.server.am;
 
-/* loaded from: classes5.dex */
 public final class ConnectionRecordProto {
     public static final int ABOVE_CLIENT = 4;
     public static final int ADJUST_WITH_ACTIVITY = 8;

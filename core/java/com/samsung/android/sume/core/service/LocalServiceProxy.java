@@ -31,7 +31,6 @@ import java.util.concurrent.Future;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.function.Consumer;
 
-/* loaded from: classes6.dex */
 public class LocalServiceProxy implements ServiceProxy, MediaController.OnEventListener {
     private static final String TAG = Def.tagOf((Class<?>) LocalServiceProxy.class);
     private final Context context;

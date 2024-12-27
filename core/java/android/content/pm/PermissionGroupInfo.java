@@ -8,7 +8,6 @@ import android.text.TextUtils;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes.dex */
 public class PermissionGroupInfo extends PackageItemInfo implements Parcelable {
     public static final Parcelable.Creator<PermissionGroupInfo> CREATOR =
             new Parcelable.Creator<

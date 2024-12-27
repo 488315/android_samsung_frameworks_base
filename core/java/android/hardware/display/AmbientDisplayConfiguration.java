@@ -13,7 +13,6 @@ import com.android.internal.util.ArrayUtils;
 
 import java.util.Map;
 
-/* loaded from: classes2.dex */
 public class AmbientDisplayConfiguration {
     private static final String[] DOZE_SETTINGS = {
         Settings.Secure.DOZE_ENABLED,

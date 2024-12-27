@@ -1,6 +1,5 @@
 package android.service.appwidget;
 
-/* loaded from: classes3.dex */
 public final class WidgetProto {
     public static final long HOST_PACKAGE = 1138166333443L;
     public static final long IS_CROSS_PROFILE = 1133871366145L;

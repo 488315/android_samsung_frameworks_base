@@ -16,7 +16,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-/* loaded from: classes.dex */
 public final class BitmapRegionDecoder {
     private long mNativeBitmapRegionDecoder;
     private final Object mNativeLock = new Object();

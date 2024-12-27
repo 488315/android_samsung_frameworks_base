@@ -9,7 +9,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class FailureResult {
     public static final int ERROR_CODE_CANCELED_AND_LAUNCHED_SETTINGS = 2;
     public static final int ERROR_CODE_DIALOG_CANCELED_BY_USER = 1;

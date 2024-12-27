@@ -1,6 +1,5 @@
 package android.hardware.radio.sim;
 
-/* loaded from: classes2.dex */
 public @interface SimLockMultiSimPolicy {
     public static final int ACTIVE_SERVICE_ON_ANY_SLOT_TO_UNBLOCK_OTHER_SLOTS = 6;
     public static final int ACTIVE_SERVICE_ON_SLOT_1_TO_UNBLOCK_OTHER_SLOTS = 5;

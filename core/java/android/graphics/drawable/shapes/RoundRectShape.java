@@ -9,7 +9,6 @@ import android.graphics.RectF;
 import java.util.Arrays;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public class RoundRectShape extends RectShape {
     private float[] mInnerRadii;
     private RectF mInnerRect;

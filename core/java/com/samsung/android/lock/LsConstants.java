@@ -2,7 +2,6 @@ package com.samsung.android.lock;
 
 import android.os.Build;
 
-/* loaded from: classes6.dex */
 public interface LsConstants {
     public static final int ATTEMPTS_BEFORE_AUTO_WIPE = 20;
     public static final String BACKUP_LSKF_BASED_PROTECTOR_ID_KEY = "backup-protector-id";

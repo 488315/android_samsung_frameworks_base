@@ -63,7 +63,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.regex.Pattern;
 
-/* loaded from: classes4.dex */
 public class TextUtils {
     public static final int ABSOLUTE_SIZE_SPAN = 16;
     public static final int ACCESSIBILITY_CLICKABLE_SPAN = 25;

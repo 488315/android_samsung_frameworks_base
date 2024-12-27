@@ -4,7 +4,6 @@ import android.os.IBinder;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes.dex */
 public class KeySet implements Parcelable {
     public static final Parcelable.Creator<KeySet> CREATOR =
             new Parcelable.Creator<KeySet>() { // from class: android.content.pm.KeySet.1

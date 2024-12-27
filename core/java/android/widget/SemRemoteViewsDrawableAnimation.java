@@ -9,7 +9,6 @@ import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 
-/* loaded from: classes4.dex */
 public class SemRemoteViewsDrawableAnimation extends SemRemoteViewsAnimation {
     public static final Parcelable.Creator<SemRemoteViewsDrawableAnimation> CREATOR =
             new Parcelable.Creator<

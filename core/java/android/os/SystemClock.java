@@ -13,7 +13,6 @@ import java.time.Clock;
 import java.time.DateTimeException;
 import java.time.ZoneOffset;
 
-/* loaded from: classes3.dex */
 public final class SystemClock {
     private static final String TAG = "SystemClock";
     private static final long sAnchorNanoTime$ravenwood = System.nanoTime();

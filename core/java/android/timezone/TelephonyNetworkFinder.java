@@ -2,7 +2,6 @@ package android.timezone;
 
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public final class TelephonyNetworkFinder {
     private final com.android.i18n.timezone.TelephonyNetworkFinder mDelegate;
 

@@ -9,7 +9,6 @@ import java.io.Closeable;
 import java.io.IOException;
 import java.util.ArrayDeque;
 
-/* loaded from: classes.dex */
 public final class SQLiteSession {
     static final /* synthetic */ boolean $assertionsDisabled = false;
     public static final int TRANSACTION_MODE_DEFERRED = 0;

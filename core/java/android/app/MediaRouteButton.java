@@ -13,7 +13,6 @@ import android.view.View;
 import com.android.internal.R;
 import com.android.internal.app.MediaRouteDialogPresenter;
 
-/* loaded from: classes.dex */
 public class MediaRouteButton extends View {
     private boolean mAttachedToWindow;
     private final MediaRouterCallback mCallback;

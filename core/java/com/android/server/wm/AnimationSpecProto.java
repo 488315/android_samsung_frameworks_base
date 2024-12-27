@@ -1,6 +1,5 @@
 package com.android.server.wm;
 
-/* loaded from: classes5.dex */
 public final class AnimationSpecProto {
     public static final long ALPHA = 1146756268035L;
     public static final long MOVE = 1146756268034L;

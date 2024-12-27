@@ -4,7 +4,6 @@ import android.security.KeyStoreException;
 
 import java.security.ProviderException;
 
-/* loaded from: classes3.dex */
 public class SecureKeyImportUnavailableException extends ProviderException {
     public SecureKeyImportUnavailableException() {}
 

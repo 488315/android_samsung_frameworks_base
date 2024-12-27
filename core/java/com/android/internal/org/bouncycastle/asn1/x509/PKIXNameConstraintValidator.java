@@ -25,7 +25,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-/* loaded from: classes5.dex */
 public class PKIXNameConstraintValidator implements NameConstraintValidator {
     private Set permittedSubtreesDN;
     private Set permittedSubtreesDNS;

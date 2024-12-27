@@ -10,7 +10,6 @@ import android.util.Log;
 
 import java.lang.ref.WeakReference;
 
-/* loaded from: classes.dex */
 public abstract class AsyncQueryHandler extends Handler {
     private static final int EVENT_ARG_DELETE = 4;
     private static final int EVENT_ARG_INSERT = 2;

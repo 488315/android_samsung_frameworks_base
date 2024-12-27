@@ -4,7 +4,6 @@ import com.android.internal.org.bouncycastle.crypto.ExtendedDigest;
 import com.android.internal.org.bouncycastle.util.Memoable;
 import com.android.internal.org.bouncycastle.util.Pack;
 
-/* loaded from: classes5.dex */
 public abstract class GeneralDigest implements ExtendedDigest, Memoable {
     private static final int BYTE_LENGTH = 64;
     private long byteCount;

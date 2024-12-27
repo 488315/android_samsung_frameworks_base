@@ -4,7 +4,6 @@ import android.content.Context;
 import android.metrics.LogMaker;
 import android.os.Build;
 
-/* loaded from: classes5.dex */
 public class MetricsLogger {
     public static final int LOGTAG = 524292;
     public static final int VIEW_UNKNOWN = 0;

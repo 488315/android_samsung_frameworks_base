@@ -8,7 +8,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.telephony.euicc.DownloadableSubscription;
 
-/* loaded from: classes3.dex */
 public interface IEuiccService extends IInterface {
     void deleteSubscription(
             int i, String str, IDeleteSubscriptionCallback iDeleteSubscriptionCallback)

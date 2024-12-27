@@ -4,7 +4,6 @@ import android.util.Log;
 
 import java.util.StringTokenizer;
 
-/* loaded from: classes2.dex */
 public class BassBoost extends AudioEffect {
     public static final int PARAM_STRENGTH = 1;
     public static final int PARAM_STRENGTH_SUPPORTED = 0;

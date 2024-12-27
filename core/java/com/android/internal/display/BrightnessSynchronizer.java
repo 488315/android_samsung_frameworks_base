@@ -24,7 +24,6 @@ import java.io.PrintWriter;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-/* loaded from: classes5.dex */
 public class BrightnessSynchronizer {
     private static final boolean COVER_DISPLAY_ENABLED = false;
     private static final boolean DEBUG = false;

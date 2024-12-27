@@ -1,6 +1,5 @@
 package com.android.sdksandbox.flags;
 
-/* loaded from: classes5.dex */
 public final class Flags {
     private static FeatureFlags FEATURE_FLAGS = new FeatureFlagsImpl();
     public static final String FLAG_FIRST_AND_LAST_SDK_SANDBOX_UID_PUBLIC =

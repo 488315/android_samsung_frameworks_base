@@ -8,7 +8,6 @@ import android.widget.FrameLayout;
 
 import java.util.ArrayList;
 
-/* loaded from: classes4.dex */
 public class GhostView extends View {
     private boolean mBeingMoved;
     private int mReferences;

@@ -15,7 +15,6 @@ import android.util.Slog;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-/* loaded from: classes5.dex */
 public final class SmRccPolicy {
     private static final String ACTION = "action";
     private static final String ACTION_DELETE = "delete";

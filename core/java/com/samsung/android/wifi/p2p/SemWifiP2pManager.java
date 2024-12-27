@@ -10,7 +10,6 @@ import android.util.Log;
 
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public class SemWifiP2pManager {
     public static final int BUSY = 2;
     public static final int ERROR = 0;

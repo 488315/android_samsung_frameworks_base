@@ -8,7 +8,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public final class AppFunctionException extends Exception implements Parcelable {
     public static final Parcelable.Creator<AppFunctionException> CREATOR =
             new Parcelable.Creator<AppFunctionException>() { // from class:

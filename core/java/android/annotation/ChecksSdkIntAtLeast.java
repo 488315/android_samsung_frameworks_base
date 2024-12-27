@@ -9,7 +9,6 @@ import java.lang.annotation.Target;
 @Target({ElementType.METHOD, ElementType.FIELD})
 @Documented
 @Retention(RetentionPolicy.SOURCE)
-/* loaded from: classes.dex */
 public @interface ChecksSdkIntAtLeast {
     int api() default -1;
 

@@ -4,7 +4,6 @@ import android.graphics.Rect;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes4.dex */
 public final class ActivityWindowInfo implements Parcelable {
     public static final Parcelable.Creator<ActivityWindowInfo> CREATOR =
             new Parcelable.Creator<

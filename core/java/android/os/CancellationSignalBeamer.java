@@ -10,7 +10,6 @@ import java.lang.ref.Reference;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/* loaded from: classes3.dex */
 public class CancellationSignalBeamer {
     static final Cleaner sCleaner = SystemCleaner.cleaner();
 

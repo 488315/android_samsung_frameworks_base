@@ -13,7 +13,6 @@ import com.android.internal.view.menu.ListMenuItemView;
 import com.android.internal.view.menu.MenuAdapter;
 import com.android.internal.view.menu.MenuBuilder;
 
-/* loaded from: classes4.dex */
 public class MenuPopupWindow extends ListPopupWindow implements MenuItemHoverListener {
     private MenuItemHoverListener mHoverListener;
 

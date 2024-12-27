@@ -23,7 +23,6 @@ import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-/* loaded from: classes5.dex */
 public class AudioManagerHelper {
     private static final int LOGGING_CALLER_DEFAULT_DEPTH = 5;
     private static final String TAG = "AudioManagerHelper";

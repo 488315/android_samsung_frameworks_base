@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.util.Log;
 
 @Deprecated
-/* loaded from: classes2.dex */
 public class SContextFlatMotionForTableModeAttribute extends SContextAttribute {
     private static final String TAG = "SContextFlatMotionForTableModeAttribute";
     private int mDuration;

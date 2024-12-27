@@ -3,7 +3,6 @@ package android.media;
 import java.io.IOException;
 import java.io.InputStream;
 
-/* loaded from: classes2.dex */
 public final class ResampleInputStream extends InputStream {
     private static final String TAG = "ResampleInputStream";
     private static final int mFirLength = 29;

@@ -1,6 +1,5 @@
 package android.hardware.radio;
 
-/* loaded from: classes2.dex */
 public @interface RadioAccessFamily {
     public static final int EDGE = 4;
     public static final int EHRPD = 8192;

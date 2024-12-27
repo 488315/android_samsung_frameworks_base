@@ -14,7 +14,6 @@ import java.util.Collection;
 import java.util.Objects;
 import java.util.UUID;
 
-/* loaded from: classes.dex */
 public class StorageStatsManager {
     private final Context mContext;
     private final IStorageStatsManager mService;

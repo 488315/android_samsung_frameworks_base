@@ -1,6 +1,5 @@
 package com.android.server.telecom.flags;
 
-/* loaded from: classes5.dex */
 public final class Flags {
     private static FeatureFlags FEATURE_FLAGS = new FeatureFlagsImpl();
     public static final String FLAG_ADD_CALL_URI_FOR_MISSED_CALLS =

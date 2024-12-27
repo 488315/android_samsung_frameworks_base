@@ -51,7 +51,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.Executor;
 import java.util.concurrent.atomic.AtomicLong;
 
-/* loaded from: classes2.dex */
 public final class DisplayManagerGlobal {
     public static final String CACHE_KEY_DISPLAY_INFO_PROPERTY = "cache_key.display_info";
     private static final boolean DEBUG;

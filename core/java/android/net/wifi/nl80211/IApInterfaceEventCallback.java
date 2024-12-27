@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes3.dex */
 public interface IApInterfaceEventCallback extends IInterface {
     public static final int BANDWIDTH_160 = 6;
     public static final int BANDWIDTH_20 = 2;

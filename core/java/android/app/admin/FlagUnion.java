@@ -3,7 +3,6 @@ package android.app.admin;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes.dex */
 public final class FlagUnion extends ResolutionMechanism<Integer> {
     public static final FlagUnion FLAG_UNION = new FlagUnion();
     public static final Parcelable.Creator<FlagUnion> CREATOR =

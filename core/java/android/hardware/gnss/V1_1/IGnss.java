@@ -29,7 +29,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public interface IGnss extends android.hardware.gnss.V1_0.IGnss {
     public static final String kInterfaceName = "android.hardware.gnss@1.1::IGnss";
 

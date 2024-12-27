@@ -9,7 +9,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Arrays;
 
-/* loaded from: classes5.dex */
 public final class VerifyCredentialResponse implements Parcelable {
     public static final int RESPONSE_ERROR = -1;
     public static final int RESPONSE_OK = 0;

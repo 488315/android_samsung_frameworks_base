@@ -8,7 +8,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public final class TrackChangeEvent extends Event implements Parcelable {
     public static final Parcelable.Creator<TrackChangeEvent> CREATOR =
             new Parcelable.Creator<

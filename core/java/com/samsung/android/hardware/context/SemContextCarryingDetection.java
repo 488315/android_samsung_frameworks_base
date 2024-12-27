@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes6.dex */
 public class SemContextCarryingDetection extends SemContextEventContext {
     public static final int AOD_BRIGHTNESS_HYSTERESIS_LUX_COUNT = 10;
     public static final int AOD_BRIGHTNESS_HYSTERESIS_MODE = 9;

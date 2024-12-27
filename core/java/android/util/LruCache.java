@@ -4,7 +4,6 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/* loaded from: classes4.dex */
 public class LruCache<K, V> {
     private int createCount;
     private int evictionCount;

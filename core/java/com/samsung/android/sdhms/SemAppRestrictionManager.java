@@ -12,7 +12,6 @@ import android.os.UserHandle;
 
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public class SemAppRestrictionManager implements Parcelable {
     public static final Parcelable.Creator<SemAppRestrictionManager> CREATOR =
             new Parcelable.Creator<

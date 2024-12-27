@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public final class AudioDeviceAttributes implements Parcelable {
     public static final Parcelable.Creator<AudioDeviceAttributes> CREATOR =
             new Parcelable.Creator<

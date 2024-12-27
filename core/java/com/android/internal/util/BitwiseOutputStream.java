@@ -1,6 +1,5 @@
 package com.android.internal.util;
 
-/* loaded from: classes5.dex */
 public class BitwiseOutputStream {
     private byte[] mBuf;
     private int mEnd;

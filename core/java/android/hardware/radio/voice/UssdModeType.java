@@ -1,6 +1,5 @@
 package android.hardware.radio.voice;
 
-/* loaded from: classes2.dex */
 public @interface UssdModeType {
     public static final int LOCAL_CLIENT = 3;
     public static final int NOTIFY = 0;

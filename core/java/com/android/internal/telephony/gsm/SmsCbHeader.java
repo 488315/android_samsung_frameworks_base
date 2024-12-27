@@ -10,7 +10,6 @@ import com.samsung.android.ims.settings.SemImsProfile;
 import java.util.Arrays;
 import java.util.Locale;
 
-/* loaded from: classes5.dex */
 public class SmsCbHeader {
     public static final int FORMAT_ETWS_PRIMARY = 3;
     public static final int FORMAT_GSM = 1;

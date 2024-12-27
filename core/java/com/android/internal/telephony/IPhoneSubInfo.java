@@ -10,7 +10,6 @@ import android.telephony.ImsiEncryptionInfo;
 
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public interface IPhoneSubInfo extends IInterface {
     ImsiEncryptionInfo getCarrierInfoForImsiEncryption(int i, int i2, String str)
             throws RemoteException;

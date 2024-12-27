@@ -2,7 +2,6 @@ package android.app.admin;
 
 import android.annotation.SystemApi;
 
-/* loaded from: classes.dex */
 public final class DevicePolicyResources {
     public static final String UNDEFINED = "UNDEFINED";
 

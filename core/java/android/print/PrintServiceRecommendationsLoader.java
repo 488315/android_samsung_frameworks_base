@@ -10,7 +10,6 @@ import com.android.internal.util.Preconditions;
 
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public class PrintServiceRecommendationsLoader extends Loader<List<RecommendationInfo>> {
     private final Handler mHandler;
     private PrintManager.PrintServiceRecommendationsChangeListener mListener;

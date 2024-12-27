@@ -6,7 +6,6 @@ import android.util.Log;
 import java.util.ArrayList;
 
 @Deprecated
-/* loaded from: classes2.dex */
 public class SContextActivityNotificationExAttribute extends SContextAttribute {
     private static final int ACTIVITY_STATUS_MAX = 5;
     private static final String TAG = "SContextActivityNotificationExAttribute";

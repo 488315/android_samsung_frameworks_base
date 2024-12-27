@@ -8,7 +8,6 @@ import android.os.Parcelable;
 import java.util.Collection;
 import java.util.List;
 
-/* loaded from: classes2.dex */
 public class Request implements Parcelable {
     public static final Parcelable.Creator<Request> CREATOR =
             new Parcelable.Creator<

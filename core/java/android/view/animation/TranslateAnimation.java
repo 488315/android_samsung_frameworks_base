@@ -6,7 +6,6 @@ import android.util.AttributeSet;
 
 import com.android.internal.R;
 
-/* loaded from: classes4.dex */
 public class TranslateAnimation extends Animation {
     protected float mFromXDelta;
     private int mFromXType;

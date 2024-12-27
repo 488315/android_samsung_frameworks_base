@@ -6,7 +6,6 @@ import android.os.Parcelable;
 
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public class WindowContextInfo implements Parcelable {
     public static final Parcelable.Creator<WindowContextInfo> CREATOR =
             new Parcelable.Creator<

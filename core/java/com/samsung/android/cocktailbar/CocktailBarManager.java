@@ -24,7 +24,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-/* loaded from: classes5.dex */
 public class CocktailBarManager extends SemCocktailBarManager {
     public static final String ACTION_COCKTAIL_BAR_COCKTAIL_UNINSTALLED =
             "com.samsung.android.app.cocktailbarservice.action.COCKTAIL_BAR_COCKTAIL_UNINSTALLED";

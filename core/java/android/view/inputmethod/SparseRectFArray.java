@@ -6,7 +6,6 @@ import android.os.Parcelable;
 
 import java.util.Arrays;
 
-/* loaded from: classes4.dex */
 public final class SparseRectFArray implements Parcelable {
     public static final Parcelable.Creator<SparseRectFArray> CREATOR =
             new Parcelable.Creator<

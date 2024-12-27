@@ -13,7 +13,6 @@ import com.samsung.android.globalactions.util.SamsungGlobalActionsAnalytics;
 import com.samsung.android.globalactions.util.SystemConditions;
 import com.samsung.android.globalactions.util.ToastController;
 
-/* loaded from: classes6.dex */
 public class SafeModeActionViewModel implements ActionViewModel {
     private final ConditionChecker mConditionChecker;
     private final SamsungGlobalActions mGlobalActions;

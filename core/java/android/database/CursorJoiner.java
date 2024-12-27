@@ -2,7 +2,6 @@ package android.database;
 
 import java.util.Iterator;
 
-/* loaded from: classes.dex */
 public final class CursorJoiner implements Iterator<Result>, Iterable<Result> {
     static final /* synthetic */ boolean $assertionsDisabled = false;
     private int[] mColumnsLeft;

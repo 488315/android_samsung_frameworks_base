@@ -1,6 +1,5 @@
 package android.provider;
 
-/* loaded from: classes3.dex */
 public final class AlarmClock {
     public static final String ACTION_DISMISS_ALARM = "android.intent.action.DISMISS_ALARM";
     public static final String ACTION_DISMISS_TIMER = "android.intent.action.DISMISS_TIMER";

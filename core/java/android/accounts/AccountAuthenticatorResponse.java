@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import android.os.RemoteException;
 import android.util.Log;
 
-/* loaded from: classes.dex */
 public class AccountAuthenticatorResponse implements Parcelable {
     public static final Parcelable.Creator<AccountAuthenticatorResponse> CREATOR =
             new Parcelable.Creator<AccountAuthenticatorResponse>() { // from class:

@@ -10,7 +10,6 @@ import android.os.RemoteException;
 
 import com.android.internal.os.IResultReceiver;
 
-/* loaded from: classes.dex */
 public interface IContentSuggestionsManager extends IInterface {
     public static final String DESCRIPTOR =
             "android.app.contentsuggestions.IContentSuggestionsManager";

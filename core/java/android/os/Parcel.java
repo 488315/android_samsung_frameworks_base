@@ -49,7 +49,6 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.IntFunction;
 
-/* loaded from: classes3.dex */
 public final class Parcel {
     private static final int ARRAY_ALLOCATION_LIMIT = 1000000;
     private static final boolean DEBUG_ARRAY_MAP = false;

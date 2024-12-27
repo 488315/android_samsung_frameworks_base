@@ -3,7 +3,6 @@ package com.samsung.android.cocktailbar;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes5.dex */
 public class CocktailBarStateInfo implements Parcelable, Cloneable {
     public static final Parcelable.Creator<CocktailBarStateInfo> CREATOR =
             new Parcelable.Creator<

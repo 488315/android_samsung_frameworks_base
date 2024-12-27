@@ -4,7 +4,6 @@ import android.hardware.scontext.SContextConstants;
 import android.util.AndroidRuntimeException;
 import android.util.FloatProperty;
 
-/* loaded from: classes5.dex */
 public final class SpringAnimation extends DynamicAnimation<SpringAnimation> {
     private static final float UNSET = Float.MAX_VALUE;
     private boolean mEndRequested;

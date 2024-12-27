@@ -6,7 +6,6 @@ import android.os.Parcelable;
 
 import java.util.StringJoiner;
 
-/* loaded from: classes6.dex */
 public class SehSignalBar implements Parcelable {
     public static final Parcelable.Creator<SehSignalBar> CREATOR =
             new Parcelable.Creator<

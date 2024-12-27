@@ -92,7 +92,6 @@ import kotlin.jvm.internal.StringCompanionObject;
 import kotlinx.coroutines.CoroutineScope;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public class KeyguardService extends Service {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final AnonymousClass3 mBinder;

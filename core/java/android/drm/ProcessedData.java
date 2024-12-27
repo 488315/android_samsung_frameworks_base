@@ -1,7 +1,6 @@
 package android.drm;
 
 @Deprecated
-/* loaded from: classes.dex */
 public class ProcessedData {
     private String mAccountId;
     private final byte[] mData;

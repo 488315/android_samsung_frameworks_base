@@ -1,6 +1,5 @@
 package com.android.server;
 
-/* loaded from: classes5.dex */
 public final class AppStateTrackerProto {
     public static final long ACTIVE_UIDS = 2220498092034L;
     public static final long EXEMPTED_BUCKET_PACKAGES = 2246267895818L;

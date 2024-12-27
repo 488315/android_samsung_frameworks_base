@@ -26,7 +26,6 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Vector;
 
-/* loaded from: classes5.dex */
 public class CustomNamedCurves {
     static X9ECParametersHolder secp192k1 = new X9ECParametersHolder() { // from class:
                 // com.android.internal.org.bouncycastle.crypto.ec.CustomNamedCurves.1

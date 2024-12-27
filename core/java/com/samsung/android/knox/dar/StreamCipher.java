@@ -10,7 +10,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-/* loaded from: classes6.dex */
 public class StreamCipher {
     private static final int DEFAULT_KEY_LEN = 64;
     public static final long DEFAULT_KS_HANDLE = 0;

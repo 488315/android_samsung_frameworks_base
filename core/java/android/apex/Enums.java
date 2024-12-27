@@ -1,6 +1,5 @@
 package android.apex;
 
-/* loaded from: classes.dex */
 public final class Enums {
     public static final int INSTALL_FAILURE_APEX_ACTIVATION = 7;
     public static final int INSTALL_FAILURE_APEX_INSTALLATION = 6;

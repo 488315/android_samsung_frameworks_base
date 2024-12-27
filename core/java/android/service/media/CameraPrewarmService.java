@@ -7,7 +7,6 @@ import android.os.IBinder;
 import android.os.Message;
 import android.os.Messenger;
 
-/* loaded from: classes3.dex */
 public abstract class CameraPrewarmService extends Service {
     public static final String ACTION_PREWARM =
             "android.service.media.CameraPrewarmService.ACTION_PREWARM";

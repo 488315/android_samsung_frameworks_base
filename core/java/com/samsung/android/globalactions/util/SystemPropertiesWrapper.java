@@ -12,7 +12,6 @@ import com.samsung.android.wallpaperbackup.BnRConstants;
 
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public class SystemPropertiesWrapper {
     public static final String KEY_SYS_SHUTDOWN = "persist.sys.shutdown";
     private static final String TAG = "SystemPropertiesWrapper";

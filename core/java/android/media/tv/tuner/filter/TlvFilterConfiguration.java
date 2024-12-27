@@ -3,7 +3,6 @@ package android.media.tv.tuner.filter;
 import android.annotation.SystemApi;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class TlvFilterConfiguration extends FilterConfiguration {
     public static final int PACKET_TYPE_COMPRESSED = 3;
     public static final int PACKET_TYPE_IPV4 = 1;

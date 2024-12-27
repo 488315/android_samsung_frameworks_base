@@ -67,7 +67,6 @@ import com.android.ims.internal.IImsServiceFeatureCallback;
 import java.util.List;
 import java.util.Map;
 
-/* loaded from: classes5.dex */
 public interface ITelephony extends IInterface {
     void addAttachRestrictionForCarrier(int i, int i2, IIntegerConsumer iIntegerConsumer)
             throws RemoteException;

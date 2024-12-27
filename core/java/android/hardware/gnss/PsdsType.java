@@ -1,6 +1,5 @@
 package android.hardware.gnss;
 
-/* loaded from: classes2.dex */
 public @interface PsdsType {
     public static final int LONG_TERM = 1;
     public static final int NORMAL = 2;

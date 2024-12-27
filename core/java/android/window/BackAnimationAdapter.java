@@ -3,7 +3,6 @@ package android.window;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes4.dex */
 public class BackAnimationAdapter implements Parcelable {
     public static final Parcelable.Creator<BackAnimationAdapter> CREATOR =
             new Parcelable.Creator<

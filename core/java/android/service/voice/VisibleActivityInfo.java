@@ -9,7 +9,6 @@ import com.android.internal.util.AnnotationValidations;
 
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public final class VisibleActivityInfo implements Parcelable {
     public static final Parcelable.Creator<VisibleActivityInfo> CREATOR =
             new Parcelable.Creator<

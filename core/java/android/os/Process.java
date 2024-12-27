@@ -20,7 +20,6 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
-/* loaded from: classes3.dex */
 public class Process {
     public static final int ADAPTIVE_BRIGHTNESS_UID = 5021;
     public static final int ADVMODEM_UID = 5017;

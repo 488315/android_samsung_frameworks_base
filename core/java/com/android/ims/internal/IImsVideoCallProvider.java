@@ -9,7 +9,6 @@ import android.os.RemoteException;
 import android.telecom.VideoProfile;
 import android.view.Surface;
 
-/* loaded from: classes5.dex */
 public interface IImsVideoCallProvider extends IInterface {
     void requestCallDataUsage() throws RemoteException;
 

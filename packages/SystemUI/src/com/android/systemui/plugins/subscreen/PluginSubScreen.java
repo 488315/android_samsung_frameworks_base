@@ -21,7 +21,6 @@ import java.util.List;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 @ProvidesInterface(action = PluginSubScreen.ACTION, version = 1)
-/* loaded from: classes2.dex */
 public interface PluginSubScreen extends Plugin {
     public static final String ACTION = "com.samsung.systemui.action.PLUGIN_SUB_SCREEN";
     public static final int BIOMETRIC_TYPE_FACE = 1001;

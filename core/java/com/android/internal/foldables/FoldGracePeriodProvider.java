@@ -8,7 +8,6 @@ import com.android.internal.foldables.flags.Flags;
 
 import java.util.function.Supplier;
 
-/* loaded from: classes5.dex */
 public class FoldGracePeriodProvider {
     private static final String TAG = "FoldGracePeriodProvider";
     private final Supplier<Boolean> mFoldGracePeriodEnabled =

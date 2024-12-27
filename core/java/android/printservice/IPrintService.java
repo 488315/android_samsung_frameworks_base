@@ -10,7 +10,6 @@ import android.print.PrinterId;
 
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public interface IPrintService extends IInterface {
     void createPrinterDiscoverySession() throws RemoteException;
 

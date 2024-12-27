@@ -1,6 +1,5 @@
 package com.samsung.android.audio;
 
-/* loaded from: classes5.dex */
 public final class AudioConstants {
     public static final int CALL_STATUS_VOIPWIFICALLING_OFF = 16;
     public static final int CALL_STATUS_VOIPWIFICALLING_ON = 32;

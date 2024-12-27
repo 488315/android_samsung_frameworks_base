@@ -9,7 +9,6 @@ import com.samsung.android.sume.core.buffer.MediaBuffer;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-/* loaded from: classes6.dex */
 public class BlockingBufferChannel implements BufferChannel {
     private static final String TAG = Def.tagOf((Class<?>) BlockingBufferChannel.class);
     private BlockingQueue<MediaBuffer> queue = new LinkedBlockingQueue();

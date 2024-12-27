@@ -5,7 +5,6 @@ import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.nio.ShortBuffer;
 
-/* loaded from: classes3.dex */
 public class GLES11Ext {
     public static final int GL_3DC_XY_AMD = 34810;
     public static final int GL_3DC_X_AMD = 34809;

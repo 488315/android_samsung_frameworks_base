@@ -3,7 +3,6 @@ package com.android.internal.org.bouncycastle.jcajce.provider.symmetric.util;
 import java.security.AlgorithmParameters;
 import java.security.spec.AlgorithmParameterSpec;
 
-/* loaded from: classes5.dex */
 class SpecUtil {
     SpecUtil() {}
 

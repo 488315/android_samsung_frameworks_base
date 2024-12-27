@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-/* loaded from: classes2.dex */
 public class AudioPort {
     public static final int ROLE_NONE = 0;
     public static final int ROLE_SINK = 2;

@@ -1,7 +1,6 @@
 package android.provider;
 
 @Deprecated
-/* loaded from: classes3.dex */
 public final class LiveFolders implements BaseColumns {
     public static final String ACTION_CREATE_LIVE_FOLDER =
             "android.intent.action.CREATE_LIVE_FOLDER";

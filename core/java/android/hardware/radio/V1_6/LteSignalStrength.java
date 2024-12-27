@@ -7,7 +7,6 @@ import android.os.HwParcel;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public final class LteSignalStrength {
     public android.hardware.radio.V1_0.LteSignalStrength base =
             new android.hardware.radio.V1_0.LteSignalStrength();

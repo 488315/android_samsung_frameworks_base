@@ -3,7 +3,6 @@ package android.webkit;
 import android.content.Context;
 
 @Deprecated
-/* loaded from: classes4.dex */
 public final class CookieSyncManager extends WebSyncManager {
     private static boolean sGetInstanceAllowed = false;
     private static final Object sLock = new Object();

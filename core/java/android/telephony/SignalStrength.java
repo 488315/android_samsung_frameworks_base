@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public class SignalStrength implements Parcelable {
     public static final Parcelable.Creator<SignalStrength> CREATOR =
             new Parcelable.Creator<

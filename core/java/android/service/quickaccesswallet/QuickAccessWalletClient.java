@@ -8,7 +8,6 @@ import android.graphics.drawable.Drawable;
 import java.io.Closeable;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes3.dex */
 public interface QuickAccessWalletClient extends Closeable {
 
     public interface OnWalletCardsRetrievedCallback {

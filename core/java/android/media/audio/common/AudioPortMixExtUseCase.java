@@ -8,7 +8,6 @@ import android.os.Parcelable;
 import java.util.Arrays;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public final class AudioPortMixExtUseCase implements Parcelable {
     public static final Parcelable.Creator<AudioPortMixExtUseCase> CREATOR =
             new Parcelable.Creator<AudioPortMixExtUseCase>() { // from class:

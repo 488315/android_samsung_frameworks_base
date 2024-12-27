@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.animation.Interpolator;
 
-/* loaded from: classes6.dex */
 public class SineEaseOut implements Interpolator {
     public SineEaseOut() {}
 

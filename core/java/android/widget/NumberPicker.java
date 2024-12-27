@@ -37,7 +37,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
-/* loaded from: classes4.dex */
 public class NumberPicker extends LinearLayout {
     private static final int DEFAULT_LAYOUT_RESOURCE_ID = 17367279;
     private static final long DEFAULT_LONG_PRESS_UPDATE_INTERVAL = 300;

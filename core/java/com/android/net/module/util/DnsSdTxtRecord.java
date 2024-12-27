@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 
-/* loaded from: classes5.dex */
 public class DnsSdTxtRecord implements Parcelable {
     public static final Parcelable.Creator<DnsSdTxtRecord> CREATOR =
             new Parcelable.Creator<

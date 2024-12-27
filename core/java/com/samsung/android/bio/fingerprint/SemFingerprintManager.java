@@ -28,7 +28,6 @@ import java.util.List;
 import javax.crypto.Cipher;
 import javax.crypto.Mac;
 
-/* loaded from: classes5.dex */
 public class SemFingerprintManager {
     public static final String EXTRA_KEY_ALLOW_AUTH_EVEN_IF_ENCRYPTED_OR_LOCKDOWN =
             "EXTRA_KEY_ALLOW_EVEN_IF_ENCRYPTED_OR_LOCKDOWN";

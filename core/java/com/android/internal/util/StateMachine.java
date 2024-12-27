@@ -18,7 +18,6 @@ import java.util.Iterator;
 import java.util.Vector;
 import java.util.function.Predicate;
 
-/* loaded from: classes5.dex */
 public class StateMachine {
     public static final boolean HANDLED = true;
     public static final boolean NOT_HANDLED = false;

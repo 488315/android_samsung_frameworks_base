@@ -13,7 +13,6 @@ import android.util.Pools;
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.GrowingArrayUtils;
 
-/* loaded from: classes4.dex */
 public class StaticLayout extends Layout {
     private static final char CHAR_NEW_LINE = '\n';
     private static final int COLUMNS_ELLIPSIZE = 7;

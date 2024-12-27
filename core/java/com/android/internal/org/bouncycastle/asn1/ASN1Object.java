@@ -6,7 +6,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
-/* loaded from: classes5.dex */
 public abstract class ASN1Object implements ASN1Encodable, Encodable {
     @Override // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public abstract ASN1Primitive toASN1Primitive();

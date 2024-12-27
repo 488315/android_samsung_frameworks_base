@@ -15,7 +15,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes.dex */
 public interface IIpMemoryStore extends IInterface {
     public static final String DESCRIPTOR = "android$net$IIpMemoryStore".replace('$', '.');
     public static final String HASH = "d5ea5eb3ddbdaa9a986ce6ba70b0804ca3e39b0c";

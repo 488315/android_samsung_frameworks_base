@@ -9,7 +9,6 @@ import android.util.Log;
 
 import com.samsung.android.media.fmradio.internal.IFMPlayer;
 
-/* loaded from: classes6.dex */
 public class SemFmPlayer {
     public static final int AUDIO_MODE_MONO = 8;
     public static final int AUDIO_MODE_STEREO = 9;

@@ -9,7 +9,6 @@ import android.os.RemoteException;
 
 import java.util.HashMap;
 
-/* loaded from: classes4.dex */
 public class WindowId implements Parcelable {
     public static final Parcelable.Creator<WindowId> CREATOR =
             new Parcelable.Creator<WindowId>() { // from class: android.view.WindowId.1

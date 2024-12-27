@@ -10,7 +10,6 @@ import android.sec.enterprise.content.SecContentProviderURI;
 
 import com.samsung.android.ims.settings.SemImsProfile;
 
-/* loaded from: classes6.dex */
 public interface SemImsService extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.ims.SemImsService";
 

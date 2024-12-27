@@ -2,7 +2,6 @@ package com.android.internal.org.bouncycastle.asn1;
 
 import java.io.IOException;
 
-/* loaded from: classes5.dex */
 public abstract class ASN1External extends ASN1Primitive {
     protected ASN1Primitive dataValueDescriptor;
     protected ASN1ObjectIdentifier directReference;

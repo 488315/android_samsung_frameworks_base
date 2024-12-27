@@ -5,7 +5,6 @@ import android.graphics.Outline;
 import android.graphics.Paint;
 import android.graphics.RectF;
 
-/* loaded from: classes.dex */
 public class OvalShape extends RectShape {
     @Override // android.graphics.drawable.shapes.RectShape, android.graphics.drawable.shapes.Shape
     public void draw(Canvas canvas, Paint paint) {

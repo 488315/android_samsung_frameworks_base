@@ -4,7 +4,6 @@ import com.samsung.vekit.Common.Object.AudioSegment;
 
 import java.util.HashMap;
 
-/* loaded from: classes6.dex */
 public interface AudioSegmentInterface<T> {
     void addAudioSegment(String str, AudioSegment audioSegment);
 

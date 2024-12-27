@@ -27,7 +27,6 @@ import android.util.Slog;
 import com.android.internal.R;
 import com.android.internal.util.ArrayUtils;
 
-/* loaded from: classes5.dex */
 public class SuspendedAppActivity extends AlertActivity implements DialogInterface.OnClickListener {
     private static final String DIGITAL_WELLBEING_PACKAGE = "com.samsung.android.forest";
     public static final String EXTRA_ACTIVITY_OPTIONS =

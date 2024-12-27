@@ -12,7 +12,6 @@ import android.text.TextUtils;
 
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public interface IPrintSpooler extends IInterface {
     void clearCustomPrinterIconCache(IPrintSpoolerCallbacks iPrintSpoolerCallbacks, int i)
             throws RemoteException;

@@ -1,6 +1,5 @@
 package android.adservices.service.measurement;
 
-/* loaded from: classes.dex */
 public final class MeasurementProtoEnums {
     public static final int AGGREGATE_AND_EVENT_REPORTS_GENERATED_SUCCESS_STATUS = 5;
     public static final int AGGREGATE_REPORTING_FALLBACK_JOB_TYPE = 5;

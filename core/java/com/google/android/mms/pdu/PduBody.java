@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 
-/* loaded from: classes5.dex */
 public class PduBody {
     private Map<String, PduPart> mPartMapByContentId;
     private Map<String, PduPart> mPartMapByContentLocation;

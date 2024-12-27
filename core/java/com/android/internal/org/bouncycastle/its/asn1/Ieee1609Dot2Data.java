@@ -9,7 +9,6 @@ import com.android.internal.org.bouncycastle.asn1.DERSequence;
 
 import java.math.BigInteger;
 
-/* loaded from: classes5.dex */
 public class Ieee1609Dot2Data extends ASN1Object {
     private final Ieee1609Dot2Content content;
     private final BigInteger protcolVersion;

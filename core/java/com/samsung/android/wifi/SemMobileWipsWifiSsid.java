@@ -15,7 +15,6 @@ import java.nio.charset.CodingErrorAction;
 import java.util.Arrays;
 import java.util.Locale;
 
-/* loaded from: classes6.dex */
 public class SemMobileWipsWifiSsid implements Parcelable {
     private static final String CHARSET_ALL = "EUC-KR";
     private static final String CHARSET_CN = "gbk";

@@ -1,6 +1,5 @@
 package android.view.accessibility;
 
-/* loaded from: classes4.dex */
 public final class FeatureFlagsImpl implements FeatureFlags {
     @Override // android.view.accessibility.FeatureFlags
     public boolean a11yOverlayCallbacks() {

@@ -1,6 +1,5 @@
 package com.android.window.flags;
 
-/* loaded from: classes5.dex */
 public final class Flags {
     private static FeatureFlags FEATURE_FLAGS = new FeatureFlagsImpl();
     public static final String FLAG_ACTIVITY_EMBEDDING_ANIMATION_CUSTOMIZATION_FLAG =

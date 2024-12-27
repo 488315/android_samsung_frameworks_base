@@ -8,7 +8,6 @@ import com.android.internal.org.bouncycastle.asn1.DERBitString;
 import com.android.internal.org.bouncycastle.asn1.DERSequence;
 import com.android.internal.org.bouncycastle.asn1.x509.AlgorithmIdentifier;
 
-/* loaded from: classes5.dex */
 public class CertificationRequest extends ASN1Object {
     protected CertificationRequestInfo reqInfo;
     protected AlgorithmIdentifier sigAlgId;

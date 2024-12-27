@@ -1,6 +1,5 @@
 package android.hardware.power;
 
-/* loaded from: classes2.dex */
 public @interface SessionTag {
     public static final int APP = 4;
     public static final int GAME = 3;

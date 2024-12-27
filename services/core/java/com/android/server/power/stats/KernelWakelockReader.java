@@ -19,7 +19,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes2.dex */
 public final class KernelWakelockReader {
     public static final int[] PROC_WAKELOCKS_FORMAT = {5129, 8201, 9, 8201, 9, 8201};
     public static final int[] WAKEUP_SOURCES_FORMAT = {

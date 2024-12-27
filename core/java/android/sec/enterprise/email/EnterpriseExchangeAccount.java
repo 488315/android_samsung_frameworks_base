@@ -3,7 +3,6 @@ package android.sec.enterprise.email;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes3.dex */
 public class EnterpriseExchangeAccount implements Parcelable {
     public static final String ACTION_CBA_INSTALL_STATUS_INTERNAL =
             "com.samsung.android.knox.intent.action.CBA_INSTALL_STATUS_INTERNAL";

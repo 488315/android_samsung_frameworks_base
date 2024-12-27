@@ -6,7 +6,6 @@ import android.os.Parcelable;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
 public final class LeaseInfo implements Parcelable {
     public static final Parcelable.Creator<LeaseInfo> CREATOR =
             new Parcelable.Creator<LeaseInfo>() { // from class: android.app.blob.LeaseInfo.1

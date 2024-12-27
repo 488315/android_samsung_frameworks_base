@@ -8,7 +8,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Objects;
 
-/* loaded from: classes5.dex */
 public class Preconditions {
     public static void checkArgument(boolean expression) {
         if (!expression) {

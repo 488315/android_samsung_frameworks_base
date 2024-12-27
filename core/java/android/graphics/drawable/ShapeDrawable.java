@@ -23,7 +23,6 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 
-/* loaded from: classes.dex */
 public class ShapeDrawable extends Drawable {
     private BlendModeColorFilter mBlendModeColorFilter;
     private boolean mMutated;

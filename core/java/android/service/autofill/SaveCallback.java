@@ -6,7 +6,6 @@ import android.util.Log;
 
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public final class SaveCallback {
     private static final String TAG = "SaveCallback";
     private final ISaveCallback mCallback;

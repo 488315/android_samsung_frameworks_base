@@ -40,7 +40,6 @@ import com.samsung.systemui.splugins.lockstar.PluginLockStar;
 import java.util.ArrayList;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes.dex */
 public final class KeyguardPunchHoleVIViewController extends ViewController implements SystemUIWidgetCallback {
     public final ConfigurationController mConfigurationController;
     public final AnonymousClass5 mConfigurationListener;

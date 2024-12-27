@@ -11,7 +11,6 @@ import com.android.internal.org.bouncycastle.crypto.params.ParametersWithIV;
 
 import java.io.ByteArrayOutputStream;
 
-/* loaded from: classes5.dex */
 public class CCMBlockCipher implements AEADBlockCipher {
     private int blockSize;
     private BlockCipher cipher;

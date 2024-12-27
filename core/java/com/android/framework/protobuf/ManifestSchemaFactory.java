@@ -1,7 +1,6 @@
 package com.android.framework.protobuf;
 
 @CheckReturnValue
-/* loaded from: classes3.dex */
 final class ManifestSchemaFactory implements SchemaFactory {
     private static final MessageInfoFactory EMPTY_FACTORY =
             new MessageInfoFactory() { // from class:

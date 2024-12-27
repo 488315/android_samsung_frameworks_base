@@ -6,7 +6,6 @@ import android.util.Log;
 
 import com.samsung.android.audio.Rune;
 
-/* loaded from: classes6.dex */
 public class AudioFxHelper {
     public static final String KEY_SITUATION_VOLUME_TOUCH_TONE = "stv_touch_tone";
     private static final String TAG = "AS.AudioFxHelper";

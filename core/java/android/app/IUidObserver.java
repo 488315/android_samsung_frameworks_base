@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes.dex */
 public interface IUidObserver extends IInterface {
     void onUidActive(int i) throws RemoteException;
 

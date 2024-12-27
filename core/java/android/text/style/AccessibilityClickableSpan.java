@@ -11,7 +11,6 @@ import android.view.accessibility.AccessibilityNodeInfo;
 
 import com.android.internal.R;
 
-/* loaded from: classes4.dex */
 public class AccessibilityClickableSpan extends ClickableSpan implements ParcelableSpan {
     public static final Parcelable.Creator<AccessibilityClickableSpan> CREATOR =
             new Parcelable.Creator<

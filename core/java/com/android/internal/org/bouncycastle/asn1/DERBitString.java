@@ -2,7 +2,6 @@ package com.android.internal.org.bouncycastle.asn1;
 
 import java.io.IOException;
 
-/* loaded from: classes5.dex */
 public class DERBitString extends ASN1BitString {
     public static DERBitString getInstance(Object obj) {
         if (obj == null || (obj instanceof DERBitString)) {

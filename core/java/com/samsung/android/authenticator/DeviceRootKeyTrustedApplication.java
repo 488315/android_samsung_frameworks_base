@@ -1,6 +1,5 @@
 package com.samsung.android.authenticator;
 
-/* loaded from: classes5.dex */
 final class DeviceRootKeyTrustedApplication implements TrustedApplication {
     private static final String TAG = "DRTA";
     private final int mHandle;

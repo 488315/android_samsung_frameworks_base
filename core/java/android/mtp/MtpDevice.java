@@ -13,7 +13,6 @@ import dalvik.system.CloseGuard;
 
 import java.io.IOException;
 
-/* loaded from: classes3.dex */
 public final class MtpDevice {
     private static final String TAG = "MtpDevice";
     private UsbDeviceConnection mConnection;

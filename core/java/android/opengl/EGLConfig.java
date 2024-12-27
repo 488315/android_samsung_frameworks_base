@@ -1,6 +1,5 @@
 package android.opengl;
 
-/* loaded from: classes3.dex */
 public class EGLConfig extends EGLObjectHandle {
     private EGLConfig(long handle) {
         super(handle);

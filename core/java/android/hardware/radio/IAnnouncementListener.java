@@ -8,7 +8,6 @@ import android.os.RemoteException;
 
 import java.util.List;
 
-/* loaded from: classes2.dex */
 public interface IAnnouncementListener extends IInterface {
     void onListUpdated(List<Announcement> list) throws RemoteException;
 

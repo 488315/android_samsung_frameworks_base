@@ -1,6 +1,5 @@
 package com.android.server.usage;
 
-/* loaded from: classes5.dex */
 public final class UsageStatsObfuscatedProto {
     public static final long APP_LAUNCH_COUNT = 1120986464262L;
     public static final long CHOOSER_ACTIONS = 2246267895815L;

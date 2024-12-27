@@ -4,7 +4,6 @@ import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
 
-/* loaded from: classes5.dex */
 class IndefiniteLengthInputStream extends LimitedInputStream {
     private int _b1;
     private int _b2;

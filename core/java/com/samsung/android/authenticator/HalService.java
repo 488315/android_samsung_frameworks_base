@@ -2,7 +2,6 @@ package com.samsung.android.authenticator;
 
 import android.os.ParcelFileDescriptor;
 
-/* loaded from: classes5.dex */
 final class HalService {
     private static final String TAG = "HS";
     private static XidlHalService sService;

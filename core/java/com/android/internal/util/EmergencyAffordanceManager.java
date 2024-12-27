@@ -10,7 +10,6 @@ import android.telecom.PhoneAccount;
 
 import com.android.internal.R;
 
-/* loaded from: classes5.dex */
 public class EmergencyAffordanceManager {
     private static final String EMERGENCY_CALL_NUMBER_SETTING = "emergency_affordance_number";
     public static final boolean ENABLED = true;

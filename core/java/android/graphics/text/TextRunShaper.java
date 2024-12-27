@@ -5,7 +5,6 @@ import android.text.TextUtils;
 
 import com.android.internal.util.Preconditions;
 
-/* loaded from: classes.dex */
 public class TextRunShaper {
     private static native long nativeShapeTextRun(
             String str, int i, int i2, int i3, int i4, boolean z, long j);

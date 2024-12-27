@@ -4,7 +4,6 @@ import org.apache.harmony.dalvik.ddmc.Chunk;
 import org.apache.harmony.dalvik.ddmc.ChunkHandler;
 import org.apache.harmony.dalvik.ddmc.DdmServer;
 
-/* loaded from: classes.dex */
 public class DdmHandleHeap extends DdmHandle {
     public static final int CHUNK_HPGC = ChunkHandler.type("HPGC");
     private static DdmHandleHeap mInstance = new DdmHandleHeap();

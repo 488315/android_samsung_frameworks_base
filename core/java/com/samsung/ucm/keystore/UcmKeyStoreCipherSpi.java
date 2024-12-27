@@ -31,7 +31,6 @@ import javax.crypto.spec.GCMParameterSpec;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
-/* loaded from: classes6.dex */
 public abstract class UcmKeyStoreCipherSpi extends CipherSpi {
     private static final String AES_ALGORITHM = "AES";
     private static final String GCM_MODE = "GCM";

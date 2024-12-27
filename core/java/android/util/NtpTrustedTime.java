@@ -25,7 +25,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public abstract class NtpTrustedTime implements TrustedTime {
     private static final boolean LOGD = true;
     public static final String NTP_SETTING_SERVER_NAME_DELIMITER = "|";

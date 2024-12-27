@@ -1,6 +1,5 @@
 package com.android.internal.org.bouncycastle.jce.provider;
 
-/* loaded from: classes5.dex */
 public class PKIXNameConstraintValidatorException extends Exception {
     private Throwable cause;
 

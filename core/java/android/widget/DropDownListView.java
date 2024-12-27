@@ -7,7 +7,6 @@ import android.view.accessibility.AccessibilityManager;
 
 import com.android.internal.widget.AutoScrollHelper;
 
-/* loaded from: classes4.dex */
 public class DropDownListView extends ListView {
     private boolean mDrawsInPressedState;
     private boolean mHijackFocus;

@@ -24,7 +24,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
-/* loaded from: classes3.dex */
 public class Environment {
     private static final long DEFAULT_SCOPED_STORAGE = 149924527;
     public static String DIRECTORY_ALARMS = null;

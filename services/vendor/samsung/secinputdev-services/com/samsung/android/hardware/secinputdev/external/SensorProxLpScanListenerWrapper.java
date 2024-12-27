@@ -7,7 +7,6 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Handler;
 
-/* loaded from: classes.dex */
 public class SensorProxLpScanListenerWrapper extends ExternalService {
     private final SensorEventListener sensorEventListener;
 

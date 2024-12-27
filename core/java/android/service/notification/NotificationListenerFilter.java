@@ -5,7 +5,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.ArraySet;
 
-/* loaded from: classes3.dex */
 public class NotificationListenerFilter implements Parcelable {
     public static final Parcelable.Creator<NotificationListenerFilter> CREATOR =
             new Parcelable.Creator<

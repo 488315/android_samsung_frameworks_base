@@ -5,7 +5,6 @@ import android.app.backup.FullBackup;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes4.dex */
 public class TypedValue {
     public static final int COMPLEX_MANTISSA_MASK = 16777215;
     public static final int COMPLEX_MANTISSA_SHIFT = 8;

@@ -1,6 +1,5 @@
 package com.android.internal.org.bouncycastle.math.raw;
 
-/* loaded from: classes5.dex */
 public abstract class Nat512 {
     public static void mul(int[] x, int[] y, int[] zz) {
         Nat256.mul(x, y, zz);

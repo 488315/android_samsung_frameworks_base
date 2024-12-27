@@ -4,7 +4,6 @@ import android.hardware.usb.UsbManager;
 
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public interface IPowerManager extends IInterface {
     public static final int GO_TO_SLEEP_FLAG_NO_DOZE = 1;
     public static final int GO_TO_SLEEP_REASON_ACCESSIBILITY = 7;

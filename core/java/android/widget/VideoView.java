@@ -32,7 +32,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Vector;
 
-/* loaded from: classes4.dex */
 public class VideoView extends SurfaceView
         implements MediaController.MediaPlayerControl, SubtitleController.Anchor {
     private static final int STATE_ERROR = -1;

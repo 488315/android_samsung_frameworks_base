@@ -6,7 +6,6 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.Map;
 
-/* loaded from: classes4.dex */
 public class TransitionValues {
     public View view;
     public final Map<String, Object> values = new ArrayMap();

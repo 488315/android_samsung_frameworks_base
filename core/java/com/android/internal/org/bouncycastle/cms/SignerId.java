@@ -6,7 +6,6 @@ import com.android.internal.org.bouncycastle.util.Selector;
 
 import java.math.BigInteger;
 
-/* loaded from: classes5.dex */
 public class SignerId implements Selector {
     private X509CertificateHolderSelector baseSelector;
 

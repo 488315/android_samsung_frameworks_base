@@ -30,7 +30,6 @@ import java.util.List;
 
 import javax.security.auth.x500.X500Principal;
 
-/* loaded from: classes5.dex */
 public class AttributeCertificateHolder implements CertSelector, Selector {
     final Holder holder;
 

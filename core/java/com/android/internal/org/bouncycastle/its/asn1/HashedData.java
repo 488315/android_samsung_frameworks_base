@@ -6,7 +6,6 @@ import com.android.internal.org.bouncycastle.asn1.ASN1OctetString;
 import com.android.internal.org.bouncycastle.asn1.ASN1Primitive;
 import com.android.internal.org.bouncycastle.asn1.DEROctetString;
 
-/* loaded from: classes5.dex */
 public class HashedData extends ASN1Object implements ASN1Choice {
     private ASN1OctetString hashData;
 

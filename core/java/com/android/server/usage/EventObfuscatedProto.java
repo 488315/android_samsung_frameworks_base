@@ -1,6 +1,5 @@
 package com.android.server.usage;
 
-/* loaded from: classes5.dex */
 public final class EventObfuscatedProto {
     public static final long CLASS_TOKEN = 1120986464258L;
     public static final long CONFIG = 1146756268038L;

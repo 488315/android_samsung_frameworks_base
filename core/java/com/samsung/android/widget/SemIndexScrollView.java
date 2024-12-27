@@ -24,7 +24,6 @@ import android.widget.FrameLayout;
 
 import com.android.internal.R;
 
-/* loaded from: classes6.dex */
 public class SemIndexScrollView extends FrameLayout implements AbsListView.OnScrollListener {
     public static final int GRAVITY_INDEX_BAR_LEFT = 0;
     public static final int GRAVITY_INDEX_BAR_RIGHT = 1;

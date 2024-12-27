@@ -13,7 +13,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 
-/* loaded from: classes6.dex */
 public class SemUnionManager {
     private static final boolean DEBUG = false;
     private static final String TAG = SemUnionManager.class.getSimpleName();

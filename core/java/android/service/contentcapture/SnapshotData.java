@@ -8,7 +8,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class SnapshotData implements Parcelable {
     public static final Parcelable.Creator<SnapshotData> CREATOR =
             new Parcelable.Creator<

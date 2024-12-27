@@ -10,7 +10,6 @@ import java.io.Closeable;
 import java.io.IOException;
 import java.util.UUID;
 
-/* loaded from: classes4.dex */
 public final class MemoryIntArray implements Parcelable, Closeable {
     public static final Parcelable.Creator<MemoryIntArray> CREATOR =
             new Parcelable.Creator<MemoryIntArray>() { // from class: android.util.MemoryIntArray.1

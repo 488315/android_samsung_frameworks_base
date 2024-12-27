@@ -13,7 +13,6 @@ import libcore.util.NativeAllocationRegistry;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public final class PositionedGlyphs {
     public static final float NO_OVERRIDE = Float.MIN_VALUE;
     private final ArrayList<Font> mFonts;

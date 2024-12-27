@@ -1,6 +1,5 @@
 package com.samsung.android.common;
 
-/* loaded from: classes5.dex */
 public final class AsPackageName {
     public static final String A11Y = "com.samsung.accessibility";
     public static final String ANDROID_SYSTEM_SERVER = "android";

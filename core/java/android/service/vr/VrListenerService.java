@@ -10,7 +10,6 @@ import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
 
-/* loaded from: classes3.dex */
 public abstract class VrListenerService extends Service {
     private static final int MSG_ON_CURRENT_VR_ACTIVITY_CHANGED = 1;
     public static final String SERVICE_INTERFACE = "android.service.vr.VrListenerService";

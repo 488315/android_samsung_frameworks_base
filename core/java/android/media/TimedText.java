@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
-/* loaded from: classes2.dex */
 public final class TimedText {
     private static final int FIRST_PRIVATE_KEY = 101;
     private static final int FIRST_PUBLIC_KEY = 1;

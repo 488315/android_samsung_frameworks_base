@@ -11,7 +11,6 @@ import android.os.UserHandle;
 
 import java.util.Map;
 
-/* loaded from: classes.dex */
 public interface IAccountManager extends IInterface {
     boolean accountAuthenticated(Account account) throws RemoteException;
 

@@ -2,7 +2,6 @@ package android.graphics.drawable;
 
 import android.graphics.Rect;
 
-/* loaded from: classes.dex */
 abstract class RippleComponent {
     protected final Rect mBounds;
     protected float mDensityScale;

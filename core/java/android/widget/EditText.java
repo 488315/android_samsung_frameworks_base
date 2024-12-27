@@ -16,7 +16,6 @@ import android.view.KeyEvent;
 
 import com.android.internal.R;
 
-/* loaded from: classes4.dex */
 public class EditText extends TextView {
     private static final int ID_BOLD = 16908379;
     private static final int ID_ITALIC = 16908380;

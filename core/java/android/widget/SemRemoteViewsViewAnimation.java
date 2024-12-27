@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
-/* loaded from: classes4.dex */
 public class SemRemoteViewsViewAnimation extends SemRemoteViewsAnimation {
     public static final Parcelable.Creator<SemRemoteViewsViewAnimation> CREATOR =
             new Parcelable.Creator<

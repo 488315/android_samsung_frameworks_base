@@ -5,7 +5,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public abstract class VopsSupportInfo implements Parcelable {
     public static final Parcelable.Creator<VopsSupportInfo> CREATOR =
             new Parcelable.Creator<

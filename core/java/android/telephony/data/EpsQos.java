@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public final class EpsQos extends Qos implements Parcelable {
     public static final Parcelable.Creator<EpsQos> CREATOR =
             new Parcelable.Creator<EpsQos>() { // from class: android.telephony.data.EpsQos.1

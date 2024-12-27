@@ -4,7 +4,6 @@ import android.os.Parcel;
 
 import java.util.Date;
 
-/* loaded from: classes3.dex */
 class KeymasterDateArgument extends KeymasterArgument {
     public final Date date;
 

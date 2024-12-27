@@ -8,7 +8,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public final class OverlayInfo implements CriticalOverlayInfo, Parcelable {
     public static final String CATEGORY_THEME = "android.theme";
     public static final Parcelable.Creator<OverlayInfo> CREATOR =

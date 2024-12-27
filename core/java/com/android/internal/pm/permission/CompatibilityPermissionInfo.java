@@ -5,7 +5,6 @@ import android.annotation.NonNull;
 
 import com.android.internal.util.AnnotationValidations;
 
-/* loaded from: classes5.dex */
 public class CompatibilityPermissionInfo {
     public static final CompatibilityPermissionInfo[] COMPAT_PERMS = {
         new CompatibilityPermissionInfo(Manifest.permission.POST_NOTIFICATIONS, 33),

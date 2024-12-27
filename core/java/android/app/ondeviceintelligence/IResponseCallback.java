@@ -9,7 +9,6 @@ import android.os.PersistableBundle;
 import android.os.RemoteCallback;
 import android.os.RemoteException;
 
-/* loaded from: classes.dex */
 public interface IResponseCallback extends IInterface {
     public static final String DESCRIPTOR = "android.app.ondeviceintelligence.IResponseCallback";
 

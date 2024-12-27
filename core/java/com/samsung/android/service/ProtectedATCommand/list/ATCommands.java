@@ -5,7 +5,6 @@ import android.util.Slog;
 
 import java.nio.charset.StandardCharsets;
 
-/* loaded from: classes6.dex */
 public class ATCommands {
     static final String TAG = "ATCommands";
     private static final boolean mIsTestBinary =

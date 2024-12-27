@@ -2,7 +2,6 @@ package android.content.integrity;
 
 import com.android.internal.util.Preconditions;
 
-/* loaded from: classes.dex */
 public class IntegrityUtils {
     private static final char[] HEX_CHARS = "0123456789ABCDEF".toCharArray();
 

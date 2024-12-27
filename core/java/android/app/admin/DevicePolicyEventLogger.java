@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public class DevicePolicyEventLogger {
     private String mAdminPackageName;
     private boolean mBooleanValue;

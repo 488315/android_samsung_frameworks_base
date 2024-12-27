@@ -15,7 +15,6 @@ import android.view.RemotableViewMethod;
 import android.widget.RemoteViews;
 
 @RemoteViews.RemoteView
-/* loaded from: classes5.dex */
 public class NotificationRowIconView extends CachingIconView {
     private boolean mApplyCircularCrop;
 

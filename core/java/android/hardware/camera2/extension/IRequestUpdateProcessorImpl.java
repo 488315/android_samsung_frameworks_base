@@ -8,7 +8,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.view.Surface;
 
-/* loaded from: classes2.dex */
 public interface IRequestUpdateProcessorImpl extends IInterface {
     public static final String DESCRIPTOR =
             "android.hardware.camera2.extension.IRequestUpdateProcessorImpl";

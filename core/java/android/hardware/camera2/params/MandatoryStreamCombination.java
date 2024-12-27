@@ -18,7 +18,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
-/* loaded from: classes2.dex */
 public final class MandatoryStreamCombination {
     private static final long STREAM_USE_CASE_CROPPED_RAW = 6;
     private static final long STREAM_USE_CASE_PREVIEW = 1;

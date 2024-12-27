@@ -6,7 +6,6 @@ import android.os.RemoteException;
 
 import java.io.IOException;
 
-/* loaded from: classes.dex */
 public class SerialManager {
     private static final String TAG = "SerialManager";
     private final Context mContext;

@@ -1,6 +1,5 @@
 package android.opengl;
 
-/* loaded from: classes3.dex */
 public class EGLSync extends EGLObjectHandle {
     private EGLSync(long handle) {
         super(handle);

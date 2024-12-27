@@ -4,7 +4,6 @@ import com.android.internal.util.Preconditions;
 
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public final class Range<T extends Comparable<? super T>> {
     private final T mLower;
     private final T mUpper;

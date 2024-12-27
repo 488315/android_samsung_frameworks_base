@@ -48,7 +48,6 @@ import com.samsung.android.view.SemWindowManager;
 
 import java.util.List;
 
-/* loaded from: classes4.dex */
 public interface IWindowManager extends IInterface {
     public static final int FIXED_TO_USER_ROTATION_DEFAULT = 0;
     public static final int FIXED_TO_USER_ROTATION_DISABLED = 1;

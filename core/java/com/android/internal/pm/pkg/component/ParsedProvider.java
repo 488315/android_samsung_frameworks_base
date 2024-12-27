@@ -5,7 +5,6 @@ import android.os.PatternMatcher;
 
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public interface ParsedProvider extends ParsedMainComponent {
     String getAuthority();
 

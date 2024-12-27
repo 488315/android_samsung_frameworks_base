@@ -20,7 +20,6 @@ import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Random;
 
-/* loaded from: classes5.dex */
 public abstract class SemClipData implements Parcelable, Serializable {
     public static final Parcelable.Creator<SemClipData> CREATOR =
             new Parcelable.Creator<

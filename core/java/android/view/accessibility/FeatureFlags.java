@@ -1,6 +1,5 @@
 package android.view.accessibility;
 
-/* loaded from: classes4.dex */
 public interface FeatureFlags {
     boolean a11yOverlayCallbacks();
 

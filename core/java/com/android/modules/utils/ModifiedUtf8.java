@@ -2,7 +2,6 @@ package com.android.modules.utils;
 
 import java.io.UTFDataFormatException;
 
-/* loaded from: classes5.dex */
 public class ModifiedUtf8 {
     public static String decode(byte[] in, char[] out, int offset, int utfSize)
             throws UTFDataFormatException {

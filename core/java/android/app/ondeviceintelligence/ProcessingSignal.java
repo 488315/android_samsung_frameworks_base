@@ -9,7 +9,6 @@ import java.util.Objects;
 import java.util.concurrent.Executor;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class ProcessingSignal {
     private static final int MAX_QUEUE_SIZE = 10;
     private Executor mExecutor;

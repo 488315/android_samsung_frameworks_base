@@ -3,7 +3,6 @@ package android.hardware.display;
 import android.os.RemoteException;
 import android.util.Log;
 
-/* loaded from: classes2.dex */
 public final class ExynosDisplaySolutionManager {
     public static final String HDR_TUNE_PATTERN_CHANGED =
             "com.android.server.display.HDR_TUNE_PATTERN_CHANGED";

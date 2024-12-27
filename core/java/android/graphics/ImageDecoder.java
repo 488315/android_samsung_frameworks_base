@@ -40,7 +40,6 @@ import java.util.Objects;
 import java.util.concurrent.Callable;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-/* loaded from: classes.dex */
 public final class ImageDecoder implements AutoCloseable {
     public static final int ALLOCATOR_DEFAULT = 0;
     public static final int ALLOCATOR_HARDWARE = 3;

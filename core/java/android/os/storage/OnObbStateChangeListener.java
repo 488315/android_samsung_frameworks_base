@@ -1,6 +1,5 @@
 package android.os.storage;
 
-/* loaded from: classes3.dex */
 public abstract class OnObbStateChangeListener {
     public static final int ERROR_ALREADY_MOUNTED = 24;
     public static final int ERROR_COULD_NOT_MOUNT = 21;

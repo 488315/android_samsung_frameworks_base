@@ -1,6 +1,5 @@
 package android.os;
 
-/* loaded from: classes3.dex */
 public interface ICancellationSignal extends IInterface {
     void cancel() throws RemoteException;
 

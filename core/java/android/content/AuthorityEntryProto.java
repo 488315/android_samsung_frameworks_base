@@ -1,6 +1,5 @@
 package android.content;
 
-/* loaded from: classes.dex */
 public final class AuthorityEntryProto {
     public static final long HOST = 1138166333441L;
     public static final long PORT = 1120986464259L;

@@ -8,7 +8,6 @@ import com.android.internal.telephony.IccPcscProvider;
 import java.io.IOException;
 import java.util.Random;
 
-/* loaded from: classes5.dex */
 public class SmartMXUICC {
     static final boolean DBG = true;
     public static final String EXTRA_ID = "android.nfc.extra.ID";

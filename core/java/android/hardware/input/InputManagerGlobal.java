@@ -37,7 +37,6 @@ import java.util.Objects;
 import java.util.concurrent.Executor;
 import java.util.function.Predicate;
 
-/* loaded from: classes2.dex */
 public final class InputManagerGlobal {
     private static final int CONVERSION_TYPE_SPEN_TO_MOUSE = 10100;
     private static final int MSG_MULTI_FINGER_GESTURE = 1;

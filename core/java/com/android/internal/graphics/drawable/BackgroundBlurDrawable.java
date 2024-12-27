@@ -33,7 +33,6 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 
-/* loaded from: classes5.dex */
 public final class BackgroundBlurDrawable extends Drawable {
     private static final boolean DEBUG;
     private static final String TAG = BackgroundBlurDrawable.class.getSimpleName();

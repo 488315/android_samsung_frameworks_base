@@ -13,7 +13,6 @@ import java.util.Map;
 import java.util.Set;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public final class ImsConferenceState implements Parcelable {
     public static final Parcelable.Creator<ImsConferenceState> CREATOR =
             new Parcelable.Creator<

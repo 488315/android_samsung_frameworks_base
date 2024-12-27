@@ -22,7 +22,6 @@ import android.view.KeyEvent;
 import java.util.List;
 import java.util.Map;
 
-/* loaded from: classes2.dex */
 public interface IAudioService extends IInterface {
     int abandonAudioFocus(
             IAudioFocusDispatcher iAudioFocusDispatcher,

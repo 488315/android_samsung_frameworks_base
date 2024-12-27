@@ -33,7 +33,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.function.Function;
 
-/* loaded from: classes3.dex */
 public class PermissionUsageHelper
         implements AppOpsManager.OnOpActiveChangedListener, AppOpsManager.OnOpStartedListener {
     private static final long DEFAULT_RECENT_TIME_MS = 15000;

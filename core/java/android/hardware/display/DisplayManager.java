@@ -37,7 +37,6 @@ import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.function.Predicate;
 
-/* loaded from: classes2.dex */
 public final class DisplayManager {
     public static final String ACTION_ROTATION_CHANGED =
             "com.samsung.intent.action.ROTATION_CHANGED";

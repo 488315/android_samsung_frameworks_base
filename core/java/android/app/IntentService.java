@@ -9,7 +9,6 @@ import android.os.Looper;
 import android.os.Message;
 
 @Deprecated
-/* loaded from: classes.dex */
 public abstract class IntentService extends Service {
     private String mName;
     private boolean mRedelivery;

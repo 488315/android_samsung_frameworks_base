@@ -8,7 +8,6 @@ import android.os.StrictMode;
 import android.security.authorization.IKeystoreAuthorization;
 import android.util.Log;
 
-/* loaded from: classes3.dex */
 public class KeyStoreAuthorization {
     public static final int SYSTEM_ERROR = 4;
     private static final String TAG = "KeyStoreAuthorization";

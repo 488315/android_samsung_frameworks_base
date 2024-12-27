@@ -10,7 +10,6 @@ import com.android.internal.R;
 import dalvik.annotation.optimization.FastNative;
 import dalvik.system.CloseGuard;
 
-/* loaded from: classes.dex */
 public class CursorWindow extends SQLiteClosable implements Parcelable {
     private static final String STATS_TAG = "CursorWindowStats";
     private final CloseGuard mCloseGuard;

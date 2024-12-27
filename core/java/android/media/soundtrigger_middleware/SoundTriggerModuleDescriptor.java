@@ -9,7 +9,6 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public class SoundTriggerModuleDescriptor implements Parcelable {
     public static final Parcelable.Creator<SoundTriggerModuleDescriptor> CREATOR =
             new Parcelable.Creator<SoundTriggerModuleDescriptor>() { // from class:

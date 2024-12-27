@@ -5,7 +5,6 @@ import android.view.inputmethod.ExtractedText;
 import android.view.inputmethod.ExtractedTextRequest;
 import android.view.inputmethod.SurroundingText;
 
-/* loaded from: classes5.dex */
 public final class InputConnectionProtoDumper {
     static final String TAG = "InputConnectionProtoDumper";
 

@@ -1,6 +1,5 @@
 package android.hardware.biometrics.face;
 
-/* loaded from: classes2.dex */
 public @interface EnrollmentStage {
     public static final byte ENROLLING_MOVEMENT_1 = 4;
     public static final byte ENROLLING_MOVEMENT_2 = 5;

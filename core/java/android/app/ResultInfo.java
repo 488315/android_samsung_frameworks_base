@@ -7,7 +7,6 @@ import android.os.Parcelable;
 
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public class ResultInfo implements Parcelable {
     public static final Parcelable.Creator<ResultInfo> CREATOR =
             new Parcelable.Creator<ResultInfo>() { // from class: android.app.ResultInfo.1

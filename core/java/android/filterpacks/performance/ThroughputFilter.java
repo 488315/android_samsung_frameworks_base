@@ -8,7 +8,6 @@ import android.filterfw.core.GenerateFieldPort;
 import android.filterfw.format.ObjectFormat;
 import android.os.SystemClock;
 
-/* loaded from: classes.dex */
 public class ThroughputFilter extends Filter {
     private long mLastTime;
     private FrameFormat mOutputFormat;

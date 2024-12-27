@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
-/* loaded from: classes3.dex */
 public final class ImageTransformation extends InternalTransformation implements Transformation, Parcelable {
     public static final Parcelable.Creator<ImageTransformation> CREATOR = new Parcelable.Creator<ImageTransformation>() { // from class: android.service.autofill.ImageTransformation.1
         /* JADX WARN: Can't rename method to resolve collision */

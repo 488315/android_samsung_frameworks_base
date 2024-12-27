@@ -17,7 +17,6 @@ import java.util.Map;
 import java.util.concurrent.Executor;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public abstract class CallDiagnosticService extends Service {
     public static final String SERVICE_INTERFACE = "android.telecom.CallDiagnosticService";
     private ICallDiagnosticServiceAdapter mAdapter;

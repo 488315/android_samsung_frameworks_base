@@ -2,7 +2,6 @@ package com.android.internal.graphics.cam;
 
 import android.hardware.scontext.SContextConstants;
 
-/* loaded from: classes5.dex */
 public class HctSolver {
     static final double[][] SCALED_DISCOUNT_FROM_LINRGB = {
         new double[] {0.001200833568784504d, 0.002389694492170889d, 2.795742885861124E-4d},

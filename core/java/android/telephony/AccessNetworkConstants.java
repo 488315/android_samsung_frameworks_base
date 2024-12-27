@@ -20,7 +20,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Locale;
 
-/* loaded from: classes4.dex */
 public final class AccessNetworkConstants {
     private static final String TAG = AccessNetworkConstants.class.getSimpleName();
 

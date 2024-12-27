@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-/* loaded from: classes6.dex */
 public class UniImgp {
     public static final int INTER_AREA = 3;
     public static final int INTER_CUBIC = 2;

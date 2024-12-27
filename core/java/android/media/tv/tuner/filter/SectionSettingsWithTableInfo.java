@@ -3,7 +3,6 @@ package android.media.tv.tuner.filter;
 import android.annotation.SystemApi;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public class SectionSettingsWithTableInfo extends SectionSettings {
     public static final int INVALID_TABLE_INFO_VERSION = -1;
     private final int mTableId;

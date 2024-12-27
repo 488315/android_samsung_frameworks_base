@@ -39,7 +39,6 @@ import java.util.concurrent.Executor;
 import java.util.function.Supplier;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public class ImsService extends Service {
     public static final long CAPABILITY_EMERGENCY_OVER_MMTEL = 1;
     public static final long CAPABILITY_SIP_DELEGATE_CREATION = 2;

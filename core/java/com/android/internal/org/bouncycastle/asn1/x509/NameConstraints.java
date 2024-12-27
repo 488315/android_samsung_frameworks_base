@@ -10,7 +10,6 @@ import com.android.internal.org.bouncycastle.asn1.DERTaggedObject;
 
 import java.util.Enumeration;
 
-/* loaded from: classes5.dex */
 public class NameConstraints extends ASN1Object {
     private GeneralSubtree[] excluded;
     private GeneralSubtree[] permitted;

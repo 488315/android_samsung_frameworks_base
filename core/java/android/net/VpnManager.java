@@ -19,7 +19,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.security.GeneralSecurityException;
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public class VpnManager {
     public static final String ACTION_VPN_MANAGER_EVENT = "android.net.action.VPN_MANAGER_EVENT";
     public static final String CATEGORY_EVENT_ALWAYS_ON_STATE_CHANGED =

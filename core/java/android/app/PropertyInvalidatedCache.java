@@ -25,7 +25,6 @@ import java.util.Set;
 import java.util.WeakHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
-/* loaded from: classes.dex */
 public class PropertyInvalidatedCache<Query, Result> {
     private static final boolean DEBUG = false;
     public static final String MODULE_BLUETOOTH = "bluetooth";

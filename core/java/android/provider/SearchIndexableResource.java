@@ -5,7 +5,6 @@ import android.content.Context;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public class SearchIndexableResource extends SearchIndexableData {
     public int xmlResId;
 

@@ -3,7 +3,6 @@ package com.android.internal.org.bouncycastle.jcajce.provider.symmetric.util;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
 
-/* loaded from: classes5.dex */
 public class ClassUtil {
     public static Class loadClass(Class sourceClass, final String className) {
         try {

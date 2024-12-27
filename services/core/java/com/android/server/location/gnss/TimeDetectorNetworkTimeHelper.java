@@ -16,7 +16,6 @@ import com.android.server.timedetector.TimeDetectorStrategyImpl;
 import com.android.server.timezonedetector.StateChangeListener;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes.dex */
 public final class TimeDetectorNetworkTimeHelper extends NetworkTimeHelper {
     public static final boolean DEBUG = Log.isLoggable("TDNetworkTimeHelper", 3);
     static final int MAX_NETWORK_TIME_AGE_MILLIS = 86400000;

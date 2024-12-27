@@ -1,6 +1,5 @@
 package android.hardware.keymaster;
 
-/* loaded from: classes2.dex */
 public @interface SecurityLevel {
     public static final int SOFTWARE = 0;
     public static final int STRONGBOX = 2;

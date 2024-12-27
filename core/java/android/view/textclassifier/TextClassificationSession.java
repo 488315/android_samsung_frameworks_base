@@ -7,7 +7,6 @@ import sun.misc.Cleaner;
 import java.util.Objects;
 import java.util.function.Supplier;
 
-/* loaded from: classes4.dex */
 final class TextClassificationSession implements TextClassifier {
     private static final String LOG_TAG = "TextClassificationSession";
     private final TextClassificationContext mClassificationContext;

@@ -16,7 +16,6 @@ import com.android.internal.telephony.SemRILConstants;
 import java.util.Objects;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes3.dex */
 public final class CallControl {
     private static final String TAG = CallControl.class.getSimpleName();
     private final String mCallId;

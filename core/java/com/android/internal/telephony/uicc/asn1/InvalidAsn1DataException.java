@@ -2,7 +2,6 @@ package com.android.internal.telephony.uicc.asn1;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 
-/* loaded from: classes5.dex */
 public class InvalidAsn1DataException extends Exception {
     private final int mTag;
 

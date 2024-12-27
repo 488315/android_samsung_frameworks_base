@@ -9,7 +9,6 @@ import android.view.RemoteAnimationTarget;
 import com.android.systemui.settings.DisplayTracker;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes.dex */
 public final class ClipboardTransitionExecutor {
     public final ClipboardTransitionExecutor$NULL_ACTIVITY_TRANSITION$1 NULL_ACTIVITY_TRANSITION;
     public final String TAG = "ClipboardTransitionExec";

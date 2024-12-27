@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 
 import com.android.internal.widget.PagerAdapter;
 
-/* loaded from: classes4.dex */
 class DayPickerPagerAdapter extends PagerAdapter {
     private static final int MONTHS_IN_YEAR = 12;
     private ColorStateList mCalendarTextColor;

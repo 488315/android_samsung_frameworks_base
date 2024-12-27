@@ -7,7 +7,6 @@ import kotlinx.coroutines.channels.Channel;
 import kotlinx.coroutines.channels.ChannelKt;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes3.dex */
 public final class IpcSerializer {
     public static final int $stable = 8;
     private final Channel channel = ChannelKt.Channel$default(0, null, null, 7);

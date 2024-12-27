@@ -1,6 +1,5 @@
 package android.app;
 
-/* loaded from: classes.dex */
 public final class ProfilerInfoProto {
     public static final long AGENT = 1138166333446L;
     public static final long AUTO_STOP_PROFILER = 1133871366148L;

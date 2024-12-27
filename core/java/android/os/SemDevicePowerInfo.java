@@ -3,7 +3,6 @@ package android.os;
 import android.hardware.scontext.SContextConstants;
 import android.telephony.CellSignalStrength;
 
-/* loaded from: classes3.dex */
 public class SemDevicePowerInfo implements Parcelable {
     public static final Parcelable.Creator<SemDevicePowerInfo> CREATOR =
             new Parcelable.Creator<

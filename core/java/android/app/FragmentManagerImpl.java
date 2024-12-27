@@ -41,7 +41,6 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /* compiled from: FragmentManager.java */
-/* loaded from: classes.dex */
 final class FragmentManagerImpl extends FragmentManager implements LayoutInflater.Factory2 {
     static boolean DEBUG = false;
     static final String TAG = "FragmentManager";

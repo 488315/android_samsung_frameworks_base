@@ -7,7 +7,6 @@ import android.os.HwParcel;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public final class CellIdentityGsm {
     public android.hardware.radio.V1_2.CellIdentityGsm base =
             new android.hardware.radio.V1_2.CellIdentityGsm();

@@ -8,7 +8,6 @@ import android.os.Parcel;
 import android.os.RemoteCallback;
 import android.os.RemoteException;
 
-/* loaded from: classes3.dex */
 public interface IAmbientContextDetectionService extends IInterface {
     public static final String DESCRIPTOR =
             "android.service.ambientcontext.IAmbientContextDetectionService";

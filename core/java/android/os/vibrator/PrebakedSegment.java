@@ -8,7 +8,6 @@ import android.os.VibratorInfo;
 
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public final class PrebakedSegment extends VibrationEffectSegment {
     public static final Parcelable.Creator<PrebakedSegment> CREATOR =
             new Parcelable.Creator<

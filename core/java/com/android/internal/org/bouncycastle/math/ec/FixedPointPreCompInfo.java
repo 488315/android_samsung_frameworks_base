@@ -1,6 +1,5 @@
 package com.android.internal.org.bouncycastle.math.ec;
 
-/* loaded from: classes5.dex */
 public class FixedPointPreCompInfo implements PreCompInfo {
     protected ECPoint offset = null;
     protected ECLookupTable lookupTable = null;

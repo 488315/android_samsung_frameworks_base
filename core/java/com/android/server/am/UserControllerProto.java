@@ -1,6 +1,5 @@
 package com.android.server.am;
 
-/* loaded from: classes5.dex */
 public final class UserControllerProto {
     public static final long CURRENT_PROFILES = 2220498092038L;
     public static final long CURRENT_USER = 1120986464261L;

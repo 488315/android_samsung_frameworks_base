@@ -10,7 +10,6 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Consumer;
 
-/* loaded from: classes2.dex */
 public final class UsbOperationInternal extends IUsbOperationInternal.Stub {
     private static final String TAG = "UsbPortStatus";
     public static final int USB_OPERATION_ERROR_INTERNAL = 1;

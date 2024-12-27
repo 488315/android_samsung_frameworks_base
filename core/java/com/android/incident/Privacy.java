@@ -1,6 +1,5 @@
 package com.android.incident;
 
-/* loaded from: classes5.dex */
 public final class Privacy {
     public static final int DEST_AUTOMATIC = 200;
     public static final int DEST_EXPLICIT = 100;

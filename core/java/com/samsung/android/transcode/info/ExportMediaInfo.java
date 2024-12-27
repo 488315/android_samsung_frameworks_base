@@ -1,6 +1,5 @@
 package com.samsung.android.transcode.info;
 
-/* loaded from: classes6.dex */
 public class ExportMediaInfo {
     private final int mFrameRate;
     private final int mHeight;

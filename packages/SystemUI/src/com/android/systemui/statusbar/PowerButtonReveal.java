@@ -7,7 +7,6 @@ import com.android.systemui.statusbar.LightRevealEffect;
 import com.android.systemui.util.leak.RotationUtils;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public final class PowerButtonReveal implements LightRevealEffect {
     public final float powerButtonY;
     public final float OFF_SCREEN_START_AMOUNT = 0.05f;

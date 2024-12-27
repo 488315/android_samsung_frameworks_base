@@ -10,7 +10,6 @@ import com.samsung.android.wallpaper.colortheme.monet.Style;
 
 import java.lang.reflect.Array;
 
-/* loaded from: classes6.dex */
 public class StandardColorPaletteCreator extends ColorPaletteCreator {
     private static final int MAX_RANGE = 19;
     private static final String TAG = "StandardColorPaletteCreator";

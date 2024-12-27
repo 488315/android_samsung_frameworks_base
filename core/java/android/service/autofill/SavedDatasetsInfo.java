@@ -10,7 +10,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public final class SavedDatasetsInfo {
     public static final String TYPE_OTHER = "other";
     public static final String TYPE_PASSWORDS = "passwords";

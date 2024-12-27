@@ -7,7 +7,6 @@ import android.os.SystemClock;
 
 import java.util.concurrent.Executor;
 
-/* loaded from: classes5.dex */
 public class PersistentServiceConnection<T> extends ObservableServiceConnection<T> {
     private final int mBaseReconnectDelayMs;
     private Object mCancelToken;

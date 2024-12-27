@@ -6,7 +6,6 @@ import android.graphics.Typeface;
 
 import com.samsung.android.feature.SemCscFeature;
 
-/* loaded from: classes6.dex */
 public class FlipFontOptimizer {
     private static final String EXTRA_FLIPFONT_NAME = "flipfontName";
     private static final String FLIPFONT_ACTION = "samsung.settings.flipfont.APPLY_NEW_FONT";

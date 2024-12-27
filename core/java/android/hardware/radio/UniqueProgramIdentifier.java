@@ -10,7 +10,6 @@ import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
-/* loaded from: classes2.dex */
 public final class UniqueProgramIdentifier implements Parcelable {
     public static final Parcelable.Creator<UniqueProgramIdentifier> CREATOR =
             new Parcelable.Creator<UniqueProgramIdentifier>() { // from class:

@@ -17,7 +17,6 @@ import android.util.SparseArray;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* loaded from: classes2.dex */
 public final class GeofenceHardwareImpl {
     private static final int ADD_GEOFENCE_CALLBACK = 2;
     private static final int CALLBACK_ADD = 2;

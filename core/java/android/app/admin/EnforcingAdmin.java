@@ -9,7 +9,6 @@ import android.os.UserHandle;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class EnforcingAdmin implements Parcelable {
     public static final Parcelable.Creator<EnforcingAdmin> CREATOR =
             new Parcelable.Creator<

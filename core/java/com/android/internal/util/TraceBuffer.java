@@ -12,7 +12,6 @@ import java.util.Queue;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-/* loaded from: classes5.dex */
 public class TraceBuffer<P, S extends P, T extends P> {
     private final Queue<T> mBuffer;
     private int mBufferCapacity;

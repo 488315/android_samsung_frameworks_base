@@ -21,7 +21,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
-/* loaded from: classes5.dex */
 public class ParsedActivityUtils {
     public static final boolean LOG_UNSAFE_BROADCASTS = false;
     private static final int RECREATE_ON_CONFIG_CHANGES_MASK = 3;

@@ -2,7 +2,6 @@ package android.os;
 
 import java.util.HashMap;
 
-/* loaded from: classes3.dex */
 public class PooledStringWriter {
     private int mNext;
     private final Parcel mOut;

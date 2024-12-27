@@ -3,7 +3,6 @@ package com.android.internal.app.procstats;
 import android.util.proto.ProtoOutputStream;
 import android.util.proto.ProtoUtils;
 
-/* loaded from: classes5.dex */
 public class PssTable extends SparseMappingTable.Table {
     public PssTable(SparseMappingTable tableData) {
         super(tableData);

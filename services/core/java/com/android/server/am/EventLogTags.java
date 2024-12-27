@@ -3,7 +3,6 @@ package com.android.server.am;
 import android.util.EventLog;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes.dex */
 public abstract class EventLogTags {
     public static void writeAmMeminfo(long j, long j2, long j3, long j4, long j5) {
         EventLog.writeEvent(

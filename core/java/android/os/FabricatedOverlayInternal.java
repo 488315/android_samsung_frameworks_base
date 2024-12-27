@@ -3,7 +3,6 @@ package android.os;
 import java.util.Collection;
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public class FabricatedOverlayInternal implements Parcelable {
     public static final Parcelable.Creator<FabricatedOverlayInternal> CREATOR =
             new Parcelable.Creator<

@@ -52,7 +52,6 @@ import java.util.regex.Pattern;
 import java.util.zip.CRC32;
 import java.util.zip.CheckedInputStream;
 
-/* loaded from: classes3.dex */
 public final class FileUtils {
     private static final long COPY_CHECKPOINT_BYTES = 524288;
     public static final int S_IRGRP = 32;

@@ -70,7 +70,6 @@ import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public final class MediaOutputController implements LocalMediaManager.DeviceCallback, INearbyMediaDevicesUpdateCallback {
     public static final boolean DEBUG = Log.isLoggable("MediaOutputController", 3);
     public final float mActiveRadius;

@@ -14,7 +14,6 @@ import com.android.internal.util.Preconditions;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes3.dex */
 public final class Control implements Parcelable {
     public static final Parcelable.Creator<Control> CREATOR =
             new Parcelable.Creator<Control>() { // from class: android.service.controls.Control.1

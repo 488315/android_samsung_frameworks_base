@@ -1,6 +1,5 @@
 package com.samsung.android.service.ProtectedATCommand.list;
 
-/* loaded from: classes6.dex */
 public class ProtectedCommand extends ICmdList {
     public ProtectedCommand() {
         try {

@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public class OverlayScanner {
     private final ArrayMap<String, ParsedOverlayInfo> mParsedOverlayInfos = new ArrayMap<>();
     private final List<Pair<String, File>> mExcludedOverlayPackages = new ArrayList();

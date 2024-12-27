@@ -7,7 +7,6 @@ import android.os.SystemProperties;
 
 import com.android.internal.R;
 
-/* loaded from: classes.dex */
 public final class SQLiteGlobal {
     private static final int DEFAULT_CACHE_SIZE = -2000;
     public static final String SYNC_MODE_FULL = "FULL";

@@ -24,7 +24,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-/* loaded from: classes.dex */
 public final class NotificationHistory implements Parcelable {
     public static final Parcelable.Creator<NotificationHistory> CREATOR =
             new Parcelable.Creator<

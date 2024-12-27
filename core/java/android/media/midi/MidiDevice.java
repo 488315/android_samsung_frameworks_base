@@ -14,7 +14,6 @@ import java.io.Closeable;
 import java.io.FileDescriptor;
 import java.io.IOException;
 
-/* loaded from: classes2.dex */
 public final class MidiDevice implements Closeable {
     private static final String TAG = "MidiDevice";
     private final IBinder mClientToken;

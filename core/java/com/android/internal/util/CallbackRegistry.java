@@ -3,7 +3,6 @@ package com.android.internal.util;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public class CallbackRegistry<C, T, A> implements Cloneable {
     private static final String TAG = "CallbackRegistry";
     private List<C> mCallbacks = new ArrayList();

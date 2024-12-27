@@ -2,7 +2,6 @@ package android.filterfw.core;
 
 import java.util.Map;
 
-/* loaded from: classes.dex */
 public class FilterFunction {
     private Filter mFilter;
     private FilterContext mFilterContext;

@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes6.dex */
 public interface ISemMhsAiService extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.mhs.ai.ISemMhsAiService";
 

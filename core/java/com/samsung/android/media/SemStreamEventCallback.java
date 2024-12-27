@@ -3,7 +3,6 @@ package com.samsung.android.media;
 import android.media.AudioTrack;
 import android.util.Log;
 
-/* loaded from: classes6.dex */
 public class SemStreamEventCallback extends AudioTrack.StreamEventCallback {
     private static final String TAG = "SemStreamEventCallback";
     public long mAJavaAudioTrackPtr;

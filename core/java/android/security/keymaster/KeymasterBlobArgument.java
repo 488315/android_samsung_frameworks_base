@@ -2,7 +2,6 @@ package android.security.keymaster;
 
 import android.os.Parcel;
 
-/* loaded from: classes3.dex */
 class KeymasterBlobArgument extends KeymasterArgument {
     public final byte[] blob;
 

@@ -6,7 +6,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class NoArgsPolicyKey extends PolicyKey {
     public static final Parcelable.Creator<NoArgsPolicyKey> CREATOR =
             new Parcelable.Creator<

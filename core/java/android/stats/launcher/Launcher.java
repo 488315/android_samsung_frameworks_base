@@ -1,6 +1,5 @@
 package android.stats.launcher;
 
-/* loaded from: classes3.dex */
 public final class Launcher {
     public static final int ALLAPPS = 4;
     public static final int BACKGROUND = 1;

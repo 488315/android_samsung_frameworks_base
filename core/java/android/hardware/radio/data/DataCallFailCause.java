@@ -1,6 +1,5 @@
 package android.hardware.radio.data;
 
-/* loaded from: classes2.dex */
 public @interface DataCallFailCause {
     public static final int ACCESS_ATTEMPT_ALREADY_IN_PROGRESS = 2219;
     public static final int ACCESS_BLOCK = 2087;

@@ -3,7 +3,6 @@ package android.media.tv.tuner.filter;
 import android.annotation.SystemApi;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public class TemiEvent extends FilterEvent {
     private final byte[] mDescrData;
     private final byte mDescrTag;

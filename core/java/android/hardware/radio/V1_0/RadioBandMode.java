@@ -2,7 +2,6 @@ package android.hardware.radio.V1_0;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class RadioBandMode {
     public static final int BAND_MODE_10_800M_2 = 15;
     public static final int BAND_MODE_5_450M = 10;

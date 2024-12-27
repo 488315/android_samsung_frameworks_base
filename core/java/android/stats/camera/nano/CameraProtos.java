@@ -9,7 +9,6 @@ import com.android.framework.protobuf.nano.WireFormatNano;
 
 import java.io.IOException;
 
-/* loaded from: classes3.dex */
 public interface CameraProtos {
 
     public static final class CameraStreamProto extends MessageNano {

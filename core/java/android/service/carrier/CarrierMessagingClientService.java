@@ -4,7 +4,6 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 
-/* loaded from: classes3.dex */
 public class CarrierMessagingClientService extends Service {
     private final ICarrierMessagingClientServiceImpl mImpl =
             new ICarrierMessagingClientServiceImpl();

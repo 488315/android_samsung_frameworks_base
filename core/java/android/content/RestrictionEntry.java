@@ -7,7 +7,6 @@ import android.text.format.DateFormat;
 import java.util.Arrays;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public class RestrictionEntry implements Parcelable {
     public static final Parcelable.Creator<RestrictionEntry> CREATOR =
             new Parcelable.Creator<

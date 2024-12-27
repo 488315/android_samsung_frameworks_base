@@ -6,7 +6,6 @@ import com.android.i18n.timezone.TzDataSetVersion;
 import java.io.IOException;
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public final class TzDataSetVersion {
     private final com.android.i18n.timezone.TzDataSetVersion mDelegate;
 

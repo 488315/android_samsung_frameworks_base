@@ -7,7 +7,6 @@ import android.util.SparseArray;
 
 import java.util.Set;
 
-/* loaded from: classes2.dex */
 public final class UnboundedSdkLevel {
     private static final SparseArray<Set<String>> PREVIOUS_CODENAMES = new SparseArray<>(4);
     private static final UnboundedSdkLevel sInstance;

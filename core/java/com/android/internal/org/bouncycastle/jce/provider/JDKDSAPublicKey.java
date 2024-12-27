@@ -20,7 +20,6 @@ import java.security.interfaces.DSAPublicKey;
 import java.security.spec.DSAParameterSpec;
 import java.security.spec.DSAPublicKeySpec;
 
-/* loaded from: classes5.dex */
 public class JDKDSAPublicKey implements DSAPublicKey {
     private static final long serialVersionUID = 1752452449903495175L;
     private DSAParams dsaSpec;

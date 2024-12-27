@@ -1,6 +1,5 @@
 package android.hardware;
 
-/* loaded from: classes.dex */
 public abstract class SensorEventCallback implements SensorEventListener2 {
     @Override // android.hardware.SensorEventListener
     public void onSensorChanged(SensorEvent event) {}

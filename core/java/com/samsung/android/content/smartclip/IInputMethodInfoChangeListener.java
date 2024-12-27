@@ -9,7 +9,6 @@ import android.view.inputmethod.EditorInfo;
 
 import com.android.internal.inputmethod.IRemoteInputConnection;
 
-/* loaded from: classes5.dex */
 public interface IInputMethodInfoChangeListener extends IInterface {
     public static final String DESCRIPTOR =
             "com.samsung.android.content.smartclip.IInputMethodInfoChangeListener";

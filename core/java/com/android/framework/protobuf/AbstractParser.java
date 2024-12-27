@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 
-/* loaded from: classes3.dex */
 public abstract class AbstractParser<MessageType extends MessageLite>
         implements Parser<MessageType> {
     private static final ExtensionRegistryLite EMPTY_REGISTRY =

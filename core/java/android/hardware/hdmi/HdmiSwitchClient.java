@@ -13,7 +13,6 @@ import java.util.Objects;
 import java.util.concurrent.Executor;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public class HdmiSwitchClient extends HdmiClient {
     private static final String TAG = "HdmiSwitchClient";
 

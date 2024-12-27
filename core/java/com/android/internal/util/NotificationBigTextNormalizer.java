@@ -4,7 +4,6 @@ import android.os.Trace;
 
 import java.util.regex.Pattern;
 
-/* loaded from: classes5.dex */
 public class NotificationBigTextNormalizer {
     private static final Pattern MULTIPLE_NEWLINES = Pattern.compile("\\v(\\s*\\v)?");
     private static final Pattern HORIZONTAL_WHITESPACES = Pattern.compile("\\h+");

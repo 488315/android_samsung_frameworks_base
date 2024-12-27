@@ -1,6 +1,5 @@
 package com.android.server.alarm;
 
-/* loaded from: classes5.dex */
 public final class AlarmManagerServiceDumpProto {
     public static final long ALARM_STATS = 2246267895847L;
     public static final long ALLOW_WHILE_IDLE_DISPATCHES = 2246267895848L;

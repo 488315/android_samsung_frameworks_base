@@ -2,7 +2,6 @@ package com.samsung.android.authenticator;
 
 import android.util.Log;
 
-/* loaded from: classes5.dex */
 final class AuthenticatorLog {
     private static final String TAG = "SAMgr_";
     private static final int sLogLevel = 4;

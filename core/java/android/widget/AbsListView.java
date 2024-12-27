@@ -103,7 +103,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public abstract class AbsListView extends AdapterView<ListAdapter>
         implements TextWatcher,
                 ViewTreeObserver.OnGlobalLayoutListener,

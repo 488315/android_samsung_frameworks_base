@@ -11,7 +11,6 @@ import libcore.util.NativeAllocationRegistry;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes.dex */
 public class Canvas extends BaseCanvas {
     public static final int ALL_SAVE_FLAG = 31;
     public static final int CLIP_SAVE_FLAG = 2;

@@ -2,7 +2,6 @@ package com.android.framework.protobuf;
 
 import java.io.IOException;
 
-/* loaded from: classes3.dex */
 public class LazyFieldLite {
     private static final ExtensionRegistryLite EMPTY_REGISTRY =
             ExtensionRegistryLite.getEmptyRegistry();

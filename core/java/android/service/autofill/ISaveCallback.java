@@ -8,7 +8,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.text.TextUtils;
 
-/* loaded from: classes3.dex */
 public interface ISaveCallback extends IInterface {
     void onFailure(CharSequence charSequence) throws RemoteException;
 

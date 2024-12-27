@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public final class DemuxFilterEvent implements Parcelable {
     public static final Parcelable.Creator<DemuxFilterEvent> CREATOR =
             new Parcelable.Creator<DemuxFilterEvent>() { // from class:

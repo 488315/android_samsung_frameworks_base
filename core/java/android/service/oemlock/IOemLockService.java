@@ -9,7 +9,6 @@ import android.os.Parcel;
 import android.os.PermissionEnforcer;
 import android.os.RemoteException;
 
-/* loaded from: classes3.dex */
 public interface IOemLockService extends IInterface {
     String getLockName() throws RemoteException;
 

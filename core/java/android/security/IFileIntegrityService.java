@@ -11,7 +11,6 @@ import android.os.ParcelFileDescriptor;
 import android.os.PermissionEnforcer;
 import android.os.RemoteException;
 
-/* loaded from: classes3.dex */
 public interface IFileIntegrityService extends IInterface {
     public static final String DESCRIPTOR = "android.security.IFileIntegrityService";
 

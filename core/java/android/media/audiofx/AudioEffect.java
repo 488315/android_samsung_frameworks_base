@@ -16,7 +16,6 @@ import java.nio.ByteOrder;
 import java.util.Objects;
 import java.util.UUID;
 
-/* loaded from: classes2.dex */
 public class AudioEffect {
     public static final String ACTION_CLOSE_AUDIO_EFFECT_CONTROL_SESSION =
             "android.media.action.CLOSE_AUDIO_EFFECT_CONTROL_SESSION";

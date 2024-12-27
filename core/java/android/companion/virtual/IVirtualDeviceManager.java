@@ -15,7 +15,6 @@ import android.text.TextUtils;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
 public interface IVirtualDeviceManager extends IInterface {
     public static final String DESCRIPTOR = "android.companion.virtual.IVirtualDeviceManager";
 

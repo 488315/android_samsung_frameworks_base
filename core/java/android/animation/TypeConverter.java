@@ -1,6 +1,5 @@
 package android.animation;
 
-/* loaded from: classes.dex */
 public abstract class TypeConverter<T, V> {
     private Class<T> mFromClass;
     private Class<V> mToClass;

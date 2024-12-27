@@ -11,7 +11,6 @@ import android.util.Log;
 
 import java.util.concurrent.Executor;
 
-/* loaded from: classes.dex */
 public final class PrepareGetCredentialResponse {
     private static final Bundle OPTIONS_SENDER_BAL_OPTIN =
             ActivityOptions.makeBasic().setPendingIntentBackgroundActivityStartMode(1).toBundle();

@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes.dex */
 public interface ICameraServiceProxy extends IInterface {
     int getAutoframingOverride(String str) throws RemoteException;
 

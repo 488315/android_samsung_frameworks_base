@@ -3,7 +3,6 @@ package android.hardware.tv.tuner;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public final class FrontendGuardInterval implements Parcelable {
     public static final Parcelable.Creator<FrontendGuardInterval> CREATOR =
             new Parcelable.Creator<FrontendGuardInterval>() { // from class:

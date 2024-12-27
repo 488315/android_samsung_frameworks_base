@@ -11,7 +11,6 @@ import android.os.RemoteException;
 
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public interface ITvInputSessionCallback extends IInterface {
     void onAdBufferConsumed(AdBuffer adBuffer) throws RemoteException;
 

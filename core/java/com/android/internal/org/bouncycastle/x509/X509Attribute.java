@@ -9,7 +9,6 @@ import com.android.internal.org.bouncycastle.asn1.ASN1Set;
 import com.android.internal.org.bouncycastle.asn1.DERSet;
 import com.android.internal.org.bouncycastle.asn1.x509.Attribute;
 
-/* loaded from: classes5.dex */
 public class X509Attribute extends ASN1Object {
     Attribute attr;
 

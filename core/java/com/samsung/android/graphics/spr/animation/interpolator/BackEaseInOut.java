@@ -2,7 +2,6 @@ package com.samsung.android.graphics.spr.animation.interpolator;
 
 import android.view.animation.Interpolator;
 
-/* loaded from: classes6.dex */
 public class BackEaseInOut implements Interpolator {
     private float overshot;
 

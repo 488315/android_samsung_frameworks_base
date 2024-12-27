@@ -1,6 +1,5 @@
 package android.hardware.radio.voice;
 
-/* loaded from: classes2.dex */
 public @interface EmergencyServiceCategory {
     public static final int AIEC = 64;
     public static final int AMBULANCE = 2;

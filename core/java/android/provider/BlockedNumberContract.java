@@ -9,7 +9,6 @@ import android.telecom.Log;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes3.dex */
 public class BlockedNumberContract {
     public static final String AUTHORITY = "com.android.blockednumber";
     public static final String EXTRA_CALL_PRESENTATION = "extra_call_presentation";

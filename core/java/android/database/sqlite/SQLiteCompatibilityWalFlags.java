@@ -7,7 +7,6 @@ import android.text.TextUtils;
 import android.util.KeyValueListParser;
 import android.util.Log;
 
-/* loaded from: classes.dex */
 public class SQLiteCompatibilityWalFlags {
     private static final String TAG = "SQLiteCompatibilityWalFlags";
     private static volatile boolean sCallingGlobalSettings;

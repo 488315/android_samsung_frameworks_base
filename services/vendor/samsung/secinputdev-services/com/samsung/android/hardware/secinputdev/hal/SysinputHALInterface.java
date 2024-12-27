@@ -7,7 +7,6 @@ import com.samsung.android.hardware.secinputdev.SemInputConstants;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-/* loaded from: classes.dex */
 public interface SysinputHALInterface {
     public static final String RESULT_STR_NG = "NG";
 

@@ -23,7 +23,6 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-/* loaded from: classes6.dex */
 public class OperatorMap implements Operator {
     private static final String TAG = Def.tagOf((Class<?>) OperatorMap.class);
     private static final Map<ImgpType, OpPriorityComputable.ComputeBridge> priorityCheckMap =

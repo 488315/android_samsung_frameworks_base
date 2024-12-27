@@ -3,7 +3,6 @@ package com.samsung.vekit.Common.Object;
 import com.samsung.vekit.Common.Type.FpsType;
 import com.samsung.vekit.Common.Type.SpeedType;
 
-/* loaded from: classes6.dex */
 public class FrcSupportInfo {
     private boolean[][] frcSupportInfo;
 

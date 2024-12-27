@@ -2,7 +2,6 @@ package android.hardware.radio.V1_0;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class RadioConst {
     public static final int CARD_MAX_APPS = 8;
     public static final int CDMA_ALPHA_INFO_BUFFER_LENGTH = 64;

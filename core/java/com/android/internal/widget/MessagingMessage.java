@@ -7,7 +7,6 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/* loaded from: classes5.dex */
 public interface MessagingMessage extends MessagingLinearLayout.MessagingChild {
     public static final String IMAGE_MIME_TYPE_PREFIX = "image/";
 

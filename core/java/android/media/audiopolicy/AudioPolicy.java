@@ -40,7 +40,6 @@ import java.util.function.IntFunction;
 import java.util.function.Predicate;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public class AudioPolicy {
     private static final boolean DEBUG = false;
     public static final int FOCUS_POLICY_DUCKING_DEFAULT = 0;

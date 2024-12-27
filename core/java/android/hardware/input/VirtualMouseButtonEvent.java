@@ -9,7 +9,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public final class VirtualMouseButtonEvent implements Parcelable {
     public static final int ACTION_BUTTON_PRESS = 11;
     public static final int ACTION_BUTTON_RELEASE = 12;

@@ -4,7 +4,6 @@ import com.android.internal.org.bouncycastle.crypto.Digest;
 
 import java.security.MessageDigest;
 
-/* loaded from: classes5.dex */
 public class BCMessageDigest extends MessageDigest {
     protected Digest digest;
     protected int digestSize;

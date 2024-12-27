@@ -5,7 +5,6 @@ import android.util.AttributeSet;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-/* loaded from: classes2.dex */
 public class ExtractEditLayout extends LinearLayout {
     Button mExtractActionButton;
 

@@ -22,7 +22,6 @@ import javax.crypto.interfaces.DHPublicKey;
 import javax.crypto.spec.DHPrivateKeySpec;
 import javax.crypto.spec.DHPublicKeySpec;
 
-/* loaded from: classes5.dex */
 public class KeyFactorySpi extends BaseKeyFactorySpi {
     @Override // com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.util.BaseKeyFactorySpi, java.security.KeyFactorySpi
     protected KeySpec engineGetKeySpec(Key key, Class spec) throws InvalidKeySpecException {

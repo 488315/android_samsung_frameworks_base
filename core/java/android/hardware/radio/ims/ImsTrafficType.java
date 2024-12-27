@@ -1,6 +1,5 @@
 package android.hardware.radio.ims;
 
-/* loaded from: classes2.dex */
 public @interface ImsTrafficType {
     public static final int EMERGENCY = 0;
     public static final int EMERGENCY_SMS = 1;

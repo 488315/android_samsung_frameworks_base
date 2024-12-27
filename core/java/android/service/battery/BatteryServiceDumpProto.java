@@ -1,6 +1,5 @@
 package android.service.battery;
 
-/* loaded from: classes3.dex */
 public final class BatteryServiceDumpProto {
     public static final long ARE_UPDATES_STOPPED = 1133871366145L;
     public static final long CHARGE_COUNTER = 1120986464261L;

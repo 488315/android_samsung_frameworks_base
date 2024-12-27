@@ -7,7 +7,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes3.dex */
 public interface IPrinterDiscoveryObserver extends IInterface {
     void onPrintersAdded(ParceledListSlice parceledListSlice) throws RemoteException;
 

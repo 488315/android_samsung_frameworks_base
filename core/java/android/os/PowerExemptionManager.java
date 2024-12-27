@@ -11,7 +11,6 @@ import java.util.Collections;
 import java.util.List;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public class PowerExemptionManager {
     public static final int EVENT_MMS = 2;
     public static final int EVENT_SMS = 1;

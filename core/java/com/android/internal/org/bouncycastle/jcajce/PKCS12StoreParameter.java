@@ -3,7 +3,6 @@ package com.android.internal.org.bouncycastle.jcajce;
 import java.io.OutputStream;
 import java.security.KeyStore;
 
-/* loaded from: classes5.dex */
 public class PKCS12StoreParameter implements KeyStore.LoadStoreParameter {
     private final boolean forDEREncoding;
     private final OutputStream out;

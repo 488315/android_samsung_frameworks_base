@@ -6,7 +6,6 @@ import android.os.Parcelable;
 
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public class CdmaLineControlInfoRecord implements Parcelable {
     public static final Parcelable.Creator<CdmaLineControlInfoRecord> CREATOR =
             new Parcelable.Creator<CdmaLineControlInfoRecord>() { // from class:

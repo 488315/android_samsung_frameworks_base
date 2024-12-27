@@ -7,7 +7,6 @@ import android.util.Log;
 
 import java.io.Closeable;
 
-/* loaded from: classes2.dex */
 abstract class VirtualInputDevice implements Closeable {
     protected static final String TAG = "VirtualInputDevice";
     protected final VirtualInputDeviceConfig mConfig;

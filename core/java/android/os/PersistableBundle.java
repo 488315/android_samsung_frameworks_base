@@ -20,7 +20,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 
-/* loaded from: classes3.dex */
 public final class PersistableBundle extends BaseBundle
         implements Cloneable, Parcelable, XmlUtils.WriteMapCallback {
     public static final Parcelable.Creator<PersistableBundle> CREATOR;

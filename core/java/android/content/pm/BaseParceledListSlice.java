@@ -11,7 +11,6 @@ import com.samsung.android.rune.PMRune;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes.dex */
 abstract class BaseParceledListSlice<T> implements Parcelable {
     private static final boolean DEBUG = false;
     private static final String TAG = "ParceledListSlice";

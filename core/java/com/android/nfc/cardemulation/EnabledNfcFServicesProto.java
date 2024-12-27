@@ -1,6 +1,5 @@
 package com.android.nfc.cardemulation;
 
-/* loaded from: classes5.dex */
 public final class EnabledNfcFServicesProto {
     public static final long ACTIVATED = 1133871366147L;
     public static final long COMPUTE_FG_REQUESTED = 1133871366148L;

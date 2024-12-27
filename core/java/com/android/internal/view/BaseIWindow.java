@@ -22,7 +22,6 @@ import com.samsung.android.content.smartclip.SmartClipRemoteRequestInfo;
 
 import java.io.IOException;
 
-/* loaded from: classes5.dex */
 public class BaseIWindow extends IWindow.Stub {
     private IWindowSession mSession;
 

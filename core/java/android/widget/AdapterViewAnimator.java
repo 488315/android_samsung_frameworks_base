@@ -19,7 +19,6 @@ import com.android.internal.R;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/* loaded from: classes4.dex */
 public abstract class AdapterViewAnimator extends AdapterView<Adapter>
         implements RemoteViewsAdapter.RemoteAdapterConnectionCallback, Advanceable {
     private static final String APPWIDGET_CURRENT_DISPLAYED_POSITION_ACTION =

@@ -132,7 +132,6 @@ import java.util.Objects;
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 
-/* loaded from: classes.dex */
 public class Activity extends ContextThemeWrapper
         implements LayoutInflater.Factory2,
                 Window.Callback,

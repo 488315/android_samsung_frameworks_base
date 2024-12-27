@@ -13,7 +13,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.function.Supplier;
 
-/* loaded from: classes.dex */
 public class DevicePolicyResourcesManager {
     private final Context mContext;
     private final IDevicePolicyManager mService;

@@ -15,7 +15,6 @@ import java.text.Collator;
 import java.util.Comparator;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public class ResolveInfo implements Parcelable {
     public static final Parcelable.Creator<ResolveInfo> CREATOR =
             new Parcelable.Creator<ResolveInfo>() { // from class: android.content.pm.ResolveInfo.1

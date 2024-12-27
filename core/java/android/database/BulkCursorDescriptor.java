@@ -3,7 +3,6 @@ package android.database;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes.dex */
 public final class BulkCursorDescriptor implements Parcelable {
     public static final Parcelable.Creator<BulkCursorDescriptor> CREATOR =
             new Parcelable.Creator<

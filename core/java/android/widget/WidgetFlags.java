@@ -1,6 +1,5 @@
 package android.widget;
 
-/* loaded from: classes4.dex */
 public final class WidgetFlags {
     public static final String ANALOG_CLOCK_SECONDS_HAND_FPS =
             "AnalogClockFeature__analog_clock_seconds_hand_fps";

@@ -3,7 +3,6 @@ package com.android.internal.protolog.common;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public class LogDataType {
     public static final int BOOLEAN = 3;
     public static final int DOUBLE = 2;

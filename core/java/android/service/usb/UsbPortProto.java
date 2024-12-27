@@ -1,6 +1,5 @@
 package android.service.usb;
 
-/* loaded from: classes3.dex */
 public final class UsbPortProto {
     public static final int ALT_MODE_DISPLAYPORT = 1;
     public static final long ID = 1138166333441L;

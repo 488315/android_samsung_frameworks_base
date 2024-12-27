@@ -24,7 +24,6 @@ import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-/* loaded from: classes3.dex */
 public class Build {
     public static final String BOARD;
     public static final String BOOTLOADER;

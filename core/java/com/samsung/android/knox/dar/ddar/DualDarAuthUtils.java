@@ -12,7 +12,6 @@ import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-/* loaded from: classes6.dex */
 public class DualDarAuthUtils {
     public static final String DDAR_INNER_AUTH_USERID_KEY = "ddar.inner.auth.userid";
     public static final String DDAR_INNER_MAIN_USERID_KEY = "ddar.inner.main.userid";

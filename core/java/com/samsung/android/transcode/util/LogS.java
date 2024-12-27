@@ -4,7 +4,6 @@ import android.util.Log;
 
 import java.io.File;
 
-/* loaded from: classes6.dex */
 public class LogS {
     public static final String TAG = "TranscodeLib";
     private static final String DEBUG_FILE = "/storage/emulated/0/DCIM/transcodelib.debug";

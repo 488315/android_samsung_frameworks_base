@@ -6,7 +6,6 @@ import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public class AudioIoDescriptor implements Parcelable {
     public static final Parcelable.Creator<AudioIoDescriptor> CREATOR =
             new Parcelable.Creator<

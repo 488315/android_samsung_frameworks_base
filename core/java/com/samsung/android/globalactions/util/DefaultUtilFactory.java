@@ -5,7 +5,6 @@ import android.util.ArrayMap;
 
 import com.samsung.android.globalactions.presentation.SamsungGlobalActionsManager;
 
-/* loaded from: classes6.dex */
 public class DefaultUtilFactory implements UtilFactory {
     Context mContext;
     private ArrayMap<Object, Object> mProvider = new ArrayMap<>();

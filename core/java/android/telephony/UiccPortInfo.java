@@ -6,7 +6,6 @@ import android.os.Parcelable;
 
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public final class UiccPortInfo implements Parcelable {
     public static final Parcelable.Creator<UiccPortInfo> CREATOR =
             new Parcelable.Creator<UiccPortInfo>() { // from class: android.telephony.UiccPortInfo.1

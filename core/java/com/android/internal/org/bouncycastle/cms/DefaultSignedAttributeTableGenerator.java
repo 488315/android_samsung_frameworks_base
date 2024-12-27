@@ -15,7 +15,6 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Map;
 
-/* loaded from: classes5.dex */
 public class DefaultSignedAttributeTableGenerator implements CMSAttributeTableGenerator {
     private final Hashtable table;
 

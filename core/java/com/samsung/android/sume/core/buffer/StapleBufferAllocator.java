@@ -7,7 +7,6 @@ import com.samsung.android.sume.core.message.Message;
 
 import java.nio.ByteBuffer;
 
-/* loaded from: classes6.dex */
 class StapleBufferAllocator extends MediaBufferAllocator {
     protected StapleBufferAllocator(MediaFormat format) {
         super(format);

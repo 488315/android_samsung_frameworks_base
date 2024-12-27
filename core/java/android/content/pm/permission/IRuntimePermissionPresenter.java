@@ -8,7 +8,6 @@ import android.os.RemoteCallback;
 import android.os.RemoteException;
 
 @Deprecated
-/* loaded from: classes.dex */
 public interface IRuntimePermissionPresenter extends IInterface {
     void getAppPermissions(String str, RemoteCallback remoteCallback) throws RemoteException;
 

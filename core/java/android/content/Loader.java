@@ -8,7 +8,6 @@ import java.io.FileDescriptor;
 import java.io.PrintWriter;
 
 @Deprecated
-/* loaded from: classes.dex */
 public class Loader<D> {
     Context mContext;
     int mId;

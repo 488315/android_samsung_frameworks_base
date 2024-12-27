@@ -5,7 +5,6 @@ import android.util.ArraySet;
 import java.security.cert.X509Certificate;
 import java.util.Set;
 
-/* loaded from: classes3.dex */
 public final class CertificatesEntryRef {
     private final boolean mOverridesPins;
     private final CertificateSource mSource;

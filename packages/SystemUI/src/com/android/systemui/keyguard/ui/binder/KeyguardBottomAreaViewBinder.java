@@ -50,7 +50,6 @@ import kotlinx.coroutines.flow.StateFlowKt;
 import kotlinx.coroutines.flow.internal.ChannelFlowTransformLatest;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public class KeyguardBottomAreaViewBinder {
     public static final Companion Companion = new Companion(null);
     public static final KeyguardBottomAreaViewBinder INSTANCE = new KeyguardBottomAreaViewBinder();

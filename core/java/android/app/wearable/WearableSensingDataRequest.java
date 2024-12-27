@@ -8,7 +8,6 @@ import android.os.PersistableBundle;
 import java.time.Duration;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class WearableSensingDataRequest implements Parcelable {
     private static final int MAX_REQUEST_SIZE = 200;
     private static final int RATE_LIMIT = 30;

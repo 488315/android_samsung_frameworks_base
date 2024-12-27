@@ -92,7 +92,6 @@ import org.json.JSONObject;
 import vendor.samsung.hardware.health.SehHealthInfo;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes.dex */
 public final class BatteryService extends SystemService {
     public static final boolean FEATURE_SUPPORTED_DAILY_BOARD;
     public static final boolean FEATURE_WIRELESS_FAST_CHARGER_CONTROL;

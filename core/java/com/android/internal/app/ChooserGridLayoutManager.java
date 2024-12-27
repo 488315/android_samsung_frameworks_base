@@ -6,7 +6,6 @@ import android.util.AttributeSet;
 import com.android.internal.widget.GridLayoutManager;
 import com.android.internal.widget.RecyclerView;
 
-/* loaded from: classes5.dex */
 public class ChooserGridLayoutManager extends GridLayoutManager {
     private boolean mVerticalScrollEnabled;
 

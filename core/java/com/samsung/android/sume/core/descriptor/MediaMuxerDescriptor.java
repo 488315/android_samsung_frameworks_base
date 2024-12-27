@@ -10,7 +10,6 @@ import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-/* loaded from: classes6.dex */
 public class MediaMuxerDescriptor extends MFDescriptorBase {
     private final Set<Integer> mediaTypesToNotifyEvent = new HashSet();
     private final int outputFormat;

@@ -17,7 +17,6 @@ import android.view.autofill.AutofillValue;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public final class ViewNode extends AssistStructure.ViewNode {
     private static final long FLAGS_ACCESSIBILITY_FOCUSED = 131072;
     private static final long FLAGS_ACTIVATED = 2097152;

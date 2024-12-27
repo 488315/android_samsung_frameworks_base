@@ -10,7 +10,6 @@ import java.nio.LongBuffer;
 import java.nio.ShortBuffer;
 import java.util.Arrays;
 
-/* loaded from: classes.dex */
 final class TensorImpl implements Tensor {
     private final DataType dtype;
     private long nativeHandle;

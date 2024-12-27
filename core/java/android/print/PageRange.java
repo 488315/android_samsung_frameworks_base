@@ -4,7 +4,6 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes3.dex */
 public final class PageRange implements Parcelable {
     public static final PageRange ALL_PAGES = new PageRange(0, Integer.MAX_VALUE);
     public static final PageRange[] ALL_PAGES_ARRAY = {ALL_PAGES};

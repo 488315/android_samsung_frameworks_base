@@ -3,7 +3,6 @@ package com.android.framework.protobuf;
 import java.util.Collection;
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public interface LazyStringList extends ProtocolStringList {
     void add(ByteString byteString);
 

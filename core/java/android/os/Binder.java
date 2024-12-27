@@ -26,7 +26,6 @@ import java.io.PrintWriter;
 import java.util.concurrent.atomic.AtomicReferenceArray;
 import java.util.function.Supplier;
 
-/* loaded from: classes3.dex */
 public class Binder implements IBinder {
     public static final boolean CHECK_PARCEL_SIZE = false;
     private static final boolean FIND_POTENTIAL_LEAKS = false;

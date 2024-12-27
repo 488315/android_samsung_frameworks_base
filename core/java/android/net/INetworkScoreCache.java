@@ -8,7 +8,6 @@ import android.os.RemoteException;
 
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public interface INetworkScoreCache extends IInterface {
     void clearScores() throws RemoteException;
 

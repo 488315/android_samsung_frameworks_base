@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.view.RemoteAnimationTarget;
 
-/* loaded from: classes4.dex */
 public final class BackMotionEvent implements Parcelable {
     public static final Parcelable.Creator<BackMotionEvent> CREATOR =
             new Parcelable.Creator<

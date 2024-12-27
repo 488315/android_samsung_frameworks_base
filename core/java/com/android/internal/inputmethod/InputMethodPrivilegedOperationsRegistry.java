@@ -5,7 +5,6 @@ import android.os.IBinder;
 import java.lang.ref.WeakReference;
 import java.util.WeakHashMap;
 
-/* loaded from: classes5.dex */
 public final class InputMethodPrivilegedOperationsRegistry {
     private static final Object sLock = new Object();
     private static InputMethodPrivilegedOperations sNop;

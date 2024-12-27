@@ -2,7 +2,6 @@ package com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.x509;
 
 import java.security.cert.CRLException;
 
-/* loaded from: classes5.dex */
 class ExtCRLException extends CRLException {
     Throwable cause;
 

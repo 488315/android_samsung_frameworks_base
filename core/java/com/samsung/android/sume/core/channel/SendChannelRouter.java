@@ -17,7 +17,6 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-/* loaded from: classes6.dex */
 public class SendChannelRouter extends ChannelRouterBase {
     private static final String TAG = Def.tagOf((Class<?>) SendChannelRouter.class);
     private Consumer<MediaBuffer> sendOp;

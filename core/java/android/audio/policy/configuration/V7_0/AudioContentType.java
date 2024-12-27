@@ -1,6 +1,5 @@
 package android.audio.policy.configuration.V7_0;
 
-/* loaded from: classes.dex */
 public enum AudioContentType {
     AUDIO_CONTENT_TYPE_UNKNOWN("AUDIO_CONTENT_TYPE_UNKNOWN"),
     AUDIO_CONTENT_TYPE_SPEECH("AUDIO_CONTENT_TYPE_SPEECH"),

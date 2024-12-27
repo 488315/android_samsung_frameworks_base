@@ -1,6 +1,5 @@
 package android.security;
 
-/* loaded from: classes3.dex */
 public class Scrypt {
     native byte[] nativeScrypt(byte[] bArr, byte[] bArr2, int i, int i2, int i3, int i4);
 

@@ -5,7 +5,6 @@ import android.net.MacAddress;
 
 import java.util.StringJoiner;
 
-/* loaded from: classes3.dex */
 public class WakeupEvent {
     public MacAddress dstHwAddr;
     public String dstIp;

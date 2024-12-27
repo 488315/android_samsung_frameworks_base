@@ -8,7 +8,6 @@ import com.android.internal.org.bouncycastle.util.Integers;
 import java.math.BigInteger;
 import java.util.Hashtable;
 
-/* loaded from: classes5.dex */
 public class CRLReason extends ASN1Object {
     public static final int AA_COMPROMISE = 10;
     public static final int AFFILIATION_CHANGED = 3;

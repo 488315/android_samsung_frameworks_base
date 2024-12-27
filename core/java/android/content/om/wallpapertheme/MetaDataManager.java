@@ -24,7 +24,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public class MetaDataManager {
     public static final int UID_TYPE_BOOL = 3;
     public static final int UID_TYPE_COLOR = 1;

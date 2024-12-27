@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public abstract class ICmdList {
     public static final boolean ALLOWED_DATA_0_TO_9 = false;
     public static final boolean NOT_ALLOWED_DATA_0_TO_9 = true;

@@ -3,7 +3,6 @@ package android.util.proto;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes4.dex */
 public class ProtoStream {
     public static final long FIELD_COUNT_MASK = 16492674416640L;
     public static final long FIELD_COUNT_PACKED = 5497558138880L;

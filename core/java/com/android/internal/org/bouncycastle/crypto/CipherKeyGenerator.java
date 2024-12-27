@@ -2,7 +2,6 @@ package com.android.internal.org.bouncycastle.crypto;
 
 import java.security.SecureRandom;
 
-/* loaded from: classes5.dex */
 public class CipherKeyGenerator {
     protected SecureRandom random;
     protected int strength;

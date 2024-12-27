@@ -8,7 +8,6 @@ import android.util.Rational;
 
 import java.nio.ByteBuffer;
 
-/* loaded from: classes2.dex */
 public final class MarshalQueryablePrimitive<T> implements MarshalQueryable<T> {
 
     private class MarshalerPrimitive extends Marshaler<T> {

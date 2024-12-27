@@ -10,7 +10,6 @@ import android.os.Parcel;
 import android.os.PermissionEnforcer;
 import android.os.RemoteException;
 
-/* loaded from: classes2.dex */
 public interface IMediaProjection extends IInterface {
     int applyVirtualDisplayFlags(int i) throws RemoteException;
 

@@ -1,6 +1,5 @@
 package android.telephony.qns;
 
-/* loaded from: classes4.dex */
 public final class QnsProtoEnums {
     public static final int CDMA2000 = 4;
     public static final int CELLULAR_PREFERRED = 2;

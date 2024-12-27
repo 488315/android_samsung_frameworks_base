@@ -11,7 +11,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-/* loaded from: classes6.dex */
 public class SemBitmapRegionDecoder {
     private static final String TAG = "SemBitmapRegionDecoder";
     private static boolean mLibraryLoaded = false;

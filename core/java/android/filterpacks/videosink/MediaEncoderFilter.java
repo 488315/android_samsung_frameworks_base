@@ -18,7 +18,6 @@ import android.util.Log;
 import java.io.FileDescriptor;
 import java.io.IOException;
 
-/* loaded from: classes.dex */
 public class MediaEncoderFilter extends Filter {
     private static final int NO_AUDIO_SOURCE = -1;
     private static final String TAG = "MediaEncoderFilter";

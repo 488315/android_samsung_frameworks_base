@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public abstract class NetworkService extends Service {
     private static final int NETWORK_SERVICE_CREATE_NETWORK_SERVICE_PROVIDER = 1;
     private static final int NETWORK_SERVICE_GET_REGISTRATION_INFO = 4;

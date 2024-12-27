@@ -14,7 +14,6 @@ import com.android.ims.internal.IImsVideoCallProvider;
 import com.android.internal.os.SomeArgs;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public abstract class ImsVideoCallProvider {
     private static final int MSG_REQUEST_CALL_DATA_USAGE = 10;
     private static final int MSG_REQUEST_CAMERA_CAPABILITIES = 9;

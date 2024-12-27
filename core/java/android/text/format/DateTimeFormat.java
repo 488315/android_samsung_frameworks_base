@@ -7,7 +7,6 @@ import android.icu.util.Calendar;
 import android.icu.util.ULocale;
 import android.util.LruCache;
 
-/* loaded from: classes4.dex */
 class DateTimeFormat {
     private static final FormatterCache CACHED_FORMATTERS = new FormatterCache();
 

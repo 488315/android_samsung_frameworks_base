@@ -1,6 +1,5 @@
 package com.android.server.am;
 
-/* loaded from: classes5.dex */
 public final class IntentBindRecordProto {
     public static final long APPS = 2246267895816L;
     public static final long AUTO_CREATE = 1133871366147L;

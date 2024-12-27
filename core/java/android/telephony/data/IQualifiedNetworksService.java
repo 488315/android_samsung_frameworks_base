@@ -8,7 +8,6 @@ import android.os.RemoteException;
 
 import java.util.List;
 
-/* loaded from: classes4.dex */
 public interface IQualifiedNetworksService extends IInterface {
     public static final String DESCRIPTOR = "android.telephony.data.IQualifiedNetworksService";
 

@@ -10,7 +10,6 @@ import com.android.internal.view.menu.MenuBuilder;
 import com.android.internal.view.menu.MenuPopupHelper;
 import com.android.internal.view.menu.ShowableListMenu;
 
-/* loaded from: classes4.dex */
 public class PopupMenu {
     private final View mAnchor;
     private final Context mContext;

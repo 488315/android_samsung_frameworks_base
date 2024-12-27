@@ -15,7 +15,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Set;
 
-/* loaded from: classes6.dex */
 public class CoreRune {
     public static final boolean ALLIED_PROC_PROTECTION_LMKD;
     public static final boolean AM = true;

@@ -1,6 +1,5 @@
 package android.service.pm;
 
-/* loaded from: classes3.dex */
 public final class PackageServiceDumpProto {
     public static final long FEATURES = 2246267895812L;
     public static final long MESSAGES = 2237677961223L;

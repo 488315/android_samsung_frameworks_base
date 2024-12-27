@@ -18,7 +18,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Objects;
 
-/* loaded from: classes5.dex */
 public final class AssociationState {
     private static final boolean DEBUG = false;
     private static final String TAG = "ProcessStats";

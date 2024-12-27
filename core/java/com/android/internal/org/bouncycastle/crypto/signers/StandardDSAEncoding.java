@@ -11,7 +11,6 @@ import com.android.internal.org.bouncycastle.util.Arrays;
 import java.io.IOException;
 import java.math.BigInteger;
 
-/* loaded from: classes5.dex */
 public class StandardDSAEncoding implements DSAEncoding {
     public static final StandardDSAEncoding INSTANCE = new StandardDSAEncoding();
 

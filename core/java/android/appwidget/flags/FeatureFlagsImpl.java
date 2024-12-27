@@ -1,6 +1,5 @@
 package android.appwidget.flags;
 
-/* loaded from: classes.dex */
 public final class FeatureFlagsImpl implements FeatureFlags {
     @Override // android.appwidget.flags.FeatureFlags
     public boolean drawDataParcel() {

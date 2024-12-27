@@ -20,7 +20,6 @@ import java.util.concurrent.FutureTask;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-/* loaded from: classes6.dex */
 public class SumeClient
         implements MediaController<Future<Response>>, MediaController.OnEventListener {
     private static final String TAG = Def.tagOf((Class<?>) SumeClient.class);

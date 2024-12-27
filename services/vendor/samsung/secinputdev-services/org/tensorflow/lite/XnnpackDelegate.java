@@ -1,6 +1,5 @@
 package org.tensorflow.lite;
 
-/* loaded from: classes.dex */
 class XnnpackDelegate implements Delegate, AutoCloseable {
     private long deleteFunction;
     private long nativeHandle;

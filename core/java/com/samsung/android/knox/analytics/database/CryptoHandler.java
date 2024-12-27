@@ -33,7 +33,6 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.GCMParameterSpec;
 import javax.crypto.spec.IvParameterSpec;
 
-/* loaded from: classes6.dex */
 class CryptoHandler {
     private static final String TAG = "[KnoxAnalytics] " + CryptoHandler.class.getSimpleName();
     private final Object mKeystoreGenerateAccessLock = new Object();

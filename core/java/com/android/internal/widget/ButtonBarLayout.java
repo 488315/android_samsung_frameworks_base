@@ -11,7 +11,6 @@ import android.widget.LinearLayout;
 
 import com.android.internal.R;
 
-/* loaded from: classes5.dex */
 public class ButtonBarLayout extends LinearLayout {
     private static final String IS_DIVIDER = "isDivider";
     private static final int PEEK_BUTTON_DP = 16;

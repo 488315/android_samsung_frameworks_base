@@ -1,6 +1,5 @@
 package android.view;
 
-/* loaded from: classes4.dex */
 public final class InsetsAnimationControlImplProto {
     public static final long CURRENT_ALPHA = 1108101562375L;
     public static final long IS_CANCELLED = 1133871366145L;

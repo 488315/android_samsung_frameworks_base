@@ -10,7 +10,6 @@ import android.view.animation.PathInterpolator;
 import android.widget.GridView;
 
 @Deprecated
-/* loaded from: classes5.dex */
 public class SemGridSortAnimator {
     Animator.AnimatorListener mAnimatorListener;
     final GridView mGridView;

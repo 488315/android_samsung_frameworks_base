@@ -8,7 +8,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class TunerVersionChecker {
     private static final String TAG = "TunerVersionChecker";
     public static final int TUNER_VERSION_1_0 = 65536;

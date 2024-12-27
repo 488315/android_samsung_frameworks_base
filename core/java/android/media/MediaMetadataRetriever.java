@@ -25,7 +25,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/* loaded from: classes2.dex */
 public class MediaMetadataRetriever implements AutoCloseable {
     private static final int EMBEDDED_PICTURE_TYPE_ANY = 65535;
     public static final int METADATA_KEY_ALBUM = 1;

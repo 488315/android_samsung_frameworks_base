@@ -17,7 +17,6 @@ import org.xmlpull.v1.XmlPullParserException;
 import java.io.IOException;
 import java.util.Objects;
 
-/* loaded from: classes5.dex */
 public class ParsedServiceUtils {
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Multi-variable type inference failed */

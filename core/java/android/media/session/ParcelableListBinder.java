@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-/* loaded from: classes2.dex */
 public class ParcelableListBinder<T extends Parcelable> extends Binder {
     private static final int END_OF_PARCEL = 0;
     private static final int ITEM_CONTINUED = 1;

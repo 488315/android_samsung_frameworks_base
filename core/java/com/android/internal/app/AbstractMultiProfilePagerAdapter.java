@@ -25,7 +25,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.function.Predicate;
 
-/* loaded from: classes5.dex */
 public abstract class AbstractMultiProfilePagerAdapter extends PagerAdapter {
     static final int PROFILE_PERSONAL = 0;
     static final int PROFILE_WORK = 1;

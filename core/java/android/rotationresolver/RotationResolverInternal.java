@@ -2,7 +2,6 @@ package android.rotationresolver;
 
 import android.os.CancellationSignal;
 
-/* loaded from: classes3.dex */
 public abstract class RotationResolverInternal {
 
     public interface RotationResolverCallbackInternal {

@@ -1,6 +1,5 @@
 package android.internal.framework.protobuf.nano;
 
-/* loaded from: classes2.dex */
 public final class FieldArray implements Cloneable {
     private static final FieldData DELETED = new FieldData();
     private FieldData[] mData;

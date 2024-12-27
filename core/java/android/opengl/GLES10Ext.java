@@ -2,7 +2,6 @@ package android.opengl;
 
 import java.nio.IntBuffer;
 
-/* loaded from: classes3.dex */
 public class GLES10Ext {
     private static native void _nativeClassInit();
 

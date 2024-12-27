@@ -33,7 +33,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-/* loaded from: classes.dex */
 public final class WallpaperColors implements Parcelable {
     private static final float DARK_PIXEL_CONTRAST = 5.5f;
     private static final float DARK_THEME_MEAN_LUMINANCE = 0.3f;

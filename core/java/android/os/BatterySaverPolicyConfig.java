@@ -9,7 +9,6 @@ import java.util.Map;
 import java.util.Set;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class BatterySaverPolicyConfig implements Parcelable {
     public static final Parcelable.Creator<BatterySaverPolicyConfig> CREATOR =
             new Parcelable.Creator<

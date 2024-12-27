@@ -38,7 +38,6 @@ import com.android.internal.widget.remotecompose.core.operations.TextMerge;
 import com.android.internal.widget.remotecompose.core.operations.Theme;
 import com.android.internal.widget.remotecompose.core.operations.utilities.IntMap;
 
-/* loaded from: classes5.dex */
 public class Operations {
     public static final int ANIMATED_FLOAT = 81;
     public static final int CLICK_AREA = 64;

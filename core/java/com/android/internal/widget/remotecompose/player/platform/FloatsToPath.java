@@ -5,7 +5,6 @@ import android.graphics.PathMeasure;
 
 import com.android.internal.widget.remotecompose.core.operations.Utils;
 
-/* loaded from: classes5.dex */
 public class FloatsToPath {
     public static void genPath(Path retPath, float[] floatPath, float start, float stop) {
         int i = 0;

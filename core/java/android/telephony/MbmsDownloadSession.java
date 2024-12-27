@@ -33,7 +33,6 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
-/* loaded from: classes4.dex */
 public class MbmsDownloadSession implements AutoCloseable {
     public static final String DEFAULT_TOP_LEVEL_TEMP_DIRECTORY = "androidMbmsTempFileRoot";
     private static final String DESTINATION_SANITY_CHECK_FILE_NAME = "destinationSanityCheckFile";

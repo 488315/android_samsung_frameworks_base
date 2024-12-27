@@ -7,7 +7,6 @@ import android.os.SystemProperties;
 import com.samsung.android.feature.SemCscFeature;
 import com.samsung.android.feature.SemFloatingFeature;
 
-/* loaded from: classes6.dex */
 public class InputRune {
     public static final boolean IFW = true;
     public static final boolean IFW_120HZ_FORCE_INTERPOLATION = true;

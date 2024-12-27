@@ -2,7 +2,6 @@ package android.service.controls.actions;
 
 import android.os.Bundle;
 
-/* loaded from: classes3.dex */
 public final class BooleanAction extends ControlAction {
     private static final String KEY_NEW_STATE = "key_new_state";
     private static final int TYPE = 1;

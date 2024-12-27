@@ -19,7 +19,6 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Supplier;
 
-/* loaded from: classes6.dex */
 public class NNDescriptor extends PluginDescriptor {
     private static final String TAG = Def.tagOf((Class<?>) NNDescriptor.class);
     private transient Supplier<String> modelIdSupplier;

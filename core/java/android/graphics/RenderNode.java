@@ -14,7 +14,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.ref.WeakReference;
 
-/* loaded from: classes.dex */
 public final class RenderNode {
     public static final int USAGE_BACKGROUND = 1;
     public static final int USAGE_UNKNOWN = 0;

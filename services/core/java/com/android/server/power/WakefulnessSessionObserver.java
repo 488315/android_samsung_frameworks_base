@@ -11,7 +11,6 @@ import android.provider.Settings;
 import android.util.SparseArray;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes2.dex */
 public final class WakefulnessSessionObserver {
     protected static final int OFF_REASON_POWER_BUTTON = 2;
     protected static final int OVERRIDE_OUTCOME_CANCEL_POWER_BUTTON = 5;

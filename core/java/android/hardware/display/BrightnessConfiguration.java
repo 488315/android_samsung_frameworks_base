@@ -23,7 +23,6 @@ import java.util.Map;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public final class BrightnessConfiguration implements Parcelable {
     private static final String ATTR_CATEGORY = "category";
     private static final String ATTR_COLLECT_COLOR = "collect-color";

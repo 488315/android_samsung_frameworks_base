@@ -3,7 +3,6 @@ package android.transition;
 import android.widget.EditText;
 import android.widget.TextView;
 
-/* loaded from: classes4.dex */
 public class ChangeText extends Transition {
     public static final int CHANGE_BEHAVIOR_IN = 2;
     public static final int CHANGE_BEHAVIOR_KEEP = 0;

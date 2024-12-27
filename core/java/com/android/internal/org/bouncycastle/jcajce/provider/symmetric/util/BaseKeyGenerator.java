@@ -13,7 +13,6 @@ import javax.crypto.KeyGeneratorSpi;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
-/* loaded from: classes5.dex */
 public class BaseKeyGenerator extends KeyGeneratorSpi {
     protected String algName;
     protected int defaultKeySize;

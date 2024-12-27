@@ -1,6 +1,5 @@
 package com.android.nfc.cardemulation;
 
-/* loaded from: classes5.dex */
 public final class SystemCodeRoutingManagerProto {
     public static final long T3T_IDENTIFIERS = 2246267895809L;
 

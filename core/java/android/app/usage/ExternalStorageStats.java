@@ -3,7 +3,6 @@ package android.app.usage;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes.dex */
 public final class ExternalStorageStats implements Parcelable {
     public static final Parcelable.Creator<ExternalStorageStats> CREATOR =
             new Parcelable.Creator<ExternalStorageStats>() { // from class:

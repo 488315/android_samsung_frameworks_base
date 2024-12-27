@@ -52,7 +52,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.stream.Stream;
 
-/* loaded from: classes2.dex */
 public final class CameraExtensionCharacteristics {
     public static final int EXTENSION_AUTOMATIC = 0;
 

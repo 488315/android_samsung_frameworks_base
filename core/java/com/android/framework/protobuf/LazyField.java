@@ -3,7 +3,6 @@ package com.android.framework.protobuf;
 import java.util.Iterator;
 import java.util.Map;
 
-/* loaded from: classes3.dex */
 public class LazyField extends LazyFieldLite {
     private final MessageLite defaultInstance;
 

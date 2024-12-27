@@ -8,7 +8,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.RemoteException;
 
-/* loaded from: classes2.dex */
 public interface IGnssBatching extends IInterface {
     public static final String DESCRIPTOR = "android$hardware$gnss$IGnssBatching".replace('$', '.');
     public static final String HASH = "fc957f1d3d261d065ff5e5415f2d21caa79c310f";

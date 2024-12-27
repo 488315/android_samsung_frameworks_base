@@ -1,6 +1,5 @@
 package android.display;
 
-/* loaded from: classes.dex */
 public final class DisplayProtoEnums {
     public static final int RANGE_0_1 = 1;
     public static final int RANGE_1000_1200 = 29;

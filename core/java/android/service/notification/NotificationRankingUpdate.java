@@ -14,7 +14,6 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public class NotificationRankingUpdate implements Parcelable {
     public static final Parcelable.Creator<NotificationRankingUpdate> CREATOR =
             new Parcelable.Creator<

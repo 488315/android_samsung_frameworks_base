@@ -1,6 +1,5 @@
 package android.hardware.radio.network;
 
-/* loaded from: classes2.dex */
 public @interface IndicationFilter {
     public static final int ALL = -1;
     public static final int BARRING_INFO = 64;

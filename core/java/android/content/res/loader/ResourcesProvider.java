@@ -19,7 +19,6 @@ import java.nio.file.LinkOption;
 import java.nio.file.Path;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public class ResourcesProvider implements AutoCloseable, Closeable {
     private static final String TAG = "ResourcesProvider";
     private final ApkAssets mApkAssets;

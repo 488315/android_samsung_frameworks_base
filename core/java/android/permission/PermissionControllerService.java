@@ -35,7 +35,6 @@ import java.util.function.Consumer;
 import java.util.function.IntConsumer;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public abstract class PermissionControllerService extends Service {
     private static final long CAMERA_MIC_INDICATORS_NOT_PRESENT = 162547999;
     private static final String LOG_TAG = PermissionControllerService.class.getSimpleName();

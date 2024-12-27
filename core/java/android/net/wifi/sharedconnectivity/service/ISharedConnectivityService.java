@@ -13,7 +13,6 @@ import android.os.RemoteException;
 
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public interface ISharedConnectivityService extends IInterface {
     public static final String DESCRIPTOR =
             "android.net.wifi.sharedconnectivity.service.ISharedConnectivityService";

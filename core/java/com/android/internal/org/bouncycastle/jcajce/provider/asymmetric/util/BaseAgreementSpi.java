@@ -26,7 +26,6 @@ import javax.crypto.SecretKey;
 import javax.crypto.ShortBufferException;
 import javax.crypto.spec.SecretKeySpec;
 
-/* loaded from: classes5.dex */
 public abstract class BaseAgreementSpi extends KeyAgreementSpi {
     protected final String kaAlgorithm;
     protected final DerivationFunction kdf;

@@ -22,7 +22,6 @@ import java.util.Locale;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
-/* loaded from: classes5.dex */
 public class LatencyTracker {
     public static final int ACTION_BACK_SYSTEM_ANIMATION = 25;
     public static final int ACTION_CHECK_CREDENTIAL = 3;

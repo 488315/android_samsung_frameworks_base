@@ -21,7 +21,6 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes3.dex */
 final class ConnectionServiceAdapter implements IBinder.DeathRecipient {
     private final Set<IConnectionServiceAdapter> mAdapters =
             Collections.newSetFromMap(new ConcurrentHashMap(8, 0.9f, 1));

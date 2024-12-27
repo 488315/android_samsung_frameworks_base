@@ -1,6 +1,5 @@
 package com.android.server.job;
 
-/* loaded from: classes5.dex */
 public final class DataSetProto {
     public static final long ELAPSED_TIME_MS = 1112396529666L;
     public static final long MAX_CONCURRENCY = 1120986464261L;

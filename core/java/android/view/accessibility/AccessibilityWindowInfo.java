@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/* loaded from: classes4.dex */
 public final class AccessibilityWindowInfo implements Parcelable {
     public static final int ACTIVE_WINDOW_ID = Integer.MAX_VALUE;
     public static final int ANY_WINDOW_ID = -2;

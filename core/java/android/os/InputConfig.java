@@ -1,6 +1,5 @@
 package android.os;
 
-/* loaded from: classes3.dex */
 public @interface InputConfig {
     public static final int CLONE = 65536;
     public static final int DEFAULT = 0;

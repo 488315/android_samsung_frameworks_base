@@ -23,7 +23,6 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public class Paint {
     public static final int ANTI_ALIAS_FLAG = 1;
     public static final int AUTO_HINTING_TEXT_FLAG = 2048;

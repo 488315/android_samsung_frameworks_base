@@ -35,7 +35,6 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.StringCompanionObject;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes.dex */
 public final class ToggleRangeBehavior implements Behavior, SecBehavior, SecActionButtonBehavior {
     public static final Companion Companion = new Companion(null);
     public static boolean inProgress;

@@ -2,7 +2,6 @@ package android.util;
 
 import android.hardware.scontext.SContextConstants;
 
-/* loaded from: classes4.dex */
 public class SparseDoubleArray implements Cloneable {
     private SparseLongArray mValues;
 

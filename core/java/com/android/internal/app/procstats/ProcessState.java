@@ -21,7 +21,6 @@ import java.io.PrintWriter;
 import java.util.Comparator;
 import java.util.concurrent.TimeUnit;
 
-/* loaded from: classes5.dex */
 public final class ProcessState {
     private static final boolean DEBUG = false;
     private static final boolean DEBUG_PARCEL = false;

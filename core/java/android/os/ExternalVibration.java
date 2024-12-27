@@ -9,7 +9,6 @@ import com.android.internal.util.Preconditions;
 import java.util.HashSet;
 import java.util.NoSuchElementException;
 
-/* loaded from: classes3.dex */
 public class ExternalVibration implements Parcelable {
     public static final Parcelable.Creator<ExternalVibration> CREATOR =
             new Parcelable.Creator<

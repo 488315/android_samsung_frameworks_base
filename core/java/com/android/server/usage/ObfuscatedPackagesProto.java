@@ -1,6 +1,5 @@
 package com.android.server.usage;
 
-/* loaded from: classes5.dex */
 public final class ObfuscatedPackagesProto {
     public static final long COUNTER = 1120986464257L;
     public static final long PACKAGES_MAP = 2246267895810L;

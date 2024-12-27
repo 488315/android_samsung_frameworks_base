@@ -1,6 +1,5 @@
 package android.os;
 
-/* loaded from: classes3.dex */
 public interface ISemHqmManager extends IInterface {
     public static final String DESCRIPTOR = "android.os.ISemHqmManager";
 

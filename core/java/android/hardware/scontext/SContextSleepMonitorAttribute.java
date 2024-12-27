@@ -6,7 +6,6 @@ import android.util.Log;
 import com.android.internal.os.BinderCallsStats;
 
 @Deprecated
-/* loaded from: classes2.dex */
 public class SContextSleepMonitorAttribute extends SContextAttribute {
     private static final String TAG = "SContextSleepMonitorAttribute";
     private int mSamplingInterval;

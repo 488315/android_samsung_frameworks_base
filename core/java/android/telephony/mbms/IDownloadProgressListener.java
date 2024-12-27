@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes4.dex */
 public interface IDownloadProgressListener extends IInterface {
     void onProgressUpdated(
             DownloadRequest downloadRequest, FileInfo fileInfo, int i, int i2, int i3, int i4)

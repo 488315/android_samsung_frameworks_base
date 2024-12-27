@@ -3,7 +3,6 @@ package com.samsung.android.hardware.secinputdev.external;
 import android.content.Context;
 import android.os.Handler;
 
-/* loaded from: classes.dex */
 public abstract class ExternalService {
     protected final Context context;
     protected final Handler handler;

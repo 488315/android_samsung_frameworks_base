@@ -118,7 +118,6 @@ import java.util.function.Supplier;
 import java.util.function.ToIntFunction;
 import java.util.stream.Collectors;
 
-/* loaded from: classes5.dex */
 public class ChooserActivity extends ResolverActivity
         implements ChooserListAdapter.ChooserListCommunicator,
                 SelectableTargetInfo.SelectableTargetInfoCommunicator {

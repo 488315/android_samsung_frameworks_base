@@ -20,7 +20,6 @@ import com.android.internal.R;
 
 import java.util.Locale;
 
-/* loaded from: classes4.dex */
 class DatePickerCalendarDelegate extends DatePicker.AbstractDatePickerDelegate {
     private static final int ANIMATION_DURATION = 300;
     private static final int DEFAULT_END_YEAR = 2100;

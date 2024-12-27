@@ -4,7 +4,6 @@ import android.database.CursorWindow;
 import android.os.CancellationSignal;
 import android.util.Log;
 
-/* loaded from: classes.dex */
 public final class SQLiteQuery extends SQLiteProgram {
     private static final String TAG = "SQLiteQuery";
     private final CancellationSignal mCancellationSignal;

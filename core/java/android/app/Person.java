@@ -8,7 +8,6 @@ import android.os.Parcelable;
 import java.util.Objects;
 import java.util.function.Consumer;
 
-/* loaded from: classes.dex */
 public final class Person implements Parcelable {
     public static final Parcelable.Creator<Person> CREATOR =
             new Parcelable.Creator<Person>() { // from class: android.app.Person.1

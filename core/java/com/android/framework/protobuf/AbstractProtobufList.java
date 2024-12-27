@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.RandomAccess;
 
-/* loaded from: classes3.dex */
 abstract class AbstractProtobufList<E> extends AbstractList<E> implements Internal.ProtobufList<E> {
     protected static final int DEFAULT_CAPACITY = 10;
     private boolean isMutable = true;

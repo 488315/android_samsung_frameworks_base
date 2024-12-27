@@ -2,7 +2,6 @@ package android.hardware.thermal.V2_0;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class TemperatureType {
     public static final int BATTERY = 2;
     public static final int BCL_CURRENT = 7;

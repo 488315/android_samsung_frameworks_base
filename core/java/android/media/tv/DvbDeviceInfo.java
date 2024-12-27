@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import android.util.Log;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class DvbDeviceInfo implements Parcelable {
     public static final Parcelable.Creator<DvbDeviceInfo> CREATOR =
             new Parcelable.Creator<

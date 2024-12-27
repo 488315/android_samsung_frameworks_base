@@ -1,7 +1,6 @@
 package android.text;
 
 @Deprecated
-/* loaded from: classes4.dex */
 public abstract class LoginFilter implements InputFilter {
     private boolean mAppendInvalid;
 

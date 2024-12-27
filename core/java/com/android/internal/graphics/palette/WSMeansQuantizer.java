@@ -11,7 +11,6 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
-/* loaded from: classes5.dex */
 public final class WSMeansQuantizer implements Quantizer {
     static final /* synthetic */ boolean $assertionsDisabled = false;
     private static final boolean DEBUG = false;

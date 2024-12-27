@@ -6,7 +6,6 @@ import com.android.internal.util.VirtualRefBasePtr;
 
 import java.lang.ref.WeakReference;
 
-/* loaded from: classes.dex */
 public final class HardwareRendererObserver {
     private final long[] mFrameMetrics;
     private final Handler mHandler;

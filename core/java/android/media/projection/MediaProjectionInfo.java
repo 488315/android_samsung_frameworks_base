@@ -7,7 +7,6 @@ import android.os.UserHandle;
 
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public final class MediaProjectionInfo implements Parcelable {
     public static final Parcelable.Creator<MediaProjectionInfo> CREATOR =
             new Parcelable.Creator<MediaProjectionInfo>() { // from class:

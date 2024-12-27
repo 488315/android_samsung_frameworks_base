@@ -2,7 +2,6 @@ package android.renderscript;
 
 
 @Deprecated
-/* loaded from: classes3.dex */
 public class ScriptIntrinsicBlend extends ScriptIntrinsic {
     ScriptIntrinsicBlend(long id, RenderScript rs) {
         super(id, rs);

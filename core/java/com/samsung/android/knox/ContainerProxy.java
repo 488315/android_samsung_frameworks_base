@@ -5,7 +5,6 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.util.Log;
 
-/* loaded from: classes6.dex */
 public class ContainerProxy {
     public static final String CATEGORY_CORE = "core";
     static final String COMMAND_BASE = "knox.container.proxy.COMMAND_";

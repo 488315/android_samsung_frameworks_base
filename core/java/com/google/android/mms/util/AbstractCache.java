@@ -2,7 +2,6 @@ package com.google.android.mms.util;
 
 import java.util.HashMap;
 
-/* loaded from: classes5.dex */
 public abstract class AbstractCache<K, V> {
     private static final boolean DEBUG = false;
     private static final boolean LOCAL_LOGV = false;

@@ -7,7 +7,6 @@ import android.util.Log;
 
 import java.util.Iterator;
 
-/* loaded from: classes5.dex */
 public class SmartClipMetaTagArrayImpl extends SemSmartClipMetaTagArray implements Parcelable {
     public static final Parcelable.Creator<SmartClipMetaTagArrayImpl> CREATOR =
             new Parcelable.Creator<

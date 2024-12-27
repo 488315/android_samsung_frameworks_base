@@ -48,7 +48,6 @@ import java.util.WeakHashMap;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-/* loaded from: classes.dex */
 public class Resources {
     public static final int ID_NULL = 0;
     private static final int MAX_THEME_REFS_FLUSH_SIZE = 512;

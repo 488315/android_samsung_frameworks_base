@@ -7,7 +7,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public final class SecurityAlgorithmUpdate implements Parcelable {
     public static final int CONNECTION_EVENT_AS_SIGNALLING_5G = 11;
     public static final int CONNECTION_EVENT_AS_SIGNALLING_LTE = 5;

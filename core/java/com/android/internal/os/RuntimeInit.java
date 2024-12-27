@@ -37,7 +37,6 @@ import java.util.Objects;
 import java.util.function.Supplier;
 import java.util.logging.LogManager;
 
-/* loaded from: classes5.dex */
 public class RuntimeInit {
     static final boolean DEBUG = false;
     private static final String SYSPROP_CRASH_COUNT = "sys.system_server.crash_java";

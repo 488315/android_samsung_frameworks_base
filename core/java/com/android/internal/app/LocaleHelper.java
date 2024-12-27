@@ -11,7 +11,6 @@ import java.text.Collator;
 import java.util.Comparator;
 import java.util.Locale;
 
-/* loaded from: classes5.dex */
 public class LocaleHelper {
     public static String toSentenceCase(String str, Locale locale) {
         return CaseMap.toTitle().wholeString().noLowercase().apply(locale, null, str);

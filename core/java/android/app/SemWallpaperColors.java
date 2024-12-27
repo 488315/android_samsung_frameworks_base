@@ -46,7 +46,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-/* loaded from: classes.dex */
 public class SemWallpaperColors implements Parcelable, Cloneable {
     public static final int COMPARE_ADAPTIVE_CONTRAST = 2;
     public static final int COMPARE_COLOR = 0;

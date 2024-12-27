@@ -7,7 +7,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes.dex */
 public interface IActivityPendingResult extends IInterface {
     boolean sendResult(int i, String str, Bundle bundle) throws RemoteException;
 

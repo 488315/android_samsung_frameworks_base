@@ -3,7 +3,6 @@ package com.samsung.android.smartface;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes6.dex */
 public final class FaceInfo implements Parcelable {
     public static final Parcelable.Creator<FaceInfo> CREATOR =
             new Parcelable.Creator<

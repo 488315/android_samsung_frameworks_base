@@ -27,7 +27,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.BiConsumer;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public class WifiNl80211Manager {
     public static final String EXTRA_SCANNING_PARAM_VENDOR_IES =
             "android.net.wifi.nl80211.extra.SCANNING_PARAM_VENDOR_IES";

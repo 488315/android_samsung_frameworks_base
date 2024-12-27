@@ -7,7 +7,6 @@ import android.util.ArrayMap;
 
 import com.android.internal.view.AppearanceRegion;
 
-/* loaded from: classes5.dex */
 public final class RegisterStatusBarResult implements Parcelable {
     public static final Parcelable.Creator<RegisterStatusBarResult> CREATOR =
             new Parcelable.Creator<

@@ -8,7 +8,6 @@ import android.util.Log;
 import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-/* loaded from: classes.dex */
 public class SemActivityTaskManager {
     public static final int CAMERA_CUTOUT_SETTING_APP_DEFAULT = 0;
     public static final int CAMERA_CUTOUT_SETTING_HIDE = 2;

@@ -13,7 +13,6 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Vector;
 
-/* loaded from: classes5.dex */
 public class ExtendedKeyUsage extends ASN1Object {
     ASN1Sequence seq;
     Hashtable usageTable = new Hashtable();

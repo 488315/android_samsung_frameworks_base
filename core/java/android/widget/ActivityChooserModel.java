@@ -31,7 +31,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/* loaded from: classes4.dex */
 public class ActivityChooserModel extends DataSetObservable {
     private static final String ATTRIBUTE_ACTIVITY = "activity";
     private static final String ATTRIBUTE_TIME = "time";

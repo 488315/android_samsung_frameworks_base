@@ -38,7 +38,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes4.dex */
 public class RemoteViewsAdapter extends BaseAdapter implements Handler.Callback {
     private static final int CACHE_RESET_CONFIG_FLAGS = -1073737216;
     private static final int DEFAULT_CACHE_SIZE = 40;

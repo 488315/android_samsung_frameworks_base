@@ -15,7 +15,6 @@ import android.widget.ImageView;
 
 import java.util.Map;
 
-/* loaded from: classes4.dex */
 public class ChangeImageTransform extends Transition {
     private static final String TAG = "ChangeImageTransform";
     private static final String PROPNAME_MATRIX = "android:changeImageTransform:matrix";

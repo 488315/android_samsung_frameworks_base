@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public abstract class BatteryConsumer {
     static final int COLUMN_COUNT = 1;
     static final int COLUMN_INDEX_BATTERY_CONSUMER_TYPE = 0;

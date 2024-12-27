@@ -6,7 +6,6 @@ import com.samsung.vekit.Content.Content;
 import com.samsung.vekit.Item.Item;
 import com.samsung.vekit.Listener.AnalyzeStatusListener;
 
-/* loaded from: classes6.dex */
 public class AnalyzeInfo implements AnalyzeStatusListener {
     private AnalyzeType analyzeType;
     private String analyzedDataPath;

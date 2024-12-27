@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.Enumeration;
 import java.util.NoSuchElementException;
 
-/* loaded from: classes5.dex */
 class LazyConstructionEnumeration implements Enumeration {
     private ASN1InputStream aIn;
     private Object nextObj = readObject();

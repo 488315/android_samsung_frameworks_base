@@ -10,7 +10,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Set;
 
-/* loaded from: classes5.dex */
 public interface AppStandbyInternal {
     void addActiveDeviceAdmin(String str, int i);
 

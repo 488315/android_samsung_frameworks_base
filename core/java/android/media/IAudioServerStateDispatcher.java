@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes2.dex */
 public interface IAudioServerStateDispatcher extends IInterface {
     void dispatchAudioServerStateChange(boolean z) throws RemoteException;
 

@@ -7,7 +7,6 @@ import java.io.IOException;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 
-/* loaded from: classes.dex */
 public class GlobalConfiguration {
     private Boolean call_screen_mode_supported;
     private EngineSuffix engine_library;

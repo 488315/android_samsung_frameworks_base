@@ -18,7 +18,6 @@ import com.android.internal.R;
 import java.util.function.Consumer;
 
 @RemoteViews.RemoteView
-/* loaded from: classes5.dex */
 public class CallLayout extends FrameLayout {
     private CachingIconView mConversationIconBadgeBg;
     private CachingIconView mConversationIconView;

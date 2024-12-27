@@ -10,7 +10,6 @@ import java.util.function.IntUnaryOperator;
 import java.util.function.Supplier;
 import java.util.stream.IntStream;
 
-/* loaded from: classes4.dex */
 class RemoteCollectionItemsAdapter extends BaseAdapter {
     private RemoteViews.ColorResources mColorResources;
     private RemoteViews.InteractionHandler mInteractionHandler;

@@ -1,6 +1,5 @@
 package android.samsung;
 
-/* loaded from: classes3.dex */
 public final class Camera {
     public static final int CONTROL_DS_MODE_AEB_HDR_MERGE = 200;
     public static final int CONTROL_DS_MODE_AEB_HYBRID_HDR_MERGE = 201;

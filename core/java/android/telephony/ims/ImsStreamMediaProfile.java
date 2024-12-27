@@ -5,7 +5,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public final class ImsStreamMediaProfile implements Parcelable {
     public static final int AUDIO_QUALITY_AMR = 1;
     public static final int AUDIO_QUALITY_AMR_WB = 2;

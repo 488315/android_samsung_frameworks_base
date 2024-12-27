@@ -18,7 +18,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* loaded from: classes6.dex */
 public class SprObjectShapeGroup extends SprObjectBase {
     private static final String TAG = "SPRObjectShapeGroup";
     private boolean mIsInitialized;

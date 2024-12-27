@@ -8,7 +8,6 @@ import com.samsung.android.sume.core.message.Message;
 import java.io.FileDescriptor;
 import java.nio.ByteBuffer;
 
-/* loaded from: classes6.dex */
 final class CaptureSourceInternal {
     public static final String KEY_CAMERA_INFO = "camera-info";
     public static final String KEY_CAMERA_INFO_SIZE = "camera-info-size";

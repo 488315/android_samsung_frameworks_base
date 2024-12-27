@@ -13,7 +13,6 @@ import org.xmlpull.v1.XmlPullParserException;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-/* loaded from: classes3.dex */
 class PowerComponents {
     private final BatteryConsumer.BatteryConsumerData mData;
 

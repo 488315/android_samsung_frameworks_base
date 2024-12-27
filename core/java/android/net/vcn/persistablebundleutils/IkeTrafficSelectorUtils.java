@@ -6,7 +6,6 @@ import android.os.PersistableBundle;
 
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public final class IkeTrafficSelectorUtils {
     private static final String END_ADDRESS_KEY = "END_ADDRESS_KEY";
     private static final String END_PORT_KEY = "END_PORT_KEY";

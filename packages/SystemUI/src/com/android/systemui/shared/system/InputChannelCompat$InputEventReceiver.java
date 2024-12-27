@@ -9,7 +9,6 @@ import android.view.InputEvent;
 import com.android.keyguard.KeyguardKnoxDualDarInnerPasswordViewController$$ExternalSyntheticOutline0;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public final class InputChannelCompat$InputEventReceiver {
     public final String mName;
     public final AnonymousClass1 mReceiver;

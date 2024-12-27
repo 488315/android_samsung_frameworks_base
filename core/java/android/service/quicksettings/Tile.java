@@ -9,7 +9,6 @@ import android.os.RemoteException;
 import android.text.TextUtils;
 import android.util.Log;
 
-/* loaded from: classes3.dex */
 public final class Tile implements Parcelable {
     public static final Parcelable.Creator<Tile> CREATOR =
             new Parcelable.Creator<Tile>() { // from class: android.service.quicksettings.Tile.1

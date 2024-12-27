@@ -44,7 +44,6 @@ import android.view.inspector.PropertyReader;
 import com.android.internal.R;
 
 @RemoteViews.RemoteView
-/* loaded from: classes4.dex */
 public class Switch extends CompoundButton {
     private static final int MAX_LOOP_COUNT = 100;
     private static final int MONOSPACE = 3;

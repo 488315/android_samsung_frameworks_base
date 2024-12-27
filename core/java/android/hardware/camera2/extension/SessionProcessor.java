@@ -19,7 +19,6 @@ import java.util.Map;
 import java.util.concurrent.Executor;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public abstract class SessionProcessor {
     private static final String TAG = "SessionProcessor";
     private CameraUsageTracker mCameraUsageTracker;

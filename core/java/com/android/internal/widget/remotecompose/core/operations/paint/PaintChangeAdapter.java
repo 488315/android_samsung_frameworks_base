@@ -1,6 +1,5 @@
 package com.android.internal.widget.remotecompose.core.operations.paint;
 
-/* loaded from: classes5.dex */
 public class PaintChangeAdapter implements PaintChanges {
     @Override // com.android.internal.widget.remotecompose.core.operations.paint.PaintChanges
     public void setTextSize(float size) {}

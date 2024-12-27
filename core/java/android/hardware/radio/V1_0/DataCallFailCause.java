@@ -4,7 +4,6 @@ import android.security.keystore.KeyProperties;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class DataCallFailCause {
     public static final int ACTIVATION_REJECT_GGSN = 30;
     public static final int ACTIVATION_REJECT_UNSPECIFIED = 31;

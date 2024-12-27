@@ -32,7 +32,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Objects;
 
-/* loaded from: classes6.dex */
 public interface ISehRadio extends vendor.samsung.hardware.radio.V2_0.ISehRadio {
     public static final String kInterfaceName = "vendor.samsung.hardware.radio@2.1::ISehRadio";
 

@@ -77,7 +77,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-/* loaded from: classes2.dex */
 public class CameraMetadataNative implements Parcelable {
     private static final String CELLID_PROCESS = "CELLID";
     private static final boolean DEBUG = false;

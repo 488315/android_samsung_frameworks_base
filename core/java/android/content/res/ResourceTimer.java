@@ -16,7 +16,6 @@ import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.util.Arrays;
 
-/* loaded from: classes.dex */
 public final class ResourceTimer {
     private static final String TAG = "ResourceTimer";
     private static Handler mHandler;

@@ -35,7 +35,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public class FaceManager extends BiometricFaceConstants implements BiometricAuthenticator {
     private static final String TAG = "FaceManager";
     private static String mDeviceType = null;

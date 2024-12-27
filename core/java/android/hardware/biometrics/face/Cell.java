@@ -4,7 +4,6 @@ import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public class Cell implements Parcelable {
     public static final Parcelable.Creator<Cell> CREATOR =
             new Parcelable.Creator<Cell>() { // from class: android.hardware.biometrics.face.Cell.1

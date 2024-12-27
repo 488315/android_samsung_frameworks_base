@@ -1,6 +1,5 @@
 package android.service.usb;
 
-/* loaded from: classes3.dex */
 public final class UsbEndPointProto {
     public static final long ADDRESS = 1120986464259L;
     public static final long ATTRIBUTES = 1155346202629L;

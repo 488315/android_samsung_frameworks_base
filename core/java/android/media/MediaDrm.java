@@ -39,7 +39,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-/* loaded from: classes2.dex */
 public final class MediaDrm implements AutoCloseable {
     public static final int CERTIFICATE_TYPE_NONE = 0;
     public static final int CERTIFICATE_TYPE_X509 = 1;

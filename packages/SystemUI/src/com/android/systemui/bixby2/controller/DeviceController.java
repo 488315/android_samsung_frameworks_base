@@ -36,7 +36,6 @@ import com.samsung.android.desktopsystemui.sharedlib.system.QuickStepContract;
 import com.samsung.android.feature.SemCscFeature;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes.dex */
 public class DeviceController {
     private static final int ORIENTATION_LANDSCAPE = 1;
     private static final int ORIENTATION_PORTRAIT = 0;

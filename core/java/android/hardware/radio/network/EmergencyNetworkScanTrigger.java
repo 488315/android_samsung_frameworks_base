@@ -7,7 +7,6 @@ import android.os.Parcelable;
 
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public class EmergencyNetworkScanTrigger implements Parcelable {
     public static final Parcelable.Creator<EmergencyNetworkScanTrigger> CREATOR =
             new Parcelable.Creator<EmergencyNetworkScanTrigger>() { // from class:

@@ -43,7 +43,6 @@ import java.util.function.Function;
 import java.util.function.IntConsumer;
 import java.util.function.Supplier;
 
-/* loaded from: classes4.dex */
 final class RemoteInputConnectionImpl extends IRemoteInputConnection.Stub {
     private static final boolean DEBUG = false;
     private static final int MAX_END_BATCH_EDIT_RETRY = 16;

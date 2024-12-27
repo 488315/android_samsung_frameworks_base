@@ -20,7 +20,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public final class ZenPolicy implements Parcelable {
     public static final int CHANNEL_POLICY_NONE = 2;
     public static final int CHANNEL_POLICY_PRIORITY = 1;

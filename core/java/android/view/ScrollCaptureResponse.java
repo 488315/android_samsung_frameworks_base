@@ -10,7 +10,6 @@ import com.android.internal.util.AnnotationValidations;
 
 import java.util.ArrayList;
 
-/* loaded from: classes4.dex */
 public class ScrollCaptureResponse implements Parcelable {
     public static final Parcelable.Creator<ScrollCaptureResponse> CREATOR =
             new Parcelable.Creator<

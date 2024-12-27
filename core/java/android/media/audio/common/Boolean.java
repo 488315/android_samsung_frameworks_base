@@ -8,7 +8,6 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public class Boolean implements Parcelable {
     public static final Parcelable.Creator<Boolean> CREATOR =
             new Parcelable.Creator<Boolean>() { // from class: android.media.audio.common.Boolean.1

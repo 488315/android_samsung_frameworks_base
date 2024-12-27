@@ -15,7 +15,6 @@ import android.view.accessibility.AccessibilityManager;
 import com.android.internal.R;
 import com.android.internal.widget.ViewPager;
 
-/* loaded from: classes4.dex */
 class DayPickerView extends ViewGroup {
     private static final int[] ATTRS_TEXT_COLOR = {16842904};
     private static final int DEFAULT_END_YEAR = 2100;

@@ -21,7 +21,6 @@ import java.util.concurrent.locks.ReentrantLock;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-/* loaded from: classes6.dex */
 public final class LsLogFile {
     private static final long BODY_OFFSET = 17;
     private static final byte EOL = 10;

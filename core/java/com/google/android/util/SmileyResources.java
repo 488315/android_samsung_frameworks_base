@@ -3,7 +3,6 @@ package com.google.android.util;
 import java.util.HashMap;
 import java.util.Set;
 
-/* loaded from: classes5.dex */
 public class SmileyResources implements AbstractMessageParser.Resources {
     private HashMap<String, Integer> mSmileyToRes = new HashMap<>();
     private final AbstractMessageParser.TrieNode smileys = new AbstractMessageParser.TrieNode();

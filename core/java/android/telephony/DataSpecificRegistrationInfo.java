@@ -9,7 +9,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public final class DataSpecificRegistrationInfo implements Parcelable {
     public static final Parcelable.Creator<DataSpecificRegistrationInfo> CREATOR =
             new Parcelable.Creator<

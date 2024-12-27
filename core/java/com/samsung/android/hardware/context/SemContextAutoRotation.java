@@ -5,7 +5,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @Deprecated(forRemoval = true, since = "13.0")
-/* loaded from: classes6.dex */
 public class SemContextAutoRotation extends SemContextEventContext {
     public static final int ANGLE_0 = 0;
     public static final int ANGLE_180 = 2;

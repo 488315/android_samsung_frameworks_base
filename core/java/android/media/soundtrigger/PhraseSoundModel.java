@@ -8,7 +8,6 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public class PhraseSoundModel implements Parcelable {
     public static final Parcelable.Creator<PhraseSoundModel> CREATOR =
             new Parcelable.Creator<PhraseSoundModel>() { // from class:

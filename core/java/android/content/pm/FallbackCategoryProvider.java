@@ -12,7 +12,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-/* loaded from: classes.dex */
 public class FallbackCategoryProvider {
     private static final String TAG = "FallbackCategoryProvider";
     private static final ArrayMap<String, Integer> sFallbacks = new ArrayMap<>();

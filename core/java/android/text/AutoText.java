@@ -13,7 +13,6 @@ import org.xmlpull.v1.XmlPullParserException;
 import java.io.IOException;
 import java.util.Locale;
 
-/* loaded from: classes4.dex */
 public class AutoText {
     private static final int DEFAULT = 14337;
     private static final int INCREMENT = 1024;

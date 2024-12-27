@@ -15,7 +15,6 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public interface IBase extends IHwInterface {
     public static final String kInterfaceName = "android.hidl.base@1.0::IBase";
 

@@ -12,7 +12,6 @@ import java.util.function.Supplier;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
-/* loaded from: classes6.dex */
 public interface NumericEnum {
     public static final String SEP = ":";
 

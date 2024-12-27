@@ -2,7 +2,6 @@ package android.hardware.radio.V1_0;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class SrvccState {
     public static final int HANDOVER_CANCELED = 3;
     public static final int HANDOVER_COMPLETED = 1;

@@ -27,7 +27,6 @@ import java.security.SignatureException;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.X509EncodedKeySpec;
 
-/* loaded from: classes5.dex */
 public class NetscapeCertRequest extends ASN1Object {
     String challenge;
     DERBitString content;

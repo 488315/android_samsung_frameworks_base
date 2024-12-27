@@ -6,7 +6,6 @@ import android.util.StatsLog;
 
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public final class FrameworkStatsLog {
     public static final int ABC_EVENT_OCCURRED = 100100;
     public static final int ACCESSIBILITY_FLOATING_MENU_STATS = 10128;

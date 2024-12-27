@@ -38,7 +38,6 @@ import java.util.Map;
 import java.util.Objects;
 
 @RemoteViews.RemoteView
-/* loaded from: classes4.dex */
 public class GridLayout extends ViewGroup {
     private static final int ALIGNMENT_MODE = 6;
     public static final int ALIGN_BOUNDS = 0;

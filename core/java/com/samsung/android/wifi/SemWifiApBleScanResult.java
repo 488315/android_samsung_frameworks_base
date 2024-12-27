@@ -7,7 +7,6 @@ import android.text.format.DateFormat;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
-/* loaded from: classes6.dex */
 public class SemWifiApBleScanResult implements Parcelable {
     public static final int AH_SOURCE = 1;
     public static final int IH_SOURCE = 3;

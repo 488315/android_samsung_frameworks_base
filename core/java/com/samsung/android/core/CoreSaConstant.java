@@ -1,6 +1,5 @@
 package com.samsung.android.core;
 
-/* loaded from: classes6.dex */
 public interface CoreSaConstant {
     public static final String APPS_TAP_APP_ID = "CVSE1045";
     public static final String APP_COMPAT_STATUS_FSA_16_9_ID = "519402";

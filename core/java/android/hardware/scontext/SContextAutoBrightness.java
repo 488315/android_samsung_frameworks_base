@@ -5,7 +5,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @Deprecated
-/* loaded from: classes2.dex */
 public class SContextAutoBrightness extends SContextEventContext {
     public static final Parcelable.Creator<SContextAutoBrightness> CREATOR =
             new Parcelable.Creator<SContextAutoBrightness>() { // from class:

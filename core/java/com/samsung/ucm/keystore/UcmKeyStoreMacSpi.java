@@ -14,7 +14,6 @@ import java.util.Arrays;
 
 import javax.crypto.MacSpi;
 
-/* loaded from: classes6.dex */
 public class UcmKeyStoreMacSpi extends MacSpi {
     private static final String TAG = "UcmKeyStoreMacSpi";
     private final String mAlgorithm;

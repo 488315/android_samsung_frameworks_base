@@ -1,6 +1,5 @@
 package com.android.server.biometrics.fingerprint;
 
-/* loaded from: classes5.dex */
 public final class FingerprintUserStatsProto {
     public static final long CRYPTO = 1146756268036L;
     public static final long NORMAL = 1146756268035L;

@@ -5,7 +5,6 @@ import android.net.wifi.SoftApConfiguration;
 import android.text.TextUtils;
 import android.util.Log;
 
-/* loaded from: classes6.dex */
 public class SemWifiApRestoreHelper {
     public static final String KEY_OPEN_INDEX = "open_index";
     public static final String KEY_PASSWORD = "shared_password";

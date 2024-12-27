@@ -6,7 +6,6 @@ import android.util.Log;
 
 import com.samsung.android.chimera.IChimera;
 
-/* loaded from: classes5.dex */
 public class GenieHintManager {
     private static final String TAG = "GenieHintManager";
     private static IChimera sService = null;

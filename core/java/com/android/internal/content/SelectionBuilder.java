@@ -8,7 +8,6 @@ import android.text.TextUtils;
 
 import java.util.ArrayList;
 
-/* loaded from: classes5.dex */
 public class SelectionBuilder {
     private StringBuilder mSelection = new StringBuilder();
     private ArrayList<String> mSelectionArgs = new ArrayList<>();

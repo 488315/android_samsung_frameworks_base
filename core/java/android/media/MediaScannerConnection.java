@@ -14,7 +14,6 @@ import com.android.internal.os.BackgroundThread;
 
 import java.io.File;
 
-/* loaded from: classes2.dex */
 public class MediaScannerConnection implements ServiceConnection {
     private static final String TAG = "MediaScannerConnection";
     private final MediaScannerConnectionClient mClient;

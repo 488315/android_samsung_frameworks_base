@@ -13,7 +13,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-/* loaded from: classes.dex */
 public final class ContentValues implements Parcelable {
     public static final Parcelable.Creator<ContentValues> CREATOR =
             new Parcelable.Creator<ContentValues>() { // from class: android.content.ContentValues.1

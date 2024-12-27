@@ -12,7 +12,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.List;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class RollbackManager {
     public static final String EXTRA_STATUS = "android.content.rollback.extra.STATUS";
     public static final String EXTRA_STATUS_MESSAGE =

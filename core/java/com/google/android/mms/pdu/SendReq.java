@@ -5,7 +5,6 @@ import android.util.Log;
 import com.google.android.mms.ContentType;
 import com.google.android.mms.InvalidHeaderValueException;
 
-/* loaded from: classes5.dex */
 public class SendReq extends MultimediaMessagePdu {
     private static final String TAG = "SendReq";
 

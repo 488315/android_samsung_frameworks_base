@@ -9,7 +9,6 @@ import java.util.function.Consumer;
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 @ProvidesInterface(action = QS.ACTION, version = 15)
 @DependsOn(target = HeightListener.class)
-/* loaded from: classes2.dex */
 public interface QS extends FragmentBase {
     public static final String ACTION = "com.android.systemui.action.PLUGIN_QS";
     public static final String TAG = "QS";

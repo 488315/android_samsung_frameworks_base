@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/* loaded from: classes5.dex */
 public final class QuantizerMap implements Quantizer {
     private HashMap<Integer, Integer> mColorToCount;
     private Palette mPalette;

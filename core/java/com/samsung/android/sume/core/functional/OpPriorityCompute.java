@@ -4,7 +4,6 @@ import com.samsung.android.sume.core.format.Shape;
 import com.samsung.android.sume.core.types.ColorFormat;
 import com.samsung.android.sume.core.types.DataType;
 
-/* loaded from: classes6.dex */
 public interface OpPriorityCompute {
     public static final float FIRST_CLASS = Float.MIN_VALUE;
     public static final float FIRST_OF_ALL = 0.0f;

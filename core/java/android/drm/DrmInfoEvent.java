@@ -3,7 +3,6 @@ package android.drm;
 import java.util.HashMap;
 
 @Deprecated
-/* loaded from: classes.dex */
 public class DrmInfoEvent extends DrmEvent {
     public static final int TYPE_ACCOUNT_ALREADY_REGISTERED = 5;
     public static final int TYPE_ALREADY_REGISTERED_BY_ANOTHER_ACCOUNT = 1;

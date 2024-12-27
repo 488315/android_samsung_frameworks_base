@@ -9,7 +9,6 @@ import java.security.cert.CertificateEncodingException;
 import java.security.cert.X509Certificate;
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public final class EapSessionConfigUtils {
     private static final String EAP_AKA_CONFIG_KEY = "EAP_AKA_CONFIG_KEY";
     private static final String EAP_AKA_PRIME_CONFIG_KEY = "EAP_AKA_PRIME_CONFIG_KEY";

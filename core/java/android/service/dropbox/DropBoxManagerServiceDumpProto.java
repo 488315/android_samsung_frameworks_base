@@ -1,6 +1,5 @@
 package android.service.dropbox;
 
-/* loaded from: classes3.dex */
 public final class DropBoxManagerServiceDumpProto {
     public static final long ENTRIES = 2246267895809L;
 

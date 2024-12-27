@@ -3,7 +3,6 @@ package android.widget;
 import android.database.DataSetObservable;
 import android.database.DataSetObserver;
 
-/* loaded from: classes4.dex */
 public abstract class BaseExpandableListAdapter
         implements ExpandableListAdapter, HeterogeneousExpandableList {
     private final DataSetObservable mDataSetObservable = new DataSetObservable();

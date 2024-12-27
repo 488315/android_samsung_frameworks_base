@@ -6,7 +6,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Random;
 
-/* loaded from: classes4.dex */
 public class SoundEffectConstants {
     public static final int CLICK = 0;
     public static final int NAVIGATION_DOWN = 4;

@@ -10,7 +10,6 @@ import android.os.ServiceManager;
 import java.util.List;
 
 @SystemApi(client = SystemApi.Client.PRIVILEGED_APPS)
-/* loaded from: classes.dex */
 public final class BackgroundInstallControlManager {
     private static final String TAG = "BackgroundInstallControlManager";
     private static IBackgroundInstallControlService sService;

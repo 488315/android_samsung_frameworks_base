@@ -6,7 +6,6 @@ import android.net.Network;
 import android.net.NetworkRequest;
 import android.util.Log;
 
-/* loaded from: classes5.dex */
 public class NetworkPinner extends ConnectivityManager.NetworkCallback {
     private static ConnectivityManager sCM;
     private static Callback sCallback;

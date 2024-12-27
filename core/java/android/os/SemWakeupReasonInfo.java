@@ -1,7 +1,6 @@
 package android.os;
 
 
-/* loaded from: classes3.dex */
 public class SemWakeupReasonInfo implements Cloneable, Parcelable {
     public static final Parcelable.Creator<SemWakeupReasonInfo> CREATOR =
             new Parcelable.Creator<

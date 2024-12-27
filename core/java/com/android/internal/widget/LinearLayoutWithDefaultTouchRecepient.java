@@ -7,7 +7,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 
-/* loaded from: classes5.dex */
 public class LinearLayoutWithDefaultTouchRecepient extends LinearLayout {
     private View mDefaultTouchRecepient;
     private final Rect mTempRect;

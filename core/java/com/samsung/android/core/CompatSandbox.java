@@ -9,7 +9,6 @@ import android.view.DisplayInfo;
 import android.view.InsetsSourceControl;
 import android.view.MotionEvent;
 
-/* loaded from: classes6.dex */
 public class CompatSandbox {
     public static final int APP_COMPAT_OVERRIDE_ENABLED = 256;
     public static final float OFFSET_DEFAULT = 0.0f;

@@ -24,7 +24,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.function.Consumer;
 
-/* loaded from: classes6.dex */
 public class ProgressUpdateClient {
     private static final long BIND_TIME_OUT_SECOND = 25;
     private static final String SERVICE_CLASS =

@@ -12,7 +12,6 @@ import com.android.systemui.plugins.qs.QSTile;
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 @Dependencies({@DependsOn(target = QSIconView.class), @DependsOn(target = QSTile.class)})
 @ProvidesInterface(version = 3)
-/* loaded from: classes2.dex */
 public abstract class QSTileView extends LinearLayout {
     public static final int VERSION = 3;
 

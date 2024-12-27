@@ -4,7 +4,6 @@ import com.android.internal.org.bouncycastle.crypto.InvalidCipherTextException;
 
 import java.security.SecureRandom;
 
-/* loaded from: classes5.dex */
 public class X923Padding implements BlockCipherPadding {
     SecureRandom random = null;
 

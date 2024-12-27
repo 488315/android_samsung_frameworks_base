@@ -16,7 +16,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.nio.charset.StandardCharsets;
 import java.util.zip.GZIPInputStream;
 
-/* loaded from: classes3.dex */
 public class DropBoxManager {
     public static final String ACTION_DROPBOX_ENTRY_ADDED =
             "android.intent.action.DROPBOX_ENTRY_ADDED";

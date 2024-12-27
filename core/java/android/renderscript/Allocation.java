@@ -15,7 +15,6 @@ import java.nio.ByteBuffer;
 import java.util.HashMap;
 
 @Deprecated
-/* loaded from: classes3.dex */
 public class Allocation extends BaseObj {
     private static final int MAX_NUMBER_IO_INPUT_ALLOC = 16;
     public static final int USAGE_GRAPHICS_CONSTANTS = 8;

@@ -21,7 +21,6 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/* loaded from: classes5.dex */
 public class SemAddDeleteGridAnimator extends SemAbsAddDeleteAnimator {
     private static final String TAG = "SemAddDeleteGridAnimator";
     private GridView mGridView;

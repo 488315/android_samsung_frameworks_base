@@ -26,7 +26,6 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-/* loaded from: classes6.dex */
 abstract class MediaBufferBase implements MediaBuffer {
     static final int DATA_HARDWARE_BUFFER = 2;
     static final int DATA_NOTHING = 1;

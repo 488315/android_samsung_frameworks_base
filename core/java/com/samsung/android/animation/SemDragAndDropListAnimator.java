@@ -19,7 +19,6 @@ import android.widget.ListView;
 import com.android.internal.R;
 
 @Deprecated
-/* loaded from: classes5.dex */
 public class SemDragAndDropListAnimator extends SemAbsDragAndDropAnimator {
     private static final String TAG = "SemDragAndDropListAnimator";
     private int mDragViewRoundCorner;

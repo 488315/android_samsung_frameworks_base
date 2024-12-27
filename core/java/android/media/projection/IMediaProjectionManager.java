@@ -10,7 +10,6 @@ import android.os.PermissionEnforcer;
 import android.os.RemoteException;
 import android.view.ContentRecordingSession;
 
-/* loaded from: classes2.dex */
 public interface IMediaProjectionManager extends IInterface {
     public static final String EXTRA_PACKAGE_REUSING_GRANTED_CONSENT =
             "extra_media_projection_package_reusing_consent";

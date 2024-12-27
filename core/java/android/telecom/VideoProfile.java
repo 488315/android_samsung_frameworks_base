@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes3.dex */
 public class VideoProfile implements Parcelable {
     public static final Parcelable.Creator<VideoProfile> CREATOR =
             new Parcelable.Creator<VideoProfile>() { // from class: android.telecom.VideoProfile.1

@@ -2,7 +2,6 @@ package android.hardware.radio.V1_5;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class NgranBands {
     public static final int BAND_1 = 1;
     public static final int BAND_12 = 12;

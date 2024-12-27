@@ -22,7 +22,6 @@ import com.android.internal.util.FunctionalUtils;
 import java.io.PrintWriter;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes3.dex */
 class SoftwareHotwordDetector extends AbstractDetector {
     private static final boolean DEBUG = false;
     private static final String TAG = SoftwareHotwordDetector.class.getSimpleName();

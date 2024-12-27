@@ -16,7 +16,6 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
 @Deprecated
-/* loaded from: classes3.dex */
 public class Contacts {
 
     @Deprecated public static final String AUTHORITY = "contacts";

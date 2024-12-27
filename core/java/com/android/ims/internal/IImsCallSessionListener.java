@@ -12,7 +12,6 @@ import android.telephony.ims.ImsReasonInfo;
 import android.telephony.ims.ImsStreamMediaProfile;
 import android.telephony.ims.ImsSuppServiceNotification;
 
-/* loaded from: classes5.dex */
 public interface IImsCallSessionListener extends IInterface {
     void callQualityChanged(CallQuality callQuality) throws RemoteException;
 

@@ -5,7 +5,6 @@ import android.widget.Toast;
 
 import java.util.function.Consumer;
 
-/* loaded from: classes6.dex */
 public class ToastController {
     private final Context mContext;
     private Consumer<String> mInterceptor = null;

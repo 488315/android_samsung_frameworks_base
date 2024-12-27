@@ -3,7 +3,6 @@ package com.android.internal.util;
 import android.media.MediaMetrics;
 import android.text.format.DateFormat;
 
-/* loaded from: classes5.dex */
 public class HexDump {
     private static final char[] HEX_DIGITS = {
         '0',

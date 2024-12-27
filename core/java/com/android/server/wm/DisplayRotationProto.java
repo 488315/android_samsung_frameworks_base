@@ -1,6 +1,5 @@
 package com.android.server.wm;
 
-/* loaded from: classes5.dex */
 public final class DisplayRotationProto {
     public static final long FIXED_TO_USER_ROTATION_MODE = 1120986464260L;
     public static final long FROZEN_TO_USER_ROTATION = 1133871366146L;

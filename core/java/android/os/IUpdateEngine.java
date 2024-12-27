@@ -2,7 +2,6 @@ package android.os;
 
 import com.samsung.android.media.AudioParameter;
 
-/* loaded from: classes3.dex */
 public interface IUpdateEngine extends IInterface {
     long allocateSpaceForPayload(String str, String[] strArr) throws RemoteException;
 

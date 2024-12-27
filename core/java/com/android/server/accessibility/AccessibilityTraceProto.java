@@ -1,6 +1,5 @@
 package com.android.server.accessibility;
 
-/* loaded from: classes5.dex */
 public final class AccessibilityTraceProto {
     public static final long ACCESSIBILITY_SERVICE = 1146756268042L;
     public static final long CALENDAR_TIME = 1138166333442L;

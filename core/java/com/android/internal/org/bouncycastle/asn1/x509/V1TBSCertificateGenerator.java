@@ -7,7 +7,6 @@ import com.android.internal.org.bouncycastle.asn1.DERSequence;
 import com.android.internal.org.bouncycastle.asn1.DERTaggedObject;
 import com.android.internal.org.bouncycastle.asn1.x500.X500Name;
 
-/* loaded from: classes5.dex */
 public class V1TBSCertificateGenerator {
     Time endDate;
     X500Name issuer;

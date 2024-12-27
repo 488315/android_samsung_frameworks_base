@@ -46,7 +46,6 @@ import java.lang.reflect.Array;
 import java.util.HashMap;
 import java.util.Locale;
 
-/* loaded from: classes.dex */
 public class SemAppIconSolution {
     private static final int APPICON_RANGE_ALL_APPS = 0;
     private static final int APPICON_RANGE_NONE = 2;

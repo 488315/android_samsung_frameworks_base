@@ -13,7 +13,6 @@ import java.lang.annotation.Annotation;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes.dex */
 public final class Checksum implements Parcelable {
     public static final Parcelable.Creator<Checksum> CREATOR =
             new Parcelable.Creator<Checksum>() { // from class: android.content.pm.Checksum.1

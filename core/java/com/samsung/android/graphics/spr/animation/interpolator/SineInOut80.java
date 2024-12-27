@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.animation.Interpolator;
 
-/* loaded from: classes6.dex */
 public class SineInOut80 implements Interpolator {
     private static final float[][] segments = {
         new float[] {0.0f, 0.0f, 0.195f},

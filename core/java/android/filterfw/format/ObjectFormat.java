@@ -3,7 +3,6 @@ package android.filterfw.format;
 import android.filterfw.core.MutableFrameFormat;
 import android.filterfw.core.NativeBuffer;
 
-/* loaded from: classes.dex */
 public class ObjectFormat {
     public static MutableFrameFormat fromClass(Class clazz, int count, int target) {
         MutableFrameFormat result = new MutableFrameFormat(8, target);

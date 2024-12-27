@@ -1,6 +1,5 @@
 package com.android.internal.org.bouncycastle.asn1;
 
-/* loaded from: classes5.dex */
 class DERFactory {
     static final ASN1Sequence EMPTY_SEQUENCE = new DERSequence();
     static final ASN1Set EMPTY_SET = new DERSet();

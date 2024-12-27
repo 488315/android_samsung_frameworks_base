@@ -16,7 +16,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public abstract class CallStreamingService extends Service {
     private static final int MSG_CALL_STREAMING_STARTED = 2;
     private static final int MSG_CALL_STREAMING_STATE_CHANGED = 4;

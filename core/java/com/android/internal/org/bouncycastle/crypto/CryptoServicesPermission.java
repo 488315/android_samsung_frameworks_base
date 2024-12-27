@@ -4,7 +4,6 @@ import java.security.Permission;
 import java.util.HashSet;
 import java.util.Set;
 
-/* loaded from: classes5.dex */
 public class CryptoServicesPermission extends Permission {
     public static final String DEFAULT_RANDOM = "defaultRandomConfig";
     public static final String GLOBAL_CONFIG = "globalConfig";

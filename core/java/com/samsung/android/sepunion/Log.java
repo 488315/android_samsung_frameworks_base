@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Locale;
 
-/* loaded from: classes6.dex */
 public class Log {
     public static final int ASSERT = 7;
     public static final int DEBUG = 3;

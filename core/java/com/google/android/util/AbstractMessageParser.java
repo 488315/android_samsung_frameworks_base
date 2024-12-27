@@ -16,7 +16,6 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/* loaded from: classes5.dex */
 public abstract class AbstractMessageParser {
     public static final String musicNote = "♫ ";
     private HashMap<Character, Format> formatStart;

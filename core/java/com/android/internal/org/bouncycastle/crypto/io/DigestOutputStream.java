@@ -5,7 +5,6 @@ import com.android.internal.org.bouncycastle.crypto.Digest;
 import java.io.IOException;
 import java.io.OutputStream;
 
-/* loaded from: classes5.dex */
 public class DigestOutputStream extends OutputStream {
     protected Digest digest;
 

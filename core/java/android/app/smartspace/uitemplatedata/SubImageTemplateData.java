@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class SubImageTemplateData extends BaseTemplateData {
     public static final Parcelable.Creator<SubImageTemplateData> CREATOR =
             new Parcelable.Creator<SubImageTemplateData>() { // from class:

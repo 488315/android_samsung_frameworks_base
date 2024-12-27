@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes3.dex */
 public interface IApInterface extends IInterface {
     public static final String DESCRIPTOR = "android.net.wifi.nl80211.IApInterface";
     public static final int ENCRYPTION_TYPE_NONE = 0;

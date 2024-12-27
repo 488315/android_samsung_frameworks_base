@@ -15,7 +15,6 @@ import com.samsung.android.telecom.SemPhoneAccount;
 
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public interface ISamsungTelecomService extends IInterface {
     public static final String DESCRIPTOR =
             "com.samsung.android.internal.telecom.ISamsungTelecomService";

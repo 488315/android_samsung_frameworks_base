@@ -13,7 +13,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Objects;
 
-/* loaded from: classes6.dex */
 public final class SemDynamicFeature {
     private static final String FORCE_ENABLE = "persist.sys.df.system.FORCE_ENABLE";
     public static final String SERVICE_NAME = "dynamic_feature";

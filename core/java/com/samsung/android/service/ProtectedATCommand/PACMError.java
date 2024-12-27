@@ -1,6 +1,5 @@
 package com.samsung.android.service.ProtectedATCommand;
 
-/* loaded from: classes6.dex */
 public final class PACMError {
     public static final int PAC_ERROR_COMMAND_NOT_FOUND = -268435455;
     public static final int PAC_ERROR_GENERAL = -268435456;

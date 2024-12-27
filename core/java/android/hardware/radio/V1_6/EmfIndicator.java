@@ -2,7 +2,6 @@ package android.hardware.radio.V1_6;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class EmfIndicator {
     public static final byte EMF_BOTH_NR_EUTRA_CONNECTED_TO_5GCN = 3;
     public static final byte EMF_EUTRA_CONNECTED_TO_5GCN = 2;

@@ -1,6 +1,5 @@
 package com.android.server.job;
 
-/* loaded from: classes5.dex */
 public final class GrantedUriPermissionsDumpProto {
     public static final long FLAGS = 1120986464257L;
     public static final long PERMISSION_OWNER = 1138166333444L;

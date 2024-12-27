@@ -7,7 +7,6 @@ import com.android.internal.telephony.SemTelephonyUtils;
 
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public final class SatelliteSubscriptionInfo implements Parcelable {
     public static final Parcelable.Creator<SatelliteSubscriptionInfo> CREATOR =
             new Parcelable.Creator<

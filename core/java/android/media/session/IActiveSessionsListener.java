@@ -8,7 +8,6 @@ import android.os.RemoteException;
 
 import java.util.List;
 
-/* loaded from: classes2.dex */
 public interface IActiveSessionsListener extends IInterface {
     void onActiveSessionsChanged(List<MediaSession.Token> list) throws RemoteException;
 

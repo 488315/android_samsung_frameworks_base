@@ -1,6 +1,5 @@
 package com.android.internal.policy;
 
-/* loaded from: classes5.dex */
 public class KeyInterceptionInfo {
     public final int layoutParamsPrivateFlags;
     public final int layoutParamsType;

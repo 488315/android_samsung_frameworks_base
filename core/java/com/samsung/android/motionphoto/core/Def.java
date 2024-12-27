@@ -1,6 +1,5 @@
 package com.samsung.android.motionphoto.core;
 
-/* loaded from: classes6.dex */
 public class Def {
     public static final int MP_EVENT_ERROR = 3002;
     public static final int MP_EVENT_INFO = 3001;

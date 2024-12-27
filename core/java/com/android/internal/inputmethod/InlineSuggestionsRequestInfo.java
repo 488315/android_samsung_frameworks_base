@@ -11,7 +11,6 @@ import com.android.internal.util.AnnotationValidations;
 
 import java.util.Objects;
 
-/* loaded from: classes5.dex */
 public final class InlineSuggestionsRequestInfo implements Parcelable {
     public static final Parcelable.Creator<InlineSuggestionsRequestInfo> CREATOR =
             new Parcelable.Creator<

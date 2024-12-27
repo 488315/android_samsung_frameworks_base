@@ -5,7 +5,6 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 
-/* loaded from: classes4.dex */
 public class SidePropagation extends VisibilityPropagation {
     private static final String TAG = "SlidePropagation";
     private float mPropagationSpeed = 3.0f;

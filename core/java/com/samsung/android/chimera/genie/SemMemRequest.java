@@ -1,6 +1,5 @@
 package com.samsung.android.chimera.genie;
 
-/* loaded from: classes5.dex */
 public class SemMemRequest {
     public static final int MEMTYPE_CONTIGUOUS = 1;
     public static final int MEMTYPE_DEFAULT = 0;

@@ -6,7 +6,6 @@ import android.telecom.Logging.Session;
 
 import com.samsung.android.content.smartclip.SemSmartClipDataRepository;
 
-/* loaded from: classes6.dex */
 public class Config {
     public static final int CMD_ALARM = 3;
     public static final int CMD_CALL = 2;

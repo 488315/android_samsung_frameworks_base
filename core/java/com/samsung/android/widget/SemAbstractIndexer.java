@@ -9,7 +9,6 @@ import android.util.SparseIntArray;
 import java.text.Collator;
 import java.util.HashMap;
 
-/* loaded from: classes6.dex */
 public abstract class SemAbstractIndexer extends DataSetObserver {
     private static final char DIGIT_CHAR = '#';
     public static final char FAVORITE_CHAR = 9733;

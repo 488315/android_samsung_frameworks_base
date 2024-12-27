@@ -1,6 +1,5 @@
 package android.service.notification;
 
-/* loaded from: classes3.dex */
 public final class DNDPolicyProto {
     public static final long ALARMS = 1159641169927L;
     public static final long ALLOW_CALLS_FROM = 1159641169937L;

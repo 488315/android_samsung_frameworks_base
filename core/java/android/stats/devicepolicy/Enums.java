@@ -1,6 +1,5 @@
 package android.stats.devicepolicy;
 
-/* loaded from: classes3.dex */
 public final class Enums {
     public static final int COMPLEXITY_HIGH = 5;
     public static final int COMPLEXITY_LEGACY = 2;

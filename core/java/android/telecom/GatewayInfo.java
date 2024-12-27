@@ -5,7 +5,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
 
-/* loaded from: classes3.dex */
 public class GatewayInfo implements Parcelable {
     public static final Parcelable.Creator<GatewayInfo> CREATOR =
             new Parcelable.Creator<GatewayInfo>() { // from class: android.telecom.GatewayInfo.1

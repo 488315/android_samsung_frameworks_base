@@ -12,7 +12,6 @@ import java.io.FileDescriptor;
 import java.nio.ByteBuffer;
 import java.util.concurrent.TimeoutException;
 
-/* loaded from: classes2.dex */
 public class UsbDeviceConnection {
     private static final String TAG = "UsbDeviceConnection";
     private Context mContext;

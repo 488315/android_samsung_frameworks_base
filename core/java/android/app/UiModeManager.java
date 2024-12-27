@@ -31,7 +31,6 @@ import java.util.function.Predicate;
 import java.util.function.ToDoubleFunction;
 import java.util.stream.Stream;
 
-/* loaded from: classes.dex */
 public class UiModeManager {
 
     @SystemApi

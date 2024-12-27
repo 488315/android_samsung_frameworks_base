@@ -1,6 +1,5 @@
 package android.aconfigd;
 
-/* loaded from: classes.dex */
 public final class Aconfigd {
 
     public final class PersistStorageRecord {

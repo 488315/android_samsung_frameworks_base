@@ -2,7 +2,6 @@ package android.opengl;
 
 import java.nio.Buffer;
 
-/* loaded from: classes3.dex */
 public final class EGL15 {
     public static final int EGL_CL_EVENT_HANDLE = 12444;
     public static final int EGL_CONDITION_SATISFIED = 12534;

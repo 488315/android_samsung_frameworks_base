@@ -32,7 +32,6 @@ import java.util.List;
 import java.util.Map;
 
 @RemoteViews.RemoteView
-/* loaded from: classes5.dex */
 public class MessagingLayout extends FrameLayout implements ImageMessageConsumer, IMessagingLayout {
     private static final float COLOR_SHIFT_AMOUNT = 60.0f;
     private ArrayList<MessagingGroup> mAddedGroups;

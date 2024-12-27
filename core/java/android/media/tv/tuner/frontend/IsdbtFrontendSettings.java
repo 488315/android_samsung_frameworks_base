@@ -8,7 +8,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public class IsdbtFrontendSettings extends FrontendSettings {
     public static final int BANDWIDTH_6MHZ = 8;
     public static final int BANDWIDTH_7MHZ = 4;

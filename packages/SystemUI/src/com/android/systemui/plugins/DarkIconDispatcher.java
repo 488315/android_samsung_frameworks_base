@@ -11,7 +11,6 @@ import java.util.Iterator;
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 @ProvidesInterface(version = 2)
 @DependsOn(target = DarkReceiver.class)
-/* loaded from: classes2.dex */
 public interface DarkIconDispatcher {
     public static final int DEFAULT_DARK_ICON_TINT = -1291845632;
     public static final int DEFAULT_ICON_TINT = -301989889;

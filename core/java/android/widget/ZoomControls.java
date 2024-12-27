@@ -11,7 +11,6 @@ import android.view.animation.AlphaAnimation;
 import com.android.internal.R;
 
 @Deprecated
-/* loaded from: classes4.dex */
 public class ZoomControls extends LinearLayout {
     private final ZoomButton mZoomIn;
     private final ZoomButton mZoomOut;

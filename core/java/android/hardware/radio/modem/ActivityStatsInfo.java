@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.util.Arrays;
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public class ActivityStatsInfo implements Parcelable {
     public static final Parcelable.Creator<ActivityStatsInfo> CREATOR =
             new Parcelable.Creator<ActivityStatsInfo>() { // from class:

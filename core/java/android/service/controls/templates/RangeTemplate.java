@@ -2,7 +2,6 @@ package android.service.controls.templates;
 
 import android.os.Bundle;
 
-/* loaded from: classes3.dex */
 public final class RangeTemplate extends ControlTemplate {
     private static final String KEY_CURRENT_VALUE = "key_current_value";
     private static final String KEY_FORMAT_STRING = "key_format_string";

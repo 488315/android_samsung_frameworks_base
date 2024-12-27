@@ -6,7 +6,6 @@ import com.samsung.android.sume.core.filter.DecoderFilter;
 import com.samsung.android.sume.core.filter.EncoderFilter;
 import com.samsung.android.sume.core.filter.MediaFilter;
 
-/* loaded from: classes6.dex */
 public class CodecFilterCreator implements MediaFilterCreator {
     @Override // com.samsung.android.sume.core.filter.factory.MediaFilterCreator
     public MediaFilter newFilter(

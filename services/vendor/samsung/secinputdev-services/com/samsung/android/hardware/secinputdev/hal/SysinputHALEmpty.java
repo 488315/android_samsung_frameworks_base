@@ -12,7 +12,6 @@ import java.io.FileWriter;
 import java.nio.charset.StandardCharsets;
 
 /* compiled from: SysinputHALFactory.java */
-/* loaded from: classes.dex */
 class SysinputHALEmpty implements SysinputHALInterface {
     private static final String FILE_PATH_TSP_CMD = "/sys/class/sec/tsp/cmd";
     private static final String FILE_PATH_TSP_CMD_LIST = "/sys/class/sec/tsp/cmd_list";

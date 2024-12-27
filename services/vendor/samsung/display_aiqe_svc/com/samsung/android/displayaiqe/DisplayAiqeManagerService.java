@@ -5,7 +5,6 @@ import android.util.Slog;
 
 import com.android.server.SystemService;
 
-/* loaded from: classes.dex */
 public class DisplayAiqeManagerService extends IDisplayAiqeManager.Stub {
     private static final String TAG = "DisplayAiqeManagerService";
     private final Context mContext;

@@ -1,6 +1,5 @@
 package android.hardware.contexthub;
 
-/* loaded from: classes2.dex */
 public @interface ErrorCode {
     public static final byte DESTINATION_NOT_FOUND = 4;
     public static final byte OK = 0;

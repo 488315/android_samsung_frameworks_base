@@ -22,7 +22,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/* loaded from: classes3.dex */
 public final class FillEventHistory implements Parcelable {
     public static final Parcelable.Creator<FillEventHistory> CREATOR =
             new Parcelable.Creator<

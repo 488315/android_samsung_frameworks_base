@@ -22,7 +22,6 @@ import com.samsung.android.sdhms.SemThermalStats;
 
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public interface ISamsungDeviceHealthManager extends IInterface {
     public static final String DESCRIPTOR = "com.sec.android.sdhms.ISamsungDeviceHealthManager";
 

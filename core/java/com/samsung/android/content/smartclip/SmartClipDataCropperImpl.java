@@ -32,7 +32,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
-/* loaded from: classes5.dex */
 public class SmartClipDataCropperImpl extends SemSmartClipDataCropper {
     private static boolean DEBUG = false;
     public static final int EXTRACTION_LEVEL_0 = 0;

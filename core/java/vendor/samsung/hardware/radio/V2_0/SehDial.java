@@ -8,7 +8,6 @@ import android.os.HwParcel;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/* loaded from: classes6.dex */
 public final class SehDial {
     public Dial base = new Dial();
     public ArrayList<SehCallDetails> callDetails = new ArrayList<>();

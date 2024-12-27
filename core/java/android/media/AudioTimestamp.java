@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes2.dex */
 public final class AudioTimestamp implements Parcelable {
     public static final Parcelable.Creator<AudioTimestamp> CREATOR =
             new Parcelable.Creator<AudioTimestamp>() { // from class: android.media.AudioTimestamp.1

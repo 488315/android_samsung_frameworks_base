@@ -31,7 +31,6 @@ import com.samsung.android.wallpaperbackup.BnRConstants;
 
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public class MultiWindowUtils {
     public static final int ADD_APP_PAIR_SHORTCUT_EDGE_PANEL = 2;
     public static final int ADD_APP_PAIR_SHORTCUT_HOME = 1;

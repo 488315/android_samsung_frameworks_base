@@ -16,7 +16,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
-/* loaded from: classes.dex */
 public final class DomainVerificationUserState implements Parcelable {
     public static final Parcelable.Creator<DomainVerificationUserState> CREATOR;
     public static final int DOMAIN_STATE_NONE = 0;

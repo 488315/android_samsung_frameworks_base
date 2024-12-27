@@ -12,7 +12,6 @@ import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 import java.util.function.IntConsumer;
 
-/* loaded from: classes4.dex */
 public class InputConnectionWrapper implements InputConnection {
     final boolean mMutable;
     private InputConnection mTarget;

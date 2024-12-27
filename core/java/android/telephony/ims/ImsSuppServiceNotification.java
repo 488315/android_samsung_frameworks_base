@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.util.Arrays;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public final class ImsSuppServiceNotification implements Parcelable {
     public static final Parcelable.Creator<ImsSuppServiceNotification> CREATOR =
             new Parcelable.Creator<

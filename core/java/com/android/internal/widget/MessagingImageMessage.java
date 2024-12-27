@@ -19,7 +19,6 @@ import com.android.internal.R;
 import java.io.IOException;
 
 @RemoteViews.RemoteView
-/* loaded from: classes5.dex */
 public class MessagingImageMessage extends ImageView implements MessagingMessage {
     private static final String TAG = "MessagingImageMessage";
     private static final MessagingPool<MessagingImageMessage> sInstancePool =

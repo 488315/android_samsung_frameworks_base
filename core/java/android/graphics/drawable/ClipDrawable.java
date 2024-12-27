@@ -14,7 +14,6 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 
-/* loaded from: classes.dex */
 public class ClipDrawable extends DrawableWrapper {
     public static final int HORIZONTAL = 1;
     private static final int MAX_LEVEL = 10000;

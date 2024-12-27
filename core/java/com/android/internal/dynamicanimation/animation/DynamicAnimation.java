@@ -11,7 +11,6 @@ import com.samsung.android.wallpaperbackup.GenerateXML;
 
 import java.util.ArrayList;
 
-/* loaded from: classes5.dex */
 public abstract class DynamicAnimation<T extends DynamicAnimation<T>>
         implements AnimationHandler.AnimationFrameCallback {
     public static final float MIN_VISIBLE_CHANGE_ALPHA = 0.00390625f;

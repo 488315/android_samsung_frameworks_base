@@ -2,7 +2,6 @@ package android.hardware.radio.V1_6;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class SscMode {
     public static final byte MODE_1 = 1;
     public static final byte MODE_2 = 2;

@@ -1,6 +1,5 @@
 package com.android.server.wm;
 
-/* loaded from: classes5.dex */
 public final class BackNavigationProto {
     public static final long ANIMATION_IN_PROGRESS = 1133871366145L;
     public static final long ANIMATION_RUNNING = 1133871366149L;

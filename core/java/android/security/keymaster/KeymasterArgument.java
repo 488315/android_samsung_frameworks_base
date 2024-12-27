@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.ParcelFormatException;
 import android.os.Parcelable;
 
-/* loaded from: classes3.dex */
 abstract class KeymasterArgument implements Parcelable {
     public static final Parcelable.Creator<KeymasterArgument> CREATOR =
             new Parcelable.Creator<

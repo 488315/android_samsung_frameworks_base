@@ -4,7 +4,6 @@ import android.hardware.HardwareBuffer;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes.dex */
 public class GraphicBuffer implements Parcelable {
     public static final Parcelable.Creator<GraphicBuffer> CREATOR =
             new Parcelable.Creator<

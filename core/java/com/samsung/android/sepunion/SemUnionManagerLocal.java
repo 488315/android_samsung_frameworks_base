@@ -5,7 +5,6 @@ import android.os.IBinder;
 
 import com.samsung.android.cover.CoverState;
 
-/* loaded from: classes6.dex */
 public abstract class SemUnionManagerLocal {
     public abstract void accessoryStateChanged(boolean z, byte[] bArr, byte[] bArr2);
 

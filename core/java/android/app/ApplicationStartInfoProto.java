@@ -1,6 +1,5 @@
 package android.app;
 
-/* loaded from: classes.dex */
 public final class ApplicationStartInfoProto {
     public static final long DEFINING_UID = 1120986464260L;
     public static final long LAUNCH_MODE = 1159641169931L;

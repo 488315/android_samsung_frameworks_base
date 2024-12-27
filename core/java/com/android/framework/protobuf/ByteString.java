@@ -23,7 +23,6 @@ import java.util.Locale;
 import java.util.NoSuchElementException;
 
 @CheckReturnValue
-/* loaded from: classes3.dex */
 public abstract class ByteString implements Iterable<Byte>, Serializable {
     static final int CONCATENATE_BY_COPY_SIZE = 128;
     public static final ByteString EMPTY = new LiteralByteString(Internal.EMPTY_BYTE_ARRAY);

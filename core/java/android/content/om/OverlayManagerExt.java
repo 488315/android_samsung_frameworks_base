@@ -24,7 +24,6 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-/* loaded from: classes.dex */
 public class OverlayManagerExt {
     public static final int CONFIG_ALL_USER_OVERLAY = 16;
     public static final int CONFIG_DELETE_RESOURCE_MAP_ON_STATE_CHANGE = 512;

@@ -13,7 +13,6 @@ import com.android.internal.os.SomeArgs;
 import com.android.internal.telecom.ICallRedirectionAdapter;
 import com.android.internal.telecom.ICallRedirectionService;
 
-/* loaded from: classes3.dex */
 public abstract class CallRedirectionService extends Service {
     private static final int MSG_PLACE_CALL = 1;
     private static final int MSG_TIMEOUT = 2;

@@ -7,7 +7,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes4.dex */
 public interface IWebViewUpdateService extends IInterface {
     String changeProviderAndSetting(String str) throws RemoteException;
 

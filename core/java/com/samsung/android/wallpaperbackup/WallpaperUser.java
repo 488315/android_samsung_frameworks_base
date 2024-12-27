@@ -2,7 +2,6 @@ package com.samsung.android.wallpaperbackup;
 
 import android.net.Uri;
 
-/* loaded from: classes6.dex */
 public class WallpaperUser {
     private String mComponent;
     private String mComponentName;

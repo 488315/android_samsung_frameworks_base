@@ -13,7 +13,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-/* loaded from: classes3.dex */
 public class LazyService extends ILazyService.Stub {
     private static final String TAG = "LazyService";
     protected static List<String> historyServices = Collections.synchronizedList(new ArrayList());

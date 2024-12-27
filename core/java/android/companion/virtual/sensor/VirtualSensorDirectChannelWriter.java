@@ -12,7 +12,6 @@ import java.util.Objects;
 import java.util.concurrent.atomic.AtomicLong;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class VirtualSensorDirectChannelWriter implements AutoCloseable {
     private static final String TAG = "VirtualSensorWriter";
     private static final long UINT32_MAX = 4294967295L;

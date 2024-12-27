@@ -25,7 +25,6 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 
-/* loaded from: classes.dex */
 public final class WallpaperInfo implements Parcelable {
     public static final Parcelable.Creator<WallpaperInfo> CREATOR =
             new Parcelable.Creator<WallpaperInfo>() { // from class: android.app.WallpaperInfo.1

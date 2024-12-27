@@ -11,7 +11,6 @@ import android.view.inspector.PropertyReader;
 
 import com.android.internal.R;
 
-/* loaded from: classes4.dex */
 public class ToggleButton extends CompoundButton {
     private static final int NO_ALPHA = 255;
     private float mDisabledAlpha;

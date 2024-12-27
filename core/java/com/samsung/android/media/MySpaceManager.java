@@ -2,7 +2,6 @@ package com.samsung.android.media;
 
 import android.media.AudioSystem;
 
-/* loaded from: classes6.dex */
 public class MySpaceManager {
     public static final int MYSPACE_EFFECT_MAX_TIMED_OUT = 1500;
     public static final int MYSPACE_EFFECT_TIMED_OUT = 1000;

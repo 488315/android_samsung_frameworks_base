@@ -1,6 +1,5 @@
 package android.os;
 
-/* loaded from: classes3.dex */
 public interface IRecoverySystemProgressListener extends IInterface {
     void onProgress(int i) throws RemoteException;
 

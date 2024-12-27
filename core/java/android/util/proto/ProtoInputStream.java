@@ -8,7 +8,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public final class ProtoInputStream extends ProtoStream {
     private static final int DEFAULT_BUFFER_SIZE = 8192;
     public static final int NO_MORE_FIELDS = -1;

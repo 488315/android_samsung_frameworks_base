@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import java.util.Locale;
 
-/* loaded from: classes4.dex */
 public class AllCapsTransformationMethod implements TransformationMethod2 {
     private static final String TAG = "AllCapsTransformationMethod";
     private boolean mEnabled;

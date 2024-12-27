@@ -27,7 +27,6 @@ import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
 
-/* loaded from: classes.dex */
 public class JobInfo implements Parcelable {
     public static final int BACKOFF_POLICY_EXPONENTIAL = 1;
     public static final int BACKOFF_POLICY_LINEAR = 0;

@@ -7,7 +7,6 @@ import java.security.cert.CertPathValidatorException;
 import java.security.cert.Certificate;
 import java.security.cert.PKIXCertPathChecker;
 
-/* loaded from: classes5.dex */
 class WrappedRevocationChecker implements PKIXCertRevocationChecker {
     private final PKIXCertPathChecker checker;
 

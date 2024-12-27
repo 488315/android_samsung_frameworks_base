@@ -8,7 +8,6 @@ import java.time.Instant;
 import java.time.ZoneId;
 import java.util.Arrays;
 
-/* loaded from: classes5.dex */
 public final class BestClock extends Clock {
     private static final String TAG = "BestClock";
     private final Clock[] mClocks;

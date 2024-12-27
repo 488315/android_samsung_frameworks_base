@@ -2,7 +2,6 @@ package android.hardware.radio.V1_0;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class ApnAuthType {
     public static final int NO_PAP_CHAP = 2;
     public static final int NO_PAP_NO_CHAP = 0;

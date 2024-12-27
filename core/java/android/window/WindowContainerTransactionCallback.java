@@ -2,7 +2,6 @@ package android.window;
 
 import android.view.SurfaceControl;
 
-/* loaded from: classes4.dex */
 public abstract class WindowContainerTransactionCallback {
     final IWindowContainerTransactionCallback mInterface =
             new IWindowContainerTransactionCallback

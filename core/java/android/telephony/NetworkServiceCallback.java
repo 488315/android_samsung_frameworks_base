@@ -7,7 +7,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public class NetworkServiceCallback {
     public static final int RESULT_ERROR_BUSY = 3;
     public static final int RESULT_ERROR_FAILED = 5;

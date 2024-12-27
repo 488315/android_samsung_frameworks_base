@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 @CheckReturnValue
-/* loaded from: classes3.dex */
 final class CodedOutputStreamWriter implements Writer {
     private final CodedOutputStream output;
 

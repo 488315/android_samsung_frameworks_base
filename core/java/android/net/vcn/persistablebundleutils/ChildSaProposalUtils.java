@@ -8,7 +8,6 @@ import com.android.server.vcn.repackaged.util.PersistableBundleUtils;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public final class ChildSaProposalUtils extends SaProposalUtilsBase {
     public static PersistableBundle toPersistableBundle(ChildSaProposal proposal) {
         return SaProposalUtilsBase.toPersistableBundle(proposal);

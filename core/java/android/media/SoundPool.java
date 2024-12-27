@@ -17,7 +17,6 @@ import java.io.IOException;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 
-/* loaded from: classes2.dex */
 public class SoundPool extends PlayerBase {
     private static final boolean DEBUG;
     private static final int SAMPLE_LOADED = 1;

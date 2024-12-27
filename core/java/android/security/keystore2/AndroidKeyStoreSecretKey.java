@@ -6,7 +6,6 @@ import android.system.keystore2.KeyMetadata;
 
 import javax.crypto.SecretKey;
 
-/* loaded from: classes3.dex */
 public class AndroidKeyStoreSecretKey extends AndroidKeyStoreKey implements SecretKey {
     public AndroidKeyStoreSecretKey(
             KeyDescriptor descriptor,

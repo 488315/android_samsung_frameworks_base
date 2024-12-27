@@ -3,7 +3,6 @@ package com.android.framework.protobuf;
 import java.util.Arrays;
 import java.util.RandomAccess;
 
-/* loaded from: classes3.dex */
 final class ProtobufArrayList<E> extends AbstractProtobufList<E> implements RandomAccess {
     private static final ProtobufArrayList<Object> EMPTY_LIST =
             new ProtobufArrayList<>(new Object[0], 0);

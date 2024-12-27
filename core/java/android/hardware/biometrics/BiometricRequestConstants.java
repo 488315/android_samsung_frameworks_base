@@ -3,7 +3,6 @@ package android.hardware.biometrics;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes2.dex */
 public class BiometricRequestConstants {
     public static final int REASON_AUTH_BP = 3;
     public static final int REASON_AUTH_KEYGUARD = 4;

@@ -8,7 +8,6 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
-/* loaded from: classes3.dex */
 final class HwNoService extends IServiceManager.Stub implements IHwBinder, IHwInterface {
     private static final String TAG = "HwNoService";
 

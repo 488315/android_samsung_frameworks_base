@@ -12,7 +12,6 @@ import java.io.PrintWriter;
 import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.LinkedBlockingDeque;
 
-/* loaded from: classes4.dex */
 public class DexObserver {
     private static final String CCIC_DOCK_UEVENT_MATCH = "DEVPATH=/devices/virtual/sec/ccic";
     private static final String TAG = "DexObserverFW";

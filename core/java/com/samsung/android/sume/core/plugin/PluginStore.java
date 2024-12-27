@@ -23,7 +23,6 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-/* loaded from: classes6.dex */
 public abstract class PluginStore {
     private static final String TAG = Def.tagOf((Class<?>) PluginStore.class);
     protected Context context;

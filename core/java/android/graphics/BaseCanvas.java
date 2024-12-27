@@ -15,7 +15,6 @@ import com.samsung.android.rune.CoreRune;
 
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public abstract class BaseCanvas {
     protected long mNativeCanvasWrapper;
     protected int mScreenDensity = 0;

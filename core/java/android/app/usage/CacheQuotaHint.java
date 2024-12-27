@@ -9,7 +9,6 @@ import com.android.internal.util.Preconditions;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class CacheQuotaHint implements Parcelable {
     public static final Parcelable.Creator<CacheQuotaHint> CREATOR =
             new Parcelable.Creator<

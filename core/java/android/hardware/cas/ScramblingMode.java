@@ -1,6 +1,5 @@
 package android.hardware.cas;
 
-/* loaded from: classes2.dex */
 public @interface ScramblingMode {
     public static final int AES128 = 9;
     public static final int AES_CBC = 14;

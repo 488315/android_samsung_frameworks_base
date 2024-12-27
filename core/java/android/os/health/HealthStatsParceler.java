@@ -3,7 +3,6 @@ package android.os.health;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes3.dex */
 public class HealthStatsParceler implements Parcelable {
     public static final Parcelable.Creator<HealthStatsParceler> CREATOR =
             new Parcelable.Creator<

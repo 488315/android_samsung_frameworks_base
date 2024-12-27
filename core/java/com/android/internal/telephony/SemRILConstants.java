@@ -1,6 +1,5 @@
 package com.android.internal.telephony;
 
-/* loaded from: classes5.dex */
 public interface SemRILConstants {
     public static final String CALL_DOMAIN_CS = "CS";
     public static final String CALL_DOMAIN_PS = "PS";

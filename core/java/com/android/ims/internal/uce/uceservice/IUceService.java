@@ -12,7 +12,6 @@ import com.android.ims.internal.uce.options.IOptionsService;
 import com.android.ims.internal.uce.presence.IPresenceListener;
 import com.android.ims.internal.uce.presence.IPresenceService;
 
-/* loaded from: classes5.dex */
 public interface IUceService extends IInterface {
     @Deprecated
     int createOptionsService(IOptionsListener iOptionsListener, UceLong uceLong)

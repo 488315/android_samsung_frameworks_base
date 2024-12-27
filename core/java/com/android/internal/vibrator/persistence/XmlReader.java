@@ -7,7 +7,6 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 
-/* loaded from: classes5.dex */
 public final class XmlReader {
     public static void readDocumentStartTag(TypedXmlPullParser parser, String expectedRootTag)
             throws XmlParserException, IOException {

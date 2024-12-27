@@ -4,7 +4,6 @@ import android.view.InputQueue;
 import android.view.PendingInsetsController;
 import android.view.SurfaceHolder;
 
-/* loaded from: classes5.dex */
 public interface RootViewSurfaceTaker {
     void onRootViewScrollYChanged(int i);
 

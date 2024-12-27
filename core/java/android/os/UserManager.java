@@ -38,7 +38,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.function.Supplier;
 
-/* loaded from: classes3.dex */
 public class UserManager {
 
     @SystemApi

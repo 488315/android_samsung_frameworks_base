@@ -3,7 +3,6 @@ package com.android.internal.telephony;
 import android.util.StatsEvent;
 import android.util.StatsLog;
 
-/* loaded from: classes5.dex */
 public final class TelephonyStatsLog {
     public static final int AIRPLANE_MODE = 311;
     public static final byte ANNOTATION_ID_DEFAULT_STATE = 6;

@@ -5,7 +5,6 @@ import android.hardware.camera2.impl.ExtensionKey;
 import android.hardware.camera2.impl.PublicKey;
 import android.util.Pair;
 
-/* loaded from: classes2.dex */
 public final class ExtensionCaptureResult {
 
     @ExtensionKey @PublicKey

@@ -13,7 +13,6 @@ import org.json.JSONObject;
 import java.nio.Buffer;
 import java.nio.ByteBuffer;
 
-/* loaded from: classes6.dex */
 public final class SharedBufferManager {
     private static volatile SharedBufferManager sInstance;
 

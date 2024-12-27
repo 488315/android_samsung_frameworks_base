@@ -6,7 +6,6 @@ import android.util.Log;
 
 import java.io.IOException;
 
-/* loaded from: classes3.dex */
 public final class Channel implements java.nio.channels.Channel {
     private static final String TAG = "OMAPI.Channel";
     private final ISecureElementChannel mChannel;

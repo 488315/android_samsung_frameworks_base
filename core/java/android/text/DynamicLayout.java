@@ -16,7 +16,6 @@ import com.android.text.flags.Flags;
 
 import java.lang.ref.WeakReference;
 
-/* loaded from: classes4.dex */
 public class DynamicLayout extends Layout {
     private static final int BLOCK_MINIMUM_CHARACTER_LENGTH = 400;
     private static final int COLUMNS_ELLIPSIZE = 7;

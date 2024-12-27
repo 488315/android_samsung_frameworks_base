@@ -3,7 +3,6 @@ package com.android.server;
 import android.os.ConditionVariable;
 import android.os.SystemClock;
 
-/* loaded from: classes5.dex */
 abstract class ResettableTimeout {
     private ConditionVariable mLock = new ConditionVariable();
     private volatile long mOffAt;

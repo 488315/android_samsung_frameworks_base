@@ -20,7 +20,6 @@ import com.android.internal.R;
 
 import com.samsung.android.wallpaperbackup.BnRConstants;
 
-/* loaded from: classes6.dex */
 public class UnknownSourceAppBlockActivity extends Activity {
     private static final String SECURITY_PORTAL =
             "https://security.samsungmobile.com/securityPost.smsb";

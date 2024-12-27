@@ -5,7 +5,6 @@ import com.android.internal.org.bouncycastle.util.io.Streams;
 import java.io.IOException;
 import java.io.InputStream;
 
-/* loaded from: classes5.dex */
 public class BEROctetStringParser implements ASN1OctetStringParser {
     private ASN1StreamParser _parser;
 

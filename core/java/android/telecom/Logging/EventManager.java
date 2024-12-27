@@ -24,7 +24,6 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.function.Consumer;
 import java.util.function.ToLongFunction;
 
-/* loaded from: classes3.dex */
 public class EventManager {
     public static final int DEFAULT_EVENTS_TO_CACHE = 10;
     public static final String TAG = "Logging.Events";

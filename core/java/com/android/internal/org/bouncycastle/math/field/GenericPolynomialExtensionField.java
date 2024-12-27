@@ -4,7 +4,6 @@ import com.android.internal.org.bouncycastle.util.Integers;
 
 import java.math.BigInteger;
 
-/* loaded from: classes5.dex */
 class GenericPolynomialExtensionField implements PolynomialExtensionField {
     protected final Polynomial minimalPolynomial;
     protected final FiniteField subfield;

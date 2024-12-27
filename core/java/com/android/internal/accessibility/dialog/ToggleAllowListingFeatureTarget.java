@@ -8,7 +8,6 @@ import com.android.internal.R;
 import com.android.internal.accessibility.util.AccessibilityUtils;
 import com.android.internal.accessibility.util.ShortcutUtils;
 
-/* loaded from: classes5.dex */
 class ToggleAllowListingFeatureTarget extends AccessibilityTarget {
     private Context mContext;
 

@@ -8,7 +8,6 @@ import android.util.Log;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class DeviceWiphyCapabilities implements Parcelable {
     public static final Parcelable.Creator<DeviceWiphyCapabilities> CREATOR =
             new Parcelable.Creator<

@@ -59,7 +59,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes2.dex */
 public final class CameraAdvancedExtensionSessionImpl extends CameraExtensionSession {
     private static final String TAG = "CameraAdvancedExtensionSessionImpl";
     private IAdvancedExtenderImpl mAdvancedExtender;

@@ -17,7 +17,6 @@ import java.io.IOException;
 import java.io.InterruptedIOException;
 import java.util.Arrays;
 
-/* loaded from: classes3.dex */
 public class RedactingFileDescriptor {
     private static final boolean DEBUG = true;
     private static final String TAG = "RedactingFileDescriptor";

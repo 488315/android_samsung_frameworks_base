@@ -8,7 +8,6 @@ import android.graphics.drawable.Drawable;
 
 import com.android.internal.R;
 
-/* loaded from: classes5.dex */
 public class UserIcons {
     private static final int[] USER_ICON_COLORS = {
         R.color.user_icon_1,

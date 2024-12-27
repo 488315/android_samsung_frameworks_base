@@ -11,7 +11,6 @@ import java.security.cert.CertificateEncodingException;
 import java.security.cert.X509CRL;
 import java.security.cert.X509Certificate;
 
-/* loaded from: classes5.dex */
 public class PrincipalUtil {
     public static X509Principal getIssuerX509Principal(X509Certificate cert)
             throws CertificateEncodingException {

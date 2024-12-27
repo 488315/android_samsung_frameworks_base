@@ -4,7 +4,6 @@ import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public class AudioMixUpdate implements Parcelable {
     public static final Parcelable.Creator<AudioMixUpdate> CREATOR =
             new Parcelable.Creator<AudioMixUpdate>() { // from class: android.media.AudioMixUpdate.1

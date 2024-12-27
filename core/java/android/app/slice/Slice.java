@@ -18,7 +18,6 @@ import java.util.List;
 import java.util.Objects;
 
 @Deprecated
-/* loaded from: classes.dex */
 public final class Slice implements Parcelable {
     public static final Parcelable.Creator<Slice> CREATOR =
             new Parcelable.Creator<Slice>() { // from class: android.app.slice.Slice.1

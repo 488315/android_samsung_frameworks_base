@@ -7,7 +7,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @Deprecated
-/* loaded from: classes3.dex */
 public final class ChooserTarget implements Parcelable {
     public static final Parcelable.Creator<ChooserTarget> CREATOR =
             new Parcelable.Creator<

@@ -14,7 +14,6 @@ import java.lang.annotation.Target;
     ElementType.LOCAL_VARIABLE
 })
 @Retention(RetentionPolicy.CLASS)
-/* loaded from: classes.dex */
 public @interface SuppressLint {
     String[] value();
 }

@@ -6,7 +6,6 @@ import android.view.View;
 
 import java.util.Locale;
 
-/* loaded from: classes4.dex */
 public class SemBaseInputConnectionUtil {
     public static CharSequence convertAllBrackets(
             CharSequence text, int newCursorPosition, Editable content, View targetView) {

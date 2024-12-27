@@ -3,7 +3,6 @@ package android.graphics;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes.dex */
 public final class Outline {
     public static final int MODE_EMPTY = 0;
     public static final int MODE_PATH = 2;

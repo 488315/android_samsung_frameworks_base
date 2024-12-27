@@ -41,7 +41,6 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-/* loaded from: classes2.dex */
 public final class CameraCharacteristics extends CameraMetadata<Key<?>> {
     private static final String TAG = "CameraCharacteristics";
     private List<CaptureRequest.Key<?>> mAvailablePhysicalRequestKeys;

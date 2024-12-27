@@ -5,7 +5,6 @@ import android.system.OsConstants;
 
 import java.io.FileDescriptor;
 
-/* loaded from: classes4.dex */
 class MemoryMappedFileDataSource implements DataSource {
     private static final long MEMORY_PAGE_SIZE_BYTES = Os.sysconf(OsConstants._SC_PAGESIZE);
     private final FileDescriptor mFd;

@@ -9,7 +9,6 @@ import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
 import java.lang.reflect.WildcardType;
 
-/* loaded from: classes2.dex */
 public abstract class TypeReference<T> {
     private final int mHash;
     private final Type mType;

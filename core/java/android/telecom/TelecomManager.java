@@ -28,7 +28,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes3.dex */
 public class TelecomManager {
     public static final String ACTION_CHANGE_DEFAULT_DIALER =
             "android.telecom.action.CHANGE_DEFAULT_DIALER";

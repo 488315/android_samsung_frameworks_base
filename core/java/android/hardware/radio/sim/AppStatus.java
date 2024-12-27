@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public class AppStatus implements Parcelable {
     public static final int APP_STATE_DETECTED = 1;
     public static final int APP_STATE_PIN = 2;

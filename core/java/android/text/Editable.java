@@ -1,6 +1,5 @@
 package android.text;
 
-/* loaded from: classes4.dex */
 public interface Editable extends CharSequence, GetChars, Spannable, Appendable {
     @Override // java.lang.Appendable
     Editable append(char c);

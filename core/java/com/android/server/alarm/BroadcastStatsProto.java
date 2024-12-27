@@ -1,6 +1,5 @@
 package com.android.server.alarm;
 
-/* loaded from: classes5.dex */
 public final class BroadcastStatsProto {
     public static final long COUNT = 1120986464260L;
     public static final long NESTING = 1120986464263L;

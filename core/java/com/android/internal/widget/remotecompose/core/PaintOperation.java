@@ -1,7 +1,6 @@
 package com.android.internal.widget.remotecompose.core;
 
 
-/* loaded from: classes5.dex */
 public abstract class PaintOperation implements Operation {
     public abstract void paint(PaintContext paintContext);
 

@@ -56,7 +56,6 @@ import kotlinx.coroutines.flow.StateFlowKt;
 import kotlinx.coroutines.flow.internal.ChannelFlowTransformLatest;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public final class KeyguardInteractor {
     public final ChannelFlowTransformLatest _nonSplitShadeNotifciationPlaceholderBounds;
     public final StateFlowImpl _notificationPlaceholderBounds;

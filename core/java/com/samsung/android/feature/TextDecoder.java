@@ -16,7 +16,6 @@ import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.zip.GZIPInputStream;
 
-/* loaded from: classes6.dex */
 public class TextDecoder {
     private static final int DECODE_BLOCK = 1048576;
     private static final int FILE_BLOCK = 1024;

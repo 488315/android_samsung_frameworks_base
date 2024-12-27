@@ -8,7 +8,6 @@ import com.android.internal.util.Preconditions;
 
 import java.util.concurrent.Executor;
 
-/* loaded from: classes2.dex */
 public class CallbackProxies {
 
     public static class SessionStateCallbackProxy extends CameraCaptureSession.StateCallback {

@@ -1,6 +1,5 @@
 package android.app;
 
-/* loaded from: classes.dex */
 public final class NotificationProto {
     public static final long ACTION_LENGTH = 1120986464264L;
     public static final long CATEGORY = 1138166333445L;

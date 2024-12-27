@@ -15,7 +15,6 @@ import java.lang.reflect.Constructor;
 import java.util.HashMap;
 
 @Deprecated
-/* loaded from: classes3.dex */
 abstract class GenericInflater<T, P extends Parent> {
     private static final Class[] mConstructorSignature = {Context.class, AttributeSet.class};
     private static final HashMap sConstructorMap = new HashMap();

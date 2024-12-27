@@ -5,7 +5,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-/* loaded from: classes3.dex */
 public @interface Immutable {
 
     @Target({ElementType.TYPE, ElementType.FIELD, ElementType.METHOD})

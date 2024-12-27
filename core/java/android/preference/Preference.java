@@ -32,7 +32,6 @@ import java.util.List;
 import java.util.Set;
 
 @Deprecated
-/* loaded from: classes3.dex */
 public class Preference implements Comparable<Preference> {
     public static final int DEFAULT_ORDER = Integer.MAX_VALUE;
     protected static final float FONT_SCALE_LARGE = 1.3f;

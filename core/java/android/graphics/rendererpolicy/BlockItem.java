@@ -5,7 +5,6 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import java.util.Iterator;
 import java.util.List;
 
-/* loaded from: classes.dex */
 public class BlockItem {
     private static final String ALL_CHIPSET = "ALL_CHIPSET";
     private static final String ALL_MODEL = "ALL_MODEL";

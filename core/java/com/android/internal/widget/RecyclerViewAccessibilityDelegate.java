@@ -5,7 +5,6 @@ import android.view.View;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
 
-/* loaded from: classes5.dex */
 public class RecyclerViewAccessibilityDelegate extends View.AccessibilityDelegate {
     final View.AccessibilityDelegate mItemDelegate =
             new View

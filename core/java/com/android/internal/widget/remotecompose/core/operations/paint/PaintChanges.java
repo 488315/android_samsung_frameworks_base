@@ -1,6 +1,5 @@
 package com.android.internal.widget.remotecompose.core.operations.paint;
 
-/* loaded from: classes5.dex */
 public interface PaintChanges {
     public static final int CLEAR_ALPHA = 2048;
     public static final int CLEAR_CAP = 64;

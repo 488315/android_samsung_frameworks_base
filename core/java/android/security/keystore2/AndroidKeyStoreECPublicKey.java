@@ -9,7 +9,6 @@ import java.security.interfaces.ECPublicKey;
 import java.security.spec.ECParameterSpec;
 import java.security.spec.ECPoint;
 
-/* loaded from: classes3.dex */
 public class AndroidKeyStoreECPublicKey extends AndroidKeyStorePublicKey implements ECPublicKey {
     private final ECParameterSpec mParams;
     private final ECPoint mW;

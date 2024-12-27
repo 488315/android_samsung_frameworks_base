@@ -16,7 +16,6 @@ import java.util.Objects;
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 
-/* loaded from: classes.dex */
 public class AppFunctionManagerHelper {
     public static void isAppFunctionEnabled(
             final String functionIdentifier,

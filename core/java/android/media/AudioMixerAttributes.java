@@ -7,7 +7,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public final class AudioMixerAttributes implements Parcelable {
     public static final Parcelable.Creator<AudioMixerAttributes> CREATOR =
             new Parcelable.Creator<

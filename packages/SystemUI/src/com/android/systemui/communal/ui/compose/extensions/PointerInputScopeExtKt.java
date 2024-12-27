@@ -9,7 +9,6 @@ import kotlin.jvm.functions.Function1;
 import kotlinx.coroutines.CoroutineScopeKt;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes.dex */
 public abstract class PointerInputScopeExtKt {
     /* JADX WARN: Removed duplicated region for block: B:12:0x0058 A[LOOP:0: B:11:0x0056->B:12:0x0058, LOOP_END] */
     /* JADX WARN: Removed duplicated region for block: B:16:0x006c  */

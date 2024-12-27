@@ -5,7 +5,6 @@ import android.util.LongSparseArray;
 
 import java.lang.ref.WeakReference;
 
-/* loaded from: classes.dex */
 abstract class ThemedResourceCache<T> {
     public static final int UNDEFINED_GENERATION = -1;
     private int mGeneration;

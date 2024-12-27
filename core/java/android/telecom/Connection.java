@@ -44,7 +44,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 
-/* loaded from: classes3.dex */
 public abstract class Connection extends Conferenceable {
     public static final int AUDIO_CODEC_AMR = 1;
     public static final int AUDIO_CODEC_AMR_WB = 2;

@@ -3,7 +3,6 @@ package android.text;
 import android.graphics.BaseCanvas;
 import android.graphics.Paint;
 
-/* loaded from: classes4.dex */
 public interface GraphicsOperations extends CharSequence {
     void drawText(BaseCanvas baseCanvas, int i, int i2, float f, float f2, Paint paint);
 

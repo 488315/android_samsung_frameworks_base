@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 
 import java.util.function.Consumer;
 
-/* loaded from: classes5.dex */
 public interface ScrollCaptureViewHelper<V extends View> {
     public static final int DOWN = 1;
     public static final int UP = -1;

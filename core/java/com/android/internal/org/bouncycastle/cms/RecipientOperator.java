@@ -6,7 +6,6 @@ import com.android.internal.org.bouncycastle.util.io.TeeInputStream;
 
 import java.io.InputStream;
 
-/* loaded from: classes5.dex */
 public class RecipientOperator {
     private final Object operator;
 

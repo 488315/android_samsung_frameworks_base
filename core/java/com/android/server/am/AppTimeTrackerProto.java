@@ -1,6 +1,5 @@
 package com.android.server.am;
 
-/* loaded from: classes5.dex */
 public final class AppTimeTrackerProto {
     public static final long PACKAGE_TIMES = 2246267895811L;
     public static final long RECEIVER = 1138166333441L;

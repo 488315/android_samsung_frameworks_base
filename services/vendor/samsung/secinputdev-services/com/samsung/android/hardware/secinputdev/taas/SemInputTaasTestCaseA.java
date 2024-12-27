@@ -21,7 +21,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.function.Consumer;
 
-/* loaded from: classes.dex */
 public class SemInputTaasTestCaseA implements SemInputTaasTestCase {
     private static final String TAG = "SemInputTaasTestCaseA";
     private static final int TIMEOUT_MILLISECONDS = 1000;

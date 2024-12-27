@@ -2,7 +2,6 @@ package android.database.sqlite;
 
 import java.io.Closeable;
 
-/* loaded from: classes.dex */
 public abstract class SQLiteClosable implements Closeable {
     private int mReferenceCount = 1;
 

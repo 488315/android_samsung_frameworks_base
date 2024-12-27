@@ -3,7 +3,6 @@ package android.filterfw.io;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/* loaded from: classes.dex */
 public class PatternScanner {
     private Pattern mIgnorePattern;
     private String mInput;

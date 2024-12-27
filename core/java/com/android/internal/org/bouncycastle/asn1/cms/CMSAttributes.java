@@ -3,7 +3,6 @@ package com.android.internal.org.bouncycastle.asn1.cms;
 import com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier;
 import com.android.internal.org.bouncycastle.asn1.pkcs.PKCSObjectIdentifiers;
 
-/* loaded from: classes5.dex */
 public interface CMSAttributes {
     public static final ASN1ObjectIdentifier contentType =
             PKCSObjectIdentifiers.pkcs_9_at_contentType;

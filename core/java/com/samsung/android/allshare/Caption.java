@@ -12,7 +12,6 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public class Caption implements Parcelable {
     public static final Parcelable.Creator<Caption> CREATOR =
             new Parcelable.Creator<

@@ -6,7 +6,6 @@ import android.os.Parcelable;
 
 import libcore.util.NativeAllocationRegistry;
 
-/* loaded from: classes4.dex */
 public final class InputChannel implements Parcelable {
     private static final boolean DEBUG = false;
     private static final String TAG = "InputChannel";

@@ -15,7 +15,6 @@ import java.util.Collections;
 import java.util.Locale;
 import java.util.Set;
 
-/* loaded from: classes.dex */
 public class ActivityInfo extends ComponentInfo implements Parcelable {
     public static final long ALWAYS_SANDBOX_DISPLAY_APIS = 185004937;
     private static final long CHECK_MIN_WIDTH_HEIGHT_FOR_MULTI_WINDOW = 197654537;

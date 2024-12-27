@@ -5,7 +5,6 @@ import android.os.RemoteException;
 
 import java.util.concurrent.Executor;
 
-/* loaded from: classes4.dex */
 public class InternalDownloadStatusListener extends IDownloadStatusListener.Stub {
     private final DownloadStatusListener mAppListener;
     private final Executor mExecutor;

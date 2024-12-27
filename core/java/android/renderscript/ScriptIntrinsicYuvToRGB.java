@@ -2,7 +2,6 @@ package android.renderscript;
 
 
 @Deprecated
-/* loaded from: classes3.dex */
 public final class ScriptIntrinsicYuvToRGB extends ScriptIntrinsic {
     private Allocation mInput;
 

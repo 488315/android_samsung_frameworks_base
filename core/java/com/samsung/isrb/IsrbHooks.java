@@ -23,7 +23,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes6.dex */
 public class IsrbHooks {
     static final boolean DEBUG = false;
     static final long ISRB_DETECT_TIME_MS = 90000;

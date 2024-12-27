@@ -1,6 +1,5 @@
 package android.audio.policy.configuration.V7_0;
 
-/* loaded from: classes.dex */
 public enum AudioUsage {
     AUDIO_USAGE_UNKNOWN("AUDIO_USAGE_UNKNOWN"),
     AUDIO_USAGE_MEDIA("AUDIO_USAGE_MEDIA"),

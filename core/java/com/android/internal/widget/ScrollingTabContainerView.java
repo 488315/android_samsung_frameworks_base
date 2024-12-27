@@ -24,7 +24,6 @@ import android.widget.TextView;
 
 import com.android.internal.view.ActionBarPolicy;
 
-/* loaded from: classes5.dex */
 public class ScrollingTabContainerView extends HorizontalScrollView
         implements AdapterView.OnItemClickListener {
     private static final int FADE_DURATION = 200;

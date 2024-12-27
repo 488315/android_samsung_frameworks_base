@@ -49,7 +49,6 @@ import javax.crypto.KeyAgreement;
 import javax.crypto.Mac;
 
 @Deprecated
-/* loaded from: classes2.dex */
 public class FingerprintManager implements BiometricAuthenticator, BiometricFingerprintConstants {
     public static final int ENROLL_ENROLL = 2;
     public static final int ENROLL_FIND_SENSOR = 1;

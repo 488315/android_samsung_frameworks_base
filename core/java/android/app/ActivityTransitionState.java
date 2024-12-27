@@ -14,7 +14,6 @@ import com.android.internal.view.OneShotPreDrawListener;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
-/* loaded from: classes.dex */
 class ActivityTransitionState {
     private static final String EXITING_MAPPED_FROM = "android:exitingMappedFrom";
     private static final String EXITING_MAPPED_TO = "android:exitingMappedTo";

@@ -10,7 +10,6 @@ import com.samsung.android.transcode.util.LogS;
 
 import java.nio.ByteBuffer;
 
-/* loaded from: classes6.dex */
 public class MediaInfoChecker {
     private static final int FOUR_K_VIDEO_RESOULTION_SIZE = 8847360;
     static final int NOT_SUPPORT_VC = 1234567890;

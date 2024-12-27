@@ -2,7 +2,6 @@ package com.samsung.android.allshare;
 
 import android.net.Uri;
 
-/* loaded from: classes3.dex */
 public abstract class ScreenSharingDevice extends Device {
 
     public interface IScreenSharingActionResponseListner {

@@ -13,7 +13,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 import java.util.UUID;
 
-/* loaded from: classes.dex */
 public class AppSearchShortcutPerson extends GenericDocument {
     private static final String KEY_ICON = "icon";
     private static final String KEY_KEY = "key";

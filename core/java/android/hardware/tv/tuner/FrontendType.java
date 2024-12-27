@@ -1,6 +1,5 @@
 package android.hardware.tv.tuner;
 
-/* loaded from: classes2.dex */
 public @interface FrontendType {
     public static final int ANALOG = 1;
     public static final int ATSC = 2;

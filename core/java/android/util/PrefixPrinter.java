@@ -1,6 +1,5 @@
 package android.util;
 
-/* loaded from: classes4.dex */
 public class PrefixPrinter implements Printer {
     private final String mPrefix;
     private final Printer mPrinter;

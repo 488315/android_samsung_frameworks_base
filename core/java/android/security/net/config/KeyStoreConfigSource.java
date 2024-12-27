@@ -5,7 +5,6 @@ import android.util.Pair;
 import java.security.KeyStore;
 import java.util.Set;
 
-/* loaded from: classes3.dex */
 class KeyStoreConfigSource implements ConfigSource {
     private final NetworkSecurityConfig mConfig;
 

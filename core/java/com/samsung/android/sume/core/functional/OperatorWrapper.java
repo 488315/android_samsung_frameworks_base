@@ -20,7 +20,6 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-/* loaded from: classes6.dex */
 public class OperatorWrapper extends OpPriorityComputable implements Operator {
     private static final String TAG = Def.tagOf((Class<?>) OperatorWrapper.class);
     private static final Map<ImgpType, MediaFormatUpdater> formatUpdaterMap = new AnonymousClass1();

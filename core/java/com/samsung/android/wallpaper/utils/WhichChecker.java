@@ -6,7 +6,6 @@ import android.util.Log;
 
 import com.samsung.android.wallpaper.Rune;
 
-/* loaded from: classes6.dex */
 public class WhichChecker {
     private static final String TAG = "WhichChecker";
 

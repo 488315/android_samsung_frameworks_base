@@ -2,7 +2,6 @@ package android.hardware.contexthub.V1_0;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class HubMemoryType {
     public static final int MAIN = 0;
     public static final int SECONDARY = 1;

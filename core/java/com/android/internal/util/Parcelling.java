@@ -15,7 +15,6 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.regex.Pattern;
 
-/* loaded from: classes5.dex */
 public interface Parcelling<T> {
     void parcel(T t, Parcel parcel, int i);
 

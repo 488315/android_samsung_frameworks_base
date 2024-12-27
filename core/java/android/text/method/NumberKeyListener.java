@@ -14,7 +14,6 @@ import android.view.View;
 import java.util.Collection;
 import java.util.Locale;
 
-/* loaded from: classes4.dex */
 public abstract class NumberKeyListener extends BaseKeyListener implements InputFilter {
     private static final String DATE_TIME_FORMAT_SYMBOLS =
             "GyYuUrQqMLlwWdDFgEecabBhHKkjJCmsSAzZOvVXx";

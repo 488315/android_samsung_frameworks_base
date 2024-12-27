@@ -6,7 +6,6 @@ import android.os.Parcelable;
 
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public class LinkCapacityEstimate implements Parcelable {
     public static final Parcelable.Creator<LinkCapacityEstimate> CREATOR =
             new Parcelable.Creator<LinkCapacityEstimate>() { // from class:

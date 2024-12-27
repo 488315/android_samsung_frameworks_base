@@ -28,7 +28,6 @@ import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public abstract class DataService extends Service {
     private static final int DATA_SERVICE_CREATE_DATA_SERVICE_PROVIDER = 1;
     private static final int DATA_SERVICE_INDICATION_APN_UNTHROTTLED = 16;

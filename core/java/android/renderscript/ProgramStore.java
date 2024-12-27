@@ -1,7 +1,6 @@
 package android.renderscript;
 
 @Deprecated
-/* loaded from: classes3.dex */
 public class ProgramStore extends BaseObj {
     BlendDstFunc mBlendDst;
     BlendSrcFunc mBlendSrc;

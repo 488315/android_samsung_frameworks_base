@@ -42,7 +42,6 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
-/* loaded from: classes5.dex */
 public final class SemService extends ISemService.Stub {
     public static final int ERROR = -1;
     public static final int ERROR_ALREADY_OPENED = -11;

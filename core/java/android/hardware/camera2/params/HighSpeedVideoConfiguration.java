@@ -6,7 +6,6 @@ import android.util.Size;
 
 import com.android.internal.util.Preconditions;
 
-/* loaded from: classes2.dex */
 public final class HighSpeedVideoConfiguration {
     private static final int HIGH_SPEED_MAX_MINIMAL_FPS = 120;
     private final int mBatchSizeMax;

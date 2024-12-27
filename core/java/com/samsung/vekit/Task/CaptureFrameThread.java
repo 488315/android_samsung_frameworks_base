@@ -14,7 +14,6 @@ import com.samsung.vekit.Listener.CaptureFrameTaskListener;
 import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.LinkedBlockingDeque;
 
-/* loaded from: classes6.dex */
 public class CaptureFrameThread extends Thread {
     VEContext context;
     Handler handler;

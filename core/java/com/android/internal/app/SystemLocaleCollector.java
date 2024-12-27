@@ -7,7 +7,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-/* loaded from: classes5.dex */
 class SystemLocaleCollector implements LocalePickerWithRegion.LocaleCollectorBase {
     private final Context mContext;
     private LocaleList mExplicitLocales;

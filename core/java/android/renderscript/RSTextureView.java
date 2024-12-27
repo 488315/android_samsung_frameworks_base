@@ -6,7 +6,6 @@ import android.util.AttributeSet;
 import android.view.TextureView;
 
 @Deprecated
-/* loaded from: classes3.dex */
 public class RSTextureView extends TextureView implements TextureView.SurfaceTextureListener {
     private RenderScriptGL mRS;
     private SurfaceTexture mSurfaceTexture;

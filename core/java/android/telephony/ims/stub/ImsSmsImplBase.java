@@ -12,7 +12,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.concurrent.Executor;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public class ImsSmsImplBase {
     public static final int DELIVER_STATUS_ERROR_GENERIC = 2;
     public static final int DELIVER_STATUS_ERROR_NO_MEMORY = 3;

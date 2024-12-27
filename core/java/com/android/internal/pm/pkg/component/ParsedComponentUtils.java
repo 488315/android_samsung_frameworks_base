@@ -14,7 +14,6 @@ import com.android.internal.pm.pkg.parsing.ParsingPackage;
 import com.android.internal.pm.pkg.parsing.ParsingPackageUtils;
 import com.android.internal.pm.pkg.parsing.ParsingUtils;
 
-/* loaded from: classes5.dex */
 class ParsedComponentUtils {
     ParsedComponentUtils() {}
 

@@ -9,7 +9,6 @@ import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.SecureRandom;
 
-/* loaded from: classes5.dex */
 public abstract class BaseAlgorithmParameterGenerator extends AlgorithmParameterGeneratorSpi {
     protected SecureRandom random;
     private final JcaJceHelper helper = new DefaultJcaJceHelper();

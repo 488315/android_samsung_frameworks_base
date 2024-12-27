@@ -5,7 +5,6 @@ import android.companion.CompanionDeviceManager;
 import android.os.Bundle;
 
 @Deprecated
-/* loaded from: classes.dex */
 public class AccountAuthenticatorActivity extends Activity {
     private AccountAuthenticatorResponse mAccountAuthenticatorResponse = null;
     private Bundle mResultBundle = null;

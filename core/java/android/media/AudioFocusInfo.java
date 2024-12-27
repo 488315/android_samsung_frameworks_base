@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public final class AudioFocusInfo implements Parcelable {
     public static final Parcelable.Creator<AudioFocusInfo> CREATOR =
             new Parcelable.Creator<AudioFocusInfo>() { // from class: android.media.AudioFocusInfo.1

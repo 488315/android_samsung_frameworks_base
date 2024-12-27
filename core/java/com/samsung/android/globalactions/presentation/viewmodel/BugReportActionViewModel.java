@@ -4,7 +4,6 @@ import com.samsung.android.globalactions.presentation.SamsungGlobalActions;
 import com.samsung.android.globalactions.util.ResourcesWrapper;
 import com.samsung.android.globalactions.util.SystemController;
 
-/* loaded from: classes6.dex */
 public class BugReportActionViewModel implements ActionViewModel {
     private final SamsungGlobalActions mGlobalActions;
     private ActionInfo mInfo;

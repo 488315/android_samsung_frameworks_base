@@ -10,7 +10,6 @@ import android.view.ThreadedRenderer;
 
 import com.samsung.android.globalactions.presentation.viewmodel.DefaultActionNames;
 
-/* loaded from: classes6.dex */
 public interface IKerykeion extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.infoextraction.IKerykeion";
 

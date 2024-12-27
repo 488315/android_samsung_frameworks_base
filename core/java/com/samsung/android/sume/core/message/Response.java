@@ -20,7 +20,6 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-/* loaded from: classes6.dex */
 public final class Response extends Message {
     private static final String TAG = Def.tagOf((Class<?>) Response.class);
     private List<MediaBuffer> bufferList;

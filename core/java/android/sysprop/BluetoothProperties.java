@@ -11,7 +11,6 @@ import java.util.Optional;
 import java.util.StringJoiner;
 import java.util.function.Function;
 
-/* loaded from: classes3.dex */
 public final class BluetoothProperties {
     private BluetoothProperties() {}
 

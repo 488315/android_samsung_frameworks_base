@@ -11,7 +11,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-/* loaded from: classes2.dex */
 public final class MediaSync {
     private static final int CB_RETURN_AUDIO_BUFFER = 1;
     private static final int EVENT_CALLBACK = 1;

@@ -31,7 +31,6 @@ import java.io.IOException;
 import java.util.Objects;
 import java.util.UUID;
 
-/* loaded from: classes5.dex */
 public class InstallLocationUtils {
     public static final int APP_INSTALL_AUTO = 0;
     public static final int APP_INSTALL_EXTERNAL = 2;

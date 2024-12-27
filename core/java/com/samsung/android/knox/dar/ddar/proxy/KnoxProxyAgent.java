@@ -9,7 +9,6 @@ import android.util.Log;
 
 import java.util.HashMap;
 
-/* loaded from: classes6.dex */
 public class KnoxProxyAgent extends Service {
     private static final String TAG = "KnoxProxyAgent";
     Object mPolicyServiceLock = new Object();

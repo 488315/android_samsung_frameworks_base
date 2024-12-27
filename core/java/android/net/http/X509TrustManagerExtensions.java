@@ -12,7 +12,6 @@ import java.util.List;
 
 import javax.net.ssl.X509TrustManager;
 
-/* loaded from: classes3.dex */
 public class X509TrustManagerExtensions {
     private final Method mCheckServerTrusted;
     private final TrustManagerImpl mDelegate;

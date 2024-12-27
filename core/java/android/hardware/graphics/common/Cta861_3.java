@@ -4,7 +4,6 @@ import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public class Cta861_3 implements Parcelable {
     public static final Parcelable.Creator<Cta861_3> CREATOR =
             new Parcelable.Creator<

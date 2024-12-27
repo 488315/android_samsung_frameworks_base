@@ -8,7 +8,6 @@ import com.samsung.android.graphics.spr.document.attribute.impl.SprRadialGradien
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-/* loaded from: classes6.dex */
 public abstract class SprAttributeColor extends SprAttributeBase {
     public static final byte TYPE_ARGB = 1;
     public static final byte TYPE_LINEAR_GRADIENT = 3;

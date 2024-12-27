@@ -16,7 +16,6 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* loaded from: classes5.dex */
 public class CocktailProviderInfo implements Parcelable {
     private static final String COCKTAIL_AUTO_SCALE = "autoScale";
     private static final String COCKTAIL_CATEGORY = "category";

@@ -3,7 +3,6 @@ package com.android.internal.midi;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-/* loaded from: classes5.dex */
 public class EventScheduler {
     public static final long NANOS_PER_MILLI = 1000000;
     private boolean mClosed;

@@ -12,7 +12,6 @@ import android.widget.RemoteViews;
 
 import com.android.internal.statusbar.IStatusBarService;
 
-/* loaded from: classes.dex */
 public class SemStatusBarManager {
     public static final int DISABLE2_NONE = 0;
     public static final int DISABLE2_ROTATE_SUGGESTIONS = 16;

@@ -1,6 +1,5 @@
 package android.hardware.security.keymint;
 
-/* loaded from: classes2.dex */
 public @interface Tag {
     public static final int ACTIVE_DATETIME = 1610613136;
     public static final int ALGORITHM = 268435458;

@@ -8,7 +8,6 @@ import com.android.internal.util.AnnotationValidations;
 
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public final class SyncNotedAppOp implements Parcelable {
     public static final Parcelable.Creator<SyncNotedAppOp> CREATOR =
             new Parcelable.Creator<SyncNotedAppOp>() { // from class: android.app.SyncNotedAppOp.1

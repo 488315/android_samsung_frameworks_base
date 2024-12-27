@@ -7,7 +7,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.view.SurfaceControlViewHost;
 
-/* loaded from: classes.dex */
 public interface IKeyguardCallback extends IInterface {
     public static final String DESCRIPTOR = "android.app.admin.IKeyguardCallback";
 

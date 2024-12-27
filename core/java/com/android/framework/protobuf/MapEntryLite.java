@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.AbstractMap;
 import java.util.Map;
 
-/* loaded from: classes3.dex */
 public class MapEntryLite<K, V> {
     private static final int KEY_FIELD_NUMBER = 1;
     private static final int VALUE_FIELD_NUMBER = 2;

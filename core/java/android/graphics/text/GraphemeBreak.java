@@ -1,6 +1,5 @@
 package android.graphics.text;
 
-/* loaded from: classes.dex */
 public class GraphemeBreak {
     private static native void nIsGraphemeBreak(
             float[] fArr, char[] cArr, int i, int i2, boolean[] zArr);

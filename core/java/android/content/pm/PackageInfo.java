@@ -3,7 +3,6 @@ package android.content.pm;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes.dex */
 public class PackageInfo implements Parcelable {
     public static final Parcelable.Creator<PackageInfo> CREATOR =
             new Parcelable.Creator<PackageInfo>() { // from class: android.content.pm.PackageInfo.1

@@ -2,7 +2,6 @@ package com.android.internal.org.bouncycastle.x509;
 
 import java.security.cert.CertificateEncodingException;
 
-/* loaded from: classes5.dex */
 class ExtCertificateEncodingException extends CertificateEncodingException {
     Throwable cause;
 

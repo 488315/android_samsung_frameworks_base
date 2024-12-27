@@ -9,7 +9,6 @@ import com.android.internal.util.Preconditions;
 
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public final class RampSegment extends VibrationEffectSegment {
     public static final Parcelable.Creator<RampSegment> CREATOR =
             new Parcelable.Creator<RampSegment>() { // from class: android.os.vibrator.RampSegment.1

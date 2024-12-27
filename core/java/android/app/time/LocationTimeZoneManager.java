@@ -1,6 +1,5 @@
 package android.app.time;
 
-/* loaded from: classes.dex */
 public final class LocationTimeZoneManager {
     public static final String DUMP_STATE_OPTION_PROTO = "--proto";
     public static final String NULL_PACKAGE_NAME_TOKEN = "@null";

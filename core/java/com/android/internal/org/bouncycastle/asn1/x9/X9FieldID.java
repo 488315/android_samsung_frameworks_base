@@ -10,7 +10,6 @@ import com.android.internal.org.bouncycastle.asn1.DERSequence;
 
 import java.math.BigInteger;
 
-/* loaded from: classes5.dex */
 public class X9FieldID extends ASN1Object implements X9ObjectIdentifiers {
     private ASN1ObjectIdentifier id;
     private ASN1Primitive parameters;

@@ -6,7 +6,6 @@ import android.provider.DeviceConfig;
 
 import com.samsung.android.knox.zt.internal.KnoxZtInternalConst;
 
-/* loaded from: classes4.dex */
 public class SafetyProtectionUtils {
     private static final String SAFETY_PROTECTION_RESOURCES_ENABLED = "safety_protection_enabled";
 

@@ -3,7 +3,6 @@ package com.android.internal.app;
 import android.util.ArrayMap;
 import android.util.SparseArray;
 
-/* loaded from: classes5.dex */
 public class ProcessMap<E> {
     final ArrayMap<String, SparseArray<E>> mMap = new ArrayMap<>();
 

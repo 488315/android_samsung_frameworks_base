@@ -19,7 +19,6 @@ import java.security.cert.PKIXParameters;
 import java.security.cert.PKIXRevocationChecker;
 import java.util.Set;
 
-/* loaded from: classes3.dex */
 public final class DelegatingCertPathValidator extends CertPathValidatorSpi {
     private static boolean DEBUG = false;
     private static final String TAG = "DelegatingCertPathValidator";

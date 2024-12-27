@@ -11,7 +11,6 @@ import com.android.internal.util.IndentingPrintWriter;
 
 import java.io.StringWriter;
 
-/* loaded from: classes.dex */
 public class PendingTransactionActions {
     private boolean mCallOnPostCreate;
     private Bundle mOldState;

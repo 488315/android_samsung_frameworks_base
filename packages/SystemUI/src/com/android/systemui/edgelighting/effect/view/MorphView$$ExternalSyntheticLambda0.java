@@ -4,7 +4,6 @@ import com.android.internal.dynamicanimation.animation.SpringAnimation;
 import com.android.systemui.edgelighting.effect.container.NotificationEffect;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public final /* synthetic */ class MorphView$$ExternalSyntheticLambda0 implements Runnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ MorphView f$0;

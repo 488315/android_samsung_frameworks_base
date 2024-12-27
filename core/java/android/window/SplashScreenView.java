@@ -38,7 +38,6 @@ import java.time.Instant;
 import java.util.function.Consumer;
 import java.util.function.LongConsumer;
 
-/* loaded from: classes4.dex */
 public final class SplashScreenView extends FrameLayout {
     private View mBrandingImageView;
     private RemoteCallback mClientCallback;

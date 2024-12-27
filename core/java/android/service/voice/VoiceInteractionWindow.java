@@ -12,7 +12,6 @@ import android.view.WindowManager;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes3.dex */
 final class VoiceInteractionWindow extends Dialog {
     private static final boolean DEBUG = false;
     private static final String TAG = "VoiceInteractionWindow";

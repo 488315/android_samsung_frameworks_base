@@ -22,7 +22,6 @@ import java.io.IOException;
 import java.util.Hashtable;
 import java.util.zip.GZIPInputStream;
 
-/* loaded from: classes6.dex */
 public class SemCscFeature {
     private static final String ATTR_COUNTRYISO = "countryISO";
     private static final boolean DEBUG = isDebugEnabled();

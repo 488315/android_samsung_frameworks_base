@@ -1,6 +1,5 @@
 package android.content.pm;
 
-/* loaded from: classes.dex */
 public final class PackageItemInfoProto {
     public static final long BANNER = 1120986464262L;
     public static final long ICON = 1120986464261L;

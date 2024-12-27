@@ -5,7 +5,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @Deprecated
-/* loaded from: classes2.dex */
 public class SContextTestFlatMotion extends SContextEventContext {
     public static final Parcelable.Creator<SContextTestFlatMotion> CREATOR =
             new Parcelable.Creator<SContextTestFlatMotion>() { // from class:

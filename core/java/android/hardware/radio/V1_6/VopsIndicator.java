@@ -2,7 +2,6 @@ package android.hardware.radio.V1_6;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class VopsIndicator {
     public static final byte VOPS_NOT_SUPPORTED = 0;
     public static final byte VOPS_OVER_3GPP = 1;

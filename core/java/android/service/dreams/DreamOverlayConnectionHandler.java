@@ -20,7 +20,6 @@ import java.util.Objects;
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 
-/* loaded from: classes3.dex */
 public final class DreamOverlayConnectionHandler {
     private static final int MSG_ADD_CONSUMER = 1;
     private static final int MSG_OVERLAY_CLIENT_READY = 3;

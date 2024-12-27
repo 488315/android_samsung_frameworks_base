@@ -11,7 +11,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-/* loaded from: classes.dex */
 public class ResourcesLoader {
     private ApkAssets[] mApkAssets;
     private ResourcesProvider[] mPreviousProviders;

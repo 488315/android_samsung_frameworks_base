@@ -2,7 +2,6 @@ package android.text;
 
 import com.android.text.flags.Flags;
 
-/* loaded from: classes4.dex */
 public class ClientFlags {
     public static boolean noBreakNoHyphenationSpan() {
         return TextFlags.isFeatureEnabled(Flags.FLAG_NO_BREAK_NO_HYPHENATION_SPAN);

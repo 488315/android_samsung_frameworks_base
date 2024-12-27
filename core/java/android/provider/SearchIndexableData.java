@@ -7,7 +7,6 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import java.util.Locale;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public abstract class SearchIndexableData {
     public String className;
     public Context context;

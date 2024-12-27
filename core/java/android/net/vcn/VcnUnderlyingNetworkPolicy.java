@@ -6,7 +6,6 @@ import android.os.Parcelable;
 
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public final class VcnUnderlyingNetworkPolicy implements Parcelable {
     public static final Parcelable.Creator<VcnUnderlyingNetworkPolicy> CREATOR =
             new Parcelable.Creator<

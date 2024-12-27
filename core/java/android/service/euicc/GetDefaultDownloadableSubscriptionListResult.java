@@ -9,7 +9,6 @@ import java.util.Arrays;
 import java.util.List;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class GetDefaultDownloadableSubscriptionListResult implements Parcelable {
     public static final Parcelable.Creator<GetDefaultDownloadableSubscriptionListResult> CREATOR =
             new Parcelable.Creator<

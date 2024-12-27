@@ -24,7 +24,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Collections;
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public class MultiWindowManager {
     public static final String ACTION_AUTORUN_FLEX_PANEL =
             "android.intent.action.AUTORUN_FLEX_PANEL";

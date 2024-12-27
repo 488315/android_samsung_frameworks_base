@@ -7,7 +7,6 @@ import libcore.util.NativeAllocationRegistry;
 
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public abstract class SurfaceControlHdrLayerInfoListener {
     private static final NativeAllocationRegistry sRegistry =
             NativeAllocationRegistry.createMalloced(

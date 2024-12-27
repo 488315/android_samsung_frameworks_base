@@ -4,7 +4,6 @@ import java.security.cert.CertificateEncodingException;
 import java.security.cert.X509Certificate;
 import java.util.Arrays;
 
-/* loaded from: classes4.dex */
 class VerbatimX509Certificate extends WrappedX509Certificate {
     private final byte[] mEncodedVerbatim;
     private int mHash;

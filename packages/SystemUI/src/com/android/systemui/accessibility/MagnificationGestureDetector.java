@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewConfiguration;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes.dex */
 public final class MagnificationGestureDetector {
     public final MagnificationGestureDetector$$ExternalSyntheticLambda0 mCancelTapGestureRunnable;
     public final Handler mHandler;

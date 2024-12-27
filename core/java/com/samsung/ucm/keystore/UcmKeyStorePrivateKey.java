@@ -13,7 +13,6 @@ import java.security.interfaces.ECKey;
 import java.security.interfaces.RSAPublicKey;
 import java.security.spec.ECParameterSpec;
 
-/* loaded from: classes6.dex */
 public class UcmKeyStorePrivateKey extends UcmKeyStoreKey implements PrivateKey {
     protected ECParameterSpec mECParameterSpec;
     protected BigInteger mModulus;

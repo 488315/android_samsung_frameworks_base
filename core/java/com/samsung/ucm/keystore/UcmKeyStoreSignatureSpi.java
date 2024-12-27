@@ -15,7 +15,6 @@ import java.security.PublicKey;
 import java.security.SignatureException;
 import java.security.SignatureSpi;
 
-/* loaded from: classes6.dex */
 public class UcmKeyStoreSignatureSpi extends SignatureSpi {
     private static final String TAG = "UcmKeyStoreSignatureSpi";
     private final String mAlgorithm;

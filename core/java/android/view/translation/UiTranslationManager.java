@@ -22,7 +22,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes4.dex */
 public final class UiTranslationManager {
     public static final String EXTRA_PACKAGE_NAME = "package_name";
     public static final String EXTRA_SOURCE_LOCALE = "source_locale";

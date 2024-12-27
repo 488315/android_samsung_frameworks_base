@@ -1,6 +1,5 @@
 package android.opengl;
 
-/* loaded from: classes3.dex */
 public class GLException extends RuntimeException {
     private final int mError;
 

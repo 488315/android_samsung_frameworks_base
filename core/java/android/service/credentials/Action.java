@@ -6,7 +6,6 @@ import android.os.Parcelable;
 
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public final class Action implements Parcelable {
     public static final Parcelable.Creator<Action> CREATOR =
             new Parcelable.Creator<Action>() { // from class: android.service.credentials.Action.1

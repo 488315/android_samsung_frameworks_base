@@ -8,7 +8,6 @@ import com.android.internal.org.bouncycastle.jcajce.provider.config.Configurable
 import com.android.internal.org.bouncycastle.jcajce.provider.symmetric.util.BaseKeyGenerator;
 import com.android.internal.org.bouncycastle.jcajce.provider.symmetric.util.BaseMac;
 
-/* loaded from: classes5.dex */
 public class SHA384 {
     private SHA384() {}
 

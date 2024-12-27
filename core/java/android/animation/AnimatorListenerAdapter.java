@@ -1,6 +1,5 @@
 package android.animation;
 
-/* loaded from: classes.dex */
 public abstract class AnimatorListenerAdapter
         implements Animator.AnimatorListener, Animator.AnimatorPauseListener {
     @Override // android.animation.Animator.AnimatorListener

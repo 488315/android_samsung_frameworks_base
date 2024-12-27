@@ -1,6 +1,5 @@
 package android.service;
 
-/* loaded from: classes3.dex */
 public final class SensorEventConnectionProto {
     public static final long CACHE_SIZE = 1120986464261L;
     public static final long EVENTS_CACHE = 1120986464266L;

@@ -17,7 +17,6 @@ import java.io.OutputStream;
 import java.net.UnknownServiceException;
 
 @Deprecated
-/* loaded from: classes.dex */
 public class DrmOutputStream extends OutputStream {
     private static final String TAG = "DrmOutputStream";
     private final DrmManagerClient mClient;

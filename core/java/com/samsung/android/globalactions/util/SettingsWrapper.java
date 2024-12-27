@@ -11,7 +11,6 @@ import android.sec.enterprise.content.SecContentProviderURI;
 
 import com.samsung.android.audio.AudioConstants;
 
-/* loaded from: classes6.dex */
 public class SettingsWrapper {
     private static final String TAG = "SettingsWrapper";
     private final Context mContext;

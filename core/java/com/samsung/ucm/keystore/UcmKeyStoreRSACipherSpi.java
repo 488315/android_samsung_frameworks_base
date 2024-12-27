@@ -8,7 +8,6 @@ import java.util.Arrays;
 
 import javax.crypto.IllegalBlockSizeException;
 
-/* loaded from: classes6.dex */
 public class UcmKeyStoreRSACipherSpi extends UcmKeyStoreGenericCipher {
     private byte[] mBuffer;
     private int mBufferOffset;

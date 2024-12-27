@@ -10,7 +10,6 @@ import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.function.Predicate;
 
-/* loaded from: classes6.dex */
 public class AudioParameter {
     public static final String AOSP_BT_A2DP_SUSPENDED = "A2dpSuspended";
     public static final String AOSP_BT_HEADSET_NREC = "bt_headset_nrec";

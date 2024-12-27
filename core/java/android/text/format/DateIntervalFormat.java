@@ -7,7 +7,6 @@ import android.util.LruCache;
 import java.text.FieldPosition;
 import java.util.TimeZone;
 
-/* loaded from: classes4.dex */
 public final class DateIntervalFormat {
     private static final LruCache<String, android.icu.text.DateIntervalFormat> CACHED_FORMATTERS =
             new LruCache<>(8);

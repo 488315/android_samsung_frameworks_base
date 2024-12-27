@@ -1,6 +1,5 @@
 package android.tracing;
 
-/* loaded from: classes4.dex */
 public final class FeatureFlagsImpl implements FeatureFlags {
     @Override // android.tracing.FeatureFlags
     public boolean perfettoIme() {

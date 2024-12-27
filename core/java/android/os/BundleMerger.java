@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.function.BinaryOperator;
 
-/* loaded from: classes3.dex */
 public class BundleMerger implements Parcelable {
     public static final Parcelable.Creator<BundleMerger> CREATOR =
             new Parcelable.Creator<BundleMerger>() { // from class: android.os.BundleMerger.1

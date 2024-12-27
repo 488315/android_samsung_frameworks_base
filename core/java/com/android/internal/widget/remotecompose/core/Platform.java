@@ -1,6 +1,5 @@
 package com.android.internal.widget.remotecompose.core;
 
-/* loaded from: classes5.dex */
 public interface Platform {
     int getImageHeight(Object obj);
 

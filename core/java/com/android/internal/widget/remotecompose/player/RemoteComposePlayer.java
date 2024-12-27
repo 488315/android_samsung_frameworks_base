@@ -10,7 +10,6 @@ import android.widget.ScrollView;
 
 import com.android.internal.widget.remotecompose.player.platform.RemoteComposeCanvas;
 
-/* loaded from: classes5.dex */
 public class RemoteComposePlayer extends FrameLayout {
     private static final int MAX_SUPPORTED_MAJOR_VERSION = 0;
     private static final int MAX_SUPPORTED_MINOR_VERSION = 1;

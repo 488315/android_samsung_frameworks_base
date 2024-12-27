@@ -5,7 +5,6 @@ import com.android.internal.org.bouncycastle.util.Pack;
 
 import java.lang.reflect.Array;
 
-/* loaded from: classes5.dex */
 public class Tables8kGCMMultiplier implements GCMMultiplier {
     private byte[] H;
     private long[][][] T;

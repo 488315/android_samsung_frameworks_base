@@ -4,7 +4,6 @@ import android.annotation.SystemApi;
 import android.content.Context;
 
 @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
-/* loaded from: classes3.dex */
 public class StatsServiceManager {
 
     public static final class ServiceRegisterer {

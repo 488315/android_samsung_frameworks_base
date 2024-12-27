@@ -1,6 +1,5 @@
 package com.samsung.android.wallpaper.legibilitycolors.utils.interpolater;
 
-/* loaded from: classes6.dex */
 public interface IEasing {
 
     public enum EEasing {

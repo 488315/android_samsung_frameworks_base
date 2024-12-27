@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public final class WindowContainerTransaction implements Parcelable {
     public static final int ADDITIONAL_FLAG_KEEP_ROTATION_DURING_TRANSITION = 1;
     public static final int CHANGE_TRANSIT_REQUEST_FULLSCREEN_TO_SPLIT = 1;

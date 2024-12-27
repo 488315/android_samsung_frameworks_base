@@ -3,7 +3,6 @@ package android.renderscript;
 import java.util.Vector;
 
 @Deprecated
-/* loaded from: classes3.dex */
 public class Mesh extends BaseObj {
     Allocation[] mIndexBuffers;
     Primitive[] mPrimitives;

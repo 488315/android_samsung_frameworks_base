@@ -14,7 +14,6 @@ import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.util.Log;
 
-/* loaded from: classes4.dex */
 public abstract class VisualVoicemailService extends Service {
     public static final String DATA_PHONE_ACCOUNT_HANDLE = "data_phone_account_handle";
     public static final String DATA_SMS = "data_sms";

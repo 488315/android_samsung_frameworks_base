@@ -26,7 +26,6 @@ import java.io.PrintWriter;
 import java.util.Set;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes.dex */
 public final class DeviceIdlenessTracker extends BroadcastReceiver implements IdlenessTracker {
     public static final boolean DEBUG;
     static final String KEY_INACTIVITY_IDLE_THRESHOLD_MS = "ic_dit_inactivity_idle_threshold_ms";

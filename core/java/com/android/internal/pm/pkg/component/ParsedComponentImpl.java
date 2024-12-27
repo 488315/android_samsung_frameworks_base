@@ -17,7 +17,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-/* loaded from: classes5.dex */
 public abstract class ParsedComponentImpl implements ParsedComponent, Parcelable {
     private int banner;
     private ComponentName componentName;

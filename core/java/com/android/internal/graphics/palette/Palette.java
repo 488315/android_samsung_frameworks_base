@@ -10,7 +10,6 @@ import android.util.Log;
 import java.util.Collections;
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public final class Palette {
     static final int DEFAULT_CALCULATE_NUMBER_COLORS = 16;
     static final Filter DEFAULT_FILTER =

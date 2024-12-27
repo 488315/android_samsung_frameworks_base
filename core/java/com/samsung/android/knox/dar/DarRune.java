@@ -1,6 +1,5 @@
 package com.samsung.android.knox.dar;
 
-/* loaded from: classes6.dex */
 public class DarRune {
     public static final boolean KNOX_SUPPORT_DAR = true;
     public static final boolean KNOX_SUPPORT_DAR_DUAL = true;

@@ -1,6 +1,5 @@
 package android.corenetworking.connectivity;
 
-/* loaded from: classes.dex */
 public final class ConnectivityProtoEnums {
     public static final int FDIS_DISABLED = 2;
     public static final int FDIS_ENABLED = 1;

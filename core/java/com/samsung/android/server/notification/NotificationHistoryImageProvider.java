@@ -13,7 +13,6 @@ import android.util.Slog;
 
 import java.util.ArrayList;
 
-/* loaded from: classes6.dex */
 public class NotificationHistoryImageProvider extends ContentProvider {
     static final String AUTHORITY = "com.android.server.notification.provider";
     private static final int DATABASE_VERSION = 1;

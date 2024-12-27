@@ -51,7 +51,6 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes4.dex */
 public class Toast {
     private static final long CHANGE_TEXT_TOASTS_IN_THE_SYSTEM = 147798919;
     public static final int LENGTH_LONG = 1;

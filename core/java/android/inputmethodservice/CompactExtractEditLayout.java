@@ -11,7 +11,6 @@ import android.widget.LinearLayout;
 
 import com.android.internal.R;
 
-/* loaded from: classes2.dex */
 public class CompactExtractEditLayout extends LinearLayout {
     private View mInputExtractAccessories;
     private View mInputExtractAction;

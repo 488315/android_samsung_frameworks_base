@@ -8,7 +8,6 @@ import com.android.internal.protolog.common.LogLevel;
 
 import java.util.TreeMap;
 
-/* loaded from: classes5.dex */
 public class ProtoLogImpl {
     private static Runnable sCacheUpdater;
     private static String sLegacyOutputFilePath;

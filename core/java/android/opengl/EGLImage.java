@@ -1,6 +1,5 @@
 package android.opengl;
 
-/* loaded from: classes3.dex */
 public class EGLImage extends EGLObjectHandle {
     private EGLImage(long handle) {
         super(handle);

@@ -5,7 +5,6 @@ import com.android.internal.util.Preconditions;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes3.dex */
 public final class Temperature implements Parcelable {
     public static final Parcelable.Creator<Temperature> CREATOR =
             new Parcelable.Creator<Temperature>() { // from class: android.os.Temperature.1

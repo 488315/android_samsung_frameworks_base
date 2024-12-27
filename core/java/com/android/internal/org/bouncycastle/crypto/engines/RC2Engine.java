@@ -11,7 +11,6 @@ import com.android.internal.org.bouncycastle.crypto.params.RC2Parameters;
 import com.samsung.android.graphics.spr.document.animator.SprAnimatorBase;
 import com.samsung.android.graphics.spr.document.attribute.SprAttributeBase;
 
-/* loaded from: classes5.dex */
 public class RC2Engine implements BlockCipher {
     private static final int BLOCK_SIZE = 8;
     private static byte[] piTable = {

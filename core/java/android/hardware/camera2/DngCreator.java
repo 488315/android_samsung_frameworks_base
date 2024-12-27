@@ -22,7 +22,6 @@ import java.util.Calendar;
 import java.util.Locale;
 import java.util.TimeZone;
 
-/* loaded from: classes2.dex */
 public final class DngCreator implements AutoCloseable {
     private static final int BYTES_PER_RGB_PIX = 3;
     private static final int DEFAULT_PIXEL_STRIDE = 2;

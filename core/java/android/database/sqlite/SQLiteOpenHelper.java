@@ -9,7 +9,6 @@ import android.util.Log;
 import java.io.File;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public abstract class SQLiteOpenHelper implements AutoCloseable {
     private static final String TAG = SQLiteOpenHelper.class.getSimpleName();
     private final Context mContext;

@@ -6,7 +6,6 @@ import android.os.Parcelable;
 
 import com.android.internal.util.Preconditions;
 
-/* loaded from: classes4.dex */
 public final class KeyboardShortcutInfo implements Parcelable {
     public static final Parcelable.Creator<KeyboardShortcutInfo> CREATOR =
             new Parcelable.Creator<

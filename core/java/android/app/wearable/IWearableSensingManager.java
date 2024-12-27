@@ -12,7 +12,6 @@ import android.os.RemoteCallback;
 import android.os.RemoteException;
 import android.os.SharedMemory;
 
-/* loaded from: classes.dex */
 public interface IWearableSensingManager extends IInterface {
     public static final String DESCRIPTOR = "android.app.wearable.IWearableSensingManager";
 

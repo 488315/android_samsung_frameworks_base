@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes2.dex */
 public interface IHdmiInputChangeListener extends IInterface {
     void onChanged(HdmiDeviceInfo hdmiDeviceInfo) throws RemoteException;
 

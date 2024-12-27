@@ -21,7 +21,6 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-/* loaded from: classes4.dex */
 public final class TextViewOnReceiveContentListener implements OnReceiveContentListener {
     private static final long AUTOFILL_NON_TEXT_REQUIRES_ON_RECEIVE_CONTENT_LISTENER = 163400105;
     private static final String LOG_TAG = "ReceiveContent";

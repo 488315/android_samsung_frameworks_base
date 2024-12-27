@@ -49,7 +49,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes2.dex */
 public final class AppsFilterImpl extends AppsFilterBase implements Watchable, Snappable {
     public final ArrayMap mPermissionToUids;
     public final AnonymousClass1 mSnapshot;

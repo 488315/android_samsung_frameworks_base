@@ -8,7 +8,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public final class UsbPortStatus implements Parcelable {
     public static final int COMPLIANCE_WARNING_BC_1_2 = 3;
     public static final int COMPLIANCE_WARNING_DEBUG_ACCESSORY = 2;

@@ -1,6 +1,5 @@
 package android.hardware.radio.network;
 
-/* loaded from: classes2.dex */
 public @interface GeranBands {
     public static final int BAND_450 = 3;
     public static final int BAND_480 = 4;

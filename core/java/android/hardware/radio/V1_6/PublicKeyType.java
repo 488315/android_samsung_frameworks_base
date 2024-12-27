@@ -2,7 +2,6 @@ package android.hardware.radio.V1_6;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class PublicKeyType {
     public static final byte EPDG = 1;
     public static final byte WLAN = 2;

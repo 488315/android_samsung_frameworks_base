@@ -12,7 +12,6 @@ import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
 @Deprecated
-/* loaded from: classes3.dex */
 public final class ValidationProbeEvent implements IpConnectivityLog.Event {
     public static final Parcelable.Creator<ValidationProbeEvent> CREATOR =
             new Parcelable.Creator<

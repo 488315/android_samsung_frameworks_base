@@ -1,6 +1,5 @@
 package com.android.internal.hidden_from_bootclasspath.android.app.job;
 
-/* loaded from: classes5.dex */
 public final class Flags {
     private static FeatureFlags FEATURE_FLAGS = new FeatureFlagsImpl();
     public static final String FLAG_BACKUP_JOBS_EXEMPTION = "android.app.job.backup_jobs_exemption";

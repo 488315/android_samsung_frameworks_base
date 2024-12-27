@@ -133,7 +133,6 @@ import kotlin.sequences.SequencesKt___SequencesKt;
 import noticolorpicker.NotificationColorPicker;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public final class NotificationStackScrollLayoutController implements Dumpable, NotificationRoundnessManager.SectionStateProvider {
     public static final AnonymousClass4 HIDE_ALPHA_PROPERTY = new AnonymousClass4(Float.class, "HideNotificationsAlpha");
     public final ActivityStarter mActivityStarter;

@@ -7,7 +7,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.List;
 
-/* loaded from: classes2.dex */
 public final class AudioHalVersionInfo implements Parcelable, Comparable<AudioHalVersionInfo> {
     public static final int AUDIO_HAL_TYPE_AIDL = 1;
     public static final int AUDIO_HAL_TYPE_HIDL = 0;

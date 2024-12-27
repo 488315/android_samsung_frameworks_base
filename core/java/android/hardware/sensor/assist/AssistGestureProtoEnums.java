@@ -1,6 +1,5 @@
 package android.hardware.sensor.assist;
 
-/* loaded from: classes2.dex */
 public final class AssistGestureProtoEnums {
     public static final int ASSIST_GESTURE_FEEDBACK_NOT_USED = 1;
     public static final int ASSIST_GESTURE_FEEDBACK_UNKNOWN = 0;

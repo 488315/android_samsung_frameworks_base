@@ -48,7 +48,6 @@ import java.util.Arrays;
 import java.util.Locale;
 import java.util.function.Supplier;
 
-/* loaded from: classes.dex */
 public class ResourcesImpl {
     private static final boolean DEBUG_CONFIG = false;
     private static final boolean DEBUG_LOAD = false;

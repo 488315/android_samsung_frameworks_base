@@ -1,6 +1,5 @@
 package com.samsung.android.globalactions.presentation.view;
 
-/* loaded from: classes6.dex */
 public enum ResourceType {
     ID_ITEM_LIST,
     ID_ITEM_LIST_LAND,

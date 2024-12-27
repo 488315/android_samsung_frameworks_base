@@ -3,7 +3,6 @@ package com.android.internal.org.bouncycastle.cms;
 import java.io.IOException;
 import java.io.OutputStream;
 
-/* loaded from: classes5.dex */
 class NullOutputStream extends OutputStream {
     NullOutputStream() {}
 

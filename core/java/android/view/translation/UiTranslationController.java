@@ -38,7 +38,6 @@ import java.util.concurrent.Executor;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
-/* loaded from: classes4.dex */
 public class UiTranslationController implements Dumpable {
     public static final boolean DEBUG = Log.isLoggable(UiTranslationManager.LOG_TAG, 3);
     public static final String DUMPABLE_NAME = "UiTranslationController";

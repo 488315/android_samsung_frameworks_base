@@ -9,7 +9,6 @@ import com.samsung.vekit.Item.Item;
 
 import java.util.ArrayList;
 
-/* loaded from: classes6.dex */
 public class FadeAnimation extends TransitionAnimation {
     public FadeAnimation(VEContext context, int id, String name) {
         super(context, id, name, TransitionType.FADE);

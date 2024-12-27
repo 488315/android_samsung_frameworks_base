@@ -11,7 +11,6 @@ import com.android.systemui.plugins.annotations.ProvidesInterface;
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 @Dependencies({@DependsOn(target = Callbacks.class), @DependsOn(target = PanelViewController.class)})
 @ProvidesInterface(action = GlobalActionsPanelPlugin.ACTION, version = 0)
-/* loaded from: classes2.dex */
 public interface GlobalActionsPanelPlugin extends Plugin {
     public static final String ACTION = "com.android.systemui.action.PLUGIN_GLOBAL_ACTIONS_PANEL";
     public static final int VERSION = 0;

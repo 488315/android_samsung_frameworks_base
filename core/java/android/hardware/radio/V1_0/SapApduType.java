@@ -2,7 +2,6 @@ package android.hardware.radio.V1_0;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class SapApduType {
     public static final int APDU = 0;
     public static final int APDU7816 = 1;

@@ -7,7 +7,6 @@ import android.os.Parcelable;
 
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public final class ComponentNamePolicyValue extends PolicyValue<ComponentName> {
     public static final Parcelable.Creator<ComponentNamePolicyValue> CREATOR =
             new Parcelable.Creator<ComponentNamePolicyValue>() { // from class:

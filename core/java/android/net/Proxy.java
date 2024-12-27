@@ -17,7 +17,6 @@ import java.net.ProxySelector;
 import java.net.URI;
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public final class Proxy {
     private static final String ENTERPRISE_PROXY_PROPERTY = "enterprise.proxy.auth";
 

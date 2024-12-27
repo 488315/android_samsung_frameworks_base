@@ -10,7 +10,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
-/* loaded from: classes6.dex */
 public class DsmsService extends IDsmsService.Stub {
     private static final long APK_TIMEOUT = TimeUnit.MILLISECONDS.convert(5, TimeUnit.MINUTES);
     public static final String DSMS_SERVICE = "dsms";

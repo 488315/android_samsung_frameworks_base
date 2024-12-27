@@ -1,6 +1,5 @@
 package android.gesture;
 
-/* loaded from: classes.dex */
 class Instance {
     private static final float[] ORIENTATIONS = {
         0.0f,

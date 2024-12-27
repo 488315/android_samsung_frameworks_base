@@ -2,7 +2,6 @@ package android.security.net.config;
 
 import java.util.Arrays;
 
-/* loaded from: classes3.dex */
 public final class Pin {
     public final byte[] digest;
     public final String digestAlgorithm;

@@ -5,7 +5,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @Deprecated
-/* loaded from: classes2.dex */
 public class SContextShakeMotion extends SContextEventContext {
     public static final Parcelable.Creator<SContextShakeMotion> CREATOR =
             new Parcelable.Creator<SContextShakeMotion>() { // from class:

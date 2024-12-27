@@ -1,6 +1,5 @@
 package android.os;
 
-/* loaded from: classes3.dex */
 public final class SystemProto {
     public static final long BATTERY = 1146756268033L;
     public static final long BATTERY_DISCHARGE = 1146756268034L;

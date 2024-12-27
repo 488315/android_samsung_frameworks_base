@@ -2,7 +2,6 @@ package android.content;
 
 import android.util.EventLog;
 
-/* loaded from: classes.dex */
 public class EventLogTags {
     public static final int BINDER_SAMPLE = 52004;
     public static final int CONTENT_QUERY_SAMPLE = 52002;

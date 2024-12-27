@@ -7,7 +7,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.window.DisplayAreaInfo;
 
-/* loaded from: classes4.dex */
 public interface IDisplayChangeWindowController extends IInterface {
     public static final String DESCRIPTOR = "android.view.IDisplayChangeWindowController";
 

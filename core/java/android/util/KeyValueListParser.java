@@ -7,7 +7,6 @@ import android.util.proto.ProtoOutputStream;
 import java.io.PrintWriter;
 import java.time.format.DateTimeParseException;
 
-/* loaded from: classes4.dex */
 public class KeyValueListParser {
     private final TextUtils.StringSplitter mSplitter;
     private final ArrayMap<String, String> mValues = new ArrayMap<>();

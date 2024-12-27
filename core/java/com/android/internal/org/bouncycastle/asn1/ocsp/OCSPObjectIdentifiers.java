@@ -2,7 +2,6 @@ package com.android.internal.org.bouncycastle.asn1.ocsp;
 
 import com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier;
 
-/* loaded from: classes5.dex */
 public interface OCSPObjectIdentifiers {
     public static final ASN1ObjectIdentifier id_pkix_ocsp =
             new ASN1ObjectIdentifier("1.3.6.1.5.5.7.48.1");

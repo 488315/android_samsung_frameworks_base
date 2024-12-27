@@ -9,7 +9,6 @@ import android.os.Parcelable;
 
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public final class PipStateTransactionItem extends ActivityTransactionItem {
     public static final Parcelable.Creator<PipStateTransactionItem> CREATOR =
             new Parcelable.Creator<PipStateTransactionItem>() { // from class:

@@ -16,7 +16,6 @@ import android.widget.flags.Flags;
 import com.android.internal.R;
 
 @RemoteViews.RemoteView
-/* loaded from: classes5.dex */
 public class BigPictureNotificationImageView extends ImageView
         implements NotificationDrawableConsumer {
     private static final String TAG = BigPictureNotificationImageView.class.getSimpleName();

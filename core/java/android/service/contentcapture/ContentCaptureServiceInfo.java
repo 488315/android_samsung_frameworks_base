@@ -23,7 +23,6 @@ import org.xmlpull.v1.XmlPullParserException;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-/* loaded from: classes3.dex */
 public class ContentCaptureServiceInfo {
     private static final String TAG = ContentCaptureServiceInfo.class.getSimpleName();
     private static final String XML_TAG_SERVICE = "content-capture-service";

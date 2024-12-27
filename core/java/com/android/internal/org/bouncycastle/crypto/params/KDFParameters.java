@@ -2,7 +2,6 @@ package com.android.internal.org.bouncycastle.crypto.params;
 
 import com.android.internal.org.bouncycastle.crypto.DerivationParameters;
 
-/* loaded from: classes5.dex */
 public class KDFParameters implements DerivationParameters {
     byte[] iv;
     byte[] shared;

@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/* loaded from: classes2.dex */
 public final class LightsRequest {
     final List<Integer> mLightIds;
     final List<LightState> mLightStates;

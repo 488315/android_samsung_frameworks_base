@@ -71,7 +71,6 @@ import java.util.concurrent.Executor;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
-/* loaded from: classes.dex */
 public class PackageInstaller {
 
     @SystemApi

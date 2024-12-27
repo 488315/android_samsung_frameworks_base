@@ -15,7 +15,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes4.dex */
 public final class ConversationActions implements Parcelable {
     public static final Parcelable.Creator<ConversationActions> CREATOR =
             new Parcelable.Creator<

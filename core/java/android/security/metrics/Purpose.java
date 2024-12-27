@@ -1,6 +1,5 @@
 package android.security.metrics;
 
-/* loaded from: classes3.dex */
 public @interface Purpose {
     public static final int AGREE_KEY = 7;
     public static final int ATTEST_KEY = 8;

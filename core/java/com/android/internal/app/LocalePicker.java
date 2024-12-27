@@ -32,7 +32,6 @@ import java.util.function.Predicate;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
-/* loaded from: classes5.dex */
 public class LocalePicker extends ListFragment {
     private static final boolean DEBUG = false;
     private static final String TAG = "LocalePicker";

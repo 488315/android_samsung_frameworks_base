@@ -16,7 +16,6 @@ import java.util.concurrent.CompletionException;
 import java.util.concurrent.Executor;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public class ImsEcbmImplBase {
     private static final String TAG = "ImsEcbmImplBase";
     private IImsEcbmListener mListener;

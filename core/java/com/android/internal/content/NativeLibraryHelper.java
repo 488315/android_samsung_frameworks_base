@@ -29,7 +29,6 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public class NativeLibraryHelper {
     private static final int BITCODE_PRESENT = 1;
     public static final String CLEAR_ABI_OVERRIDE = "-";

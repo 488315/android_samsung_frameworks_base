@@ -8,7 +8,6 @@ import com.android.internal.org.bouncycastle.asn1.ASN1TaggedObject;
 import com.android.internal.org.bouncycastle.asn1.DERSequence;
 import com.android.internal.org.bouncycastle.asn1.DERTaggedObject;
 
-/* loaded from: classes5.dex */
 public class Holder extends ASN1Object {
     public static final int V1_CERTIFICATE_HOLDER = 0;
     public static final int V2_CERTIFICATE_HOLDER = 1;

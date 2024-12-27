@@ -7,7 +7,6 @@ import android.icu.util.GregorianCalendar;
 import android.icu.util.TimeZone;
 import android.icu.util.ULocale;
 
-/* loaded from: classes4.dex */
 public final class DateUtilsBridge {
     public static TimeZone icuTimeZone(java.util.TimeZone tz) {
         TimeZone icuTimeZone = TimeZone.getTimeZone(tz.getID());

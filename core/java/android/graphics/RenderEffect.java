@@ -2,7 +2,6 @@ package android.graphics;
 
 import libcore.util.NativeAllocationRegistry;
 
-/* loaded from: classes.dex */
 public final class RenderEffect {
     private final long mNativeRenderEffect;
 

@@ -9,7 +9,6 @@ import android.view.InputChannel;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes5.dex */
 public final class InputBindResult implements Parcelable {
     public final SparseArray<IAccessibilityInputMethodSession> accessibilitySessions;
     public final InputChannel channel;

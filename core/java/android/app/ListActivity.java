@@ -10,7 +10,6 @@ import android.widget.ListView;
 import com.android.internal.R;
 
 @Deprecated
-/* loaded from: classes.dex */
 public class ListActivity extends Activity {
     protected ListAdapter mAdapter;
     protected ListView mList;

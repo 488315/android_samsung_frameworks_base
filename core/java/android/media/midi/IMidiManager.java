@@ -8,7 +8,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes2.dex */
 public interface IMidiManager extends IInterface {
     void closeDevice(IBinder iBinder, IBinder iBinder2) throws RemoteException;
 

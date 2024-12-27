@@ -4,7 +4,6 @@ import android.sec.enterprise.EnterpriseDeviceManager;
 import android.sec.enterprise.IEDMProxy;
 import android.util.Log;
 
-/* loaded from: classes3.dex */
 public class KioskMode {
     private static final String TAG = "KioskMode";
     public static String CONTROL_PANEL_PKGNAME = "com.sec.android.app.controlpanel";

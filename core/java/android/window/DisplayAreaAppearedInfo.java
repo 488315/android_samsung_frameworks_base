@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.view.SurfaceControl;
 
-/* loaded from: classes4.dex */
 public final class DisplayAreaAppearedInfo implements Parcelable {
     public static final Parcelable.Creator<DisplayAreaAppearedInfo> CREATOR =
             new Parcelable.Creator<

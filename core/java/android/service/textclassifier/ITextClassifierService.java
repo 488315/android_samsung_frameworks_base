@@ -15,7 +15,6 @@ import android.view.textclassifier.TextLanguage;
 import android.view.textclassifier.TextLinks;
 import android.view.textclassifier.TextSelection;
 
-/* loaded from: classes3.dex */
 public interface ITextClassifierService extends IInterface {
     void onClassifyText(
             TextClassificationSessionId textClassificationSessionId,

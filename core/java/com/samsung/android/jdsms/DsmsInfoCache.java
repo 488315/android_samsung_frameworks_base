@@ -13,7 +13,6 @@ import com.samsung.android.dsms.aidl.IDsmsInfoService;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-/* loaded from: classes6.dex */
 public final class DsmsInfoCache {
     private static final String SUBTAG = "DsmsInfoCache";
     private static final long TIMEOUT = TimeUnit.MILLISECONDS.convert(2, TimeUnit.SECONDS);

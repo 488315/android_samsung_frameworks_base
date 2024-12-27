@@ -7,7 +7,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.view.Surface;
 
-/* loaded from: classes3.dex */
 public interface ITvInputHardware extends IInterface {
     void overrideAudioSink(int i, String str, int i2, int i3, int i4) throws RemoteException;
 

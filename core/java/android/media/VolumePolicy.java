@@ -6,7 +6,6 @@ import android.os.Parcelable;
 
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public final class VolumePolicy implements Parcelable {
     public static final int A11Y_MODE_INDEPENDENT_A11Y_VOLUME = 1;
     public static final int A11Y_MODE_MEDIA_A11Y_VOLUME = 0;

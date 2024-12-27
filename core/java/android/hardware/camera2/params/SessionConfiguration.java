@@ -17,7 +17,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes2.dex */
 public final class SessionConfiguration implements Parcelable {
     public static final Parcelable.Creator<SessionConfiguration> CREATOR =
             new Parcelable.Creator<SessionConfiguration>() { // from class:

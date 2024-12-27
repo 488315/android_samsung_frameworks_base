@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import com.android.internal.util.AnnotationValidations;
 import com.android.internal.util.Parcelling;
 
-/* loaded from: classes5.dex */
 public class ParsedApexSystemServiceImpl implements ParsedApexSystemService, Parcelable {
     public static final Parcelable.Creator<ParsedApexSystemServiceImpl> CREATOR;
     static Parcelling<String> sParcellingForJarPath;

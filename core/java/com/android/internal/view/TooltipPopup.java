@@ -22,7 +22,6 @@ import com.android.internal.R;
 import com.samsung.android.rune.CoreRune;
 import com.samsung.android.rune.ViewRune;
 
-/* loaded from: classes5.dex */
 public class TooltipPopup {
     private static final String TAG = "TooltipPopup";
     private View mContentView;

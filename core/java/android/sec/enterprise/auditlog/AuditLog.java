@@ -7,7 +7,6 @@ import android.sec.enterprise.IEDMProxy;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public class AuditLog {
     public static final int ALERT = 1;
     public static final int AUDIT_LOG_GROUP_APPLICATION = 5;

@@ -12,7 +12,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class WifiActivityEnergyInfo implements Parcelable {
     public static final Parcelable.Creator<WifiActivityEnergyInfo> CREATOR =
             new Parcelable.Creator<

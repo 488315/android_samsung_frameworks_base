@@ -2,7 +2,6 @@ package android.filterfw.core;
 
 import java.lang.reflect.Field;
 
-/* loaded from: classes.dex */
 public class FinalPort extends FieldPort {
     public FinalPort(Filter filter, String name, Field field, boolean hasDefault) {
         super(filter, name, field, hasDefault);

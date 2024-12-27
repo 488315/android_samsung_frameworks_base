@@ -19,7 +19,6 @@ import android.view.ViewGroup;
 
 import com.android.internal.R;
 
-/* loaded from: classes4.dex */
 public class ChangeTransform extends Transition {
     private static final String PROPNAME_INTERMEDIATE_MATRIX =
             "android:changeTransform:intermediateMatrix";

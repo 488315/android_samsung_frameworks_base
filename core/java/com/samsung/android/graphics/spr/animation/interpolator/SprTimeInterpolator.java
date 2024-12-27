@@ -4,7 +4,6 @@ import android.animation.TimeInterpolator;
 
 import java.util.TimeZone;
 
-/* loaded from: classes6.dex */
 public class SprTimeInterpolator implements TimeInterpolator {
     static final int DAY_MILLISECONDS = 86400000;
     public static final int DAY_TYPE = 1;

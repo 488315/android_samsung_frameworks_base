@@ -15,7 +15,6 @@ import android.os.RemoteException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes.dex */
 public class JobParameters implements Parcelable {
     public static final int INTERNAL_STOP_REASON_ANR = 12;
     public static final int INTERNAL_STOP_REASON_CANCELED = 0;

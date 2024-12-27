@@ -3,7 +3,6 @@ package com.android.internal.org.bouncycastle.asn1;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
-/* loaded from: classes5.dex */
 public class DERExternal extends ASN1External {
     public DERExternal(ASN1EncodableVector vector) {
         super(vector);

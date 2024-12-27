@@ -17,7 +17,6 @@ import java.util.Objects;
 import java.util.function.IntFunction;
 import java.util.function.Predicate;
 
-/* loaded from: classes5.dex */
 public class ArrayUtils {
     private static final int CACHE_SIZE = 73;
     private static Object[] sCache = new Object[73];

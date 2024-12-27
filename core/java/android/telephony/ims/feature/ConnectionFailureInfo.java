@@ -8,7 +8,6 @@ import android.util.SparseArray;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes4.dex */
 public final class ConnectionFailureInfo implements Parcelable {
     public static final Parcelable.Creator<ConnectionFailureInfo> CREATOR;
     public static final int REASON_ACCESS_DENIED = 1;

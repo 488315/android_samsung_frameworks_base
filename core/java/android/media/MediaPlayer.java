@@ -74,7 +74,6 @@ import java.util.UUID;
 import java.util.Vector;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes2.dex */
 public class MediaPlayer extends PlayerBase
         implements SubtitleController.Listener, VolumeAutomation, AudioRouting {
     public static final boolean APPLY_METADATA_FILTER = true;

@@ -1,6 +1,5 @@
 package android.media.audio.common;
 
-/* loaded from: classes2.dex */
 public @interface AudioInputFlags {
     public static final int BCMGR = 12;
     public static final int DIRECT = 7;

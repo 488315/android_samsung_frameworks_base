@@ -7,7 +7,6 @@ import android.util.AttributeSet;
 
 import com.android.internal.R;
 
-/* loaded from: classes4.dex */
 public class ExtendAnimation extends Animation {
     private int mFromBottomType;
     private float mFromBottomValue;

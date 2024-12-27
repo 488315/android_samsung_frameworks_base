@@ -8,7 +8,6 @@ import com.android.internal.org.bouncycastle.math.ec.ECPoint;
 
 import java.math.BigInteger;
 
-/* loaded from: classes5.dex */
 public class ECNamedDomainParameters extends ECDomainParameters {
     private ASN1ObjectIdentifier name;
 

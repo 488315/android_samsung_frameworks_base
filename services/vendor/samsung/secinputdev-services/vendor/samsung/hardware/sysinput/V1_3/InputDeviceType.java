@@ -2,7 +2,6 @@ package vendor.samsung.hardware.sysinput.V1_3;
 
 import java.util.ArrayList;
 
-/* loaded from: classes.dex */
 public final class InputDeviceType {
     public static final int HALL = 10;
     public static final int HALL_DIGITAL = 11;

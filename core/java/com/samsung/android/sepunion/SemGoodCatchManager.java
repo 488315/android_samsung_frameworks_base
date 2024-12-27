@@ -10,7 +10,6 @@ import android.os.RemoteException;
 
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public class SemGoodCatchManager {
     public static final String ACTION_GOOD_CATCH_STATE_CHANGED =
             "com.android.server.sepunion.semgoodcatchservice.GOOD_CATCH_STATE_CHANGED";

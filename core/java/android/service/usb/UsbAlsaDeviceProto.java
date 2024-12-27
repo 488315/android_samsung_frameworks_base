@@ -1,6 +1,5 @@
 package android.service.usb;
 
-/* loaded from: classes3.dex */
 public final class UsbAlsaDeviceProto {
     public static final long ADDRESS = 1138166333446L;
     public static final long CARD = 1120986464257L;

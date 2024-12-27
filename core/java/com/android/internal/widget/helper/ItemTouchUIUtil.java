@@ -5,7 +5,6 @@ import android.view.View;
 
 import com.android.internal.widget.RecyclerView;
 
-/* loaded from: classes5.dex */
 public interface ItemTouchUIUtil {
     void clearView(View view);
 

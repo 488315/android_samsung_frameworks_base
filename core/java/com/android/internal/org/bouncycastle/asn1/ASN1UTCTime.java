@@ -13,7 +13,6 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.SimpleTimeZone;
 
-/* loaded from: classes5.dex */
 public class ASN1UTCTime extends ASN1Primitive {
     private byte[] time;
 

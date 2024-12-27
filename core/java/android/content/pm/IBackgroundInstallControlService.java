@@ -7,7 +7,6 @@ import android.os.IRemoteCallback;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes.dex */
 public interface IBackgroundInstallControlService extends IInterface {
     public static final String DESCRIPTOR = "android.content.pm.IBackgroundInstallControlService";
 

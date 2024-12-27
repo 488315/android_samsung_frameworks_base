@@ -28,7 +28,6 @@ import com.android.internal.view.OneShotPreDrawListener;
 import java.util.ArrayList;
 import java.util.Collection;
 
-/* loaded from: classes.dex */
 abstract class ActivityTransitionCoordinator extends ResultReceiver {
     protected static final String KEY_ELEVATION = "shared_element:elevation";
     protected static final String KEY_IMAGE_MATRIX = "shared_element:imageMatrix";

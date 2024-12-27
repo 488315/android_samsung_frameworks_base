@@ -20,7 +20,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.List;
 import java.util.Set;
 
-/* loaded from: classes2.dex */
 public abstract class DisplayManagerInternal {
     public static final int HBM_FREEZE_MODE = 2;
     public static final int NONFREEZING = 0;

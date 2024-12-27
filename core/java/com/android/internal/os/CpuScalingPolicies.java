@@ -8,7 +8,6 @@ import com.samsung.android.core.pm.runtimemanifest.RuntimeManifestUtils;
 
 import java.util.Arrays;
 
-/* loaded from: classes5.dex */
 public class CpuScalingPolicies {
     private final SparseArray<int[]> mCpusByPolicy;
     private final SparseArray<int[]> mFreqsByPolicy;

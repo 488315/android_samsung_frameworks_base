@@ -29,7 +29,6 @@ import java.security.spec.PSSParameterSpec;
 import java.util.HashMap;
 import java.util.Map;
 
-/* loaded from: classes5.dex */
 class X509SignatureUtil {
     private static final Map<ASN1ObjectIdentifier, String> algNames = new HashMap();
     private static final ASN1Null derNull;

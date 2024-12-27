@@ -8,7 +8,6 @@ import android.util.Slog;
 
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public final class AccessibilityButtonController {
     private static final String LOG_TAG = "A11yButtonController";
     private ArrayMap<AccessibilityButtonCallback, Handler> mCallbacks;

@@ -7,7 +7,6 @@ import java.io.PrintWriter;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
-/* loaded from: classes3.dex */
 public class RemoteCallbackList<E extends IInterface> {
     private static final String TAG = "RemoteCallbackList";
     private Object[] mActiveBroadcast;

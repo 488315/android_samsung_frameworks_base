@@ -6,7 +6,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public class SemWifiRescueParty {
     private static final String APEX_WIFI_DATA_PATH = "apexdata/com.android.wifi";
     private static final String MISC_PATH = "/data/misc/";

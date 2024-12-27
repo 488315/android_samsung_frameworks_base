@@ -1,6 +1,5 @@
 package com.android.input.flags;
 
-/* loaded from: classes5.dex */
 public final class FeatureFlagsImpl implements FeatureFlags {
     @Override // com.android.input.flags.FeatureFlags
     public boolean a11yCrashOnInconsistentEventStream() {

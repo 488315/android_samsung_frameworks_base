@@ -13,7 +13,6 @@ import com.android.systemui.statusbar.phone.CentralSurfacesImpl;
 import com.android.systemui.surfaceeffects.ripple.RippleShader;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes.dex */
 public final class WirelessChargingAnimation {
     public static final boolean DEBUG = Log.isLoggable("WirelessChargingView", 3);
     public static WirelessChargingView mPreviousWirelessChargingView;

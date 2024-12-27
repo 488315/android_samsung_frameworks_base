@@ -17,7 +17,6 @@ import android.window.WindowContainerToken;
 
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public interface IMultiTaskingBinder extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.multiwindow.IMultiTaskingBinder";
 

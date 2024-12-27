@@ -1,6 +1,5 @@
 package android.stats.mediametrics_message;
 
-/* loaded from: classes3.dex */
 public final class MediametricsMessage {
 
     public final class AudioPolicyData {

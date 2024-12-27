@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Map;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public class PhoneAccountSuggestionService extends Service {
     public static final String SERVICE_INTERFACE = "android.telecom.PhoneAccountSuggestionService";
     private IPhoneAccountSuggestionService mInterface =

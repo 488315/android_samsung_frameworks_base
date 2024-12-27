@@ -22,7 +22,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class AppPredictor {
     private static final String TAG = AppPredictor.class.getSimpleName();
     private final IPredictionManager mPredictionManager;

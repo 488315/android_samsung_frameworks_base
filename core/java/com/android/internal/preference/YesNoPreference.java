@@ -8,7 +8,6 @@ import android.preference.DialogPreference;
 import android.preference.Preference;
 import android.util.AttributeSet;
 
-/* loaded from: classes5.dex */
 public class YesNoPreference extends DialogPreference {
     private boolean mWasPositiveResult;
 

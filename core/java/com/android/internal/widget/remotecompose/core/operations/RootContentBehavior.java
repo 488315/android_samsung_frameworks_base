@@ -10,7 +10,6 @@ import com.android.internal.widget.remotecompose.core.WireBuffer;
 
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public class RootContentBehavior implements RemoteComposeOperation {
     public static final int ALIGNMENT_BOTTOM = 4;
     public static final int ALIGNMENT_CENTER = 34;

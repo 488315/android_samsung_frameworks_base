@@ -10,7 +10,6 @@ import java.util.Optional;
 import java.util.StringJoiner;
 import java.util.function.Function;
 
-/* loaded from: classes6.dex */
 public final class SemTelephonyVendorProps {
     private SemTelephonyVendorProps() {}
 

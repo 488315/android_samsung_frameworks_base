@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.Collections;
 
-/* loaded from: classes4.dex */
 class ExpandableListConnector extends BaseAdapter implements Filterable {
     private ExpandableListAdapter mExpandableListAdapter;
     private int mTotalExpChildrenCount;

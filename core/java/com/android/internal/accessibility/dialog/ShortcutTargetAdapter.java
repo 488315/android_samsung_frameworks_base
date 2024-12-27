@@ -17,7 +17,6 @@ import com.android.internal.accessibility.util.AccessibilityUtils;
 
 import java.util.List;
 
-/* loaded from: classes5.dex */
 class ShortcutTargetAdapter extends TargetAdapter {
     private int mShortcutMenuMode = 0;
     private final List<AccessibilityTarget> mTargets;

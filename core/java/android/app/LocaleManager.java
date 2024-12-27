@@ -6,7 +6,6 @@ import android.content.res.Configuration;
 import android.os.LocaleList;
 import android.os.RemoteException;
 
-/* loaded from: classes.dex */
 public class LocaleManager {
     private static final String TAG = "LocaleManager";
     private Context mContext;

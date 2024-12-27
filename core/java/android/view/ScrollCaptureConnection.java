@@ -17,7 +17,6 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
 
-/* loaded from: classes4.dex */
 public class ScrollCaptureConnection extends IScrollCaptureConnection.Stub
         implements IBinder.DeathRecipient {
     private static final String END_CAPTURE = "endCapture";

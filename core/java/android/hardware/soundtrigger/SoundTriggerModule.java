@@ -19,7 +19,6 @@ import android.util.Log;
 
 import java.io.IOException;
 
-/* loaded from: classes2.dex */
 public class SoundTriggerModule {
     private static final int EVENT_MODEL_UNLOADED = 4;
     private static final int EVENT_RECOGNITION = 1;

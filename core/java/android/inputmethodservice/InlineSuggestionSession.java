@@ -23,7 +23,6 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-/* loaded from: classes2.dex */
 class InlineSuggestionSession {
     static final InlineSuggestionsResponse EMPTY_RESPONSE =
             new InlineSuggestionsResponse((List<InlineSuggestion>) Collections.emptyList());

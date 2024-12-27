@@ -1,6 +1,5 @@
 package android.net.wimax;
 
-/* loaded from: classes3.dex */
 public class WimaxManagerConstants {
     public static final String EXTRA_4G_STATE = "4g_state";
     public static final String EXTRA_NEW_SIGNAL_LEVEL = "newSignalLevel";

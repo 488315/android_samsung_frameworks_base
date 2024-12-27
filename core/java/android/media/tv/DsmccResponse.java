@@ -9,7 +9,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public final class DsmccResponse extends BroadcastInfoResponse implements Parcelable {
     public static final String BIOP_MESSAGE_TYPE_DIRECTORY = "directory";
     public static final String BIOP_MESSAGE_TYPE_FILE = "file";

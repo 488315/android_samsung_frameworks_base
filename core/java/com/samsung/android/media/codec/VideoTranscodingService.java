@@ -17,7 +17,6 @@ import java.util.Queue;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-/* loaded from: classes6.dex */
 public class VideoTranscodingService extends IVideoTranscodingService.Stub {
     private static final int HANDLER_MESSAGE_QUEUE_UPDATED = 0;
     private static final int MAX_PRINT_TASKS = 20;

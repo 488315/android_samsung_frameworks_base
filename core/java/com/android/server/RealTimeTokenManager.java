@@ -4,7 +4,6 @@ import android.os.IBinder;
 import android.os.ServiceManager;
 import android.util.Slog;
 
-/* loaded from: classes5.dex */
 public final class RealTimeTokenManager {
     public static final int RTTS_ERR_GENERAL_ERROR = -101;
     public static final int RTTS_ERR_INVALID_ARGUMENT = -102;

@@ -14,7 +14,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-/* loaded from: classes3.dex */
 public class TransactionTracker {
     private Map<String, ArrayList<String>> mTimestamp;
     private Map<String, Long> mTraces;

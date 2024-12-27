@@ -12,7 +12,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.text.TextUtils;
 
-/* loaded from: classes2.dex */
 public interface ISession extends IInterface {
     void destroySession() throws RemoteException;
 

@@ -1,6 +1,5 @@
 package android.media;
 
-/* loaded from: classes2.dex */
 public @interface AudioDirectMode {
     public static final int BITSTREAM = 4;
     public static final int NONE = 0;

@@ -1,6 +1,5 @@
 package android.security.metrics;
 
-/* loaded from: classes3.dex */
 public @interface Storage {
     public static final int AUTH_TOKEN = 11;
     public static final int BLOB_ENTRY = 4;

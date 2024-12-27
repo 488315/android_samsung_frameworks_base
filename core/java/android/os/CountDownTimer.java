@@ -1,6 +1,5 @@
 package android.os;
 
-/* loaded from: classes3.dex */
 public abstract class CountDownTimer {
     private static final int MSG = 1;
     private final long mCountdownInterval;

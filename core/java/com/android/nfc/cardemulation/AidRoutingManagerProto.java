@@ -1,6 +1,5 @@
 package com.android.nfc.cardemulation;
 
-/* loaded from: classes5.dex */
 public final class AidRoutingManagerProto {
     public static final long DEFAULT_ROUTE = 1120986464257L;
     public static final long ROUTES = 2246267895810L;

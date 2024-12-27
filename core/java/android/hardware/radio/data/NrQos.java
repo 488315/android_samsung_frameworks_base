@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public class NrQos implements Parcelable {
     public static final int AVERAGING_WINDOW_UNKNOWN = -1;
     public static final Parcelable.Creator<NrQos> CREATOR =

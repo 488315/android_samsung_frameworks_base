@@ -5,7 +5,6 @@ import android.os.Handler;
 
 import java.lang.ref.WeakReference;
 
-/* loaded from: classes4.dex */
 public class FrameMetricsObserver
         implements HardwareRendererObserver.OnFrameMetricsAvailableListener {
     private final FrameMetrics mFrameMetrics = new FrameMetrics();

@@ -10,7 +10,6 @@ import android.widget.Toast;
 
 import com.android.internal.R;
 
-/* loaded from: classes.dex */
 public final class SqliteWrapper {
     private static final String SQLITE_EXCEPTION_DETAIL_MESSAGE = "unable to open database file";
     private static final String TAG = "SqliteWrapper";

@@ -1,6 +1,5 @@
 package com.google.android.wearable.media.routing;
 
-/* loaded from: classes5.dex */
 public final class Enums {
     public static final int CONNECTIONREPORT_CONNECTION_TO_DEVICE_FAILED = 3;
     public static final int CONNECTIONREPORT_CONNECTION_TO_DEVICE_INITIATED = 1;

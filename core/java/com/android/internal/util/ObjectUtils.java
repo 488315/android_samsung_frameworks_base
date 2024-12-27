@@ -2,7 +2,6 @@ package com.android.internal.util;
 
 import java.util.Objects;
 
-/* loaded from: classes5.dex */
 public class ObjectUtils {
     private ObjectUtils() {}
 

@@ -33,7 +33,6 @@ import java.util.function.Function;
 import java.util.function.IntFunction;
 import java.util.function.Predicate;
 
-/* loaded from: classes.dex */
 public class AppWidgetManager {
     public static final String ACTION_APPWIDGET_BIND = "android.appwidget.action.APPWIDGET_BIND";
     public static final String ACTION_APPWIDGET_CONFIGURE =

@@ -2,7 +2,6 @@ package com.samsung.vekit.Common.Object;
 
 import java.util.Arrays;
 
-/* loaded from: classes6.dex */
 public class SpeakerIDInfo {
     private String ID;
     private float[] data;

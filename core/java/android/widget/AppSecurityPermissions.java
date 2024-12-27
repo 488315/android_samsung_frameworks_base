@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import com.android.internal.R;
 
 @Deprecated
-/* loaded from: classes4.dex */
 public class AppSecurityPermissions {
     public static View getPermissionItemView(
             Context context, CharSequence grpName, CharSequence description, boolean dangerous) {

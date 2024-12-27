@@ -26,7 +26,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-/* loaded from: classes3.dex */
 public class ClipboardPolicyObserver extends ContentObserver {
     private static final String ALL_PACKAGES = "*";
     private static final String AUTHORITY = "com.sec.knox.rcppolicyprovider";

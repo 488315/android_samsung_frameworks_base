@@ -4,7 +4,6 @@ import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public class NanoappRpcService implements Parcelable {
     public static final Parcelable.Creator<NanoappRpcService> CREATOR =
             new Parcelable.Creator<NanoappRpcService>() { // from class:

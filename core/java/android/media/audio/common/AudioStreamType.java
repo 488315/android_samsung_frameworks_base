@@ -1,6 +1,5 @@
 package android.media.audio.common;
 
-/* loaded from: classes2.dex */
 public @interface AudioStreamType {
     public static final int ACCESSIBILITY = 10;
     public static final int ALARM = 4;

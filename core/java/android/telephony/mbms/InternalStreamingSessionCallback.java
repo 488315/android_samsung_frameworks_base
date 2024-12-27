@@ -6,7 +6,6 @@ import android.os.RemoteException;
 import java.util.List;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes4.dex */
 public class InternalStreamingSessionCallback extends IMbmsStreamingSessionCallback.Stub {
     private final MbmsStreamingSessionCallback mAppCallback;
     private final Executor mExecutor;

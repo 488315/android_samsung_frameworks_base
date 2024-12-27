@@ -7,7 +7,6 @@ import com.android.internal.org.bouncycastle.asn1.ASN1TaggedObject;
 import com.android.internal.org.bouncycastle.asn1.DERSequence;
 import com.android.internal.org.bouncycastle.util.Strings;
 
-/* loaded from: classes5.dex */
 public class CRLDistPoint extends ASN1Object {
     ASN1Sequence seq;
 

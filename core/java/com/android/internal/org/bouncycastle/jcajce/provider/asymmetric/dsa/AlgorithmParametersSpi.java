@@ -9,7 +9,6 @@ import java.security.spec.AlgorithmParameterSpec;
 import java.security.spec.DSAParameterSpec;
 import java.security.spec.InvalidParameterSpecException;
 
-/* loaded from: classes5.dex */
 public class AlgorithmParametersSpi extends java.security.AlgorithmParametersSpi {
     DSAParameterSpec currentSpec;
 

@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public final class InputMethodInfoSafeList implements Parcelable {
     public static final Parcelable.Creator<InputMethodInfoSafeList> CREATOR =
             new Parcelable.Creator<

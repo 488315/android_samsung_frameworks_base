@@ -11,7 +11,6 @@ import android.os.RemoteException;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
-/* loaded from: classes.dex */
 public interface ContentInterface {
     ContentProviderResult[] applyBatch(String str, ArrayList<ContentProviderOperation> arrayList)
             throws RemoteException, OperationApplicationException;

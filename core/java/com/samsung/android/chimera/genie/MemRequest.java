@@ -3,7 +3,6 @@ package com.samsung.android.chimera.genie;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes5.dex */
 public final class MemRequest implements Parcelable {
     public static final Parcelable.Creator<MemRequest> CREATOR =
             new Parcelable.Creator<

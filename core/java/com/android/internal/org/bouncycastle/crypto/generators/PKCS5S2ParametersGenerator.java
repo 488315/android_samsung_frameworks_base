@@ -9,7 +9,6 @@ import com.android.internal.org.bouncycastle.crypto.macs.HMac;
 import com.android.internal.org.bouncycastle.crypto.params.KeyParameter;
 import com.android.internal.org.bouncycastle.crypto.params.ParametersWithIV;
 
-/* loaded from: classes5.dex */
 public class PKCS5S2ParametersGenerator extends PBEParametersGenerator {
     private Mac hMac;
     private byte[] state;

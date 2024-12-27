@@ -1,6 +1,5 @@
 package com.android.server.usage;
 
-/* loaded from: classes5.dex */
 public final class IntervalStatsProto {
     public static final long CONFIGURATIONS = 2246267895829L;
     public static final long END_TIME_MS = 1112396529665L;

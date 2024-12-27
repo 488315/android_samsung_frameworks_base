@@ -15,7 +15,6 @@ import com.android.systemui.keyguard.ui.view.layout.sections.ExtensionsKt;
 import com.android.systemui.lifecycle.RepeatWhenAttachedKt$repeatWhenAttached$1;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes.dex */
 public final class CommunalTutorialIndicatorSection extends KeyguardSection {
     public final CommunalInteractor communalInteractor;
     public RepeatWhenAttachedKt$repeatWhenAttached$1 communalTutorialIndicatorHandle;

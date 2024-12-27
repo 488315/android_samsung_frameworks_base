@@ -7,7 +7,6 @@ import android.graphics.PointF;
 import android.graphics.Rect;
 import android.view.SurfaceControl;
 
-/* loaded from: classes4.dex */
 public class RotationUtils {
     public static Insets rotateInsets(Insets insets, int rotation) {
         if (insets == null || insets == Insets.NONE) {

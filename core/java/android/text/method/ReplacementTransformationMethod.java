@@ -9,7 +9,6 @@ import android.text.SpannedString;
 import android.text.TextUtils;
 import android.view.View;
 
-/* loaded from: classes4.dex */
 public abstract class ReplacementTransformationMethod implements TransformationMethod {
     protected abstract char[] getOriginal();
 

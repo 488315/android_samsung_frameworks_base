@@ -16,7 +16,6 @@ import com.samsung.android.rune.CoreRune;
 
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 final class InkWindow extends PhoneWindow {
     private ViewTreeObserver.OnGlobalLayoutListener mGlobalLayoutListener;
     private View mInkView;

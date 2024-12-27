@@ -3,7 +3,6 @@ package android.hardware.biometrics.fingerprint;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes2.dex */
 public final class AcquiredInfoAndVendorCode implements Parcelable {
     public static final Parcelable.Creator<AcquiredInfoAndVendorCode> CREATOR =
             new Parcelable.Creator<AcquiredInfoAndVendorCode>() { // from class:

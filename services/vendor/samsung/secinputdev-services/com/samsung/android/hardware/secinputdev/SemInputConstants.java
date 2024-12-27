@@ -3,7 +3,6 @@ package com.samsung.android.hardware.secinputdev;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes.dex */
 public class SemInputConstants {
 
     public enum Command implements Parcelable {

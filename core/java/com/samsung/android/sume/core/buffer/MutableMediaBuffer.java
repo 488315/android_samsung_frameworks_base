@@ -21,7 +21,6 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-/* loaded from: classes6.dex */
 public final class MutableMediaBuffer extends MediaBufferBase implements PlaceHolder<MediaBuffer> {
     public static final Parcelable.Creator<MutableMediaBuffer> CREATOR =
             new Parcelable.Creator<

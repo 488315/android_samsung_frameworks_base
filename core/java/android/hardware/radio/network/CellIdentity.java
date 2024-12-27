@@ -6,7 +6,6 @@ import android.os.Parcelable;
 
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public final class CellIdentity implements Parcelable {
     public static final Parcelable.Creator<CellIdentity> CREATOR =
             new Parcelable.Creator<

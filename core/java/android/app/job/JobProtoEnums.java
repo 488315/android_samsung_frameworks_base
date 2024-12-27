@@ -1,6 +1,5 @@
 package android.app.job;
 
-/* loaded from: classes.dex */
 public final class JobProtoEnums {
     public static final int INTERNAL_STOP_REASON_ANR = 12;
     public static final int INTERNAL_STOP_REASON_CANCELLED = 0;

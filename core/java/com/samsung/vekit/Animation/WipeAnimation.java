@@ -10,7 +10,6 @@ import com.samsung.vekit.Item.Item;
 
 import java.util.ArrayList;
 
-/* loaded from: classes6.dex */
 public class WipeAnimation extends TransitionAnimation {
     protected WipeType mWipeType;
 

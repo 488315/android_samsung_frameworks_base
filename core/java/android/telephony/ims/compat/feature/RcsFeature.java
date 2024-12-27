@@ -2,7 +2,6 @@ package android.telephony.ims.compat.feature;
 
 import com.android.ims.internal.IImsRcsFeature;
 
-/* loaded from: classes4.dex */
 public class RcsFeature extends ImsFeature {
     private final IImsRcsFeature mImsRcsBinder =
             new IImsRcsFeature

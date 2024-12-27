@@ -13,7 +13,6 @@ import android.util.SparseArray;
 import android.util.SparseIntArray;
 import android.view.WindowCallbacks;
 
-/* loaded from: classes5.dex */
 class InteractionMonitorDebugOverlay implements WindowCallbacks {
     private static final int REASON_STILL_RUNNING = -1000;
     private static final String TAG = "InteractionMonitorDebug";

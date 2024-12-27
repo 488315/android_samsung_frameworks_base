@@ -13,7 +13,6 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-/* loaded from: classes2.dex */
 public abstract class CameraMetadata<TKey> {
     public static final int AUTOMOTIVE_LENS_FACING_EXTERIOR_FRONT = 1;
     public static final int AUTOMOTIVE_LENS_FACING_EXTERIOR_LEFT = 3;

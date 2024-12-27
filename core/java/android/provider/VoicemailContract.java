@@ -9,7 +9,6 @@ import android.telecom.Voicemail;
 
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public class VoicemailContract {
     public static final String ACTION_FETCH_VOICEMAIL = "android.intent.action.FETCH_VOICEMAIL";
     public static final String ACTION_NEW_VOICEMAIL = "android.intent.action.NEW_VOICEMAIL";

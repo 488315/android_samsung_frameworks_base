@@ -16,7 +16,6 @@ import android.os.UserHandle;
 
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public interface ISemExecuteManager extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.app.ISemExecuteManager";
 

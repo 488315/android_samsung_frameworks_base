@@ -2,7 +2,6 @@ package android.animation;
 
 import android.graphics.PointF;
 
-/* loaded from: classes.dex */
 public class PointFEvaluator implements TypeEvaluator<PointF> {
     private PointF mPoint;
 

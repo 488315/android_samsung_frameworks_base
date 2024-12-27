@@ -1,6 +1,5 @@
 package android.uwb;
 
-/* loaded from: classes4.dex */
 public final class UwbProtoEnums {
     public static final int ALIRO = 4;
     public static final int BAD_PARAMS = 3;

@@ -3,7 +3,6 @@ package com.android.internal.listeners;
 import java.util.concurrent.Executor;
 import java.util.function.Supplier;
 
-/* loaded from: classes5.dex */
 public interface ListenerExecutor {
 
     public interface FailureCallback<TListenerOperation extends ListenerOperation<?>> {

@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.Objects;
 
 @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
-/* loaded from: classes.dex */
 public class SignedPackage {
     private final SignedPackageParcel mData;
 

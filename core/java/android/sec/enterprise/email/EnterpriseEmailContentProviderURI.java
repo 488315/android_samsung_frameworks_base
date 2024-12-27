@@ -1,6 +1,5 @@
 package android.sec.enterprise.email;
 
-/* loaded from: classes3.dex */
 public class EnterpriseEmailContentProviderURI {
     public static final String ACTION_UNLOCK_CREDENTIAL_INTERNAL = "com.android.credentials.UNLOCK";
     public static final String EMAILACCOUNTPOLICY_GET_ACCOUNT = "getEmailAccount";

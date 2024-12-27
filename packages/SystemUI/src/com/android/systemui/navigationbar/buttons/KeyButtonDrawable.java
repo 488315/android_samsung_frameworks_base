@@ -21,7 +21,6 @@ import com.android.systemui.R;
 import com.android.systemui.navigationbar.util.IconDrawableUtil;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public final class KeyButtonDrawable extends Drawable {
     public static final AnonymousClass1 KEY_DRAWABLE_ROTATE = new FloatProperty("KeyButtonRotation") { // from class: com.android.systemui.navigationbar.buttons.KeyButtonDrawable.1
         @Override // android.util.Property

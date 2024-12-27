@@ -26,7 +26,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes2.dex */
 public class CameraConstrainedHighSpeedCaptureSessionImpl
         extends CameraConstrainedHighSpeedCaptureSession implements CameraCaptureSessionCore {
     private final CameraCharacteristics mCharacteristics;

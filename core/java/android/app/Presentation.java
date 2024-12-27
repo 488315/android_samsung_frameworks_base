@@ -19,7 +19,6 @@ import com.samsung.android.rune.CoreRune;
 
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public class Presentation extends Dialog {
     private static final String TAG = "Presentation";
     private boolean isRearDisplayPresentation;

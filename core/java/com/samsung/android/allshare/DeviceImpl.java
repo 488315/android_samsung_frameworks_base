@@ -14,7 +14,6 @@ import com.sec.android.allshare.iface.message.AllShareKey;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* loaded from: classes3.dex */
 final class DeviceImpl extends Device implements IBundleHolder, IHandlerHolder {
     private static final String TAG = "DeviceImpl";
     private Bundle mDeviceBundle;

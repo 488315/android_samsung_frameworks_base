@@ -1,6 +1,5 @@
 package android.media.audio;
 
-/* loaded from: classes2.dex */
 public final class FeatureFlagsImpl implements FeatureFlags {
     @Override // android.media.audio.FeatureFlags
     public boolean autoPublicVolumeApiHardening() {

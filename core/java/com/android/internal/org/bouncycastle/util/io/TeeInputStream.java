@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-/* loaded from: classes5.dex */
 public class TeeInputStream extends InputStream {
     private final InputStream input;
     private final OutputStream output;

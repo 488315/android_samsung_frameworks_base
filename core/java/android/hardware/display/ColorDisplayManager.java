@@ -19,7 +19,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.time.LocalTime;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public final class ColorDisplayManager {
 
     @SystemApi public static final int AUTO_MODE_CUSTOM_TIME = 1;

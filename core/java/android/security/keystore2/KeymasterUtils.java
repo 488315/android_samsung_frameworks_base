@@ -19,7 +19,6 @@ import java.security.spec.ECParameterSpec;
 import java.security.spec.InvalidParameterSpecException;
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public abstract class KeymasterUtils {
     private static final int DEVICE_KEYMASTER = 1;
     private static final int DEVICE_KEYMINT = 2;

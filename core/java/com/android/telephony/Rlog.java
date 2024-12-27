@@ -14,7 +14,6 @@ import com.android.internal.telephony.util.TelephonyUtils;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-/* loaded from: classes5.dex */
 public final class Rlog {
     private static final boolean USER_BUILD = TelephonyUtils.IS_USER;
 

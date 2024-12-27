@@ -2,7 +2,6 @@ package android.hardware.radio.V1_1;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class ScanStatus {
     public static final int COMPLETE = 2;
     public static final int PARTIAL = 1;

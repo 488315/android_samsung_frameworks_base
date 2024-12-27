@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/* loaded from: classes.dex */
 public final class CredentialProviderInfo implements Parcelable {
     public static final Parcelable.Creator<CredentialProviderInfo> CREATOR =
             new Parcelable.Creator<CredentialProviderInfo>() { // from class:

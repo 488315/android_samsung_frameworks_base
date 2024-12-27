@@ -6,7 +6,6 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 @Deprecated
-/* loaded from: classes3.dex */
 public class RSSurfaceView extends SurfaceView implements SurfaceHolder.Callback {
     private RenderScriptGL mRS;
     private SurfaceHolder mSurfaceHolder;

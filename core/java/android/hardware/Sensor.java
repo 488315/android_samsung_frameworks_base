@@ -6,7 +6,6 @@ import android.os.SystemProperties;
 
 import java.util.UUID;
 
-/* loaded from: classes.dex */
 public final class Sensor {
     private static final int ADDITIONAL_INFO_MASK = 64;
     private static final int ADDITIONAL_INFO_SHIFT = 6;

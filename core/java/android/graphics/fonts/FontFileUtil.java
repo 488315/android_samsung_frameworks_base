@@ -9,7 +9,6 @@ import java.nio.ByteOrder;
 import java.util.Collections;
 import java.util.Set;
 
-/* loaded from: classes.dex */
 public class FontFileUtil {
     private static final int ANALYZE_ERROR = -1;
     private static final int FVAR_TABLE_TAG = 1719034226;

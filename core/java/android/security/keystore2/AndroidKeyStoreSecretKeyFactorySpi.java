@@ -20,7 +20,6 @@ import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactorySpi;
 import javax.crypto.spec.SecretKeySpec;
 
-/* loaded from: classes3.dex */
 public class AndroidKeyStoreSecretKeyFactorySpi extends SecretKeyFactorySpi {
     /* JADX WARN: Multi-variable type inference failed */
     @Override // javax.crypto.SecretKeyFactorySpi

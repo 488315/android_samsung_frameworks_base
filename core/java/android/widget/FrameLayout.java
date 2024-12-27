@@ -21,7 +21,6 @@ import com.android.internal.R;
 import java.util.ArrayList;
 
 @RemoteViews.RemoteView
-/* loaded from: classes4.dex */
 public class FrameLayout extends ViewGroup {
     private static final int DEFAULT_CHILD_GRAVITY = 8388659;
     private static final String TAG = "FrameLayout";

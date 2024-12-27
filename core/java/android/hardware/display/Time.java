@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 import java.time.LocalTime;
 
-/* loaded from: classes2.dex */
 public final class Time implements Parcelable {
     public static final Parcelable.Creator<Time> CREATOR =
             new Parcelable.Creator<Time>() { // from class: android.hardware.display.Time.1

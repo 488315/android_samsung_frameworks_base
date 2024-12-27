@@ -13,7 +13,6 @@ import java.security.PublicKey;
 import javax.crypto.interfaces.DHPrivateKey;
 import javax.crypto.interfaces.DHPublicKey;
 
-/* loaded from: classes5.dex */
 public class DHUtil {
     public static AsymmetricKeyParameter generatePublicKeyParameter(PublicKey key)
             throws InvalidKeyException {

@@ -1,6 +1,5 @@
 package android.service.notification;
 
-/* loaded from: classes3.dex */
 public final class ZenModeProto {
     public static final long ENABLED_ACTIVE_CONDITIONS = 2246267895810L;
     public static final long POLICY = 1146756268037L;

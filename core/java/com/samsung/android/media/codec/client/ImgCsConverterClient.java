@@ -12,7 +12,6 @@ import com.samsung.android.media.codec.SemVideoTranscodingService;
 import java.io.IOException;
 import java.util.Map;
 
-/* loaded from: classes6.dex */
 public class ImgCsConverterClient extends ClientImpl {
     public ImgCsConverterClient(
             IVideoTranscodingService transcodingService,

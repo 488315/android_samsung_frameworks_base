@@ -5,7 +5,6 @@ import android.graphics.Rect;
 import android.graphics.pdf.PdfDocument;
 import android.print.PrintAttributes;
 
-/* loaded from: classes3.dex */
 public class PrintedPdfDocument extends PdfDocument {
     private static final int MILS_PER_INCH = 1000;
     private static final int POINTS_IN_INCH = 72;

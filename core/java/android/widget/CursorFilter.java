@@ -2,7 +2,6 @@ package android.widget;
 
 import android.database.Cursor;
 
-/* loaded from: classes4.dex */
 class CursorFilter extends Filter {
     CursorFilterClient mClient;
 

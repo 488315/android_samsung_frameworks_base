@@ -17,7 +17,6 @@ import android.util.TypedValue;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes.dex */
 public class AppWidgetProviderInfo implements Parcelable {
     public static final Parcelable.Creator<AppWidgetProviderInfo> CREATOR =
             new Parcelable.Creator<AppWidgetProviderInfo>() { // from class:

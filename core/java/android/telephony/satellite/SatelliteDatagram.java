@@ -5,7 +5,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public final class SatelliteDatagram implements Parcelable {
     public static final Parcelable.Creator<SatelliteDatagram> CREATOR =
             new Parcelable.Creator<

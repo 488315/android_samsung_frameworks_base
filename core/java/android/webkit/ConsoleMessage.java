@@ -1,6 +1,5 @@
 package android.webkit;
 
-/* loaded from: classes4.dex */
 public class ConsoleMessage {
     private MessageLevel mLevel;
     private int mLineNumber;

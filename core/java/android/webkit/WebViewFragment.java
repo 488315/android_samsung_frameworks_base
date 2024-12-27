@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 @Deprecated
-/* loaded from: classes4.dex */
 public class WebViewFragment extends Fragment {
     private boolean mIsWebViewAvailable;
     private WebView mWebView;

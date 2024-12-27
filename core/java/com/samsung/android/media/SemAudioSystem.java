@@ -6,7 +6,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-/* loaded from: classes6.dex */
 public class SemAudioSystem {
     public static final Set<Integer> MULTI_SOUND_PRIMARY_DEVICE_SET = new HashSet();
     private static final int OFFSET_FOR_SAMSUNG_AUDIO = 10000;

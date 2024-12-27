@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.os.Process;
 import android.os.RemoteException;
 
-/* loaded from: classes4.dex */
 class DirectAccessibilityConnection extends IAccessibilityServiceConnection.Default {
     private static final int FETCH_FLAGS = 384;
     private static final Region INTERACTIVE_REGION = null;

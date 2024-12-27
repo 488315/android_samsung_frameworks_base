@@ -11,7 +11,6 @@ import android.filterfw.format.ImageFormat;
 import android.filterfw.geometry.Point;
 import android.filterfw.geometry.Quad;
 
-/* loaded from: classes.dex */
 public class RotateFilter extends Filter {
 
     @GenerateFieldPort(name = "angle")

@@ -24,7 +24,6 @@ import java.util.List;
 
 import javax.crypto.spec.GCMParameterSpec;
 
-/* loaded from: classes3.dex */
 abstract class AndroidKeyStoreAuthenticatedAESCipherSpi extends AndroidKeyStoreCipherSpiBase {
     private static final int BLOCK_SIZE_BYTES = 16;
     private byte[] mIv;

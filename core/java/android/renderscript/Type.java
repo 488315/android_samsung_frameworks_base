@@ -1,7 +1,6 @@
 package android.renderscript;
 
 @Deprecated
-/* loaded from: classes3.dex */
 public class Type extends BaseObj {
     static final int mMaxArrays = 4;
     int[] mArrays;

@@ -3,7 +3,6 @@ package android.view;
 import android.content.Context;
 import android.util.Log;
 
-/* loaded from: classes4.dex */
 public abstract class ActionProvider {
     private static final String TAG = "ActionProvider";
     private SubUiVisibilityListener mSubUiVisibilityListener;

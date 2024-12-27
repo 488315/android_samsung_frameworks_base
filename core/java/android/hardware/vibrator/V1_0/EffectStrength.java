@@ -2,7 +2,6 @@ package android.hardware.vibrator.V1_0;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class EffectStrength {
     public static final byte LIGHT = 0;
     public static final byte MEDIUM = 1;

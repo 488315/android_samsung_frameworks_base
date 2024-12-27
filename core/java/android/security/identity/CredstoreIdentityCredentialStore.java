@@ -7,7 +7,6 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.ServiceSpecificException;
 
-/* loaded from: classes3.dex */
 class CredstoreIdentityCredentialStore extends IdentityCredentialStore {
     private static final String TAG = "CredstoreIdentityCredentialStore";
     private static CredstoreIdentityCredentialStore sInstanceDefault = null;

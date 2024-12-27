@@ -2,7 +2,6 @@ package android.app;
 
 import android.util.EventLog;
 
-/* loaded from: classes.dex */
 public class EventLogTags {
     public static final int DISMISS_SCREEN = 36100;
     public static final int PENDING_INTENT_AFTER_UNLOCK = 36101;

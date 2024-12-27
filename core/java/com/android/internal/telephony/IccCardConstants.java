@@ -1,6 +1,5 @@
 package com.android.internal.telephony;
 
-/* loaded from: classes5.dex */
 public class IccCardConstants {
     public static final String INTENT_KEY_ICC_STATE = "ss";
     public static final String INTENT_KEY_IS_EUICC = "isEuicc";

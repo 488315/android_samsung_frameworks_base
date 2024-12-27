@@ -3,7 +3,6 @@ package android.credentials.selection;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes.dex */
 public final class DisabledProviderData extends ProviderData implements Parcelable {
     public static final Parcelable.Creator<DisabledProviderData> CREATOR =
             new Parcelable.Creator<DisabledProviderData>() { // from class:

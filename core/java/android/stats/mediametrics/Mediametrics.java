@@ -1,6 +1,5 @@
 package android.stats.mediametrics;
 
-/* loaded from: classes3.dex */
 public final class Mediametrics {
     public static final int ABANDONED = 15;
     public static final int AUDIO = 0;

@@ -6,7 +6,6 @@ import android.os.HwParcel;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public final class Monostate {
     public final boolean equals(Object otherObject) {
         if (this == otherObject) {

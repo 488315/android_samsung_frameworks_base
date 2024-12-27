@@ -6,7 +6,6 @@ import java.io.UnsupportedEncodingException;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 @Deprecated
-/* loaded from: classes3.dex */
 public class BaseObj {
     final CloseGuard guard = CloseGuard.get();
     private boolean mDestroyed;

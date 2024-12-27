@@ -31,7 +31,6 @@ import java.security.spec.X509EncodedKeySpec;
 import java.util.Arrays;
 import java.util.Map;
 
-/* loaded from: classes4.dex */
 public class ApkSignatureSchemeV4Verifier {
     static final int APK_SIGNATURE_SCHEME_DEFAULT = -1;
 

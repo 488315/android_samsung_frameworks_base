@@ -12,7 +12,6 @@ import com.android.internal.app.ResolverActivity;
 
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public abstract class NotSelectableTargetInfo implements ChooserTargetInfo {
     @Override // com.android.internal.app.chooser.TargetInfo
     public Intent getResolvedIntent() {

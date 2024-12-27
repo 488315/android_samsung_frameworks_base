@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.DataFormatException;
 
-/* loaded from: classes6.dex */
 class DatabaseCryptoAdapter {
     private static final String TAG =
             "[KnoxAnalytics] " + DatabaseCryptoAdapter.class.getSimpleName();

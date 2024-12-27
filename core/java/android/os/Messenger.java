@@ -1,7 +1,6 @@
 package android.os;
 
 
-/* loaded from: classes3.dex */
 public final class Messenger implements Parcelable {
     public static final Parcelable.Creator<Messenger> CREATOR =
             new Parcelable.Creator<Messenger>() { // from class: android.os.Messenger.1

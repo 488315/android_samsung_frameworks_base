@@ -7,7 +7,6 @@ import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
 
-/* loaded from: classes4.dex */
 public interface IGraphicsStats extends IInterface {
     ParcelFileDescriptor requestBufferForProcess(
             String str, IGraphicsStatsCallback iGraphicsStatsCallback) throws RemoteException;

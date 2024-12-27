@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-/* loaded from: classes2.dex */
 public final class EncoderProfiles {
     private List<AudioProfile> audioProfiles;
     private int durationSecs;

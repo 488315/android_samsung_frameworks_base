@@ -18,7 +18,6 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-/* loaded from: classes6.dex */
 public final class Request extends Message {
     private static final String TAG = Def.tagOf((Class<?>) Request.class);
     private List<MediaBuffer> inputBufferList;

@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-/* loaded from: classes4.dex */
 public final class IntFlagMapping {
     private final List<Flag> mFlags = new ArrayList();
 

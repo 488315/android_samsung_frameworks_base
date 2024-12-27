@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-/* loaded from: classes3.dex */
 public class SessionManager {
     private static final long DEFAULT_SESSION_TIMEOUT_MS = 30000;
     private static final String LOGGING_TAG = "Logging";

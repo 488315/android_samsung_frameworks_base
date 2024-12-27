@@ -3,7 +3,6 @@ package android.database.sqlite.trace;
 import java.io.IOException;
 import java.util.List;
 
-/* loaded from: classes.dex */
 public abstract class SQLiteTraceExporter implements AutoCloseable {
     private SQLiteTrace.TraceConfiguration mConfiguration;
 

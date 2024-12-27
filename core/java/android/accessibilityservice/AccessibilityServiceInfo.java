@@ -26,7 +26,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/* loaded from: classes.dex */
 public class AccessibilityServiceInfo implements Parcelable {
     public static final int CAPABILITY_CAN_CONTROL_MAGNIFICATION = 16;
     public static final int CAPABILITY_CAN_PERFORM_GESTURES = 32;

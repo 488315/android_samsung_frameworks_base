@@ -10,7 +10,6 @@ import com.samsung.vekit.Common.VEContext;
 
 import java.util.ArrayList;
 
-/* loaded from: classes6.dex */
 public class WaveAnimation extends Animation<WaveInfo> {
     public WaveAnimation(VEContext context, int id, String name) {
         super(context, AnimationType.WAVE, id, name);

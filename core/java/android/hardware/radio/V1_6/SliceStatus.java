@@ -2,7 +2,6 @@ package android.hardware.radio.V1_6;
 
 import java.util.ArrayList;
 
-/* loaded from: classes2.dex */
 public final class SliceStatus {
     public static final byte ALLOWED = 2;
     public static final byte CONFIGURED = 1;

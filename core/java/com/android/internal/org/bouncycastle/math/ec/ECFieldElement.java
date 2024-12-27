@@ -7,7 +7,6 @@ import com.android.internal.org.bouncycastle.util.Integers;
 import java.math.BigInteger;
 import java.util.Random;
 
-/* loaded from: classes5.dex */
 public abstract class ECFieldElement implements ECConstants {
 
     public abstract static class AbstractFp extends ECFieldElement {}

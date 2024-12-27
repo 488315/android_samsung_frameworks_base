@@ -8,7 +8,6 @@ import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
 
-/* loaded from: classes5.dex */
 public interface IObbBackupService extends IInterface {
     void backupObbs(
             String str,

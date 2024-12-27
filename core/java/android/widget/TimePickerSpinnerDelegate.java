@@ -17,7 +17,6 @@ import com.android.internal.R;
 
 import java.util.Calendar;
 
-/* loaded from: classes4.dex */
 class TimePickerSpinnerDelegate extends TimePicker.AbstractTimePickerDelegate {
     private static final boolean DEFAULT_ENABLED_STATE = true;
     private static final int HOURS_IN_HALF_DAY = 12;

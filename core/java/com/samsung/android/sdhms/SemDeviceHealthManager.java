@@ -13,7 +13,6 @@ import vendor.samsung.hardware.thermal.V1_0.SehTempStatus;
 import java.util.Collections;
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public class SemDeviceHealthManager {
     public static final String ACTION_THERMAL_THROTTLING_DELTA_CHANGED =
             "com.sec.android.sdhms.action.THERMAL_THROTTLING_DELTA_CHANGED";

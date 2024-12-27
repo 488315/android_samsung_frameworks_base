@@ -1,6 +1,5 @@
 package android.animation;
 
-/* loaded from: classes.dex */
 public abstract class Keyframe implements Cloneable {
     float mFraction;
     boolean mHasValue;

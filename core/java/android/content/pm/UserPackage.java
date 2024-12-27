@@ -9,7 +9,6 @@ import libcore.util.EmptyArray;
 import java.util.Objects;
 import java.util.Random;
 
-/* loaded from: classes.dex */
 public final class UserPackage {
     private static final boolean ENABLE_CACHING = true;
     static final int MAX_NUM_CACHED_ENTRIES_PER_USER = 1000;

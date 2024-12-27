@@ -68,7 +68,6 @@ import java.util.function.IntFunction;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
-/* loaded from: classes2.dex */
 public final class CameraManager {
     private static final int API_VERSION_1 = 1;
     private static final int API_VERSION_2 = 2;

@@ -7,7 +7,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public abstract class FrontendSettings {
     public static final long FEC_11_15 = 4194304;
     public static final long FEC_11_20 = 8388608;

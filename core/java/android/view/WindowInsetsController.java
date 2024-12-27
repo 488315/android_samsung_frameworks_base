@@ -6,7 +6,6 @@ import android.view.animation.Interpolator;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes4.dex */
 public interface WindowInsetsController {
     public static final int APPEARANCE_EMBED_ACTIVITY_NAVIGATION_BARS = 2097152;
     public static final int APPEARANCE_FORCE_LIGHT_NAVIGATION_BARS = 512;

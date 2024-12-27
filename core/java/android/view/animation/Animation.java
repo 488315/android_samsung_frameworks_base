@@ -12,7 +12,6 @@ import com.android.internal.R;
 
 import dalvik.system.CloseGuard;
 
-/* loaded from: classes4.dex */
 public abstract class Animation implements Cloneable {
     public static final int ABSOLUTE = 0;
     public static final int INFINITE = -1;

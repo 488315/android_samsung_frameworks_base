@@ -46,7 +46,6 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public abstract class ContentCaptureService extends Service {
     public static final String ASSIST_CONTENT_ACTIVITY_START_KEY = "activity_start_assist_content";
     public static final String PROTECTION_SERVICE_INTERFACE =

@@ -1,6 +1,5 @@
 package android.content;
 
-/* loaded from: classes.dex */
 public class SemSyncStatusInfo {
     public boolean initialize;
     public long lastFailureTime;

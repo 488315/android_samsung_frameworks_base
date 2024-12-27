@@ -1,6 +1,5 @@
 package com.samsung.android.knox.tima.attestation;
 
-/* loaded from: classes6.dex */
 public class SemEnhancedAttestationError {
     public static final int ERROR_BIND_FAIL = -7;
     public static final int ERROR_DEVICE_NOT_SUPPORTED = -4;

@@ -19,7 +19,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 
-/* loaded from: classes3.dex */
 public class PacProxySelector extends ProxySelector {
     private static final String PROXY = "PROXY ";
     public static final String PROXY_SERVICE = "com.android.net.IProxyService";

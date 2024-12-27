@@ -5,7 +5,6 @@ import android.util.Slog;
 
 import java.util.ArrayList;
 
-/* loaded from: classes6.dex */
 public class DynamicFeatureManager {
     private String TAG = "DynamicFeature_DynamicFeatureManager";
     private IDynamicFeatureManager mService;

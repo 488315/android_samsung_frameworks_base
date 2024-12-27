@@ -15,7 +15,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public class VibratorInfo implements Parcelable {
     private static final String TAG = "VibratorInfo";
     private final long mCapabilities;

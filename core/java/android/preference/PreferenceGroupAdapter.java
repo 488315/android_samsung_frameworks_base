@@ -15,7 +15,6 @@ import java.util.Collections;
 import java.util.List;
 
 @Deprecated
-/* loaded from: classes3.dex */
 public class PreferenceGroupAdapter extends BaseAdapter
         implements Preference.OnPreferenceChangeInternalListener {
     private static final String TAG = "PreferenceGroupAdapter";

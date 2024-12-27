@@ -1,6 +1,5 @@
 package android.hardware.tv.input.V1_0;
 
-/* loaded from: classes2.dex */
 public class Constants {
     public static final int CABLE_CONNECTION_STATUS_CONNECTED = 1;
     public static final int CABLE_CONNECTION_STATUS_DISCONNECTED = 2;

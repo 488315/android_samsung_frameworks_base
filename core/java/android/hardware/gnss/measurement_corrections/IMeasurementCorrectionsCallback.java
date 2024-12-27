@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes2.dex */
 public interface IMeasurementCorrectionsCallback extends IInterface {
     public static final int CAPABILITY_EXCESS_PATH_LENGTH = 2;
     public static final int CAPABILITY_LOS_SATS = 1;

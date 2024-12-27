@@ -19,7 +19,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-/* loaded from: classes4.dex */
 public class SmsMessage {
     public static final int ENCODING_16BIT = 3;
     public static final int ENCODING_7BIT = 1;

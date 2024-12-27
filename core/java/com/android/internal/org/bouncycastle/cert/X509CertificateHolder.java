@@ -23,7 +23,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
-/* loaded from: classes5.dex */
 public class X509CertificateHolder implements Encodable, Serializable {
     private static final long serialVersionUID = 20170722001L;
     private transient Extensions extensions;

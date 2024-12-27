@@ -1,6 +1,5 @@
 package android.view.animation;
 
-/* loaded from: classes4.dex */
 public abstract class BaseInterpolator implements Interpolator {
     private int mChangingConfiguration;
 

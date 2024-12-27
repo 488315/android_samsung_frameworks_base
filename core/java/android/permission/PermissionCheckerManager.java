@@ -11,7 +11,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public class PermissionCheckerManager {
     public static final int PERMISSION_GRANTED = 0;
     public static final int PERMISSION_HARD_DENIED = 2;

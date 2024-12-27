@@ -8,7 +8,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public final class NtnSignalStrength implements Parcelable {
     public static final Parcelable.Creator<NtnSignalStrength> CREATOR =
             new Parcelable.Creator<

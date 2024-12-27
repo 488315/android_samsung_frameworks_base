@@ -8,7 +8,6 @@ import android.os.RemoteException;
 
 import com.android.ims.ImsFeatureContainer;
 
-/* loaded from: classes5.dex */
 public interface IImsServiceFeatureCallback extends IInterface {
     void imsFeatureCreated(ImsFeatureContainer imsFeatureContainer, int i) throws RemoteException;
 

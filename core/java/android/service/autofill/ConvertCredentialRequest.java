@@ -8,7 +8,6 @@ import android.os.Parcelable;
 
 import com.android.internal.util.AnnotationValidations;
 
-/* loaded from: classes3.dex */
 public final class ConvertCredentialRequest implements Parcelable {
     public static final Parcelable.Creator<ConvertCredentialRequest> CREATOR =
             new Parcelable.Creator<

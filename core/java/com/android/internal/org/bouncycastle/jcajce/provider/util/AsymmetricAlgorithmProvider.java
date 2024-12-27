@@ -3,7 +3,6 @@ package com.android.internal.org.bouncycastle.jcajce.provider.util;
 import com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier;
 import com.android.internal.org.bouncycastle.jcajce.provider.config.ConfigurableProvider;
 
-/* loaded from: classes5.dex */
 public abstract class AsymmetricAlgorithmProvider extends AlgorithmProvider {
     protected void addSignatureAlgorithm(
             ConfigurableProvider provider,

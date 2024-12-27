@@ -16,7 +16,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Locale;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public class MeasuredText {
     private static final String TAG = "MeasuredText";
     private final int mBottom;

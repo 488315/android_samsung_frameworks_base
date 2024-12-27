@@ -25,7 +25,6 @@ import android.view.inspector.PropertyReader;
 
 import com.android.internal.R;
 
-/* loaded from: classes4.dex */
 public class CheckedTextView extends TextView implements Checkable {
     private static final int[] CHECKED_STATE_SET = {16842912};
     private int mBasePadding;

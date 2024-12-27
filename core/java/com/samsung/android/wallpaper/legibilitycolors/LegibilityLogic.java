@@ -15,7 +15,6 @@ import com.samsung.android.wallpaper.legibilitycolors.utils.interpolater.EasingQ
 import java.util.Arrays;
 import java.util.Objects;
 
-/* loaded from: classes6.dex */
 public class LegibilityLogic extends ColorExtractor {
     private static final String TAG = "LegibilityLogic";
     static final float mBgBrightnessRangeBlackMax = 0.7f;

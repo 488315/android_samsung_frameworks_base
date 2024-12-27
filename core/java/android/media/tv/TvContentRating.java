@@ -9,7 +9,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes3.dex */
 public final class TvContentRating {
     private static final String DELIMITER = "/";
     public static final TvContentRating UNRATED = new TvContentRating("null", "null", "null", null);

@@ -10,7 +10,6 @@ import android.util.PathParser;
 
 import com.android.internal.R;
 
-/* loaded from: classes4.dex */
 public class PatternPathMotion extends PathMotion {
     private Path mOriginalPatternPath;
     private final Path mPatternPath = new Path();

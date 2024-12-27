@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-/* loaded from: classes.dex */
 public final class UnregisterCredentialDescriptionRequest implements Parcelable {
     public static final Parcelable.Creator<UnregisterCredentialDescriptionRequest> CREATOR =
             new Parcelable.Creator<UnregisterCredentialDescriptionRequest>() { // from class:

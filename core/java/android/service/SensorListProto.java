@@ -1,6 +1,5 @@
 package android.service;
 
-/* loaded from: classes3.dex */
 public final class SensorListProto {
     public static final int RM_CONTINUOUS = 1;
     public static final int RM_ONE_SHOT = 3;

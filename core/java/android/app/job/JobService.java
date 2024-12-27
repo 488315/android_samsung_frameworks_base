@@ -10,7 +10,6 @@ import android.util.Log;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes.dex */
 public abstract class JobService extends Service {
     public static final int JOB_END_NOTIFICATION_POLICY_DETACH = 0;
     public static final int JOB_END_NOTIFICATION_POLICY_REMOVE = 1;

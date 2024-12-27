@@ -8,7 +8,6 @@ import android.text.TextUtils;
 import android.util.SparseArray;
 import android.view.View;
 
-/* loaded from: classes4.dex */
 public class QwertyKeyListener extends BaseKeyListener {
     private static QwertyKeyListener sFullKeyboardInstance;
     private TextKeyListener.Capitalize mAutoCap;

@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class SearchTargetEvent implements Parcelable {
     public static final int ACTION_DELETE = 9;
     public static final int ACTION_DISMISS = 10;

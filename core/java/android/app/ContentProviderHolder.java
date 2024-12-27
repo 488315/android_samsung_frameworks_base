@@ -7,7 +7,6 @@ import android.os.IBinder;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes.dex */
 public class ContentProviderHolder implements Parcelable {
     public static final Parcelable.Creator<ContentProviderHolder> CREATOR =
             new Parcelable.Creator<

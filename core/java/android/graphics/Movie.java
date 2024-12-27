@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.InputStream;
 
 @Deprecated
-/* loaded from: classes.dex */
 public class Movie {
     private long mNativeMovie;
 

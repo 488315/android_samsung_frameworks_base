@@ -1,6 +1,5 @@
 package android.content.pm;
 
-/* loaded from: classes.dex */
 public @interface InstallationFileLocation {
     public static final int DATA_APP = 0;
     public static final int MEDIA_DATA = 2;

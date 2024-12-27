@@ -3,7 +3,6 @@ package android.view.displayhash;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* loaded from: classes4.dex */
 public interface DisplayHashResultCallback {
     public static final int DISPLAY_HASH_ERROR_INVALID_BOUNDS = -2;
     public static final int DISPLAY_HASH_ERROR_INVALID_HASH_ALGORITHM = -5;

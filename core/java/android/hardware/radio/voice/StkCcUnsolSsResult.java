@@ -8,7 +8,6 @@ import android.os.Parcelable;
 import java.util.Arrays;
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public class StkCcUnsolSsResult implements Parcelable {
     public static final Parcelable.Creator<StkCcUnsolSsResult> CREATOR =
             new Parcelable.Creator<StkCcUnsolSsResult>() { // from class:

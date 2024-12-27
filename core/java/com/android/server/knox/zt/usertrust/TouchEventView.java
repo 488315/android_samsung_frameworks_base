@@ -20,7 +20,6 @@ import com.android.internal.content.NativeLibraryHelper;
 
 import java.util.ArrayList;
 
-/* loaded from: classes5.dex */
 public class TouchEventView
         implements InputManager.InputDeviceListener,
                 WindowManagerPolicyConstants.PointerEventListener {

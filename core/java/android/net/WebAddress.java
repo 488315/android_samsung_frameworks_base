@@ -8,7 +8,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public class WebAddress {
     static final int MATCH_GROUP_AUTHORITY = 2;
     static final int MATCH_GROUP_HOST = 3;

@@ -20,7 +20,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
 
 @SystemApi
-/* loaded from: classes.dex */
 public final class SmartspaceSession implements AutoCloseable {
     private static final boolean DEBUG = false;
     private static final String TAG = SmartspaceSession.class.getSimpleName();

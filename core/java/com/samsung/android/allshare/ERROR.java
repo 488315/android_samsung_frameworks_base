@@ -2,7 +2,6 @@ package com.samsung.android.allshare;
 
 import android.service.timezone.TimeZoneProviderService;
 
-/* loaded from: classes3.dex */
 public enum ERROR {
     SUCCESS(TimeZoneProviderService.TEST_COMMAND_RESULT_SUCCESS_KEY),
     OUT_OF_MEMORY("OUT_OF_MEMORY"),

@@ -24,7 +24,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-/* loaded from: classes4.dex */
 public final class SpellCheckerInfo implements Parcelable {
     private final String mId;
     private final int mLabel;

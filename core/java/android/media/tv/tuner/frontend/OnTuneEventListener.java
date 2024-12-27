@@ -6,7 +6,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public interface OnTuneEventListener {
     public static final int SIGNAL_LOCKED = 0;
     public static final int SIGNAL_LOST_LOCK = 2;

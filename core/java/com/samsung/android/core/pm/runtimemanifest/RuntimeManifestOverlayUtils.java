@@ -14,7 +14,6 @@ import com.android.internal.util.ArrayUtils;
 import java.util.List;
 import java.util.Map;
 
-/* loaded from: classes6.dex */
 public class RuntimeManifestOverlayUtils {
     public static final boolean DEBUG = false;
     public static final String TAG = "RuntimeManifestOverlayUtils";

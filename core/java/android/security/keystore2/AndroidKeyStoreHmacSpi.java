@@ -15,7 +15,6 @@ import java.util.List;
 
 import javax.crypto.MacSpi;
 
-/* loaded from: classes3.dex */
 public abstract class AndroidKeyStoreHmacSpi extends MacSpi implements KeyStoreCryptoOperation {
     private static final String TAG = "AndroidKeyStoreHmacSpi";
     private final int mKeymasterDigest;

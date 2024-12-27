@@ -4,7 +4,6 @@ import com.samsung.android.sume.core.controller.SumeClient;
 import com.samsung.android.sume.core.service.ServiceProxySupplier;
 
 @Deprecated
-/* loaded from: classes6.dex */
 public class NNDirector extends com.samsung.android.sume.solution.service.NNDirector {
     public NNDirector(ServiceProxySupplier serviceProxy) {
         super(serviceProxy);

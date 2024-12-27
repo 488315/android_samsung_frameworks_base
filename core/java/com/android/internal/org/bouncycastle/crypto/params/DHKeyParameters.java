@@ -1,6 +1,5 @@
 package com.android.internal.org.bouncycastle.crypto.params;
 
-/* loaded from: classes5.dex */
 public class DHKeyParameters extends AsymmetricKeyParameter {
     private DHParameters params;
 

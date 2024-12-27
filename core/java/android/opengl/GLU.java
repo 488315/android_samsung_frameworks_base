@@ -2,7 +2,6 @@ package android.opengl;
 
 import javax.microedition.khronos.opengles.GL10;
 
-/* loaded from: classes3.dex */
 public class GLU {
     private static final float[] sScratch = new float[32];
 

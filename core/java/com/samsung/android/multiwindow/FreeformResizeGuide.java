@@ -18,7 +18,6 @@ import android.view.WindowManager;
 
 import com.android.internal.R;
 
-/* loaded from: classes6.dex */
 public class FreeformResizeGuide {
     private static final long DEFER_DISMISSING_TIMEOUT_MARGIN = 10;
     private static final int INVALID_MAX_SIZE = -1;

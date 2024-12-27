@@ -86,7 +86,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
 import java.util.function.ToIntFunction;
 
-/* loaded from: classes4.dex */
 public final class InputMethodManager {
     private static final String CACHE_KEY_CONNECTIONLESS_STYLUS_HANDWRITING_PROPERTY =
             "cache_key.system_server.connectionless_stylus_handwriting";

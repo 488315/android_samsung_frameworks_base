@@ -11,7 +11,6 @@ import java.util.Objects;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-/* loaded from: classes5.dex */
 public final class CollectionUtils {
     private CollectionUtils() {}
 

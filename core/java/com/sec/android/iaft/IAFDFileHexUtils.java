@@ -9,7 +9,6 @@ import java.io.FileOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-/* loaded from: classes6.dex */
 public class IAFDFileHexUtils {
     public boolean makeFileToHexFile(String path, String inFileName, String outFileName) {
         File originfile = new File(path + inFileName);

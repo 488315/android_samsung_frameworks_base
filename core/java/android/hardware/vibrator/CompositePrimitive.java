@@ -1,6 +1,5 @@
 package android.hardware.vibrator;
 
-/* loaded from: classes2.dex */
 public @interface CompositePrimitive {
     public static final int CLICK = 1;
     public static final int LIGHT_TICK = 7;

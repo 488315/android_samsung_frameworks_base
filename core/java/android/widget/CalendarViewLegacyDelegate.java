@@ -23,7 +23,6 @@ import com.android.internal.R;
 
 import java.util.Locale;
 
-/* loaded from: classes4.dex */
 class CalendarViewLegacyDelegate extends CalendarView.AbstractCalendarViewDelegate {
     private static final int ADJUSTMENT_SCROLL_DURATION = 500;
     private static final int DAYS_PER_WEEK = 7;

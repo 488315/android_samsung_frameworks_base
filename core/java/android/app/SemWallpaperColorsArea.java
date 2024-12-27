@@ -21,7 +21,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-/* loaded from: classes.dex */
 public class SemWallpaperColorsArea implements Cloneable {
     public static final int BACKGROUND = 7;
     public static final int BODY = 1;

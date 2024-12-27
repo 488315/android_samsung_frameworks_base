@@ -19,7 +19,6 @@ import com.samsung.android.globalactions.util.UsageStatsWrapper;
 
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public class RestartActionViewModel implements ActionViewModel {
     private final ConditionChecker mConditionChecker;
     private String mExtraInfo;

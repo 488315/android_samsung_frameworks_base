@@ -5,7 +5,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
-/* loaded from: classes2.dex */
 public final class BluetoothProfileConnectionInfo implements Parcelable {
     public static final Parcelable.Creator<BluetoothProfileConnectionInfo> CREATOR =
             new Parcelable.Creator<BluetoothProfileConnectionInfo>() { // from class:

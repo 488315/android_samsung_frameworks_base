@@ -6,7 +6,6 @@ import android.system.keystore2.KeyDescriptor;
 
 import java.security.Key;
 
-/* loaded from: classes3.dex */
 public class AndroidKeyStoreKey implements Key {
     private final String mAlgorithm;
     private final Authorization[] mAuthorizations;

@@ -15,7 +15,6 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-/* loaded from: classes6.dex */
 abstract class ChannelRouterBase extends BufferChannelGroupBase {
     protected Map<Evaluator, BufferChannel> evChannelMap;
 

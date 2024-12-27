@@ -21,7 +21,6 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public final class ImsCallProfile implements Parcelable {
     public static final int CALL_RESTRICT_CAUSE_DISABLED = 2;
     public static final int CALL_RESTRICT_CAUSE_HD = 3;

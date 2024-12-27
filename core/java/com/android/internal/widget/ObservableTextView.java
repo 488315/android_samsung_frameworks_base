@@ -9,7 +9,6 @@ import android.widget.TextView;
 import java.util.function.Consumer;
 
 @RemoteViews.RemoteView
-/* loaded from: classes5.dex */
 public class ObservableTextView extends TextView {
     private Consumer<Integer> mOnVisibilityChangedListener;
 

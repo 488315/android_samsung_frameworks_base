@@ -58,7 +58,6 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes.dex */
 public class BootReceiver extends BroadcastReceiver {
     public static final int LASTK_LOG_SIZE;
     public static final String[] LAST_KMSG_FILES;

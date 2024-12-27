@@ -18,7 +18,6 @@ import android.os.RemoteException;
 
 import java.util.ArrayList;
 
-/* loaded from: classes.dex */
 public abstract class ContentProviderNative extends Binder implements IContentProvider {
     public abstract String getProviderName();
 

@@ -1,6 +1,5 @@
 package android.service.autofill;
 
-/* loaded from: classes3.dex */
 public final class FeatureFlagsImpl implements FeatureFlags {
     @Override // android.service.autofill.FeatureFlags
     public boolean addLastFocusedIdToClientState() {

@@ -16,7 +16,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Set;
 
-/* loaded from: classes6.dex */
 public class DesktopModeFeature {
     public static final boolean DEBUG;
     public static final boolean ENABLED = true;

@@ -8,7 +8,6 @@ import com.samsung.android.globalactions.presentation.strategies.WindowManagerFu
 import java.lang.reflect.Array;
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public interface DataRequestReason$$ {
     static String toString(int _aidl_v) {
         return _aidl_v == 1

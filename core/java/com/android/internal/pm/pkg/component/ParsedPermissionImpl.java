@@ -11,7 +11,6 @@ import java.util.Collections;
 import java.util.Locale;
 import java.util.Set;
 
-/* loaded from: classes5.dex */
 public class ParsedPermissionImpl extends ParsedComponentImpl
         implements ParsedPermission, Parcelable {
     private String backgroundPermission;

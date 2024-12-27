@@ -8,7 +8,6 @@ import com.android.internal.content.NativeLibraryHelper;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/* loaded from: classes.dex */
 public class SQLitePragma {
     private static final String TAG = "SQLitePragma";
     private final SQLiteDatabase mDatabase;

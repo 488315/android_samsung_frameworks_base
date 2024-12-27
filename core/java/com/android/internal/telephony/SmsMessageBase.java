@@ -18,7 +18,6 @@ import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/* loaded from: classes5.dex */
 public abstract class SmsMessageBase {
     private static final int DELIMITER_ETX = 3;
     private static final int DELIMITER_GS = 29;

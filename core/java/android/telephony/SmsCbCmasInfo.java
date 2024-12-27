@@ -8,7 +8,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public final class SmsCbCmasInfo implements Parcelable {
     public static final int CMAS_CATEGORY_CBRNE = 10;
     public static final int CMAS_CATEGORY_ENV = 7;

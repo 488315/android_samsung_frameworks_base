@@ -16,7 +16,6 @@ import com.samsung.vekit.Manager.FilterManager;
 import com.samsung.vekit.Manager.ItemManager;
 import com.samsung.vekit.Manager.LayerManager;
 
-/* loaded from: classes6.dex */
 public class VEContext extends Element implements VEStateInterface {
     private final AnimationManager animationManager;
     private final ContentManager contentManager;

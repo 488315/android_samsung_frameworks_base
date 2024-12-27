@@ -14,7 +14,6 @@ import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
 
-/* loaded from: classes4.dex */
 public final class CellIdentityNr extends CellIdentity {
     public static final Parcelable.Creator<CellIdentityNr> CREATOR =
             new Parcelable.Creator<

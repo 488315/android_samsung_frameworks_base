@@ -3,7 +3,6 @@ package android.graphics;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* loaded from: classes.dex */
 public final class ParcelableColorSpace implements Parcelable {
     public static final Parcelable.Creator<ParcelableColorSpace> CREATOR =
             new Parcelable.Creator<

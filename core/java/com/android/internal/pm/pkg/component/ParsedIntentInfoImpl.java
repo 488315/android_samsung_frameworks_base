@@ -7,7 +7,6 @@ import android.os.Parcelable;
 
 import com.android.internal.util.AnnotationValidations;
 
-/* loaded from: classes5.dex */
 public class ParsedIntentInfoImpl implements ParsedIntentInfo, Parcelable {
     public static final Parcelable.Creator<ParsedIntentInfoImpl> CREATOR =
             new Parcelable.Creator<

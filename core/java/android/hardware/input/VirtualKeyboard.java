@@ -7,7 +7,6 @@ import android.os.RemoteException;
 import android.util.Log;
 
 @SystemApi
-/* loaded from: classes2.dex */
 public class VirtualKeyboard extends VirtualInputDevice {
     private final int mUnsupportedKeyCode;
 

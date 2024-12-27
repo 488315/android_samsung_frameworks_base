@@ -7,7 +7,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Arrays;
 
 @SystemApi
-/* loaded from: classes4.dex */
 public class TlsParams {
     public static final int GROUP_SECP256R1 = 23;
     public static final int GROUP_SECP384R1 = 24;

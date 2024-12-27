@@ -2,7 +2,6 @@ package com.android.internal.org.bouncycastle.jce.provider;
 
 import java.util.Date;
 
-/* loaded from: classes5.dex */
 class CertStatus {
     public static final int UNDETERMINED = 12;
     public static final int UNREVOKED = 11;

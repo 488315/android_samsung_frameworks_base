@@ -15,7 +15,6 @@ import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-/* loaded from: classes2.dex */
 public class LoudnessCodecDispatcher implements CallbackUtil.DispatcherStub {
     private static final boolean DEBUG = false;
     private static final String TAG = "LoudnessCodecDispatcher";

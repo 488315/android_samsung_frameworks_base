@@ -1,6 +1,5 @@
 package android.os;
 
-/* loaded from: classes3.dex */
 public class AsyncResult {
     public Throwable exception;
     public Object result;

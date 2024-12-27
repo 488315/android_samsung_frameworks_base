@@ -6,7 +6,6 @@ import com.android.internal.logging.UiEventLogger;
 import com.android.internal.logging.UiEventLoggerImpl;
 import com.android.internal.util.FrameworkStatsLog;
 
-/* loaded from: classes5.dex */
 public class ChooserActivityLoggerImpl implements ChooserActivityLogger {
     private static final int SHARESHEET_INSTANCE_ID_MAX = 8192;
     private static InstanceIdSequence sInstanceIdSequence;

@@ -1,6 +1,5 @@
 package android.view.inputmethod;
 
-/* loaded from: classes4.dex */
 public final class InputMethodManagerProto {
     public static final long ACTIVE = 1133871366148L;
     public static final long CUR_ID = 1138166333441L;

@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 
-/* loaded from: classes2.dex */
 public class AudioDevicePort extends AudioPort {
     private final String mAddress;
     private final int[] mEncapsulationMetadataTypes;

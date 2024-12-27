@@ -1,6 +1,5 @@
 package android.hardware.radio.data;
 
-/* loaded from: classes2.dex */
 public @interface PdpProtocolType {
     public static final int IP = 0;
     public static final int IPV4V6 = 2;

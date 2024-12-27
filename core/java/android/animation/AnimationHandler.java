@@ -8,7 +8,6 @@ import android.view.Choreographer;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
-/* loaded from: classes.dex */
 public class AnimationHandler {
     private static final boolean LOCAL_LOGV = false;
     private static final String TAG = "AnimationHandler";

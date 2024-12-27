@@ -8,7 +8,6 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-/* loaded from: classes2.dex */
 public class AudioHalEngineConfig implements Parcelable {
     public static final Parcelable.Creator<AudioHalEngineConfig> CREATOR =
             new Parcelable.Creator<AudioHalEngineConfig>() { // from class:

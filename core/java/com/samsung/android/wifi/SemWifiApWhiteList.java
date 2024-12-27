@@ -13,7 +13,6 @@ import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/* loaded from: classes6.dex */
 public class SemWifiApWhiteList {
     public static final int WL_ALREADY_IN_TABLE = 4;
     public static final int WL_DENY_SUCCESS = 6;

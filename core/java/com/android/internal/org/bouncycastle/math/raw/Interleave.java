@@ -2,7 +2,6 @@ package com.android.internal.org.bouncycastle.math.raw;
 
 import com.samsung.android.widget.SemHoverPopupWindow;
 
-/* loaded from: classes5.dex */
 public class Interleave {
     private static final long M32 = 1431655765;
     private static final long M64 = 6148914691236517205L;

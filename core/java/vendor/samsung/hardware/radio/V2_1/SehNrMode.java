@@ -2,7 +2,6 @@ package vendor.samsung.hardware.radio.V2_1;
 
 import java.util.ArrayList;
 
-/* loaded from: classes6.dex */
 public final class SehNrMode {
     public static final int DISABLE_NONE = 0;
     public static final int DISABLE_NSA = 2;

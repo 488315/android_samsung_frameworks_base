@@ -4,7 +4,6 @@ import android.content.pm.ResolveInfo;
 
 import com.samsung.android.multiwindow.MultiWindowManager;
 
-/* loaded from: classes5.dex */
 public class SemMultiWindowManager {
     public static final int MODE_FREEFORM = 1;
     public static final int MODE_NONE = 0;

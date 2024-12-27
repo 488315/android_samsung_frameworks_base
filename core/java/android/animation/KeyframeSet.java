@@ -6,7 +6,6 @@ import android.util.Log;
 import java.util.Arrays;
 import java.util.List;
 
-/* loaded from: classes.dex */
 public class KeyframeSet implements Keyframes {
     TypeEvaluator mEvaluator;
     Keyframe mFirstKeyframe;

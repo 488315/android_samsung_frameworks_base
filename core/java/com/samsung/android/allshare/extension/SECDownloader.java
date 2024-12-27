@@ -14,7 +14,6 @@ import com.sec.android.allshare.iface.message.AllShareKey;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* loaded from: classes3.dex */
 public class SECDownloader {
     private static final String TAG_CLASS = "SECDownloader";
     private IAllShareConnector mAllShareConnector;

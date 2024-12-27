@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import java.util.Arrays;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public class IInputDeviceBatteryState implements Parcelable {
     public static final Parcelable.Creator<IInputDeviceBatteryState> CREATOR =
             new Parcelable.Creator<IInputDeviceBatteryState>() { // from class:

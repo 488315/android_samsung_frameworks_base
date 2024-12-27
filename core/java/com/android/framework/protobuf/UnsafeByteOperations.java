@@ -3,7 +3,6 @@ package com.android.framework.protobuf;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-/* loaded from: classes3.dex */
 public final class UnsafeByteOperations {
     private UnsafeByteOperations() {}
 

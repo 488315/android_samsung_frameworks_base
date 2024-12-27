@@ -5,7 +5,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Collection;
 
 @Deprecated
-/* loaded from: classes3.dex */
 public abstract class ResultData {
     public static final int STATUS_NOT_IN_REQUEST_MESSAGE = 3;
     public static final int STATUS_NOT_REQUESTED = 2;

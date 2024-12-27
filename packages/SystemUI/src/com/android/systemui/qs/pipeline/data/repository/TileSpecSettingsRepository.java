@@ -18,7 +18,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.text.StringsKt__StringsKt;
 
 /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
-/* loaded from: classes2.dex */
 public final class TileSpecSettingsRepository implements TileSpecRepository {
     public final QSPipelineLogger logger;
     public final Resources resources;

@@ -3,7 +3,6 @@ package android.webkit;
 import java.util.Map;
 
 @Deprecated
-/* loaded from: classes4.dex */
 public interface UrlInterceptHandler {
     @Deprecated
     PluginData getPluginData(String str, Map<String, String> map);

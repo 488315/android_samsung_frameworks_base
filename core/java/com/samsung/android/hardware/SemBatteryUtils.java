@@ -8,7 +8,6 @@ import android.os.ServiceManager;
 
 import com.sec.android.sdhms.ISamsungDeviceHealthManager;
 
-/* loaded from: classes6.dex */
 public class SemBatteryUtils {
 
     @Deprecated public static final int FLAG_AOD_ON = 4096;

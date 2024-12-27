@@ -7,7 +7,6 @@ import android.util.Log;
 
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public class KnoxGuardManager {
     private static final String KNOXGUARD_SERVICE = "knoxguard_service";
     private static String TAG = "KnoxGuardManager";

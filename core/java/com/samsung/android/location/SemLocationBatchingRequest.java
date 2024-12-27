@@ -6,7 +6,6 @@ import android.telecom.ParcelableCallAnalytics;
 
 import com.samsung.android.lock.LsConstants;
 
-/* loaded from: classes6.dex */
 public class SemLocationBatchingRequest implements Parcelable {
     public static final Parcelable.Creator<SemLocationBatchingRequest> CREATOR =
             new Parcelable.Creator<

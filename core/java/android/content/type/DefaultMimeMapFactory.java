@@ -5,7 +5,6 @@ import libcore.content.type.MimeMap;
 import java.io.InputStream;
 import java.util.function.Function;
 
-/* loaded from: classes.dex */
 public class DefaultMimeMapFactory {
     private DefaultMimeMapFactory() {}
 

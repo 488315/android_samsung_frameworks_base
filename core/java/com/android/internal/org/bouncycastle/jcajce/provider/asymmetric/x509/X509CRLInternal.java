@@ -5,7 +5,6 @@ import com.android.internal.org.bouncycastle.jcajce.util.JcaJceHelper;
 
 import java.security.cert.CRLException;
 
-/* loaded from: classes5.dex */
 class X509CRLInternal extends X509CRLImpl {
     private final byte[] encoding;
 

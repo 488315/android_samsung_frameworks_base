@@ -27,7 +27,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes.dex */
 public class LaunchActivityItem extends ClientTransactionItem {
     public static final Parcelable.Creator<LaunchActivityItem> CREATOR =
             new Parcelable.Creator<LaunchActivityItem>() { // from class:

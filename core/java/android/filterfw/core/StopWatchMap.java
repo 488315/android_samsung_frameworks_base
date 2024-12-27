@@ -2,7 +2,6 @@ package android.filterfw.core;
 
 import java.util.HashMap;
 
-/* loaded from: classes.dex */
 public class StopWatchMap {
     public boolean LOG_MFF_RUNNING_TIMES = false;
     private HashMap<String, StopWatch> mStopWatches;

@@ -11,7 +11,6 @@ import android.widget.RemoteViews;
 
 import com.samsung.android.util.SemLog;
 
-/* loaded from: classes5.dex */
 public class SemCocktailBarManager {
     public static final int COCKTAIL_CATEGORY_CONTEXTUAL = 65536;
     public static final int COCKTAIL_CATEGORY_GLOBAL = 1;

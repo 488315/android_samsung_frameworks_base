@@ -14,7 +14,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
-/* loaded from: classes2.dex */
 public final class RouteListingPreference implements Parcelable {
     public static final String ACTION_TRANSFER_MEDIA = "android.media.action.TRANSFER_MEDIA";
     public static final Parcelable.Creator<RouteListingPreference> CREATOR =

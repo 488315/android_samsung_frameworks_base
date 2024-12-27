@@ -20,7 +20,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-/* loaded from: classes5.dex */
 public class PKIXCertPathBuilderSpi extends CertPathBuilderSpi {
     private Exception certPathException;
     private final boolean isForCRLCheck;

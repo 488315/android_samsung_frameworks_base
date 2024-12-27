@@ -6,7 +6,6 @@ import android.os.Parcelable;
 
 @SystemApi
 @Deprecated
-/* loaded from: classes2.dex */
 public class NanoAppFilter implements Parcelable {
     public static final int APP_ANY = -1;
     public static final Parcelable.Creator<NanoAppFilter> CREATOR =

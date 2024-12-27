@@ -10,7 +10,6 @@ import android.os.Parcelable;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes3.dex */
 public final class SharedConnectivitySettingsState implements Parcelable {
     public static final Parcelable.Creator<SharedConnectivitySettingsState> CREATOR =
             new Parcelable.Creator<

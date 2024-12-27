@@ -6,7 +6,6 @@ import com.android.internal.app.chooser.TargetInfo;
 
 import java.util.Comparator;
 
-/* loaded from: classes5.dex */
 interface ResolverComparatorModel {
     Comparator<ResolveInfo> getComparator();
 

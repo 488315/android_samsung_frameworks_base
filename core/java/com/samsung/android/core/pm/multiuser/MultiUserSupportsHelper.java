@@ -17,7 +17,6 @@ import com.samsung.android.wallpaperbackup.BnRConstants;
 
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public class MultiUserSupportsHelper {
     public static final boolean DEFAULT_ENABLE_STATUS;
     public static final int DEFAULT_MAX_USERS;

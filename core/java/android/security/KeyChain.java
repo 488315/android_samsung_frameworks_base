@@ -47,7 +47,6 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import javax.security.auth.x500.X500Principal;
 
-/* loaded from: classes3.dex */
 public final class KeyChain {
     public static final String ACCOUNT_TYPE = "com.android.keychain";
     private static final String ACTION_CHOOSER = "com.android.keychain.CHOOSER";

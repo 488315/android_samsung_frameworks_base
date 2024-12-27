@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.RemoteException;
 import android.view.IInputFilter;
 
-/* loaded from: classes6.dex */
 public final class SemMultiControlManager {
     private IMultiControlManager mService;
     public static final String TAG_PREFIX = "MultiControl@";

@@ -8,7 +8,6 @@ import android.os.RemoteException;
 
 import java.util.List;
 
-/* loaded from: classes6.dex */
 public interface ICompatChangeableManager extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.core.ICompatChangeableManager";
 

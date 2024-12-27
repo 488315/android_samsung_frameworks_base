@@ -15,7 +15,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* loaded from: classes4.dex */
 public interface SplashScreen {
     public static final int SPLASH_SCREEN_STYLE_ICON = 1;
     public static final int SPLASH_SCREEN_STYLE_SOLID_COLOR = 0;

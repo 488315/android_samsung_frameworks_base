@@ -13,7 +13,6 @@ import android.filterfw.geometry.Quad;
 
 import com.samsung.android.wallpaperbackup.GenerateXML;
 
-/* loaded from: classes.dex */
 public class FixedRotationFilter extends Filter {
     private ShaderProgram mProgram;
 

@@ -6,7 +6,6 @@ import android.os.Parcelable;
 
 import java.io.PrintWriter;
 
-/* loaded from: classes.dex */
 public abstract class ClientTransactionItem implements BaseClientRequest, Parcelable {
     public int getPostExecutionState() {
         return -1;

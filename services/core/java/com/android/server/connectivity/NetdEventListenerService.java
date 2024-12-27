@@ -58,7 +58,6 @@ import java.util.Random;
 import java.util.StringJoiner;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-/* loaded from: classes.dex */
 public final class NetdEventListenerService extends BaseNetdEventListener {
     public static final int[] ALLOWED_CALLBACK_TYPES = {0, 1, 2, 3, 4, 5};
     static final int WAKEUP_EVENT_BUFFER_LENGTH = 1024;

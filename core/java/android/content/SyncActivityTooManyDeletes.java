@@ -16,7 +16,6 @@ import com.android.internal.R;
 
 import com.samsung.android.core.pm.runtimemanifest.RuntimeManifestUtils;
 
-/* loaded from: classes.dex */
 public class SyncActivityTooManyDeletes extends Activity
         implements AdapterView.OnItemClickListener {
     private Account mAccount;

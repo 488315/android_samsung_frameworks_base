@@ -42,7 +42,6 @@ import com.android.internal.org.bouncycastle.util.encoders.Hex;
 import java.io.IOException;
 import java.util.Enumeration;
 
-/* loaded from: classes5.dex */
 public class ASN1Dump {
     private static final int SAMPLE_SIZE = 32;
     private static final String TAB = "    ";

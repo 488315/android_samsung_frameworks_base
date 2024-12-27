@@ -6,7 +6,6 @@ import android.text.style.ImageSpan;
 
 import java.util.ArrayList;
 
-/* loaded from: classes5.dex */
 public class SmileyParser extends AbstractMessageParser {
     private SmileyResources mRes;
 

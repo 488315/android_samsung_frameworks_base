@@ -14,7 +14,6 @@ import com.android.internal.telephony.ISipDialogStateCallback;
 
 import java.util.List;
 
-/* loaded from: classes4.dex */
 public interface IImsRcsController extends IInterface {
     public static final String DESCRIPTOR = "android.telephony.ims.aidl.IImsRcsController";
 

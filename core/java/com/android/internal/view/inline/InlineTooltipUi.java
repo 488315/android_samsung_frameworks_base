@@ -20,7 +20,6 @@ import android.widget.inline.InlineContentView;
 import java.io.PrintWriter;
 import java.lang.ref.WeakReference;
 
-/* loaded from: classes5.dex */
 public final class InlineTooltipUi extends PopupWindow implements AutoCloseable {
     private static final int FIRST_TIME_SHOW_DEFAULT_DELAY_MS = 250;
     private static final String TAG = "InlineTooltipUi";
